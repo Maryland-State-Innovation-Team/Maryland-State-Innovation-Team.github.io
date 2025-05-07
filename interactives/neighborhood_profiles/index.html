@@ -77,7 +77,7 @@
                     <div class="disclaimer-section">
                         <p class="disclaimer-text">
                             Narrative text was automatically generated and may contain errors.
-                            Neighborhood names programmatically generated from the <a href="https://www.openstreetmap.org">OpenStreetMap</a> Overpass API.
+                            Neighborhood names programmatically generated from the <a href="https://www.openstreetmap.org" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> Overpass API.
                             Street-level imagery is provided by <a href="https://www.mapillary.com/" target="_blank" rel="noopener noreferrer">Mapillary</a>.
                         </p>
                     </div>
@@ -473,7 +473,7 @@
         });
         
 
-        // --- DOM Elements (Same as before) ---
+        // --- DOM Elements ---
         const mapContainer = document.getElementById('map-container');
         const detailsTitle = document.getElementById('details-title');
         const detailsContent = document.getElementById('details-content');
@@ -488,7 +488,7 @@
         const narrativeText = document.getElementById('narrative-text');
         const mapAreas = document.querySelectorAll('.map-area'); // Get all clickable areas
 
-        // --- Function to Update Details (Same as before) ---
+        // --- Function to Update Details ---
         function updateDetails(regionKey) {
             // Smooth scroll to the details section if it's not already in view
             const detailsRect = detailsTitle.getBoundingClientRect();
@@ -544,7 +544,7 @@
             }
         }
 
-         // --- Initial State (Same as before) ---
+         // --- Initial State  ---
          detailsContent.classList.add('hidden');
          detailsPlaceholder.classList.remove('hidden');
 
