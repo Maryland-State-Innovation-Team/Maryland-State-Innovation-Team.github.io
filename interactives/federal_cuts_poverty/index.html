@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact of Federal Cuts on Maryland Child Poverty</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Lato', sans-serif; /* Apply Lato font */
+        }
+        /* Style the slider thumb */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #A89473; /* Gold */
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: -6px; /* Adjust vertical alignment */
+        }
+
+        input[type=range]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #A89473; /* Gold */
+            border-radius: 50%;
+            cursor: pointer;
+            border: none; /* Remove default border */
+        }
+
+        /* Style the slider track */
+        input[type=range] {
+            height: 8px;
+            cursor: pointer;
+            background: #e2e8f0; /* Tailwind gray-300 */
+            border-radius: 9999px; /* Fully rounded */
+            transition: background 0.2s ease;
+        }
+        input[type=range]:disabled::-webkit-slider-thumb {
+             background: #9ca3af; /* Gray-400 when disabled */
+        }
+        input[type=range]:disabled::-moz-range-thumb {
+             background: #9ca3af; /* Gray-400 when disabled */
+        }
+
+        /* Icon styling */
+        .child-icon {
+            width: 12px;
+            height: 18px;
+            margin: 1px;
+            display: inline-block;
+            fill: currentColor; /* Allows color control via text color */
+        }
+
+        /* Animation Classes (Optional - can use JS for finer control) */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+    <script>
+        // Configuration for Tailwind CSS (optional)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy-1': '#050a47',
+                        'navy-2': '#050d5e',
+                        'light-blue': '#3D578A',
+                        'gold': '#A89473',
+                        'poverty-increase': '#ef4444', // Tailwind red-500 for increase
+                        'poverty-base': '#3b82f6', // Tailwind blue-500 for base
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <nav class="bg-navy-1 text-white p-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto text-center md:text-left">
+            <h1 class="text-xl md:text-2xl font-bold">Impact of Federal Cuts on Maryland Child Poverty</h1>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+
+        <section class="text-center my-8 md:my-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-navy-1 leading-tight">
+                Proposed Federal Cuts Could Push Over <span class="text-poverty-increase">43,000</span> More Maryland Children Into Poverty
+            </h2>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <h3 class="text-2xl font-bold text-navy-1 mb-4">Maryland's Starting Point</h3>
+            <div class="grid md:grid-cols-2 gap-4 mb-6 text-center md:text-left">
+                <div class="bg-blue-50 p-4 rounded">
+                    <div class="text-lg font-semibold text-blue-800">Current Child Poverty Rate</div>
+                    <div class="text-4xl font-bold text-blue-600">11.3%</div>
+                </div>
+                <div class="bg-blue-50 p-4 rounded">
+                    <div class="text-lg font-semibold text-blue-800">Children Currently in Poverty</div>
+                    <div class="text-4xl font-bold text-blue-600" id="current-total-static">149,906</div>
+                </div>
+            </div>
+            <p class="text-lg text-gray-700 mb-4">
+                Federal non-military discretionary funding supports vital programs for Maryland families. Cuts could reverse progress and increase hardship.
+            </p>
+            <div class="flex flex-wrap justify-center md:justify-start items-center space-x-4 space-y-2 md:space-y-0">
+                <span class="font-semibold text-navy-1">Key programs include:</span>
+                <span class="inline-flex items-center bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                    <img class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20" src="assets/noun-nutrition-2917972.svg"/> WIC
+                </span>
+                <span class="inline-flex items-center bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">
+                     <img class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20" src="assets/noun-education-4212.svg"/> Head Start
+                </span>
+                 <span class="inline-flex items-center bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">
+                     <img class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20" src="assets/noun-community-building-4389.svg"/> Housing Assistance
+                </span>
+            </div>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <h3 class="text-2xl font-bold text-navy-1 mb-6 text-center">See the Potential Impact of a 23% Cut</h3>
+
+            <div class="mb-6 flex flex-col items-center">
+                 <label for="cut-slider" class="block text-sm font-medium text-gray-700 mb-2">Proposed Cut Percentage: <span id="slider-value-display" class="font-bold">0%</span></label>
+                 <input type="range" id="cut-slider" name="cut-slider" min="0" max="23" value="0" step="0.1" class="w-full max-w-md h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" disabled>
+                 <button id="apply-cut-button" class="mt-4 px-6 py-2 bg-gold text-white font-semibold rounded-md shadow hover:bg-opacity-90 transition duration-150 ease-in-out">
+                     Apply 23% Cut
+                 </button>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4 mb-6 text-center">
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <div class="text-sm font-semibold text-gray-600">Projected Poverty Rate</div>
+                    <div id="dynamic-rate" class="text-3xl font-bold text-navy-2">11.3%</div>
+                </div>
+                 <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <div class="text-sm font-semibold text-gray-600">Total Children in Poverty</div>
+                    <div id="dynamic-total-count" class="text-3xl font-bold text-navy-2">149,906</div>
+                </div>
+                <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                    <div class="text-sm font-semibold text-red-600">Additional Children in Poverty</div>
+                    <div id="dynamic-increase-count" class="text-3xl font-bold text-poverty-increase">+0</div>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-gray-50 rounded border border-gray-200">
+                <h4 class="text-center text-navy-1 font-semibold mb-2">Visualizing the Impact</h4>
+                <p class="text-center text-sm text-gray-600 mb-3">Each icon represents 1,000 children. Red icons show the projected increase.</p>
+                <div id="icon-container" class="flex flex-wrap justify-center items-center min-h-[100px]">
+                    </div>
+            </div>
+        </section>
+
+        <section class="bg-navy-2 text-white p-6 rounded-lg shadow-md mb-8 text-center">
+            <h3 class="text-2xl font-bold mb-4">The Bottom Line: Impact of a Full 23% Cut</h3>
+            <div class="grid md:grid-cols-3 gap-4 mb-6">
+                 <div>
+                    <div class="text-sm uppercase tracking-wide text-gray-300">Projected Rate</div>
+                    <div id="final-rate" class="text-4xl font-bold">14.5%</div>
+                 </div>
+                 <div>
+                    <div class="text-sm uppercase tracking-wide text-gray-300">Total Children in Poverty</div>
+                    <div id="final-total-count" class="text-4xl font-bold">192,918</div>
+                 </div>
+                 <div>
+                    <div class="text-sm uppercase tracking-wide text-gray-300">Increase</div>
+                    <div id="final-increase-count" class="text-4xl font-bold text-yellow-300">+43,012</div>
+                 </div>
+            </div>
+            <p class="text-lg mt-4">
+                That's enough children to fill approximately <strong class="text-yellow-300">83</strong> average Maryland elementary schools.
+            </p>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <h3 class="text-2xl font-bold text-navy-1 mb-4">Historical Context: Maryland Child Poverty Rate</h3>
+             <p class="text-sm text-gray-600 mb-4">Source data includes years with available data points between 1989 and 2023. Here's what the last 15 years looks like:</p>
+            <div class="relative h-64 md:h-80">
+                <canvas id="historicalChart"></canvas>
+            </div>
+        </section>
+
+        <footer class="text-center text-sm text-gray-500 mt-12 mb-6">
+            Source: Analysis by Maryland State Innovation Team, based on federal spending from CBO and economic data from St. Louis Federal Reserve Bank, 1989-2023. Projection based on regression analysis estimating the impact of changes in federal non-military discretionary spending.
+        </footer>
+
+    </div>
+
+    <script>
+        // --- Configuration ---
+        const START_RATE = 11.3;
+        const END_RATE = 14.5;
+        const START_COUNT = 149906;
+        const END_COUNT = 192918;
+        const TOTAL_INCREASE = END_COUNT - START_COUNT; // 43012
+        const MAX_CUT = 23; // Max cut percentage
+        const ANIMATION_DURATION_MS = 1500; // Duration of slider/number animation
+        const ICONS_PER_1000 = 1; // How many children each icon represents (adjust for density)
+        const TOTAL_ICONS_TO_DISPLAY = Math.ceil(END_COUNT / (1000 / ICONS_PER_1000));
+        const START_ICONS_POVERTY = Math.round(START_COUNT / (1000 / ICONS_PER_1000));
+
+        // --- DOM Elements ---
+        const slider = document.getElementById('cut-slider');
+        const sliderValueDisplay = document.getElementById('slider-value-display');
+        const applyButton = document.getElementById('apply-cut-button');
+        const dynamicRateEl = document.getElementById('dynamic-rate');
+        const dynamicTotalCountEl = document.getElementById('dynamic-total-count');
+        const dynamicIncreaseCountEl = document.getElementById('dynamic-increase-count');
+        const iconContainer = document.getElementById('icon-container');
+        const currentTotalStaticEl = document.getElementById('current-total-static');
+        const finalRateEl = document.getElementById('final-rate');
+        const finalTotalCountEl = document.getElementById('final-total-count');
+        const finalIncreaseCountEl = document.getElementById('final-increase-count');
+
+        // --- Helper Functions ---
+        const formatNumber = (num) => Math.round(num).toLocaleString();
+        const formatRate = (rate) => rate.toFixed(1) + '%';
+
+        // --- Icon Generation ---
+        function createChildIconSVG() {
+            // Simple SVG silhouette
+            return `
+                <svg class="child-icon" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m774.46 760.08s114.7 114.84 115.08 115c36.562 36.805 27.109 101.58-7.5859 136.88l-160 166.73c-61.789 61.57-144.37-23.902-84.371-83.594l101.48-101.57-99.371-98.688z"/>
+                    <path d="m417.72 760.08s-114.46 114.84-114.46 115c-36.875 36.805-27.422 101.58 6.875 136.88l160.63 166.73c61.559 61.57 144.16-23.902 84.457-83.594l-101.33-101.57 98.676-98.688-134.86-134.76"/>
+                    <path d="m600.14 332.79c91.883 0 166.41-74.34 166.41-166.61 0-91.801-74.531-166.18-166.41-166.18-92.027 0-166.64 74.375-166.64 166.19 0 92.27 74.617 166.6 166.64 166.6z"/>
+                    <path d="m780.47 693.43 2.4258-113.52 138.28 129.07c11.328 10.621 25.777 15.77 40.246 15.77 15.707 0 31.477-6.2539 43.043-18.672 22.262-23.832 20.941-61.105-2.8086-83.281 0 0-158.61-172.36-181.33-192.43-42.266-37.43-104.15-58.598-204.54-58.598h-31.559c-100.39 0-162.28 21.168-204.54 58.598-22.742 20.09-181.35 192.43-181.35 192.43-23.746 22.188-25.078 59.449-2.8086 83.281 11.555 12.422 27.348 18.672 43.043 18.672 14.449 0 28.906-5.1602 40.234-15.77l138.29-129.07 2.4258 113.52z"/>
+                </svg>
+            `;
+        }
+
+        function renderIcons(currentPovertyCount) {
+            iconContainer.innerHTML = ''; // Clear existing icons
+            const currentPovertyIcons = Math.round(currentPovertyCount / (1000 / ICONS_PER_1000));
+            const increaseIcons = Math.max(0, currentPovertyIcons - START_ICONS_POVERTY);
+            const baseIcons = START_ICONS_POVERTY;
+
+            // Render base icons (blue)
+            for (let i = 0; i < baseIcons; i++) {
+                const iconWrapper = document.createElement('span');
+                iconWrapper.classList.add('text-poverty-base'); // Blue
+                iconWrapper.innerHTML = createChildIconSVG();
+                iconContainer.appendChild(iconWrapper);
+            }
+
+            // Render increase icons (red)
+            for (let i = 0; i < increaseIcons; i++) {
+                 const iconWrapper = document.createElement('span');
+                 iconWrapper.classList.add('text-poverty-increase'); // Red
+                 iconWrapper.innerHTML = createChildIconSVG();
+                 iconContainer.appendChild(iconWrapper);
+            }
+
+             // Render remaining potential icons (grayed out, optional)
+            // const grayIcons = TOTAL_ICONS_TO_DISPLAY - currentPovertyIcons;
+            // for (let i = 0; i < grayIcons; i++) {
+            //     const iconWrapper = document.createElement('span');
+            //     iconWrapper.classList.add('text-gray-300'); // Light gray
+            //     iconWrapper.innerHTML = createChildIconSVG();
+            //     iconContainer.appendChild(iconWrapper);
+            // }
+        }
+
+        // --- Animation Logic ---
+        let animationFrameId = null;
+        function animateSlider(startTime) {
+            const elapsedTime = Date.now() - startTime;
+            const progress = Math.min(1, elapsedTime / ANIMATION_DURATION_MS); // Ensure progress doesn't exceed 1
+
+            // Calculate current cut based on animation progress
+            const currentCut = progress * MAX_CUT;
+            slider.value = currentCut;
+            sliderValueDisplay.textContent = currentCut.toFixed(1) + '%';
+
+            // Linear Interpolation for numbers
+            const currentRate = START_RATE + (END_RATE - START_RATE) * progress;
+            const currentTotalCount = START_COUNT + TOTAL_INCREASE * progress;
+            const currentIncrease = TOTAL_INCREASE * progress;
+
+            // Update dynamic displays
+            dynamicRateEl.textContent = formatRate(currentRate);
+            dynamicTotalCountEl.textContent = formatNumber(currentTotalCount);
+            dynamicIncreaseCountEl.textContent = '+' + formatNumber(currentIncrease);
+
+            // Update icons
+            renderIcons(currentTotalCount);
+
+            // Continue animation if not finished
+            if (progress < 1) {
+                animationFrameId = requestAnimationFrame(() => animateSlider(startTime));
+            } else {
+                // Ensure final values are exact
+                slider.value = MAX_CUT;
+                sliderValueDisplay.textContent = MAX_CUT.toFixed(1) + '%';
+                dynamicRateEl.textContent = formatRate(END_RATE);
+                dynamicTotalCountEl.textContent = formatNumber(END_COUNT);
+                dynamicIncreaseCountEl.textContent = '+' + formatNumber(TOTAL_INCREASE);
+                renderIcons(END_COUNT);
+                // Re-enable button (optional: or change text to "Reset")
+                applyButton.disabled = false;
+                applyButton.textContent = "Reset"; // Change button text
+                slider.disabled = false; // Re-enable slider for manual exploration
+            }
+        }
+
+        // --- Event Listener ---
+        applyButton.addEventListener('click', () => {
+            if (applyButton.textContent === "Reset") {
+                // Reset logic
+                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                slider.value = 0;
+                sliderValueDisplay.textContent = '0.0%';
+                dynamicRateEl.textContent = formatRate(START_RATE);
+                dynamicTotalCountEl.textContent = formatNumber(START_COUNT);
+                dynamicIncreaseCountEl.textContent = '+0';
+                renderIcons(START_COUNT);
+                applyButton.textContent = "Apply 23% Cut";
+                applyButton.disabled = false;
+                slider.disabled = true; // Disable slider until 'Apply' is clicked again
+            } else {
+                // Start animation
+                applyButton.disabled = true;
+                slider.disabled = true; // Keep slider disabled during animation
+                const startTime = Date.now();
+                if (animationFrameId) cancelAnimationFrame(animationFrameId); // Cancel previous animation if any
+                animateSlider(startTime);
+            }
+        });
+
+        // Allow manual slider interaction AFTER animation completes
+        slider.addEventListener('input', () => {
+            if (applyButton.textContent !== "Reset") return; // Only allow manual sliding after animation
+
+            const currentCut = parseFloat(slider.value);
+            const progress = currentCut / MAX_CUT;
+
+             // Calculate values based on slider position
+            const currentRate = START_RATE + (END_RATE - START_RATE) * progress;
+            const currentTotalCount = START_COUNT + TOTAL_INCREASE * progress;
+            const currentIncrease = TOTAL_INCREASE * progress;
+
+            // Update displays
+            sliderValueDisplay.textContent = currentCut.toFixed(1) + '%';
+            dynamicRateEl.textContent = formatRate(currentRate);
+            dynamicTotalCountEl.textContent = formatNumber(currentTotalCount);
+            dynamicIncreaseCountEl.textContent = '+' + formatNumber(currentIncrease);
+            renderIcons(currentTotalCount);
+        });
+
+
+        // --- Historical Chart ---
+        const historicalData = [
+            {year:1989, rate:0.143}, {year:1993, rate:0.151}, {year:1995, rate:0.132},
+            {year:1996, rate:0.144}, {year:1997, rate:0.149}, {year:1998, rate:0.126},
+            {year:1999, rate:0.101}, {year:2000, rate:0.107}, {year:2001, rate:0.094},
+            {year:2002, rate:0.101}, {year:2003, rate:0.115}, {year:2004, rate:0.111},
+            {year:2005, rate:0.109}, {year:2006, rate:0.101}, {year:2007, rate:0.106},
+            {year:2008, rate:0.104}, {year:2009, rate:0.118}, {year:2010, rate:0.131},
+            {year:2011, rate:0.139}, {year:2012, rate:0.141}, {year:2013, rate:0.139},
+            {year:2014, rate:0.138}, {year:2015, rate:0.139}, {year:2016, rate:0.130},
+            {year:2017, rate:0.124}, {year:2018, rate:0.121}, {year:2019, rate:0.123},
+            {year:2020, rate:0.112}, {year:2021, rate:0.140}, {year:2022, rate:0.121},
+            {year:2023, rate:0.113}
+        ];
+
+        // Filter data for recent years if desired, e.g., last 15 years
+        const recentHistoricalData = historicalData.filter(d => d.year >= 2008);
+
+        const ctx = document.getElementById('historicalChart').getContext('2d');
+        const historicalChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: recentHistoricalData.map(d => d.year),
+                datasets: [{
+                    label: 'Maryland Child Poverty Rate',
+                    data: recentHistoricalData.map(d => d.rate * 100), // Convert rate to percentage
+                    borderColor: '#3D578A', // Light blue
+                    backgroundColor: 'rgba(61, 87, 138, 0.1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#050a47', // Navy 1 for points
+                    pointRadius: 4,
+                    tension: 0.1 // Slight curve to the line
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false, // Start axis near lowest value
+                        title: {
+                            display: true,
+                            text: 'Child Poverty Rate (%)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%'; // Add % sign to Y-axis labels
+                            }
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Year'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += context.parsed.y.toFixed(1) + '%';
+                                }
+                                return label;
+                            }
+                        }
+                    },
+                    legend: {
+                        display: false // Hide legend if only one dataset
+                    }
+                }
+            }
+        });
+
+        // --- Initial Setup ---
+        // Format static numbers on load
+        currentTotalStaticEl.textContent = formatNumber(START_COUNT);
+        finalRateEl.textContent = formatRate(END_RATE);
+        finalTotalCountEl.textContent = formatNumber(END_COUNT);
+        finalIncreaseCountEl.textContent = '+' + formatNumber(TOTAL_INCREASE);
+        // Render initial icons
+        renderIcons(START_COUNT);
+        // Set initial slider display
+        sliderValueDisplay.textContent = '0.0%';
+        // Ensure slider starts disabled
+        slider.disabled = true;
+
+    </script>
+
+</body>
+</html>
