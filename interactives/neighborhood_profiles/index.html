@@ -392,6 +392,9 @@
         };
 
         function getRedGradientColor(value) {
+            if(value === null){
+                return "#AAAAAA";
+            };
             // Ensure the value is within the 0-100 range
             const percentage = Math.min(100, Math.max(0, value)) / 100;
 
