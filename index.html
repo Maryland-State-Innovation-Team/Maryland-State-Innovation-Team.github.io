@@ -301,16 +301,7 @@
                             <td class="text-left py-3 px-4"><a href="/data/access-to-capital/" target="_blank" rel="noopener noreferrer" class="content-link">View README</a></td>
                             <td class="text-left py-3 px-4">NCUA Branch Locator 2025</td>
                         </tr>
-                        <tr class="bg-gray-50">
-                            <a id="ai-workforce-data"></a>
-                            <td class="text-left py-3 px-4">Maryland Occupations and Tasks Ranked by AI Capability</td>
-                            <td class="text-left py-3 px-4">All occupations in Maryland, the daily tasks of those occupations, and an ordinal ranking of how capable AI is at those tasks</td>
-                            <td class="text-left py-3 px-4">AI</td>
-                            <td class="text-left py-3 px-4">2025-04-02</td>
-                            <td class="text-left py-3 px-4"><a href="/data/ai-workforce-impact/all_occupation_task_ratings.csv" class="content-link" download>Download CSV</a></td>
-                            <td class="text-left py-3 px-4"><a href="/data/ai-workforce-impact/" target="_blank" rel="noopener noreferrer" class="content-link">View README</a></td>
-                            <td class="text-left py-3 px-4">BLS 2025</td>
-                        </tr>
+                        
                         <tr class="bg-gray-50">
                             <td class="text-left py-3 px-4">Baltimore Redlining Map Shapefile</td>
                             <td class="text-left py-3 px-4">A digitized and georeferenced shapefile of the 1937 HOLC Redlining map of Baltimore</td>
@@ -366,11 +357,15 @@
         // Set current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Smooth scroll for navigation links
+        // Smooth scroll for navigation links and skip links (with .skiplink class)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                // Check if it's a nav link for scrolling, not other # links
-                if (this.closest('header nav') || this.closest('#mobile-menu')) {
+                // Smooth scroll for nav links and for links with .skiplink class
+                if (
+                    this.closest('header nav') ||
+                    this.closest('#mobile-menu') ||
+                    this.classList.contains('skiplink')
+                ) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
