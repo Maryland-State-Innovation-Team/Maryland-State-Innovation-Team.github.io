@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-F-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maryland State Innovation Team - GitHub Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth; /* Enables smooth scrolling for anchor links */
+        }
+        /* Custom colors based on user request */
+        .bg-navy-1 { background-color: #050a47; } /* Navigation bar */
+        .text-navy-1 { color: #050a47; }
+        .bg-navy-2 { background-color: #050d5e; } /* Dark content blocks */
+        .text-link-blue { color: #3D578A; }
+        .hover\:text-link-blue-hover:hover { color: #2c436e; } /* Darker shade for hover */
+        .bg-gold-button { background-color: #A89473; }
+        .hover\:bg-gold-button-hover:hover { background-color: #938161; } /* Darker shade for hover */
+        .text-light { color: #FFFFFF; }
+
+        /* Helper for full bleed sections with alternating backgrounds */
+        .section-padding {
+            padding-top: 4rem; /* 64px */
+            padding-bottom: 4rem; /* 64px */
+        }
+        .section-padding-condensed {
+            padding-top: 3rem; /* 48px */
+            padding-bottom: 3rem; /* 48px */
+        }
+
+        /* Ensure content within sections is constrained */
+        .content-container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem; /* 16px */
+            padding-right: 1rem; /* 16px */
+        }
+
+        /* Styling for navigation links */
+        .nav-link {
+            padding: 0.75rem 1rem; /* 12px 16px */
+            border-radius: 0.375rem; /* 6px */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .nav-link:hover {
+            background-color: #0e155f; /* Slightly lighter navy for hover */
+        }
+
+        /* Active nav link styling (optional, requires JS to implement based on scroll) */
+        /* .nav-link.active {
+            background-color: #A89473;
+            color: #050a47;
+        } */
+
+        /* Responsive image styling */
+        .feature-image {
+            width: 100%;
+            height: auto;
+            max-height: 400px; /* Adjust as needed */
+            object-fit: cover;
+            border-radius: 0.5rem; /* 8px */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        h2 {
+            font-size: 2.25rem; /* 36px */
+            font-weight: 700;
+            margin-bottom: 1.5rem; /* 24px */
+        }
+        h3 {
+            font-size: 1.5rem; /* 24px */
+            font-weight: 600;
+            margin-bottom: 1rem; /* 16px */
+            margin-top: 1.5rem; /* 24px */
+        }
+        p, ul {
+            margin-bottom: 1rem; /* 16px */
+            line-height: 1.6;
+        }
+        ul {
+            list-style-position: inside;
+            padding-left: 1.5rem; /* Indent bullets */
+        }
+        li {
+            margin-bottom: 0.5rem; /* 8px */
+        }
+        a.content-link {
+            color: #3D578A;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        a.content-link:hover {
+            color: #2c436e;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem; /* 12px 24px */
+            border-radius: 0.375rem; /* 6px */
+            font-weight: 600;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="bg-navy-1 text-light sticky top-0 z-50 shadow-lg">
+        <nav class="content-container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold">
+                        MD Innovation Team <span class="text-sm font-normal">GitHub Guide</span>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#about" class="nav-link">About</a>
+                        <a href="#analyses" class="nav-link">Analyses & Factsheets</a>
+                        <a href="#tools" class="nav-link">Data Tools & Methods</a>
+                        <a href="#datasets" class="nav-link">Datasets</a>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" class="bg-navy-2 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-navy-1 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-button">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="text-gray-300 hover:bg-navy-2 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#analyses" class="text-gray-300 hover:bg-navy-2 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Analyses & Factsheets</a>
+                <a href="#tools" class="text-gray-300 hover:bg-navy-2 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Data Tools & Methods</a>
+                <a href="#datasets" class="text-gray-300 hover:bg-navy-2 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Datasets</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-navy-2 text-light section-padding">
+        <div class="content-container text-center">
+            <img src="assets/innovation-website-logo-light.png" alt="Maryland State Innovation Team Logo" class="mx-auto mb-8 h-24 w-auto rounded-md">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Maryland State Innovation Team</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+                A Guide to Our Open Source Resources on GitHub
+            </p>
+            <a href="https://github.com/Maryland-State-Innovation-Team" target="_blank" rel="noopener noreferrer" class="cta-button bg-gold-button text-navy-1 hover:bg-gold-button-hover">
+                Visit our GitHub
+            </a>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding bg-white">
+        <div class="content-container">
+            <h2 class="text-navy-1">About Our GitHub</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p>Welcome to the official guide for the Maryland State Innovation Team's GitHub presence. Here, we share our open-source projects, datasets, analytical tools, and methodologies. Our goal is to foster transparency, collaboration, and innovation in public service.</p>
+                    <p>This page will help you navigate our repositories and understand the resources available. Whether you're a developer, researcher, policymaker, or curious citizen, we hope you find something valuable.</p>
+                    <h3 class="text-navy-1">Our Mission on GitHub</h3>
+                    <ul class="list-disc text-gray-700">
+                        <li>To openly share code and data for public benefit.</li>
+                        <li>To encourage community contributions and feedback.</li>
+                        <li>To showcase innovative data-driven solutions for Maryland.</li>
+                        <li>To provide resources that support evidence-based policymaking.</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="assets/team_photo.jpg" alt="A photo of the team" class="feature-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="analyses" class="section-padding bg-navy-2 text-light">
+        <div class="content-container">
+            <h2 class="text-white">Analyses and Factsheets</h2>
+            <p class="mb-8">Explore our published analyses, research findings, and informative factsheets. These resources provide insights into various state initiatives and challenges, backed by data.</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
+                    <img src="assets/ai_impact_thumb.png" alt="A thumbnail of the Maryland Workforce Impacts analysis" class="w-full h-40 object-cover rounded-md mb-4">
+                    <h3 class="text-navy-1">AI's impact on the Maryland Workforce</h3>
+                    <p class="text-sm mb-3">A novel AI-based approach to estimating how jobs in Maryland might be automated or augmented</p>
+                    <ul class="list-disc text-sm text-gray-600">
+                        <li><a href="https://github.com/Maryland-State-Innovation-Team/MD-Workforce-AI-Impacts/blob/main/README.md#maryland-workforce-ai-impact-analysis" target="_blank" rel="noopener noreferrer" class="content-link">Read the Report</a></li>
+                        <li><a href="data/ai-workforce-impact/all_occupation_task_ratings.csv" class="content-link" download>Access Underlying Data</a></li>
+                        <li><a href="https://github.com/Maryland-State-Innovation-Team/MD-Workforce-AI-Impacts/" target="_blank" rel="noopener noreferrer" class="content-link">GitHub Repository for Analysis</a></li>
+                    </ul>
+                </div>
+                <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
+                    <img src="assets/federal_cuts_thumb.png" alt="A thumbnail of the Federal cuts analysis" class="w-full h-40 object-cover rounded-md mb-4">
+                    <h3 class="text-navy-1">Federal spending and poverty</h3>
+                    <p class="text-sm mb-3">An interactive factsheet on the impact of proposed federal cuts</p>
+                    <ul class="list-disc text-sm text-gray-600">
+                        <li><a href="interactives/federal_cuts_poverty/" target="_blank" rel="noopener noreferrer" class="content-link">Visit the Factsheet</a></li>
+                    </ul>
+                </div>
+                <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
+                     <img src="https://placehold.co/400x250/A89473/FFFFFF?text=Analysis+2" alt="Analysis 2 Placeholder" class="w-full h-40 object-cover rounded-md mb-4">
+                    <h3 class="text-navy-1">Impact of Green Spaces</h3>
+                    <p class="text-sm mb-3">Analysis of the correlation between urban green spaces and community well-being.</p>
+                     <ul class="list-disc text-sm text-gray-600">
+                        <li><a href="#" class="content-link">Read the Study</a></li>
+                        <li><a href="#" class="content-link">Interactive Map (Link to Tool)</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tools" class="section-padding bg-white">
+        <div class="content-container">
+            <h2 class="text-navy-1">Data Tools and Methods</h2>
+            <p class="mb-8 text-gray-700">Discover the tools, software, and methodologies we've developed or utilized in our projects. This includes code libraries, data visualization dashboards, and guides on our analytical approaches.</p>
+
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <div>
+                    <h3 class="text-navy-1">Featured Tools</h3>
+                    <div class="mb-6 p-4 border border-gray-200 rounded-lg shadow-sm">
+                        <img src="https://placehold.co/100x100/050a47/FFFFFF?text=Tool+Icon" alt="Tool Icon" class="float-left mr-4 mb-2 h-16 w-16 rounded-md">
+                        <h4 class="font-semibold text-lg text-navy-1">Maryland Open Data Portal Toolkit</h4>
+                        <p class="text-sm text-gray-600 mb-2">A Python library for easily accessing and working with data from Maryland's Open Data Portal.</p>
+                        <a href="#" class="cta-button bg-gold-button text-navy-1 text-sm hover:bg-gold-button-hover">Access on GitHub</a>
+                    </div>
+                    <div class="mb-6 p-4 border border-gray-200 rounded-lg shadow-sm">
+                        <img src="https://placehold.co/100x100/050a47/FFFFFF?text=Dashboard+Icon" alt="Dashboard Icon" class="float-left mr-4 mb-2 h-16 w-16 rounded-md">
+                        <h4 class="font-semibold text-lg text-navy-1">Interactive Policy Dashboard</h4>
+                        <p class="text-sm text-gray-600 mb-2">A web-based dashboard visualizing key performance indicators for state programs.</p>
+                        <a href="#" class="cta-button bg-gold-button text-navy-1 text-sm hover:bg-gold-button-hover">View Dashboard</a>
+                         <a href="#" class="ml-2 content-link text-sm">GitHub Repo</a>
+                    </div>
+                    <h4 class="font-semibold text-lg text-navy-1 mt-4">Other Tools & Libraries:</h4>
+                    <ul class="list-disc text-gray-700">
+                        <li><a href="#" class="content-link">Geospatial Analysis Utilities (R Package)</a></li>
+                        <li><a href="#" class="content-link">Data Cleaning & Preprocessing Scripts (Python)</a></li>
+                        <li><a href="#" class="content-link">Template for Reproducible Reports (Quarto/RMarkdown)</a></li>
+                    </ul>
+                </div>
+                <div>
+                     <img src="https://placehold.co/600x450/050d5e/FFFFFF?text=Data+Methodology" alt="Placeholder image for data tools and methods" class="feature-image mb-6">
+                    <h3 class="text-navy-1">Our Methodologies</h3>
+                    <p class="text-gray-700">We are committed to rigorous and transparent analytical methods. Our approach often includes:</p>
+                    <ul class="list-disc text-gray-700">
+                        <li>Agile project management for iterative development.</li>
+                        <li>Human-centered design principles in tool development.</li>
+                        <li>Statistical modeling and machine learning for predictive insights.</li>
+                        <li>Version control (Git) for all code and analytical scripts.</li>
+                        <li>Open standards and formats where possible.</li>
+                    </ul>
+                    <p class="text-gray-700 mt-4">Detailed documentation for specific project methodologies can be found within their respective GitHub repositories.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="datasets" class="section-padding bg-navy-2 text-light">
+        <div class="content-container">
+            <h2 class="text-white">Datasets</h2>
+            <p class="mb-8">Access curated datasets that we have made publicly available. Each dataset includes metadata, descriptions, and links to access the data files or APIs.</p>
+            
+            <div class="overflow-x-auto rounded-lg shadow-md">
+                <table class="min-w-full bg-white text-gray-800">
+                    <thead class="bg-navy-1 text-light">
+                        <tr>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Dataset Name</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Description</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Category</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Last Updated</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Link</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr>
+                            <td class="text-left py-3 px-4">Maryland Education Outcomes</td>
+                            <td class="text-left py-3 px-4">Aggregated data on student performance and school characteristics.</td>
+                            <td class="text-left py-3 px-4">Education</td>
+                            <td class="text-left py-3 px-4">2024-03-15</td>
+                            <td class="text-left py-3 px-4"><a href="#" class="content-link">View on GitHub</a></td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="text-left py-3 px-4">State Agency Expenditures</td>
+                            <td class="text-left py-3 px-4">Dataset of expenditures by various Maryland state agencies.</td>
+                            <td class="text-left py-3 px-4">Finance</td>
+                            <td class="text-left py-3 px-4">2024-04-01</td>
+                            <td class="text-left py-3 px-4"><a href="#" class="content-link">Access Data</a></td>
+                        </tr>
+                         <tr>
+                            <td class="text-left py-3 px-4">Public Transportation Ridership</td>
+                            <td class="text-left py-3 px-4">Monthly ridership data for public transit systems in Maryland.</td>
+                            <td class="text-left py-3 px-4">Transportation</td>
+                            <td class="text-left py-3 px-4">2024-05-01</td>
+                            <td class="text-left py-3 px-4"><a href="#" class="content-link">Download CSV</a></td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+            <p class="mt-6 text-sm">For a comprehensive list of all available datasets, please visit the <a href="https://opendata.maryland.gov/" target="_blank" rel="noopener noreferrer" class="font-semibold underline hover:text-gold-button">Maryland Open Data Portal</a> or browse our <a href="https://github.com/Maryland-State-Innovation-Team" target="_blank" rel="noopener noreferrer" class="font-semibold underline hover:text-gold-button">GitHub repositories</a>.</p>
+        </div>
+    </section>
+
+    <footer class="bg-navy-1 text-light section-padding-condensed">
+        <div class="content-container text-center">
+            <p class="mb-2">&copy; <span id="currentYear"></span> Maryland State Innovation Team. All rights reserved.</p>
+            <p class="text-sm">This page serves as a guide to our GitHub resources. For official state information, please visit <a href="https://maryland.gov" target="_blank" rel="noopener noreferrer" class="font-semibold underline hover:text-gold-button">maryland.gov</a>.</p>
+            <div class="mt-4">
+                <a href="https://github.com/Maryland-State-Innovation-Team" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white mx-2">
+                    GitHub
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white mx-2">
+                    Contact Us (Placeholder)
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuButton && mobileMenu) {
+            menuButton.addEventListener('click', () => {
+                const isExpanded = menuButton.getAttribute('aria-expanded') === 'true' || false;
+                menuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Check if it's a nav link for scrolling, not other # links
+                if (this.closest('header nav') || this.closest('#mobile-menu')) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Calculate offset for fixed header
+                        const headerOffset = document.querySelector('header').offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+
+                        // Close mobile menu if open and a link is clicked
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                           menuButton.click(); // Simulate a click to toggle and close
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
