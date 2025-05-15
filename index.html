@@ -193,7 +193,7 @@
                     <p class="text-sm mb-3">A novel AI-based approach to estimating how jobs in Maryland might be automated or augmented</p>
                     <ul class="list-disc text-sm text-gray-600">
                         <li><a href="https://github.com/Maryland-State-Innovation-Team/MD-Workforce-AI-Impacts/blob/main/README.md#maryland-workforce-ai-impact-analysis" target="_blank" rel="noopener noreferrer" class="content-link">Read the Report</a></li>
-                        <li><a href="#ai-workforce-data" class="content-link">Access the Data</a></li>
+                        <li><a href="#ai-workforce-data" class="content-link skiplink">Access the Data</a></li>
                         <li><a href="https://github.com/Maryland-State-Innovation-Team/MD-Workforce-AI-Impacts/" target="_blank" rel="noopener noreferrer" class="content-link">GitHub Repository for Analysis</a></li>
                     </ul>
                 </div>
@@ -203,7 +203,7 @@
                     <p class="text-sm mb-3">An interactive factsheet on the impact of proposed federal cuts</p>
                     <ul class="list-disc text-sm text-gray-600">
                         <li><a href="/interactives/federal_cuts_poverty/" class="content-link">Visit the Factsheet</a></li>
-                        <li><a href="https://github.com/Maryland-State-Innovation-Team/Maryland-State-Innovation-Team.github.io/tree/main/standalone_code/federal-cuts" target="_blank" rel="noopener noreferrer" class="content-link">Recreate the Analysis</a></li>
+                        <li><a href="https://github.com/Maryland-State-Innovation-Team/Maryland-State-Innovation-Team.github.io/blob/main/standalone_code/federal-cuts/federal_cuts.R" target="_blank" rel="noopener noreferrer" class="content-link">Recreate the Analysis</a></li>
                     </ul>
                 </div>
                 <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
@@ -319,12 +319,11 @@
                             <td class="text-left py-3 px-4">NCUA Branch Locator 2025</td>
                         </tr>
                         <tr class="bg-gray-50">
-                            <a id="ai-workforce-data"></a>
                             <td class="text-left py-3 px-4">Maryland Occupations and Tasks Ranked by AI Capability</td>
                             <td class="text-left py-3 px-4">All occupations in Maryland, the daily tasks of those occupations, and an ordinal ranking of how capable AI is at those tasks</td>
                             <td class="text-left py-3 px-4">AI</td>
                             <td class="text-left py-3 px-4">2025-04-02</td>
-                            <td class="text-left py-3 px-4"><a href="/data/ai-workforce-impact/all_occupation_task_ratings.csv" class="content-link" download>Download CSV</a></td>
+                            <td id="ai-workforce-data" class="text-left py-3 px-4"><a href="/data/ai-workforce-impact/all_occupation_task_ratings.csv" class="content-link" download>Download CSV</a></td>
                             <td class="text-left py-3 px-4"><a href="/data/ai-workforce-impact/" target="_blank" rel="noopener noreferrer" class="content-link">View README</a></td>
                             <td class="text-left py-3 px-4">BLS 2025</td>
                         </tr>
@@ -383,11 +382,15 @@
         // Set current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Smooth scroll for navigation links
+        // Smooth scroll for navigation links and skip links (with .skiplink class)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                // Check if it's a nav link for scrolling, not other # links
-                if (this.closest('header nav') || this.closest('#mobile-menu')) {
+                // Smooth scroll for nav links and for links with .skiplink class
+                if (
+                    this.closest('header nav') ||
+                    this.closest('#mobile-menu') ||
+                    this.classList.contains('skiplink')
+                ) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
