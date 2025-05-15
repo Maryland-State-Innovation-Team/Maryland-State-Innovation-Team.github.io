@@ -163,8 +163,9 @@
             <h2 class="text-navy-1">About Our GitHub</h2>
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <p>Welcome to the official guide for the Maryland State Innovation Team's GitHub presence. Here, we share our open-source projects, datasets, analytical tools, and methodologies. Our goal is to foster transparency, collaboration, and innovation in public service.</p>
+                    <p>Welcome to the official guide for the Maryland State Innovation Team's GitHub. Here, we share our open-source projects, datasets, analytical tools, and methodologies. Our goal is to foster transparency, collaboration, and innovation in public service.</p>
                     <p>This page will help you navigate our repositories and understand the resources available. Whether you're a developer, researcher, policymaker, or curious citizen, we hope you find something valuable.</p>
+                    <br/>
                     <h3 class="text-navy-1">Our Mission on GitHub</h3>
                     <ul class="list-disc text-gray-700">
                         <li>To openly share code and data for public benefit.</li>
@@ -192,7 +193,7 @@
                     <p class="text-sm mb-3">A novel AI-based approach to estimating how jobs in Maryland might be automated or augmented</p>
                     <ul class="list-disc text-sm text-gray-600">
                         <li><a href="https://github.com/Maryland-State-Innovation-Team/MD-Workforce-AI-Impacts/blob/main/README.md#maryland-workforce-ai-impact-analysis" target="_blank" rel="noopener noreferrer" class="content-link">Read the Report</a></li>
-                        <li><a href="data/ai-workforce-impact/all_occupation_task_ratings.csv" class="content-link" download>Access Underlying Data</a></li>
+                        <li><a href="#ai-workforce-data" class="content-link">Access the Data</a></li>
                         <li><a href="https://github.com/Maryland-State-Innovation-Team/MD-Workforce-AI-Impacts/" target="_blank" rel="noopener noreferrer" class="content-link">GitHub Repository for Analysis</a></li>
                     </ul>
                 </div>
@@ -201,17 +202,18 @@
                     <h3 class="text-navy-1">Federal spending and poverty</h3>
                     <p class="text-sm mb-3">An interactive factsheet on the impact of proposed federal cuts</p>
                     <ul class="list-disc text-sm text-gray-600">
-                        <li><a href="interactives/federal_cuts_poverty/" target="_blank" rel="noopener noreferrer" class="content-link">Visit the Factsheet</a></li>
+                        <li><a href="/interactives/federal_cuts_poverty/" class="content-link">Visit the Factsheet</a></li>
                         <li><a href="https://github.com/Maryland-State-Innovation-Team/Maryland-State-Innovation-Team.github.io/tree/main/standalone_code/federal-cuts" target="_blank" rel="noopener noreferrer" class="content-link">Recreate the Analysis</a></li>
                     </ul>
                 </div>
                 <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
-                     <img src="https://placehold.co/400x250/A89473/FFFFFF?text=Analysis+2" alt="Analysis 2 Placeholder" class="w-full h-40 object-cover rounded-md mb-4">
-                    <h3 class="text-navy-1">Impact of Green Spaces</h3>
-                    <p class="text-sm mb-3">Analysis of the correlation between urban green spaces and community well-being.</p>
+                     <img src="assets/voice_benchmark_thumb.png" alt="A thumbnail of the voice transcription benchmark" class="w-full h-40 object-cover rounded-md mb-4">
+                    <h3 class="text-navy-1">Maryland voice transcription benchmark</h3>
+                    <p class="text-sm mb-3">A benchmark for natural language transcription based on the languages spoken in our state</p>
                      <ul class="list-disc text-sm text-gray-600">
-                        <li><a href="#" class="content-link">Read the Study</a></li>
-                        <li><a href="#" class="content-link">Interactive Map (Link to Tool)</a></li>
+                        <li><a href="https://github.com/Maryland-State-Innovation-Team/State-Transcription-Benchmark/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="content-link">Read the Report</a></li>
+                        <li><a href="https://github.com/Maryland-State-Innovation-Team/State-Transcription-Benchmark/tree/main/results" target="_blank" rel="noopener noreferrer" class="content-link">Access the Data</a></li>
+                        <li><a href="https://github.com/Maryland-State-Innovation-Team/State-Transcription-Benchmark/tree/main?tab=readme-ov-file#use-as-an-import" target="_blank" rel="noopener noreferrer" class="content-link">Benchmark your own state</a></li>
                     </ul>
                 </div>
             </div>
@@ -227,32 +229,30 @@
                 <div>
                     <h3 class="text-navy-1">Featured Tools</h3>
                     <div class="mb-6 p-4 border border-gray-200 rounded-lg shadow-sm">
-                        <img src="https://placehold.co/100x100/050a47/FFFFFF?text=Tool+Icon" alt="Tool Icon" class="float-left mr-4 mb-2 h-16 w-16 rounded-md">
-                        <h4 class="font-semibold text-lg text-navy-1">Maryland Open Data Portal Toolkit</h4>
-                        <p class="text-sm text-gray-600 mb-2">A Python library for easily accessing and working with data from Maryland's Open Data Portal.</p>
-                        <a href="#" class="cta-button bg-gold-button text-navy-1 text-sm hover:bg-gold-button-hover">Access on GitHub</a>
+                        <img src="assets/geocoding_thumb.png" alt="Thumbnail of LMI geocoding map" class="float-left mr-4 mb-2 h-16 w-16 rounded-md">
+                        <h4 class="font-semibold text-lg text-navy-1">Low- to moderate-income Geocoding Map</h4>
+                        <p class="text-sm text-gray-600 mb-2">A map of low- to moderate-income (LMI) and ENOUGH Act-eligible communities. Click on the spyglass to locate an address and find its data. Toggle between plain and OpenStreetMap basemaps.</p>
+                        <a href="/interactives/lmi_geocoder/" class="cta-button bg-gold-button text-navy-1 text-sm hover:bg-gold-button-hover">View Map</a>
                     </div>
                     <div class="mb-6 p-4 border border-gray-200 rounded-lg shadow-sm">
-                        <img src="https://placehold.co/100x100/050a47/FFFFFF?text=Dashboard+Icon" alt="Dashboard Icon" class="float-left mr-4 mb-2 h-16 w-16 rounded-md">
-                        <h4 class="font-semibold text-lg text-navy-1">Interactive Policy Dashboard</h4>
-                        <p class="text-sm text-gray-600 mb-2">A web-based dashboard visualizing key performance indicators for state programs.</p>
-                        <a href="#" class="cta-button bg-gold-button text-navy-1 text-sm hover:bg-gold-button-hover">View Dashboard</a>
-                         <a href="#" class="ml-2 content-link text-sm">GitHub Repo</a>
+                        <img src="assets/neighborhood_thumb.png" alt="Dashboard Icon" class="float-left mr-4 mb-2 h-16 w-16 rounded-md">
+                        <h4 class="font-semibold text-lg text-navy-1">Maryland Neighborhood Dashboard</h4>
+                        <p class="text-sm text-gray-600 mb-2">Explore profiles of over 1,400 neighborhoods in Maryland. Learn more about what impacts economic opportunity and see street-level imagery across the state.</p>
+                        <a href="/interactives/neighborhood_profiles/" class="cta-button bg-gold-button text-navy-1 text-sm hover:bg-gold-button-hover">View Dashboard</a>
                     </div>
                     <h4 class="font-semibold text-lg text-navy-1 mt-4">Other Tools & Libraries:</h4>
                     <ul class="list-disc text-gray-700">
-                        <li><a href="#" class="content-link">Geospatial Analysis Utilities (R Package)</a></li>
-                        <li><a href="#" class="content-link">Data Cleaning & Preprocessing Scripts (Python)</a></li>
-                        <li><a href="#" class="content-link">Template for Reproducible Reports (Quarto/RMarkdown)</a></li>
+                        <li><a href="https://github.com/Maryland-State-Innovation-Team/md-r-reference/" target="_blank" rel="noopener noreferrer" class="content-link">Self-guided R Training for Maryland State Employees</a></li>
+                        <li><a href="https://github.com/Maryland-State-Innovation-Team/LLM-Content-Coder" target="_blank" rel="noopener noreferrer" class="content-link">Large Language Model (LLM) Data Enhancement Tool</a></li>
+                        <li><a href="/interactives/mciv_map/" class="content-link">Interactive Access to Capital Landscape Map</a></li>
                     </ul>
                 </div>
                 <div>
-                     <img src="https://placehold.co/600x450/050d5e/FFFFFF?text=Data+Methodology" alt="Placeholder image for data tools and methods" class="feature-image mb-6">
+                     <img src="assets/methodologies.jpg" alt="A photo of the team brainstorming" class="feature-image mb-6">
                     <h3 class="text-navy-1">Our Methodologies</h3>
                     <p class="text-gray-700">We are committed to rigorous and transparent analytical methods. Our approach often includes:</p>
                     <ul class="list-disc text-gray-700">
-                        <li>Agile project management for iterative development.</li>
-                        <li>Human-centered design principles in tool development.</li>
+                        <li>Human-centered design principles.</li>
                         <li>Statistical modeling and machine learning for predictive insights.</li>
                         <li>Version control (Git) for all code and analytical scripts.</li>
                         <li>Open standards and formats where possible.</li>
@@ -276,30 +276,75 @@
                             <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Description</th>
                             <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Category</th>
                             <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Last Updated</th>
-                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Link</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Data</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Metadata</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Source</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-700">
                         <tr>
-                            <td class="text-left py-3 px-4">Maryland Education Outcomes</td>
-                            <td class="text-left py-3 px-4">Aggregated data on student performance and school characteristics.</td>
-                            <td class="text-left py-3 px-4">Education</td>
-                            <td class="text-left py-3 px-4">2024-03-15</td>
-                            <td class="text-left py-3 px-4"><a href="#" class="content-link">View on GitHub</a></td>
+                            <td class="text-left py-3 px-4">Correlates of Child Poverty</td>
+                            <td class="text-left py-3 px-4">A census-tract level dataset of possible correlates of child poverty in Maryland.</td>
+                            <td class="text-left py-3 px-4">Child Poverty</td>
+                            <td class="text-left py-3 px-4">2024-05-15</td>
+                            <td class="text-left py-3 px-4"><a href="/data/child-poverty/poverty_correlates.csv" class="content-link" download>Download CSV</a></td>
+                            <td class="text-left py-3 px-4"><a href="/data/child-poverty/" target="_blank" rel="noopener noreferrer" class="content-link">View README</a></td>
+                            <td class="text-left py-3 px-4">U.S. Census ACS 5-Year 2023, FFIEC 2024, Voting and Election Science Team 2020, Maryland Family Network 2025</td>
                         </tr>
                         <tr class="bg-gray-50">
-                            <td class="text-left py-3 px-4">State Agency Expenditures</td>
-                            <td class="text-left py-3 px-4">Dataset of expenditures by various Maryland state agencies.</td>
-                            <td class="text-left py-3 px-4">Finance</td>
-                            <td class="text-left py-3 px-4">2024-04-01</td>
-                            <td class="text-left py-3 px-4"><a href="#" class="content-link">Access Data</a></td>
+                            <td class="text-left py-3 px-4">Small Business Loans for Maryland and Regional States</td>
+                            <td class="text-left py-3 px-4">A census-tract level dataset of small business loan counts and dollars.</td>
+                            <td class="text-left py-3 px-4">Access to Capital</td>
+                            <td class="text-left py-3 px-4">2025-03-06</td>
+                            <td class="text-left py-3 px-4"><a href="/data/access-to-capital/all_ffiec_loans.csv" class="content-link" download>Download CSV</a></td>
+                            <td class="text-left py-3 px-4"><a href="/data/access-to-capital/" target="_blank" rel="noopener noreferrer" class="content-link">View README</a></td>
+                            <td class="text-left py-3 px-4">FFIEC 2024</td>
                         </tr>
-                         <tr>
-                            <td class="text-left py-3 px-4">Public Transportation Ridership</td>
-                            <td class="text-left py-3 px-4">Monthly ridership data for public transit systems in Maryland.</td>
-                            <td class="text-left py-3 px-4">Transportation</td>
-                            <td class="text-left py-3 px-4">2024-05-01</td>
-                            <td class="text-left py-3 px-4"><a href="#" class="content-link">Download CSV</a></td>
+                        <tr class="bg-gray-50">
+                            <td class="text-left py-3 px-4">FDIC-insured Bank Branch Locations for Maryland and Regional States</td>
+                            <td class="text-left py-3 px-4">A geocoded dataset of FDIC-insured bank branches.</td>
+                            <td class="text-left py-3 px-4">Access to Capital</td>
+                            <td class="text-left py-3 px-4">2025-03-12</td>
+                            <td class="text-left py-3 px-4"><a href="/data/access-to-capital/fdic_branches_regional.csv" class="content-link" download>Download CSV</a></td>
+                            <td class="text-left py-3 px-4"><a href="/data/access-to-capital/" target="_blank" rel="noopener noreferrer" class="content-link">View README</a></td>
+                            <td class="text-left py-3 px-4">FDIC SOD API 2025</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="text-left py-3 px-4">NCUA-insured Credit Union Branch Locations for Maryland and Regional States</td>
+                            <td class="text-left py-3 px-4">A geocoded dataset of NCUA-insured credit union branches.</td>
+                            <td class="text-left py-3 px-4">Access to Capital</td>
+                            <td class="text-left py-3 px-4">2025-03-12</td>
+                            <td class="text-left py-3 px-4"><a href="/data/access-to-capital/ncua_branches_regional.csv" class="content-link" download>Download CSV</a></td>
+                            <td class="text-left py-3 px-4"><a href="/data/access-to-capital/" target="_blank" rel="noopener noreferrer" class="content-link">View README</a></td>
+                            <td class="text-left py-3 px-4">NCUA Branch Locator 2025</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <a id="ai-workforce-data"></a>
+                            <td class="text-left py-3 px-4">Maryland Occupations and Tasks Ranked by AI Capability</td>
+                            <td class="text-left py-3 px-4">All occupations in Maryland, the daily tasks of those occupations, and an ordinal ranking of how capable AI is at those tasks</td>
+                            <td class="text-left py-3 px-4">AI</td>
+                            <td class="text-left py-3 px-4">2025-04-02</td>
+                            <td class="text-left py-3 px-4"><a href="/data/ai-workforce-impact/all_occupation_task_ratings.csv" class="content-link" download>Download CSV</a></td>
+                            <td class="text-left py-3 px-4"><a href="/data/ai-workforce-impact/" target="_blank" rel="noopener noreferrer" class="content-link">View README</a></td>
+                            <td class="text-left py-3 px-4">BLS 2025</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="text-left py-3 px-4">Baltimore Redlining Map Shapefile</td>
+                            <td class="text-left py-3 px-4">A digitized and georeferenced shapefile of the 1937 HOLC Redlining map of Baltimore</td>
+                            <td class="text-left py-3 px-4">General</td>
+                            <td class="text-left py-3 px-4">2025-04-08</td>
+                            <td class="text-left py-3 px-4"><a href="/data/general/baltimore_residential_security.zip" class="content-link" download>Download ZIP</a></td>
+                            <td class="text-left py-3 px-4"><a href="/data/general/" target="_blank" rel="noopener noreferrer" class="content-link">View README</a></td>
+                            <td class="text-left py-3 px-4">HOLC 1937, Johns Hopkins Libraries 2025</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="text-left py-3 px-4">Maryland Neighborhood Names for Census Tracts</td>
+                            <td class="text-left py-3 px-4">Human-readable names for Maryland U.S. Census tract GEOIDs</td>
+                            <td class="text-left py-3 px-4">General</td>
+                            <td class="text-left py-3 px-4">2025-03-14</td>
+                            <td class="text-left py-3 px-4"><a href="/data/general/md_geoid_names.csv" class="content-link" download>Download CSV</a></td>
+                            <td class="text-left py-3 px-4"><a href="/data/general/" target="_blank" rel="noopener noreferrer" class="content-link">View README</a></td>
+                            <td class="text-left py-3 px-4">OpenStreetMap 2025</td>
                         </tr>
                         </tbody>
                 </table>
@@ -316,8 +361,8 @@
                 <a href="https://github.com/Maryland-State-Innovation-Team" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white mx-2">
                     GitHub
                 </a>
-                <a href="#" class="text-gray-400 hover:text-white mx-2">
-                    Contact Us (Placeholder)
+                <a href="mailto:innovation.team@maryland.gov" class="text-gray-400 hover:text-white mx-2">
+                    Contact Us
                 </a>
             </div>
         </div>
