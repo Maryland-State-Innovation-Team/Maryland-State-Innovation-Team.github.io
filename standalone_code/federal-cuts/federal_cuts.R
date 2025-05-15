@@ -184,7 +184,7 @@ unemp$year = year(unemp$date)
 unemp = unemp[,c("geo","year","maryland_unemployment")]
 dat = merge(dat, unemp, by=c("geo", "year"), all.x=T)
 
-# Fed total exp
+# Fed total exp, source: https://www.cbo.gov/data/budget-economic-data
 cbo_fed_desc = read.xlsx("51134-2025-01-Historical-Budget-Data.xlsx",sheet="4. Discretionary Outlays",startRow = 8)
 cbo_fed_desc = cbo_fed_desc[c(1:63),c("X1","Defense","Nondefense")]
 names(cbo_fed_desc) = c("year", "federal_expend_military_discretionary", "federal_expend_nonmilitary_discretionary")
