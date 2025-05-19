@@ -67,15 +67,15 @@
         }
 
         h2 {
-            font-size: 2.25rem; /* 36px */
-            font-weight: 700;
-            margin-bottom: 1.5rem; /* 24px */
+            font-size: 2.25rem !important; /* 36px */
+            font-weight: 700 !important;
+            margin-bottom: 1.5rem !important; /* 24px */
         }
         h3 {
-            font-size: 1.5rem; /* 24px */
-            font-weight: 600;
-            margin-bottom: 1rem; /* 16px */
-            margin-top: 1.5rem; /* 24px */
+            font-size: 1.5rem !important; /* 24px */
+            font-weight: 600 !important;
+            margin-bottom: 1rem !important; /* 16px */
+            margin-top: 1.5rem !important; /* 24px */
         }
         p, ul {
             margin-bottom: 1rem; /* 16px */
@@ -95,6 +95,14 @@
         }
         a.content-link:hover {
             color: #2c436e;
+        }
+        a.content-link-light {
+            color: #FFFFFF;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        a.content-link-light:hover {
+            color: #BBBBBB;
         }
         .cta-button {
             display: inline-block;
@@ -203,7 +211,7 @@
                     <p class="text-sm mb-3">An interactive factsheet on the impact of proposed federal cuts</p>
                     <ul class="pl-5 list-disc text-sm text-gray-600">
                         <li><a href="/interactives/federal_cuts_poverty/" class="content-link">Visit the Factsheet</a></li>
-                        <li><a href="https://github.com/Maryland-State-Innovation-Team/Maryland-State-Innovation-Team.github.io/blob/main/standalone_code/federal-cuts/federal_cuts.R" target="_blank" rel="noopener noreferrer" class="content-link">Recreate the Analysis</a></li>
+                        <li><a href="https://github.com/Maryland-State-Innovation-Team/Maryland-State-Innovation-Team.github.io/blob/main/code/federal-cuts/federal_cuts.R" target="_blank" rel="noopener noreferrer" class="content-link">Recreate the Analysis</a></li>
                     </ul>
                 </div>
                 <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
@@ -217,6 +225,10 @@
                     </ul>
                 </div>
             </div>
+            <h4 class="font-semibold text-lg mt-4">Other Analyses & Factsheets:</h4>
+            <ul class="pl-5 list-disc">
+                <li><a href="reports/child-poverty-analysis-2025-04-28/" class="content-link-light">Child poverty-focused small business analysis (April 28, 2025)</a></li>
+            </ul>
         </div>
     </section>
 
