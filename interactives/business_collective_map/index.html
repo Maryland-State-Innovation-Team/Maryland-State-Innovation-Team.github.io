@@ -61,7 +61,7 @@
                 top: unset !important;
                 bottom: 1rem !important;
                 right: 1rem !important;
-                left: 1rem !important;
+                left: unset !important;
                 width: calc(100vw - 2rem);
                 max-width: none;
                 min-width: 0;
@@ -71,6 +71,7 @@
             #narrative-box {
                 left: 1rem !important;
                 right: 1rem !important;
+                left: unset !important;
                 max-width: none;
                 width: calc(100vw - 2rem);
             }
@@ -133,11 +134,65 @@
       });
     </script>
 
-    <div id="layer-control-box" class="custom-control-box absolute top-4 right-4 p-4 bg-white rounded-lg shadow-xl z-[1000]">
-        <h3 class="text-lg font-semibold mb-2 text-gray-800">Business Layers</h3>
-        <div id="layer-checkboxes" class="space-y-2">
-            </div>
+    <div id="layer-control-box" class="custom-control-box absolute top-4 right-4 p-4 bg-white rounded-lg shadow-xl z-[1000] transition-all duration-200">
+        <!-- Collapse/Expand Button -->
+        <button id="layer-toggle-btn" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 focus:outline-none" title="Expand">
+          <span id="layer-toggle-icon" class="text-lg leading-none">&#43;</span>
+        </button>
+        <div id="layer-control-content">
+          <h3 class="text-lg font-semibold pr-6 mb-2 text-gray-800">Businesses</h3>
+          <div id="layer-checkboxes" class="space-y-2"></div>
+        </div>
     </div>
+    <script>
+      // Collapsible Layer Control
+      const layerControlBox = document.getElementById('layer-control-box');
+      const layerToggleBtn = document.getElementById('layer-toggle-btn');
+      const layerToggleIcon = document.getElementById('layer-toggle-icon');
+      const layerControlContent = document.getElementById('layer-control-content');
+      let layerCollapsed = false;
+
+      function setLayerCollapsed(collapsed) {
+        layerCollapsed = collapsed;
+        if (layerCollapsed) {
+          layerControlContent.style.display = 'none';
+          layerToggleIcon.innerHTML = '&#43;'; // plus
+          layerToggleBtn.title = 'Expand';
+          layerControlBox.style.padding = '0.5rem';
+          layerControlBox.style.width = '3rem';
+          layerControlBox.style.minWidth = 'unset';
+          layerControlBox.style.maxWidth = '3rem';
+          layerControlBox.style.height = '2.5rem';
+          layerControlBox.style.minHeight = '2.5rem';
+        } else {
+          layerControlContent.style.display = '';
+          layerToggleIcon.innerHTML = '&#8211;'; // minus
+          layerToggleBtn.title = 'Collapse';
+          layerControlBox.style.padding = '';
+          layerControlBox.style.width = '';
+          layerControlBox.style.minWidth = '';
+          layerControlBox.style.maxWidth = '';
+          layerControlBox.style.height = '';
+          layerControlBox.style.minHeight = '';
+        }
+      }
+
+      layerToggleBtn.addEventListener('click', () => {
+        setLayerCollapsed(!layerCollapsed);
+      });
+
+      // Collapse by default on mobile
+      function checkMobileAndCollapseLayerBox() {
+        if (window.innerWidth <= 640) {
+          setLayerCollapsed(true);
+        } else {
+          setLayerCollapsed(false);
+        }
+      }
+      window.addEventListener('resize', checkMobileAndCollapseLayerBox);
+      // Initial check
+      checkMobileAndCollapseLayerBox();
+    </script>
 
     <div id="legend" class="custom-control-box absolute bottom-4 left-4 p-3 bg-white rounded-lg shadow-xl z-[1000]">
         <h4 class="text-md font-semibold mb-1 text-gray-800">Legend</h4>
