@@ -55,6 +55,26 @@
             opacity: 0.5;
             cursor: not-allowed;
         }
+        /* Responsive: Move layer control to bottom right and make full-width on small screens */
+        @media (max-width: 640px) {
+            #layer-control-box {
+                top: unset !important;
+                bottom: 1rem !important;
+                right: 1rem !important;
+                left: 1rem !important;
+                width: calc(100vw - 2rem);
+                max-width: none;
+                min-width: 0;
+                z-index: 1001;
+                box-sizing: border-box;
+            }
+            #narrative-box {
+                left: 1rem !important;
+                right: 1rem !important;
+                max-width: none;
+                width: calc(100vw - 2rem);
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100">
