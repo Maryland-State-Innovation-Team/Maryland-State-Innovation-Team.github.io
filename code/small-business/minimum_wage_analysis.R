@@ -179,10 +179,9 @@ fit = auto.arima(md_ts)
 summary(fit)
 
 
-# Create a newdata frame for prediction, using the same numeric time representation
-newdata_for_forecast <- data.frame(
-  date = forecast_dates
-)
+forecast_dates <- seq.Date(from = max(pre_covid_data$date, na.rm = TRUE),
+                           to = as.Date("2025-04-01"),
+                           by = "month")
 
 predictions = forecast(fit, h = length(forecast_dates) - 1)
 
