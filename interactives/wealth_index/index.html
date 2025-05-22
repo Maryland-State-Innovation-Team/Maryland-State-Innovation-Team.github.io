@@ -170,9 +170,9 @@
             <select id="indicatorSelector"></select>
         </div>
         <div>
-            <label for="yearSlider">Select Year: <span id="currentYearDisplay">2014</span></label>
+            <label for="yearSlider">Select Year: <span id="currentYearDisplay">2023</span></label>
             <div class="time-slider-controls">
-                <input type="range" id="yearSlider" min="2014" max="2023" value="2014" step="1">
+                <input type="range" id="yearSlider" min="2014" max="2023" value="2023" step="1">
                 <button id="playButton">Play</button>
             </div>
         </div>
@@ -183,7 +183,7 @@
         let map;
         let geojsonLayer;
         let wealthData = {}; // To store processed CSV data: wealthData[GEOID][year][indicator_key]
-        let currentYear = 2014;
+        let currentYear = 2023;
         let currentIndicator; // Will be an object { name: "...", key: "..." }
         let playInterval;
         let isPlaying = false;
