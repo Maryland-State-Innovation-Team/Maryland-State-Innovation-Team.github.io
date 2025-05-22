@@ -242,17 +242,13 @@
         // --- Data Loading and Processing ---
         async function fetchData() {
             try {
-                console.log("Fetching GeoJSON data...");
                 const geojsonResponse = await fetch('assets/wealth_indices.geojson');
                 if (!geojsonResponse.ok) throw new Error(`GeoJSON fetch failed: ${geojsonResponse.statusText}`);
                 const geojsonData = await geojsonResponse.json();
-                console.log("GeoJSON data loaded.");
         
-                console.log("Fetching CSV data...");
                 const csvResponse = await fetch('assets/wealth_indicies_data.csv');
                 if (!csvResponse.ok) throw new Error(`CSV fetch failed: ${csvResponse.statusText}`);
                 const csvText = await csvResponse.text();
-                console.log("CSV data loaded.");
         
                 processCsvData(csvText);
                 addGeojsonLayer(geojsonData);
@@ -297,7 +293,6 @@
                     wealthData[geoid][year][ind.key] = row.hasOwnProperty(ind.key) ? row[ind.key] : null;
                 });
             });
-            console.log("Processed CSV data structure:", wealthData);
         }
 
 
@@ -309,7 +304,6 @@
                 style: styleFeature,
                 onEachFeature: onEachFeature
             }).addTo(map);
-            console.log("GeoJSON layer added to map.");
             updateMapDisplay(); 
         }
 
@@ -420,7 +414,6 @@
                 const foundIndicator = indicators.find(ind => ind.key === selectedIndicatorKey);
                 if (foundIndicator) {
                     currentIndicator = foundIndicator;
-                    console.log("Indicator changed to:", currentIndicator.name);
                     updateMapDisplay();
                 }
             });
@@ -433,7 +426,6 @@
             yearSlider.addEventListener('change', (e) => { 
                 currentYear = parseInt(e.target.value);
                 currentYearDisplay.textContent = currentYear;
-                console.log("Year changed to:", currentYear);
                 updateMapDisplay();
             });
 
@@ -472,9 +464,6 @@
                         console.warn("Layer without feature or properties found in geojsonLayer:", layer);
                     }
                 });
-                console.log("Map display updated for year:", currentYear, "and indicator:", currentIndicator.name);
-            } else {
-                console.log("updateMapDisplay called but geojsonLayer is not yet defined.");
             }
             currentYearDisplay.textContent = currentYear; 
             yearSlider.value = currentYear; 
@@ -485,11 +474,9 @@
                 clearInterval(playInterval);
                 playButton.textContent = 'Play';
                 isPlaying = false;
-                console.log("Animation paused.");
             } else {
                 playButton.textContent = 'Pause';
                 isPlaying = true;
-                console.log("Animation playing...");
                 playInterval = setInterval(() => {
                     currentYear++;
                     if (currentYear > parseInt(yearSlider.max)) {
@@ -520,7 +507,7 @@
                      );
                 }
                 // Last category
-                legendItemsHTML.push(`<div class="legend-item"><i style="background:${colors[colors.length-1]}"></i> &ge; ${colorBreaks[colors.length-2].toFixed(1)}</div>`);
+                legendItemsHTML.push(`<div class="legend-item"><i style="background:${colors[colors.length-1]}"></i> &ge; ${colorBreaks[colors.length-1].toFixed(1)}</div>`);
                 legendItemsHTML.push(`<div class="legend-item"><i style="background:${defaultColor}"></i> N/A or No Data</div>`);
 
                 div.innerHTML += legendItemsHTML.join('');
