@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wealth Index Choropleth Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Prevent scrollbars from appearing due to controls */
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        .controls-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            max-width: 300px;
+        }
+        .controls-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .controls-container select,
+        .controls-container input[type="range"] {
+            width: calc(100% - 20px); /* Adjust for padding/border */
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .time-slider-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .time-slider-controls input[type="range"] {
+            flex-grow: 1;
+            margin-bottom: 0;
+        }
+        .time-slider-controls button {
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .time-slider-controls button:hover {
+            background-color: #45a049;
+        }
+        #currentYearDisplay {
+            font-weight: bold;
+            min-width: 40px; /* Ensure space for year */
+            text-align: center;
+        }
+        .leaflet-legend {
+            line-height: 18px;
+            color: #333;
+            background: rgba(255,255,255,0.9);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .leaflet-legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.9;
+            border: 1px solid #666;
+        }
+        .leaflet-legend h4 {
+            margin-top: 0;
+            margin-bottom: 8px; /* Added some space below title */
+            font-size: 14px;
+        }
+        /* Styles for legend items to fix indentation */
+        .leaflet-legend div.legend-item {
+            margin-bottom: 3px; /* Space between legend items */
+            clear: both; /* Ensure each item starts on a new line below the float */
+            display: flex; /* Align icon and text nicely */
+            align-items: center; /* Vertically align icon and text */
+        }
+        .leaflet-legend div.legend-item:last-child {
+            margin-bottom: 0;
+        }
+        .leaflet-tooltip{
+            width: 300px;
+            white-space: normal;
+        }
+        .info-popup-content {
+            font-size: 12px;
+        }
+        .info-popup-content strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Methodology Popup -->
+    <div id="methodologyPopup" style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2001;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+        padding: 28px 28px 18px 28px;
+        max-width: 480px;
+        width: 90vw;
+        font-size: 15px;
+        color: #222;
+        line-height: 1.5;
+        display: block;
+    ">
+        <button id="closeMethodologyPopup" style="
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: transparent;
+            border: none;
+            font-size: 22px;
+            color: #888;
+            cursor: pointer;
+        " aria-label="Close">&times;</button>
+        <h2 style="margin-top:0;font-size:1.25em;">About the Wealth Index</h2>
+        <p>
+            The Wealth Index shown here is a composite score designed to compare asset wealth (as opposed to income) across census tracts and racial/ethnic groups in Maryland over time. It is built from U.S. Census American Community Survey data at the tract level, using indicators that reflect household wealth and stability, such as:
+        </p>
+        <ul style="margin-top:0.5em;margin-bottom:0.5em;">
+            <li>Homeownership rate</li>
+            <li>Vehicle ownership (proxied by commute)</li>
+            <li>SNAP receipt (as total assets are a qualifying factor)</li>
+            <li>Low household crowding (1 or fewer occupants per room)</li>
+            <li>Types of housing units (e.g., detached homes)</li>
+        </ul>
+        <p>
+            For each racial/ethnic group (Black, Latino, White not Hispanic), these indicators are combined using principal component analysis (PCA) to create a single index value per tract and year (2014–2023). Higher values indicate greater access to wealth-related resources. The "gap" indicators show the difference in index values between groups.
+        </p>
+        <p>
+            <strong>Note:</strong> The index is relative and not a direct measure of dollars or assets. It is intended to highlight disparities and trends over time and geography.
+        </p>
+    </div>
+    <div id="map"></div>
+    <div class="controls-container">
+        <div>
+            <label for="indicatorSelector">Select Indicator:</label>
+            <select id="indicatorSelector"></select>
+        </div>
+        <div>
+            <label for="yearSlider">Select Year: <span id="currentYearDisplay">2014</span></label>
+            <div class="time-slider-controls">
+                <input type="range" id="yearSlider" min="2014" max="2023" value="2014" step="1">
+                <button id="playButton">Play</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Global Variables ---
+        let map;
+        let geojsonLayer;
+        let wealthData = {}; // To store processed CSV data: wealthData[GEOID][year][indicator_key]
+        let currentYear = 2014;
+        let currentIndicator; // Will be an object { name: "...", key: "..." }
+        let playInterval;
+        let isPlaying = false;
+
+        const indicators = [
+            { name: "Black wealth index", key: "black_wealth_index" },
+            { name: "Latino wealth index", key: "latino_wealth_index" },
+            { name: "White wealth index", key: "white_wealth_index" },
+            { name: "White - Black wealth gap", key: "white_black_gap" },
+            { name: "White - Latino wealth gap", key: "white_latino_gap" },
+            { name: "Latino - Black wealth gap", key: "latino_black_gap" }
+        ];
+        currentIndicator = indicators[0]; // Default indicator
+
+        // Color scale and breaks (fixed as per requirement)
+        // Data range: -8.160617 to 8.074095
+        const colorBreaks = [-8.17, -5, -2.5, -0.1, 0.1, 2.5, 5, 8.08]; // 7 categories, 8 breaks
+        const colors = [ // 7 colors for 7 categories (RdYlBu from ColorBrewer)
+            '#d73027', // < -5
+            '#fc8d59', // -5 to -2.5
+            '#fee090', // -2.5 to -0.1
+            '#ffffbf', // -0.1 to 0.1 (neutral)
+            '#e0f3f8', // 0.1 to 2.5
+            '#91bfdb', // 2.5 to 5
+            '#4575b4'  // > 5
+        ];
+        const defaultColor = '#cccccc'; // Grey for missing data
+
+        // --- DOM Elements ---
+        const yearSlider = document.getElementById('yearSlider');
+        const currentYearDisplay = document.getElementById('currentYearDisplay');
+        const indicatorSelector = document.getElementById('indicatorSelector');
+        const playButton = document.getElementById('playButton');
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', initializeMap);
+
+        function initializeMap() {
+            map = L.map('map').setView([39.0458, -76.6413], 8); // Centered on Maryland
+
+            // Updated basemap
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(map);
+
+            populateIndicatorSelector();
+            setupEventListeners();
+            createLegend();
+
+
+            fetchData();
+        }
+
+        // --- Data Loading and Processing ---
+        async function fetchData() {
+            try {
+                console.log("Fetching GeoJSON data...");
+                const geojsonResponse = await fetch('assets/wealth_indices.geojson');
+                if (!geojsonResponse.ok) throw new Error(`GeoJSON fetch failed: ${geojsonResponse.statusText}`);
+                const geojsonData = await geojsonResponse.json();
+                console.log("GeoJSON data loaded.");
+        
+                console.log("Fetching CSV data...");
+                const csvResponse = await fetch('assets/wealth_indicies_data.csv');
+                if (!csvResponse.ok) throw new Error(`CSV fetch failed: ${csvResponse.statusText}`);
+                const csvText = await csvResponse.text();
+                console.log("CSV data loaded.");
+        
+                processCsvData(csvText);
+                addGeojsonLayer(geojsonData);
+        
+            } catch (error) {
+                console.error("Error loading data:", error);
+                const errorDiv = document.createElement('div');
+                errorDiv.style.position = 'absolute';
+                errorDiv.style.top = '50%';
+                errorDiv.style.left = '50%';
+                errorDiv.style.transform = 'translate(-50%, -50%)';
+                errorDiv.style.padding = '20px';
+                errorDiv.style.backgroundColor = 'lightcoral';
+                errorDiv.style.border = '1px solid red';
+                errorDiv.style.zIndex = '2000';
+                errorDiv.textContent = `Failed to load map data: ${error.message}. Please check file paths and ensure files are accessible.`;
+                document.body.appendChild(errorDiv);
+            }
+        }
+
+
+        function processCsvData(csvText) {
+            const parsed = Papa.parse(csvText, { header: true, dynamicTyping: true, skipEmptyLines: true });
+            if (parsed.errors.length > 0) {
+                console.warn("CSV Parsing errors:", parsed.errors);
+            }
+            parsed.data.forEach(row => {
+                const geoid = row.GEOID;
+                const year = row.year;
+                if (geoid === undefined || year === undefined) { 
+                    console.warn("Skipping row with missing GEOID or year:", row);
+                    return;
+                }
+
+                if (!wealthData[geoid]) {
+                    wealthData[geoid] = {};
+                }
+                if (!wealthData[geoid][year]) {
+                    wealthData[geoid][year] = {};
+                }
+                indicators.forEach(ind => {
+                    wealthData[geoid][year][ind.key] = row.hasOwnProperty(ind.key) ? row[ind.key] : null;
+                });
+            });
+            console.log("Processed CSV data structure:", wealthData);
+        }
+
+
+        function addGeojsonLayer(geojsonData) {
+            if (geojsonLayer) {
+                map.removeLayer(geojsonLayer);
+            }
+            geojsonLayer = L.geoJSON(geojsonData, {
+                style: styleFeature,
+                onEachFeature: onEachFeature
+            }).addTo(map);
+            console.log("GeoJSON layer added to map.");
+            updateMapDisplay(); 
+        }
+
+
+        // --- Styling and Interaction ---
+        function getColor(value) {
+            if (value === null || value === undefined || isNaN(parseFloat(value))) { 
+                return defaultColor; 
+            }
+            const numValue = parseFloat(value);
+            for (let i = 0; i < colorBreaks.length - 1; i++) {
+                if (numValue >= colorBreaks[i] && numValue < colorBreaks[i+1]) {
+                    return colors[i];
+                }
+            }
+            if (numValue >= colorBreaks[colorBreaks.length - 1]) return colors[colors.length -1];
+            if (numValue < colorBreaks[0]) return colors[0]; 
+            return defaultColor;
+        }
+
+        function styleFeature(feature) {
+            const geoid = feature.properties.GEOID;
+            let value = null;
+
+            if (wealthData[geoid] && wealthData[geoid][currentYear]) {
+                value = wealthData[geoid][currentYear][currentIndicator.key];
+            }
+            
+            return {
+                fillColor: getColor(value),
+                weight: 0.5, 
+                opacity: 1,
+                color: getColor(value), 
+                fillOpacity: 0.8
+            };
+        }
+
+        function highlightFeature(e) {
+            const layer = e.target;
+            layer.setStyle({
+                weight: 3,
+                color: '#333', 
+                dashArray: '',
+                fillOpacity: 0.9
+            });
+            if (!L.Browser.mobile) { 
+                layer.bringToFront();
+            }
+        }
+
+        function resetHighlight(e) {
+            if (geojsonLayer) { 
+                 geojsonLayer.resetStyle(e.target);
+            }
+        }
+
+        function onEachFeature(feature, layer) {
+            layer.on({
+                mouseover: (e) => {
+                    highlightFeature(e);
+                    const props = feature.properties;
+                    let valueText = "N/A";
+                    if (wealthData[props.GEOID] && wealthData[props.GEOID][currentYear]) {
+                        const val = wealthData[props.GEOID][currentYear][currentIndicator.key];
+                        if (val !== null && val !== undefined && !isNaN(parseFloat(val))) {
+                             valueText = parseFloat(val).toFixed(2);
+                        } else if (val !== null && val !== undefined) {
+                            valueText = String(val); 
+                        }
+                    }
+                    const tooltipContent = `
+                        <div class="info-popup-content">
+                            <strong>${props.tract_name || 'N/A'}</strong><br>
+                            County: ${props.county_name || 'N/A'}<br>
+                            ${currentIndicator.name}: ${valueText} (${currentYear})
+                        </div>
+                    `;
+                    if (layer.getTooltip()) {
+                        layer.setTooltipContent(tooltipContent);
+                    } else {
+                        layer.bindTooltip(tooltipContent, {sticky: true});
+                    }
+                    layer.openTooltip();
+                },
+                mouseout: (e) => {
+                    resetHighlight(e);
+                    if (layer.getTooltip() && layer.isTooltipOpen()) { 
+                        layer.closeTooltip();
+                    }
+                },
+            });
+        }
+        
+        // --- UI Controls and Event Handlers ---
+        function populateIndicatorSelector() {
+            indicators.forEach(ind => {
+                const option = document.createElement('option');
+                option.value = ind.key;
+                option.textContent = ind.name;
+                indicatorSelector.appendChild(option);
+            });
+            indicatorSelector.value = currentIndicator.key;
+        }
+
+        function setupEventListeners() {
+            indicatorSelector.addEventListener('change', (e) => {
+                const selectedIndicatorKey = e.target.value;
+                const foundIndicator = indicators.find(ind => ind.key === selectedIndicatorKey);
+                if (foundIndicator) {
+                    currentIndicator = foundIndicator;
+                    console.log("Indicator changed to:", currentIndicator.name);
+                    updateMapDisplay();
+                }
+            });
+
+            yearSlider.addEventListener('input', (e) => {
+                currentYear = parseInt(e.target.value);
+                currentYearDisplay.textContent = currentYear;
+            });
+            
+            yearSlider.addEventListener('change', (e) => { 
+                currentYear = parseInt(e.target.value);
+                currentYearDisplay.textContent = currentYear;
+                console.log("Year changed to:", currentYear);
+                updateMapDisplay();
+            });
+
+
+            playButton.addEventListener('click', togglePlay);
+        }
+
+        function updateMapDisplay() {
+            if (geojsonLayer) {
+                geojsonLayer.eachLayer(layer => {
+                    if (layer.feature && layer.feature.properties) {
+                        layer.setStyle(styleFeature(layer.feature));
+                        
+                        const tooltip = layer.getTooltip();
+                        if (tooltip && layer.isTooltipOpen()) {
+                            const props = layer.feature.properties;
+                            let valueText = "N/A";
+                            if (wealthData[props.GEOID] && wealthData[props.GEOID][currentYear]) {
+                                const val = wealthData[props.GEOID][currentYear][currentIndicator.key];
+                                 if (val !== null && val !== undefined && !isNaN(parseFloat(val))) {
+                                    valueText = parseFloat(val).toFixed(2);
+                                } else if (val !== null && val !== undefined) {
+                                    valueText = String(val);
+                                }
+                            }
+                            const tooltipContent = `
+                                <div class="info-popup-content">
+                                    <strong>${props.tract_name || 'N/A'}</strong><br>
+                                    County: ${props.county_name || 'N/A'}<br>
+                                    ${currentIndicator.name}: ${valueText} (${currentYear})
+                                </div>
+                            `;
+                            layer.setTooltipContent(tooltipContent);
+                        }
+                    } else {
+                        console.warn("Layer without feature or properties found in geojsonLayer:", layer);
+                    }
+                });
+                console.log("Map display updated for year:", currentYear, "and indicator:", currentIndicator.name);
+            } else {
+                console.log("updateMapDisplay called but geojsonLayer is not yet defined.");
+            }
+            currentYearDisplay.textContent = currentYear; 
+            yearSlider.value = currentYear; 
+        }
+
+        function togglePlay() {
+            if (isPlaying) {
+                clearInterval(playInterval);
+                playButton.textContent = 'Play';
+                isPlaying = false;
+                console.log("Animation paused.");
+            } else {
+                playButton.textContent = 'Pause';
+                isPlaying = true;
+                console.log("Animation playing...");
+                playInterval = setInterval(() => {
+                    currentYear++;
+                    if (currentYear > parseInt(yearSlider.max)) {
+                        currentYear = parseInt(yearSlider.min);
+                    }
+                    yearSlider.value = currentYear;
+                    updateMapDisplay(); 
+                }, 1000); 
+            }
+        }
+
+        // --- Legend ---
+        function createLegend() {
+            const legend = L.control({ position: 'bottomleft' });
+
+            legend.onAdd = function (map) {
+                const div = L.DomUtil.create('div', 'info leaflet-legend');
+                div.innerHTML += '<h4>Wealth Index/Gap</h4>';
+                
+                const legendItemsHTML = [];
+                // First category
+                legendItemsHTML.push(`<div class="legend-item"><i style="background:${colors[0]}"></i> &lt; ${colorBreaks[1].toFixed(1)}</div>`);
+
+                // Intermediate categories
+                for (let i = 1; i < colors.length - 1; i++) { 
+                     legendItemsHTML.push(
+                        `<div class="legend-item"><i style="background:${colors[i]}"></i> ${colorBreaks[i].toFixed(1)} to ${colorBreaks[i+1].toFixed(1)}</div>`
+                     );
+                }
+                // Last category
+                legendItemsHTML.push(`<div class="legend-item"><i style="background:${colors[colors.length-1]}"></i> &ge; ${colorBreaks[colors.length-2].toFixed(1)}</div>`);
+                legendItemsHTML.push(`<div class="legend-item"><i style="background:${defaultColor}"></i> N/A or No Data</div>`);
+
+                div.innerHTML += legendItemsHTML.join('');
+                return div;
+            };
+            legend.addTo(map);
+        }
+
+        // --- Methodology Popup Logic ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const popup = document.getElementById('methodologyPopup');
+            const closeBtn = document.getElementById('closeMethodologyPopup');
+            if (closeBtn && popup) {
+                closeBtn.addEventListener('click', function() {
+                    popup.style.display = 'none';
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>
