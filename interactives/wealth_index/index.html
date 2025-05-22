@@ -189,18 +189,17 @@
         let isPlaying = false;
 
         const indicators = [
-            { name: "Black wealth index", key: "black_wealth_index" },
-            { name: "Latino wealth index", key: "latino_wealth_index" },
-            { name: "White wealth index", key: "white_wealth_index" },
-            { name: "White - Black wealth gap", key: "white_black_gap" },
-            { name: "White - Latino wealth gap", key: "white_latino_gap" },
-            { name: "Latino - Black wealth gap", key: "latino_black_gap" }
+            { name: "Black wealth index", key: "black_wealth_index", type: "index" },
+            { name: "Latino wealth index", key: "latino_wealth_index", type: "index" },
+            { name: "White wealth index", key: "white_wealth_index", type: "index" },
+            { name: "Black - White wealth gap", key: "black_white_gap", type: "gap" },
+            { name: "Latino - White wealth gap", key: "latino_white_gap", type: "gap" }
         ];
         currentIndicator = indicators[0]; // Default indicator
 
         // Color scale and breaks (fixed as per requirement)
-        // Data range: -8.160617 to 8.074095
-        const colorBreaks = [-8.17, -5, -2.5, -0.1, 0.1, 2.5, 5, 8.08]; // 7 categories, 8 breaks
+        // Data range: -8.074095 to 8.160617
+        const colorBreaks = [-8.08, -5, -2.5, -0.1, 0.1, 1.0, 2.5,  8.17]; // 7 categories, 8 breaks
         const colors = [ // 7 colors for 7 categories (RdYlBu from ColorBrewer)
             '#d73027', // < -5
             '#fc8d59', // -5 to -2.5
@@ -314,14 +313,27 @@
                 return defaultColor; 
             }
             const numValue = parseFloat(value);
-            for (let i = 0; i < colorBreaks.length - 1; i++) {
-                if (numValue >= colorBreaks[i] && numValue < colorBreaks[i+1]) {
-                    return colors[i];
+            if (currentIndicator.type === "gap") {
+                // For gap: all positive values (>= 0.1) are one blue, all negative as before
+                if (numValue < colorBreaks[0]) return colors[0];
+                if (numValue >= colorBreaks[0] && numValue < colorBreaks[1]) return colors[0];
+                if (numValue >= colorBreaks[1] && numValue < colorBreaks[2]) return colors[1];
+                if (numValue >= colorBreaks[2] && numValue < colorBreaks[3]) return colors[2];
+                if (numValue >= colorBreaks[3] && numValue < colorBreaks[4]) return colors[3];
+                // All positive values (>= 0.1) use the light blue color
+                if (numValue >= colorBreaks[4]) return colors[4];
+                return defaultColor;
+            } else {
+                // index: as before
+                for (let i = 0; i < colorBreaks.length - 1; i++) {
+                    if (numValue >= colorBreaks[i] && numValue < colorBreaks[i+1]) {
+                        return colors[i];
+                    }
                 }
+                if (numValue >= colorBreaks[colorBreaks.length - 1]) return colors[colors.length -1];
+                if (numValue < colorBreaks[0]) return colors[0]; 
+                return defaultColor;
             }
-            if (numValue >= colorBreaks[colorBreaks.length - 1]) return colors[colors.length -1];
-            if (numValue < colorBreaks[0]) return colors[0]; 
-            return defaultColor;
         }
 
         function styleFeature(feature) {
@@ -467,6 +479,7 @@
             }
             currentYearDisplay.textContent = currentYear; 
             yearSlider.value = currentYear; 
+            createLegend(); // <-- rerender legend on update
         }
 
         function togglePlay() {
@@ -490,30 +503,41 @@
 
         // --- Legend ---
         function createLegend() {
+            if (window._leaflet_legend_control) {
+                map.removeControl(window._leaflet_legend_control);
+            }
             const legend = L.control({ position: 'bottomleft' });
-
             legend.onAdd = function (map) {
                 const div = L.DomUtil.create('div', 'info leaflet-legend');
-                div.innerHTML += '<h4>Wealth Index/Gap</h4>';
-                
-                const legendItemsHTML = [];
-                // First category
-                legendItemsHTML.push(`<div class="legend-item"><i style="background:${colors[0]}"></i> &lt; ${colorBreaks[1].toFixed(1)}</div>`);
-
-                // Intermediate categories
-                for (let i = 1; i < colors.length - 1; i++) { 
-                     legendItemsHTML.push(
-                        `<div class="legend-item"><i style="background:${colors[i]}"></i> ${colorBreaks[i].toFixed(1)} to ${colorBreaks[i+1].toFixed(1)}</div>`
-                     );
+                if (currentIndicator.type === "gap") {
+                    div.innerHTML += '<h4>Wealth gap</h4>';
+                    const legendItemsHTML = [];
+                    // Negative categories (red/yellow)
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${colors[0]}"></i> &lt; ${colorBreaks[1].toFixed(1)} (Least equal)</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${colors[1]}"></i> ${colorBreaks[1].toFixed(1)} to ${colorBreaks[2].toFixed(1)}</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${colors[2]}"></i> ${colorBreaks[2].toFixed(1)} to ${colorBreaks[3].toFixed(1)}</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${colors[3]}"></i> ${colorBreaks[3].toFixed(1)} to ${colorBreaks[4].toFixed(1)}</div>`);
+                    // All positive values (blue)
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${colors[4]}"></i> &ge; ${colorBreaks[4].toFixed(1)} (Most equal)</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${defaultColor}"></i> N/A or No Data</div>`);
+                    div.innerHTML += legendItemsHTML.join('');
+                } else {
+                    div.innerHTML += '<h4>Wealth Index</h4>';
+                    const legendItemsHTML = [];
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${colors[0]}"></i> &lt; ${colorBreaks[1].toFixed(1)} (Least wealth)</div>`);
+                    for (let i = 1; i < colors.length - 1; i++) { 
+                        legendItemsHTML.push(
+                            `<div class="legend-item"><i style="background:${colors[i]}"></i> ${colorBreaks[i].toFixed(1)} to ${colorBreaks[i+1].toFixed(1)}</div>`
+                        );
+                    }
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${colors[colors.length-1]}"></i> &ge; ${colorBreaks[colors.length-1].toFixed(1)} (Most wealth)</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${defaultColor}"></i> N/A or No Data</div>`);
+                    div.innerHTML += legendItemsHTML.join('');
                 }
-                // Last category
-                legendItemsHTML.push(`<div class="legend-item"><i style="background:${colors[colors.length-1]}"></i> &ge; ${colorBreaks[colors.length-1].toFixed(1)}</div>`);
-                legendItemsHTML.push(`<div class="legend-item"><i style="background:${defaultColor}"></i> N/A or No Data</div>`);
-
-                div.innerHTML += legendItemsHTML.join('');
                 return div;
             };
             legend.addTo(map);
+            window._leaflet_legend_control = legend;
         }
 
         // --- Methodology Popup Logic ---
