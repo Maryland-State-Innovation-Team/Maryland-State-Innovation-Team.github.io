@@ -162,7 +162,13 @@
         <p>
             <strong>Note:</strong> The index is relative and not a direct measure of dollars or assets. It is intended to highlight disparities and trends over time and geography.
         </p>
+        <div style="display: flex; justify-content: space-between; margin-top: 18px;">
+            <button id="popupCloseBtn" style="background: #eee; color: #333; border: none; border-radius: 5px; padding: 8px 18px; font-size: 15px; cursor: pointer;">Close</button>
+            <button id="popupTourBtn" style="background: #2563eb; color: #fff; border: none; border-radius: 5px; padding: 8px 18px; font-size: 15px; cursor: pointer;">Take a tour</button>
+        </div>
     </div>
+    <div id="popupOverlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.25); z-index:2000;"></div>
+    <div id="tourStep" style="display:none; position:fixed; z-index:3000; background:white; border-radius:10px; box-shadow:0 4px 32px rgba(0,0,0,0.25); padding:22px 24px; max-width:350px; font-size:15px; color:#222; line-height:1.5;"></div>
     <div id="map"></div>
     <div class="controls-container">
         <div>
@@ -544,13 +550,139 @@
         document.addEventListener('DOMContentLoaded', function() {
             const popup = document.getElementById('methodologyPopup');
             const closeBtn = document.getElementById('closeMethodologyPopup');
+            const overlay = document.getElementById('popupOverlay');
+            const closeBtn2 = document.getElementById('popupCloseBtn');
+            const tourBtn = document.getElementById('popupTourBtn');
             if (closeBtn && popup) {
                 closeBtn.addEventListener('click', function() {
                     popup.style.display = 'none';
+                    overlay.style.display = 'none';
+                });
+            }
+            if (closeBtn2) {
+                closeBtn2.addEventListener('click', function() {
+                    popup.style.display = 'none';
+                    overlay.style.display = 'none';
+                });
+            }
+            if (overlay) {
+                overlay.addEventListener('click', function(e) {
+                    if (popup.style.display !== 'none') {
+                        popup.style.display = 'none';
+                        overlay.style.display = 'none';
+                    }
+                });
+            }
+            // Show overlay when popup is open
+            if (popup.style.display !== 'none') {
+                overlay.style.display = 'block';
+            }
+            // Tour logic
+            if (tourBtn) {
+                tourBtn.addEventListener('click', function() {
+                    popup.style.display = 'none';
+                    overlay.style.display = 'none';
+                    startTour();
                 });
             }
         });
 
+        // --- Simple Tour Feature ---
+        const tourSteps = [
+            {
+                element: '#indicatorSelector',
+                title: 'Indicator Selector',
+                text: 'Use this menu to choose which wealth index or gap to display. "Wealth index" shows the relative asset wealth for a group; "gap" shows the difference between groups.'
+            },
+            {
+                element: '#yearSlider',
+                title: 'Time Slider',
+                text: 'Move the slider to change the year. You can also press Play to animate the map over time.'
+            },
+            {
+                element: '.leaflet-legend',
+                title: 'Legend',
+                text: 'When the legend shows a wealth index, the values run from <b style="color:' + colors[0] + ';">Least wealth</b> to <b style="color:' + colors[6] + ';">Most wealth</b>. Higher values indicate greater access to wealth-related resources.'
+            },
+            {
+                element: '.leaflet-legend',
+                title: 'Legend',
+                text: 'When the legend shows a wealth gap, the values run from <b style="color:' + colors[0] + ';">Least equal</b> to <b style="color:' + colors[6] + ';">Most equal</b>. Negative values mean the relative wealth of white (non-Hispanic) families is greater than the selected race/ethnicity in that tract.'
+            }
+        ];
+        let tourIndex = 0;
+        function startTour() {
+            tourIndex = 0;
+            showTourStep();
+        }
+        function showTourStep() {
+            const step = tourSteps[tourIndex];
+            const tourBox = document.getElementById('tourStep');
+            const overlay = document.getElementById('popupOverlay');
+            // Remove highlight from all
+            document.querySelectorAll('.tour-highlight').forEach(el => {
+                el.classList.remove('tour-highlight');
+                el.style.boxShadow = '';
+                el.style.zIndex = '';
+            });
+            // Highlight element
+            let target = null;
+            if (step.element) {
+                target = document.querySelector(step.element);
+                if (target) {
+                    target.classList.add('tour-highlight');
+                    target.style.boxShadow = '0 0 0 4px #2563eb88';
+                    target.style.zIndex = 2500;
+                }
+            }
+            // Position tour box
+            if (target) {
+                const rect = target.getBoundingClientRect();
+                let top = rect.bottom + 10;
+                let left = rect.left;
+                if (window.innerHeight - rect.bottom < 180) {
+                    top = rect.top - 170;
+                }
+                if (window.innerWidth - rect.left < 370) {
+                    left = window.innerWidth - 370;
+                }
+                tourBox.style.top = top + 'px';
+                tourBox.style.left = left + 'px';
+            } else {
+                tourBox.style.top = '50%';
+                tourBox.style.left = '50%';
+                tourBox.style.transform = 'translate(-50%, -50%)';
+            }
+            // Set content
+            let text = typeof step.text === 'function' ? step.text() : step.text;
+            tourBox.innerHTML = `<div style="font-weight:bold;font-size:1.1em;margin-bottom:6px;">${step.title}</div><div style="margin-bottom:16px;">${text}</div><div style="display:flex;justify-content:space-between;gap:10px;"><button id='tourEndBtn' style='background:#eee;color:#333;border:none;border-radius:5px;padding:7px 16px;font-size:14px;cursor:pointer;'>End tour</button><button id='tourNextBtn' style='background:#2563eb;color:#fff;border:none;border-radius:5px;padding:7px 16px;font-size:14px;cursor:pointer;'>${tourIndex < tourSteps.length-1 ? 'Next' : 'Finish'}</button></div>`;
+            tourBox.style.display = 'block';
+            tourBox.style.zIndex = 3000;
+            overlay.style.display = 'block';
+            overlay.style.zIndex = 2999;
+            // Button handlers
+            document.getElementById('tourNextBtn').onclick = function() {
+                if (tourIndex < tourSteps.length-1) {
+                    tourIndex++;
+                    showTourStep();
+                } else {
+                    endTour();
+                }
+            };
+            document.getElementById('tourEndBtn').onclick = endTour;
+        }
+        function endTour() {
+            const tourBox = document.getElementById('tourStep');
+            const overlay = document.getElementById('popupOverlay');
+            tourBox.style.display = 'none';
+            overlay.style.display = 'none';
+            // Remove highlight
+            document.querySelectorAll('.tour-highlight').forEach(el => {
+                el.classList.remove('tour-highlight');
+                el.style.boxShadow = '';
+                el.style.zIndex = '';
+            });
+        }
     </script>
 </body>
 </html>
