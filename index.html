@@ -116,15 +116,57 @@
     </style>
 </head>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DRDQTZX21F"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'ad_storage': 'denied',
+        'analytics_storage': 'denied',
+        'wait_for_update': 500,
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-DRDQTZX21F');
 
-  gtag('config', 'G-DRDQTZX21F');
+    document.addEventListener('DOMContentLoaded', function() {
+        // Consent Banner Logic
+        var consentBanner = document.getElementById('consent-banner');
+        var grantButton = document.getElementById('grant-consent-btn');
+        if (consentBanner && grantButton) {
+            // Show banner if consent not granted
+            if (!localStorage.getItem('consentGranted')) {
+                consentBanner.style.display = 'flex';
+            }
+            grantButton.addEventListener("click", function() {
+                localStorage.setItem("consentGranted", "true");
+                gtag('consent', 'update', {
+                    ad_user_data: 'granted',
+                    ad_personalization: 'granted',
+                    ad_storage: 'granted',
+                    analytics_storage: 'granted'
+                });
+                consentBanner.style.display = 'none';
+            });
+        }
+    });
+
+    // Load gtag.js script.
+    var gtagScript = document.createElement('script');
+    gtagScript.async = true;
+    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-DRDQTZX21F';
+
+    // Insert before the first script tag in the document
+    var firstScript = document.getElementsByTagName('script')[0];
+    firstScript.parentNode.insertBefore(gtagScript, firstScript);
 </script>
 <body class="bg-gray-100 text-gray-800">
+
+    <!-- Consent Banner -->
+    <div id="consent-banner" style="display:none;" class="fixed bottom-0 left-0 w-full z-50 bg-navy-1 text-light p-4 flex flex-col md:flex-row items-center justify-between shadow-lg">
+        <span class="mb-2 md:mb-0 text-sm">We use cookies for analytics to improve your experience. <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener noreferrer" class="underline text-gold-button hover:text-gold-button-hover">Learn more</a>.</span>
+        <button id="grant-consent-btn" class="cta-button bg-gold-button text-navy-1 hover:bg-gold-button-hover ml-0 md:ml-4 mt-2 md:mt-0">Allow Analytics Cookies</button>
+    </div>
 
     <header class="bg-navy-1 text-light sticky top-0 z-50 shadow-lg">
         <nav class="content-container mx-auto px-4 sm:px-6 lg:px-8">
