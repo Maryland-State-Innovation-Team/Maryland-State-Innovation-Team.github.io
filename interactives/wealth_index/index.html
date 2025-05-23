@@ -164,7 +164,7 @@
             <li>Types of housing units (e.g., detached homes)</li>
         </ul>
         <p>
-            These indicators are combined using principal component analysis (PCA) to create a single index value using <a href="https://dhsprogram.com/topics/wealth-index/" target="_blank" rel="noopener noreferrer">methodology from USAID</a>. Higher values indicate greater access to wealth-related resources and "gap" indicators show the difference between groups.
+            For each racial/ethnic group (Black, Latino, White non-Hispanic), these indicators are combined using principal component analysis (PCA) to create a single index value using <a href="https://dhsprogram.com/topics/wealth-index/" target="_blank" rel="noopener noreferrer">methodology from USAID</a>. Higher values indicate greater access to wealth-related resources and "gap" indicators show the difference between groups.
         </p>
         <p>
             <strong>Note:</strong> The index is relative and not a direct measure of dollars or assets. Tracts with estimated populations below 50 have been omitted. Full replication code is available <a href="https://github.com/Maryland-State-Innovation-Team/Maryland-State-Innovation-Team.github.io/tree/main/code/wealth-index" target="_blank" rel="noopener noreferrer">here</a>.
@@ -323,6 +323,11 @@
                 indicators.forEach(ind => {
                     wealthData[geoid][year][ind.key] = row.hasOwnProperty(ind.key) ? row[ind.key] : null;
                 });
+                // Load population fields
+                wealthData[geoid][year].totalPopulation = row.hasOwnProperty('totalPopulation') ? row.totalPopulation : null;
+                wealthData[geoid][year].percentBlackPopulation = row.hasOwnProperty('percentBlackPopulation') ? row.percentBlackPopulation : null;
+                wealthData[geoid][year].percentLatinoPopulation = row.hasOwnProperty('percentLatinoPopulation') ? row.percentLatinoPopulation : null;
+                wealthData[geoid][year].percentWhitePopulation = row.hasOwnProperty('percentWhitePopulation') ? row.percentWhitePopulation : null;
             });
         }
 
@@ -439,18 +444,32 @@
                     highlightFeature(e);
                     const props = feature.properties;
                     let valueText = "N/A";
+                    let totalPop = 'N/A', pctBlack = 'N/A', pctLatino = 'N/A', pctWhite = 'N/A';
                     if (wealthData[props.GEOID] && wealthData[props.GEOID][currentYear]) {
                         const val = wealthData[props.GEOID][currentYear][currentIndicator.key];
                         if (val !== null && val !== undefined && !isNaN(parseFloat(val))) {
-                             valueText = parseFloat(val).toFixed(2);
+                            valueText = parseFloat(val).toFixed(2);
                         } else if (val !== null && val !== undefined) {
-                            valueText = String(val); 
+                            valueText = String(val);
                         }
+                        // Population and percent fields from wealthData
+                        const wd = wealthData[props.GEOID][currentYear];
+                        totalPop = (wd.totalPopulation !== undefined && wd.totalPopulation !== null && !isNaN(wd.totalPopulation)) ? Number(Math.round(wd.totalPopulation)).toLocaleString() : 'N/A';
+                        function pct(val) {
+                            return (val !== undefined && val !== null && !isNaN(val)) ? (val * 100).toFixed(1) + '%' : 'N/A';
+                        }
+                        pctBlack = pct(wd.percentBlackPopulation);
+                        pctLatino = pct(wd.percentLatinoPopulation);
+                        pctWhite = pct(wd.percentWhitePopulation);
                     }
                     const tooltipContent = `
                         <div class="info-popup-content">
                             <strong>${props.tract_name || 'N/A'}</strong><br>
                             County: ${props.county_name || 'N/A'}<br>
+                            Total population: ${totalPop}<br>
+                            % Black: ${pctBlack}<br>
+                            % Latino: ${pctLatino}<br>
+                            % White (non-Hispanic): ${pctWhite}<br>
                             ${currentIndicator.name}: ${valueText} (${currentYear})
                         </div>
                     `;
@@ -519,23 +538,36 @@
                 geojsonLayer.eachLayer(layer => {
                     if (layer.feature && layer.feature.properties) {
                         layer.setStyle(styleFeature(layer.feature));
-                        
                         const tooltip = layer.getTooltip();
                         if (tooltip && layer.isTooltipOpen()) {
                             const props = layer.feature.properties;
                             let valueText = "N/A";
+                            let totalPop = 'N/A', pctBlack = 'N/A', pctLatino = 'N/A', pctWhite = 'N/A';
                             if (wealthData[props.GEOID] && wealthData[props.GEOID][currentYear]) {
                                 const val = wealthData[props.GEOID][currentYear][currentIndicator.key];
-                                 if (val !== null && val !== undefined && !isNaN(parseFloat(val))) {
+                                if (val !== null && val !== undefined && !isNaN(parseFloat(val))) {
                                     valueText = parseFloat(val).toFixed(2);
                                 } else if (val !== null && val !== undefined) {
                                     valueText = String(val);
                                 }
+                                // Population and percent fields from wealthData
+                                const wd = wealthData[props.GEOID][currentYear];
+                                totalPop = (wd.totalPopulation !== undefined && wd.totalPopulation !== null && !isNaN(wd.totalPopulation)) ? Number(Math.round(wd.totalPopulation)).toLocaleString() : 'N/A';
+                                function pct(val) {
+                                    return (val !== undefined && val !== null && !isNaN(val)) ? (val * 100).toFixed(1) + '%' : 'N/A';
+                                }
+                                pctBlack = pct(wd.percentBlackPopulation);
+                                pctLatino = pct(wd.percentLatinoPopulation);
+                                pctWhite = pct(wd.percentWhitePopulation);
                             }
                             const tooltipContent = `
                                 <div class="info-popup-content">
                                     <strong>${props.tract_name || 'N/A'}</strong><br>
                                     County: ${props.county_name || 'N/A'}<br>
+                                    Total population: ${totalPop}<br>
+                                    % Black: ${pctBlack}<br>
+                                    % Latino: ${pctLatino}<br>
+                                    % White (non-Hispanic): ${pctWhite}<br>
                                     ${currentIndicator.name}: ${valueText} (${currentYear})
                                 </div>
                             `;
