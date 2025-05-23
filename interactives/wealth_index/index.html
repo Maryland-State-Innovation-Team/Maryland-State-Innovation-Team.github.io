@@ -114,6 +114,13 @@
         .info-popup-content strong {
             font-weight: bold;
         }
+        .enough-highlight {
+            stroke: #d100d1 !important;
+            stroke-width: 3 !important;
+            fill: #d100d1 !important;
+            fill-opacity: 0.08 !important;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -147,7 +154,7 @@
         " aria-label="Close">&times;</button>
         <h2 style="margin-top:0;font-size:1.25em;">About the wealth index</h2>
         <p>
-            The index shown here is a composite score designed to compare asset wealth across census tracts and racial/ethnic groups in Maryland over time. The index is meant to be complementary to other indicators of wealth available from the <a href="https://blackwealthdata.org/" target="_blank" rel="noopener noreferrer">Black Wealth Data Center</a>. It is built from U.S. Census American Community Survey data using indicators that reflect household wealth, such as:
+            This index was created to provide a census-tract level indicator of household asset wealth that can be compared with tracts eligible under the <a href="https://goc.maryland.gov/Pages/enough-initiative.aspx" target="_blank" rel="noopener noreferrer">ENOUGH Act</a>. It is meant to be complementary to other indicators of wealth available from the <a href="https://blackwealthdata.org/" target="_blank" rel="noopener noreferrer">Black Wealth Data Center</a>. It is built from U.S. Census American Community Survey data using indicators that reflect household wealth, such as:
         </p>
         <ul style="margin-top:0.5em;margin-bottom:0.5em;">
             <li>Homeownership rate</li>
@@ -182,12 +189,18 @@
                 <button id="playButton">Play</button>
             </div>
         </div>
+        <div style="margin-top:8px; display: flex; align-items: center; gap: 6px;">
+            <input type="checkbox" id="enoughToggle" checked>
+            <label for="enoughToggle" style="font-weight:normal; margin:0;">ENOUGH Act</label>
+        </div>
     </div>
 
     <script>
         // --- Global Variables ---
         let map;
         let geojsonLayer;
+        let enoughLayer; // <-- Add this for ENOUGH Act overlay
+        let enoughLayerVisible = true; // Track ENOUGH Act layer visibility
         let wealthData = {}; // To store processed CSV data: wealthData[GEOID][year][indicator_key]
         let currentYear = 2023;
         let currentIndicator; // Will be an object { name: "...", key: "..." }
@@ -242,6 +255,7 @@
 
 
             fetchData();
+            fetchEnoughGeojson(); // <-- Fetch ENOUGH Act overlay
         }
 
         // --- Data Loading and Processing ---
@@ -274,6 +288,18 @@
             }
         }
 
+        // --- ENOUGH Act Overlay ---
+        async function fetchEnoughGeojson() {
+            try {
+                const enoughResp = await fetch('assets/enough.geojson');
+                if (!enoughResp.ok) throw new Error(`ENOUGH Act geojson fetch failed: ${enoughResp.statusText}`);
+                const enoughGeojson = await enoughResp.json();
+                addEnoughLayer(enoughGeojson);
+                updateEnoughLayerVisibility();
+            } catch (error) {
+                console.warn("Could not load ENOUGH Act overlay:", error);
+            }
+        }
 
         function processCsvData(csvText) {
             const parsed = Papa.parse(csvText, { header: true, dynamicTyping: true, skipEmptyLines: true });
@@ -312,6 +338,38 @@
             updateMapDisplay(); 
         }
 
+        function addEnoughLayer(geojson) {
+            if (enoughLayer) {
+                map.removeLayer(enoughLayer);
+            }
+            enoughLayer = L.geoJSON(geojson, {
+                style: {
+                    color: '#d100d1',
+                    weight: 3,
+                    fillColor: '#d100d1',
+                    fillOpacity: 0.08,
+                    opacity: 1,
+                    interactive: false
+                },
+                pane: 'overlayPane'
+            });
+            updateEnoughLayerVisibility();
+        }
+
+        function updateEnoughLayerVisibility() {
+            if (enoughLayer) {
+                if (enoughLayerVisible) {
+                    if (!map.hasLayer(enoughLayer)) {
+                        enoughLayer.addTo(map);
+                    }
+                    enoughLayer.bringToFront();
+                } else {
+                    if (map.hasLayer(enoughLayer)) {
+                        map.removeLayer(enoughLayer);
+                    }
+                }
+            }
+        }
 
         // --- Styling and Interaction ---
         function getColor(value) {
@@ -367,9 +425,6 @@
                 dashArray: '',
                 fillOpacity: 0.9
             });
-            if (!L.Browser.mobile) { 
-                layer.bringToFront();
-            }
         }
 
         function resetHighlight(e) {
@@ -447,8 +502,16 @@
                 updateMapDisplay();
             });
 
-
             playButton.addEventListener('click', togglePlay);
+
+            // ENOUGH Act toggle
+            const enoughToggle = document.getElementById('enoughToggle');
+            if (enoughToggle) {
+                enoughToggle.addEventListener('change', (e) => {
+                    enoughLayerVisible = e.target.checked;
+                    updateEnoughLayerVisibility();
+                });
+            }
         }
 
         function updateMapDisplay() {
@@ -486,6 +549,10 @@
             currentYearDisplay.textContent = currentYear; 
             yearSlider.value = currentYear; 
             createLegend(); // <-- rerender legend on update
+            // ENOUGH overlay stays on top
+            if (enoughLayer) {
+                enoughLayer.bringToFront();
+            }
         }
 
         function togglePlay() {
@@ -515,6 +582,8 @@
             const legend = L.control({ position: 'bottomleft' });
             legend.onAdd = function (map) {
                 const div = L.DomUtil.create('div', 'info leaflet-legend');
+                // ENOUGH Act legend item (always on top)
+                div.innerHTML += `<div class="legend-item"><i style="background:transparent;border:2px solid #d100d1;width:18px;height:18px;"></i> <span style="color:#a000a0;font-weight:bold;">ENOUGH Act eligible</span></div>`;
                 if (currentIndicator.type === "gap") {
                     div.innerHTML += '<h4>Wealth gap</h4>';
                     const legendItemsHTML = [];
@@ -600,9 +669,14 @@
                 text: 'Move the slider to change the year. You can also press Play to animate the map over time.'
             },
             {
+                element: '#enoughToggle',
+                title: 'ENOUGH Act Toggle',
+                text: 'Use this checkbox to show or hide the ENOUGH Act eligible tracts overlay. When checked, eligible communities are highlighted in purple.'
+            },
+            {
                 element: '.leaflet-legend',
                 title: 'Legend',
-                text: 'When the legend shows a wealth index, the values run from <b style="color:' + colors[0] + ';">Least wealth</b> to <b style="color:' + colors[6] + ';">Most wealth</b>. Higher values indicate greater access to wealth-related resources.'
+                text: 'When the legend shows a wealth index, the values run from <b style="color:' + colors[0] + ';">Least wealth</b> to <b style="color:' + colors[6] + ';">Most wealth</b>. Higher values indicate greater access to wealth-related resources. ENOUGH Act eligible communities are highlighted in <b style="color:#d100d1;">purple</b>.'
             },
             {
                 element: '.leaflet-legend',
