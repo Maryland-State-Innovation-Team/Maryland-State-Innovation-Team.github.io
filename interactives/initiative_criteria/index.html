@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Innovation Matrix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overscroll-behavior: none; /* Prevents pull-to-refresh on mobile */
+        }
+        .chart-container {
+            width: 100%;
+            max-width: 800px; /* Max width for the chart */
+            margin: 0 auto;
+            touch-action: manipulation; /* Improves touch responsiveness */
+        }
+        .axis-label {
+            font-size: 0.8rem;
+            fill: #4A5568; /* gray-700 */
+        }
+        .grid line {
+            stroke: #E2E8F0; /* gray-300 */
+            stroke-opacity: 0.7;
+            shape-rendering: crispEdges;
+        }
+        .grid path {
+            stroke-width: 0;
+        }
+        .bubble {
+            stroke-width: 1.5px;
+            cursor: pointer;
+            transition: r 0.3s ease, opacity 0.3s ease;
+        }
+        .bubble:hover {
+            opacity: 0.7;
+        }
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            padding: 8px;
+            font-size: 0.8rem;
+            background: white;
+            border: 1px solid #CBD5E0; /* gray-400 */
+            border-radius: 8px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .arc-path {
+            fill-opacity: 0.15;
+            stroke: none;
+        }
+        .arc-label {
+            font-size: 0.85rem; /* Adjusted for better fit */
+            font-weight: 600;
+            fill: #2D3748; /* gray-800 */
+            text-anchor: middle;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .legend-color-box {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+            border-radius: 0.25rem;
+        }
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 p-4 md:p-8 min-h-screen flex flex-col items-center">
+
+    <div class="w-full max-w-4xl bg-white p-6 rounded-lg shadow-xl">
+        <h1 class="text-2xl md:text-3xl font-bold text-center text-blue-700 mb-6">Innovation Portfolio Matrix</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div>
+                <label for="x-axis-select" class="block text-sm font-medium text-gray-700 mb-1">Horizontal Axis:</label>
+                <select id="x-axis-select" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></select>
+            </div>
+            <div>
+                <label for="y-axis-select" class="block text-sm font-medium text-gray-700 mb-1">Vertical Axis:</label>
+                <select id="y-axis-select" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></select>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-6">
+            <div class="chart-container flex-grow">
+                <svg id="innovation-chart" class="w-full h-auto" viewbox="0 0 600 600"></svg>
+            </div>
+
+            <div id="legend" class="w-full lg:w-1/4 p-4 bg-gray-50 rounded-lg shadow">
+                <h3 class="text-lg font-semibold mb-3 text-blue-600">Legend (Topics)</h3>
+                </div>
+        </div>
+    </div>
+
+    <div id="tooltip" class="tooltip"></div>
+
+    <script>
+        // --- Data Definitions ---
+        const initialIndicators = [
+            { id: 'novelty', name: 'Novelty', description: 'From existing to new innovation' },
+            { id: 'formality', name: 'Required formality', description: 'From internal optimization to regulatory change' },
+            { id: 'urbanRural', name: 'Location', description: 'From urban to rural' },
+            { id: 'timeframe', name: 'Time frame', description: 'From quick win to slow burn' },
+            { id: 'agencyScope', name: 'Agency scope', description: 'From single-agency to cross-agency' },
+            { id: 'funding', name: 'Funding', description: 'From has existing funding to needs external funding' }
+        ];
+
+        const initialBubblesData = [
+            {
+                id: 1,
+                name: 'Project Alpha',
+                topic: 'Economic Growth',
+                novelty: 8,
+                urbanRural: 3,
+                formality: 3,
+                timeframe: 2,
+                impact: 7,
+                agencyScope: 2,
+                funding: 1
+            },
+            {
+                id: 2,
+                name: 'Project Beta',
+                topic: 'Economic Growth',
+                novelty: 5,
+                urbanRural: 5,
+                formality: 7,
+                timeframe: 1,
+                impact: 8,
+                agencyScope: 10,
+                funding: 5
+            },
+            {
+                id: 3,
+                name: 'Project Gamma',
+                topic: 'Social Program',
+                novelty: 1,
+                urbanRural: 5,
+                formality: 1,
+                timeframe: 3,
+                impact: 3,
+                agencyScope: 1,
+                funding: 1
+            },
+            {
+                id: 4,
+                name: 'Project Delta',
+                topic: 'Social Program',
+                novelty: 7,
+                urbanRural: 5,
+                formality: 5,
+                timeframe: 4,
+                impact: 5,
+                agencyScope: 3,
+                funding: 7
+            },
+            {
+                id: 5,
+                name: 'Project Epsilon',
+                topic: 'Social Program',
+                novelty: 1,
+                urbanRural: 5,
+                formality: 2,
+                timeframe: 3,
+                impact: 2,
+                agencyScope: 1,
+                funding: 3
+            },
+            {
+                id: 6,
+                name: 'Project Gamma',
+                topic: 'Social Program',
+                novelty: 5,
+                urbanRural: 5,
+                formality: 1,
+                timeframe: 2,
+                impact: 3,
+                agencyScope: 1,
+                funding: 5
+            },
+            {
+                id: 7,
+                name: 'Project Zeta',
+                topic: 'Economic Growth',
+                novelty: 9,
+                urbanRural: 3,
+                formality: 7,
+                timeframe: 5,
+                impact: 6,
+                agencyScope: 5,
+                funding: 10
+            },
+            {
+                id: 8,
+                name: 'Project Eta',
+                topic: 'Economic Growth',
+                novelty: 10,
+                urbanRural: 3,
+                formality: 9,
+                timeframe: 7,
+                impact: 7,
+                agencyScope: 7,
+                funding: 10
+            },
+        ];
+
+        // --- Arc Label Logic ---
+        // Defines different sets of arc labels based on X and Y indicator combinations.
+        // The key is "indicator1-indicator2" in alphabetical order.
+        const arcLabelSets = {
+            'default': { core: 'Core', adjacent: 'Adjacent', transformational: 'Transformational' },
+            'novelty-novelty': { core: 'Pre-existing', adjacent: 'Semi-new', transformational: 'Totally new' },
+            'urbanRural-urbanRural': { core: 'Urban', adjacent: 'Suburban', transformational: 'Rural' },
+            'formality-formality': { core: 'Internal optimization', adjacent: 'Semi-formal', transformational: 'Regulatory change' },
+            'timeframe-timeframe': { core: 'Quick win', adjacent: 'Moderate timeframe', transformational: 'Slow burn' },
+            'agencyScope-agencyScope': { core: 'Single-agency', adjacent: 'Multi-agency', transformational: 'Cross-agency' },
+            'funding-funding': { core: 'All existing', adjacent: 'Some existing', transformational: 'All new' },
+            'novelty-urbanRural': { core: 'Pre-existing urban', adjacent: 'Semi-new suburban', transformational: 'Totally new rural' },
+            'formality-novelty': { core: 'Core', adjacent: 'Adjacent', transformational: 'Transformational' },
+            'novelty-timeframe': { core: 'Pre-existing quick win', adjacent: 'Semi-new semi-formal', transformational: 'Totally new slow burn' },
+            'agencyScope-novelty': { core: 'Pre-existing single-agency', adjacent: 'Semi-new multi-agency', transformational: 'Totally new cross-agency' },
+            'funding-novelty': { core: 'Pre-existing with funding', adjacent: 'Semi-new with some funding', transformational: 'Totally new needs funding' },
+            'formality-urbanRural': { core: 'Urban-focused internal optimization', adjacent: 'Suburban-focused semi-formal', transformational: 'Rural-focused regulatory change' },
+            'timeframe-urbanRural': { core: 'Urban-focused quick win', adjacent: 'Suburban-focused moderate timeframe', transformational: 'Rural-focused slow burn' },
+            'agencyScope-urbanRural': { core: 'Urban-focused single-agency', adjacent: 'Suburban-focused multi-agency', transformational: 'Rural-focused cross-agency' },
+            'funding-urbanRural': { core: 'Urban-focused and funded', adjacent: 'Suburban-focused some funding', transformational: 'Rural-focused needs funding' },
+            'formality-timeframe': { core: 'Internal optimization quick win', adjacent: 'Semi-formal moderate timeframe', transformational: 'Regulatory change slow burn' },
+            'agencyScope-formality': { core: 'Single-agency internal optimization', adjacent: 'Multi-agency semi-formal', transformational: 'Cross-agency regulatory change' },
+            'formality-funding': { core: 'Funded internal optimization', adjacent: 'Semi-funded semi-formal', transformational: 'Needs funding regulatory change' },
+            'agencyScope-timeframe': { core: 'Single-agency quick win', adjacent: 'Multi-agency moderate timeframe', transformational: 'Cross-agency slow burn' },
+            'funding-timeframe': { core: 'Existing-funding quick win', adjacent: 'Semi-funded moderate timeframe', transformational: 'Needs funding slow burn' },
+            'agencyScope-funding': { core: 'Existing-funding single-agency', adjacent: 'Semi-funded multi-agency', transformational: 'Needs funding cross-agency' },
+        };
+        let currentArcLabels = arcLabelSets.default;
+
+        // --- Color Scale for Topics ---
+        const topics = [...new Set(initialBubblesData.map(d => d.topic))];
+        const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(topics);
+
+        // --- D3 Setup ---
+        const svg = d3.select("#innovation-chart");
+        const tooltip = d3.select("#tooltip");
+        const legendContainer = d3.select("#legend");
+
+        const margin = { top: 60, right: 30, bottom: 60, left: 60 }; // Increased top margin for arc labels
+        let width, height; // To be set by resize
+
+        const xScale = d3.scaleLinear().domain([0, 10]).range([0, null]); // Range set on resize
+        const yScale = d3.scaleLinear().domain([0, 10]).range([null, 0]); // Range set on resize
+        const impactScale = d3.scaleSqrt().domain([1, 10]).range([5, 25]); // Bubble size
+
+        const xAxisGrid = d3.axisBottom(xScale).tickSize(-height).tickFormat('').ticks(10);
+        const yAxisGrid = d3.axisLeft(yScale).tickSize(-width).tickFormat('').ticks(10);
+
+        // --- Axis Selectors ---
+        const xAxisSelect = d3.select("#x-axis-select");
+        const yAxisSelect = d3.select("#y-axis-select");
+
+        initialIndicators.forEach(indicator => {
+            xAxisSelect.append("option").attr("value", indicator.id).text(indicator.name);
+            yAxisSelect.append("option").attr("value", indicator.id).text(indicator.name);
+        });
+
+        // Set initial selections (can be different for X and Y)
+        xAxisSelect.property("value", initialIndicators[0].id);
+        yAxisSelect.property("value", initialIndicators[1].id);
+
+        let currentXIndicatorId = xAxisSelect.property("value");
+        let currentYIndicatorId = yAxisSelect.property("value");
+
+        // --- Drawing Functions ---
+
+        function updateArcLabels() {
+            const indicatorKeys = [currentXIndicatorId, currentYIndicatorId].sort();
+            const combinationKey = `${indicatorKeys[0]}-${indicatorKeys[1]}`;
+            console.log(combinationKey)
+            currentArcLabels = arcLabelSets[combinationKey] || arcLabelSets.default;
+            console.log(currentArcLabels)
+
+            svg.selectAll(".arc-label-transformational").text(currentArcLabels.transformational);
+            svg.selectAll(".arc-label-adjacent").text(currentArcLabels.adjacent);
+            svg.selectAll(".arc-label-core").text(currentArcLabels.core);
+        }
+
+
+        let nodes = initialBubblesData.map(d => Object.assign({}, d));
+        let simulation = null;
+
+        function drawChart() {
+            // Get current dimensions
+            const chartContainer = d3.select(".chart-container").node();
+            if (!chartContainer) return;
+
+            const newWidth = chartContainer.getBoundingClientRect().width - margin.left - margin.right;
+            const newHeight = newWidth; // Maintain square aspect ratio for the plot area
+            
+            // Update SVG viewbox and internal dimensions if they changed significantly
+            if (Math.abs(newWidth - width) > 1 || Math.abs(newHeight - height) > 1 || !width) {
+                width = newWidth;
+                height = newHeight;
+
+                svg.attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`);
+                
+                xScale.range([0, width]);
+                yScale.range([height, 0]);
+
+                xAxisGrid.tickSize(-height);
+                yAxisGrid.tickSize(-width);
+            }
+            
+            svg.selectAll(".static-group").remove(); // Remove only static chart elements
+
+            // Static chart elements (grid, axes, arcs, labels)
+            const staticGroup = svg.append("g")
+                .attr("class", "static-group")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            // Draw Grid
+            staticGroup.append("g")
+                .attr("class", "grid x-grid")
+                .attr("transform", `translate(0,${height})`)
+                .call(xAxisGrid);
+            staticGroup.append("g")
+                .attr("class", "grid y-grid")
+                .call(yAxisGrid);
+
+            // Draw Arcs (Paths)
+            const maxRadius = Math.min(width, height);
+            const arcRadii = [maxRadius * 0.525, maxRadius * 0.875, maxRadius];
+            const arcData = [
+                { id: 'core', color: '#6EE7B7', path: `M 0 ${height} L ${arcRadii[0]} ${height} A ${arcRadii[0]} ${arcRadii[0]} 0 0 0 0 ${height - arcRadii[0]} Z` },
+                { id: 'adjacent', color: '#34D399', path: `M 0 ${height} L ${arcRadii[1]} ${height} A ${arcRadii[1]} ${arcRadii[1]} 0 0 0 0 ${height - arcRadii[1]} Z` }
+            ];
+            staticGroup.selectAll(".arc-path")
+                .data(arcData.slice().reverse())
+                .enter().append("path")
+                .attr("class", d => `arc-path arc-${d.id}`)
+                .attr("d", d => d.path)
+                .style("fill", d => d.color);
+
+            // Draw Axes
+            staticGroup.append("g")
+                .attr("transform", `translate(0,${height})`)
+                .call(d3.axisBottom(xScale).ticks(5));
+            staticGroup.append("g")
+                .call(d3.axisLeft(yScale).ticks(5));
+
+            // Axis Labels
+            staticGroup.append("text")
+                .attr("class", "axis-label")
+                .attr("text-anchor", "middle")
+                .attr("x", width / 2)
+                .attr("y", height + margin.bottom / 1.5)
+                .text(initialIndicators.find(ind => ind.id === currentXIndicatorId)?.name || 'X Axis');
+
+            staticGroup.append("text")
+                .attr("class", "axis-label")
+                .attr("text-anchor", "middle")
+                .attr("transform", "rotate(-90)")
+                .attr("x", -height / 2)
+                .attr("y", -margin.left / 1.5)
+                .text(initialIndicators.find(ind => ind.id === currentYIndicatorId)?.name || 'Y Axis');
+
+            updateArcLabels();
+
+            // --- Bubbles: persistent selection ---
+            // Update target positions
+            nodes.forEach(d => {
+                d.targetX = xScale(d[currentXIndicatorId]);
+                d.targetY = yScale(d[currentYIndicatorId]);
+            });
+
+            // Bubble group (ensure it's always on top)
+            let bubbleGroup = svg.select("g.bubble-group");
+            if (bubbleGroup.empty()) {
+                bubbleGroup = svg.append("g").attr("class", "bubble-group").attr("transform", `translate(${margin.left},${margin.top})`);
+            } else {
+                // Move bubbleGroup to the end so it's above static elements
+                bubbleGroup.attr("transform", `translate(${margin.left},${margin.top})`);
+                svg.node().appendChild(bubbleGroup.node());
+            }
+
+            // Data join
+            let bubbles = bubbleGroup.selectAll(".bubble").data(nodes, d => d.id);
+
+            // Enter
+            bubbles.enter().append("circle")
+                .attr("class", "bubble")
+                .attr("r", d => impactScale(d.impact))
+                .attr("cx", d => d.x !== undefined ? d.x : d.targetX)
+                .attr("cy", d => d.y !== undefined ? d.y : d.targetY)
+                .style("fill", d => colorScale(d.topic))
+                .style("stroke", d => d3.rgb(colorScale(d.topic)).darker(0.7))
+                .on("mouseover", function(event, d) {
+                    tooltip.transition().duration(200).style("opacity", .9);
+                    const xIndicator = initialIndicators.find(ind => ind.id === currentXIndicatorId);
+                    const yIndicator = initialIndicators.find(ind => ind.id === currentYIndicatorId);
+                    tooltip.html(
+                        `<strong>${d.name}</strong><br/>
+                        Topic: ${d.topic}<br/>
+                        Impact: ${d.impact}<br/>
+                        ${xIndicator?.name || 'X'}: ${d[currentXIndicatorId]}<br/>
+                        ${yIndicator?.name || 'Y'}: ${d[currentYIndicatorId]}`
+                    )
+                    .style("left", (event.pageX + 15) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+                    d3.select(this).attr("r", impactScale(d.impact) * 1.2);
+                })
+                .on("mouseout", function(event, d) {
+                    tooltip.transition().duration(500).style("opacity", 0);
+                    d3.select(this).attr("r", impactScale(d.impact));
+                });
+
+            // Exit
+            bubbles.exit().remove();
+
+            // --- D3 Force Simulation for smooth movement ---
+            if (simulation) simulation.stop();
+            simulation = d3.forceSimulation(nodes)
+                .force("x", d3.forceX(d => d.targetX).strength(0.1))
+                .force("y", d3.forceY(d => d.targetY).strength(0.1))
+                .force("collide", d3.forceCollide(d => impactScale(d.impact) + 2))
+                .alpha(0.8)
+                .alphaDecay(0.03)
+                .on("tick", () => {
+                    bubbleGroup.selectAll(".bubble")
+                        .attr("cx", d => d.x)
+                        .attr("cy", d => d.y);
+                });
+
+            // Remove any existing arc-label-group
+            svg.selectAll('.arc-label-group').remove();
+            // Draw arc labels in a new group above bubbles
+            const arcLabelGroup = svg.append('g')
+                .attr('class', 'arc-label-group')
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+            arcLabelGroup.append('text')
+                .attr('class', 'arc-label arc-label-transformational')
+                .attr('x', width * 0.85)
+                .attr('y', height * 0.15)
+                .attr('dy', '-0.5em')
+                .text(currentArcLabels.transformational);
+            arcLabelGroup.append('text')
+                .attr('class', 'arc-label arc-label-adjacent')
+                .attr('x', width * 0.5)
+                .attr('y', height * 0.5)
+                .attr('dy', '-0.5em')
+                .text(currentArcLabels.adjacent);
+            arcLabelGroup.append('text')
+                .attr('class', 'arc-label arc-label-core')
+                .attr('x', width * 0.15)
+                .attr('y', height * 0.85)
+                .attr('dy', '-0.5em')
+                .text(currentArcLabels.core);
+        }
+
+        // --- Legend ---
+        function drawLegend() {
+            legendContainer.selectAll("*").remove(); // Clear previous legend
+            legendContainer.append("h3")
+                .attr("class", "text-lg font-semibold mb-3 text-blue-600")
+                .text("Legend (Topics)");
+
+            const legendItems = legendContainer.selectAll(".legend-item")
+                .data(topics)
+                .enter().append("div")
+                .attr("class", "legend-item text-sm");
+
+            legendItems.append("div")
+                .attr("class", "legend-color-box")
+                .style("background-color", d => colorScale(d));
+
+            legendItems.append("span")
+                .text(d => d);
+        }
+
+        // --- Event Listeners ---
+        xAxisSelect.on("change", function() {
+            currentXIndicatorId = d3.select(this).property("value");
+            updateArcLabels();
+            drawChart();
+        });
+
+        yAxisSelect.on("change", function() {
+            currentYIndicatorId = d3.select(this).property("value");
+            updateArcLabels();
+            drawChart();
+        });
+        
+        // --- Initial Draw and Resize Handling ---
+        function initialize() {
+            drawLegend();
+            // Use ResizeObserver for better performance and accuracy
+            new ResizeObserver(entries => {
+                if (entries && entries.length > 0) {
+                    // Potentially debounce or throttle if needed, but usually fine for ResizeObserver
+                    drawChart();
+                }
+            }).observe(d3.select(".chart-container").node());
+            
+            drawChart(); // Initial draw
+        }
+
+        // Wait for the DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', initialize);
+
+    </script>
+</body>
+</html>
