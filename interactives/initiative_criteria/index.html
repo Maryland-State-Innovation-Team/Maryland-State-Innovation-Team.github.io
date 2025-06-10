@@ -88,16 +88,23 @@
 </head>
 <body class="bg-gray-100 text-gray-800 p-4 md:p-8 min-h-screen flex flex-col items-center">
 
+    <!-- Description Box (show/hide) -->
+    <div id="description-box" class="w-full max-w-4xl bg-blue-50 border border-blue-200 rounded-lg shadow p-5 mb-4 relative">
+        <button id="desc-toggle-btn" class="absolute top-2 right-2 px-2 py-1 text-xs rounded bg-blue-100 hover:bg-blue-200 text-blue-700 font-semibold focus:outline-none mb-1">Hide Description</button>
+        <div id="desc-content">
+            <!-- Content will be filled by JS -->
+        </div>
+    </div>
+
     <div class="w-full max-w-4xl bg-white p-6 rounded-lg shadow-xl">
-        <h1 class="text-2xl md:text-3xl font-bold text-center text-blue-700 mb-6">Innovation Portfolio Matrix</h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div>
-                <label for="x-axis-select" class="block text-sm font-medium text-gray-700 mb-1">Horizontal Axis:</label>
+                <!-- <label for="x-axis-select" class="block text-sm font-medium text-gray-700 mb-1">Horizontal Axis:</label> -->
                 <select id="x-axis-select" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></select>
             </div>
             <div>
-                <label for="y-axis-select" class="block text-sm font-medium text-gray-700 mb-1">Vertical Axis:</label>
+                <!-- <label for="y-axis-select" class="block text-sm font-medium text-gray-700 mb-1">Vertical Axis:</label> -->
                 <select id="y-axis-select" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></select>
             </div>
         </div>
@@ -108,7 +115,7 @@
             </div>
 
             <div id="legend" class="w-full lg:w-1/4 p-4 bg-gray-50 rounded-lg shadow">
-                <h3 class="text-lg font-semibold mb-3 text-blue-600">Legend (Focus areas and cross-cutting themes)</h3>
+                <h3 class="text-lg font-semibold mb-3 text-blue-600">Legend</h3>
                 </div>
         </div>
     </div>
@@ -233,27 +240,27 @@
         // The key is "indicator1-indicator2" in alphabetical order.
         const arcLabelSets = {
             'default': { core: 'Core', adjacent: 'Adjacent', transformational: 'Transformational' },
-            'novelty-novelty': { core: 'Pre-existing', adjacent: 'Semi-new', transformational: 'Totally new' },
+            'novelty-novelty': { core: 'Existing', adjacent: 'Semi-New', transformational: 'Brand New' },
             'urbanRural-urbanRural': { core: 'Urban', adjacent: 'Suburban', transformational: 'Rural' },
-            'formality-formality': { core: 'Internal optimization', adjacent: 'Semi-formal', transformational: 'Regulatory change' },
-            'timeframe-timeframe': { core: 'Quick win', adjacent: 'Moderate timeframe', transformational: 'Slow burn' },
-            'agencyScope-agencyScope': { core: 'Single-agency', adjacent: 'Multi-agency', transformational: 'Cross-agency' },
-            'funding-funding': { core: 'All existing', adjacent: 'Some existing', transformational: 'All new' },
-            'novelty-urbanRural': { core: 'Pre-existing urban', adjacent: 'Semi-new suburban', transformational: 'Totally new rural' },
+            'formality-formality': { core: 'Internal Opt.', adjacent: 'Semi-Formal', transformational: 'Regulatory' },
+            'timeframe-timeframe': { core: 'Quick Win', adjacent: 'Mid-Term', transformational: 'Slow Burn' },
+            'agencyScope-agencyScope': { core: 'Single-Agency', adjacent: 'Multi-Agency', transformational: 'Cross-Agency' },
+            'funding-funding': { core: 'Existing Funds', adjacent: 'Partial Funds', transformational: 'New Funds' },
+            'novelty-urbanRural': { core: 'Existing Urban', adjacent: 'Semi-New Suburban', transformational: 'New Rural' },
             'formality-novelty': { core: 'Core', adjacent: 'Adjacent', transformational: 'Transformational' },
-            'novelty-timeframe': { core: 'Pre-existing quick win', adjacent: 'Semi-new moderate timeframe', transformational: 'Totally new slow burn' },
-            'agencyScope-novelty': { core: 'Pre-existing single-agency', adjacent: 'Semi-new multi-agency', transformational: 'Totally new cross-agency' },
-            'funding-novelty': { core: 'Pre-existing with funding', adjacent: 'Semi-new with some funding', transformational: 'Totally new needs funding' },
-            'formality-urbanRural': { core: 'Urban-focused internal optimization', adjacent: 'Suburban-focused semi-formal', transformational: 'Rural-focused regulatory change' },
-            'timeframe-urbanRural': { core: 'Urban-focused quick win', adjacent: 'Suburban-focused moderate timeframe', transformational: 'Rural-focused slow burn' },
-            'agencyScope-urbanRural': { core: 'Urban-focused single-agency', adjacent: 'Suburban-focused multi-agency', transformational: 'Rural-focused cross-agency' },
-            'funding-urbanRural': { core: 'Urban-focused and funded', adjacent: 'Suburban-focused some funding', transformational: 'Rural-focused needs funding' },
-            'formality-timeframe': { core: 'Internal optimization quick win', adjacent: 'Semi-formal moderate timeframe', transformational: 'Regulatory change slow burn' },
-            'agencyScope-formality': { core: 'Single-agency internal optimization', adjacent: 'Multi-agency semi-formal', transformational: 'Cross-agency regulatory change' },
-            'formality-funding': { core: 'Funded internal optimization', adjacent: 'Semi-funded semi-formal', transformational: 'Needs funding regulatory change' },
-            'agencyScope-timeframe': { core: 'Single-agency quick win', adjacent: 'Multi-agency moderate timeframe', transformational: 'Cross-agency slow burn' },
-            'funding-timeframe': { core: 'Existing-funding quick win', adjacent: 'Semi-funded moderate timeframe', transformational: 'Needs funding slow burn' },
-            'agencyScope-funding': { core: 'Existing-funding single-agency', adjacent: 'Semi-funded multi-agency', transformational: 'Needs funding cross-agency' },
+            'novelty-timeframe': { core: 'Existing Quick Win', adjacent: 'Semi-New Mid-Term', transformational: 'New Slow Burn' },
+            'agencyScope-novelty': { core: 'Existing Single-Agency', adjacent: 'Semi-New Multi-Agency', transformational: 'New Cross-Agency' },
+            'funding-novelty': { core: 'Funded Existing', adjacent: 'Part-Funded New', transformational: 'Unfunded New' },
+            'formality-urbanRural': { core: 'Urban Internal Opt.', adjacent: 'Suburban Semi-Formal', transformational: 'Rural Regulatory' },
+            'timeframe-urbanRural': { core: 'Urban Quick Win', adjacent: 'Suburban Mid-Term', transformational: 'Rural Slow Burn' },
+            'agencyScope-urbanRural': { core: 'Urban Single-Agency', adjacent: 'Suburban Multi-Agency', transformational: 'Rural Cross-Agency' },
+            'funding-urbanRural': { core: 'Funded Urban', adjacent: 'Part-Funded Suburban', transformational: 'Unfunded Rural' },
+            'formality-timeframe': { core: 'Internal Opt. Quick Win', adjacent: 'Semi-Formal Mid-Term', transformational: 'Regulatory Slow Burn' },
+            'agencyScope-formality': { core: 'Single-Agency Internal Opt.', adjacent: 'Multi-Agency Semi-Formal', transformational: 'Cross-Agency Regulatory' },
+            'formality-funding': { core: 'Funded Internal Opt.', adjacent: 'Part-Funded Semi-Formal', transformational: 'Unfunded Regulatory' },
+            'agencyScope-timeframe': { core: 'Single-Agency Quick Win', adjacent: 'Multi-Agency Mid-Term', transformational: 'Cross-Agency Slow Burn' },
+            'funding-timeframe': { core: 'Funded Quick Win', adjacent: 'Part-Funded Mid-Term', transformational: 'Unfunded Slow Burn' },
+            'agencyScope-funding': { core: 'Funded Single-Agency', adjacent: 'Part-Funded Multi-Agency', transformational: 'Unfunded Cross-Agency' },
         };
         let currentArcLabels = arcLabelSets.default;
 
@@ -264,6 +271,120 @@
         // -- Color scale for crosscutting themes
         const crosscuttingThemes = [...new Set(initialBubblesData.map(d => d.crosscut).filter(d => d !== undefined))];
         const crosscutColorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(crosscuttingThemes);
+
+        // --- Arc Label Explanations ---
+        const arcLabelExplanations = {
+            'default': {
+                core: 'Optimizing existing solutions for existing stakeholders.',
+                adjacent: 'Expanding from existing solutions into "new to us."',
+                transformational: 'Developing breakthroughs and inventing things for markets that do not exist yet.'
+            },
+            'novelty-novelty': {
+                core: 'Focusing on initiatives and solutions that are already established.',
+                adjacent: 'Adapting established solutions for a new context or purpose.',
+                transformational: 'Creating entirely new solutions or capabilities from the ground up.'
+            },
+            'urbanRural-urbanRural': {
+                core: 'Addressing the specific needs and opportunities within urban centers.',
+                adjacent: 'Expanding efforts to serve communities at the edge of the city.',
+                transformational: 'Branching out to address the unique challenges of rural areas.'
+            },
+            'formality-formality': {
+                core: 'Improving current processes and systems within the existing structure.',
+                adjacent: 'Introducing new practices that may exist outside of formal protocols.',
+                transformational: 'Driving fundamental shifts by creating or altering official regulations.'
+            },
+            'timeframe-timeframe': {
+                core: 'Implementing projects that deliver immediate and tangible results.',
+                adjacent: 'Pursuing initiatives with a mid-term scope that requires sustained effort.',
+                transformational: 'Investing in long-term, foundational projects that will unfold over time.'
+            },
+            'agencyScope-agencyScope': {
+                core: 'Focusing on projects managed entirely within our own agency.',
+                adjacent: 'Collaborating with a few partner agencies to achieve a shared goal.',
+                transformational: 'Leading broad initiatives that span multiple agencies and sectors.'
+            },
+            'funding-funding': {
+                core: 'Leveraging currently allocated budgets and financial resources.',
+                adjacent: 'Combining existing funds with a search for new financial support.',
+                transformational: 'Seeking entirely new sources of funding for groundbreaking projects.'
+            },
+            'novelty-urbanRural': {
+                core: 'Optimizing established solutions for the needs of urban communities.',
+                adjacent: 'Adapting known approaches to serve new purposes in suburban areas.',
+                transformational: 'Developing brand-new initiatives to address unique rural challenges.'
+            },
+            'formality-novelty': {
+                core: 'Optimizing existing solutions for existing stakeholders.',
+                adjacent: 'Expanding from existing solutions into "new to us."',
+                transformational: 'Developing breakthroughs and inventing things for markets that do not exist yet.'
+            },
+            'novelty-timeframe': {
+                core: 'Getting quick results by implementing established, proven solutions.',
+                adjacent: 'Adapting known solutions for new purposes over a moderate timeframe.',
+                transformational: 'Investing in the long-term development of entirely new, groundbreaking ideas.'
+            },
+            'agencyScope-novelty': {
+                core: 'Improving our agency\'s existing work with proven, internal solutions.',
+                adjacent: 'Collaborating with partners to adapt existing solutions for a new purpose.',
+                transformational: 'Leading a broad coalition to create something that has never been done before.'
+            },
+            'funding-novelty': {
+                core: 'Using our current budget to support and improve established projects.',
+                adjacent: 'Partially funding the adaptation of existing ideas for new uses.',
+                transformational: 'Seeking new investment to pioneer completely new and unfunded concepts.'
+            },
+            'formality-urbanRural': {
+                core: 'Improving our internal processes to better serve urban areas.',
+                adjacent: 'Introducing semi-formal changes to expand our reach into the suburbs.',
+                transformational: 'Driving regulatory change to create new opportunities in rural communities.'
+            },
+            'timeframe-urbanRural': {
+                core: 'Achieving fast, tangible results on projects within urban centers.',
+                adjacent: 'Undertaking mid-term projects to expand our impact in suburban areas.',
+                transformational: 'Committing to long-term initiatives to foster growth in rural communities.'
+            },
+            'agencyScope-urbanRural': {
+                core: 'Focusing our agency’s efforts on initiatives within urban centers.',
+                adjacent: 'Partnering with other agencies to serve suburban communities.',
+                transformational: 'Leading a broad coalition to address the unique needs of rural areas.'
+            },
+            'funding-urbanRural': {
+                core: 'Using our existing budget for projects focused on urban communities.',
+                adjacent: 'Partially funding initiatives to expand our work into suburban areas.',
+                transformational: 'Seeking new investment to launch critical projects in rural communities.'
+            },
+            'formality-timeframe': {
+                core: 'Making swift internal improvements for immediate gains.',
+                adjacent: 'Implementing semi-formal changes over a moderate period.',
+                transformational: 'Undertaking the long-term process of driving fundamental regulatory change.'
+            },
+            'agencyScope-formality': {
+                core: 'Improving our own agency\'s processes and efficiency.',
+                adjacent: 'Working with partners to implement new, semi-formal practices.',
+                transformational: 'Leading a broad effort to make sweeping, official changes to regulations.'
+            },
+            'formality-funding': {
+                core: 'Using our current budget to make internal improvements.',
+                adjacent: 'Partially funding new, semi-formal approaches to our work.',
+                transformational: 'Seeking new investment to drive significant regulatory reform.'
+            },
+            'agencyScope-timeframe': {
+                core: 'Achieving rapid results on projects we can handle entirely on our own.',
+                adjacent: 'Collaborating with partners on initiatives with a mid-term timeline.',
+                transformational: 'Leading long-term, foundational projects that span multiple organizations.'
+            },
+            'funding-timeframe': {
+                core: 'Using our current budget to achieve fast and tangible outcomes.',
+                adjacent: 'Partially funding projects that will deliver results in the mid-term.',
+                transformational: 'Seeking new investment for long-term projects with transformative potential.'
+            },
+            'agencyScope-funding': {
+                core: 'Using our own budget to fund projects managed by our agency.',
+                adjacent: 'Partially funding collaborative projects with partner agencies.',
+                transformational: 'Seeking new investment for large-scale initiatives that involve many organizations.'
+            }
+        };
 
         // --- D3 Setup ---
         const svg = d3.select("#innovation-chart");
@@ -486,7 +607,11 @@
             legendContainer.selectAll("*").remove(); // Clear previous legend
             legendContainer.append("h3")
                 .attr("class", "text-lg font-semibold mb-3 text-blue-600")
-                .text("Legend (Focus areas and cross-cutting themes)");
+                .text("Legend");
+
+            legendContainer.append("h4")
+                .attr("class", "text-md font-semibold mb-3 text-blue-600")
+                .text("Focus areas");
 
             const legendItems = legendContainer.selectAll(".legend-item")
                 .data(focusAreas)
@@ -499,6 +624,10 @@
 
             legendItems.append("span")
                 .text(d => d);
+
+            legendContainer.append("h4")
+                .attr("class", "text-md font-semibold mb-3 text-blue-600")
+                .text("Cross-cutting themes");
 
             const legendBorderItems = legendContainer.selectAll(".legend-item-border")
                 .data(crosscuttingThemes)
@@ -513,22 +642,64 @@
                 .text(d => d);
         }
 
+        // --- Description Box Logic ---
+        const descBox = document.getElementById('description-box');
+        const descContent = document.getElementById('desc-content');
+        const descToggleBtn = document.getElementById('desc-toggle-btn');
+
+        function updateDescriptionBox() {
+            const xInd = initialIndicators.find(ind => ind.id === currentXIndicatorId);
+            const yInd = initialIndicators.find(ind => ind.id === currentYIndicatorId);
+            const indicatorKeys = [currentXIndicatorId, currentYIndicatorId].sort();
+            const combinationKey = `${indicatorKeys[0]}-${indicatorKeys[1]}`;
+            const arcLabels = currentArcLabels;
+            const arcExplanations = arcLabelExplanations[combinationKey] || arcLabelExplanations['default'];
+            descContent.innerHTML = `
+                <p class="mb-2 text-sm text-gray-800">
+                    <span class="font-semibold">${xInd?.name || ''}:</span> ${xInd?.description || ''}<br>
+                    <span class="font-semibold">${yInd?.name || ''}:</span> ${yInd?.description || ''}
+                </p>
+                <p class="mb-2 text-sm text-gray-800">
+                    <span class="font-semibold">${arcLabels.core}:</span> ${arcExplanations.core}<br>
+                    <span class="font-semibold">${arcLabels.adjacent}:</span> ${arcExplanations.adjacent}<br>
+                    <span class="font-semibold">${arcLabels.transformational}:</span> ${arcExplanations.transformational}
+                </p>
+            `;
+        }
+
+        descToggleBtn.addEventListener('click', function() {
+            if (descContent.style.display === 'none') {
+                descContent.style.display = '';
+                descToggleBtn.textContent = 'Hide Description';
+            } else {
+                descContent.style.display = 'none';
+                descToggleBtn.textContent = 'Show Description';
+            }
+        });
+
+        // Call this after updating arc labels or indicator selection
+        function updateAllDescriptions() {
+            updateArcLabels();
+            updateDescriptionBox();
+        }
+
         // --- Event Listeners ---
         xAxisSelect.on("change", function() {
             currentXIndicatorId = d3.select(this).property("value");
-            updateArcLabels();
+            updateAllDescriptions();
             drawChart();
         });
 
         yAxisSelect.on("change", function() {
             currentYIndicatorId = d3.select(this).property("value");
-            updateArcLabels();
+            updateAllDescriptions();
             drawChart();
         });
         
         // --- Initial Draw and Resize Handling ---
         function initialize() {
             drawLegend();
+            updateDescriptionBox();
             // Use ResizeObserver for better performance and accuracy
             new ResizeObserver(entries => {
                 if (entries && entries.length > 0) {
