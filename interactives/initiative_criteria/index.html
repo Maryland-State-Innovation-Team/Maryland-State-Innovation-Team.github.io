@@ -30,7 +30,7 @@
             stroke-width: 0;
         }
         .bubble {
-            stroke-width: 1.5px;
+            stroke-width: 3px;
             cursor: pointer;
             transition: r 0.3s ease, opacity 0.3s ease;
         }
@@ -60,7 +60,7 @@
             fill: #2D3748; /* gray-800 */
             text-anchor: middle;
         }
-        .legend-item {
+        .legend-item, .legend-item-border {
             display: flex;
             align-items: center;
             margin-bottom: 0.5rem;
@@ -70,6 +70,9 @@
             height: 1rem;
             margin-right: 0.5rem;
             border-radius: 0.25rem;
+        }
+        .legend-item-border .legend-color-box{
+            border: 3px solid;
         }
         select {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
@@ -105,7 +108,7 @@
             </div>
 
             <div id="legend" class="w-full lg:w-1/4 p-4 bg-gray-50 rounded-lg shadow">
-                <h3 class="text-lg font-semibold mb-3 text-blue-600">Legend (Topics)</h3>
+                <h3 class="text-lg font-semibold mb-3 text-blue-600">Legend (Focus areas and cross-cutting themes)</h3>
                 </div>
         </div>
     </div>
@@ -127,7 +130,7 @@
             {
                 id: 1,
                 name: 'Project Alpha',
-                topic: 'Economic Growth',
+                focusArea: 'High-quality employment opportunities',
                 novelty: 8,
                 urbanRural: 3,
                 formality: 3,
@@ -139,7 +142,7 @@
             {
                 id: 2,
                 name: 'Project Beta',
-                topic: 'Economic Growth',
+                focusArea: 'High-quality employment opportunities',
                 novelty: 5,
                 urbanRural: 5,
                 formality: 7,
@@ -151,7 +154,7 @@
             {
                 id: 3,
                 name: 'Project Gamma',
-                topic: 'Social Program',
+                focusArea: 'Benefits and financial supports',
                 novelty: 1,
                 urbanRural: 5,
                 formality: 1,
@@ -163,7 +166,7 @@
             {
                 id: 4,
                 name: 'Project Delta',
-                topic: 'Social Program',
+                focusArea: 'Benefits and financial supports',
                 novelty: 7,
                 urbanRural: 5,
                 formality: 5,
@@ -175,7 +178,8 @@
             {
                 id: 5,
                 name: 'Project Epsilon',
-                topic: 'Social Program',
+                focusArea: 'Benefits and financial supports',
+                crosscut: 'ENOUGH',
                 novelty: 1,
                 urbanRural: 5,
                 formality: 2,
@@ -187,7 +191,7 @@
             {
                 id: 6,
                 name: 'Project Zeta',
-                topic: 'Social Program',
+                focusArea: 'Wealth-building pathways',
                 novelty: 5,
                 urbanRural: 5,
                 formality: 1,
@@ -199,7 +203,8 @@
             {
                 id: 7,
                 name: 'Project Eta',
-                topic: 'Economic Growth',
+                focusArea: 'High-quality employment opportunities',
+                crosscut: 'Racial Wealth Gap',
                 novelty: 9,
                 urbanRural: 3,
                 formality: 7,
@@ -211,7 +216,8 @@
             {
                 id: 8,
                 name: 'Project Theta',
-                topic: 'Economic Growth',
+                focusArea: 'High-quality employment opportunities',
+                crosscut: 'ENOUGH',
                 novelty: 10,
                 urbanRural: 3,
                 formality: 9,
@@ -251,9 +257,13 @@
         };
         let currentArcLabels = arcLabelSets.default;
 
-        // --- Color Scale for Topics ---
-        const topics = [...new Set(initialBubblesData.map(d => d.topic))];
-        const colorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(topics);
+        // --- Color Scale for focusAreas ---
+        const focusAreas = [...new Set(initialBubblesData.map(d => d.focusArea))];
+        const colorScale = d3.scaleOrdinal(["#c94a36", "#050d5e", "#a89473"]).domain(focusAreas);
+
+        // -- Color scale for crosscutting themes
+        const crosscuttingThemes = [...new Set(initialBubblesData.map(d => d.crosscut).filter(d => d !== undefined))];
+        const crosscutColorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(crosscuttingThemes);
 
         // --- D3 Setup ---
         const svg = d3.select("#innovation-chart");
@@ -291,9 +301,7 @@
         function updateArcLabels() {
             const indicatorKeys = [currentXIndicatorId, currentYIndicatorId].sort();
             const combinationKey = `${indicatorKeys[0]}-${indicatorKeys[1]}`;
-            console.log(combinationKey)
             currentArcLabels = arcLabelSets[combinationKey] || arcLabelSets.default;
-            console.log(currentArcLabels)
 
             svg.selectAll(".arc-label-transformational").text(currentArcLabels.transformational);
             svg.selectAll(".arc-label-adjacent").text(currentArcLabels.adjacent);
@@ -407,15 +415,16 @@
                 .attr("r", d => impactScale(d.impact))
                 .attr("cx", d => d.x !== undefined ? d.x : d.targetX)
                 .attr("cy", d => d.y !== undefined ? d.y : d.targetY)
-                .style("fill", d => colorScale(d.topic))
-                .style("stroke", d => d3.rgb(colorScale(d.topic)).darker(0.7))
+                .style("fill", d => colorScale(d.focusArea))
+                .style("stroke", d => d.crosscut ? crosscutColorScale(d.crosscut) : "transparent")
                 .on("mouseover", function(event, d) {
                     tooltip.transition().duration(200).style("opacity", .9);
                     const xIndicator = initialIndicators.find(ind => ind.id === currentXIndicatorId);
                     const yIndicator = initialIndicators.find(ind => ind.id === currentYIndicatorId);
                     tooltip.html(
                         `<strong>${d.name}</strong><br/>
-                        Topic: ${d.topic}<br/>
+                        Focus area: ${d.focusArea}<br/>
+                        ${d.crosscut ? 'Cross-cutting theme: ' + d.crosscut + '<br/>' : ''}
                         Impact: ${d.impact}<br/>
                         ${xIndicator?.name || 'X'}: ${d[currentXIndicatorId]}<br/>
                         ${yIndicator?.name || 'Y'}: ${d[currentYIndicatorId]}`
@@ -477,10 +486,10 @@
             legendContainer.selectAll("*").remove(); // Clear previous legend
             legendContainer.append("h3")
                 .attr("class", "text-lg font-semibold mb-3 text-blue-600")
-                .text("Legend (Topics)");
+                .text("Legend (Focus areas and cross-cutting themes)");
 
             const legendItems = legendContainer.selectAll(".legend-item")
-                .data(topics)
+                .data(focusAreas)
                 .enter().append("div")
                 .attr("class", "legend-item text-sm");
 
@@ -489,6 +498,18 @@
                 .style("background-color", d => colorScale(d));
 
             legendItems.append("span")
+                .text(d => d);
+
+            const legendBorderItems = legendContainer.selectAll(".legend-item-border")
+                .data(crosscuttingThemes)
+                .enter().append("div")
+                .attr("class", "legend-item-border text-sm");
+
+            legendBorderItems.append("div")
+                .attr("class", "legend-color-box")
+                .style("border-color", d => crosscutColorScale(d));
+
+            legendBorderItems.append("span")
                 .text(d => d);
         }
 
