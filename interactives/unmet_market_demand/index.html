@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unmet-Market-Demand-Tool</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ensure body and html take full height and map container too */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif; /* Tailwind default font */
+            overflow: hidden; /* Prevent scrollbars from appearing due to controls */
+        }
+        #map {
+            height: 100%;
+            width: 100%;
+            z-index: 0; /* Ensure map is behind controls */
+        }
+        /* Custom Leaflet control styling to match Tailwind's aesthetic */
+        .leaflet-control-container .leaflet-control {
+            border-radius: 0.375rem; /* rounded-md */
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-md */
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+        }
+        .custom-control-box {
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            z-index: 800; /* Ensure controls are above the map */
+        }
+        .legend-color-box {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-right: 5px;
+            border: 1px solid #ccc;
+        }
+        /* Ensure Leaflet attribution is visible */
+        .leaflet-control-attribution {
+            background: rgba(255,255,255,0.7) !important;
+            padding: 2px 5px !important;
+            border-radius: 3px;
+        }
+        /* Add this for visually disabled buttons */
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        /* Responsive: Move layer control to bottom right and make full-width on small screens */
+        @media (max-width: 640px) {
+            #layer-control-box {
+                top: unset !important;
+                bottom: 1rem !important;
+                right: 1rem !important;
+                left: unset !important;
+                width: calc(100vw - 2rem);
+                max-width: none;
+                min-width: 0;
+                z-index: 1001;
+                box-sizing: border-box;
+            }
+            #narrative-box {
+                left: 1rem !important;
+                right: 1rem !important;
+                left: unset !important;
+                max-width: none;
+                width: calc(100vw - 2rem);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div id="map"></div>
+
+    <div id="layer-control-box" class="custom-control-box absolute top-4 right-4 p-4 bg-white rounded-lg shadow-xl z-[1000] transition-all duration-200">
+        <!-- Collapse/Expand Button -->
+        <button id="layer-toggle-btn" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 focus:outline-none" title="Expand">
+          <span id="layer-toggle-icon" class="text-lg leading-none">&#43;</span>
+        </button>
+        <div id="layer-control-content">
+          <h3 class="text-lg font-semibold pr-6 mb-2 text-gray-800">Layers</h3>
+          <div id="layer-checkboxes" class="space-y-2"></div>
+        </div>
+    </div>
+    <script>
+      // Collapsible Layer Control
+      const layerControlBox = document.getElementById('layer-control-box');
+      const layerToggleBtn = document.getElementById('layer-toggle-btn');
+      const layerToggleIcon = document.getElementById('layer-toggle-icon');
+      const layerControlContent = document.getElementById('layer-control-content');
+      let layerCollapsed = false;
+
+      function setLayerCollapsed(collapsed) {
+        layerCollapsed = collapsed;
+        if (layerCollapsed) {
+          layerControlContent.style.display = 'none';
+          layerToggleIcon.innerHTML = '&#43;'; // plus
+          layerToggleBtn.title = 'Expand';
+          layerControlBox.style.padding = '0.5rem';
+          layerControlBox.style.width = '3rem';
+          layerControlBox.style.minWidth = 'unset';
+          layerControlBox.style.maxWidth = '3rem';
+          layerControlBox.style.height = '2.5rem';
+          layerControlBox.style.minHeight = '2.5rem';
+        } else {
+          layerControlContent.style.display = '';
+          layerToggleIcon.innerHTML = '&#8211;'; // minus
+          layerToggleBtn.title = 'Collapse';
+          layerControlBox.style.padding = '';
+          layerControlBox.style.width = '';
+          layerControlBox.style.minWidth = '';
+          layerControlBox.style.maxWidth = '';
+          layerControlBox.style.height = '';
+          layerControlBox.style.minHeight = '';
+        }
+      }
+
+      layerToggleBtn.addEventListener('click', () => {
+        setLayerCollapsed(!layerCollapsed);
+      });
+
+      // Collapse by default on mobile
+      function checkMobileAndCollapseLayerBox() {
+        if (window.innerWidth <= 640) {
+          setLayerCollapsed(true);
+        } else {
+          setLayerCollapsed(false);
+        }
+      }
+      window.addEventListener('resize', checkMobileAndCollapseLayerBox);
+      // Initial check
+      checkMobileAndCollapseLayerBox();
+    </script>
+
+    <div id="legend" class="custom-control-box absolute bottom-4 left-4 p-3 bg-white rounded-lg shadow-xl z-[1000]">
+        <h4 class="text-md font-semibold mb-1 text-gray-800">Legend</h4>
+        <div class="flex items-center mb-1">
+            <span class="legend-color-box" style="background-color: rgba(5, 13, 94, 0.5);border-radius: 50%;height:6px; width:6px;"></span>
+            <span class="text-xs text-gray-700">100 people</span>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-ajax@2.1.0/dist/leaflet.ajax.min.js"></script>
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([39.295232664756334, -76.62620544433595], 11);
+
+        // Add CartoDB.Positron basemap
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
+
+        // --- Layer Control ---
+        const layerCheckboxesContainer = document.getElementById('layer-checkboxes');
+        const serviceLayers = {
+            'Population density': new L.layerGroup()
+        };
+
+          const serviceLayerGroup = serviceLayers['Population density'];
+          new L.GeoJSON.AJAX(`assets/population_density_dots_100.geojson`, {
+            pointToLayer: function(feature, latlng) {
+                return L.circleMarker(latlng, {
+                    radius: 2,
+                    fillColor: '#050d5e',
+                    color: '#050d5e',
+                    weight: 0,
+                    fillOpacity: 0.5
+                });
+            }
+        }).on('data:loaded', function(e) {
+              // Add all features to the layer group
+              serviceLayerGroup.addLayer(e.target);
+          });
+
+        // Create checkboxes for each layer
+        Object.keys(serviceLayers).forEach(layerName => {
+            const div = document.createElement('div');
+            div.classList.add('flex', 'items-center');
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = `checkbox-${layerName.toLowerCase().replace(/\s+/g, '-')}`;
+            checkbox.value = layerName;
+            checkbox.classList.add('mr-2', 'h-4', 'w-4', 'text-blue-600', 'border-gray-300', 'rounded', 'focus:ring-blue-500');
+            checkbox.checked = true;
+            if (checkbox.checked) {
+                map.addLayer(serviceLayers[layerName]);
+            }
+
+            const label = document.createElement('label');
+            label.htmlFor = checkbox.id;
+            label.textContent = layerName;
+            label.classList.add('text-sm', 'text-gray-700');
+
+            checkbox.addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    map.addLayer(serviceLayers[layerName]);
+                } else {
+                    map.removeLayer(serviceLayers[layerName]);
+                }
+            });
+
+            div.appendChild(checkbox);
+            div.appendChild(label);
+            layerCheckboxesContainer.appendChild(div);
+        });
+        // --- Adjust map view on window resize ---
+        window.addEventListener('resize', () => {
+            map.invalidateSize();
+        });
+    </script>
+
+</body>
+</html>
