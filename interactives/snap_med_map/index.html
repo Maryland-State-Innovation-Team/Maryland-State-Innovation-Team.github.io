@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNAP & Medicaid Cuts: Poverty Impact Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+        #map {
+            height: 100%;
+            width: 100%;
+            z-index: 0;
+        }
+        .custom-control-box {
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            z-index: 800;
+        }
+        .legend-color-box {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-right: 5px;
+            border: 1px solid #ccc;
+        }
+        .leaflet-control-attribution {
+            background: rgba(255,255,255,0.7) !important;
+            padding: 2px 5px !important;
+            border-radius: 3px;
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        @media (max-width: 640px) {
+            #layer-control-box {
+                top: unset !important;
+                bottom: 1rem !important;
+                right: 1rem !important;
+                left: unset !important;
+                width: calc(100vw - 2rem);
+                max-width: none;
+                min-width: 0;
+                z-index: 1001;
+                box-sizing: border-box;
+            }
+            #narrative-box {
+                left: 3rem !important;
+                right: 1rem !important;
+                right: unset !important;
+                max-width: none;
+                width: calc(100vw - 2rem);
+            }
+        }
+        #choropleth-controls label,
+        #choropleth-controls input[type="radio"] {
+            cursor: pointer;
+        }
+        #narrative-text a {
+            color: #2563eb; /* Tailwind blue-600 */
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+        #narrative-text a:hover {
+            color: #1d4ed8; /* Tailwind blue-700 */
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div id="map"></div>
+
+    <div id="narrative-box" class="custom-control-box absolute top-4 left-16 md:left-20 max-w-md p-4 bg-white rounded-lg shadow-xl z-[1000] transition-all duration-200">
+      <button id="narrative-toggle-btn" class="absolute top-2 left-2 w-7 h-7 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 focus:outline-none" title="Minimize">
+        <span id="narrative-toggle-icon" class="text-lg leading-none">&#8211;</span>
+      </button>
+      <h2 id="narrative-title" class="text-xl font-semibold mt-6 mb-2 text-gray-800">Impact of SNAP & Medicaid Cuts on Child Poverty</h2>
+      <p id="narrative-text" class="text-sm text-gray-700 mb-4 h-40 overflow-y-auto">
+        <strong>Statewide, proposed cuts for SNAP and Medicaid are estimated to push between 4,500 and 11,000 children (<18) and between 7,500 to 18,000 youth (<25) into poverty in Maryland.</strong><br><br>
+        This map shows how these impacts are distributed across Maryland. <br><br>
+        <strong>How were these numbers estimated?</strong><br>
+        We used recent Census microdata to identify households with children or youth who would lose SNAP or Medicaid due to proposed work requirements for their caregivers. For SNAP, we subtracted the value of lost benefits from family resources. For Medicaid, we added typical out-of-pocket medical costs for those losing coverage. We then recalculated poverty status for each scenario, using survey weights to estimate the number and percent of children and youth pushed into poverty in each area. <br><br>
+        Minimize this box and use the controls to explore the map by age group, metric, and policy scenario. Click a region for details.<br><br>
+        Full methodology and data are available to download <a href="https://github.com/Maryland-State-Innovation-Team/SPM-Benefits/" target="_blank" rel="noopener noreferrer">here</a>.
+      </p>
+    </div>
+
+    <div id="choropleth-controls" class="custom-control-box absolute top-4 right-4 p-4 bg-white rounded-lg shadow-xl z-[999] transition-all duration-200 w-80">
+      <button id="controls-toggle-btn" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 focus:outline-none" title="Minimize">
+        <span id="controls-toggle-icon" class="text-lg leading-none">&#8211;</span>
+      </button>
+      <div id="controls-content">
+        <h3 class="text-lg font-semibold mb-2 text-gray-800">Map Controls</h3>
+        <div class="mb-2">
+          <span class="font-medium">Age group:</span><br>
+          <label class="mr-4"><input type="radio" name="age" value="child" checked> Child (&lt;18)</label>
+          <label><input type="radio" name="age" value="youth"> Youth (&lt;25)</label>
+        </div>
+        <div class="mb-2">
+          <span class="font-medium">Metric:</span><br>
+          <label class="mr-4"><input type="radio" name="metric" value="count" checked> Count</label>
+          <label><input type="radio" name="metric" value="percent"> Percent</label>
+        </div>
+        <div class="mb-2">
+          <span class="font-medium">Scenario:</span><br>
+          <label class="mr-2"><input type="radio" name="scenario" value="baseline" checked> Baseline</label>
+          <label class="mr-2"><input type="radio" name="scenario" value="snap_med"> Cuts</label>
+          <label><input type="radio" name="scenario" value="diff"> Difference</label>
+        </div>
+      </div>
+    </div>
+
+    <div id="legend" class="custom-control-box absolute bottom-4 left-4 p-3 bg-white rounded-lg shadow-xl z-[1000]">
+        <h4 class="text-md font-semibold mb-1 text-gray-800">Legend</h4>
+        <div id="legend-gradient" class="flex flex-col space-y-1 mb-1"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-ajax@2.1.0/dist/leaflet.ajax.min.js"></script>
+    <script>
+        // --- Narrative Minimize/Maximize ---
+        const narrativeBox = document.getElementById('narrative-box');
+        const narrativeToggleBtn = document.getElementById('narrative-toggle-btn');
+        const narrativeToggleIcon = document.getElementById('narrative-toggle-icon');
+        let narrativeMinimized = false;
+        narrativeToggleBtn.addEventListener('click', () => {
+          narrativeMinimized = !narrativeMinimized;
+          if (narrativeMinimized) {
+            Array.from(narrativeBox.children).forEach(child => {
+              if (child !== narrativeToggleBtn) child.style.display = 'none';
+            });
+            narrativeBox.style.padding = '0.5rem';
+            narrativeBox.style.width = '3rem';
+            narrativeBox.style.maxWidth = '3rem';
+            narrativeBox.style.height = '2.5rem';
+            narrativeBox.style.minHeight = '2.5rem';
+            narrativeToggleIcon.innerHTML = '&#43;';
+            narrativeToggleBtn.title = "Maximize";
+          } else {
+            Array.from(narrativeBox.children).forEach(child => {
+              if (child !== narrativeToggleBtn) child.style.display = '';
+            });
+            narrativeBox.style.padding = '';
+            narrativeBox.style.width = '';
+            narrativeBox.style.maxWidth = '';
+            narrativeBox.style.height = '';
+            narrativeBox.style.minHeight = '';
+            narrativeToggleIcon.innerHTML = '&#8211;';
+            narrativeToggleBtn.title = "Minimize";
+          }
+        });
+
+        // --- Controls Minimize/Maximize ---
+        const controlsBox = document.getElementById('choropleth-controls');
+        const controlsToggleBtn = document.getElementById('controls-toggle-btn');
+        const controlsToggleIcon = document.getElementById('controls-toggle-icon');
+        const controlsContent = document.getElementById('controls-content');
+        let controlsMinimized = false;
+        controlsToggleBtn.addEventListener('click', () => {
+          controlsMinimized = !controlsMinimized;
+          if (controlsMinimized) {
+            controlsContent.style.display = 'none';
+            controlsBox.style.padding = '0.5rem';
+            controlsBox.style.width = '3rem';
+            controlsBox.style.maxWidth = '3rem';
+            controlsBox.style.height = '2.5rem';
+            controlsBox.style.minHeight = '2.5rem';
+            controlsToggleIcon.innerHTML = '&#43;';
+            controlsToggleBtn.title = "Maximize";
+          } else {
+            controlsContent.style.display = '';
+            controlsBox.style.padding = '';
+            controlsBox.style.width = '';
+            controlsBox.style.maxWidth = '';
+            controlsBox.style.height = '';
+            controlsBox.style.minHeight = '';
+            controlsToggleIcon.innerHTML = '&#8211;';
+            controlsToggleBtn.title = "Minimize";
+          }
+        });
+
+        // --- Map Init ---
+        const map = L.map('map').setView([39, -77.3], 8);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
+
+        // --- Choropleth Controls ---
+        const controls = {
+          age: 'child',
+          metric: 'count',
+          scenario: 'baseline'
+        };
+        document.querySelectorAll('input[name="age"]').forEach(r => r.addEventListener('change', e => { controls.age = e.target.value; updateChoropleth(); }));
+        document.querySelectorAll('input[name="metric"]').forEach(r => r.addEventListener('change', e => { controls.metric = e.target.value; updateChoropleth(); }));
+        document.querySelectorAll('input[name="scenario"]').forEach(r => r.addEventListener('change', e => { controls.scenario = e.target.value; updateChoropleth(); }));
+
+        // --- Color Scale ---
+        // Store snap_med and diff breaks for each age/metric
+        let snapMedBreaks = {};
+        let diffBreaks = {};
+        function getColorScale(isPercent, breaks) {
+          const colors = isPercent
+            ? ['#f7fbff','#c6dbef','#6baed6','#3182bd','#08519c','#08306b']
+            : ['#fff5eb','#fdd0a2','#fdae6b','#fd8d3c','#e6550d','#a63603'];
+          return function(val) {
+            if (val == null || isNaN(val)) return '#ccc';
+            for (let i=0; i<breaks.length-1; i++) {
+              if (val <= breaks[i+1]) return colors[i];
+            }
+            return colors[colors.length-1];
+          };
+        }
+        // --- Legend ---
+        function updateLegend(breaks, isPercent) {
+          // Update legend title based on selected controls
+          const legendTitle = document.querySelector('#legend h4');
+          let ageLabel = controls.age === 'child' ? 'children' : 'youth';
+          let metricLabel = controls.metric === 'count' ? 'Count of' : 'Percent of';
+          let scenarioLabel = controls.scenario === 'baseline' ? 'Baseline' : controls.scenario === 'snap_med' ? 'Cuts' : 'Difference';
+          legendTitle.textContent = `${metricLabel} ${ageLabel} in poverty (${scenarioLabel})`;
+
+          const legendGradient = document.getElementById('legend-gradient');
+          legendGradient.innerHTML = '';
+          const colors = isPercent
+            ? ['#f7fbff','#c6dbef','#6baed6','#3182bd','#08519c','#08306b']
+            : ['#fff5eb','#fdd0a2','#fdae6b','#fd8d3c','#e6550d','#a63603'];
+          for (let i=0; i<breaks.length-1; i++) {
+            const row = document.createElement('div');
+            row.className = 'flex items-center';
+            const box = document.createElement('span');
+            box.className = 'legend-color-box';
+            box.style.background = colors[i];
+            row.appendChild(box);
+            const label = document.createElement('span');
+            label.className = 'text-xs text-gray-700';
+            const lower = breaks[i];
+            const upper = breaks[i+1];
+            if (isPercent) {
+              label.textContent = `${(lower*100).toFixed(1)}% – ${(upper*100).toFixed(1)}%`;
+            } else {
+              label.textContent = `${Math.round(lower).toLocaleString()} – ${Math.round(upper).toLocaleString()}`;
+            }
+            row.appendChild(label);
+            legendGradient.appendChild(row);
+          }
+        }
+        // --- Load and Draw PUMAs ---
+        let pumaLayer = null;
+        let pumaGeojson = null;
+        function updateChoropleth() {
+          if (!pumaGeojson) return;
+          const {age, metric, scenario} = controls;
+          let breaks;
+          let prop, moeProp, isPercent;
+          if (scenario === 'diff') {
+            // Always use youth diff breaks for the legend
+            const diffKey = `youth_${metric}`;
+            breaks = diffBreaks[diffKey];
+            if (!breaks) {
+              // Compute breaks for youth diff if not present
+              prop = `youth_poverty_diff_${metric}`;
+              const values = pumaGeojson.features.map(f => f.properties[prop]);
+              const sorted = values.filter(v => v !== null && !isNaN(v)).sort((a,b) => a-b);
+              const n = 6;
+              breaks = [sorted[0] ?? 0];
+              for (let i=1; i<=n; i++) {
+                breaks.push(sorted[Math.floor(i*sorted.length/n)] ?? breaks[breaks.length-1]);
+              }
+              diffBreaks[diffKey] = breaks;
+            }
+            // But keep the prop/moeProp for the selected age
+            prop = `${age}_poverty_diff_${metric}`;
+            moeProp = `${prop}_moe`;
+            isPercent = metric === 'percent';
+          } else {
+            // For both baseline and snap_med, always use youth_snap_med breaks for the legend
+            const snapMedKey = `youth_${metric}`;
+            breaks = snapMedBreaks[snapMedKey];
+            if (!breaks) {
+              // fallback: compute from youth_snap_med if not yet loaded
+              prop = `youth_poverty_snap_med_${metric}`;
+              const values = pumaGeojson.features.map(f => f.properties[prop]);
+              const sorted = values.filter(v => v !== null && !isNaN(v)).sort((a,b) => a-b);
+              const n = 6;
+              breaks = [sorted[0] ?? 0];
+              for (let i=1; i<=n; i++) {
+                breaks.push(sorted[Math.floor(i*sorted.length/n)] ?? breaks[breaks.length-1]);
+              }
+              snapMedBreaks[snapMedKey] = breaks;
+            }
+            // But keep the prop/moeProp for the selected age/scenario
+            prop = `${age}_poverty_${scenario}_${metric}`;
+            moeProp = `${prop}_moe`;
+            isPercent = metric === 'percent';
+          }
+          // Color scale
+          const colorScale = getColorScale(isPercent, breaks);
+          // Remove old layer
+          if (pumaLayer) map.removeLayer(pumaLayer);
+          // Add new layer
+          pumaLayer = L.geoJson(pumaGeojson, {
+            style: feature => ({
+              color: '#333',
+              weight: 1,
+              fillColor: colorScale(feature.properties[prop]),
+              fillOpacity: 0.7
+            }),
+            onEachFeature: (feature, layer) => {
+              const val = feature.properties[prop];
+              const moe = feature.properties[moeProp];
+              const name = feature.properties.Name;
+              const displayVal = isPercent && val != null ? (val*100).toFixed(1)+'%' : (val != null ? Math.round(val).toLocaleString() : 'N/A');
+              const displayMoe = isPercent && moe != null ? (moe*100).toFixed(1)+'%' : (moe != null ? Math.round(moe).toLocaleString() : 'N/A');
+              const popupHtml = `<div><strong>${name}</strong><br>
+                <span>${displayVal} (±${displayMoe})</span><br>
+                <span class="text-xs text-gray-500">Poverty, ${age==='child'?'Children <18':'Youth <25'}, ${metric==='count'?'Count':'Percent'}, ${
+                  scenario==='baseline'?'Baseline':scenario==='snap_med'?'Cuts':'Difference'
+                }</span></div>`;
+              layer.bindPopup(popupHtml);
+              layer.on('mouseover', function(e) {
+                this.setStyle({weight:2, color:'#000'});
+              });
+              layer.on('mouseout', function(e) {
+                this.setStyle({weight:1, color:'#333'});
+              });
+            }
+          }).addTo(map);
+          updateLegend(breaks, isPercent);
+        }
+        // Load geojson and precompute snap_med and diff breaks
+        fetch('assets/pumas.geojson')
+          .then(resp => resp.json())
+          .then(geojson => {
+            pumaGeojson = geojson;
+            // Precompute snap_med and diff breaks for all age/metric combos
+            ['child','youth'].forEach(age => {
+              ['count','percent'].forEach(metric => {
+                // snap_med
+                const prop = `${age}_poverty_snap_med_${metric}`;
+                const values = geojson.features.map(f => f.properties[prop]);
+                const sorted = values.filter(v => v !== null && !isNaN(v)).sort((a,b) => a-b);
+                const n = 6;
+                let breaks = [];
+                for (let i=0; i<n; i++) {
+                  const idx = Math.floor(i*sorted.length/n);
+                  breaks.push(sorted[idx]);
+                }
+                if (sorted.length > 0) {
+                  breaks.push(sorted[sorted.length-1]);
+                } else {
+                  breaks.push(0);
+                }
+                breaks = breaks.filter((v,i,a) => i === 0 || v !== a[i-1]);
+                snapMedBreaks[`${age}_${metric}`] = breaks;
+                // diff
+                const diffProp = `${age}_poverty_diff_${metric}`;
+                const diffValues = geojson.features.map(f => f.properties[diffProp]);
+                const diffSorted = diffValues.filter(v => v !== null && !isNaN(v)).sort((a,b) => a-b);
+                let diffBreaksArr = [];
+                // First break is always 0
+                diffBreaksArr.push(0);
+                if (metric === 'count') {
+                  diffBreaksArr.push(1);
+                } else {
+                  diffBreaksArr.push(0.001); // 0.1% in decimal
+                }
+                const nDiff = 6;
+                for (let i=1; i<nDiff; i++) {
+                  const idx = Math.floor(i*diffSorted.length/nDiff);
+                  const val = diffSorted[idx];
+                  // Only add if greater than last break
+                  if (val > diffBreaksArr[diffBreaksArr.length-1]) {
+                    diffBreaksArr.push(val);
+                  }
+                }
+                if (diffSorted.length > 0) {
+                  const maxVal = diffSorted[diffSorted.length-1];
+                  if (maxVal > diffBreaksArr[diffBreaksArr.length-1]) {
+                    diffBreaksArr.push(maxVal);
+                  }
+                }
+                // Remove consecutive duplicate breaks
+                diffBreaksArr = diffBreaksArr.filter((v,i,a) => i === 0 || v !== a[i-1]);
+                diffBreaks[`${age}_${metric}`] = diffBreaksArr;
+              });
+            });
+            updateChoropleth();
+          });
+        // Responsive map
+        window.addEventListener('resize', () => {
+            map.invalidateSize();
+        });
+    </script>
+</body>
+</html>
