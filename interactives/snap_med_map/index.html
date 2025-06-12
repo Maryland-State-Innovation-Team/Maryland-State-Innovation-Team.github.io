@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNAP & Medicaid Cuts: Poverty Impact Map</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
+    <link rel="stylesheet" href="third_party_assets/leaflet.css"/>
+    <link rel="stylesheet" href="third_party_assets/Control.Geocoder.css"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html, body {
@@ -127,10 +126,9 @@
         <div id="legend-gradient" class="flex flex-col space-y-1 mb-1"></div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet-ajax@2.1.0/dist/leaflet.ajax.min.js"></script>
+    <script src="third_party_assets/leaflet.js"></script>
+    <script src="third_party_assets/Control.Geocoder.js"></script>
+    <script src="third_party_assets/leaflet.ajax.min.js"></script>
     <script>
         // --- Narrative Minimize/Maximize ---
         const narrativeBox = document.getElementById('narrative-box');
@@ -170,6 +168,15 @@
         const controlsToggleIcon = document.getElementById('controls-toggle-icon');
         const controlsContent = document.getElementById('controls-content');
         let controlsMinimized = false;
+        // Helper: adjust geocoder margin
+        function adjustGeocoderMargin() {
+          const geocoderContainer = document.querySelector('.leaflet-top.leaflet-right');
+          if (!geocoderContainer) return;
+          // Get the height of the controlsBox (minimized or not)
+          const boxRect = controlsBox.getBoundingClientRect();
+          // Add a little extra space (8px)
+          geocoderContainer.style.marginTop = `${boxRect.height + 12}px`;
+        }
         controlsToggleBtn.addEventListener('click', () => {
           controlsMinimized = !controlsMinimized;
           if (controlsMinimized) {
@@ -191,6 +198,7 @@
             controlsToggleIcon.innerHTML = '&#8211;';
             controlsToggleBtn.title = "Minimize";
           }
+          setTimeout(adjustGeocoderMargin, 200);
         });
 
         // --- Map Init ---
@@ -403,9 +411,14 @@
             });
             updateChoropleth();
           });
+        // Add geocoder
+        L.Control.geocoder().addTo(map);
+        // Adjust geocoder margin after geocoder is added
+        setTimeout(adjustGeocoderMargin, 100);
         // Responsive map
         window.addEventListener('resize', () => {
             map.invalidateSize();
+            adjustGeocoderMargin();
         });
     </script>
 </body>
