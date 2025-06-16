@@ -35,8 +35,8 @@
         }
         @media (max-width: 640px) {
             #narrative-box {
-                left: unset !important;
-                right: 1rem !important;
+                left: 1rem;
+                right: 1rem;
                 max-width: none;
                 width: calc(100vw - 2rem);
             }
@@ -61,7 +61,7 @@
         </select>
       </div>
       <div class="explanation text-sm text-gray-700 mb-2" id="explanation"></div>
-      <div class="flex justify-end gap-2 mt-4">
+      <div class="flex justify-end gap-2 mt-4" id="prev-next-neigh-btns">
         <button id="prev-neigh-btn" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-gray-700">Previous</button>
         <button id="next-neigh-btn" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-gray-700">Next</button>
       </div>
@@ -74,31 +74,48 @@
     const narrativeBox = document.getElementById('narrative-box');
     const narrativeToggleBtn = document.getElementById('narrative-toggle-btn');
     const narrativeToggleIcon = document.getElementById('narrative-toggle-icon');
+    const prevNextBtn = document.getElementById('prev-next-neigh-btns');
     let narrativeMinimized = false;
     narrativeToggleBtn.addEventListener('click', () => {
       narrativeMinimized = !narrativeMinimized;
       if (narrativeMinimized) {
         Array.from(narrativeBox.children).forEach(child => {
-          if (child !== narrativeToggleBtn) child.style.display = 'none';
+          if (child !== narrativeToggleBtn && child !== prevNextBtn) child.style.display = 'none';
         });
         narrativeBox.style.padding = '0.5rem';
-        narrativeBox.style.width = '3rem';
-        narrativeBox.style.maxWidth = '3rem';
-        narrativeBox.style.height = '2.5rem';
-        narrativeBox.style.minHeight = '2.5rem';
+        narrativeBox.style.width = '10.5rem';
+        narrativeBox.style.maxWidth = '10.5rem';
+        narrativeBox.style.height = '5rem';
+        narrativeBox.style.minHeight = '5rem';
+        // Responsive left position for minimized box
+        if (window.innerWidth < 640) {
+            narrativeBox.style.left = 'unset';
+        } else {
+            narrativeBox.style.left = '';
+            narrativeBox.style.right = '';
+        }
         narrativeToggleIcon.innerHTML = '&#43;';
         narrativeToggleBtn.title = "Maximize";
+        prevNextBtn.style.paddingTop = '1rem';
       } else {
         Array.from(narrativeBox.children).forEach(child => {
           if (child !== narrativeToggleBtn) child.style.display = '';
         });
         narrativeBox.style.padding = '';
-        narrativeBox.style.width = '';
         narrativeBox.style.maxWidth = '';
         narrativeBox.style.height = '';
         narrativeBox.style.minHeight = '';
+        if (window.innerWidth < 640) {
+            narrativeBox.style.width = 'calc(100vw - 2rem)';
+            narrativeBox.style.left = '1rem';
+        } else {
+            narrativeBox.style.width = '';
+            narrativeBox.style.left = '';
+            narrativeBox.style.right = '';
+        }
         narrativeToggleIcon.innerHTML = '&#8211;';
         narrativeToggleBtn.title = "Minimize";
+        prevNextBtn.style.paddingTop = '';
       }
     });
 
@@ -213,7 +230,7 @@
         neighborhoodsLayer = L.geoJSON(filtered, {
             style: { color: '#e67e22', weight: 2, fillOpacity: 0.4, fillColor: '#e67e22' },
             onEachFeature: function (feature, layer) {
-                let popup = `<b>${feature.properties.AREA_NAME}</b><br/>`;
+                let popup = `<b>${feature.properties.AREA_NAME} (Plan ${feature.properties.STATUS})</b><br/>`;
                 // Persona
                 personaProps.forEach(p => {
                     if (feature.properties[p.key] === true || feature.properties[p.key] === 'True') {
