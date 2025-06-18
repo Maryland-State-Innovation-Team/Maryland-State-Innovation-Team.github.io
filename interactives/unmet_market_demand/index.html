@@ -15,6 +15,10 @@
             overflow: hidden;
             background: #f3f4f6;
         }
+        ul.list {
+            list-style-type: disc;
+            list-style-position: inside;
+        }
         #map {
             height: 100vh;
             width: 100vw;
@@ -52,12 +56,11 @@
       </button>
       <h2 class="text-xl font-semibold mt-6 mb-2 text-gray-800">Baltimore Development Demand Map</h2>
       <div class="dropdown-container mb-2">
-        <label for="devType">I'm looking to build a </label>
+        <label for="devType">I'm looking to build </label>
         <select id="devType" class="border rounded px-2 py-1">
+            <option value="childcare">Childcare center</option>
             <option value="grocery">Grocery store or supermarket</option>
-            <option value="pharmacy">Pharmacy or drug store</option>
-            <option value="bank">Bank or credit union</option>
-            <option value="hardware">Home improvement or hardware store</option>
+            <option value="medical">Pharmacy or medical services</option>
         </select>
       </div>
       <div class="explanation text-sm text-gray-700 mb-2" id="explanation"></div>
@@ -128,29 +131,20 @@
 
     // Data sources
     const devTypes = {
+        childcare: {
+            label: 'Childcare center',
+            quotesProp: 'childcare_demand_quotes',
+            points: 'assets/childcare.geojson',
+        },
         grocery: {
             label: 'Grocery store or supermarket',
-            demandProp: 'desires_grocery_stores_and_supermarkets',
-            quotesProp: 'desires_grocery_stores_and_supermarkets_quotes',
+            quotesProp: 'grocery_demand_quotes',
             points: 'assets/grocery.geojson',
         },
-        pharmacy: {
-            label: 'Pharmacy or drug store',
-            demandProp: 'desires_pharmacies_and_drug_stores',
-            quotesProp: 'desires_pharmacies_and_drug_stores_quotes',
-            points: 'assets/pharmacy.geojson',
-        },
-        bank: {
-            label: 'Bank or credit union',
-            demandProp: 'desires_banks_and_financial_services',
-            quotesProp: 'desires_banks_and_financial_services_quotes',
-            points: 'assets/financial.geojson',
-        },
-        hardware: {
-            label: 'Home improvement or hardware store',
-            demandProp: 'desires_home_improvement_and_hardware_stores',
-            quotesProp: 'desires_home_improvement_and_hardware_stores_quotes',
-            points: 'assets/home_repair.geojson',
+        medical: {
+            label: 'Pharmacy or medical services',
+            quotesProp: 'health_demand_quotes',
+            points: 'assets/medical.geojson',
         }
     };
 
@@ -166,32 +160,11 @@
     let neighborhoodLayers = [];
 
     // Persona mapping
-    const personaProps = [
-        {
-            key: 'persona_historic_rooted',
-            label: 'Historic and rooted',
-            quotes: 'persona_historic_rooted_quotes',
-            description: 'Communities with a strong sense of identity grounded in their history, distinctive architecture, and long-term residents. They often boast a "small-town feel" within the city, valuing neighborly connections and cultural institutions.'
-        },
-        {
-            key: 'persona_reclaiming_revitalizing',
-            label: 'Reclaiming and revitalizing',
-            quotes: 'persona_reclaiming_revitalizing_quotes',
-            description: 'Communities grappling with significant blight, high vacancy rates, and persistent social challenges like crime and drug activity. However, they are also characterized by strong, active residents and community organizations who are determined to reclaim their neighborhoods through strategic revitalization efforts, advocating for better services, and attracting new investment.'
-        },
-        {
-            key: 'persona_stable_suburban_like_urban',
-            label: 'Stable suburban-like urban',
-            quotes: 'persona_stable_suburban_like_urban_quotes',
-            description: 'Well-established communities that enjoy a high quality of life, characterized by strong homeownership, well-maintained homes, and ample green spaces. They often project a more suburban or "country-like" feel while still being within city limits. Their primary focus is on preserving their existing strengths and quality, rather than extensive revitalization.'
-        },
-        {
-            key: 'persona_dynamic_evolving',
-            label: 'Dynamic and evolving',
-            quotes: 'persona_dynamic_evolving_quotes',
-            description: 'Areas that are actively undergoing significant change, often driven by new development, proximity to major institutions, or re-envisioning of their commercial or industrial past. They are typically diverse and seek to grow into mixed-use, vibrant hubs, but face the complex task of integrating new growth with existing communities while managing urban challenges.'
-        }
-    ];
+    const personas = {
+        'Established & Evolving': 'These neighborhoods are largely stable and well-regarded, often boasting historical charm, strong community cohesion, and proximity to valuable amenities or institutions. Their primary focus is not on fundamental repair, but rather on refining their urban environment, managing growth, and enhancing existing assets to ensure continued vibrancy and desirability. They seek to evolve without losing their unique character.',
+        'Stabilizing & Reinvesting': 'These neighborhoods are in a transitional phase, grappling with a mix of stable areas and visible signs of decline, such as scattered vacancies or aging commercial corridors. There is a strong recognition within the community of the need for change, coupled with active engagement and a clear, albeit sometimes fragmented, vision for revitalization. Efforts focus on targeted interventions to stabilize the housing market, improve public safety, and attract consistent investment.',
+        'Transforming & Rebuilding': 'These neighborhoods have experienced significant disinvestment, characterized by high rates of vacant and deteriorated properties, substantial population loss, and entrenched social challenges like poverty and crime. They require comprehensive, large-scale intervention, often involving demolition and extensive redevelopment, to create entirely new, mixed-income communities and fundamentally rebuild their social and physical infrastructure.'
+    }
 
     // Load neighborhoods geojson
     fetch('assets/baltimore_area.geojson')
@@ -218,7 +191,7 @@
         }).addTo(map);
 
         // Filter polygons by demand
-        filteredNeighborhoods = neighborhoodsGeojson.features.filter(f => f.properties[config.demandProp] === true || f.properties[config.demandProp] === 'True');
+        filteredNeighborhoods = neighborhoodsGeojson.features.filter(f => f.properties[config.quotesProp].length > 0 );
         currentNeighborhoodIdx = filteredNeighborhoods.length > 0 ? 0 : -1;
         neighborhoodLayers = [];
 
@@ -230,20 +203,20 @@
         neighborhoodsLayer = L.geoJSON(filtered, {
             style: { color: '#e67e22', weight: 2, fillOpacity: 0.4, fillColor: '#e67e22' },
             onEachFeature: function (feature, layer) {
-                let popup = `<b>${feature.properties.AREA_NAME} (Plan ${feature.properties.STATUS})</b><br/>`;
+                let popup = `<b>${feature.properties.area_name}`;
+                if (feature.properties.plan_year){
+                    popup += ` (${feature.properties.plan_year})`;
+                }
+                popup += `</b><br/>`;
                 // Persona
-                personaProps.forEach(p => {
-                    if (feature.properties[p.key] === true || feature.properties[p.key] === 'True') {
-                        popup += `<br/><b>Neighborhood persona:</b> <span style='cursor:help' title='${p.description}'>${p.label}</span><br/>`;
-                    }
-                });
+                popup += `<br/><b>Neighborhood persona:</b> <span style='cursor:help' title='${personas[feature.properties.persona_label]}'>${feature.properties.persona_label}</span><br/>`;
                 // Demand quotes
                 if (feature.properties[config.quotesProp]) {
-                    popup += `<br/><b>Comprehensive plan details:</b><ul>`;
+                    popup += `<br/><b>Comprehensive plan details:</b><ul class="list">`;
                     feature.properties[config.quotesProp].forEach(q => popup += `<li>${q}</li>`);
                     popup += `</ul>`;
                 }
-                popup += `<br/><a href='pdfs/${feature.properties.OBJECTID}.pdf' target='_blank' rel='noopener'>Read the full comprehensive plan here</a>`
+                popup += `<br/><a href='pdfs/${feature.properties.pdf_path}' target='_blank' rel='noopener'>Read the full comprehensive plan here</a>`
                 layer.bindPopup(popup);
                 neighborhoodLayers.push(layer);
             }
@@ -269,7 +242,7 @@
                 // 2. Get 9 most common tags
                 const topTags = Object.entries(tagCounts)
                     .sort((a, b) => b[1] - a[1])
-                    .slice(0, 9)
+                    .slice(0, 8)
                     .map(([tag]) => tag);
                 // 3. Replace all other tags with 'Other'
                 pointsData.features.forEach(f => {
