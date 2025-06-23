@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Detail - Neighborhood IQ</title>
+    <title>Property Detail - Unmet Market Demand</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
     <script>
         tailwind.config = {
             theme: {
@@ -32,6 +39,10 @@
             overflow-x: hidden;
             max-width: 100vw;
          }
+         #map-container {
+            min-height: 16rem; /* fallback for h-64 */
+            width: 100%;
+        }
     </style>
 </head>
 <body class="bg-gray-50 font-inter overflow-x-hidden">
@@ -42,7 +53,7 @@
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center">
                     <img src="/interactives/unmet/assets/innovation-website-logo-light.png" alt="Maryland State Innovation Team logo" class="h-10 mr-4">
-                    <h1 class="text-xl sm:text-2xl font-bold tracking-wider">Neighborhood IQ</h1>
+                    <h1 class="text-xl sm:text-2xl font-bold tracking-wider">Unmet Market Demand</h1>
                 </div>
                 <div class="hidden md:flex items-center space-x-6" id="desktop-menu">
                     <a href="#" class="hover:text-gold transition-colors">Home</a>
@@ -82,8 +93,8 @@
             <div class="w-full lg:w-2/3">
                 <!-- Image Gallery -->
                 <div class="mb-6">
-                    <img src="https://placehold.co/800x500/cccccc/666666?text=Main+Property+Image" alt="Main property view" class="w-full h-auto rounded-lg shadow-lg mb-2">
-                    <div class="grid grid-cols-5 gap-2">
+                    <img src="assets/123mainst.jpg" alt="Main property view" class="w-full h-auto rounded-lg shadow-lg mb-2">
+                    <!-- <div class="grid grid-cols-5 gap-2">
                         <img src="https://placehold.co/150x100/cccccc/666666?text=View+1" alt="Property view 1" class="rounded-md cursor-pointer hover:opacity-80 transition">
                         <img src="https://placehold.co/150x100/cccccc/666666?text=View+2" alt="Property view 2" class="rounded-md cursor-pointer hover:opacity-80 transition">
                         <img src="https://placehold.co/150x100/cccccc/666666?text=View+3" alt="Property view 3" class="rounded-md cursor-pointer hover:opacity-80 transition">
@@ -91,7 +102,7 @@
                         <div class="bg-gray-200 rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-300">
                            <span class="text-gray-600 font-semibold">+5 more</span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- Property Header -->
@@ -199,7 +210,7 @@
 
                     <!-- Map -->
                     <div class="rounded-lg shadow-md overflow-hidden border">
-                         <img src="https://placehold.co/400x300/e2e8f0/333333?text=Map+of+123+Main+St" alt="Map showing property location" class="w-full h-auto">
+                         <div id="map-container" class="w-full h-64 sm:h-80 lg:h-96"></div>
                     </div>
                 </div>
             </div>
@@ -217,6 +228,24 @@
                     mobileMenu.classList.toggle('hidden');
                 });
             }
+            // Set up map
+            var southWest = L.latLng(37.5, -80),
+            northEast = L.latLng(40, -75),
+            bounds = L.latLngBounds(southWest, northEast);
+            const map = L.map('map-container', {
+                center: [39.2904, -76.6122],
+                zoom: 11,
+                maxBounds: bounds
+            });
+
+            // Basemap
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/{variant}/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href=\"https://carto.com/attributions\">CARTO</a>',
+                variant: 'light_nolabels'
+            }).addTo(map);
+
+            // Add city markers
+            const baltimoreMarker = L.marker([39.2904, -76.6122]).addTo(map).bindPopup('Baltimore, MD');
         });
     </script>
 </body>
