@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neighborhood IQ</title>
+    <title>Unmet Market Demand</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,7 +14,6 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet-ajax@2.1.0/dist/leaflet.ajax.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -119,7 +118,7 @@
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center">
                     <img src="assets/innovation-website-logo-light.png" alt="Maryland State Innovation Team logo" class="h-10 mr-4">
-                    <h1 class="text-xl sm:text-2xl font-bold tracking-wider">Neighborhood IQ</h1>
+                    <h1 class="text-xl sm:text-2xl font-bold tracking-wider">Unmet Market Demand</h1>
                 </div>
                 <div class="hidden md:flex items-center space-x-6" id="desktop-menu">
                     <a href="#" class="hover:text-gold transition-colors">Home</a>
@@ -172,7 +171,7 @@
                         
                         <!-- Price Slider Filter -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Price After Incentives</label>
+                            <label class="block text-sm font-medium text-gray-700">Price</label>
                             <div class="mt-2">
                                 <div class="flex justify-between text-sm text-gray-600 mb-2">
                                     <span id="min-price-display">$0</span>
@@ -225,7 +224,7 @@
                             <i class="far fa-heart text-xl"></i>
                             <i class="fas fa-heart text-xl"></i>
                         </button>
-                        <img src="https://placehold.co/400x250/cccccc/666666?text=Property+Image" alt="Property Image" class="w-full h-48 object-cover">
+                        <img src="baltimore/assets/123mainst.jpg" alt="Property Image" class="w-full h-48 object-cover">
                         <div class="p-4">
                             <h3 class="text-lg font-semibold text-navy-2">123 Main Street, Baltimore</h3>
                             <p class="text-light-blue font-bold text-xl mt-1">$1,200,000</p>
@@ -251,7 +250,7 @@
                             <i class="far fa-heart text-xl"></i>
                             <i class="fas fa-heart text-xl"></i>
                         </button>
-                        <img src="https://placehold.co/400x250/cccccc/666666?text=Property+Image" alt="Property Image" class="w-full h-48 object-cover">
+                        <img src="assets/rowhome.jpg" alt="Property Image" class="w-full h-48 object-cover">
                         <div class="p-4">
                             <h3 class="text-lg font-semibold text-navy-2">456 Oak Avenue, Annapolis</h3>
                             <p class="text-light-blue font-bold text-xl mt-1">$750,000 (Lease optional)</p>
@@ -260,7 +259,7 @@
                                 <div class="mb-2">
                                     <span class="font-semibold">Identified Community Needs:</span>
                                     <div class="flex flex-wrap gap-2 mt-2">
-                                        <span class="bg-gold/20 text-white text-xs font-semibold px-2.5 py-1 rounded-full flex items-center"><i class="fas fa-shopping-cart mr-2"></i>Grocery</span>
+                                        <span class="bg-gold/20 text-white text-xs font-semibold px-2.5 py-1 rounded-full flex items-center"><i class="fas fa-baby-carriage mr-2"></i>Childcare</span>
                                     </div>
                                 </div>
                                 <hr class="my-3 border-gray-600">
@@ -276,7 +275,7 @@
                             <i class="far fa-heart text-xl"></i>
                             <i class="fas fa-heart text-xl"></i>
                         </button>
-                        <img src="https://placehold.co/400x250/cccccc/666666?text=Property+Image" alt="Property Image" class="w-full h-48 object-cover">
+                        <img src="assets/medical.jpg" alt="Property Image" class="w-full h-48 object-cover">
                         <div class="p-4">
                             <h3 class="text-lg font-semibold text-navy-2">789 Pine Street, Frederick</h3>
                             <p class="text-light-blue font-bold text-xl mt-1">$2,500/month</p>
@@ -286,7 +285,7 @@
                                     <span class="font-semibold">Identified Community Needs:</span>
                                     <div class="flex flex-wrap gap-2 mt-2">
                                          <span class="bg-gold/20 text-white text-xs font-semibold px-2.5 py-1 rounded-full flex items-center"><i class="fas fa-clinic-medical mr-2"></i>Medical</span>
-                                         <span class="bg-gold/20 text-white text-xs font-semibold px-2.5 py-1 rounded-full flex items-center"><i class="fas fa-baby-carriage mr-2"></i>Childcare</span>
+                                         <span class="bg-gold/20 text-white text-xs font-semibold px-2.5 py-1 rounded-full flex items-center"><i class="fas fa-shopping-cart mr-2"></i>Grocery</span>
                                     </div>
                                 </div>
                                 <hr class="my-3 border-gray-600">
