@@ -43,11 +43,14 @@ dat_census_funding$Response.option = factor(dat_census_funding$Response.option, 
 dat_census_funding = data.table(dat_census_funding)[order(dat_census_funding$Census.division, -dat_census_funding$Response.option), ]
 dat_census_funding[,"cumsumPercent":=cumsum(Percent),by=.(Census.division)]
 dat_census_funding$y_text_pos = dat_census_funding$cumsumPercent - (dat_census_funding$Percent / 2)
+dat_census_funding$highlight = "transparent"
+dat_census_funding$highlight[which(dat_census_funding$Census.division=="South Atlantic")] = "black"
 ggplot(dat_census_funding, aes(x=Census.division, y=Percent, group=Response.option, fill=Response.option)) +
-  geom_bar(stat="identity") +
+  geom_bar(stat="identity", aes(color=highlight), linewidth=1.5) +
   geom_text(data=subset(dat_census_funding, Response.option %in% c("Funds from owner", "Loan from family or friends", "Grant")), aes(y=y_text_pos, label=percent(Percent))) +
   scale_y_continuous(expand = c(0, 0), labels=percent) +
   scale_fill_manual(values=qual5) +
+  scale_color_identity() +
   theme_bw() +
   theme(
     panel.border = element_blank()
