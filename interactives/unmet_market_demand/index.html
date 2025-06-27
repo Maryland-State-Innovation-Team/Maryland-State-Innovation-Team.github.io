@@ -399,7 +399,7 @@
                 attachLegendClickHandlers();
 
                 // --- Explanation ---
-                document.getElementById('explanation').innerHTML = `Neighborhoods are colored by their <b>access score</b> (purple=low, orange=high) for the selected service, based on proximity and density of supply. Highlighted neighborhoods have expressed demand for a <b>${config.label}</b> in their neighborhood development plans. The dots show current supply and are color-coded by type according to the legend. <b>You can click legend items to filter supply types on the map; active types are fully colored, while inactive types are faded.</b> Click the buttons below to see all the neighborhoods with this demand, or click on a neighborhood or dot for more details.`;
+                document.getElementById('explanation').innerHTML = `Neighborhoods are colored by their <b>access score</b> (red=low, blue=high) for the selected service, based on proximity and density of supply. Highlighted neighborhoods have expressed demand for a <b>${config.label}</b> in their neighborhood development plans. The dots show current supply and are color-coded by type according to the legend. <b>You can click legend items to filter supply types on the map; active types are fully colored, while inactive types are faded.</b> Click the buttons below to see all the neighborhoods with this demand, or click on a neighborhood or dot for more details.`;
             }); // <-- This closes the fetch(config.points).then(...)
     }
 
