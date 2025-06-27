@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baltimore Development Demand Map</title>
+    <title>Development Demand Map</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html, body {
@@ -33,6 +35,23 @@
             box-shadow: 0 0 15px rgba(0,0,0,0.15);
             z-index: 800;
         }
+        .score-legend {
+            margin-bottom: 0.5rem;
+        }
+        .score-legend .score-box {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            margin-right: 6px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            vertical-align: middle;
+        }
+        .score-legend-label {
+            font-size: 13px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
         button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -54,13 +73,12 @@
       <button id="narrative-toggle-btn" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 focus:outline-none" title="Minimize">
         <span id="narrative-toggle-icon" class="text-lg leading-none">&#8211;</span>
       </button>
-      <h2 class="text-xl font-semibold mt-6 mb-2 text-gray-800">Baltimore Development Demand Map</h2>
+      <h2 class="text-xl font-semibold mt-6 mb-2 text-gray-800">Development Demand Map</h2>
       <div class="dropdown-container mb-2">
         <label for="devType">I'm looking to build </label>
         <select id="devType" class="border rounded px-2 py-1">
             <option value="childcare">Childcare center</option>
             <option value="grocery">Grocery store or supermarket</option>
-            <option value="medical">Pharmacy or medical services</option>
         </select>
       </div>
       <div class="explanation text-sm text-gray-700 mb-2" id="explanation"></div>
@@ -140,11 +158,6 @@
             label: 'Grocery store or supermarket',
             quotesProp: 'grocery_demand_quotes',
             points: 'assets/grocery.geojson',
-        },
-        medical: {
-            label: 'Pharmacy or medical services',
-            quotesProp: 'health_demand_quotes',
-            points: 'assets/medical.geojson',
         }
     };
 
@@ -159,15 +172,8 @@
     let currentNeighborhoodIdx = -1;
     let neighborhoodLayers = [];
 
-    // Persona mapping
-    const personas = {
-        'Established & Evolving': 'These neighborhoods are largely stable and well-regarded, often boasting historical charm, strong community cohesion, and proximity to valuable amenities or institutions. Their primary focus is not on fundamental repair, but rather on refining their urban environment, managing growth, and enhancing existing assets to ensure continued vibrancy and desirability. They seek to evolve without losing their unique character.',
-        'Stabilizing & Reinvesting': 'These neighborhoods are in a transitional phase, grappling with a mix of stable areas and visible signs of decline, such as scattered vacancies or aging commercial corridors. There is a strong recognition within the community of the need for change, coupled with active engagement and a clear, albeit sometimes fragmented, vision for revitalization. Efforts focus on targeted interventions to stabilize the housing market, improve public safety, and attract consistent investment.',
-        'Transforming & Rebuilding': 'These neighborhoods have experienced significant disinvestment, characterized by high rates of vacant and deteriorated properties, substantial population loss, and entrenched social challenges like poverty and crime. They require comprehensive, large-scale intervention, often involving demolition and extensive redevelopment, to create entirely new, mixed-income communities and fundamentally rebuild their social and physical infrastructure.'
-    }
-
     // Load neighborhoods geojson
-    fetch('assets/baltimore_area.geojson')
+    fetch('assets/plan_areas.geojson')
         .then(r => r.json())
         .then(data => {
             neighborhoodsGeojson = data;
@@ -177,6 +183,19 @@
     document.getElementById('devType').addEventListener('change', updateMap);
 
     function updateMap() {
+        // --- Access score helpers ---
+        function getAccessScore(feature) {
+            const devType = document.getElementById('devType').value;
+            if (devType === 'childcare') return feature.properties.childcare_access_score;
+            if (devType === 'grocery') return feature.properties.grocery_access_score;
+            return null;
+        }
+        function getPolygonColor(score) {
+            if (score == null || isNaN(score)) return '#e0d7ef';
+            const colors = ['#d7191c', '#fdae61', '#ffffbf', '#abd9e9', '#2c7bb6'];
+            let idx = Math.round(Math.max(1, Math.min(5, score))) - 1;
+            return colors[idx];
+        }
         const devType = document.getElementById('devType').value;
         const config = devTypes[devType];
         // Remove previous layers
@@ -191,7 +210,16 @@
         }).addTo(map);
 
         // Filter polygons by demand
-        filteredNeighborhoods = neighborhoodsGeojson.features.filter(f => f.properties[config.quotesProp].length > 0 );
+        filteredNeighborhoods = neighborhoodsGeojson.features
+            .filter(f => f.properties[config.quotesProp].length > 0)
+            .sort((a, b) => {
+                const scoreA = getAccessScore(a);
+                const scoreB = getAccessScore(b);
+                // Handle null/undefined/NaN: treat as lowest
+                if (scoreA == null || isNaN(scoreA)) return 1;
+                if (scoreB == null || isNaN(scoreB)) return -1;
+                return scoreA - scoreB;
+            });
         currentNeighborhoodIdx = filteredNeighborhoods.length > 0 ? 0 : -1;
         neighborhoodLayers = [];
 
@@ -200,23 +228,52 @@
             features: filteredNeighborhoods
         };
 
+        function darkenColor(hex, percent) {
+            // Remove # if present
+            hex = hex.replace(/^#/, '');
+            if (hex.length === 3) {
+                hex = hex.split('').map(x => x + x).join('');
+            }
+            let num = parseInt(hex, 16);
+            let r = (num >> 16) & 0xFF;
+            let g = (num >> 8) & 0xFF;
+            let b = num & 0xFF;
+            r = Math.max(0, Math.min(255, Math.floor(r * (1 - percent))));
+            g = Math.max(0, Math.min(255, Math.floor(g * (1 - percent))));
+            b = Math.max(0, Math.min(255, Math.floor(b * (1 - percent))));
+            return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        }
+
         neighborhoodsLayer = L.geoJSON(filtered, {
-            style: { color: '#e67e22', weight: 2, fillOpacity: 0.4, fillColor: '#e67e22' },
+            style: function(feature) {
+                const score = getAccessScore(feature);
+                const baseColor = getPolygonColor(score);
+                const darkColor = darkenColor(baseColor, 0.25); // 25% darker
+                return {
+                    color: darkColor,
+                    weight: 2,
+                    fillOpacity: 0.6,
+                    fillColor: baseColor
+                };
+            },
             onEachFeature: function (feature, layer) {
                 let popup = `<b>${feature.properties.area_name}`;
                 if (feature.properties.plan_year){
                     popup += ` (${feature.properties.plan_year})`;
                 }
                 popup += `</b><br/>`;
-                // Persona
-                popup += `<br/><b>Neighborhood persona:</b> <span style='cursor:help' title='${personas[feature.properties.persona_label]}'>${feature.properties.persona_label}</span><br/>`;
                 // Demand quotes
                 if (feature.properties[config.quotesProp]) {
-                    popup += `<br/><b>Comprehensive plan details:</b><ul class="list">`;
+                    popup += `<br/><b>Development plan details:</b><ul class="list">`;
                     feature.properties[config.quotesProp].forEach(q => popup += `<li>${q}</li>`);
                     popup += `</ul>`;
                 }
-                popup += `<br/><a href='pdfs/${feature.properties.pdf_path}' target='_blank' rel='noopener'>Read the full comprehensive plan here</a>`
+                // Access score
+                const score = getAccessScore(feature);
+                if (score !== undefined && score !== null && !isNaN(score)) {
+                    popup += `<br/><b>Access score:</b> <span style='font-weight:bold;'>${score}</span> (1=low, 5=high)`;
+                }
+                popup += `<br/><a href='pdfs/${feature.properties.pdf_path}' target='_blank' rel='noopener'>Read the full development plan here</a>`
                 layer.bindPopup(popup);
                 neighborhoodLayers.push(layer);
             }
@@ -266,14 +323,21 @@
 
                 // --- Tag filtering state ---
                 let activeTags = new Set(tags);
+                // --- MarkerCluster for supply points ---
                 if (supplyLayerGroup) {
                     map.removeLayer(supplyLayerGroup);
                 }
-                supplyLayerGroup = L.layerGroup().addTo(map);
+                supplyLayerGroup = L.markerClusterGroup({
+                    disableClusteringAtZoom: 15,
+                    spiderfyOnMaxZoom: true,
+                    showCoverageOnHover: false
+                });
+                map.addLayer(supplyLayerGroup);
 
                 function renderSupplyPoints() {
                     supplyLayerGroup.clearLayers();
-                    L.geoJSON(pointsData, {
+                    // Use L.geoJSON to create circleMarkers, then add to cluster group
+                    const geojsonLayer = L.geoJSON(pointsData, {
                         filter: feature => activeTags.has(feature.properties.tag_label),
                         pointToLayer: (feature, latlng) => L.circleMarker(latlng, {
                             radius: 7,
@@ -285,7 +349,8 @@
                         onEachFeature: function (feature, layer) {
                             layer.bindPopup(`<b>${feature.properties.name}</b><br/>${feature.properties.tag_label}`);
                         }
-                    }).addTo(supplyLayerGroup);
+                    });
+                    supplyLayerGroup.addLayer(geojsonLayer);
                 }
 
                 function attachLegendClickHandlers() {
@@ -314,10 +379,19 @@
                 window.supplyLegend.onAdd = function(map) {
                     const div = L.DomUtil.create('div', 'info legend bg-white p-2 rounded shadow');
                     div.style.fontSize = '14px';
+                    // Polygon score legend
+                    div.innerHTML = `<div class='score-legend mb-2'><b>Access Score</b><br>
+                        <span class='score-box' style='background:#d7191c'></span><span class='score-legend-label'>1 (low)</span>
+                        <span class='score-box' style='background:#fdae61'></span><span class='score-legend-label'>2</span>
+                        <span class='score-box' style='background:#ffffbf'></span><span class='score-legend-label'>3</span>
+                        <span class='score-box' style='background:#abd9e9'></span><span class='score-legend-label'>4</span>
+                        <span class='score-box' style='background:#2c7bb6'></span><span class='score-legend-label'>5 (high)</span>
+                    </div>`;
+                    // Point legend
                     // Sort tags alphabetically, but always put 'Other' last if present
                     const sortedTags = tags.filter(t => t !== 'Other').sort((a, b) => a.localeCompare(b));
                     if (tags.includes('Other')) sortedTags.push('Other');
-                    div.innerHTML = '<b>Supply Type</b><br>' +
+                    div.innerHTML += '<b>Supply Type</b><br>' +
                         sortedTags.map(tag => `<span class="legend-item" data-tag="${tag}" style="display:inline-block;width:14px;height:14px;background:${colorScale(tag)};margin-right:6px;border-radius:3px;border:1px solid #ccc;cursor:pointer;opacity:${activeTags.has(tag)?'1':'0.3'};"></span><span style="cursor:pointer;opacity:${activeTags.has(tag)?'1':'0.3'};" class="legend-item" data-tag="${tag}">${tag}</span>`).join('<br>');
                     return div;
                 };
@@ -325,7 +399,7 @@
                 attachLegendClickHandlers();
 
                 // --- Explanation ---
-                document.getElementById('explanation').innerHTML = `Neighborhoods highlighted in orange have expressed demand for a <b>${config.label}</b> in their comprehensive plans. The dots show current supply and are color-coded by type according to the legend. <b>You can click legend items to filter supply types on the map; active types are fully colored, while inactive types are faded.</b> Click the buttons below to see all the neighborhoods with this demand, or click on a neighborhood or dot for more details.`;
+                document.getElementById('explanation').innerHTML = `Neighborhoods are colored by their <b>access score</b> (purple=low, orange=high) for the selected service, based on proximity and density of supply. Highlighted neighborhoods have expressed demand for a <b>${config.label}</b> in their neighborhood development plans. The dots show current supply and are color-coded by type according to the legend. <b>You can click legend items to filter supply types on the map; active types are fully colored, while inactive types are faded.</b> Click the buttons below to see all the neighborhoods with this demand, or click on a neighborhood or dot for more details.`;
             }); // <-- This closes the fetch(config.points).then(...)
     }
 
