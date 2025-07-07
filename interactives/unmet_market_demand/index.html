@@ -309,20 +309,14 @@
                 });
                 // 4. Get unique tags (top 9 + 'Other' if present)
                 const tags = [...new Set(pointsData.features.map(f => f.properties.tag_label))];
-                // 5. Assign colors
-                const colorScale = (function() {
-                    const palette = [
-                        '#1f77b4','#ff7f0e','#2ca02c','#d62728','#9467bd','#8c564b','#e377c2','#7f7f7f','#bcbd22','#17becf',
-                        '#cccccc' // for 'Other'
-                    ];
-                    return tag => {
-                        const idx = tags.indexOf(tag);
-                        return palette[idx % palette.length];
-                    };
-                })();
+                // 5. Assign colors for quality
+                function getQualityColor(quality) {
+                    if (quality === 0 || quality === null || quality === undefined || isNaN(quality)) return '#e0d7ef'; // missing
+                    const colors = ['#d7191c', '#fdae61', '#ffffbf', '#abd9e9', '#2c7bb6'];
+                    let idx = Math.round(Math.max(1, Math.min(5, quality))) - 1;
+                    return colors[idx];
+                }
 
-                // --- Tag filtering state ---
-                let activeTags = new Set(tags);
                 // --- MarkerCluster for supply points ---
                 if (supplyLayerGroup) {
                     map.removeLayer(supplyLayerGroup);
@@ -330,7 +324,23 @@
                 supplyLayerGroup = L.markerClusterGroup({
                     disableClusteringAtZoom: 15,
                     spiderfyOnMaxZoom: true,
-                    showCoverageOnHover: false
+                    showCoverageOnHover: false,
+                    iconCreateFunction: function(cluster) {
+                        // Get all child markers' quality values
+                        const markers = cluster.getAllChildMarkers();
+                        let qualities = markers.map(m => {
+                            let q = m.feature && m.feature.properties ? m.feature.properties.quality : null;
+                            return (q === 0 || q === null || q === undefined || isNaN(q)) ? null : Number(q);
+                        }).filter(q => q !== null);
+                        let avgQuality = qualities.length > 0 ? (qualities.reduce((a, b) => a + b, 0) / qualities.length) : 0;
+                        let color = getQualityColor(avgQuality);
+                        // Create a custom cluster icon
+                        return L.divIcon({
+                            html: `<div style='background:${color};opacity:0.8;border:2px solid #fff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;'><span style='color:#222;font-weight:bold;'>${cluster.getChildCount()}</span></div>`,
+                            className: 'custom-cluster-icon',
+                            iconSize: [40, 40]
+                        });
+                    }
                 });
                 map.addLayer(supplyLayerGroup);
 
@@ -338,38 +348,20 @@
                     supplyLayerGroup.clearLayers();
                     // Use L.geoJSON to create circleMarkers, then add to cluster group
                     const geojsonLayer = L.geoJSON(pointsData, {
-                        filter: feature => activeTags.has(feature.properties.tag_label),
                         pointToLayer: (feature, latlng) => L.circleMarker(latlng, {
                             radius: 7,
-                            fillColor: colorScale(feature.properties.tag_label),
+                            fillColor: getQualityColor(feature.properties.quality),
                             color: '#fff',
                             weight: 1,
-                            fillOpacity: 0.7
+                            fillOpacity: 0.85
                         }),
                         onEachFeature: function (feature, layer) {
-                            layer.bindPopup(`<b>${feature.properties.name}</b><br/>${feature.properties.tag_label}`);
+                            let q = feature.properties.quality;
+                            let qLabel = (q === 0 || q === null || q === undefined || isNaN(q)) ? 'Missing' : q;
+                            layer.bindPopup(`<b>${feature.properties.name} - ${feature.properties.tag_label}</b><br/>Quality: <b>${qLabel}</b>`);
                         }
                     });
                     supplyLayerGroup.addLayer(geojsonLayer);
-                }
-
-                function attachLegendClickHandlers() {
-                    document.querySelectorAll('.legend-item').forEach(el => {
-                        el.onclick = function() {
-                            const tag = this.getAttribute('data-tag');
-                            if (activeTags.has(tag)) {
-                                if (activeTags.size === 1) return; // Prevent hiding all
-                                activeTags.delete(tag);
-                            } else {
-                                activeTags.add(tag);
-                            }
-                            renderSupplyPoints();
-                            // Re-render legend to update opacity and re-attach handlers
-                            window.supplyLegend.remove();
-                            window.supplyLegend.addTo(map);
-                            attachLegendClickHandlers();
-                        };
-                    });
                 }
                 renderSupplyPoints();
 
@@ -379,27 +371,29 @@
                 window.supplyLegend.onAdd = function(map) {
                     const div = L.DomUtil.create('div', 'info legend bg-white p-2 rounded shadow');
                     div.style.fontSize = '14px';
-                    // Polygon score legend
-                    div.innerHTML = `<div class='score-legend mb-2'><b>Access Score</b><br>
+                    // Polygon score legend (access score)
+                    div.innerHTML = `<div class='score-legend mb-2'><b>Access Score (Polygon)</b><br>
                         <span class='score-box' style='background:#d7191c'></span><span class='score-legend-label'>1 (low)</span>
                         <span class='score-box' style='background:#fdae61'></span><span class='score-legend-label'>2</span>
                         <span class='score-box' style='background:#ffffbf'></span><span class='score-legend-label'>3</span>
                         <span class='score-box' style='background:#abd9e9'></span><span class='score-legend-label'>4</span>
                         <span class='score-box' style='background:#2c7bb6'></span><span class='score-legend-label'>5 (high)</span>
                     </div>`;
-                    // Point legend
-                    // Sort tags alphabetically, but always put 'Other' last if present
-                    const sortedTags = tags.filter(t => t !== 'Other').sort((a, b) => a.localeCompare(b));
-                    if (tags.includes('Other')) sortedTags.push('Other');
-                    div.innerHTML += '<b>Supply Type</b><br>' +
-                        sortedTags.map(tag => `<span class="legend-item" data-tag="${tag}" style="display:inline-block;width:14px;height:14px;background:${colorScale(tag)};margin-right:6px;border-radius:3px;border:1px solid #ccc;cursor:pointer;opacity:${activeTags.has(tag)?'1':'0.3'};"></span><span style="cursor:pointer;opacity:${activeTags.has(tag)?'1':'0.3'};" class="legend-item" data-tag="${tag}">${tag}</span>`).join('<br>');
+                    // Point quality legend
+                    div.innerHTML += `<div class='score-legend mb-2'><b>Quality (Supply Point)</b><br>
+                        <span class='score-box' style='background:#e0d7ef'></span><span class='score-legend-label'>0 (missing)</span><br>
+                        <span class='score-box' style='background:#d7191c'></span><span class='score-legend-label'>1 (low)</span><br>
+                        <span class='score-box' style='background:#fdae61'></span><span class='score-legend-label'>2</span><br>
+                        <span class='score-box' style='background:#ffffbf'></span><span class='score-legend-label'>3</span><br>
+                        <span class='score-box' style='background:#abd9e9'></span><span class='score-legend-label'>4</span><br>
+                        <span class='score-box' style='background:#2c7bb6'></span><span class='score-legend-label'>5 (best)</span>
+                    </div>`;
                     return div;
                 };
                 window.supplyLegend.addTo(map);
-                attachLegendClickHandlers();
 
                 // --- Explanation ---
-                document.getElementById('explanation').innerHTML = `Neighborhoods are colored by their <b>access score</b> (red=low, blue=high) for the selected service, based on proximity and density of supply. Highlighted neighborhoods have expressed demand for a <b>${config.label}</b> in their neighborhood development plans. The dots show current supply and are color-coded by type according to the legend. <b>You can click legend items to filter supply types on the map; active types are fully colored, while inactive types are faded.</b> Click the buttons below to see all the neighborhoods with this demand, or click on a neighborhood or dot for more details.`;
+                document.getElementById('explanation').innerHTML = `Neighborhoods are colored by their <b>access score</b> (red=low, blue=high) for the selected service, based on proximity and density of supply. Highlighted neighborhoods have expressed demand for a <b>${config.label}</b> in their neighborhood development plans. The dots show current supply and are color-coded by quality according to the legend. Click the buttons below to see all the neighborhoods with this demand, or click on a neighborhood or dot for more details.`;
             }); // <-- This closes the fetch(config.points).then(...)
     }
 
