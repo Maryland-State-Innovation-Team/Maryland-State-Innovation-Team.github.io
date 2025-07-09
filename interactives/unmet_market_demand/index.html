@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Development Demand Map</title>
+    <title>Unmet Market Demand Data Explorer</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
@@ -73,9 +73,8 @@
       <button id="narrative-toggle-btn" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 focus:outline-none" title="Minimize">
         <span id="narrative-toggle-icon" class="text-lg leading-none">&#8211;</span>
       </button>
-      <h2 class="text-xl font-semibold mt-6 mb-2 text-gray-800">Development Demand Map</h2>
+      <h2 class="text-xl font-semibold mt-6 mb-2 text-gray-800">Unmet Market Demand Data Explorer</h2>
       <div class="dropdown-container mb-2">
-        <label for="devType">I'm looking to build </label>
         <select id="devType" class="border rounded px-2 py-1">
             <option value="childcare">Childcare center</option>
             <option value="grocery">Grocery store or supermarket</option>
@@ -151,12 +150,14 @@
     const devTypes = {
         childcare: {
             label: 'Childcare center',
-            quotesProp: 'childcare_demand_quotes',
+            needQuotesProp: 'childcare_need_quotes',
+            planningQuotesProp: 'childcare_planning_quotes',
             points: 'assets/childcare.geojson',
         },
         grocery: {
             label: 'Grocery store or supermarket',
-            quotesProp: 'grocery_demand_quotes',
+            needQuotesProp: 'fresh_food_need_quotes',
+            planningQuotesProp: 'fresh_food_planning_quotes',
             points: 'assets/grocery.geojson',
         }
     };
@@ -211,7 +212,7 @@
 
         // Filter polygons by demand
         filteredNeighborhoods = neighborhoodsGeojson.features
-            .filter(f => f.properties[config.quotesProp].length > 0)
+            .filter(f => f.properties[config.needQuotesProp].length > 0)
             .sort((a, b) => {
                 const scoreA = getAccessScore(a);
                 const scoreB = getAccessScore(b);
@@ -262,10 +263,23 @@
                     popup += ` (${feature.properties.plan_year})`;
                 }
                 popup += `</b><br/>`;
-                // Demand quotes
-                if (feature.properties[config.quotesProp]) {
-                    popup += `<br/><b>Development plan details:</b><ul class="list">`;
-                    feature.properties[config.quotesProp].forEach(q => popup += `<li>${q}</li>`);
+                // Community vision
+                if (feature.properties.community_vision) {
+                    popup += `<br/><b>Community Vision:</b> <span>${feature.properties.community_vision}</span><br/>`;
+                }
+                // --- Population display logic ---
+                popup += `<br/><b>Estimated Population (2020):</b> <span>${feature.properties.estimated_population.toLocaleString()}</span><br/>`;
+
+                // Demand quotes logic
+                const needQuotes = feature.properties[config.needQuotesProp] || [];
+                const planningQuotes = feature.properties[config.planningQuotesProp] || [];
+                if (needQuotes.length > 0) {
+                    popup += `<br/><b>Development need quotes:</b><ul class="list">`;
+                    needQuotes.forEach(q => popup += `<li>${q}</li>`);
+                    popup += `</ul>`;
+                } else if (planningQuotes.length > 0) {
+                    popup += `<br/><b>Development planning quotes:</b><ul class="list">`;
+                    planningQuotes.forEach(q => popup += `<li>${q}</li>`);
                     popup += `</ul>`;
                 }
                 // Access score
@@ -273,7 +287,23 @@
                 if (score !== undefined && score !== null && !isNaN(score)) {
                     popup += `<br/><b>Access score:</b> <span style='font-weight:bold;'>${score}</span> (1=low, 5=high)`;
                 }
-                popup += `<br/><a href='pdfs/${feature.properties.pdf_path}' target='_blank' rel='noopener'>Read the full development plan here</a>`
+                // Sub-area plans links
+                const subAreas = feature.properties.sub_area_plans || [];
+                if (Array.isArray(subAreas) && subAreas.length > 0) {
+                    popup += `<br/><b>Sub-area plans:</b><div style='max-height:120px;overflow-y:auto;'><ul class='list' style='margin-bottom:0;'>`;
+                    // Build a set of filteredNeighborhoods OBJECTIDs for fast lookup
+                    const filteredIds = new Set(filteredNeighborhoods.map(f => f.properties.OBJECTID));
+                    subAreas.forEach(subObj => {
+                        const subId = subObj.OBJECTID || '';
+                        const subName = subObj.area_name || subId;
+                        if (filteredIds.has(subId)) {
+                            popup += `<li><a href='#' class='sub-area-link' data-objectid='${subId}'>${subName}</a></li>`;
+                        } else {
+                            popup += `<li><span style='color:#888;font-style:italic;cursor:not-allowed;'>${subName}</span></li>`;
+                        }
+                    });
+                    popup += `</ul></div>`;
+                }
                 layer.bindPopup(popup);
                 neighborhoodLayers.push(layer);
             }
@@ -393,7 +423,7 @@
                 window.supplyLegend.addTo(map);
 
                 // --- Explanation ---
-                document.getElementById('explanation').innerHTML = `Neighborhoods are colored by their <b>access score</b> (red=low, blue=high) for the selected service, based on proximity and density of supply. Highlighted neighborhoods have expressed demand for a <b>${config.label}</b> in their neighborhood development plans. The dots show current supply and are color-coded by quality according to the legend. Click the buttons below to see all the neighborhoods with this demand, or click on a neighborhood or dot for more details.`;
+                document.getElementById('explanation').innerHTML = `Areas are colored by their <b>access score</b> (red=low, blue=high) for the selected service, based on availability of the service. Highlighted areas have expressed demand for a <b>${config.label}</b> in their development plans. The dots show current supply and are color-coded by quality according to the legend. Click the buttons below to see all the areas with this demand, or click on an area or dot for more details.`;
             }); // <-- This closes the fetch(config.points).then(...)
     }
 
@@ -422,10 +452,38 @@
         showNeighborhood(idx);
     });
 
-    // Optionally, show the first neighborhood on load if any
-    // window.addEventListener('DOMContentLoaded', () => {
-    //   if (filteredNeighborhoods.length > 0) showNeighborhood(0);
-    // });
+    // --- After neighborhoodsLayer is created and added to map ---
+    // Add event delegation for sub-area links
+    map.on('popupopen', function(e) {
+        const popupEl = e.popup.getElement();
+        if (!popupEl) return;
+        popupEl.querySelectorAll('.sub-area-link').forEach(link => {
+            link.addEventListener('click', function(ev) {
+                ev.preventDefault();
+                const subId = this.getAttribute('data-objectid');
+                // Find the index of the sub-area in filteredNeighborhoods or all features
+                let idx = filteredNeighborhoods.findIndex(f => f.properties.OBJECTID == subId);
+                if (idx === -1) {
+                    // Try all features if not in filtered
+                    idx = neighborhoodsGeojson.features.findIndex(f => f.properties.OBJECTID == subId);
+                    if (idx !== -1) {
+                        // Focus on the sub-area in allNeighborhoodsLayer
+                        const allLayers = [];
+                        allNeighborhoodsLayer.eachLayer(l => allLayers.push(l));
+                        const subLayer = allLayers.find(l => l.feature && l.feature.properties.OBJECTID == subId);
+                        if (subLayer) {
+                            map.fitBounds(subLayer.getBounds(), { maxZoom: 15 });
+                            setTimeout(() => subLayer.openPopup(), 400);
+                        }
+                        return;
+                    }
+                } else {
+                    // Focus on the sub-area in filteredNeighborhoods
+                    showNeighborhood(idx);
+                }
+            });
+        });
+    });
     </script>
 </body>
 </html>
