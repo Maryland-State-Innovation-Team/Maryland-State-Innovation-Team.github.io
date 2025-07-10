@@ -229,6 +229,8 @@ function loadPolygonsAndPoints() {
                 e.originalEvent.stopPropagation();
                 breadcrumbPath = [feature];
                 showPlanDashboard();
+                // Scroll dashboard panel to top when area is clicked
+                document.getElementById('details-panel').scrollTo({ top: 0, behavior: 'smooth' });
             });
             layer.bindTooltip(feature.properties.area_name, {sticky:true});
         }
@@ -238,6 +240,8 @@ function loadPolygonsAndPoints() {
     if (neighborhoodsLayer && neighborhoodsLayer.getBounds().isValid()) {
         map.fitBounds(neighborhoodsLayer.getBounds());
     }
+    // Scroll dashboard panel to top when returning to Maryland view
+    document.getElementById('details-panel').scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function showPlanDashboard() {
@@ -270,6 +274,8 @@ function showPlanDashboard() {
                     e.originalEvent.stopPropagation();
                     breadcrumbPath = [...breadcrumbPath, f];
                     showPlanDashboard();
+                    // Scroll dashboard panel to top when sub-area is clicked
+                    document.getElementById('details-panel').scrollTo({ top: 0, behavior: 'smooth' });
                 });
                 layer.bindTooltip(f.properties.area_name, {sticky:true});
             }
@@ -302,9 +308,12 @@ function showPlanDashboard() {
                     breadcrumbPath = breadcrumbPath.slice(0, -1);
                     if (breadcrumbPath.length === 0) {
                         loadPolygonsAndPoints();
+                        document.getElementById('back-to-parent-container').innerHTML = '';
                     } else {
                         showPlanDashboard();
                     }
+                    // Scroll dashboard panel to top when going up a level
+                    document.getElementById('details-panel').scrollTo({ top: 0, behavior: 'smooth' });
                 }
             }
         };
@@ -445,6 +454,8 @@ function updateDashboard() {
                     breadcrumbPath = breadcrumbPath.slice(0, idx);
                     showPlanDashboard();
                 }
+                // Scroll dashboard panel to top when navigating via breadcrumb
+                document.getElementById('details-panel').scrollTo({ top: 0, behavior: 'smooth' });
             };
         });
     } else {
