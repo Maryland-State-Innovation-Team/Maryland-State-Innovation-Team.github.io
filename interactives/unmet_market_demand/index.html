@@ -251,9 +251,11 @@ function showPlanDashboard() {
     neighborhoodsLayer = L.geoJSON(currentPlan, {
         style: {color:'#2563eb',weight:3,fillOpacity:0.18,fillColor:'#bcdff1'},
         onEachFeature: (f, layer) => {
-            layer.on('click', () => {
-                breadcrumbPath = [];
-                loadPolygonsAndPoints();
+            // No click handler on highlighted area
+            layer.on('add', function() {
+                if (layer._path) {
+                    layer._path.style.cursor = 'grab';
+                }
             });
         }
     }).addTo(map);
@@ -277,6 +279,40 @@ function showPlanDashboard() {
     updateDashboard();
     if (neighborhoodsLayer && neighborhoodsLayer.getBounds().isValid()) {
         map.fitBounds(neighborhoodsLayer.getBounds());
+    }
+
+    // --- Map click handler for going up one breadcrumb layer ---
+    if (!window._mapBgClickHandler) {
+        window._mapBgClickHandler = function(e) {
+            if (breadcrumbPath.length > 0) {
+                let clickedInside = false;
+                map.eachLayer(function(layer) {
+                    if (layer instanceof L.GeoJSON) {
+                        layer.eachLayer(function(innerLayer) {
+                            // Only check actual polygons (not markers, not polylines)
+                            if (innerLayer instanceof L.Polygon && !(innerLayer instanceof L.Marker)) {
+                                if (innerLayer.getBounds().contains(e.latlng)) {
+                                    clickedInside = true;
+                                }
+                            }
+                        });
+                    }
+                });
+                if (!clickedInside) {
+                    breadcrumbPath = breadcrumbPath.slice(0, -1);
+                    if (breadcrumbPath.length === 0) {
+                        loadPolygonsAndPoints();
+                    } else {
+                        showPlanDashboard();
+                    }
+                }
+            }
+        };
+    }
+    // Remove previous handler to avoid duplicates
+    map.off('click', window._mapBgClickHandler);
+    if (breadcrumbPath.length > 0) {
+        map.on('click', window._mapBgClickHandler);
     }
 }
 
