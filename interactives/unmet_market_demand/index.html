@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unmet Market Demand Data Explorer</title>
+    <title>Unmet Market Demand Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
@@ -14,476 +15,632 @@
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
-            overflow: hidden;
             background: #f3f4f6;
         }
-        ul.list {
-            list-style-type: disc;
-            list-style-position: inside;
+        .dashboard-container {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+            width: 100vw;
+        }
+        #map-panel {
+            flex: 1 1 60%;
+            min-width: 350px;
+            position: relative;
         }
         #map {
             height: 100vh;
-            width: 100vw;
+            width: 100%;
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             z-index: 0;
         }
-        .custom-control-box {
-            background-color: white;
-            padding: 1rem;
+        #details-panel {
+            flex: 1 1 40%;
+            min-width: 350px;
+            max-width: 600px;
+            background: #fff;
+            box-shadow: -2px 0 16px rgba(0,0,0,0.07);
+            padding: 2rem 2rem 2rem 2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .stat-box {
+            background: #f8fafc;
             border-radius: 0.5rem;
-            box-shadow: 0 0 15px rgba(0,0,0,0.15);
-            z-index: 800;
+            padding: 1rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
         }
-        .score-legend {
-            margin-bottom: 0.5rem;
-        }
-        .score-legend .score-box {
-            display: inline-block;
-            width: 22px;
-            height: 22px;
-            margin-right: 6px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
+        .warning-icon {
+            color: #f59e42;
+            margin-left: 0.5em;
+            font-size: 1.1em;
             vertical-align: middle;
         }
-        .score-legend-label {
-            font-size: 13px;
-            margin-right: 10px;
-            vertical-align: middle;
+        .breadcrumb {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            color: #64748b;
         }
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        .breadcrumb a {
+            color: #2563eb;
+            text-decoration: underline;
+            cursor: pointer;
         }
-        @media (max-width: 640px) {
-            #narrative-box {
-                left: 1rem;
-                right: 1rem;
+        .placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+        @media (max-width: 900px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+            #details-panel {
                 max-width: none;
-                width: calc(100vw - 2rem);
+                min-width: 0;
+                width: 100vw;
+                height: 50vh;
+                position: relative;
+                box-shadow: none;
+                padding: 1rem;
+            }
+            #map-panel {
+                height: 50vh;
+                min-width: 0;
+            }
+            #map {
+                height: 50vh;
             }
         }
     </style>
 </head>
-<body class="bg-gray-100">
-    <div id="map"></div>
-
-    <div id="narrative-box" class="custom-control-box absolute top-4 left-12 max-w-md p-4 bg-white rounded-lg shadow-xl z-[1000] transition-all duration-200">
-      <button id="narrative-toggle-btn" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 focus:outline-none" title="Minimize">
-        <span id="narrative-toggle-icon" class="text-lg leading-none">&#8211;</span>
-      </button>
-      <h2 class="text-xl font-semibold mt-6 mb-2 text-gray-800">Unmet Market Demand Data Explorer</h2>
-      <div class="dropdown-container mb-2">
-        <select id="devType" class="border rounded px-2 py-1">
-            <option value="childcare">Childcare center</option>
-            <option value="grocery">Grocery store or supermarket</option>
-        </select>
-      </div>
-      <div class="explanation text-sm text-gray-700 mb-2" id="explanation"></div>
-      <div class="flex justify-end gap-2 mt-4" id="prev-next-neigh-btns">
-        <button id="prev-neigh-btn" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-gray-700">Previous</button>
-        <button id="next-neigh-btn" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-gray-700">Next</button>
-      </div>
+<body>
+<div class="dashboard-container">
+    <div id="map-panel">
+        <div id="map"></div>
     </div>
+    <div id="details-panel">
+        <div id="breadcrumb" class="breadcrumb hidden"></div>
+        <h1 id="area-title" class="section-title">Select a county to view details</h1>
+        <div id="plan-year-row" class="mb-2 text-gray-600"></div>
+        <div id="plan-summary" class="mb-4 text-gray-700"></div>
+        <div id="community-vision" class="mb-4 text-gray-700"></div>
+        <div class="stat-grid mb-4">
+            <div class="stat-box">
+                <div class="font-semibold">Childcare Access Score</div>
+                <div id="stat-childcare-score" class="text-2xl font-bold">-</div>
+                <div class="relative mt-2 mb-2" style="height: 44px;">
+                    <div id="childcare-score-indicator" style="position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; height: 18px;">
+                        <div style="position: absolute; left: 0; transform: translateX(-50%); color: #2563eb; font-size: 18px; line-height: 1;">▼</div>
+                    </div>
+                    <div class="absolute left-0 right-0" style="top: 18px; height: 2px; background: #cbd5e1; border-radius: 1px;"></div>
+                    <div class="flex items-center justify-between text-xs text-gray-500" style="position: absolute; top: 22px; left: 0; right: 0; width: 100%;">
+                        <span>Low</span>
+                        <span>High</span>
+                    </div>
+                </div>
+                <div id="stat-childcare-quotes" class="text-xs mt-2 text-gray-600"></div>
+            </div>
+            <div class="stat-box">
+                <div class="font-semibold">Fresh Food Access Score</div>
+                <div id="stat-grocery-score" class="text-2xl font-bold">-</div>
+                <div class="relative mt-2 mb-2" style="height: 44px;">
+                    <div id="grocery-score-indicator" style="position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; height: 18px;">
+                        <div style="position: absolute; left: 0; transform: translateX(-50%); color: #2563eb; font-size: 18px; line-height: 1;">▼</div>
+                    </div>
+                    <div class="absolute left-0 right-0" style="top: 18px; height: 2px; background: #cbd5e1; border-radius: 1px;"></div>
+                    <div class="flex items-center justify-between text-xs text-gray-500" style="position: absolute; top: 22px; left: 0; right: 0; width: 100%;">
+                        <span>Low</span>
+                        <span>High</span>
+                    </div>
+                </div>
+                <div id="stat-grocery-quotes" class="text-xs mt-2 text-gray-600"></div>
+            </div>
+        </div>
+        <div class="mb-4">
+            <div class="font-semibold mb-1">State Incentives</div>
+            <div id="state-incentives" class="placeholder">(Incentive data coming soon)</div>
+        </div>
+        <div class="mb-4">
+            <div class="font-semibold mb-1">Demographics</div>
+            <ul id="demographics-list" class="list-disc pl-5">
+                <li><span class="font-medium">Estimated Population:</span> <span id="demog-pop">-</span></li>
+                <li><span class="font-medium">Average Income:</span> <span class="placeholder">(coming soon)</span></li>
+                <li><span class="font-medium">% White:</span> <span class="placeholder">(coming soon)</span></li>
+                <li><span class="font-medium">% Black:</span> <span class="placeholder">(coming soon)</span></li>
+                <li><span class="font-medium">% Hispanic:</span> <span class="placeholder">(coming soon)</span></li>
+                <li><span class="font-medium">Per Capita Grocery Spend:</span> <span class="placeholder">(coming soon)</span></li>
+                <li><span class="font-medium">Per Capita Childcare Spend:</span> <span class="placeholder">(coming soon)</span></li>
+            </ul>
+        </div>
+        <div id="subarea-section" class="mb-4" style="display:none;">
+            <div class="font-semibold mb-1">Sub-Area Plans</div>
+            <ul id="subarea-list" class="list-disc pl-5"></ul>
+        </div>
+        <div class="text-xs text-gray-400 mt-8">Dashboard is illustrative of the data collected for the Unmet Market Demand Tool and does not represent the final tool. More indicators and incentive data coming soon.</div>
+        <div id="back-to-parent-container" class="mt-4"></div>
+    </div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script>
+// --- Data and State ---
+let planAreasGeojson = null;
+let countyLayerGroup = null;
+let subAreaLayerGroup = null;
+let supplyLayerGroup = null;
+let currentCounty = null;
+let currentSubArea = null;
+let countyFeatures = [];
+let subAreaFeatures = [];
+let childcarePoints = [];
+let groceryPoints = [];
+let neighborhoodsLayer = null;
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-    <script>
-    // --- Narrative Minimize/Maximize ---
-    const narrativeBox = document.getElementById('narrative-box');
-    const narrativeToggleBtn = document.getElementById('narrative-toggle-btn');
-    const narrativeToggleIcon = document.getElementById('narrative-toggle-icon');
-    const prevNextBtn = document.getElementById('prev-next-neigh-btns');
-    let narrativeMinimized = false;
-    narrativeToggleBtn.addEventListener('click', () => {
-      narrativeMinimized = !narrativeMinimized;
-      if (narrativeMinimized) {
-        Array.from(narrativeBox.children).forEach(child => {
-          if (child !== narrativeToggleBtn && child !== prevNextBtn) child.style.display = 'none';
-        });
-        narrativeBox.style.padding = '0.5rem';
-        narrativeBox.style.width = '10.5rem';
-        narrativeBox.style.maxWidth = '10.5rem';
-        narrativeBox.style.height = '5rem';
-        narrativeBox.style.minHeight = '5rem';
-        // Responsive left position for minimized box
-        if (window.innerWidth < 640) {
-            narrativeBox.style.left = 'unset';
-        } else {
-            narrativeBox.style.left = '';
-            narrativeBox.style.right = '';
-        }
-        narrativeToggleIcon.innerHTML = '&#43;';
-        narrativeToggleBtn.title = "Maximize";
-        prevNextBtn.style.paddingTop = '1rem';
-      } else {
-        Array.from(narrativeBox.children).forEach(child => {
-          if (child !== narrativeToggleBtn) child.style.display = '';
-        });
-        narrativeBox.style.padding = '';
-        narrativeBox.style.maxWidth = '';
-        narrativeBox.style.height = '';
-        narrativeBox.style.minHeight = '';
-        if (window.innerWidth < 640) {
-            narrativeBox.style.width = 'calc(100vw - 2rem)';
-            narrativeBox.style.left = '1rem';
-        } else {
-            narrativeBox.style.width = '';
-            narrativeBox.style.left = '';
-            narrativeBox.style.right = '';
-        }
-        narrativeToggleIcon.innerHTML = '&#8211;';
-        narrativeToggleBtn.title = "Minimize";
-        prevNextBtn.style.paddingTop = '';
-      }
-    });
+// Track navigation path for breadcrumb (array of features)
+let breadcrumbPath = [];
 
-    // Map config
-    const map = L.map('map').setView([39.29, -76.61], 12);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OpenStreetMap &copy; CartoDB',
-        maxZoom: 19
-    }).addTo(map);
+// Initialize Leaflet map before any function definitions or data loading
+const map = L.map('map').setView([39.0, -76.7], 8);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CartoDB',
+    maxZoom: 19
+}).addTo(map);
 
-    // Data sources
-    const devTypes = {
-        childcare: {
-            label: 'Childcare center',
-            needQuotesProp: 'childcare_need_quotes',
-            planningQuotesProp: 'childcare_planning_quotes',
-            points: 'assets/childcare.geojson',
+// Helper to find a plan by OBJECTID
+function findPlanById(id) {
+    return planAreasGeojson.features.find(f => f.properties.OBJECTID == id);
+}
+
+// Helper to get top-level plans (no parent_plan_id)
+function getTopLevelPlans() {
+    return planAreasGeojson.features.filter(f => !f.properties.parent_plan_id);
+}
+
+function loadPolygonsAndPoints() {
+    breadcrumbPath = [];
+    if (neighborhoodsLayer) map.removeLayer(neighborhoodsLayer);
+    if (supplyLayerGroup) map.removeLayer(supplyLayerGroup);
+    if (subAreaLayerGroup) {
+        map.removeLayer(subAreaLayerGroup);
+        subAreaLayerGroup = null;
+    }
+    // Show all top-level plans
+    const topPlans = getTopLevelPlans();
+    neighborhoodsLayer = L.geoJSON({type:'FeatureCollection',features:topPlans}, {
+        style: function(feature) {
+            return {color:'#222',weight:1,fillOpacity:0.25,fillColor:'#bcdff1'};
         },
-        grocery: {
-            label: 'Grocery store or supermarket',
-            needQuotesProp: 'fresh_food_need_quotes',
-            planningQuotesProp: 'fresh_food_planning_quotes',
-            points: 'assets/grocery.geojson',
-        }
-    };
-
-    let neighborhoodsLayer = null;
-    let supplyLayer = null;
-    let neighborhoodsGeojson = null;
-    let allNeighborhoodsLayer = null;
-    let supplyLayerGroup = null;
-
-    // --- Neighborhood cycling state ---
-    let filteredNeighborhoods = [];
-    let currentNeighborhoodIdx = -1;
-    let neighborhoodLayers = [];
-
-    // Load neighborhoods geojson
-    fetch('assets/plan_areas.geojson')
-        .then(r => r.json())
-        .then(data => {
-            neighborhoodsGeojson = data;
-            updateMap();
-        });
-
-    document.getElementById('devType').addEventListener('change', updateMap);
-
-    function updateMap() {
-        // --- Access score helpers ---
-        function getAccessScore(feature) {
-            const devType = document.getElementById('devType').value;
-            if (devType === 'childcare') return feature.properties.childcare_access_score;
-            if (devType === 'grocery') return feature.properties.grocery_access_score;
-            return null;
-        }
-        function getPolygonColor(score) {
-            if (score == null || isNaN(score)) return '#e0d7ef';
-            const colors = ['#d7191c', '#fdae61', '#ffffbf', '#abd9e9', '#2c7bb6'];
-            let idx = Math.round(Math.max(1, Math.min(5, score))) - 1;
-            return colors[idx];
-        }
-        const devType = document.getElementById('devType').value;
-        const config = devTypes[devType];
-        // Remove previous layers
-        if (neighborhoodsLayer) map.removeLayer(neighborhoodsLayer);
-        if (supplyLayer) map.removeLayer(supplyLayer);
-        if (allNeighborhoodsLayer) map.removeLayer(allNeighborhoodsLayer);
-
-        // Show all neighborhoods in grey
-        allNeighborhoodsLayer = L.geoJSON(neighborhoodsGeojson, {
-            style: { color: '#888', weight: 1, fillOpacity: 0.2, fillColor: '#ccc' },
-            interactive: false
-        }).addTo(map);
-
-        // Filter polygons by demand
-        filteredNeighborhoods = neighborhoodsGeojson.features
-            .filter(f => f.properties[config.needQuotesProp].length > 0)
-            .sort((a, b) => {
-                const scoreA = getAccessScore(a);
-                const scoreB = getAccessScore(b);
-                // Handle null/undefined/NaN: treat as lowest
-                if (scoreA == null || isNaN(scoreA)) return 1;
-                if (scoreB == null || isNaN(scoreB)) return -1;
-                return scoreA - scoreB;
+        onEachFeature: function(feature, layer) {
+            layer.on('click', function(e) {
+                e.originalEvent.stopPropagation();
+                breadcrumbPath = [feature];
+                showPlanDashboard();
             });
-        currentNeighborhoodIdx = filteredNeighborhoods.length > 0 ? 0 : -1;
-        neighborhoodLayers = [];
-
-        const filtered = {
-            ...neighborhoodsGeojson,
-            features: filteredNeighborhoods
-        };
-
-        function darkenColor(hex, percent) {
-            // Remove # if present
-            hex = hex.replace(/^#/, '');
-            if (hex.length === 3) {
-                hex = hex.split('').map(x => x + x).join('');
-            }
-            let num = parseInt(hex, 16);
-            let r = (num >> 16) & 0xFF;
-            let g = (num >> 8) & 0xFF;
-            let b = num & 0xFF;
-            r = Math.max(0, Math.min(255, Math.floor(r * (1 - percent))));
-            g = Math.max(0, Math.min(255, Math.floor(g * (1 - percent))));
-            b = Math.max(0, Math.min(255, Math.floor(b * (1 - percent))));
-            return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+            layer.bindTooltip(feature.properties.area_name, {sticky:true});
         }
+    }).addTo(map);
+    addSupplyPoints(); // Maryland view: show all points, clustering on
+    updateDashboard();
+    if (neighborhoodsLayer && neighborhoodsLayer.getBounds().isValid()) {
+        map.fitBounds(neighborhoodsLayer.getBounds());
+    }
+}
 
-        neighborhoodsLayer = L.geoJSON(filtered, {
-            style: function(feature) {
-                const score = getAccessScore(feature);
-                const baseColor = getPolygonColor(score);
-                const darkColor = darkenColor(baseColor, 0.25); // 25% darker
-                return {
-                    color: darkColor,
-                    weight: 2,
-                    fillOpacity: 0.6,
-                    fillColor: baseColor
-                };
-            },
-            onEachFeature: function (feature, layer) {
-                let popup = `<b>${feature.properties.area_name}`;
-                if (feature.properties.plan_year){
-                    popup += ` (${feature.properties.plan_year})`;
-                }
-                popup += `</b><br/>`;
-                // Community vision
-                if (feature.properties.community_vision) {
-                    popup += `<br/><b>Community Vision:</b> <span>${feature.properties.community_vision}</span><br/>`;
-                }
-                // --- Population display logic ---
-                popup += `<br/><b>Estimated Population (2020):</b> <span>${feature.properties.estimated_population.toLocaleString()}</span><br/>`;
-
-                // Demand quotes logic
-                const needQuotes = feature.properties[config.needQuotesProp] || [];
-                const planningQuotes = feature.properties[config.planningQuotesProp] || [];
-                if (needQuotes.length > 0) {
-                    popup += `<br/><b>Development need quotes:</b><ul class="list">`;
-                    needQuotes.forEach(q => popup += `<li>${q}</li>`);
-                    popup += `</ul>`;
-                } else if (planningQuotes.length > 0) {
-                    popup += `<br/><b>Development planning quotes:</b><ul class="list">`;
-                    planningQuotes.forEach(q => popup += `<li>${q}</li>`);
-                    popup += `</ul>`;
-                }
-                // Access score
-                const score = getAccessScore(feature);
-                if (score !== undefined && score !== null && !isNaN(score)) {
-                    popup += `<br/><b>Access score:</b> <span style='font-weight:bold;'>${score}</span> (1=low, 5=high)`;
-                }
-                // Sub-area plans links
-                const subAreas = feature.properties.sub_area_plans || [];
-                if (Array.isArray(subAreas) && subAreas.length > 0) {
-                    popup += `<br/><b>Sub-area plans:</b><div style='max-height:120px;overflow-y:auto;'><ul class='list' style='margin-bottom:0;'>`;
-                    // Build a set of filteredNeighborhoods OBJECTIDs for fast lookup
-                    const filteredIds = new Set(filteredNeighborhoods.map(f => f.properties.OBJECTID));
-                    subAreas.forEach(subObj => {
-                        const subId = subObj.OBJECTID || '';
-                        const subName = subObj.area_name || subId;
-                        if (filteredIds.has(subId)) {
-                            popup += `<li><a href='#' class='sub-area-link' data-objectid='${subId}'>${subName}</a></li>`;
-                        } else {
-                            popup += `<li><span style='color:#888;font-style:italic;cursor:not-allowed;'>${subName}</span></li>`;
-                        }
-                    });
-                    popup += `</ul></div>`;
-                }
-                layer.bindPopup(popup);
-                neighborhoodLayers.push(layer);
+function showPlanDashboard() {
+    if (neighborhoodsLayer) map.removeLayer(neighborhoodsLayer);
+    if (subAreaLayerGroup) {
+        map.removeLayer(subAreaLayerGroup);
+        subAreaLayerGroup = null;
+    }
+    const currentPlan = breadcrumbPath[breadcrumbPath.length - 1];
+    // Highlight current plan
+    neighborhoodsLayer = L.geoJSON(currentPlan, {
+        style: {color:'#2563eb',weight:3,fillOpacity:0.18,fillColor:'#bcdff1'},
+        onEachFeature: (f, layer) => {
+            layer.on('click', () => {
+                breadcrumbPath = [];
+                loadPolygonsAndPoints();
+            });
+        }
+    }).addTo(map);
+    // Show sub-areas for this plan
+    let subAreas = (currentPlan.properties.sub_area_plans || []).map(sa => findPlanById(sa.OBJECTID));
+    subAreas = subAreas.filter(Boolean);
+    if (subAreas.length > 0) {
+        subAreaLayerGroup = L.geoJSON({type:'FeatureCollection',features:subAreas}, {
+            style: f => ({color:'#f59e42',weight:2,fillOpacity:0.35,fillColor:'#fef3c7'}),
+            onEachFeature: (f, layer) => {
+                layer.on('click', (e) => {
+                    e.originalEvent.stopPropagation();
+                    breadcrumbPath = [...breadcrumbPath, f];
+                    showPlanDashboard();
+                });
+                layer.bindTooltip(f.properties.area_name, {sticky:true});
             }
         }).addTo(map);
-
-        // Fit map to polygons
-        if (filtered.features.length > 0) {
-            map.fitBounds(neighborhoodsLayer.getBounds());
-        } else {
-            map.fitBounds(allNeighborhoodsLayer.getBounds());
-        }
-
-        // Load and add supply points
-        fetch(config.points)
-            .then(r => r.json())
-            .then(pointsData => {
-                // 1. Count tag frequencies
-                const tagCounts = {};
-                pointsData.features.forEach(f => {
-                    const tag = f.properties.tag_label;
-                    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-                });
-                // 2. Get 9 most common tags
-                const topTags = Object.entries(tagCounts)
-                    .sort((a, b) => b[1] - a[1])
-                    .slice(0, 8)
-                    .map(([tag]) => tag);
-                // 3. Replace all other tags with 'Other'
-                pointsData.features.forEach(f => {
-                    if (!topTags.includes(f.properties.tag_label)) {
-                        f.properties.tag_label = 'Other';
-                    }
-                });
-                // 4. Get unique tags (top 9 + 'Other' if present)
-                const tags = [...new Set(pointsData.features.map(f => f.properties.tag_label))];
-                // 5. Assign colors for quality
-                function getQualityColor(quality) {
-                    if (quality === 0 || quality === null || quality === undefined || isNaN(quality)) return '#e0d7ef'; // missing
-                    const colors = ['#d7191c', '#fdae61', '#ffffbf', '#abd9e9', '#2c7bb6'];
-                    let idx = Math.round(Math.max(1, Math.min(5, quality))) - 1;
-                    return colors[idx];
-                }
-
-                // --- MarkerCluster for supply points ---
-                if (supplyLayerGroup) {
-                    map.removeLayer(supplyLayerGroup);
-                }
-                supplyLayerGroup = L.markerClusterGroup({
-                    disableClusteringAtZoom: 15,
-                    spiderfyOnMaxZoom: true,
-                    showCoverageOnHover: false,
-                    iconCreateFunction: function(cluster) {
-                        // Get all child markers' quality values
-                        const markers = cluster.getAllChildMarkers();
-                        let qualities = markers.map(m => {
-                            let q = m.feature && m.feature.properties ? m.feature.properties.quality : null;
-                            return (q === 0 || q === null || q === undefined || isNaN(q)) ? null : Number(q);
-                        }).filter(q => q !== null);
-                        let avgQuality = qualities.length > 0 ? (qualities.reduce((a, b) => a + b, 0) / qualities.length) : 0;
-                        let color = getQualityColor(avgQuality);
-                        // Create a custom cluster icon
-                        return L.divIcon({
-                            html: `<div style='background:${color};opacity:0.8;border:2px solid #fff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;'><span style='color:#222;font-weight:bold;'>${cluster.getChildCount()}</span></div>`,
-                            className: 'custom-cluster-icon',
-                            iconSize: [40, 40]
-                        });
-                    }
-                });
-                map.addLayer(supplyLayerGroup);
-
-                function renderSupplyPoints() {
-                    supplyLayerGroup.clearLayers();
-                    // Use L.geoJSON to create circleMarkers, then add to cluster group
-                    const geojsonLayer = L.geoJSON(pointsData, {
-                        pointToLayer: (feature, latlng) => L.circleMarker(latlng, {
-                            radius: 7,
-                            fillColor: getQualityColor(feature.properties.quality),
-                            color: '#fff',
-                            weight: 1,
-                            fillOpacity: 0.85
-                        }),
-                        onEachFeature: function (feature, layer) {
-                            let q = feature.properties.quality;
-                            let qLabel = (q === 0 || q === null || q === undefined || isNaN(q)) ? 'Missing' : q;
-                            layer.bindPopup(`<b>${feature.properties.name} - ${feature.properties.tag_label}</b><br/>Quality: <b>${qLabel}</b>`);
-                        }
-                    });
-                    supplyLayerGroup.addLayer(geojsonLayer);
-                }
-                renderSupplyPoints();
-
-                // 7. Add legend
-                if (window.supplyLegend) map.removeControl(window.supplyLegend);
-                window.supplyLegend = L.control({position: 'bottomleft'});
-                window.supplyLegend.onAdd = function(map) {
-                    const div = L.DomUtil.create('div', 'info legend bg-white p-2 rounded shadow');
-                    div.style.fontSize = '14px';
-                    // Polygon score legend (access score)
-                    div.innerHTML = `<div class='score-legend mb-2'><b>Access Score (Polygon)</b><br>
-                        <span class='score-box' style='background:#d7191c'></span><span class='score-legend-label'>1 (low)</span>
-                        <span class='score-box' style='background:#fdae61'></span><span class='score-legend-label'>2</span>
-                        <span class='score-box' style='background:#ffffbf'></span><span class='score-legend-label'>3</span>
-                        <span class='score-box' style='background:#abd9e9'></span><span class='score-legend-label'>4</span>
-                        <span class='score-box' style='background:#2c7bb6'></span><span class='score-legend-label'>5 (high)</span>
-                    </div>`;
-                    // Point quality legend
-                    div.innerHTML += `<div class='score-legend mb-2'><b>Quality (Supply Point)</b><br>
-                        <span class='score-box' style='background:#e0d7ef'></span><span class='score-legend-label'>0 (missing)</span><br>
-                        <span class='score-box' style='background:#d7191c'></span><span class='score-legend-label'>1 (low)</span><br>
-                        <span class='score-box' style='background:#fdae61'></span><span class='score-legend-label'>2</span><br>
-                        <span class='score-box' style='background:#ffffbf'></span><span class='score-legend-label'>3</span><br>
-                        <span class='score-box' style='background:#abd9e9'></span><span class='score-legend-label'>4</span><br>
-                        <span class='score-box' style='background:#2c7bb6'></span><span class='score-legend-label'>5 (best)</span>
-                    </div>`;
-                    return div;
-                };
-                window.supplyLegend.addTo(map);
-
-                // --- Explanation ---
-                document.getElementById('explanation').innerHTML = `Areas are colored by their <b>access score</b> (red=low, blue=high) for the selected service, based on availability of the service. Highlighted areas have expressed demand for a <b>${config.label}</b> in their development plans. The dots show current supply and are color-coded by quality according to the legend. Click the buttons below to see all the areas with this demand, or click on an area or dot for more details.`;
-            }); // <-- This closes the fetch(config.points).then(...)
     }
-
-    // --- Previous/Next button logic ---
-    function showNeighborhood(idx) {
-        if (filteredNeighborhoods.length === 0 || idx < 0 || idx >= filteredNeighborhoods.length) return;
-        currentNeighborhoodIdx = idx;
-        const feature = filteredNeighborhoods[idx];
-        const layer = neighborhoodLayers[idx];
-        if (layer) {
-            map.fitBounds(layer.getBounds(), { maxZoom: 15 });
-            setTimeout(() => {
-                layer.openPopup();
-            }, 400);
-        }
+    addSupplyPoints(currentPlan.properties.OBJECTID); // Pass plan OBJECTID to filter points, clustering off
+    updateDashboard();
+    if (neighborhoodsLayer && neighborhoodsLayer.getBounds().isValid()) {
+        map.fitBounds(neighborhoodsLayer.getBounds());
     }
+}
 
-    document.getElementById('prev-neigh-btn').addEventListener('click', function() {
-        if (filteredNeighborhoods.length === 0) return;
-        let idx = (currentNeighborhoodIdx - 1 + filteredNeighborhoods.length) % filteredNeighborhoods.length;
-        showNeighborhood(idx);
-    });
-    document.getElementById('next-neigh-btn').addEventListener('click', function() {
-        if (filteredNeighborhoods.length === 0) return;
-        let idx = (currentNeighborhoodIdx + 1) % filteredNeighborhoods.length;
-        showNeighborhood(idx);
-    });
+function addSupplyPoints(planObjectId = null) {
+    const childcareGradient = [
+        '#808080',
+        '#fcbba1',
+        '#fc9272',
+        '#fb6a4a',
+        '#de2d26',
+        '#a50f15'
+    ];
+    const groceryGradient = [
+        '#808080',
+        '#c6dbef',
+        '#9ecae1',
+        '#6baed6',
+        '#3182bd',
+        '#08519c'
+    ];
+    if (supplyLayerGroup) map.removeLayer(supplyLayerGroup);
+    childcarePoints.forEach(pt => pt.properties.type = 'childcare');
+    groceryPoints.forEach(pt => pt.properties.type = 'grocery');
+    let points;
+    let useClustering = true;
+    if (planObjectId) {
+        // Filter points to those whose area_plans includes the selected planObjectId
+        points = [
+            ...childcarePoints.filter(pt => Array.isArray(pt.properties.area_plans) && pt.properties.area_plans.includes(planObjectId)),
+            ...groceryPoints.filter(pt => Array.isArray(pt.properties.area_plans) && pt.properties.area_plans.includes(planObjectId))
+        ];
+        useClustering = false;
+    } else {
+        points = [...childcarePoints, ...groceryPoints];
+        useClustering = true;
+    }
+    if (useClustering) {
+        supplyLayerGroup = L.markerClusterGroup({
+            disableClusteringAtZoom:15,
+            spiderfyOnMaxZoom:true,
+            showCoverageOnHover:false,
+            iconCreateFunction: function(cluster) {
+                // Get all child markers' quality values
+                const markers = cluster.getAllChildMarkers();
+                let qualities = markers.map(m => {
+                    let q = m.feature && m.feature.properties ? m.feature.properties.quality : null;
+                    return (q === 0 || q === null || q === undefined || isNaN(q)) ? null : Number(q);
+                }).filter(q => q !== null);
+                let avgQuality = qualities.length > 0 ? (qualities.reduce((a, b) => a + b, 0) / qualities.length) : 0;
+                let childcareCount = markers.filter(m => m.feature && m.feature.properties.type === 'childcare').length;
+                let groceryCount = markers.filter(m => m.feature && m.feature.properties.type === 'grocery').length;
+                let total = childcareCount + groceryCount;
+                let ratio = total > 0 ? childcareCount / total : 0.5;
 
-    // --- After neighborhoodsLayer is created and added to map ---
-    // Add event delegation for sub-area links
-    map.on('popupopen', function(e) {
-        const popupEl = e.popup.getElement();
-        if (!popupEl) return;
-        popupEl.querySelectorAll('.sub-area-link').forEach(link => {
-            link.addEventListener('click', function(ev) {
-                ev.preventDefault();
-                const subId = this.getAttribute('data-objectid');
-                // Find the index of the sub-area in filteredNeighborhoods or all features
-                let idx = filteredNeighborhoods.findIndex(f => f.properties.OBJECTID == subId);
-                if (idx === -1) {
-                    // Try all features if not in filtered
-                    idx = neighborhoodsGeojson.features.findIndex(f => f.properties.OBJECTID == subId);
-                    if (idx !== -1) {
-                        // Focus on the sub-area in allNeighborhoodsLayer
-                        const allLayers = [];
-                        allNeighborhoodsLayer.eachLayer(l => allLayers.push(l));
-                        const subLayer = allLayers.find(l => l.feature && l.feature.properties.OBJECTID == subId);
-                        if (subLayer) {
-                            map.fitBounds(subLayer.getBounds(), { maxZoom: 15 });
-                            setTimeout(() => subLayer.openPopup(), 400);
-                        }
-                        return;
+                // Find the closest gradient index for avgQuality (0-5)
+                let idx = Math.round(Math.max(0, Math.min(5, avgQuality)));
+                let ccColor = childcareGradient[idx];
+                let grColor = groceryGradient[idx];
+
+                // Helper to mix two hex colors by ratio
+                function mixColors(c1, c2, r) {
+                    function hexToRgb(hex) {
+                        hex = hex.replace('#','');
+                        if (hex.length === 3) hex = hex.split('').map(x=>x+x).join('');
+                        let num = parseInt(hex,16);
+                        return [(num>>16)&255, (num>>8)&255, num&255];
                     }
+                    function rgbToHex(rgb) {
+                        return '#' + rgb.map(x=>x.toString(16).padStart(2,'0')).join('');
+                    }
+                    let rgb1 = hexToRgb(c1), rgb2 = hexToRgb(c2);
+                    let mixed = rgb1.map((v,i)=>Math.round(v*r + rgb2[i]*(1-r)));
+                    return rgbToHex(mixed);
+                }
+
+                let color = mixColors(ccColor, grColor, ratio);
+                // Create a custom cluster icon
+                return L.divIcon({
+                    html: `<div style='background:${color};opacity:0.8;border:2px solid #fff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;'><span style='color:#222;font-weight:bold;'>${cluster.getChildCount()}</span></div>`,
+                    className: 'custom-cluster-icon',
+                    iconSize: [40, 40]
+                });
+            }
+        });
+    } else {
+        supplyLayerGroup = L.layerGroup();
+    }
+    points.forEach(pt => {
+        const isChildcare = pt.properties && pt.properties.type && pt.properties.type === 'childcare';
+        const pointQuality = pt.properties.quality || 0;
+        const color = isChildcare ? childcareGradient[pointQuality] : groceryGradient[pointQuality];
+        const marker = L.circleMarker([pt.geometry.coordinates[1], pt.geometry.coordinates[0]], {
+            radius: 7,
+            fillColor: color,
+            color: '#fff',
+            weight: 1,
+            fillOpacity: 0.85
+        });
+        marker.feature = pt; // Attach the GeoJSON feature to the marker
+        marker.bindPopup(`<b>${safe(pt.properties.name)}</b><br/>Type: ${safe(pt.properties.tag_label)}<br/>Quality: ${safe(pt.properties.quality)}`);
+        supplyLayerGroup.addLayer(marker);
+    });
+    map.addLayer(supplyLayerGroup);
+}
+
+function updateDashboard() {
+    // Breadcrumb
+    const breadcrumb = document.getElementById('breadcrumb');
+    if (breadcrumbPath.length > 0) {
+        let html = `<a href='#' class='bc-link' data-bc-idx='0'>Maryland</a>`;
+        breadcrumbPath.forEach((plan, idx) => {
+            html += ` &raquo; `;
+            if (idx === breadcrumbPath.length - 1) {
+                html += `<span>${plan.properties.area_name}</span>`;
+            } else {
+                html += `<a href='#' class='bc-link' data-bc-idx='${idx+1}'>${plan.properties.area_name}</a>`;
+            }
+        });
+        breadcrumb.innerHTML = html;
+        breadcrumb.classList.remove('hidden');
+        breadcrumb.querySelectorAll('.bc-link').forEach(link => {
+            link.onclick = (e) => {
+                e.preventDefault();
+                const idx = parseInt(link.getAttribute('data-bc-idx'));
+                if (idx === 0) {
+                    breadcrumbPath = [];
+                    loadPolygonsAndPoints();
                 } else {
-                    // Focus on the sub-area in filteredNeighborhoods
-                    showNeighborhood(idx);
+                    breadcrumbPath = breadcrumbPath.slice(0, idx);
+                    showPlanDashboard();
+                }
+            };
+        });
+    } else {
+        breadcrumb.innerHTML = `<span>Maryland</span>`;
+        breadcrumb.classList.remove('hidden');
+    }
+    // Area title and details
+    const areaTitle = document.getElementById('area-title');
+    const plan = breadcrumbPath[breadcrumbPath.length - 1];
+    if (!plan) {
+        areaTitle.textContent = 'Select a plan to view details';
+        document.getElementById('plan-year-row').innerHTML = '';
+        document.getElementById('plan-summary').innerHTML = '';
+        document.getElementById('community-vision').innerHTML = '';
+        document.getElementById('stat-childcare-score').textContent = '-';
+        document.getElementById('stat-childcare-quotes').textContent = '';
+        document.getElementById('stat-grocery-score').textContent = '-';
+        document.getElementById('stat-grocery-quotes').textContent = '';
+        document.getElementById('demog-pop').textContent = '-';
+        document.getElementById('subarea-list').innerHTML = '';
+        document.getElementById('subarea-section').style.display = 'none';
+        return;
+    }
+    areaTitle.textContent = plan.properties.area_name;
+    // Plan year
+    const planYear = safe(plan.properties.plan_year);
+    document.getElementById('plan-year-row').innerHTML = planYear ? `<b>Plan Year:</b> ${planYear} ${getPlanYearWarning(planYear)}` : '';
+    // Plan summary
+    document.getElementById('plan-summary').innerHTML = `<b>Geography:</b> ` + safe(plan.properties.area_geographic_summary, '(No geography available)');
+    // Community vision
+    document.getElementById('community-vision').innerHTML = `<b>Community Vision:</b> ` + safe(plan.properties.community_vision, '(No vision available)');
+    // Childcare
+    document.getElementById('stat-childcare-score').textContent = safe(plan.properties.childcare_access_score);
+    let ccQuotes = (Array.isArray(plan.properties.childcare_need_quotes) && plan.properties.childcare_need_quotes.length > 0)
+        ? plan.properties.childcare_need_quotes
+        : (Array.isArray(plan.properties.childcare_planning_quotes) && plan.properties.childcare_planning_quotes.length > 0)
+            ? plan.properties.childcare_planning_quotes
+            : [];
+    document.getElementById('stat-childcare-quotes').innerHTML = ccQuotes.length ? `<ul class='list-disc'>${ccQuotes.map(q=>`<li>${q}</li>`).join('')}</ul>` : '';
+    // Grocery
+    document.getElementById('stat-grocery-score').textContent = safe(plan.properties.grocery_access_score);
+    let grQuotes = (Array.isArray(plan.properties.fresh_food_need_quotes) && plan.properties.fresh_food_need_quotes.length > 0)
+        ? plan.properties.fresh_food_need_quotes
+        : (Array.isArray(plan.properties.fresh_food_planning_quotes) && plan.properties.fresh_food_planning_quotes.length > 0)
+            ? plan.properties.fresh_food_planning_quotes
+            : [];
+    document.getElementById('stat-grocery-quotes').innerHTML = grQuotes.length ? `<ul class='list-disc'>${grQuotes.map(q=>`<li>${q}</li>`).join('')}</ul>` : '';
+    // Demographics
+    document.getElementById('demog-pop').textContent = safe(plan.properties.estimated_population);
+    // Sub-area links
+    const subareaList = document.getElementById('subarea-list');
+    const subareaSection = document.getElementById('subarea-section');
+    let subAreas = (plan.properties.sub_area_plans || []).map(sa => findPlanById(sa.OBJECTID)).filter(Boolean);
+    // Alphabetize by area_name
+    subAreas.sort((a, b) => (a.properties.area_name || '').localeCompare(b.properties.area_name || ''));
+    if (subAreas.length > 0) {
+        subareaSection.style.display = '';
+        subareaList.innerHTML = subAreas.map(sub => `<li><a href='#' class='subarea-link text-blue-600 dark:text-blue-500 hover:underline' data-oid='${sub.properties.OBJECTID}'>${sub.properties.area_name}</a></li>`).join('');
+        subareaList.querySelectorAll('.subarea-link').forEach(link => {
+            link.onclick = (e) => {
+                e.preventDefault();
+                const oid = link.getAttribute('data-oid');
+                const sub = findPlanById(oid);
+                if (sub) {
+                    breadcrumbPath = [...breadcrumbPath, sub];
+                    showPlanDashboard();
+                    // Scroll dashboard panel to top when sub-area is clicked
+                    document.getElementById('details-panel').scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            };
+        });
+    } else {
+        subareaSection.style.display = 'none';
+        subareaList.innerHTML = '';
+    }
+    // Add Back to Parent button if in a sub-area (breadcrumbPath.length > 1)
+    const backContainer = document.getElementById('back-to-parent-container');
+    if (plan && breadcrumbPath.length > 0) {
+        const parent = breadcrumbPath[breadcrumbPath.length - 2];
+        let parentName;
+        let isMaryland = false;
+        if (breadcrumbPath.length === 1) {
+            parentName = 'Maryland';
+            isMaryland = true;
+        } else {
+            parentName = parent && parent.properties && parent.properties.area_name ? parent.properties.area_name : 'Parent Area';
+        }
+        backContainer.innerHTML = `<button id="back-to-parent-btn" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">&larr; Back to ${parentName}</button>`;
+        document.getElementById('back-to-parent-btn').onclick = function() {
+            if (isMaryland) {
+                breadcrumbPath = [];
+                loadPolygonsAndPoints();
+            } else {
+                breadcrumbPath = breadcrumbPath.slice(0, -1);
+                showPlanDashboard();
+            }
+            document.getElementById('details-panel').scrollTo({ top: 0, behavior: 'smooth' });
+        };
+    } else {
+        backContainer.innerHTML = '';
+    }
+}
+
+// Helper to display warning if plan year is old
+function getPlanYearWarning(planYear) {
+    if (!planYear) return '';
+    const year = parseInt(planYear);
+    const now = new Date().getFullYear();
+    if (now - year > 5) {
+        return '<span class="warning-icon" title="Plan is more than 5 years old">&#9888;</span>';
+    }
+    return '';
+}
+
+// Helper functions to identify counties and sub-areas
+function isCounty(feature) {
+    return Array.isArray(feature.properties.sub_area_plans) && feature.properties.sub_area_plans.length > 0;
+}
+function isSubArea(feature) {
+    return !isCounty(feature);
+}
+
+// Helper function to safely display values
+function safe(val, fallback='-') {
+    return (val === undefined || val === null || val === '') ? fallback : val;
+}
+
+// Fetch data and only call loadPolygonsAndPoints after arrays are populated
+Promise.all([
+    fetch('assets/plan_areas.geojson').then(r => r.json()),
+    fetch('assets/childcare.geojson').then(r => r.json()),
+    fetch('assets/grocery.geojson').then(r => r.json())
+]).then(([planAreas, childcare, grocery]) => {
+    planAreasGeojson = planAreas;
+    // --- Build parent_plan_id for all features ---
+    const featuresById = {};
+    planAreas.features.forEach(f => {
+        featuresById[f.properties.OBJECTID] = f;
+    });
+    planAreas.features.forEach(parent => {
+        if (Array.isArray(parent.properties.sub_area_plans)) {
+            parent.properties.sub_area_plans.forEach(sub => {
+                // Find the sub-area feature by OBJECTID
+                const subFeature = featuresById[sub.OBJECTID];
+                if (subFeature) {
+                    subFeature.properties.parent_plan_id = parent.properties.OBJECTID;
                 }
             });
-        });
+        }
     });
-    </script>
+    // --- End parent_plan_id build ---
+    childcarePoints = childcare.features;
+    groceryPoints = grocery.features;
+    countyFeatures = planAreas.features.filter(isCounty);
+    subAreaFeatures = planAreas.features.filter(isSubArea);
+    loadPolygonsAndPoints(); // Only call here!
+});
+
+// Add Leaflet legend control for quality gradients
+L.Control.QualityLegend = L.Control.extend({
+    onAdd: function(map) {
+        var div = L.DomUtil.create('div', 'leaflet-control leaflet-bar bg-white p-3 shadow rounded',);
+        div.style.background = '#fff';
+        div.style.boxShadow = '0 1px 4px rgba(0,0,0,0.12)';
+        div.style.borderRadius = '0.5rem';
+        div.style.fontSize = '0.95rem';
+        div.innerHTML = `
+            <div class="font-semibold mb-1">Legend</div>
+            <div class="flex flex-col gap-2">
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="w-28">Childcare Quality</span>
+                    <div class="flex h-4 w-36 rounded overflow-hidden border border-gray-300">
+                        <div style="background:#808080;width:16.6%"></div>
+                        <div style="background:#fcbba1;width:16.6%"></div>
+                        <div style="background:#fc9272;width:16.6%"></div>
+                        <div style="background:#fb6a4a;width:16.6%"></div>
+                        <div style="background:#de2d26;width:16.6%"></div>
+                        <div style="background:#a50f15;width:16.6%"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="w-28">Fresh Food Quality</span>
+                    <div class="flex h-4 w-36 rounded overflow-hidden border border-gray-300">
+                        <div style="background:#808080;width:16.6%"></div>
+                        <div style="background:#c6dbef;width:16.6%"></div>
+                        <div style="background:#9ecae1;width:16.6%"></div>
+                        <div style="background:#6baed6;width:16.6%"></div>
+                        <div style="background:#3182bd;width:16.6%"></div>
+                        <div style="background:#08519c;width:16.6%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-xs text-gray-500 mt-1">Darker = higher quality</div>
+        `;
+        return div;
+    },
+    onRemove: function(map) {}
+});
+L.control.qualityLegend = function(opts) {
+    return new L.Control.QualityLegend(opts);
+};
+L.control.qualityLegend({ position: 'bottomleft' }).addTo(map);
+</script>
+<script>
+function updateScoreIndicators() {
+    // Helper to position or hide the triangle
+    function setIndicator(score, min, max, indicatorId) {
+        const indicator = document.getElementById(indicatorId);
+        if (indicator) {
+            const triangle = indicator.querySelector('div');
+            if (typeof score !== 'number' || isNaN(score)) {
+                triangle.style.opacity = '0';
+                triangle.style.left = '0';
+            } else {
+                const pct = Math.max(0, Math.min(1, (score - min) / (max - min)));
+                triangle.style.left = `calc(${pct * 100}% )`;
+                triangle.style.opacity = '1';
+            }
+        }
+    }
+    // Childcare
+    let ccScore = parseFloat(document.getElementById('stat-childcare-score').textContent);
+    setIndicator(ccScore, 1, 5, 'childcare-score-indicator');
+    // Grocery
+    let grScore = parseFloat(document.getElementById('stat-grocery-score').textContent);
+    setIndicator(grScore, 1, 5, 'grocery-score-indicator');
+}
+// Call after dashboard updates
+const origUpdateDashboard = updateDashboard;
+updateDashboard = function() {
+    origUpdateDashboard.apply(this, arguments);
+    updateScoreIndicators();
+};
+</script>
 </body>
 </html>
