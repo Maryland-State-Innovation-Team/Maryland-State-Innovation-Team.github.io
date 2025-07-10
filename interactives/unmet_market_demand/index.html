@@ -404,6 +404,7 @@ function updateDashboard() {
                 if (idx === 0) {
                     breadcrumbPath = [];
                     loadPolygonsAndPoints();
+                    document.getElementById('back-to-parent-container').innerHTML = '';
                 } else {
                     breadcrumbPath = breadcrumbPath.slice(0, idx);
                     showPlanDashboard();
@@ -500,6 +501,7 @@ function updateDashboard() {
             if (isMaryland) {
                 breadcrumbPath = [];
                 loadPolygonsAndPoints();
+                document.getElementById('back-to-parent-container').innerHTML = '';
             } else {
                 breadcrumbPath = breadcrumbPath.slice(0, -1);
                 showPlanDashboard();
