@@ -154,7 +154,7 @@
         </div>
         <div class="mb-4">
             <div class="font-semibold mb-1">State Incentives</div>
-            <div id="state-incentives" class="placeholder">(Incentive data coming soon)</div>
+            <div id="state-incentives"></div>
         </div>
         <div class="mb-4">
             <div class="font-semibold mb-1">Demographics</div>
@@ -172,7 +172,7 @@
             <div class="font-semibold mb-1">Sub-Area Plans</div>
             <ul id="subarea-list" class="list-disc pl-5"></ul>
         </div>
-        <div class="text-xs text-gray-400 mt-8">Dashboard is illustrative of the data collected for the Unmet Market Demand Tool and does not represent the final tool. More indicators and incentive data coming soon.</div>
+        <div class="text-xs text-gray-400 mt-8">Dashboard is illustrative of the data collected for the Unmet Market Demand Tool and does not represent the final tool. More indicators coming soon.</div>
         <div id="back-to-parent-container" class="mt-4"></div>
     </div>
 </div>
@@ -477,6 +477,7 @@ function updateDashboard() {
         document.getElementById('stat-grocery-score').textContent = '-';
         document.getElementById('stat-grocery-quotes').textContent = '';
         document.getElementById('demog-pop').textContent = '-';
+        document.getElementById('state-incentives').innerHTML = '';
         document.getElementById('subarea-list').innerHTML = '';
         document.getElementById('subarea-section').style.display = 'none';
         return;
@@ -507,6 +508,30 @@ function updateDashboard() {
     document.getElementById('stat-grocery-quotes').innerHTML = grQuotes.length ? `<ul class='list-disc'>${grQuotes.map(q=>`<li>${q}</li>`).join('')}</ul>` : '';
     // Demographics
     document.getElementById('demog-pop').textContent = safe(plan.properties.estimated_population);
+    // State Incentives
+    const incentivesDiv = document.getElementById('state-incentives');
+    const incentiveAreas = plan.properties.incentive_areas;
+    const incentiveNarrative = plan.properties.incentive_narrative;
+    let incentivesHtml = '';
+    if (Array.isArray(incentiveAreas) && incentiveAreas.length > 0) {
+        // Format as comma-separated with Oxford comma and 'and' before last item
+        let formatted = '';
+        if (incentiveAreas.length === 1) {
+            formatted = safe(incentiveAreas[0]);
+        } else if (incentiveAreas.length === 2) {
+            formatted = safe(incentiveAreas[0]) + ' and ' + safe(incentiveAreas[1]);
+        } else {
+            formatted = incentiveAreas.slice(0, -1).map(safe).join(', ') + ', and ' + safe(incentiveAreas[incentiveAreas.length - 1]);
+        }
+        incentivesHtml += `<div class="mb-2"><b>Place-based incentive areas:</b> ${formatted}.</div>`;
+    }
+    if (incentiveNarrative) {
+        incentivesHtml += `<div class="mt-1">${incentiveNarrative}</div>`;
+    }
+    if (!incentivesHtml) {
+        incentivesHtml = '<span class="placeholder">(Incentive data coming soon)</span>';
+    }
+    incentivesDiv.innerHTML = incentivesHtml;
     // Sub-area links
     const subareaList = document.getElementById('subarea-list');
     const subareaSection = document.getElementById('subarea-section');
