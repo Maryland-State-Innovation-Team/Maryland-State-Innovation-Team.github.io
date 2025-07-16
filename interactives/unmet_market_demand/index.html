@@ -66,9 +66,59 @@
         }
         .warning-icon {
             color: #f59e42;
-            margin-left: 0.5em;
+            margin-left: 0.2em;
             font-size: 1.1em;
-            vertical-align: middle;
+            position: relative;
+            cursor: pointer;
+        }
+        .info-icon {
+            color: #050a47;
+            margin-left: 0.2em;
+            font-size: 1.1em;
+            position: relative;
+            cursor: pointer;
+        }
+        .warning-tooltip {
+            visibility: hidden;
+            background: #fffbe6;
+            color: #b45309;
+            text-align: left;
+            border-radius: 0.4em;
+            padding: 0.4em 0.7em;
+            position: absolute;
+            z-index: 100;
+            left: 120%;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            font-size: 0.95em;
+            min-width: 180px;
+            border: 1px solid #fde68a;
+            white-space: normal;
+        }
+        .warning-icon:hover .warning-tooltip {
+            visibility: visible;
+        }
+        .info-tooltip {
+            visibility: hidden;
+            background: #ffffff;
+            color: #050a47;
+            text-align: left;
+            border-radius: 0.4em;
+            padding: 0.4em 0.7em;
+            position: absolute;
+            z-index: 100;
+            left: 120%;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            font-size: 0.95em;
+            min-width: 180px;
+            border: 1px solid #050d5e;
+            white-space: normal;
+        }
+        .info-icon:hover .info-tooltip {
+            visibility: visible;
         }
         .breadcrumb {
             font-size: 0.95rem;
@@ -83,6 +133,9 @@
         .placeholder {
             color: #aaa;
             font-style: italic;
+        }
+        li > ul {
+            padding-left: 25px;
         }
         @media (max-width: 900px) {
             .dashboard-container {
@@ -107,6 +160,11 @@
                 height: 100%;
             }
         }
+        .incentive-advice-boldlink a {
+            font-weight: bold;
+            color: #2563eb;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -118,7 +176,7 @@
         <div id="breadcrumb" class="breadcrumb hidden"></div>
         <h1 id="area-title" class="section-title">Select a county to view details</h1>
         <div id="plan-year-row" class="mb-2 text-gray-600"></div>
-        <div id="plan-summary" class="mb-4 text-gray-700"></div>
+        <div id="demographics-table-container" class="mb-4"></div>
         <div id="community-vision" class="mb-4 text-gray-700"></div>
         <div class="stat-grid mb-4">
             <div class="stat-box">
@@ -152,25 +210,19 @@
                 <div id="stat-grocery-quotes" class="text-xs mt-2 text-gray-600"></div>
             </div>
         </div>
+        <!-- Collapsible State Incentives -->
         <div class="mb-4">
-            <div class="font-semibold mb-1">State Incentives</div>
-            <div id="state-incentives"></div>
+            <div id="state-incentives-header" class="font-semibold mb-1 cursor-pointer select-none flex items-center">
+                <span id="state-incentives-arrow" class="mr-2">&#9660;</span> State Incentives
+            </div>
+            <div id="state-incentives" style="display:none;"></div>
         </div>
+        <!-- Collapsible Sub-Area Plans -->
         <div class="mb-4">
-            <div class="font-semibold mb-1">Demographics</div>
-            <ul id="demographics-list" class="list-disc pl-5">
-                <li><span class="font-medium">Estimated Population:</span> <span id="demog-pop">-</span></li>
-                <li><span class="font-medium">Average Income:</span> <span class="placeholder">(coming soon)</span></li>
-                <li><span class="font-medium">% White:</span> <span class="placeholder">(coming soon)</span></li>
-                <li><span class="font-medium">% Black:</span> <span class="placeholder">(coming soon)</span></li>
-                <li><span class="font-medium">% Hispanic:</span> <span class="placeholder">(coming soon)</span></li>
-                <li><span class="font-medium">Per Capita Grocery Spend:</span> <span class="placeholder">(coming soon)</span></li>
-                <li><span class="font-medium">Per Capita Childcare Spend:</span> <span class="placeholder">(coming soon)</span></li>
-            </ul>
-        </div>
-        <div id="subarea-section" class="mb-4" style="display:none;">
-            <div class="font-semibold mb-1">Sub-Area Plans</div>
-            <ul id="subarea-list" class="list-disc pl-5"></ul>
+            <div id="subarea-header" class="font-semibold mb-1 cursor-pointer select-none flex items-center">
+                <span id="subarea-arrow" class="mr-2">&#9660;</span> Sub-Area Plans
+            </div>
+            <ul id="subarea-list" class="list-disc pl-5" style="display:none;"></ul>
         </div>
         <div class="text-xs text-gray-400 mt-8">Dashboard is illustrative of the data collected for the Unmet Market Demand Tool and does not represent the final tool. More indicators coming soon.</div>
         <div id="back-to-parent-container" class="mt-4"></div>
@@ -220,6 +272,9 @@ function loadPolygonsAndPoints() {
         map.removeLayer(subAreaLayerGroup);
         subAreaLayerGroup = null;
     }
+    // Hide the legend in state view
+    const legend = document.querySelector('.leaflet-control.quality-legend');
+    if (legend) legend.style.display = 'none';
     // Show all top-level plans
     const topPlans = getTopLevelPlans();
     neighborhoodsLayer = L.geoJSON({type:'FeatureCollection',features:topPlans}, {
@@ -238,10 +293,38 @@ function loadPolygonsAndPoints() {
         }
     }).addTo(map);
     addSupplyPoints(); // Maryland view: show all points, clustering on
+    // --- Populate subareaList with counties and expand by default ---
+    const subareaList = document.getElementById('subarea-list');
+    if (subareaList) {
+        // Get all counties (top-level plans)
+        let counties = getTopLevelPlans().slice();
+        counties.sort((a, b) => (a.properties.area_name || '').localeCompare(b.properties.area_name || ''));
+        subareaList.innerHTML = counties.map(county => `<li><a href='#' class='subarea-link text-blue-600 dark:text-blue-500 hover:underline' data-oid='${county.properties.OBJECTID}'>${county.properties.area_name}</a></li>`).join('');
+        subareaList.style.display = '';
+        // Set arrow to expanded
+        const subareaArrow = document.getElementById('subarea-arrow');
+        if (subareaArrow) subareaArrow.style.transform = 'rotate(180deg)';
+        // Add click handlers
+        subareaList.querySelectorAll('.subarea-link').forEach(link => {
+            link.onclick = (e) => {
+                e.preventDefault();
+                const oid = link.getAttribute('data-oid');
+                const county = findPlanById(oid);
+                if (county) {
+                    breadcrumbPath = [county];
+                    showPlanDashboard();
+                    document.getElementById('details-panel').scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            };
+        });
+    }
     updateDashboard();
     if (neighborhoodsLayer && neighborhoodsLayer.getBounds().isValid()) {
         map.fitBounds(neighborhoodsLayer.getBounds());
     }
+    // Reset arrows
+    const incentivesArrow = document.getElementById('state-incentives-arrow');
+    incentivesArrow.style.transform = 'rotate(0deg)';
     // Scroll dashboard panel to top when returning to Maryland view
     document.getElementById('details-panel').scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -252,6 +335,9 @@ function showPlanDashboard() {
         map.removeLayer(subAreaLayerGroup);
         subAreaLayerGroup = null;
     }
+    // Show the legend in plan view
+    const legend = document.querySelector('.leaflet-control.quality-legend');
+    if (legend) legend.style.display = '';
     const currentPlan = breadcrumbPath[breadcrumbPath.length - 1];
     // Highlight current plan
     neighborhoodsLayer = L.geoJSON(currentPlan, {
@@ -327,14 +413,25 @@ function showPlanDashboard() {
     }
 }
 
+// Helper to find the top-level parent plan for a given OBJECTID
+function findTopLevelParentId(objectId) {
+    let plan = findPlanById(objectId);
+    if (!plan) return null;
+    while (plan.properties.parent_plan_id) {
+        plan = findPlanById(plan.properties.parent_plan_id);
+        if (!plan) break;
+    }
+    return plan ? plan.properties.OBJECTID : null;
+}
+
 function addSupplyPoints(planObjectId = null) {
     const childcareGradient = [
         '#808080',
-        '#fcbba1',
-        '#fc9272',
-        '#fb6a4a',
-        '#de2d26',
-        '#a50f15'
+        '#c7e9c0',
+        '#a1d99b',
+        '#74c476',
+        '#31a354',
+        '#006d2c'
     ];
     const groceryGradient = [
         '#808080',
@@ -347,18 +444,27 @@ function addSupplyPoints(planObjectId = null) {
     if (supplyLayerGroup) map.removeLayer(supplyLayerGroup);
     childcarePoints.forEach(pt => pt.properties.type = 'childcare');
     groceryPoints.forEach(pt => pt.properties.type = 'grocery');
-    let points;
-    let useClustering = true;
+    let points = [];
+    let useClustering = false;
     if (planObjectId) {
-        // Filter points to those whose area_plans includes the selected planObjectId
-        points = [
-            ...childcarePoints.filter(pt => Array.isArray(pt.properties.area_plans) && pt.properties.area_plans.includes(planObjectId)),
-            ...groceryPoints.filter(pt => Array.isArray(pt.properties.area_plans) && pt.properties.area_plans.includes(planObjectId))
-        ];
+        // Find the top-level parent OBJECTID for the selected planObjectId
+        const topLevelId = findTopLevelParentId(planObjectId);
+        if (topLevelId) {
+            points = [
+                ...childcarePoints.filter(pt => Array.isArray(pt.properties.area_plans) && pt.properties.area_plans.includes(topLevelId)),
+                ...groceryPoints.filter(pt => Array.isArray(pt.properties.area_plans) && pt.properties.area_plans.includes(topLevelId))
+            ];
+        }
         useClustering = false;
     } else {
-        points = [...childcarePoints, ...groceryPoints];
-        useClustering = true;
+        // No plan selected: remove all points (do not add any)
+        points = [];
+        useClustering = false;
+    }
+    if (points.length === 0) {
+        supplyLayerGroup = L.layerGroup();
+        map.addLayer(supplyLayerGroup);
+        return;
     }
     if (useClustering) {
         supplyLayerGroup = L.markerClusterGroup({
@@ -423,7 +529,7 @@ function addSupplyPoints(planObjectId = null) {
             fillOpacity: 0.85
         });
         marker.feature = pt; // Attach the GeoJSON feature to the marker
-        marker.bindPopup(`<b>${safe(pt.properties.name)}</b><br/>Type: ${safe(pt.properties.tag_label)}<br/>Quality: ${safe(pt.properties.quality)}`);
+        marker.bindPopup(`<b>${safe(pt.properties.name)}</b><br/>Type: ${safe(pt.properties.tag_label)}<br/>Quality: ${safe(pt.properties.quality > 0 ? pt.properties.quality : '-')}${isChildcare ? ' (<a href="https://marylandexcels.org/" target="_blank">Maryland Excels</a>)' : ''}`);
         supplyLayerGroup.addLayer(marker);
     });
     map.addLayer(supplyLayerGroup);
@@ -470,24 +576,69 @@ function updateDashboard() {
     if (!plan) {
         areaTitle.textContent = 'Select a county to view details';
         document.getElementById('plan-year-row').innerHTML = '';
-        document.getElementById('plan-summary').innerHTML = '';
+        document.getElementById('demographics-table-container').innerHTML = '';
         document.getElementById('community-vision').innerHTML = '';
         document.getElementById('stat-childcare-score').textContent = '-';
         document.getElementById('stat-childcare-quotes').textContent = '';
         document.getElementById('stat-grocery-score').textContent = '-';
         document.getElementById('stat-grocery-quotes').textContent = '';
-        document.getElementById('demog-pop').textContent = '-';
         document.getElementById('state-incentives').innerHTML = '';
-        document.getElementById('subarea-list').innerHTML = '';
-        document.getElementById('subarea-section').style.display = 'none';
+        document.getElementById('state-incentives').style.display = 'none';
+        // Only clear subarea-list if not at Maryland level
+        const subareaList = document.getElementById('subarea-list');
+        if (subareaList && breadcrumbPath.length > 0) {
+            subareaList.innerHTML = '';
+            subareaList.style.display = 'none';
+        }
         return;
     }
     areaTitle.textContent = plan.properties.area_name;
     // Plan year
     const planYear = safe(plan.properties.plan_year);
     document.getElementById('plan-year-row').innerHTML = planYear ? `<b>Plan Year:</b> ${planYear} ${getPlanYearWarning(planYear)}` : '';
-    // Plan summary
-    document.getElementById('plan-summary').innerHTML = `<b>Geography:</b> ` + safe(plan.properties.area_geographic_summary, '(No geography available)');
+    // Demographics table (moved up)
+    const mdAverages = {
+        estimated_population: 6170738,
+        childcare_spending_per_under5: 4708.851900706852,
+        per_household_food_at_home: 8744.72982625397,
+        per_household_food_out: 4823.080191905031,
+        pct_under5: 0.0582329050431245,
+        pct_white: 0.49600728470403377,
+        pct_black: 0.295893295096956,
+        pct_hispanic: 0.12061312601507307,
+        avg_household_income: 128386.8932847582
+    };
+    const demogFields = [
+        { key: 'estimated_population', label: 'Population', fmt: v => v ? v.toLocaleString() : '-', source: '2020 Decennial Census (aggregated from block level)' },
+        { key: 'childcare_spending_per_under5', label: 'Annual spending on childcare per child', fmt: v => v ? `$${Number(v).toLocaleString(undefined,{maximumFractionDigits:0})}` : '-', source: '2024 Esri Consumer Spending dataset' },
+        { key: 'per_household_food_at_home', label: 'Household annual spending on food at home', fmt: v => v ? `$${Number(v).toLocaleString(undefined,{maximumFractionDigits:0})}` : '-', source: '2024 Esri Consumer Spending dataset' },
+        { key: 'per_household_food_out', label: 'Household annual spending on food away', fmt: v => v ? `$${Number(v).toLocaleString(undefined,{maximumFractionDigits:0})}` : '-', source: '2024 Esri Consumer Spending dataset' },
+        { key: 'avg_household_income', label: 'Average household income', fmt: v => v ? `$${Number(v).toLocaleString(undefined,{maximumFractionDigits:0})}` : '-', source: '2023 American Community Survey 5-year estimates' },
+        { key: 'pct_under5', label: 'Population under 5', fmt: v => v !== undefined ? `${(100*Number(v)).toFixed(1)}%` : '-', source: '2023 American Community Survey 5-year estimates' },
+        { key: 'pct_white', label: 'White population', fmt: v => v !== undefined ? `${(100*Number(v)).toFixed(1)}%` : '-', source: '2023 American Community Survey 5-year estimates' },
+        { key: 'pct_black', label: 'Black population', fmt: v => v !== undefined ? `${(100*Number(v)).toFixed(1)}%` : '-', source: '2023 American Community Survey 5-year estimates' },
+        { key: 'pct_hispanic', label: 'Hispanic population', fmt: v => v !== undefined ? `${(100*Number(v)).toFixed(1)}%` : '-', source: '2023 American Community Survey 5-year estimates' }
+    ];
+    let demogRows = demogFields.map(f => {
+        const areaVal = plan.properties[f.key];
+        const mdVal = mdAverages[f.key];
+        // Add tooltip icon with source note
+        const tooltip = `<span class=\"info-icon\" tabindex=\"0\">&#9432;<span class=\"info-tooltip\">${f.source}</span></span>`;
+        return `<tr><td class='px-2 py-1 text-gray-700'>${f.label} ${tooltip}</td><td class='px-2 py-1 text-right'>${f.fmt(areaVal)}</td><td class='px-2 py-1 text-right text-gray-500'>${f.fmt(mdVal)}</td></tr>`;
+    }).join('');
+    document.getElementById('demographics-table-container').innerHTML = `
+        <table class='min-w-full text-sm border border-gray-200 rounded mb-2 bg-white shadow-sm'>
+            <thead>
+                <tr class='bg-gray-50'>
+                    <th class='text-left px-3 py-2 font-semibold text-gray-700 border-b border-gray-200'>Indicator</th>
+                    <th class='text-right px-3 py-2 font-semibold text-blue-900 border-b border-gray-200'>Area</th>
+                    <th class='text-right px-3 py-2 font-semibold text-gray-500 border-b border-gray-200'>Maryland</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${demogRows}
+            </tbody>
+        </table>`;
     // Community vision
     document.getElementById('community-vision').innerHTML = `<b>Community Vision:</b> ` + safe(plan.properties.community_vision, '(No vision available)');
     // Childcare
@@ -506,41 +657,42 @@ function updateDashboard() {
             ? plan.properties.fresh_food_planning_quotes
             : [];
     document.getElementById('stat-grocery-quotes').innerHTML = grQuotes.length ? `<ul class='list-disc'>${grQuotes.map(q=>`<li>${q}</li>`).join('')}</ul>` : '';
-    // Demographics
-    document.getElementById('demog-pop').textContent = safe(plan.properties.estimated_population);
-    // State Incentives
+    // State Incentives (collapsible)
     const incentivesDiv = document.getElementById('state-incentives');
-    const incentiveAreas = plan.properties.incentive_areas;
-    const incentiveNarrative = plan.properties.incentive_narrative;
+    const incentiveIntro = plan.properties.incentive_intro;
+    const childcareAdvice = Array.isArray(plan.properties.incentive_childcare_advice) ? plan.properties.incentive_childcare_advice : [];
+    const freshFoodAdvice = Array.isArray(plan.properties.incentive_fresh_food_advice) ? plan.properties.incentive_fresh_food_advice : [];
     let incentivesHtml = '';
-    if (Array.isArray(incentiveAreas) && incentiveAreas.length > 0) {
-        // Format as comma-separated with Oxford comma and 'and' before last item
-        let formatted = '';
-        if (incentiveAreas.length === 1) {
-            formatted = safe(incentiveAreas[0]);
-        } else if (incentiveAreas.length === 2) {
-            formatted = safe(incentiveAreas[0]) + ' and ' + safe(incentiveAreas[1]);
-        } else {
-            formatted = incentiveAreas.slice(0, -1).map(safe).join(', ') + ', and ' + safe(incentiveAreas[incentiveAreas.length - 1]);
+    // --- Render nested advice lists ---
+    if (incentiveIntro || childcareAdvice.length || freshFoodAdvice.length) {
+        if (incentiveIntro) {
+            incentivesHtml += `<div class="mb-2">${incentiveIntro}</div>`;
         }
-        incentivesHtml += `<div class="mb-2"><b>Place-based incentive areas:</b> ${formatted}.</div>`;
-    }
-    if (incentiveNarrative) {
-        incentivesHtml += `<div class="mt-1">${incentiveNarrative}</div>`;
+        incentivesHtml += `<ul class="list-disc ml-2">`;
+        if (childcareAdvice.length) {
+            incentivesHtml += `<li><b>Advice for child care entrepreneurs:</b><ul class="list-disc ml-4 incentive-advice-boldlink">${childcareAdvice.map(a=>`<li>${a}</li>`).join('')}</ul></li>`;
+        }
+        if (freshFoodAdvice.length) {
+            incentivesHtml += `<li><b>Advice for fresh food entrepreneurs:</b><ul class="list-disc ml-4 incentive-advice-boldlink">${freshFoodAdvice.map(a=>`<li>${a}</li>`).join('')}</ul></li>`;
+        }
+        incentivesHtml += `</ul>`;
     }
     if (!incentivesHtml) {
         incentivesHtml = '<span class="placeholder">(Incentive data coming soon)</span>';
     }
     incentivesDiv.innerHTML = incentivesHtml;
-    // Sub-area links
+    incentivesDiv.style.display = 'none'; // collapsed by default
+    const incentivesArrow = document.getElementById('state-incentives-arrow');
+    incentivesArrow.style.transform = 'rotate(0deg)';
+    // Sub-area links (collapsible)
     const subareaList = document.getElementById('subarea-list');
-    const subareaSection = document.getElementById('subarea-section');
     let subAreas = (plan.properties.sub_area_plans || []).map(sa => findPlanById(sa.OBJECTID)).filter(Boolean);
-    // Alphabetize by area_name
     subAreas.sort((a, b) => (a.properties.area_name || '').localeCompare(b.properties.area_name || ''));
     if (subAreas.length > 0) {
-        subareaSection.style.display = '';
         subareaList.innerHTML = subAreas.map(sub => `<li><a href='#' class='subarea-link text-blue-600 dark:text-blue-500 hover:underline' data-oid='${sub.properties.OBJECTID}'>${sub.properties.area_name}</a></li>`).join('');
+        subareaList.style.display = 'none'; // collapsed by default
+        const subareaArrow = document.getElementById('subarea-arrow');
+        subareaArrow.style.transform = 'rotate(0deg)';
         subareaList.querySelectorAll('.subarea-link').forEach(link => {
             link.onclick = (e) => {
                 e.preventDefault();
@@ -549,14 +701,13 @@ function updateDashboard() {
                 if (sub) {
                     breadcrumbPath = [...breadcrumbPath, sub];
                     showPlanDashboard();
-                    // Scroll dashboard panel to top when sub-area is clicked
                     document.getElementById('details-panel').scrollTo({ top: 0, behavior: 'smooth' });
                 }
             };
         });
     } else {
-        subareaSection.style.display = 'none';
         subareaList.innerHTML = '';
+        subareaList.style.display = 'none';
     }
     // Add Back to Parent button if in a sub-area (breadcrumbPath.length > 1)
     const backContainer = document.getElementById('back-to-parent-container');
@@ -593,7 +744,7 @@ function getPlanYearWarning(planYear) {
     const year = parseInt(planYear);
     const now = new Date().getFullYear();
     if (now - year > 5) {
-        return '<span class="warning-icon" title="Plan is more than 5 years old">&#9888;</span>';
+        return `<span class="warning-icon">&#9888;<span class="warning-tooltip">Plan is more than 5 years old.</span></span>`;
     }
     return '';
 }
@@ -645,11 +796,12 @@ Promise.all([
 // Add Leaflet legend control for quality gradients
 L.Control.QualityLegend = L.Control.extend({
     onAdd: function(map) {
-        var div = L.DomUtil.create('div', 'leaflet-control leaflet-bar bg-white p-3 shadow rounded',);
+        var div = L.DomUtil.create('div', 'leaflet-control quality-legend bg-white p-3 shadow rounded',);
         div.style.background = '#fff';
         div.style.boxShadow = '0 1px 4px rgba(0,0,0,0.12)';
         div.style.borderRadius = '0.5rem';
         div.style.fontSize = '0.95rem';
+        div.style.display = 'none';
         div.innerHTML = `
             <div class="font-semibold mb-1">Legend</div>
             <div class="flex flex-col gap-2">
@@ -657,11 +809,11 @@ L.Control.QualityLegend = L.Control.extend({
                     <span class="w-28">Childcare</span>
                     <div class="flex h-4 w-24 rounded overflow-hidden border border-gray-300">
                         <div style="background:#808080;width:16.6%"></div>
-                        <div style="background:#fcbba1;width:16.6%"></div>
-                        <div style="background:#fc9272;width:16.6%"></div>
-                        <div style="background:#fb6a4a;width:16.6%"></div>
-                        <div style="background:#de2d26;width:16.6%"></div>
-                        <div style="background:#a50f15;width:16.6%"></div>
+                        <div style="background:#c7e9c0;width:16.6%"></div>
+                        <div style="background:#a1d99b;width:16.6%"></div>
+                        <div style="background:#74c476;width:16.6%"></div>
+                        <div style="background:#31a354;width:16.6%"></div>
+                        <div style="background:#006d2c;width:16.6%"></div>
                     </div>
                 </div>
                 <div class="flex items-center gap-2">
@@ -717,6 +869,32 @@ updateDashboard = function() {
     origUpdateDashboard.apply(this, arguments);
     updateScoreIndicators();
 };
+</script>
+<script>
+// Collapsible sections: State Incentives and Sub-Area Plans
+(function() {
+    function setupCollapsible(headerId, arrowId, contentId) {
+        const header = document.getElementById(headerId);
+        const arrow = document.getElementById(arrowId);
+        const content = document.getElementById(contentId);
+        if (!header || !arrow || !content) return;
+        header.addEventListener('click', function() {
+            const isOpen = content.style.display !== 'none';
+            if (isOpen) {
+                content.style.display = 'none';
+                arrow.style.transform = 'rotate(0deg)';
+            } else {
+                content.style.display = '';
+                arrow.style.transform = 'rotate(180deg)';
+            }
+        });
+    }
+    // Run after DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        setupCollapsible('state-incentives-header', 'state-incentives-arrow', 'state-incentives');
+        setupCollapsible('subarea-header', 'subarea-arrow', 'subarea-list');
+    });
+})();
 </script>
 </body>
 </html>
