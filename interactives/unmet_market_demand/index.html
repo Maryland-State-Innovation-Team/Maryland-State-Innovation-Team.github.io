@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unmet Market Demand Dashboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Public+Sans:400,500,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
@@ -15,8 +17,12 @@
             height: 100%;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Public Sans', Arial, sans-serif;
+            color: #000000;
             background: #f3f4f6;
+        }
+        hr {
+            border-width: 2px;
         }
         .dashboard-container {
             height: 100vh;
@@ -49,6 +55,52 @@
         }
         .leaflet-control {
             pointer-events: auto;
+        }
+        .main-title, .section-title, .details-title, .card-title {
+            color: #050A47;
+            font-family: 'Merriweather', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        .score-numerator {
+            color: #050A47;
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: 'Public Sans', Arial, sans-serif;
+        }
+        .score-denominator {
+            color: #565656;
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: 'Public Sans', Arial, sans-serif;
+        }
+        .main-title, .section-title, .details-title {
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .main-label, .main-filter-label, .main-legend-label, .breadcrumb {
+            color: #565656;
+            font-family: 'Public Sans', Arial, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .table-blue, .info-icon {
+            color: #050A47;
+        }
+        .main-legend-title {
+            color: #565656;
+            font-family: 'Merriweather', serif;
+        }
+        .legend-color-box {
+            width: 20px !important;
+            height: 20px !important;
+            min-width: 20px !important;
+            min-height: 20px !important;
+            display: inline-block;
+            margin-right: 5px;
+            border: 1px solid #ccc;
+            vertical-align: middle;
+        }
+        #back-to-parent-btn:hover, #back-to-maryland:hover{
+            background-color: #212a84;
         }
         #narrative-dropdown-wrapper {
             position: absolute;
@@ -208,7 +260,7 @@
                 transform: translateY(0);
             }
         }
-        .section-title {
+        .details-title {
             font-size: 2.25rem;
             font-weight: 700;
             margin-bottom: 1rem;
@@ -284,18 +336,8 @@
         }
         .breadcrumb a {
             color: #2563eb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .breadcrumb a:hover {
             text-decoration: underline;
-        }
-        .placeholder {
-            color: #aaa;
-            font-style: italic;
-        }
-        li > ul {
-            padding-left: 25px;
+            cursor: pointer;
         }
         .incentive-advice-boldlink a {
             font-weight: bold;
@@ -439,27 +481,15 @@
 </head>
 <body>
 <div class="dashboard-container">
-    <div id="mode-toggle-wrapper" style="display:none;">
-      <div id="mode-toggle" class="flex rounded-full shadow bg-white border border-gray-200 overflow-hidden">
-        <button id="toggle-childcare" class="flex rounded-full items-center gap-2 px-4 py-2 font-semibold text-white bg-[#31a354] focus:outline-none transition active">
-          <i class="fa-solid fa-child"></i>
-          CHILD CARE
-        </button>
-        <button id="toggle-freshfood" class="flex rounded-full items-center gap-2 px-4 py-2 font-semibold text-[#3182bd] bg-white focus:outline-none transition">
-          <i class="fa-solid fa-apple-whole"></i>
-          FRESH FOOD
-        </button>
-      </div>
-    </div>
     <div id="narrative-dropdown-wrapper">
         <div id="narrative-box">
-            <div class="font-bold mb-2">Unmet Demand Dashboard</div>
+            <div class="main-title">Unmet Demand Dashboard</div>
             <div class="text-gray-700">
                 This dashboard is designed to provide a high-level preview of unmet market demand for fresh food and quality childcare across Maryland. Comprised of AI-extracted data from almost 18,000 pages of development plans, 10,000 business locations, and 50 State incentives, it allows users to explore the interplay of community demand, essential service supply, and the incentives designed to bridge the gap between the two. By selecting an area plan, users can access the area's strategic vision, key demographic indicators, specific scores for childcare and fresh food access (contextualized with relevant quotes from the plan), and location-specific advice on State incentives for entrepreneurs.
             </div>
         </div>
         <div id="county-dropdown-card">
-            <label for="county-select" class="block font-semibold mb-2">Select a County</label>
+            <label for="county-select" class="block font-semibold mb-2 main-label">Select a County</label>
             <select id="county-select" class="border border-gray-300 rounded px-3 py-2">
                 <option value="">Select</option>
             </select>
@@ -470,11 +500,23 @@
         <div id="seal-tooltip">Created by the Maryland State Innovation Team in the Office of Governor Wes Moore.</div>
     </div>
     <div id="map-panel">
+        <div id="mode-toggle-wrapper" style="display:none;">
+            <div id="mode-toggle" class="flex rounded-full shadow bg-white border border-gray-200 overflow-hidden">
+                <button id="toggle-childcare" class="flex rounded-full items-center gap-2 px-4 py-2 font-semibold text-white bg-[#31a354] focus:outline-none transition active">
+                <i class="fa-solid fa-child"></i>
+                CHILD CARE
+                </button>
+                <button id="toggle-freshfood" class="flex rounded-full items-center gap-2 px-4 py-2 font-semibold text-[#3182bd] bg-white focus:outline-none transition">
+                <i class="fa-solid fa-apple-whole"></i>
+                FRESH FOOD
+                </button>
+            </div>
+        </div>
         <div id="map"></div>
     </div>
     <div id="details-panel">
         <div id="breadcrumb" class="breadcrumb hidden"></div>
-        <h1 id="area-title" class="section-title">Select a county to view details</h1>
+        <h1 id="area-title" class="details-title">Select a county to view details</h1>
         <div id="subarea-dropdown-container" style="display:none;">
             <label for="subarea-dropdown" class="block text-sm font-medium text-gray-700 mb-1">Select a Sub-Area plan</label>
             <select id="subarea-dropdown" class="border border-gray-300 rounded px-3 py-2 w-full text-sm">
@@ -483,13 +525,13 @@
         </div>
         <hr class="my-6 border-gray-200">
         <div id="quick-facts-section">
-            <div id="demographics-table-title" class="font-semibold text-lg mb-2">Quick Facts</div>
+            <div id="demographics-table-title" class="section-title">Quick Facts</div>
             <div id="demographics-table-container"></div>
         </div>
         <hr class="my-6 border-gray-200">
         <div id="community-vision-section">
-            <div id="community-vision-title" class="font-semibold text-lg mb-1">Community Vision</div>
-            <div id="plan-year-row" class="mb-2 text-sm text-gray-500"></div>
+            <div id="community-vision-title" class="section-title">Community Vision</div>
+            <div id="plan-year-row" class="mb-2 text-sm text-gray-500 italic"></div>
             <div id="community-vision" class="text-gray-700 text-sm leading-relaxed"></div>
         </div>
         <hr class="my-6 border-gray-200">
@@ -497,9 +539,10 @@
         </div>
         <div id="state-incentives-section">
         </div>
+        <div id="keep-exploring-section" class="mt-6"></div>
         <hr class="my-6 border-gray-200">
         <div id="back-to-parent-container"></div>
-        <div class="text-xs text-gray-400 mt-auto pt-4">Dashboard is illustrative of the data collected for the Unmet Market Demand Tool and does not represent the final tool. More indicators coming soon.</div>
+        <div class="text-xs text-gray-400 mt-auto pt-4">Dashboard is illustrative of the data collected for the Unmet Market Demand Tool and does not represent the final tool. More plans coming soon.</div>
     </div>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -795,7 +838,7 @@ function updateDashboard() {
     
     if (!plan) {
         areaTitle.textContent = 'Select a county to view details';
-        ['plan-year-row', 'demographics-table-container', 'community-vision', 'access-score-section', 'state-incentives-section', 'back-to-parent-container'].forEach(id => document.getElementById(id).innerHTML = '');
+        ['plan-year-row', 'demographics-table-container', 'community-vision', 'access-score-section', 'state-incentives-section', 'keep-exploring-section', 'back-to-parent-container'].forEach(id => document.getElementById(id).innerHTML = '');
         document.getElementById('subarea-dropdown-container').style.display = 'none';
         showModeToggle(false);
         return;
@@ -811,27 +854,26 @@ function updateDashboard() {
         const mdVal = mdAverages[f.key];
         const tooltip = `<span class="info-icon" tabindex="0">i<span class="info-tooltip">${f.source}</span></span>`;
         
-        // Alternating row background color to match the screenshot
         const rowClass = i % 2 === 0 ? 'bg-white' : 'bg-stone-50';
 
         return `
             <tr class='${rowClass}'>
-                <td class='py-3 px-4 text-sm text-gray-700'>${f.label} ${tooltip}</td>
-                <td class='py-3 px-4 text-sm text-right font-medium text-gray-900'>${f.fmt(areaVal)}</td>
+                <td class='py-3 px-4 text-sm table-blue'>${f.label} ${tooltip}</td>
+                <td class='py-3 px-4 text-sm text-right font-medium table-blue'>${f.fmt(areaVal)}</td>
                 <td class='py-3 px-4 text-sm text-right text-gray-500'>${f.fmt(mdVal)}</td>
             </tr>`;
     }).join('');
 
     document.getElementById('demographics-table-container').innerHTML = `
-        <table class='min-w-full'>
+        <table class='min-w-full border border-stone-200 rounded-b-lg'>
             <thead>
                 <tr>
-                    <th class='py-2 px-4 bg-stone-100 text-sm font-semibold text-left text-gray-600 rounded-tl-lg'>Indicator</th>
-                    <th class='py-2 px-4 bg-stone-100 text-sm font-semibold text-right text-gray-600'>Area</th>
-                    <th class='py-2 px-4 bg-stone-100 text-sm font-semibold text-right text-gray-600 rounded-tr-lg'>Maryland</th>
+                    <th class='py-2 px-4 bg-stone-100 text-sm font-semibold text-left table-blue rounded-tl-lg'>Indicator</th>
+                    <th class='py-2 px-4 bg-stone-100 text-sm font-semibold text-right table-blue'>Area</th>
+                    <th class='py-2 px-4 bg-stone-100 text-sm font-semibold text-right text-gray-500 rounded-tr-lg'>Maryland</th>
                 </tr>
             </thead>
-            <tbody class='border border-stone-200 rounded-b-lg'>
+            <tbody>
                 ${demogRows}
             </tbody>
         </table>`;
@@ -840,19 +882,20 @@ function updateDashboard() {
     
     renderAccessScoreSection(plan);
     renderStateIncentivesSection(plan);
+    renderKeepExploringSection(plan);
 
     const backContainer = document.getElementById('back-to-parent-container');
     if (breadcrumbPath.length > 1) {
         const parent = breadcrumbPath[breadcrumbPath.length - 2];
         const parentName = safe(parent?.properties?.area_name, 'Parent Area');
-        backContainer.innerHTML = `<button id="back-to-parent-btn" class="px-4 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition text-sm">&larr; Back to ${parentName}</button>`;
+        backContainer.innerHTML = `<button id="back-to-parent-btn" class="px-4 py-2 rounded text-sm bg-[#050A47] text-white hover:bg-[#212a84]">&larr; Back to ${parentName}</button>`;
         document.getElementById('back-to-parent-btn').onclick = function() {
             breadcrumbPath.pop();
             showPlanDashboard();
             document.getElementById('details-panel').scrollTo({ top: 0, behavior: 'smooth' });
         };
     } else {
-         backContainer.innerHTML = `<button id="back-to-maryland" class="px-4 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition text-sm">&larr; Back to Maryland</button>`;
+         backContainer.innerHTML = `<button id="back-to-maryland" class="px-4 py-2 rounded text-sm bg-[#050A47] text-white hover:bg-[#212a84]">&larr; Back to Maryland</button>`;
          document.getElementById('back-to-maryland').onclick = (e) => { e.preventDefault(); loadPolygonsAndPoints(); };
     }
 
@@ -910,13 +953,15 @@ function renderAccessScoreSection(plan) {
 
         return `
             <div class="access-score-card">
-                <div class="flex items-center gap-3 mb-2">
-                    <div class="text-xl ${title.includes('Childcare') ? 'text-green-600' : 'text-blue-600'}">${icon}</div>
-                    <div class="font-semibold text-gray-800">${title}</div>
-                </div>
-                <div class="flex items-baseline gap-2 mb-2">
-                    <span class="text-3xl font-bold text-gray-800">${score || '-'}</span>
-                    <span class="text-gray-500 font-semibold">/ 5</span>
+                <div class="flex items-baseline justify-between">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="rounded-full text-white text-xl h-8 w-8 flex items-center justify-center ${title.includes('Childcare') ? 'bg-green-600' : 'bg-blue-600'}">${icon}</div>
+                        <div class="card-title">${title}</div>
+                    </div>
+                    <div class="flex items-baseline flex-nowrap gap-2 mb-2">
+                        <span class="score-numerator">${score || '-'}</span>
+                        <span class="score-denominator text-nowrap">/ 5</span>
+                    </div>
                 </div>
                 <div class="access-score-bar-bg">
                     <div class="access-score-bar-fg" style="width: ${barWidth}%; background: ${gradient};"></div>
@@ -933,7 +978,7 @@ function renderAccessScoreSection(plan) {
             : (plan.properties.childcare_planning_quotes || []);
         html = createCard(
             'Childcare Access Score', 
-            '<i class="fa-solid fa-child"></i>', 
+            '<i class="fa-solid fa-child relative right-[0.5px]"></i>', 
             childcareScore, 
             childcareQuotes
         );
@@ -944,7 +989,7 @@ function renderAccessScoreSection(plan) {
             : (plan.properties.fresh_food_planning_quotes || []);
         html = createCard(
             'Fresh Food Access Score', 
-            '<i class="fa-solid fa-apple-whole"></i>', 
+            '<i class="fa-solid fa-apple-whole relative right-[0.5px]"></i>', 
             freshFoodScore, 
             freshFoodQuotes
         );
@@ -996,8 +1041,8 @@ function renderStateIncentivesSection(plan) {
     if (adviceHtml.trim() !== '') {
         container.innerHTML = `
             <hr class="my-6 border-gray-200">
-            <div class="font-semibold text-lg mb-2">State Incentives</div>
-            <div class="text-sm text-gray-600 mb-3">${intro || '<span class="placeholder">(Incentive data coming soon)</span>'}</div>
+            <div class="section-title">State Incentives</div>
+            <div class="text-sm text-gray-600 mb-3">${intro || '<span class="italic text-gray-400">(Incentive data coming soon)</span>'}</div>
             <div class="border border-gray-200 rounded-md p-3">
             ${adviceHtml}
             </div>`;
@@ -1006,12 +1051,59 @@ function renderStateIncentivesSection(plan) {
     }
 }
 
+function renderKeepExploringSection(plan) {
+    const container = document.getElementById('keep-exploring-section');
+    if (!container || !plan) {
+        if (container) container.innerHTML = '';
+        return;
+    }
+
+    let subAreas = (plan.properties.sub_area_plans || []).map(sa => findPlanById(sa.OBJECTID)).filter(Boolean);
+    subAreas.sort((a, b) => (a.properties.area_name || '').localeCompare(b.properties.area_name || ''));
+
+    if (subAreas.length > 0) {
+        const listItems = subAreas.map(sub => `
+            <li>
+                <a href="#" class="text-blue-600 hover:text-blue-800 underline" data-plan-id="${sub.properties.OBJECTID}">
+                    ${safe(sub.properties.area_name)}
+                </a>
+            </li>
+        `).join('');
+
+        container.innerHTML = `
+            <hr class="my-6 border-gray-200">
+            <div class="section-title italic">Keep exploring ${safe(plan.properties.area_name)}</div>
+            <div class="main-label">Sub-Area Plans:</div>
+            <ul class="list-disc list-inside">
+                ${listItems}
+            </ul>
+        `;
+
+        container.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const planId = this.dataset.planId;
+                if (planId) {
+                    const sub = findPlanById(planId);
+                    if (sub) {
+                        breadcrumbPath.push(sub);
+                        showPlanDashboard();
+                        document.getElementById('details-panel').scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    } else {
+        container.innerHTML = '';
+    }
+}
+
 
 function getPlanYearWarning(planYear) {
     if (!planYear) return '';
     const year = parseInt(planYear);
     const now = new Date().getFullYear();
-    return now - year > 5 ? `<span class="warning-icon">&#9888;<span class="warning-tooltip">Plan is more than 5 years old.</span></span>` : '';
+    return now - year > 5 ? `<span class="warning-icon not-italic">&#9888;<span class="warning-tooltip">Plan is more than 5 years old.</span></span>` : '';
 }
 function isCounty(feature) { return Array.isArray(feature.properties.sub_area_plans) && feature.properties.sub_area_plans.length > 0; }
 function isSubArea(feature) { return !isCounty(feature); }
