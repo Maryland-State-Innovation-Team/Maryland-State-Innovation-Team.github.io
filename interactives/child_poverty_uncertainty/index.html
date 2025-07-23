@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Poverty Uncertainty Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        .controls-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            max-width: 340px;
+            min-width: 240px;
+        }
+        .toggle-group {
+            margin-bottom: 18px;
+        }
+        .toggle-title {
+            font-weight: bold;
+            margin-bottom: 2px;
+            margin-left: 0;
+        }
+        .toggle-options {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-left: 18px;
+        }
+        .toggle-options > div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .indicator-selector {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+        .indicator-selector label,
+        .toggle-options label {
+            font-weight: 500;
+            margin: 0 8px 0 2px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .indicator-selector input[type="radio"],
+        .toggle-options input[type="radio"] {
+            accent-color: #2563eb;
+            width: 1.15em;
+            height: 1.15em;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        .indicator-selector input[type="radio"]:focus + label,
+        .indicator-selector label:hover,
+        .toggle-options input[type="radio"]:focus + label,
+        .toggle-options label:hover {
+            background: #f0f4ff;
+            border-radius: 4px;
+        }
+        .leaflet-legend {
+            line-height: 18px;
+            color: #333;
+            background: rgba(255,255,255,0.9);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .leaflet-legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.9;
+            border: 1px solid #666;
+        }
+        .leaflet-legend h4 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .leaflet-legend div.legend-item {
+            margin-bottom: 3px;
+            clear: both;
+            display: flex;
+            align-items: center;
+        }
+        .leaflet-legend div.legend-item:last-child {
+            margin-bottom: 0;
+        }
+        .leaflet-tooltip{
+            width: 300px;
+            white-space: normal;
+        }
+        .info-popup-content {
+            font-size: 13px;
+        }
+        .info-popup-content strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="controls-container">
+        <div class="toggle-group indicator-selector">
+            <div class="toggle-title">Indicator:</div>
+            <div class="toggle-options">
+                <div>
+                    <input type="radio" name="indicator" id="povertyPct" value="child_pov_pct" checked>
+                    <label for="povertyPct">Child Poverty Percent</label>
+                </div>
+                <div>
+                    <input type="radio" name="indicator" id="povertyCV" value="child_pov_pct_cv">
+                    <label for="povertyCV">Child Poverty Uncertainty</label>
+                </div>
+            </div>
+        </div>
+        <div class="toggle-group">
+            <div class="toggle-title">Method:</div>
+            <div class="toggle-options">
+                <div>
+                    <input type="radio" name="method" id="baseline" value="BASE" checked>
+                    <label for="baseline">Baseline</label>
+                </div>
+                <div>
+                    <input type="radio" name="method" id="threshold" value="THRESH">
+                    <label for="threshold">Threshold</label>
+                </div>
+                <div>
+                    <input type="radio" name="method" id="geographic" value="GEO">
+                    <label for="geographic">Geographic</label>
+                </div>
+                <div>
+                    <input type="radio" name="method" id="temporal" value="TIME">
+                    <label for="temporal">Temporal</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // --- Global Variables ---
+        let map;
+        let geojsonLayer;
+        let geojsonData;
+        let currentIndicator = 'child_pov_pct'; // or 'child_pov_pct_cv'
+        let currentMethod = 'BASE'; // BASE, THRESH, GEO, TIME
+
+        // Color scales for each indicator
+        // Poverty %: 0 to 1 (0% to 100%)
+        // CV: 0 to 1 (0% to 100%+)
+        const povertyBreaks = [0, 0.02, 0.07, 0.18, 0.32, 0.45, 0.6, 1.0];
+        const cvBreaks = [0, 0.1, 0.35, 0.6, 0.85, 1.0, 1.2, 7.1];
+        const povertyColors = [
+            '#fee5d9', // <2%
+            '#fcbba1', // 2-7%
+            '#fc9272', // 7-18%
+            '#fb6a4a', // 18-32%
+            '#ef3b2c', // 32-45%
+            '#cb181d', // 45-60%
+            '#99000d'  // >60%
+        ];
+        const cvColors = [
+            '#eff3ff', // <10%
+            '#c6dbef', // 10-35%
+            '#9ecae1', // 35-60%
+            '#6baed6', // 60-85%
+            '#4292c6', // 85-100%
+            '#2171b5', // 100-120%
+            '#084594'  // >120%
+        ];
+        const defaultColor = '#cccccc';
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', initializeMap);
+
+        function initializeMap() {
+            map = L.map('map').setView([39.0458, -76.6413], 8);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(map);
+            setupEventListeners();
+            fetchGeojson();
+        }
+
+        // --- Data Loading ---
+        async function fetchGeojson() {
+            try {
+                const resp = await fetch('assets/comparison.geojson');
+                if (!resp.ok) throw new Error(`GeoJSON fetch failed: ${resp.statusText}`);
+                geojsonData = await resp.json();
+                addGeojsonLayer();
+            } catch (error) {
+                console.error("Error loading data:", error);
+                const errorDiv = document.createElement('div');
+                errorDiv.style.position = 'absolute';
+                errorDiv.style.top = '50%';
+                errorDiv.style.left = '50%';
+                errorDiv.style.transform = 'translate(-50%, -50%)';
+                errorDiv.style.padding = '20px';
+                errorDiv.style.backgroundColor = 'lightcoral';
+                errorDiv.style.border = '1px solid red';
+                errorDiv.style.zIndex = '2000';
+                errorDiv.textContent = `Failed to load map data: ${error.message}. Please check file paths and ensure files are accessible.`;
+                document.body.appendChild(errorDiv);
+            }
+        }
+
+        function addGeojsonLayer() {
+            if (geojsonLayer) {
+                map.removeLayer(geojsonLayer);
+            }
+            geojsonLayer = L.geoJSON(geojsonData, {
+                style: styleFeature,
+                onEachFeature: onEachFeature
+            }).addTo(map);
+            createLegend();
+        }
+
+        // --- Styling and Interaction ---
+        function getColor(value, indicator) {
+            if (value === null || value === undefined || isNaN(parseFloat(value))) {
+                return defaultColor;
+            }
+            const numValue = parseFloat(value);
+            let breaks, colors;
+            if (indicator === 'child_pov_pct') {
+                breaks = povertyBreaks;
+                colors = povertyColors;
+            } else {
+                breaks = cvBreaks;
+                colors = cvColors;
+            }
+            for (let i = 0; i < breaks.length - 1; i++) {
+                if (numValue >= breaks[i] && numValue < breaks[i+1]) {
+                    return colors[i];
+                }
+            }
+            if (numValue >= breaks[breaks.length - 1]) return colors[colors.length -1];
+            if (numValue < breaks[0]) return colors[0];
+            return defaultColor;
+        }
+
+        function styleFeature(feature) {
+            const props = feature.properties;
+            const col = `${currentMethod}-${currentIndicator}`;
+            let value = props[col];
+            return {
+                fillColor: getColor(value, currentIndicator),
+                weight: 0.5,
+                opacity: 1,
+                color: getColor(value, currentIndicator),
+                fillOpacity: 1
+            };
+        }
+
+        function onEachFeature(feature, layer) {
+            layer.on({
+                mouseover: (e) => {
+                    highlightFeature(e);
+                    const props = feature.properties;
+                    const colPct = `${currentMethod}-child_pov_pct`;
+                    const colCV = `${currentMethod}-child_pov_pct_cv`;
+                    const colSub = `${currentMethod}-substitution`;
+                    let pct = props[colPct];
+                    let cv = props[colCV];
+                    let sub = props[colSub];
+                    function fmtPct(val) {
+                        return (val !== null && val !== undefined && !isNaN(val)) ? (val*100).toFixed(1) + '%' : 'N/A';
+                    }
+                    const popupContent = `
+                        <div class="info-popup-content">
+                            <strong>GEOID20:</strong> ${props.GEOID20 || 'N/A'}<br>
+                            <strong>Tract name:</strong> ${props.tract_name || 'N/A'}<br>
+                            <strong>County name:</strong> ${props.county_name || 'N/A'}<br>
+                            <strong>Child poverty %:</strong> ${fmtPct(pct)}<br>
+                            <strong>Child poverty CV:</strong> ${fmtPct(cv)}<br>
+                            ${currentMethod !== 'BASE' ? `<strong>Substitution:</strong> ${sub !== undefined && sub !== null ? sub : 'N/A'}<br>` : ''}
+                        </div>
+                    `;
+                    if (layer.getTooltip()) {
+                        layer.setTooltipContent(popupContent);
+                    } else {
+                        layer.bindTooltip(popupContent, {sticky: true});
+                    }
+                    layer.openTooltip();
+                },
+                mouseout: (e) => {
+                    resetHighlight(e);
+                    if (layer.getTooltip() && layer.isTooltipOpen()) {
+                        layer.closeTooltip();
+                    }
+                },
+            });
+        }
+
+        function highlightFeature(e) {
+            const layer = e.target;
+            layer.setStyle({
+                weight: 3,
+                color: '#333',
+                dashArray: '',
+                fillOpacity: 0.9
+            });
+        }
+        function resetHighlight(e) {
+            if (geojsonLayer) {
+                geojsonLayer.resetStyle(e.target);
+            }
+        }
+
+        // --- UI Controls ---
+        function setupEventListeners() {
+            document.querySelectorAll('input[name="indicator"]').forEach(el => {
+                el.addEventListener('change', (e) => {
+                    currentIndicator = e.target.value;
+                    updateMapDisplay();
+                });
+            });
+            document.querySelectorAll('input[name="method"]').forEach(el => {
+                el.addEventListener('change', (e) => {
+                    currentMethod = e.target.value;
+                    updateMapDisplay();
+                });
+            });
+        }
+        function updateMapDisplay() {
+            if (geojsonLayer) {
+                geojsonLayer.eachLayer(layer => {
+                    if (layer.feature && layer.feature.properties) {
+                        layer.setStyle(styleFeature(layer.feature));
+                        // Update tooltip if open
+                        if (layer.getTooltip() && layer.isTooltipOpen()) {
+                            const props = layer.feature.properties;
+                            const colPct = `${currentMethod}-child_pov_pct`;
+                            const colCV = `${currentMethod}-child_pov_pct_cv`;
+                            const colSub = `${currentMethod}-substitution`;
+                            let pct = props[colPct];
+                            let cv = props[colCV];
+                            let sub = props[colSub];
+                            function fmtPct(val) {
+                                return (val !== null && val !== undefined && !isNaN(val)) ? (val*100).toFixed(1) + '%' : 'N/A';
+                            }
+                            const popupContent = `
+                                <div class="info-popup-content">
+                                    <strong>GEOID20:</strong> ${props.GEOID20 || 'N/A'}<br>
+                                    <strong>Tract name:</strong> ${props.tract_name || 'N/A'}<br>
+                                    <strong>County name:</strong> ${props.county_name || 'N/A'}<br>
+                                    <strong>Child poverty %:</strong> ${fmtPct(pct)}<br>
+                                    <strong>Child poverty CV:</strong> ${fmtPct(cv)}<br>
+                                    ${currentMethod !== 'BASE' ? `<strong>Substitution:</strong> ${sub !== undefined && sub !== null ? sub : 'N/A'}<br>` : ''}
+                                </div>
+                            `;
+                            layer.setTooltipContent(popupContent);
+                        }
+                    }
+                });
+            }
+            createLegend();
+        }
+
+        // --- Legend ---
+        function createLegend() {
+            if (window._leaflet_legend_control) {
+                map.removeControl(window._leaflet_legend_control);
+            }
+            const legend = L.control({ position: 'bottomleft' });
+            legend.onAdd = function (map) {
+                const div = L.DomUtil.create('div', 'info leaflet-legend');
+                if (currentIndicator === 'child_pov_pct') {
+                    div.innerHTML += '<h4>Child Poverty %</h4>';
+                    const legendItemsHTML = [];
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${povertyColors[0]}"></i> &lt; 2%</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${povertyColors[1]}"></i> 2% - 7%</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${povertyColors[2]}"></i> 7% - 18%</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${povertyColors[3]}"></i> 18% - 32%</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${povertyColors[4]}"></i> 32% - 45%</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${povertyColors[5]}"></i> 45% - 60%</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${povertyColors[6]}"></i> > 60%</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${defaultColor}"></i> N/A or No Data</div>`);
+                    div.innerHTML += legendItemsHTML.join('');
+                } else {
+                    div.innerHTML += '<h4>Child Poverty CV</h4>';
+                    const legendItemsHTML = [];
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${cvColors[0]}"></i> &lt; 10%</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${cvColors[1]}"></i> 10% - 35%</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${cvColors[2]}"></i> 35% - 60%</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${cvColors[3]}"></i> 60% - 85%</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${cvColors[4]}"></i> 85% - 100%</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${cvColors[5]}"></i> 100% - 120%</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${cvColors[6]}"></i> > 120%</div>`);
+                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${defaultColor}"></i> N/A or No Data</div>`);
+                    div.innerHTML += legendItemsHTML.join('');
+                }
+                return div;
+            };
+            legend.addTo(map);
+            window._leaflet_legend_control = legend;
+        }
+    </script>
+</body>
+</html>
