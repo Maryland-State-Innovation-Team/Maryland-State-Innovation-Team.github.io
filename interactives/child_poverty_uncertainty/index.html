@@ -51,6 +51,15 @@
             flex-direction: row;
             align-items: center;
         }
+        .category-swatch {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            border-radius: 3px;
+            border: 1px solid #666;
+            vertical-align: middle;
+        }
         .indicator-selector {
             display: flex;
             flex-direction: column;
@@ -136,6 +145,14 @@
                 <div>
                     <input type="radio" name="indicator" id="povertyCV" value="child_pov_pct_cv">
                     <label for="povertyCV">Child Poverty Uncertainty</label>
+                </div>
+                <div>
+                    <input type="radio" name="indicator" id="geoSub" value="geo_substitution">
+                    <label for="geoSub">Geographic substitution source</label>
+                </div>
+                <div>
+                    <input type="radio" name="indicator" id="timeSub" value="time_substitution">
+                    <label for="timeSub">Temporal substitution source</label>
                 </div>
             </div>
         </div>
@@ -242,8 +259,73 @@
             createLegend();
         }
 
+        // --- Indicator configs ---
+        const indicatorConfigs = {
+            child_pov_pct: {
+                breaks: povertyBreaks,
+                colors: povertyColors,
+                legend: [
+                    { label: '< 2%', color: povertyColors[0] },
+                    { label: '2% - 7%', color: povertyColors[1] },
+                    { label: '7% - 18%', color: povertyColors[2] },
+                    { label: '18% - 32%', color: povertyColors[3] },
+                    { label: '32% - 45%', color: povertyColors[4] },
+                    { label: '45% - 60%', color: povertyColors[5] },
+                    { label: '> 60%', color: povertyColors[6] }
+                ],
+                isCategorical: false
+            },
+            child_pov_pct_cv: {
+                breaks: cvBreaks,
+                colors: cvColors,
+                legend: [
+                    { label: '< 10%', color: cvColors[0] },
+                    { label: '10% - 35%', color: cvColors[1] },
+                    { label: '35% - 60%', color: cvColors[2] },
+                    { label: '60% - 85%', color: cvColors[3] },
+                    { label: '85% - 100%', color: cvColors[4] },
+                    { label: '100% - 120%', color: cvColors[5] },
+                    { label: '> 120%', color: cvColors[6] }
+                ],
+                isCategorical: false
+            },
+            geo_substitution: {
+                values: ['tract', 'county', 'puma'],
+                colors: ['#e5f5e0', '#a1d99b', '#31a354'],
+                legend: [
+                    { label: 'Tract', color: '#e5f5e0' },
+                    { label: 'County', color: '#a1d99b' },
+                    { label: 'PUMA', color: '#31a354' }
+                ],
+                isCategorical: true
+            },
+            time_substitution: {
+                values: ['2018', '2019', '2020', '2021', '2022', '2023'],
+                colors: ['#54278f', '#756bb1', '#9e9ac8', '#bcbddc', '#dadaeb', '#f2f0f7'],
+                legend: [
+                    { label: '2018', color: '#54278f' },
+                    { label: '2019', color: '#756bb1' },
+                    { label: '2020', color: '#9e9ac8' },
+                    { label: '2021', color: '#bcbddc' },
+                    { label: '2022', color: '#dadaeb' },
+                    { label: '2023', color: '#f2f0f7' }
+                ],
+                isCategorical: true
+            }
+        };
+
         // --- Styling and Interaction ---
         function getColor(value, indicator) {
+            if (indicator === 'geo_substitution') {
+                if (!value) return defaultColor;
+                const idx = indicatorConfigs.geo_substitution.values.indexOf(String(value).toLowerCase());
+                return idx >= 0 ? indicatorConfigs.geo_substitution.colors[idx] : defaultColor;
+            }
+            if (indicator === 'time_substitution') {
+                if (!value) return defaultColor;
+                const idx = indicatorConfigs.time_substitution.values.indexOf(String(value));
+                return idx >= 0 ? indicatorConfigs.time_substitution.colors[idx] : defaultColor;
+            }
             if (value === null || value === undefined || isNaN(parseFloat(value))) {
                 return defaultColor;
             }
@@ -268,8 +350,15 @@
 
         function styleFeature(feature) {
             const props = feature.properties;
-            const col = `${currentMethod}-${currentIndicator}`;
-            let value = props[col];
+            let value;
+            if (currentIndicator === 'geo_substitution') {
+                value = props['GEO-substitution'];
+            } else if (currentIndicator === 'time_substitution') {
+                value = props['TIME-substitution'];
+            } else {
+                const col = `${currentMethod}-${currentIndicator}`;
+                value = props[col];
+            }
             return {
                 fillColor: getColor(value, currentIndicator),
                 weight: 0.5,
@@ -284,25 +373,32 @@
                 mouseover: (e) => {
                     highlightFeature(e);
                     const props = feature.properties;
-                    const colPct = `${currentMethod}-child_pov_pct`;
-                    const colCV = `${currentMethod}-child_pov_pct_cv`;
-                    const colSub = `${currentMethod}-substitution`;
-                    let pct = props[colPct];
-                    let cv = props[colCV];
-                    let sub = props[colSub];
-                    function fmtPct(val) {
-                        return (val !== null && val !== undefined && !isNaN(val)) ? (val*100).toFixed(1) + '%' : 'N/A';
+                    let popupContent = '';
+                    if (currentIndicator === 'geo_substitution') {
+                        popupContent = `<div class="info-popup-content"><strong>GEOID20:</strong> ${props.GEOID20 || 'N/A'}<br><strong>Tract name:</strong> ${props.tract_name || 'N/A'}<br><strong>County name:</strong> ${props.county_name || 'N/A'}<br><strong>Geographic substitution source:</strong> ${props['GEO-substitution'] || 'N/A'}</div>`;
+                    } else if (currentIndicator === 'time_substitution') {
+                        popupContent = `<div class="info-popup-content"><strong>GEOID20:</strong> ${props.GEOID20 || 'N/A'}<br><strong>Tract name:</strong> ${props.tract_name || 'N/A'}<br><strong>County name:</strong> ${props.county_name || 'N/A'}<br><strong>Temporal substitution source:</strong> ${props['TIME-substitution'] || 'N/A'}</div>`;
+                    } else {
+                        const colPct = `${currentMethod}-child_pov_pct`;
+                        const colCV = `${currentMethod}-child_pov_pct_cv`;
+                        const colSub = `${currentMethod}-substitution`;
+                        let pct = props[colPct];
+                        let cv = props[colCV];
+                        let sub = props[colSub];
+                        function fmtPct(val) {
+                            return (val !== null && val !== undefined && !isNaN(val)) ? (val*100).toFixed(1) + '%' : 'N/A';
+                        }
+                        popupContent = `
+                            <div class="info-popup-content">
+                                <strong>GEOID20:</strong> ${props.GEOID20 || 'N/A'}<br>
+                                <strong>Tract name:</strong> ${props.tract_name || 'N/A'}<br>
+                                <strong>County name:</strong> ${props.county_name || 'N/A'}<br>
+                                <strong>Child poverty %:</strong> ${fmtPct(pct)}<br>
+                                <strong>Child poverty CV:</strong> ${fmtPct(cv)}<br>
+                                ${currentMethod !== 'BASE' ? `<strong>Substitution:</strong> ${sub !== undefined && sub !== null ? sub : 'N/A'}<br>` : ''}
+                            </div>
+                        `;
                     }
-                    const popupContent = `
-                        <div class="info-popup-content">
-                            <strong>GEOID20:</strong> ${props.GEOID20 || 'N/A'}<br>
-                            <strong>Tract name:</strong> ${props.tract_name || 'N/A'}<br>
-                            <strong>County name:</strong> ${props.county_name || 'N/A'}<br>
-                            <strong>Child poverty %:</strong> ${fmtPct(pct)}<br>
-                            <strong>Child poverty CV:</strong> ${fmtPct(cv)}<br>
-                            ${currentMethod !== 'BASE' ? `<strong>Substitution:</strong> ${sub !== undefined && sub !== null ? sub : 'N/A'}<br>` : ''}
-                        </div>
-                    `;
                     if (layer.getTooltip()) {
                         layer.setTooltipContent(popupContent);
                     } else {
@@ -339,6 +435,7 @@
             document.querySelectorAll('input[name="indicator"]').forEach(el => {
                 el.addEventListener('change', (e) => {
                     currentIndicator = e.target.value;
+                    updateMethodSelectorsState();
                     updateMapDisplay();
                 });
             });
@@ -348,7 +445,17 @@
                     updateMapDisplay();
                 });
             });
+            // Initial state
+            updateMethodSelectorsState();
         }
+
+        function updateMethodSelectorsState() {
+            const disable = (currentIndicator === 'geo_substitution' || currentIndicator === 'time_substitution');
+            document.querySelectorAll('input[name="method"]').forEach(el => {
+                el.disabled = disable;
+            });
+        }
+
         function updateMapDisplay() {
             if (geojsonLayer) {
                 geojsonLayer.eachLayer(layer => {
@@ -392,30 +499,19 @@
             const legend = L.control({ position: 'bottomleft' });
             legend.onAdd = function (map) {
                 const div = L.DomUtil.create('div', 'info leaflet-legend');
-                if (currentIndicator === 'child_pov_pct') {
-                    div.innerHTML += '<h4>Child Poverty %</h4>';
-                    const legendItemsHTML = [];
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${povertyColors[0]}"></i> &lt; 2%</div>`);
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${povertyColors[1]}"></i> 2% - 7%</div>`);
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${povertyColors[2]}"></i> 7% - 18%</div>`);
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${povertyColors[3]}"></i> 18% - 32%</div>`);
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${povertyColors[4]}"></i> 32% - 45%</div>`);
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${povertyColors[5]}"></i> 45% - 60%</div>`);
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${povertyColors[6]}"></i> > 60%</div>`);
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${defaultColor}"></i> N/A or No Data</div>`);
-                    div.innerHTML += legendItemsHTML.join('');
-                } else {
-                    div.innerHTML += '<h4>Child Poverty CV</h4>';
-                    const legendItemsHTML = [];
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${cvColors[0]}"></i> &lt; 10%</div>`);
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${cvColors[1]}"></i> 10% - 35%</div>`);
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${cvColors[2]}"></i> 35% - 60%</div>`);
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${cvColors[3]}"></i> 60% - 85%</div>`);
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${cvColors[4]}"></i> 85% - 100%</div>`);
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${cvColors[5]}"></i> 100% - 120%</div>`);
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${cvColors[6]}"></i> > 120%</div>`);
-                    legendItemsHTML.push(`<div class="legend-item"><i style="background:${defaultColor}"></i> N/A or No Data</div>`);
-                    div.innerHTML += legendItemsHTML.join('');
+                const config = indicatorConfigs[currentIndicator];
+                if (config && config.isCategorical) {
+                    div.innerHTML += `<h4>${currentIndicator === 'geo_substitution' ? 'Geographic substitution source' : 'Temporal substitution source'}</h4>`;
+                    config.legend.forEach(item => {
+                        div.innerHTML += `<div class="legend-item"><span class="category-swatch" style="background:${item.color}"></span>${item.label}</div>`;
+                    });
+                    div.innerHTML += `<div class="legend-item"><span class="category-swatch" style="background:${defaultColor}"></span>N/A or No Data</div>`;
+                } else if (config) {
+                    div.innerHTML += `<h4>${currentIndicator === 'child_pov_pct' ? 'Child Poverty %' : 'Child Poverty CV'}</h4>`;
+                    config.legend.forEach(item => {
+                        div.innerHTML += `<div class="legend-item"><i style="background:${item.color}"></i> ${item.label}</div>`;
+                    });
+                    div.innerHTML += `<div class="legend-item"><i style="background:${defaultColor}"></i> N/A or No Data</div>`;
                 }
                 return div;
             };
