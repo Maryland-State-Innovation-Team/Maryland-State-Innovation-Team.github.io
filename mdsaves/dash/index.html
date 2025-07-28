@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarylandSaves Performance Dashboard</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
+    
+    <!-- Papaparse for CSV parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Define brand colors as CSS variables for the new light theme */
+        :root {
+            --bg-primary: #F3F4F6; /* Light Gray */
+            --bg-secondary: #FFFFFF; /* White */
+            --text-primary: #1F2937; /* Dark Gray */
+            --text-secondary: #4B5563; /* Medium Gray */
+            --accent-gold: #92400E; /* Darker Gold/Brown for contrast */
+            --accent-blue: #3D578A;
+            --border-color: #D1D5DB;
+        }
+
+        /* Apply base styles */
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom scrollbar for a more integrated look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #E5E7EB;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-gold);
+        }
+        
+        /* Styling for the toggle switch to use the accent color */
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: var(--accent-blue);
+        }
+
+        /* Style for active toggle buttons */
+        #deep-dive button.active {
+            background-color: var(--accent-gold);
+            box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.2);
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-chart-simple text-2xl" style="color: var(--accent-gold);"></i>
+                    <h1 class="text-xl sm:text-2xl font-bold ml-3 tracking-tight text-text-primary">MarylandSaves Performance Dashboard</h1>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#at-a-glance" class="text-sm font-medium text-text-secondary hover:text-accent-blue transition-colors">At a Glance</a>
+                    <a href="#deep-dive" class="text-sm font-medium text-text-secondary hover:text-accent-blue transition-colors">Maryland Deep Dive</a>
+                    <a href="#comparison" class="text-sm font-medium text-text-secondary hover:text-accent-blue transition-colors">State Comparisons</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <!-- Loading Indicator -->
+        <div id="loading" class="text-center py-20">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2" style="border-color: var(--accent-gold);"></div>
+            <p class="mt-4 text-lg text-text-secondary">Loading and processing state data...</p>
+        </div>
+
+        <!-- Dashboard Content (hidden until loaded) -->
+        <div id="dashboard-content" class="hidden">
+            
+            <!-- Section: At a Glance -->
+            <section id="at-a-glance" class="mb-12">
+                <h2 class="text-3xl font-bold mb-2 text-text-primary">At a Glance: Maryland</h2>
+                <p class="text-text-secondary mb-6">Latest key metrics for the MarylandSaves program as of <span id="latest-date-display" class="font-semibold" style="color: var(--accent-gold);"></span>.</p>
+                <div id="kpi-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- KPI Cards will be injected here by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Section: Maryland Deep Dive -->
+            <section id="deep-dive" class="mb-12">
+                <div class="bg-secondary rounded-xl p-6 shadow-lg">
+                    <h2 class="text-3xl font-bold mb-2 text-text-primary">Maryland Deep Dive</h2>
+                    <p class="text-text-secondary mb-6">Analyze trends and seasonality for specific metrics within the MarylandSaves program.</p>
+                    <div class="flex flex-wrap items-center gap-4 mb-6">
+                        <div>
+                            <label for="deep-dive-metric" class="block text-sm font-medium mb-1 text-text-secondary">Select Metric:</label>
+                            <select id="deep-dive-metric" class="bg-gray-50 border border-border-color text-text-primary rounded-md px-3 py-2 focus:outline-none focus:ring-2" style="--tw-ring-color: var(--accent-gold);">
+                                <!-- Options will be injected here -->
+                            </select>
+                        </div>
+                        <div class="flex items-center space-x-4 pt-5">
+                             <button id="toggle-trend" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-md transition-all duration-300 flex items-center gap-2">
+                                <i class="fa-solid fa-chart-line w-4 h-4"></i>Show Trend
+                            </button>
+                            <button id="toggle-seasonality" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-md transition-all duration-300 flex items-center gap-2">
+                               <i class="fa-solid fa-wave-square w-4 h-4"></i>Show Seasonality
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative h-96">
+                        <canvas id="deepDiveChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: State Comparisons -->
+            <section id="comparison">
+                 <div class="bg-secondary rounded-xl p-6 shadow-lg">
+                    <h2 class="text-3xl font-bold mb-2 text-text-primary">State Comparisons</h2>
+                    <p class="text-text-secondary mb-6">Compare performance across all state-sponsored retirement programs.</p>
+                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-6">
+                        <div>
+                            <label for="comparison-metric" class="block text-sm font-medium mb-1 text-text-secondary">Select Metric:</label>
+                            <select id="comparison-metric" class="bg-gray-50 border border-border-color text-text-primary rounded-md px-3 py-2 focus:outline-none focus:ring-2" style="--tw-ring-color: var(--accent-gold);">
+                                <!-- Options will be injected here -->
+                            </select>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
+                            <label for="sync-toggle" class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="sync-toggle" class="sr-only peer toggle-checkbox">
+                                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-accent-blue toggle-label peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                                <span class="ml-3 text-sm font-medium text-text-secondary">Sync by Start Date</span>
+                            </label>
+                            <label for="baseline-toggle" class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="baseline-toggle" class="sr-only peer toggle-checkbox">
+                                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-accent-blue toggle-label peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                                <span class="ml-3 text-sm font-medium text-text-secondary">Baseline to 100</span>
+                            </label>
+                             <label for="zoom-toggle" class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="zoom-toggle" class="sr-only peer toggle-checkbox">
+                                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-accent-blue toggle-label peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                                <span class="ml-3 text-sm font-medium text-text-secondary">Zoom to Maryland's Timeline</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="relative h-96">
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                 </div>
+            </section>
+        </div>
+
+    </main>
+    
+    <script type="module">
+        // --- CONFIGURATION ---
+        const CSV_URL = 'state_sponsored_retirement_plan_data_wide.csv';
+        const STATE_COLORS = {
+            "Maryland": "#92400E", // Dark Gold
+            "California": "#2563EB",
+            "Colorado": "#059669",
+            "Connecticut": "#7C3AED",
+            "Illinois": "#DC2626",
+            "Maine": "#EA580C",
+            "Oregon": "#4F46E5",
+            "Default": "#6B7280"
+        };
+        const NUMERIC_COLS = [
+            "AUM", "Accounts with a full withdrawal", "Accounts with a partial withdrawal",
+            "Accounts with a withdrawal", "Average account balance", "Employers able to process payroll contributions",
+            "Funded accounts", "Percent of accounts with a full withdrawal", "Percent of accounts with a partial withdrawal",
+            "Percent of accounts with a withdrawal", "Registered employers", "Total contributions", "Total withdrawals",
+            "Withdrawal percent of total contributions", "Average participating employees per employer",
+            "Percent of registered employers able to process payroll contributions"
+        ];
+        const THEME = {
+            textPrimary: '#1F2937',
+            textSecondary: '#6B7280',
+            gridColor: '#E5E7EB',
+            accentBlue: '#3D578A',
+            accentGold: '#92400E'
+        };
+
+        // --- GLOBAL STATE ---
+        let processedData = {};
+        let deepDiveChart, comparisonChart;
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', init);
+
+        async function init() {
+            try {
+                const rawData = await fetchData(CSV_URL);
+                processedData = processData(rawData);
+
+                populateSelectors();
+                renderAtAGlance();
+                renderDeepDiveChart();
+                renderComparisonChart();
+
+                setupEventListeners();
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('dashboard-content').style.display = 'block';
+            } catch (error) {
+                console.error("Initialization failed:", error);
+                document.getElementById('loading').innerHTML = `<p class="text-red-500">Failed to load dashboard data. Please check the console for errors.</p>`;
+            }
+        }
+
+        // --- DATA FETCHING & PROCESSING ---
+        function fetchData(url) {
+            return new Promise((resolve, reject) => {
+                Papa.parse(url, {
+                    download: true,
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: (results) => resolve(results.data),
+                    error: (error) => reject(error)
+                });
+            });
+        }
+
+        function processData(data) {
+            // 1. Clean and type-cast data
+            const cleanedData = data.map(row => {
+                const newRow = { ...row };
+                newRow.Date = new Date(row.Date + 'T00:00:00');
+                for (const col of NUMERIC_COLS) {
+                    newRow[col] = (row[col] === 'NA' || row[col] === '' || row[col] === null) ? null : parseFloat(row[col]);
+                }
+                return newRow;
+            }).sort((a, b) => a.Date - b.Date);
+
+            // 2. Group by state
+            const groupedByState = cleanedData.reduce((acc, row) => {
+                if (!acc[row.State]) {
+                    acc[row.State] = [];
+                }
+                acc[row.State].push(row);
+                return acc;
+            }, {});
+
+            // 3. Calculate start dates, months in operation, and filter pre-launch data
+            const finalData = {};
+            for (const state in groupedByState) {
+                let stateData = groupedByState[state];
+                const firstDataPoint = stateData.find(d => NUMERIC_COLS.some(col => d[col] !== null && d[col] > 0));
+                const startDate = firstDataPoint ? firstDataPoint.Date : null;
+
+                if (startDate) {
+                    stateData = stateData.filter(d => d.Date >= startDate);
+
+                    finalData[state] = {
+                        startDate: startDate,
+                        data: stateData.map(row => ({
+                            ...row,
+                            monthsInOperation: differenceInMonths(row.Date, startDate)
+                        }))
+                    };
+                }
+            }
+            return finalData;
+        }
+        
+        // --- RENDERING FUNCTIONS ---
+        function renderAtAGlance() {
+            const kpiGrid = document.getElementById('kpi-grid');
+            const marylandData = processedData["Maryland"].data;
+            const latestData = [...marylandData].reverse().find(d => d.AUM !== null);
+            const previousData = marylandData[marylandData.indexOf(latestData) - 1];
+
+            if (!latestData) return;
+            
+            document.getElementById('latest-date-display').textContent = latestData.Date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            const kpis = [
+                { label: "Assets Under Management (AUM)", key: "AUM", format: 'currency' },
+                { label: "Funded Accounts", key: "Funded accounts", format: 'number' },
+                { label: "Registered Employers", key: "Registered employers", format: 'number' },
+                { label: "Average Account Balance", key: "Average account balance", format: 'currency-small' }
+            ];
+
+            kpiGrid.innerHTML = kpis.map(kpi => {
+                const latestValue = latestData[kpi.key];
+                const previousValue = previousData ? previousData[kpi.key] : 0;
+                const change = (previousValue && latestValue && previousValue > 0) ? ((latestValue - previousValue) / previousValue) : 0;
+                const isPositive = change >= 0;
+
+                return `
+                    <div class="bg-secondary rounded-xl p-5 shadow-lg transition-transform hover:scale-105 border border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-medium text-text-secondary">${kpi.label}</p>
+                            <span class="p-2 rounded-full ${isPositive ? 'bg-green-100' : 'bg-red-100'}">
+                                <i class="fa-solid ${isPositive ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down'} text-xl ${isPositive ? 'text-green-600' : 'text-red-600'}"></i>
+                            </span>
+                        </div>
+                        <p class="text-3xl font-bold mt-2 text-text-primary">${formatValue(latestValue, kpi.format)}</p>
+                        <p class="text-sm mt-1 ${isPositive ? 'text-green-600' : 'text-red-600'}">
+                            <span class="font-semibold">${(change * 100).toFixed(1)}%</span> vs previous month
+                        </p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+function renderDeepDiveChart() {
+            const metric = document.getElementById('deep-dive-metric').value;
+            const showTrend = document.getElementById('toggle-trend').classList.contains('active');
+            const showSeasonality = document.getElementById('toggle-seasonality').classList.contains('active');
+            
+            let marylandSeries = processedData["Maryland"];
+            if (!marylandSeries) return;
+
+            const relevantData = marylandSeries.data.filter(d => d[metric] !== null);
+            
+            const labels = relevantData.map(d => d.Date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }));
+            const dataPoints = relevantData.map(d => d[metric]);
+
+            const datasets = [{
+                label: `MD - ${metric}`,
+                data: dataPoints,
+                borderColor: STATE_COLORS["Maryland"],
+                backgroundColor: `${STATE_COLORS["Maryland"]}33`,
+                fill: true,
+                tension: 0.3,
+                pointRadius: 2,
+                pointHoverRadius: 6,
+                yAxisID: 'y',
+            }];
+
+            const chartOptions = createChartConfig(labels, [], `Maryland: ${metric}`, 'Date', metric).options;
+
+            if (showTrend) {
+                const trendData = calculateSMA(dataPoints, 6);
+                datasets.push({
+                    label: '6-Month Trend',
+                    data: trendData,
+                    borderColor: THEME.accentBlue,
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 0,
+                    yAxisID: 'y',
+                    spanGaps: true
+                });
+            }
+            
+            if (showSeasonality) {
+                const trendData = calculateSMA(dataPoints, 6);
+                const seasonalityData = dataPoints.map((val, i) => val !== null && trendData[i] !== null ? val - trendData[i] : null);
+                datasets.push({
+                    label: 'Seasonality Component',
+                    data: seasonalityData,
+                    borderColor: STATE_COLORS["Colorado"],
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    fill: false,
+                    tension: 0.3,
+                    pointRadius: 0,
+                    yAxisID: 'y1',
+                    spanGaps: true
+                });
+
+                chartOptions.scales.y1 = {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    title: { display: true, text: 'Seasonality', color: THEME.textSecondary },
+                    grid: { drawOnChartArea: false },
+                    ticks: { color: THEME.textSecondary }
+                };
+            }
+
+            const ctx = document.getElementById('deepDiveChart').getContext('2d');
+            if (deepDiveChart) deepDiveChart.destroy();
+            deepDiveChart = new Chart(ctx, {
+                type: 'line',
+                data: { labels, datasets },
+                options: chartOptions,
+            });
+        }
+
+        function renderComparisonChart() {
+            const metric = document.getElementById('comparison-metric').value;
+            const sync = document.getElementById('sync-toggle').checked;
+            const baseline = document.getElementById('baseline-toggle').checked;
+            const zoom = document.getElementById('zoom-toggle').checked;
+
+            let allLabels = new Set();
+            let datasets = [];
+
+            let minDate, maxDate, minMonth, maxMonth;
+            if (zoom && processedData["Maryland"]) {
+                const mdData = processedData["Maryland"].data;
+                minDate = mdData[0].Date;
+                maxDate = mdData[mdData.length - 1].Date;
+                minMonth = mdData[0].monthsInOperation;
+                maxMonth = mdData[mdData.length - 1].monthsInOperation;
+            }
+
+            for (const state in processedData) {
+                let stateData = processedData[state].data;
+
+                if (zoom) {
+                    if (sync){
+                        stateData = stateData.filter(d => d.monthsInOperation >= minMonth && d.monthsInOperation <= maxMonth);
+                    } else {
+                        stateData = stateData.filter(d => d.Date >= minDate && d.Date <= maxDate);
+                    }
+                    
+                }
+                
+                let dataPoints = stateData.map(d => d[metric]);
+                if (baseline) {
+                    const firstValue = dataPoints.find(d => d !== null);
+                    if (firstValue > 0) {
+                        dataPoints = dataPoints.map(d => d !== null ? (d / firstValue) * 100 : null);
+                    }
+                }
+
+                const seriesLabels = sync
+                    ? stateData.map(d => d.monthsInOperation)
+                    : stateData.map(d => d.Date.getTime());
+                
+                seriesLabels.forEach(l => allLabels.add(l));
+                
+                datasets.push({
+                    label: state,
+                    sourceData: dataPoints,
+                    sourceLabels: seriesLabels,
+                    data: [],
+                    borderColor: STATE_COLORS[state] || STATE_COLORS.Default,
+                    borderWidth: state === "Maryland" ? 3 : 1.5,
+                    fill: false,
+                    tension: 0.1,
+                    pointRadius: 1,
+                    pointHoverRadius: 5,
+                    spanGaps: true,
+                    segment: {
+                        borderColor: ctx => ctx.p0.skip || ctx.p1.skip ? `rgba(0,0,0,0.1)` : undefined,
+                        borderDash: ctx => ctx.p0.skip || ctx.p1.skip ? [6, 6] : undefined,
+                    }
+                });
+            }
+            
+            let sortedLabels = Array.from(allLabels).sort((a, b) => a - b);
+            
+            if (zoom && sync) {
+                sortedLabels = sortedLabels.filter(l => l >= minMonth && l <= maxMonth);
+            }
+
+            datasets.forEach(ds => {
+                const dataMap = new Map(ds.sourceLabels.map((l, i) => [l, ds.sourceData[i]]));
+                ds.data = sortedLabels.map(l => dataMap.get(l) ?? null);
+            });
+
+            const finalLabels = !sync 
+                ? sortedLabels.map(d => new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }))
+                : sortedLabels;
+
+            const ctx = document.getElementById('comparisonChart').getContext('2d');
+            if (comparisonChart) comparisonChart.destroy();
+            
+            let title = `${metric} Comparison`;
+            let xAxisTitle = sync ? 'Months Since Program Start' : 'Date';
+            let yAxisTitle = baseline ? 'Value (Indexed to 100)' : metric;
+
+            comparisonChart = new Chart(ctx, createChartConfig(finalLabels, datasets, title, xAxisTitle, yAxisTitle));
+        }
+
+        // --- HELPERS & UTILITIES ---
+        function populateSelectors() {
+            const deepDiveSelect = document.getElementById('deep-dive-metric');
+            const comparisonSelect = document.getElementById('comparison-metric');
+            
+            const mdData = processedData["Maryland"] ? processedData["Maryland"].data : [];
+            const validMdCols = NUMERIC_COLS.filter(col => mdData.some(d => d[col] !== null));
+
+            const mdOptionsHtml = validMdCols.map(col => `<option value="${col}">${col}</option>`).join('');
+            const comparisonOptionsHtml = NUMERIC_COLS.map(col => `<option value="${col}">${col}</option>`).join('');
+            
+            deepDiveSelect.innerHTML = mdOptionsHtml;
+            comparisonSelect.innerHTML = comparisonOptionsHtml;
+            
+            deepDiveSelect.value = "Funded accounts";
+            comparisonSelect.value = "AUM";
+        }
+
+        function setupEventListeners() {
+            const trendBtn = document.getElementById('toggle-trend');
+            const seasonalityBtn = document.getElementById('toggle-seasonality');
+
+            trendBtn.addEventListener('click', (e) => {
+                e.currentTarget.classList.toggle('active');
+                e.currentTarget.style.backgroundColor = e.currentTarget.classList.contains('active') ? THEME.accentBlue : '';
+                renderDeepDiveChart();
+            });
+            seasonalityBtn.addEventListener('click', (e) => {
+                e.currentTarget.classList.toggle('active');
+                e.currentTarget.style.backgroundColor = e.currentTarget.classList.contains('active') ? THEME.accentGold : '';
+                renderDeepDiveChart();
+            });
+
+            document.getElementById('deep-dive-metric').addEventListener('change', renderDeepDiveChart);
+            document.getElementById('comparison-metric').addEventListener('change', renderComparisonChart);
+            document.getElementById('sync-toggle').addEventListener('change', renderComparisonChart);
+            document.getElementById('baseline-toggle').addEventListener('change', renderComparisonChart);
+            document.getElementById('zoom-toggle').addEventListener('change', renderComparisonChart);
+        }
+
+        function createChartConfig(labels, datasets, title, xAxisTitle = 'Date', yAxisTitle = 'Value') {
+            const isPercent = yAxisTitle.toLowerCase().includes('percent');
+            
+            return {
+                type: 'line',
+                data: { labels, datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: THEME.textSecondary } },
+                        title: { display: true, text: title, color: THEME.textPrimary, font: { size: 18 } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        if (isPercent) {
+                                            label += context.parsed.y.toFixed(2) + '%';
+                                        } else {
+                                             label += new Intl.NumberFormat('en-US').format(context.parsed.y);
+                                        }
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: xAxisTitle, color: THEME.textSecondary },
+                            ticks: { color: THEME.textSecondary },
+                            grid: { color: THEME.gridColor }
+                        },
+                        y: {
+                            title: { display: true, text: yAxisTitle, color: THEME.textSecondary },
+                            ticks: {
+                                color: THEME.textSecondary,
+                                callback: function(value) {
+                                    if (isPercent) {
+                                        return value.toFixed(1) + '%';
+                                    }
+                                    return new Intl.NumberFormat('en-US', {
+                                        notation: "compact",
+                                        compactDisplay: "short"
+                                    }).format(value);
+                                }
+                            },
+                            grid: { color: THEME.gridColor }
+                        }
+                    },
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    spanGaps: true
+                }
+            };
+        }
+        
+        function formatValue(value, type) {
+            if (value === null || value === undefined) return 'N/A';
+            switch (type) {
+                case 'currency':
+                    return `$${(value / 1_000_000).toFixed(1)}M`;
+                case 'currency-small':
+                     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+                case 'number':
+                    return value.toLocaleString();
+                default:
+                    return value;
+            }
+        }
+
+        function calculateSMA(data, period) {
+            const sma = [];
+            for (let i = 0; i < data.length; i++) {
+                if (i < period - 1) {
+                    sma.push(null);
+                } else {
+                    const slice = data.slice(i - period + 1, i + 1);
+                    const validSlice = slice.filter(d => d !== null);
+                    if (validSlice.length > 0) {
+                        const sum = validSlice.reduce((a, b) => a + b, 0);
+                        sma.push(sum / validSlice.length);
+                    } else {
+                        sma.push(null);
+                    }
+                }
+            }
+            return sma;
+        }
+        
+        function differenceInMonths(dateLeft, dateRight) {
+            let months = (dateLeft.getFullYear() - dateRight.getFullYear()) * 12;
+            months -= dateRight.getMonth();
+            months += dateLeft.getMonth();
+            return months <= 0 ? 0 : months;
+        }
+
+    </script>
+</body>
+</html>
