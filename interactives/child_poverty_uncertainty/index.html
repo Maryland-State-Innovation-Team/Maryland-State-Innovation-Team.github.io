@@ -147,6 +147,10 @@
                     <label for="povertyCV">Child Poverty Uncertainty</label>
                 </div>
                 <div>
+                    <input type="radio" name="indicator" id="suppressed" value="suppressed">
+                    <label for="suppressed">Data suppression</label>
+                </div>
+                <div>
                     <input type="radio" name="indicator" id="geoSub" value="geo_substitution">
                     <label for="geoSub">Geographic substitution source</label>
                 </div>
@@ -289,6 +293,15 @@
                 ],
                 isCategorical: false
             },
+            suppressed: {
+                values: [true, false],
+                colors: ['#636363', '#f0f0f0'],
+                legend: [
+                    { label: 'Suppressed', color: '#636363' },
+                    { label: 'Not suppressed', color: '#f0f0f0' }
+                ],
+                isCategorical: true
+            },
             geo_substitution: {
                 values: ['tract', 'county', 'puma'],
                 colors: ['#e5f5e0', '#a1d99b', '#31a354'],
@@ -326,6 +339,16 @@
                 const idx = indicatorConfigs.time_substitution.values.indexOf(String(value));
                 return idx >= 0 ? indicatorConfigs.time_substitution.colors[idx] : defaultColor;
             }
+            if (indicator === 'suppressed') {
+                // Accepts true/false or 'true'/'false' (case-insensitive)
+                if (value === true || value === 'true' || value === 'TRUE' || value === 1 || value === '1') {
+                    return indicatorConfigs.suppressed.colors[0];
+                } else if (value === false || value === 'false' || value === 'FALSE' || value === 0 || value === '0') {
+                    return indicatorConfigs.suppressed.colors[1];
+                } else {
+                    return defaultColor;
+                }
+            }
             if (value === null || value === undefined || isNaN(parseFloat(value))) {
                 return defaultColor;
             }
@@ -355,6 +378,9 @@
                 value = props['GEO-substitution'];
             } else if (currentIndicator === 'time_substitution') {
                 value = props['TIME-substitution'];
+            } else if (currentIndicator === 'suppressed') {
+                // Try to find a suppressed property for the current method, fallback to 'suppressed'
+                value = props['suppressed'];
             } else {
                 const col = `${currentMethod}-${currentIndicator}`;
                 value = props[col];
@@ -378,6 +404,11 @@
                         popupContent = `<div class="info-popup-content"><strong>GEOID20:</strong> ${props.GEOID20 || 'N/A'}<br><strong>Tract name:</strong> ${props.tract_name || 'N/A'}<br><strong>County name:</strong> ${props.county_name || 'N/A'}<br><strong>Geographic substitution source:</strong> ${props['GEO-substitution'] || 'N/A'}</div>`;
                     } else if (currentIndicator === 'time_substitution') {
                         popupContent = `<div class="info-popup-content"><strong>GEOID20:</strong> ${props.GEOID20 || 'N/A'}<br><strong>Tract name:</strong> ${props.tract_name || 'N/A'}<br><strong>County name:</strong> ${props.county_name || 'N/A'}<br><strong>Temporal substitution source:</strong> ${props['TIME-substitution'] || 'N/A'}</div>`;
+                    } else if (currentIndicator === 'suppressed') {
+                        // Try to find a suppressed property for the current method, fallback to 'suppressed'
+                        let suppressedVal = props['suppressed'];
+                        let suppressedLabel = (suppressedVal === true || suppressedVal === 'true' || suppressedVal === 'TRUE' || suppressedVal === 1 || suppressedVal === '1') ? 'Suppressed' : (suppressedVal === false || suppressedVal === 'false' || suppressedVal === 'FALSE' || suppressedVal === 0 || suppressedVal === '0') ? 'Not suppressed' : 'N/A';
+                        popupContent = `<div class="info-popup-content"><strong>GEOID20:</strong> ${props.GEOID20 || 'N/A'}<br><strong>Tract name:</strong> ${props.tract_name || 'N/A'}<br><strong>County name:</strong> ${props.county_name || 'N/A'}<br><strong>Suppression status:</strong> ${suppressedLabel}</div>`;
                     } else {
                         const colPct = `${currentMethod}-child_pov_pct`;
                         const colCV = `${currentMethod}-child_pov_pct_cv`;
@@ -450,7 +481,7 @@
         }
 
         function updateMethodSelectorsState() {
-            const disable = (currentIndicator === 'geo_substitution' || currentIndicator === 'time_substitution');
+            const disable = (currentIndicator === 'geo_substitution' || currentIndicator === 'time_substitution' || currentIndicator === 'suppressed');
             document.querySelectorAll('input[name="method"]').forEach(el => {
                 el.disabled = disable;
             });
@@ -464,26 +495,35 @@
                         // Update tooltip if open
                         if (layer.getTooltip() && layer.isTooltipOpen()) {
                             const props = layer.feature.properties;
-                            const colPct = `${currentMethod}-child_pov_pct`;
-                            const colCV = `${currentMethod}-child_pov_pct_cv`;
-                            const colSub = `${currentMethod}-substitution`;
-                            let pct = props[colPct];
-                            let cv = props[colCV];
-                            let sub = props[colSub];
-                            function fmtPct(val) {
-                                return (val !== null && val !== undefined && !isNaN(val)) ? (val*100).toFixed(1) + '%' : 'N/A';
+                            if (currentIndicator === 'suppressed') {
+                                const colSupp = `${currentMethod}-suppressed`;
+                                let suppressedVal = props[colSupp];
+                                if (suppressedVal === undefined) suppressedVal = props['suppressed'];
+                                let suppressedLabel = (suppressedVal === true || suppressedVal === 'true' || suppressedVal === 'TRUE' || suppressedVal === 1 || suppressedVal === '1') ? 'Suppressed' : (suppressedVal === false || suppressedVal === 'false' || suppressedVal === 'FALSE' || suppressedVal === 0 || suppressedVal === '0') ? 'Not suppressed' : 'N/A';
+                                const popupContent = `<div class="info-popup-content"><strong>GEOID20:</strong> ${props.GEOID20 || 'N/A'}<br><strong>Tract name:</strong> ${props.tract_name || 'N/A'}<br><strong>County name:</strong> ${props.county_name || 'N/A'}<br><strong>Suppression status:</strong> ${suppressedLabel}</div>`;
+                                layer.setTooltipContent(popupContent);
+                            } else {
+                                const colPct = `${currentMethod}-child_pov_pct`;
+                                const colCV = `${currentMethod}-child_pov_pct_cv`;
+                                const colSub = `${currentMethod}-substitution`;
+                                let pct = props[colPct];
+                                let cv = props[colCV];
+                                let sub = props[colSub];
+                                function fmtPct(val) {
+                                    return (val !== null && val !== undefined && !isNaN(val)) ? (val*100).toFixed(1) + '%' : 'N/A';
+                                }
+                                const popupContent = `
+                                    <div class="info-popup-content">
+                                        <strong>GEOID20:</strong> ${props.GEOID20 || 'N/A'}<br>
+                                        <strong>Tract name:</strong> ${props.tract_name || 'N/A'}<br>
+                                        <strong>County name:</strong> ${props.county_name || 'N/A'}<br>
+                                        <strong>Child poverty %:</strong> ${fmtPct(pct)}<br>
+                                        <strong>Child poverty CV:</strong> ${fmtPct(cv)}<br>
+                                        ${currentMethod !== 'BASE' ? `<strong>Substitution:</strong> ${sub !== undefined && sub !== null ? sub : 'N/A'}<br>` : ''}
+                                    </div>
+                                `;
+                                layer.setTooltipContent(popupContent);
                             }
-                            const popupContent = `
-                                <div class="info-popup-content">
-                                    <strong>GEOID20:</strong> ${props.GEOID20 || 'N/A'}<br>
-                                    <strong>Tract name:</strong> ${props.tract_name || 'N/A'}<br>
-                                    <strong>County name:</strong> ${props.county_name || 'N/A'}<br>
-                                    <strong>Child poverty %:</strong> ${fmtPct(pct)}<br>
-                                    <strong>Child poverty CV:</strong> ${fmtPct(cv)}<br>
-                                    ${currentMethod !== 'BASE' ? `<strong>Substitution:</strong> ${sub !== undefined && sub !== null ? sub : 'N/A'}<br>` : ''}
-                                </div>
-                            `;
-                            layer.setTooltipContent(popupContent);
                         }
                     }
                 });
