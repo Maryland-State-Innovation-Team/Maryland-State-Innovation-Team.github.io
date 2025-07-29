@@ -24,7 +24,7 @@
             --bg-secondary: #FFFFFF; /* White */
             --text-primary: #1F2937; /* Dark Gray */
             --text-secondary: #4B5563; /* Medium Gray */
-            --accent-gold: #92400E; /* Darker Gold/Brown for contrast */
+            --accent-teal: #0E7C86; /* Teal for accent */
             --accent-blue: #3D578A;
             --border-color: #D1D5DB;
         }
@@ -48,7 +48,7 @@
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-gold);
+            background: var(--accent-teal);
         }
         
         /* Styling for the toggle switch to use the accent color */
@@ -58,7 +58,7 @@
 
         /* Style for active toggle buttons */
         #deep-dive button.active {
-            background-color: var(--accent-gold);
+            background-color: var(--accent-teal);
             box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.2);
         }
     </style>
@@ -73,7 +73,7 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
-                    <i class="fa-solid fa-chart-simple text-2xl" style="color: var(--accent-gold);"></i>
+                    <i class="fa-solid fa-chart-simple text-2xl" style="color: var(--accent-teal);"></i>
                     <h1 class="text-xl sm:text-2xl font-bold ml-3 tracking-tight text-text-primary">MarylandSaves Performance Dashboard</h1>
                 </div>
                 <nav class="hidden md:flex space-x-6">
@@ -90,7 +90,7 @@
         
         <!-- Loading Indicator -->
         <div id="loading" class="text-center py-20">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2" style="border-color: var(--accent-gold);"></div>
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2" style="border-color: var(--accent-teal);"></div>
             <p class="mt-4 text-lg text-text-secondary">Loading and processing state data...</p>
         </div>
 
@@ -100,7 +100,7 @@
             <!-- Section: At a Glance -->
             <section id="at-a-glance" class="mb-12">
                 <h2 class="text-3xl font-bold mb-2 text-text-primary">At a Glance: Maryland</h2>
-                <p class="text-text-secondary mb-6">Latest key metrics for the MarylandSaves program as of <span id="latest-date-display" class="font-semibold" style="color: var(--accent-gold);"></span>.</p>
+                <p class="text-text-secondary mb-6">Latest key metrics for the MarylandSaves program as of <span id="latest-date-display" class="font-semibold" style="color: var(--accent-teal);"></span>.</p>
                 <div id="kpi-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <!-- KPI Cards will be injected here by JavaScript -->
                 </div>
@@ -114,7 +114,7 @@
                     <div class="flex flex-wrap items-center gap-4 mb-6">
                         <div>
                             <label for="deep-dive-metric" class="block text-sm font-medium mb-1 text-text-secondary">Select Metric:</label>
-                            <select id="deep-dive-metric" class="bg-gray-50 border border-border-color text-text-primary rounded-md px-3 py-2 focus:outline-none focus:ring-2" style="--tw-ring-color: var(--accent-gold);">
+                            <select id="deep-dive-metric" class="bg-gray-50 border border-border-color text-text-primary rounded-md px-3 py-2 focus:outline-none focus:ring-2" style="--tw-ring-color: var(--accent-teal);">
                                 <!-- Options will be injected here -->
                             </select>
                         </div>
@@ -124,6 +124,12 @@
                             </button>
                             <button id="toggle-seasonality" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-md transition-all duration-300 flex items-center gap-2">
                                <i class="fa-solid fa-wave-square w-4 h-4"></i>Show Seasonality
+                            </button>
+                            <button id="download-deep-dive-png" class="bg-transparent hover:bg-teal-700 text-teal-700 font-semibold hover:text-white py-2 px-4 border border-teal-700 rounded-md flex items-center gap-2 transition-colors duration-300">
+                                <i class="fa-solid fa-file-image w-4 h-4"></i>Download PNG
+                            </button>
+                             <button id="download-deep-dive-csv" class="bg-transparent hover:bg-teal-700 text-teal-700 font-semibold hover:text-white py-2 px-4 border border-teal-700 rounded-md flex items-center gap-2 transition-colors duration-300">
+                                <i class="fa-solid fa-file-csv w-4 h-4"></i>Download CSV
                             </button>
                         </div>
                     </div>
@@ -141,7 +147,7 @@
                      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-6">
                         <div>
                             <label for="comparison-metric" class="block text-sm font-medium mb-1 text-text-secondary">Select Metric:</label>
-                            <select id="comparison-metric" class="bg-gray-50 border border-border-color text-text-primary rounded-md px-3 py-2 focus:outline-none focus:ring-2" style="--tw-ring-color: var(--accent-gold);">
+                            <select id="comparison-metric" class="bg-gray-50 border border-border-color text-text-primary rounded-md px-3 py-2 focus:outline-none focus:ring-2" style="--tw-ring-color: var(--accent-teal);">
                                 <!-- Options will be injected here -->
                             </select>
                         </div>
@@ -161,6 +167,14 @@
                                 <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-accent-blue toggle-label peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
                                 <span class="ml-3 text-sm font-medium text-text-secondary">Zoom to Maryland's Timeline</span>
                             </label>
+                            <div class="flex items-center gap-x-4 ml-auto">
+                                <button id="download-comparison-png" class="bg-transparent hover:bg-teal-700 text-teal-700 font-semibold hover:text-white py-2 px-4 border border-teal-700 rounded-md flex items-center gap-2 transition-colors duration-300">
+                                    <i class="fa-solid fa-file-image w-4 h-4"></i>Download PNG
+                                </button>
+                                 <button id="download-comparison-csv" class="bg-transparent hover:bg-teal-700 text-teal-700 font-semibold hover:text-white py-2 px-4 border border-teal-700 rounded-md flex items-center gap-2 transition-colors duration-300">
+                                    <i class="fa-solid fa-file-csv w-4 h-4"></i>Download CSV
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="relative h-96">
@@ -176,7 +190,7 @@
         // --- CONFIGURATION ---
         const CSV_URL = 'state_sponsored_retirement_plan_data_wide.csv';
         const STATE_COLORS = {
-            "Maryland": "#92400E", // Dark Gold
+            "Maryland": "#0E7C86", // Teal
             "California": "#2563EB",
             "Colorado": "#059669",
             "Connecticut": "#7C3AED",
@@ -211,7 +225,7 @@
             textSecondary: '#6B7280',
             gridColor: '#E5E7EB',
             accentBlue: '#3D578A',
-            accentGold: '#92400E'
+            accentTeal: '#0E7C86'
         };
 
         // --- GLOBAL STATE ---
@@ -574,6 +588,51 @@
             comparisonSelect.value = "AUM";
         }
 
+        function downloadChartAsPNG(chart, filename) {
+            const link = document.createElement('a');
+            link.href = chart.toBase64Image('image/png', 1);
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function downloadChartAsCSV(chart, filename) {
+            const { labels, datasets } = chart.data;
+            const xAxisTitle = chart.options.scales.x.title.text;
+            
+            const visibleDatasets = datasets.filter(ds => !ds.hidden);
+
+            // Create header row
+            const header = [xAxisTitle, ...visibleDatasets.map(ds => ds.label)];
+            
+            // Create data rows
+            const rows = labels.map((label, i) => {
+                const rowData = visibleDatasets.map(ds => {
+                    const value = ds.data[i];
+                    // Handle null or undefined values gracefully
+                    return (value === null || value === undefined) ? '' : value;
+                });
+                return [label, ...rowData];
+            });
+
+            // Combine header and rows into a CSV string
+            const csvContent = [header, ...rows]
+                .map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+                .join('\n');
+            
+            // Create Blob and trigger download
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
         function setupEventListeners() {
             const trendBtn = document.getElementById('toggle-trend');
             const seasonalityBtn = document.getElementById('toggle-seasonality');
@@ -585,7 +644,7 @@
             });
             seasonalityBtn.addEventListener('click', (e) => {
                 e.currentTarget.classList.toggle('active');
-                e.currentTarget.style.backgroundColor = e.currentTarget.classList.contains('active') ? THEME.accentGold : '';
+                e.currentTarget.style.backgroundColor = e.currentTarget.classList.contains('active') ? THEME.accentTeal : '';
                 renderDeepDiveChart();
             });
 
@@ -594,6 +653,19 @@
             document.getElementById('sync-toggle').addEventListener('change', renderComparisonChart);
             document.getElementById('baseline-toggle').addEventListener('change', renderComparisonChart);
             document.getElementById('zoom-toggle').addEventListener('change', renderComparisonChart);
+
+            document.getElementById('download-deep-dive-png').addEventListener('click', () => {
+                downloadChartAsPNG(deepDiveChart, 'maryland-deep-dive.png');
+            });
+            document.getElementById('download-deep-dive-csv').addEventListener('click', () => {
+                downloadChartAsCSV(deepDiveChart, 'maryland-deep-dive-data.csv');
+            });
+            document.getElementById('download-comparison-png').addEventListener('click', () => {
+                downloadChartAsPNG(comparisonChart, 'state-comparison.png');
+            });
+            document.getElementById('download-comparison-csv').addEventListener('click', () => {
+                downloadChartAsCSV(comparisonChart, 'state-comparison-data.csv');
+            });
         }
 
         function createChartConfig(labels, datasets, title, xAxisTitle = 'Date', yAxisTitle = 'Value') {
