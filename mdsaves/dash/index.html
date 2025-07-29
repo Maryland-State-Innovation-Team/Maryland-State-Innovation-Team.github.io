@@ -217,6 +217,9 @@
         // --- GLOBAL STATE ---
         let processedData = {};
         let deepDiveChart, comparisonChart;
+        let comparisonSeriesVisibility = {};
+        let xAxisDateMin = null, xAxisDateMax = null;
+        let xAxisMonthMin = null, xAxisMonthMax = null;
 
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', init);
@@ -337,7 +340,7 @@
             }).join('');
         }
 
-function renderDeepDiveChart() {
+        function renderDeepDiveChart() {
             const metric = document.getElementById('deep-dive-metric').value;
             const showTrend = document.getElementById('toggle-trend').classList.contains('active');
             const showSeasonality = document.getElementById('toggle-seasonality').classList.contains('active');
@@ -374,8 +377,7 @@ function renderDeepDiveChart() {
                     fill: false,
                     tension: 0.3,
                     pointRadius: 0,
-                    yAxisID: 'y',
-                    spanGaps: true
+                    yAxisID: 'y'
                 });
             }
             
@@ -391,8 +393,7 @@ function renderDeepDiveChart() {
                     fill: false,
                     tension: 0.3,
                     pointRadius: 0,
-                    yAxisID: 'y1',
-                    spanGaps: true
+                    yAxisID: 'y1'
                 });
 
                 chartOptions.scales.y1 = {
@@ -420,6 +421,25 @@ function renderDeepDiveChart() {
             const baseline = document.getElementById('baseline-toggle').checked;
             const zoom = document.getElementById('zoom-toggle').checked;
 
+            const states = Object.keys(processedData);
+            if (Object.keys(comparisonSeriesVisibility).length === 0 && states.length > 0) {
+                states.forEach(state => {
+                    comparisonSeriesVisibility[state] = true;
+                });
+            }
+
+            if (zoom) {
+                // When zoom is ON, it overrides any custom legend zoom.
+                xAxisDateMin = xAxisDateMax = xAxisMonthMin = xAxisMonthMax = null;
+            } else {
+                // When zoom is turned OFF, recalculate the bounds from the visible series.
+                const bounds = calculateBoundsFromVisibleSeries();
+                if (bounds) {
+                    xAxisDateMin = bounds.dateMin; xAxisDateMax = bounds.dateMax;
+                    xAxisMonthMin = bounds.monthMin; xAxisMonthMax = bounds.monthMax;
+                }
+            }
+
             let allLabels = new Set();
             let datasets = [];
 
@@ -434,16 +454,13 @@ function renderDeepDiveChart() {
 
             for (const state in processedData) {
                 let stateData = processedData[state].data;
-
                 if (zoom) {
                     if (sync){
                         stateData = stateData.filter(d => d.monthsInOperation >= minMonth && d.monthsInOperation <= maxMonth);
                     } else {
                         stateData = stateData.filter(d => d.Date >= minDate && d.Date <= maxDate);
                     }
-                    
                 }
-                
                 let dataPoints = stateData.map(d => d[metric]);
                 if (baseline) {
                     const firstValue = dataPoints.find(d => d !== null);
@@ -451,25 +468,12 @@ function renderDeepDiveChart() {
                         dataPoints = dataPoints.map(d => d !== null ? (d / firstValue) * 100 : null);
                     }
                 }
-
-                const seriesLabels = sync
-                    ? stateData.map(d => d.monthsInOperation)
-                    : stateData.map(d => d.Date.getTime());
-                
+                const seriesLabels = sync ? stateData.map(d => d.monthsInOperation) : stateData.map(d => d.Date.getTime());
                 seriesLabels.forEach(l => allLabels.add(l));
-                
                 datasets.push({
-                    label: state,
-                    sourceData: dataPoints,
-                    sourceLabels: seriesLabels,
-                    data: [],
-                    borderColor: STATE_COLORS[state] || STATE_COLORS.Default,
-                    borderWidth: state === "Maryland" ? 3 : 1.5,
-                    fill: false,
-                    tension: 0.1,
-                    pointRadius: 1,
-                    pointHoverRadius: 5,
-                    spanGaps: true,
+                    label: state, sourceData: dataPoints, sourceLabels: seriesLabels, data: [], hidden: !comparisonSeriesVisibility[state],
+                    borderColor: STATE_COLORS[state] || STATE_COLORS.Default, borderWidth: state === "Maryland" ? 3 : 1.5,
+                    fill: false, tension: 0.1, pointRadius: 1, pointHoverRadius: 5,
                     segment: {
                         borderColor: ctx => ctx.p0.skip || ctx.p1.skip ? `rgba(0,0,0,0.1)` : undefined,
                         borderDash: ctx => ctx.p0.skip || ctx.p1.skip ? [6, 6] : undefined,
@@ -478,31 +482,81 @@ function renderDeepDiveChart() {
             }
             
             let sortedLabels = Array.from(allLabels).sort((a, b) => a - b);
-            
             if (zoom && sync) {
                 sortedLabels = sortedLabels.filter(l => l >= minMonth && l <= maxMonth);
             }
-
             datasets.forEach(ds => {
                 const dataMap = new Map(ds.sourceLabels.map((l, i) => [l, ds.sourceData[i]]));
                 ds.data = sortedLabels.map(l => dataMap.get(l) ?? null);
             });
-
-            const finalLabels = !sync 
-                ? sortedLabels.map(d => new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }))
-                : sortedLabels;
-
-            const ctx = document.getElementById('comparisonChart').getContext('2d');
+            const finalLabels = !sync ? sortedLabels.map(d => new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })) : sortedLabels;
             if (comparisonChart) comparisonChart.destroy();
+            let title = `${metric} Comparison`, xAxisTitle = sync ? 'Months Since Program Start' : 'Date', yAxisTitle = baseline ? 'Value (Indexed to 100)' : metric;
+            const config = createChartConfig(finalLabels, datasets, title, xAxisTitle, yAxisTitle);
             
-            let title = `${metric} Comparison`;
-            let xAxisTitle = sync ? 'Months Since Program Start' : 'Date';
-            let yAxisTitle = baseline ? 'Value (Indexed to 100)' : metric;
+            const activeMin = sync ? xAxisMonthMin : xAxisDateMin;
+            const activeMax = sync ? xAxisMonthMax : xAxisDateMax;
+            if (activeMin !== null && activeMax !== null && sortedLabels.length > 0) {
+                const newChartMin = sortedLabels[0], newChartMax = sortedLabels[sortedLabels.length - 1];
+                if (activeMin >= newChartMin && activeMax <= newChartMax) {
+                    config.options.scales.x.min = sync ? activeMin : new Date(activeMin).toLocaleDateString('en-US', { month: 'short', 'year': 'numeric' });
+                    config.options.scales.x.max = sync ? activeMax : new Date(activeMax).toLocaleDateString('en-US', { month: 'short', 'year': 'numeric' });
+                }
+            }
+            
+            config.options.plugins.legend.onClick = (e, legendItem, legend) => {
+                const chart = legend.chart;
+                Chart.defaults.plugins.legend.onClick(e, legendItem, legend);
+                comparisonSeriesVisibility[legendItem.text] = chart.isDatasetVisible(legendItem.datasetIndex);
+                
+                const bounds = calculateBoundsFromVisibleSeries();
 
-            comparisonChart = new Chart(ctx, createChartConfig(finalLabels, datasets, title, xAxisTitle, yAxisTitle));
+                if (bounds) {
+                    xAxisDateMin = bounds.dateMin; xAxisDateMax = bounds.dateMax;
+                    xAxisMonthMin = bounds.monthMin; xAxisMonthMax = bounds.monthMax;
+                    
+                    const currentMin = sync ? xAxisMonthMin : xAxisDateMin;
+                    const currentMax = sync ? xAxisMonthMax : xAxisDateMax;
+                    chart.options.scales.x.min = sync ? currentMin : new Date(currentMin).toLocaleDateString('en-US', { month: 'short', 'year': 'numeric' });
+                    chart.options.scales.x.max = sync ? currentMax : new Date(currentMax).toLocaleDateString('en-US', { month: 'short', 'year': 'numeric' });
+                } else {
+                    xAxisDateMin = xAxisDateMax = xAxisMonthMin = xAxisMonthMax = null;
+                    delete chart.options.scales.x.min; delete chart.options.scales.x.max;
+                }
+                chart.update();
+            };
+
+            comparisonChart = new Chart(document.getElementById('comparisonChart').getContext('2d'), config);
         }
 
         // --- HELPERS & UTILITIES ---
+        function calculateBoundsFromVisibleSeries() {
+            let isDataVisible = false;
+            let newMinDate = Infinity, newMaxDate = -Infinity;
+            let newMinMonth = Infinity, newMaxMonth = -Infinity;
+
+            // Loop through all states to see which ones are visible
+            for (const state in processedData) {
+                if (comparisonSeriesVisibility[state]) {
+                    isDataVisible = true;
+                    // Find the min/max for both date and month for the visible state
+                    processedData[state].data.forEach(d => {
+                        newMinDate = Math.min(newMinDate, d.Date.getTime());
+                        newMaxDate = Math.max(newMaxDate, d.Date.getTime());
+                        newMinMonth = Math.min(newMinMonth, d.monthsInOperation);
+                        newMaxMonth = Math.max(newMaxMonth, d.monthsInOperation);
+                    });
+                }
+            }
+
+            if (isDataVisible) {
+                return {
+                    dateMin: newMinDate, dateMax: newMaxDate,
+                    monthMin: newMinMonth, monthMax: newMaxMonth
+                };
+            }
+            return null; // Return null if no series are visible
+        }
         function populateSelectors() {
             const deepDiveSelect = document.getElementById('deep-dive-metric');
             const comparisonSelect = document.getElementById('comparison-metric');
@@ -552,7 +606,11 @@ function renderDeepDiveChart() {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { labels: { color: THEME.textSecondary } },
+                        legend: { 
+                            labels: { color: THEME.textSecondary },
+                            onHover: (event) => { event.native.target.style.cursor = 'pointer'; },
+                            onLeave: (event) => { event.native.target.style.cursor = 'default'; }
+                        },
                         title: { display: true, text: title, color: THEME.textPrimary, font: { size: 18 } },
                         tooltip: {
                             callbacks: {
@@ -570,6 +628,9 @@ function renderDeepDiveChart() {
                                     }
                                     return label;
                                 }
+                            },
+                            itemSort: function(a, b) {
+                                return b.raw - a.raw; // Sorts in descending order by raw value
                             }
                         }
                     },
