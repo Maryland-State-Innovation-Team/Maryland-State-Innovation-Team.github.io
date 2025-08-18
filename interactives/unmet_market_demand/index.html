@@ -485,7 +485,7 @@
         <div id="narrative-box">
             <div class="main-title">Unmet Demand Dashboard</div>
             <div class="text-gray-700">
-                This dashboard is designed to provide a high-level preview of unmet market demand for fresh food and quality childcare across Maryland. Comprised of AI-extracted data from almost 18,000 pages of development plans, 10,000 business locations, and 50 State incentives, it allows users to explore the interplay of community demand, essential service supply, and the incentives designed to bridge the gap between the two. By selecting an area plan, users can access the area's strategic vision, key demographic indicators, specific scores for childcare and fresh food access (contextualized with relevant quotes from the plan), and location-specific advice on State incentives for entrepreneurs.
+                This dashboard is designed to provide a high-level preview of unmet market demand for fresh food and quality childcare across Maryland. Comprised of AI-extracted data from almost 18,000 pages of development plans, 10,000 business locations, and over 200 State and local incentives, it allows users to explore the interplay of community demand, essential service supply, and the incentives designed to bridge the gap between the two. By selecting an area plan, users can access the area's strategic vision, key demographic indicators, specific scores for childcare and fresh food access (contextualized with relevant quotes from the plan), and location-specific advice on State and local incentives for entrepreneurs.
             </div>
         </div>
         <div id="county-dropdown-card">
@@ -1041,7 +1041,7 @@ function renderStateIncentivesSection(plan) {
     if (adviceHtml.trim() !== '') {
         container.innerHTML = `
             <hr class="my-6 border-gray-200">
-            <div class="section-title">State Incentives</div>
+            <div class="section-title">Incentives</div>
             <div class="text-sm text-gray-600 mb-3">${intro || '<span class="italic text-gray-400">(Incentive data coming soon)</span>'}</div>
             <div class="border border-gray-200 rounded-md p-3">
             ${adviceHtml}
@@ -1105,7 +1105,9 @@ function getPlanYearWarning(planYear) {
     const now = new Date().getFullYear();
     return now - year > 5 ? `<span class="warning-icon not-italic">&#9888;<span class="warning-tooltip">Plan is more than 5 years old.</span></span>` : '';
 }
-function isCounty(feature) { return Array.isArray(feature.properties.sub_area_plans) && feature.properties.sub_area_plans.length > 0; }
+function isCounty(feature) {
+    return !feature.properties.parent_plan_id;
+}
 function isSubArea(feature) { return !isCounty(feature); }
 function safe(val, fallback='-') { return (val === undefined || val === null || val === '') ? fallback : val; }
 
@@ -1116,12 +1118,6 @@ Promise.all([
 ]).then(([planAreas, childcare, grocery]) => {
     planAreasGeojson = planAreas;
     const featuresById = Object.fromEntries(planAreas.features.map(f => [f.properties.OBJECTID, f]));
-    planAreas.features.forEach(parent => {
-        parent.properties.sub_area_plans?.forEach(sub => {
-            const subFeature = featuresById[sub.OBJECTID];
-            if (subFeature) subFeature.properties.parent_plan_id = parent.properties.OBJECTID;
-        });
-    });
     childcarePoints = childcare.features;
     groceryPoints = grocery.features;
     loadPolygonsAndPoints();
