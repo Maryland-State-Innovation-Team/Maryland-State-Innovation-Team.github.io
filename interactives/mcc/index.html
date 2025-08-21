@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maryland Community Compass - Pre-registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to extend Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+        }
+        /* Define brand colors for Tailwind */
+        .bg-navy-1 { background-color: #050a47; }
+        .text-navy-1 { color: #050a47; }
+        .bg-navy-2 { background-color: #050d5e; }
+        .text-navy-2 { color: #050d5e; }
+        .text-light-blue { color: #3D578A; }
+        .hover\:text-light-blue-dark:hover { color: #2c426b; }
+        .bg-gold { background-color: #A89473; }
+        .hover\:bg-gold-dark:hover { background-color: #8e7c5f; }
+        .border-gold { border-color: #A89473; }
+        
+        /* Simple transition for section visibility */
+        .section {
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        .section.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            position: absolute;
+        }
+        .modal-overlay {
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-navy-1 text-white shadow-md">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo Placeholder -->
+            <div class="w-1/4">
+                <img src="innovation-website-logo-light.png"/>
+            </div>
+            <!-- Site Title -->
+            <div class="w-1/2 text-center">
+                <h1 class="text-xl md:text-3xl font-bold tracking-wider">Maryland Community Compass</h1>
+            </div>
+            <!-- Auth Link -->
+            <div class="w-1/4 text-right">
+                <a href="#" id="authLink" class="text-white hover:text-gold transition duration-300 font-semibold">Sign Up / Sign In</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-24 relative">
+        <!-- Landing Page Section -->
+        <section id="landingPage" class="section text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-navy-2 leading-tight mb-8">
+                    A Business Development Resource to Help Maryland Communities Thrive.
+                </h2>
+                <p class="text-lg md:text-xl text-gray-600 mb-12">
+                    The Maryland Innovation Team is hard at work building the Maryland Community Compass, a tool designed to connect business owners and entrepreneurs with the information and support they need to help communities thrive. To stay up to date on our progress, pre-register for an account below.
+                </p>
+                <button id="preRegisterBtn" class="bg-gold text-white font-bold py-4 px-10 rounded-lg text-xl shadow-lg hover:bg-gold-dark transform hover:-translate-y-1 transition-all duration-300">
+                    Pre-register Now
+                </button>
+            </div>
+        </section>
+
+        <!-- Success Page Section -->
+        <section id="successPage" class="section hidden">
+            <div class="max-w-2xl mx-auto bg-white p-8 md:p-12 rounded-xl shadow-2xl">
+                <div id="successFormContainer">
+                    <h2 class="text-2xl md:text-3xl font-bold text-navy-2 mb-4">Welcome! Just one more step.</h2>
+                    <p class="text-gray-600 mb-8">Your input will help us build a better tool for everyone. Please tell us a little more about yourself.</p>
+                    <form id="detailsForm">
+                        <div class="mb-6">
+                            <label for="userType" class="block text-gray-700 text-sm font-bold mb-2">How would you best describe yourself?</label>
+                            <select id="userType" name="userType" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gold">
+                                <option>Business owner</option>
+                                <option>Entrepreneur</option>
+                                <option>Investor</option>
+                                <option>Small Business Support Organization</option>
+                                <option>State/local government employee</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-8">
+                            <label for="userNeeds" class="block text-gray-700 text-sm font-bold mb-2">What do you need to help create and sustain thriving businesses in Maryland?</label>
+                            <textarea id="userNeeds" name="userNeeds" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gold" placeholder="Share your thoughts, challenges, or ideas..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gold text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-gold-dark transition duration-300">
+                            Submit
+                        </button>
+                    </form>
+                </div>
+                <div id="thankYouMessage" class="hidden text-center">
+                     <svg class="mx-auto h-16 w-16 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h2 class="text-2xl md:text-3xl font-bold text-navy-2 mt-4 mb-2">Thank You!</h2>
+                    <p class="text-gray-600">Thank you for helping us shape the Maryland Community Compass! Keep an eye on your inbox for updates.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Sign-in/Sign-up Modal -->
+    <div id="authModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-md p-8 rounded-xl shadow-2xl relative">
+            <!-- Close Button -->
+            <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <h2 class="text-2xl font-bold text-center text-navy-2 mb-6">Create Your Account</h2>
+            
+            <!-- Google SSO Button -->
+            <button id="googleSignInBtn" class="w-full flex items-center justify-center bg-white border border-gray-300 text-gray-700 font-semibold py-3 px-4 rounded-lg shadow-sm hover:bg-gray-50 transition duration-300 mb-6">
+                <svg class="w-5 h-5 mr-3" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C12.955 4 4 12.955 4 24s8.955 20 20 20s20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"></path><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C16.318 4 9.656 8.337 6.306 14.691z"></path><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"></path><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571l6.19 5.238C42.012 36.49 44 30.861 44 24c0-1.341-.138-2.65-.389-3.917z"></path></svg>
+                Sign up with Google
+            </button>
+
+            <div class="flex items-center my-4">
+                <hr class="flex-grow border-t border-gray-300">
+                <span class="mx-4 text-gray-500 text-sm">OR</span>
+                <hr class="flex-grow border-t border-gray-300">
+            </div>
+
+            <!-- Email/Password Form -->
+            <form id="emailForm">
+                <div class="mb-4">
+                    <label for="email" class="sr-only">Email</label>
+                    <input type="email" id="email" placeholder="Email Address" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gold" required>
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="sr-only">Password</label>
+                    <input type="password" id="password" placeholder="Password" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gold" required>
+                </div>
+                <button type="submit" class="w-full bg-navy-2 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-navy-1 transition duration-300">
+                    Sign Up with Email
+                </button>
+            </form>
+            <div id="emailVerificationMsg" class="hidden mt-4 p-3 bg-blue-100 border border-blue-300 text-blue-800 text-sm rounded-lg text-center">
+                Please check your inbox to verify your email address. Redirecting...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- DOM Element Selectors ---
+        const landingPage = document.getElementById('landingPage');
+        const successPage = document.getElementById('successPage');
+        const authModal = document.getElementById('authModal');
+        
+        const preRegisterBtn = document.getElementById('preRegisterBtn');
+        const authLink = document.getElementById('authLink');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        
+        const googleSignInBtn = document.getElementById('googleSignInBtn');
+        const emailForm = document.getElementById('emailForm');
+        const emailVerificationMsg = document.getElementById('emailVerificationMsg');
+        
+        const detailsForm = document.getElementById('detailsForm');
+        const successFormContainer = document.getElementById('successFormContainer');
+        const thankYouMessage = document.getElementById('thankYouMessage');
+
+        // --- Functions to control visibility ---
+        const showModal = () => {
+            authModal.classList.remove('hidden');
+        };
+
+        const hideModal = () => {
+            authModal.classList.add('hidden');
+        };
+
+        const showSuccessPage = () => {
+            // Hide the landing page and show the success page
+            landingPage.classList.add('hidden');
+            successPage.classList.remove('hidden');
+        };
+
+        // --- Event Listeners ---
+
+        // Open modal from landing page button or header link
+        preRegisterBtn.addEventListener('click', showModal);
+        authLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showModal();
+        });
+
+        // Close modal
+        closeModalBtn.addEventListener('click', hideModal);
+        authModal.addEventListener('click', (e) => {
+            // Close if clicking on the overlay, not the content
+            if (e.target === authModal) {
+                hideModal();
+            }
+        });
+
+        // --- Form Submission Logic (Mockup) ---
+
+        // 1. Google Single-Sign-On
+        googleSignInBtn.addEventListener('click', () => {
+            // In a real app, this would trigger the Google Auth flow.
+            // For this mockup, we simulate immediate success.
+            hideModal();
+            setTimeout(showSuccessPage, 300); // Small delay for smooth transition
+        });
+
+        // 2. Email and Password Sign-Up
+        emailForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // In a real app, you'd send data to your backend here.
+            
+            // Show verification message
+            emailForm.classList.add('hidden');
+            emailVerificationMsg.classList.remove('hidden');
+
+            // Simulate redirect after a short delay
+            setTimeout(() => {
+                hideModal();
+                showSuccessPage();
+                // Reset form for next time
+                emailVerificationMsg.classList.add('hidden');
+                emailForm.classList.remove('hidden');
+                emailForm.reset();
+            }, 2500); // 2.5 second delay
+        });
+
+        // 3. Success Page Details Form
+        detailsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // In a real app, you'd save this additional user data.
+            const userType = document.getElementById('userType').value;
+            const userNeeds = document.getElementById('userNeeds').value;
+            console.log('User Details Submitted:', { userType, userNeeds });
+
+            // Hide the form and show the thank you message
+            successFormContainer.classList.add('hidden');
+            thankYouMessage.classList.remove('hidden');
+        });
+
+    </script>
+</body>
+</html>
