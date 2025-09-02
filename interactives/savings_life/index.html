@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Game of Financial Life</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            touch-action: manipulation;
+        }
+        .card {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .btn-primary {
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
+        .progress-bar-fill {
+            transition: width 0.5s ease-in-out;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 flex items-center justify-center min-h-screen p-4">
+    <div id="gameContainer" class="w-full max-w-4xl mx-auto">
+
+        <!-- Initial Setup Screen -->
+        <div id="setupScreen" class="text-center p-8 bg-white rounded-2xl shadow-lg">
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-800 mb-4">Welcome to The Game of Financial Life!</h1>
+            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Navigate the ups and downs of life from age 18 to 65. Make a crucial choice now: will you enroll in a WorkLife Savings Plan (like MarylandSaves) to automatically build an emergency and retirement fund?</p>
+            <div class="flex flex-col md:flex-row gap-6 justify-center">
+                <button onclick="startGame(true)" class="btn-primary bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-lg text-lg">Yes, Enroll Me!</button>
+                <button onclick="startGame(false)" class="btn-primary bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-8 rounded-lg text-lg">No, I'll Go It Alone</button>
+            </div>
+            <div class="mt-8 text-left max-w-2xl mx-auto p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <h3 class="font-bold text-blue-700 mb-2">How the WorkLife Savings Plan Works:</h3>
+                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                    <li><b>5% of your income</b> is automatically saved.</li>
+                    <li>The first <b>$1,000</b> goes into a penalty-free Emergency Fund.</li>
+                    <li>The rest is invested for retirement in a Roth IRA.</li>
+                    <li>You can withdraw your own contributions (not earnings) anytime, tax and penalty-free!</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Game Screen -->
+        <div id="gameScreen" class="hidden">
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-bold text-blue-800">The Game of Financial Life</h2>
+                <p id="planStatus" class="text-lg font-medium"></p>
+            </div>
+
+            <!-- Dashboard -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white p-4 rounded-xl shadow-md text-center">
+                    <div class="text-sm font-medium text-gray-500">Age</div>
+                    <div id="age" class="text-2xl font-bold text-blue-700">18</div>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-md text-center">
+                    <div class="text-sm font-medium text-gray-500">Net Worth</div>
+                    <div id="netWorth" class="text-2xl font-bold text-green-700">$0</div>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-md text-center">
+                    <div class="text-sm font-medium text-gray-500">Savings</div>
+                    <div id="savings" class="text-2xl font-bold text-indigo-700">$0</div>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-md text-center">
+                    <div class="text-sm font-medium text-gray-500">Debt</div>
+                    <div id="debt" class="text-2xl font-bold text-red-700">$0</div>
+                </div>
+            </div>
+
+            <!-- Savings Details (Only for Plan users) -->
+            <div id="savingsDetails" class="hidden grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                 <div class="bg-white p-4 rounded-xl shadow-md text-center">
+                    <div class="text-sm font-medium text-gray-500">Emergency Fund</div>
+                    <div id="emergencyFund" class="text-xl font-bold text-cyan-700">$0</div>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-md text-center">
+                    <div class="text-sm font-medium text-gray-500">Retirement Fund</div>
+                    <div id="retirementFund" class="text-xl font-bold text-purple-700">$0</div>
+                </div>
+            </div>
+            
+            <!-- Timeline -->
+            <div class="bg-white p-4 rounded-xl shadow-md mb-6">
+                <div class="flex justify-between text-sm font-medium mb-1">
+                    <span>Start (Age 18)</span>
+                    <span>Retirement (Age 65)</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div id="progressBar" class="bg-blue-600 h-4 rounded-full progress-bar-fill" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Event Card -->
+            <div id="eventCard" class="card bg-white p-6 rounded-2xl min-h-[200px] flex flex-col items-center justify-center text-center fade-in">
+                <!-- Event content will be injected here -->
+            </div>
+
+            <!-- Action Button -->
+            <div class="text-center mt-6">
+                <button id="nextYearBtn" onclick="nextYear()" class="btn-primary bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-10 rounded-lg text-lg">Next Year</button>
+            </div>
+        </div>
+
+        <!-- End Game Screen -->
+        <div id="endScreen" class="hidden text-center p-8 bg-white rounded-2xl shadow-lg">
+            <h1 id="endTitle" class="text-3xl md:text-4xl font-bold mb-4">You've Reached Retirement!</h1>
+            <p id="endMessage" class="text-gray-600 mb-6 max-w-2xl mx-auto"></p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                    <div class="text-sm font-medium text-green-800">Final Net Worth</div>
+                    <div id="endNetWorth" class="text-3xl font-bold text-green-700">$0</div>
+                </div>
+                <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-200">
+                    <div class="text-sm font-medium text-indigo-800">Total Savings</div>
+                    <div id="endSavings" class="text-3xl font-bold text-indigo-700">$0</div>
+                </div>
+                <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                    <div class="text-sm font-medium text-red-800">Final Debt</div>
+                    <div id="endDebt" class="text-3xl font-bold text-red-700">$0</div>
+                </div>
+            </div>
+            <button onclick="resetGame()" class="btn-primary bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg">Play Again</button>
+        </div>
+    </div>
+
+<script>
+    // --- GAME STATE ---
+    let gameState = {};
+
+    // --- GAME DATA ---
+    const lifeEvents = [
+        // Positive Events
+        { type: 'positive', title: 'Side Hustle Success!', text: 'Your weekend project took off. You earned an extra $1,500.', impact: 1500, impactType: 'cash' },
+        { type: 'positive', title: 'Promotion!', text: 'Great work! Your annual salary increases by $5,000.', impact: 5000, impactType: 'salary' },
+        { type: 'positive', title: 'Small Inheritance', text: 'You received a gift of $2,000 from a relative.', impact: 2000, impactType: 'cash' },
+        { type: 'positive', title: 'Bull Market', text: 'Your retirement investments had a great year, growing by an extra 5%!', impact: 0.05, impactType: 'growth' },
+        { type: 'positive', title: 'Tax Refund', text: 'You got an unexpected tax refund of $750.', impact: 750, impactType: 'cash' },
+
+        // Negative Events
+        { type: 'negative', title: 'Car Trouble', text: 'Your car needs an urgent repair costing $800.', impact: 800, impactType: 'expense' },
+        { type: 'negative', title: 'Medical Bill', text: 'An unexpected doctor\'s visit leaves you with a $500 bill.', impact: 500, impactType: 'expense' },
+        { type: 'negative', title: 'Leaky Roof', text: 'A storm damages your roof. Repairs cost $2,500.', impact: 2500, impactType: 'expense' },
+        { type: 'negative', title: 'Job Loss', text: 'You were laid off. You have no income for 3 months.', impact: 0.25, impactType: 'income_loss' },
+        { type: 'negative', title: 'Bear Market', text: 'Your retirement investments lost 10% of their value this year.', impact: -0.10, impactType: 'growth' },
+
+        // Neutral Events
+        { type: 'neutral', title: 'A Quiet Year', text: 'Nothing major happened this year. You continue saving and working.', impact: 0, impactType: 'none' },
+        { type: 'neutral', title: 'Cost of Living Rise', text: 'Inflation is up. Your annual expenses increase by $1,000.', impact: 1000, impactType: 'expense_increase' },
+        { type: 'neutral', title: 'Moved to a new city', text: 'You moved for a new opportunity. Moving costs were $1,200 but your salary is the same.', impact: 1200, impactType: 'expense'},
+        { type: 'neutral', title: 'A Friend in Need', text: 'You helped a friend with a loan of $300. You might get it back someday.', impact: 300, impactType: 'expense'},
+    ];
+
+    // --- DOM ELEMENTS ---
+    const setupScreen = document.getElementById('setupScreen');
+    const gameScreen = document.getElementById('gameScreen');
+    const endScreen = document.getElementById('endScreen');
+    const eventCard = document.getElementById('eventCard');
+
+    function formatCurrency(num) {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(num);
+    }
+
+    function updateDashboard() {
+        document.getElementById('age').textContent = gameState.age;
+        document.getElementById('netWorth').textContent = formatCurrency(gameState.cash + gameState.savings.retirement - gameState.debt);
+        document.getElementById('savings').textContent = formatCurrency(gameState.savings.emergency + gameState.savings.retirement);
+        document.getElementById('debt').textContent = formatCurrency(gameState.debt);
+        
+        if (gameState.hasPlan) {
+            document.getElementById('emergencyFund').textContent = formatCurrency(gameState.savings.emergency);
+            document.getElementById('retirementFund').textContent = formatCurrency(gameState.savings.retirement);
+        }
+
+        const progress = ((gameState.age - 18) / (65 - 18)) * 100;
+        document.getElementById('progressBar').style.width = `${progress}%`;
+    }
+
+    function resetGame() {
+        gameState = {
+            age: 18,
+            hasPlan: false,
+            salary: 40000,
+            cash: 1000,
+            debt: 0,
+            savings: {
+                emergency: 0,
+                retirement: 0,
+                totalContributions: 0,
+            },
+            contributionRate: 0.05,
+        };
+        setupScreen.style.display = 'block';
+        gameScreen.style.display = 'none';
+        endScreen.style.display = 'none';
+    }
+
+    function startGame(withPlan) {
+        resetGame();
+        gameState.hasPlan = withPlan;
+
+        setupScreen.style.display = 'none';
+        gameScreen.style.display = 'block';
+
+        const planStatus = document.getElementById('planStatus');
+        if (withPlan) {
+            planStatus.textContent = 'WorkLife Savings Plan: ACTIVE';
+            planStatus.className = 'text-lg font-medium text-green-600';
+            document.getElementById('savingsDetails').style.display = 'grid';
+        } else {
+            planStatus.textContent = 'WorkLife Savings Plan: INACTIVE';
+            planStatus.className = 'text-lg font-medium text-red-600';
+            document.getElementById('savingsDetails').style.display = 'none';
+        }
+        
+        showInitialEvent();
+        updateDashboard();
+    }
+    
+    function showInitialEvent() {
+        eventCard.innerHTML = `
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Year 1: The Journey Begins!</h3>
+            <p class="text-gray-600">You're 18, earning ${formatCurrency(gameState.salary)} per year. You have ${formatCurrency(gameState.cash)} in your bank account. Let's see what life has in store for you. Click "Next Year" to advance.</p>
+        `;
+    }
+
+    function nextYear() {
+        // --- 1. Age and Check for Game Over ---
+        gameState.age++;
+        if (gameState.age > 65) {
+            endGame();
+            return;
+        }
+
+        // --- 2. Earn Income ---
+        let incomeThisYear = gameState.salary;
+        let eventMessage = '';
+
+        // --- 3. Apply Savings Plan (if enrolled) ---
+        if (gameState.hasPlan) {
+            let contribution = incomeThisYear * gameState.contributionRate;
+            gameState.savings.totalContributions += contribution;
+            
+            let toEmergency = Math.min(contribution, 1000 - gameState.savings.emergency);
+            if (toEmergency > 0) {
+                 gameState.savings.emergency += toEmergency;
+                 contribution -= toEmergency;
+            }
+            gameState.savings.retirement += contribution;
+
+            // Auto-escalation
+            if (gameState.age % 1 === 0 && gameState.contributionRate < 0.10) {
+                gameState.contributionRate = Math.min(0.10, gameState.contributionRate + 0.01);
+            }
+        }
+        
+        // --- 4. Handle a Random Life Event ---
+        const event = lifeEvents[Math.floor(Math.random() * lifeEvents.length)];
+        eventCard.className = 'card p-6 rounded-2xl min-h-[200px] flex flex-col items-center justify-center text-center fade-in'; // reset class
+        
+        let cardBorderColor = 'bg-white';
+        if (event.type === 'positive') cardBorderColor = 'bg-green-50 border-2 border-green-300';
+        if (event.type === 'negative') cardBorderColor = 'bg-red-50 border-2 border-red-300';
+        if (event.type === 'neutral') cardBorderColor = 'bg-gray-100 border-2 border-gray-300';
+        eventCard.classList.add(...cardBorderColor.split(' '));
+
+        switch(event.impactType) {
+            case 'cash':
+                gameState.cash += event.impact;
+                eventMessage = `You gained ${formatCurrency(event.impact)}.`;
+                break;
+            case 'salary':
+                gameState.salary += event.impact;
+                eventMessage = `Your salary is now ${formatCurrency(gameState.salary)}.`;
+                break;
+            case 'expense':
+                handleExpense(event.impact);
+                eventMessage = `You faced an expense of ${formatCurrency(event.impact)}.`;
+                break;
+            case 'income_loss':
+                incomeThisYear *= (1 - event.impact);
+                eventMessage = `You lost several months of income.`;
+                break;
+            case 'expense_increase':
+                 gameState.salary -= event.impact; // simplified as a reduction in effective salary
+                 eventMessage = `Your living costs increased.`;
+                 break;
+        }
+        
+        // --- 5. Simulate Investment Growth ---
+        let growthRate = 0.04; // Average market return
+        if (event.impactType === 'growth') {
+            growthRate += event.impact;
+            eventMessage = `Your investments changed value by ${(event.impact * 100).toFixed(0)}%.`;
+        }
+        gameState.savings.retirement *= (1 + growthRate);
+        
+        // --- 6. Pay debt interest
+        gameState.debt *= 1.15; // 15% interest on debt
+
+        // --- 7. Update UI ---
+        eventCard.innerHTML = `
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">${event.title}</h3>
+            <p class="text-gray-600 mb-3">${event.text}</p>
+            <p class="font-semibold text-blue-700">${eventMessage}</p>
+        `;
+
+        updateDashboard();
+    }
+
+    function handleExpense(cost) {
+        if (gameState.hasPlan) {
+            // Use emergency fund first
+            let fromEmergency = Math.min(cost, gameState.savings.emergency);
+            gameState.savings.emergency -= fromEmergency;
+            cost -= fromEmergency;
+
+            // Use cash next
+            let fromCash = Math.min(cost, gameState.cash);
+            gameState.cash -= fromCash;
+            cost -= fromCash;
+            
+            // Use Roth IRA contributions (not earnings) if necessary
+            if (cost > 0) {
+                 let fromRetirement = Math.min(cost, gameState.savings.totalContributions);
+                 gameState.savings.retirement -= fromRetirement;
+                 gameState.savings.totalContributions -= fromRetirement;
+                 cost -= fromRetirement;
+            }
+
+            // Finally, take on debt
+            if (cost > 0) {
+                gameState.debt += cost;
+            }
+
+        } else { // No plan
+            // Use cash first
+            let fromCash = Math.min(cost, gameState.cash);
+            gameState.cash -= fromCash;
+            cost -= fromCash;
+            
+            // Take on debt for the rest
+            if (cost > 0) {
+                gameState.debt += cost;
+            }
+        }
+    }
+
+    function endGame() {
+        gameScreen.style.display = 'none';
+        endScreen.style.display = 'block';
+        
+        const finalNetWorth = gameState.cash + gameState.savings.retirement - gameState.debt;
+        const totalSavings = gameState.savings.emergency + gameState.savings.retirement;
+
+        document.getElementById('endNetWorth').textContent = formatCurrency(finalNetWorth);
+        document.getElementById('endSavings').textContent = formatCurrency(totalSavings);
+        document.getElementById('endDebt').textContent = formatCurrency(gameState.debt);
+
+        let message = '';
+        if (finalNetWorth > 250000) {
+            message = `Congratulations! Thanks to consistent saving and smart decisions, you've built a solid nest egg for a comfortable retirement.`;
+            document.getElementById('endTitle').textContent = 'A Golden Retirement!';
+        } else if (finalNetWorth > 50000) {
+            message = `You made it! It wasn't always easy, but you have some savings to rely on in retirement.`;
+            document.getElementById('endTitle').textContent = 'You Reached Retirement!';
+        } else {
+             message = `The journey was tough. With little savings and some debt, retirement will be a challenge. This shows how unexpected life events can impact finances without a safety net.`;
+             document.getElementById('endTitle').textContent = 'A Challenging Road Ahead...';
+        }
+        
+        if(gameState.hasPlan && finalNetWorth > 50000) {
+             message += " Your WorkLife Savings Plan made a huge difference, creating a safety net and automating your success."
+        }
+        
+        if(!gameState.hasPlan && finalNetWorth < 50000) {
+            message += " Playing again with a savings plan could show how different the outcome could be!"
+        }
+
+        document.getElementById('endMessage').textContent = message;
+    }
+
+    // Initialize the game
+    window.onload = resetGame;
+</script>
+</body>
+</html>
