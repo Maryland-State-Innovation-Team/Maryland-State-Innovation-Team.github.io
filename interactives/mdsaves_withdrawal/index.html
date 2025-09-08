@@ -20,7 +20,8 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .chart-bar {
-            transition: all 0.5s ease-in-out;
+            transition: all 0.8s ease-in-out;
+            height: 0%; /* Start at 0 height for animation */
         }
     </style>
 </head>
@@ -72,17 +73,17 @@
                             <p class="text-sm text-center text-gray-600">Projected Growth of Your <span class="font-bold">$5,482.19</span></p>
                             <div class="flex items-end justify-around h-48 bg-white p-4 rounded-md">
                                 <div class="text-center">
-                                    <div id="bar-10" class="chart-bar w-10 bg-blue-300 rounded-t-sm" style="height: 25%;"></div>
+                                    <div id="bar-10" class="chart-bar w-10 bg-blue-300 rounded-t-sm"></div>
                                     <p class="text-xs mt-1">10 Yrs</p>
                                     <p id="val-10" class="text-xs font-bold text-blue-700">$9,850</p>
                                 </div>
                                 <div class="text-center">
-                                    <div id="bar-20" class="chart-bar w-10 bg-blue-400 rounded-t-sm" style="height: 55%;"></div>
+                                    <div id="bar-20" class="chart-bar w-10 bg-blue-400 rounded-t-sm"></div>
                                     <p class="text-xs mt-1">20 Yrs</p>
                                     <p id="val-20" class="text-xs font-bold text-blue-700">$17,690</p>
                                 </div>
                                 <div class="text-center">
-                                    <div id="bar-30" class="chart-bar w-10 bg-blue-500 rounded-t-sm" style="height: 100%;"></div>
+                                    <div id="bar-30" class="chart-bar w-10 bg-blue-500 rounded-t-sm"></div>
                                     <p class="text-xs mt-1">30 Yrs</p>
                                     <p id="val-30" class="text-xs font-bold text-blue-700">$31,780</p>
                                 </div>
@@ -101,7 +102,7 @@
                             </li>
                              <li class="flex items-start">
                                 <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <span><span class="font-semibold">$650.00</span> in employer contributions earned</span>
+                                <span>You've established a <span class="font-semibold">$1,000 emergency fund</span> with your initial savings—a safety net you'd be giving up.</span>
                             </li>
                             <li class="flex items-start">
                                 <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -134,7 +135,7 @@
                             </div>
                             <div class="ml-3 text-sm leading-6">
                               <label for="acknowledgement" class="font-medium text-gray-900">I understand what this means.</label>
-                              <p id="acknowledgement-description" class="text-gray-500">By checking this, I acknowledge that I will lose my account benefits, my employer may stop contributing, and I may owe taxes and penalties on this withdrawal.</p>
+                              <p id="acknowledgement-description" class="text-gray-500">By checking this, I acknowledge that I will lose my account benefits, including the dedicated <span class="font-semibold">$1,000 emergency fund</span> I've built, and that I may owe taxes and penalties on this withdrawal.</p>
                             </div>
                         </div>
                     </div>
@@ -165,6 +166,17 @@
             const closeAccountBtn = document.getElementById('close-account-btn');
             const keepAccountBtn = document.getElementById('keep-account-btn');
 
+            // Animate chart bars into view after a short delay.
+            // The parent container has 160px of available height. We subtract ~28px for the labels below. Max bar height is ~132px.
+            setTimeout(() => {
+                // ~25% of max height
+                document.getElementById('bar-10').style.height = '33px'; 
+                // ~55% of max height
+                document.getElementById('bar-20').style.height = '73px';
+                // 100% of max height
+                document.getElementById('bar-30').style.height = '132px';
+            }, 200);
+
             acknowledgementCheckbox.addEventListener('change', function() {
                 if (this.checked) {
                     closeAccountBtn.disabled = false;
@@ -192,3 +204,8 @@
     </script>
 </body>
 </html>
+
+
+
+
+
