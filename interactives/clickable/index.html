@@ -114,24 +114,21 @@
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
                     <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Find Your Opportunity in Maryland</h1>
                     <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">Connect with the ideal mix of funding, tax credits, and location insights to aid in your community investment decisions.</p>
-                    <div class="mt-8 max-w-xl mx-auto">
-                        <div class="relative">
-                            <input type="text" placeholder="Search by address, city, or zip code..." class="w-full p-4 pr-20 rounded-md border-2 border-slate-300 focus:ring-slate-500 focus:border-slate-500">
-                            <button class="absolute inset-y-0 right-0 flex items-center px-4 btn" onclick="searchAddress()">Search</button>
-                        </div>
-                    </div>
-                    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                     <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow" onclick="navigateTo('explore-maryland')">
                             <h2 class="text-xl font-semibold">Explore the Map</h2>
                             <p class="mt-2 text-slate-600">Visually explore demand metrics, opportunity zones, and community data.</p>
+                             <p class="mt-2 text-slate-500 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
                         <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow" onclick="navigateTo('find-incentives')">
                             <h2 class="text-xl font-semibold">Find Incentives</h2>
                             <p class="mt-2 text-slate-600">Search a comprehensive, filterable database of state and local incentives.</p>
+                             <p class="mt-2 text-slate-500 text-sm">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                         </div>
                         <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow" onclick="navigateTo('business-resources')">
                             <h2 class="text-xl font-semibold">Business Resources</h2>
                             <p class="mt-2 text-slate-600">Access startup checklists and connect with Small Business Development Centers.</p>
+                            <p class="mt-2 text-slate-500 text-sm">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                         </div>
                     </div>
                 </div>
@@ -142,7 +139,7 @@
                  <div class="flex flex-col md:flex-row h-[calc(100vh-64px)]">
                     <!-- Left Panel -->
                     <div id="location-profile-panel" class="w-full md:w-1/3 lg:w-1/4 bg-white p-4 overflow-y-auto shadow-lg" style="display: none;">
-                        <h2 class="text-lg font-bold">Location Profile</h2>
+                        <h2 class="text-lg font-bold hover:underline" onclick="navigateTo('address-details')">Location Profile</h2>
                         <p class="text-sm text-slate-500">123 Main St, Annapolis, MD</p>
                         
                         <div class="mt-4">
@@ -184,8 +181,14 @@
                     </div>
                     <!-- Map Area -->
                     <div class="flex-grow bg-slate-200 relative">
-                        <div class="absolute top-4 left-4 bg-white p-4 rounded-md shadow-lg z-10">
-                            <h3 class="font-semibold mb-2">Map Layers</h3>
+                        <div class="absolute top-4 left-4 bg-white p-4 rounded-md shadow-lg z-10 w-full max-w-md">
+                             <div class="relative">
+                                <input type="text" placeholder="Search by address, city, or zip code..." class="w-full p-3 pr-12 rounded-md border-2 border-slate-300 focus:ring-slate-500 focus:border-slate-500">
+                                <button class="absolute inset-y-0 right-0 flex items-center px-3 text-slate-500" onclick="showLocationProfile()">
+                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+                                </button>
+                            </div>
+                            <h3 class="font-semibold mt-4 mb-2">Map Layers</h3>
                             <div class="space-y-2">
                                 <label class="flex items-center"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-slate-600 focus:ring-slate-500"> <span class="ml-2 text-sm">Population Density</span></label>
                                 <label class="flex items-center"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-slate-600 focus:ring-slate-500"> <span class="ml-2 text-sm">Median Income</span></label>
@@ -195,6 +198,28 @@
                         </div>
                         <div class="placeholder w-full h-full" onclick="showLocationProfile()">
                             <p>Interactive Map Placeholder<br>(Click to show Location Profile)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 1.2.1 Address Details Page -->
+            <section id="address-details">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <button class="btn-outline mb-4" onclick="navigateTo('explore-maryland')">&larr; Back to Map</button>
+                    <h1 class="text-3xl font-bold">Location Profile: 123 Main St, Annapolis, MD</h1>
+                    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="md:col-span-1 bg-white p-6 rounded-lg shadow-md">
+                            <h2 class="text-xl font-semibold">Overview</h2>
+                            <div class="placeholder h-48 mt-4">Viability Score & Demand Metrics</div>
+                        </div>
+                        <div class="md:col-span-1 bg-white p-6 rounded-lg shadow-md">
+                            <h2 class="text-xl font-semibold">Eligible Incentives</h2>
+                            <div class="placeholder h-48 mt-4">List of incentives, linking to detail pages.</div>
+                        </div>
+                        <div class="md:col-span-1 bg-white p-6 rounded-lg shadow-md">
+                            <h2 class="text-xl font-semibold">Community Insights</h2>
+                            <div class="placeholder h-48 mt-4">Qualitative data placeholder.</div>
                         </div>
                     </div>
                 </div>
@@ -294,10 +319,32 @@
                      <h1 class="text-3xl font-bold">About This Tool</h1>
                      <div class="mt-6 bg-white p-6 rounded-lg shadow-md prose max-w-none">
                         <p>Placeholder text explaining the mission of the Governor's Innovation Team and the purpose of the tool.</p>
-                        <h2 class="text-xl font-semibold mt-4">Data Sources</h2>
-                        <p>Placeholder text listing public data sources.</p>
-                        <h2 class="text-xl font-semibold mt-4">FAQ</h2>
-                        <p>Placeholder for frequently asked questions.</p>
+                     </div>
+                 </div>
+            </section>
+
+            <!-- Footer Pages -->
+            <section id="faq">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <h1 class="text-3xl font-bold">Frequently Asked Questions</h1>
+                    <div class="mt-6 bg-white p-6 rounded-lg shadow-md prose max-w-none">
+                       <p>FAQ Content Placeholder...</p>
+                    </div>
+                </div>
+            </section>
+            <section id="contact">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <h1 class="text-3xl font-bold">Contact Us</h1>
+                    <div class="mt-6 bg-white p-6 rounded-lg shadow-md prose max-w-none">
+                       <p>Contact Information Placeholder...</p>
+                    </div>
+                </div>
+           </section>
+            <section id="help">
+                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                     <h1 class="text-3xl font-bold">Help</h1>
+                     <div class="mt-6 bg-white p-6 rounded-lg shadow-md prose max-w-none">
+                        <p>Help and Documentation Placeholder...</p>
                      </div>
                  </div>
             </section>
@@ -328,19 +375,46 @@
                     <h1 class="text-3xl font-bold">Agency Dashboard</h1>
                     <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
                         <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
-                            <h2 class="text-xl font-semibold">Incentive Underutilization "Cold Map"</h2>
-                            <div class="mt-4 placeholder h-96">Map showing where incentive uptake is low.</div>
+                           <h2 class="text-xl font-semibold">My Agency's Incentives</h2>
+                           <div class="mt-4 space-y-3">
+                               <div class="p-3 bg-slate-100 rounded-md hover:bg-slate-200 flex justify-between items-center" onclick="navigateTo('incentive-performance')">
+                                   <span>Incentive Program Alpha</span>
+                                   <span class="text-sm text-slate-500">View Performance &rarr;</span>
+                               </div>
+                               <div class="p-3 bg-slate-100 rounded-md hover:bg-slate-200 flex justify-between items-center" onclick="navigateTo('incentive-performance')">
+                                   <span>Incentive Program Beta</span>
+                                   <span class="text-sm text-slate-500">View Performance &rarr;</span>
+                               </div>
+                               <div class="p-3 bg-slate-100 rounded-md hover:bg-slate-200 flex justify-between items-center" onclick="navigateTo('incentive-performance')">
+                                   <span>Incentive Program Gamma</span>
+                                   <span class="text-sm text-slate-500">View Performance &rarr;</span>
+                               </div>
+                           </div>
                         </div>
                         <div class="space-y-6">
                              <div class="bg-white p-6 rounded-lg shadow-md">
                                 <h2 class="text-xl font-semibold">Summary Statistics</h2>
                                 <div class="mt-4 placeholder h-32">High-level numbers on incentives.</div>
                              </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 2.2.1 Incentive Performance -->
+            <section id="incentive-performance">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <button class="btn-outline mb-4" onclick="navigateTo('agency-dashboard')">&larr; Back to Dashboard</button>
+                    <h1 class="text-3xl font-bold">Performance: Incentive Program Alpha</h1>
+                    <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
+                            <h2 class="text-xl font-semibold">Incentive Underutilization "Cold Map"</h2>
+                            <div class="mt-4 placeholder h-96">Map showing where this incentive's uptake is low.</div>
+                        </div>
+                        <div class="space-y-6">
                              <div class="bg-white p-6 rounded-lg shadow-md">
-                                <h2 class="text-xl font-semibold">Quick Links</h2>
-                                <div class="mt-4 space-y-2">
-                                    <button class="btn-outline w-full text-left" onclick="navigateTo('agency-management')">Manage My Incentives</button>
-                                </div>
+                                <h2 class="text-xl font-semibold">User Interest Metrics</h2>
+                                <div class="mt-4 placeholder h-32">Data on clicks, saves, etc.</div>
                              </div>
                         </div>
                     </div>
@@ -360,13 +434,31 @@
                  </div>
             </section>
 
+             <!-- 2.4 Agency Account Management -->
+             <section id="agency-account">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <h1 class="text-3xl font-bold">Account Management</h1>
+                    <div class="mt-6 max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+                        <div class="placeholder h-64">Form to change name, email, password.</div>
+                    </div>
+                </div>
+            </section>
+
         </main>
         
         <!-- Footer -->
         <footer class="bg-white border-t">
-            <div class="container mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-500">
-                <p>&copy; 2025 Maryland State Innovation Team</p>
-                <a href="#" class="hover:underline" onclick="goToAgencyPortal()">State Agency Portal</a>
+             <div class="container mx-auto py-6 px-4 sm:px-6 lg:px-8 text-sm text-slate-500">
+                <div class="text-center">
+                    <p>&copy; 2025 Maryland State Innovation Team</p>
+                </div>
+                <nav class="mt-4 flex justify-center flex-wrap gap-x-6 gap-y-2">
+                    <a href="javascript:void(0)" class="hover:underline" onclick="navigateTo('about')">About</a>
+                    <a href="javascript:void(0)" class="hover:underline" onclick="navigateTo('faq')">FAQs</a>
+                    <a href="javascript:void(0)" class="hover:underline" onclick="navigateTo('contact')">Contact Us</a>
+                    <a href="javascript:void(0)" class="hover:underline" onclick="navigateTo('help')">Help</a>
+                    <a href="javascript:void(0)" class="hover:underline" onclick="goToAgencyPortal()">State Agency Portal</a>
+                </nav>
             </div>
         </footer>
     </div>
@@ -390,6 +482,7 @@
         const agencyRoutes = [
             { id: 'agency-dashboard', name: 'Dashboard' },
             { id: 'agency-management', name: 'Incentive Management' },
+            { id: 'agency-account', name: 'My Account' },
         ];
         
         const mainNav = document.getElementById('main-nav');
@@ -433,13 +526,27 @@
         }
 
         function updateActiveLinks() {
+            // Deselect all nav links first
             document.querySelectorAll('.nav-link, #mobile-menu a').forEach(link => {
                 link.classList.remove('active');
-                if (link.dataset.page === appState.currentPage) {
-                    link.classList.add('active');
-                }
+            });
+            
+            let activePage = appState.currentPage;
+
+            // If on a sub-page, highlight the parent nav item
+            if (['address-details'].includes(activePage)) {
+                activePage = 'explore-maryland';
+            }
+            if (['incentive-performance'].includes(activePage)) {
+                activePage = 'agency-dashboard';
+            }
+            
+            // Add active class to the correct link
+            document.querySelectorAll(`.nav-link[data-page="${activePage}"], #mobile-menu a[data-page="${activePage}"]`).forEach(link => {
+                 link.classList.add('active');
             });
         }
+
 
         function navigateTo(pageId, subView = null) {
             appState.currentPage = pageId;
