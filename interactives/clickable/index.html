@@ -20,31 +20,59 @@
             text-align: center;
         }
         .nav-link {
-            padding: 0.5rem 0.75rem;
+            padding: 0.5rem 1rem;
             border-radius: 0.375rem;
             font-size: 0.875rem;
             font-weight: 500;
-            color: #334155; /* slate-700 */
+            color: #475569; /* slate-600 */
             transition: background-color 0.2s, color 0.2s;
             cursor: pointer;
         }
         .nav-link:hover {
-            background-color: #e2e8f0; /* slate-200 */
+            background-color: #f1f5f9; /* slate-100 */
             color: #0f172a; /* slate-900 */
         }
         .nav-link.active {
-            background-color: #1e293b; /* slate-800 */
-            color: #ffffff;
+            background-color: #f1f5f9; /* slate-100 */
+            color: #1e293b; /* slate-800 */
         }
-        .nav-link.active:hover {
+        /* Agency nav can have a stronger active state */
+        #agency-nav .nav-link.active {
             background-color: #1e293b; /* slate-800 */
             color: #ffffff;
         }
         .btn {
-            @apply px-4 py-2 bg-slate-700 text-white rounded-md hover:bg-slate-800 transition-colors;
+            display: inline-block;
+            padding-left: 1.5rem; /* px-6 */
+            padding-right: 1.5rem;
+            padding-top: 0.625rem; /* ~py-2.5 */
+            padding-bottom: 0.625rem;
+            background-color: #334155; /* slate-700 */
+            color: #ffffff;
+            border-radius: 0.5rem; /* rounded-lg */
+            font-weight: 600;
+            transition: background-color 0.2s;
         }
+        .btn:hover {
+            background-color: #1e293b; /* slate-800 */
+        }
+
         .btn-outline {
-             @apply px-4 py-2 border border-slate-700 text-slate-700 rounded-md hover:bg-slate-100 transition-colors;
+            display: inline-block;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            padding-top: 0.625rem;
+            padding-bottom: 0.625rem;
+            background-color: #e2e8f0; /* slate-200 */
+            color: #334155; /* slate-700 */
+            border: 1px solid #94a3b8; /* slate-400 */
+            border-radius: 0.5rem; /* rounded-lg */
+            font-weight: 600;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .btn-outline:hover {
+            background-color: #cbd5e1; /* slate-300 */
+            border-color: #94a3b8; /* slate-400 */
         }
         section {
             display: none;
@@ -57,12 +85,12 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-white text-slate-800">
 
     <div id="app" class="min-h-screen flex flex-col">
 
         <!-- Header -->
-        <header class="bg-white shadow-sm sticky top-0 z-50">
+        <header class="bg-white border-b sticky top-0 z-50">
             <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center">
@@ -70,19 +98,17 @@
                            <span class="font-bold text-xl text-slate-800">Maryland Neighborhood Insight</span>
                         </div>
                         <div class="hidden md:block">
-                            <div id="main-nav" class="ml-10 flex items-baseline space-x-4">
+                            <div id="main-nav" class="ml-10 flex items-baseline space-x-1">
                                 <!-- Public Nav Links will be injected here -->
                             </div>
-                            <div id="agency-nav" class="ml-10 flex items-baseline space-x-4" style="display: none;">
+                            <div id="agency-nav" class="ml-10 flex items-baseline space-x-1" style="display: none;">
                                 <!-- Agency Nav Links will be injected here -->
                             </div>
                         </div>
                     </div>
                     <div class="hidden md:block">
-                        <div class="ml-4 flex items-center md:ml-6">
-                            <div id="auth-container">
-                                <button class="btn" onclick="navigateTo('my-project')">My Project (Login)</button>
-                            </div>
+                        <div id="auth-container" class="ml-4 flex items-center md:ml-6 space-x-2">
+                            <!-- Auth buttons will be injected here -->
                         </div>
                     </div>
                     <div class="-mr-2 flex md:hidden">
@@ -99,8 +125,8 @@
                 <div id="mobile-main-nav" class="px-2 pt-2 pb-3 space-y-1 sm:px-3"></div>
                 <div id="mobile-agency-nav" class="px-2 pt-2 pb-3 space-y-1 sm:px-3" style="display: none;"></div>
                 <div class="pt-4 pb-3 border-t border-slate-200">
-                    <div class="flex items-center px-5">
-                       <button class="w-full btn" onclick="navigateTo('my-project')">My Project (Login)</button>
+                    <div id="mobile-auth-container" class="flex items-center px-5 space-x-2">
+                         <!-- Mobile Auth buttons will be injected here -->
                     </div>
                 </div>
             </div>
@@ -111,24 +137,103 @@
 
             <!-- 1.1 Homepage -->
             <section id="homepage" class="active">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-                    <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Find Your Opportunity in Maryland</h1>
-                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">Connect with the ideal mix of funding, tax credits, and location insights to aid in your community investment decisions.</p>
-                     <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow" onclick="navigateTo('explore-maryland')">
-                            <h2 class="text-xl font-semibold">Explore the Map</h2>
-                            <p class="mt-2 text-slate-600">Visually explore demand metrics, opportunity zones, and community data.</p>
-                             <p class="mt-2 text-slate-500 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <!-- Hero Section -->
+                <div class="bg-slate-50">
+                    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-24 flex items-center justify-center text-center">
+                        <div class="relative">
+                             <div class="absolute inset-0 bg-slate-200/50 rounded-full blur-3xl w-[400px] h-[400px] -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
+                             <div class="relative p-12">
+                                <h1 class="text-6xl font-bold text-slate-900">Title</h1>
+                                <p class="mt-4 text-xl text-slate-600">Subtitle</p>
+                                <div class="mt-8 flex justify-center space-x-4">
+                                    <button class="btn-outline" onclick="navigateTo('explore-maryland')">Explore Communities</button>
+                                    <button class="btn" onclick="navigateTo('find-incentives')">Find Incentives</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow" onclick="navigateTo('find-incentives')">
-                            <h2 class="text-xl font-semibold">Find Incentives</h2>
-                            <p class="mt-2 text-slate-600">Search a comprehensive, filterable database of state and local incentives.</p>
-                             <p class="mt-2 text-slate-500 text-sm">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+
+                <!-- User Personas Section -->
+                 <div class="py-16">
+                    <div class="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+                        <div>
+                            <h2 class="text-xl font-bold">For Small Business Owners</h2>
+                            <p class="mt-2 text-slate-600">Lorem ipsum... needs... challenges</p>
+                            <hr class="my-4">
+                            <a href="javascript:void(0)" onclick="navigateTo('find-incentives')" class="text-slate-800 font-semibold hover:underline flex items-center">Access Capital <span class="ml-2">&rarr;</span></a>
+                            <a href="javascript:void(0)" onclick="navigateTo('explore-maryland')" class="mt-2 text-slate-800 font-semibold hover:underline flex items-center">Explore Potential Sites <span class="ml-2">&rarr;</span></a>
                         </div>
-                        <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow" onclick="navigateTo('business-resources')">
-                            <h2 class="text-xl font-semibold">Business Resources</h2>
-                            <p class="mt-2 text-slate-600">Access startup checklists and connect with Small Business Development Centers.</p>
-                            <p class="mt-2 text-slate-500 text-sm">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                        <div>
+                            <h2 class="text-xl font-bold">For Developers and Investors</h2>
+                            <p class="mt-2 text-slate-600">Lorem ipsum... needs... challenges</p>
+                            <hr class="my-4">
+                            <a href="javascript:void(0)" onclick="navigateTo('find-incentives')" class="text-slate-800 font-semibold hover:underline flex items-center">Find Incentives <span class="ml-2">&rarr;</span></a>
+                             <a href="javascript:void(0)" onclick="navigateTo('explore-maryland')" class="mt-2 text-slate-800 font-semibold hover:underline flex items-center">Explore Potential Sites <span class="ml-2">&rarr;</span></a>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold">For State Agencies</h2>
+                            <p class="mt-2 text-slate-600">Lorem ipsum... needs... challenges</p>
+                            <hr class="my-4">
+                            <a href="javascript:void(0)" onclick="goToAgencyPortal()" class="text-slate-800 font-semibold hover:underline flex items-center">Update Incentives <span class="ml-2">&rarr;</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Incentives Grid -->
+                <div class="bg-slate-50 py-16">
+                    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                        <h2 class="text-3xl font-bold">Incentives pulled across state and local agencies</h2>
+                        <p class="mt-2 text-slate-600">Subheading</p>
+                        <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+                            <div class="placeholder h-24 rounded-lg"></div>
+                            <div class="placeholder h-24 rounded-lg"></div>
+                            <div class="placeholder h-24 rounded-lg"></div>
+                            <div class="placeholder h-24 rounded-lg"></div>
+                            <div class="placeholder h-24 rounded-lg"></div>
+                            <div class="placeholder h-24 rounded-lg"></div>
+                            <div class="placeholder h-24 rounded-lg"></div>
+                            <div class="placeholder h-24 rounded-lg"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonials -->
+                <div class="py-16">
+                     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                        <h2 class="text-3xl font-bold">Testimonials</h2>
+                        <p class="mt-2 text-slate-600">Subheading</p>
+                        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div class="border p-6 rounded-lg">
+                                <p class="text-lg font-semibold">"Quote"</p>
+                                <div class="flex items-center mt-4">
+                                    <div class="placeholder w-10 h-10 rounded-full mr-4"></div>
+                                    <div>
+                                        <p class="font-semibold">Title</p>
+                                        <p class="text-slate-600">Description</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border p-6 rounded-lg">
+                                <p class="text-lg font-semibold">"Quote"</p>
+                                <div class="flex items-center mt-4">
+                                    <div class="placeholder w-10 h-10 rounded-full mr-4"></div>
+                                    <div>
+                                        <p class="font-semibold">Title</p>
+                                        <p class="text-slate-600">Description</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border p-6 rounded-lg">
+                                <p class="text-lg font-semibold">"Quote"</p>
+                                <div class="flex items-center mt-4">
+                                    <div class="placeholder w-10 h-10 rounded-full mr-4"></div>
+                                    <div>
+                                        <p class="font-semibold">Title</p>
+                                        <p class="text-slate-600">Description</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -348,6 +453,22 @@
                      </div>
                  </div>
             </section>
+             <section id="terms">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <h1 class="text-3xl font-bold">Terms of Service</h1>
+                    <div class="mt-6 bg-white p-6 rounded-lg shadow-md prose max-w-none">
+                       <p>Terms of Service content placeholder...</p>
+                    </div>
+                </div>
+            </section>
+             <section id="privacy">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <h1 class="text-3xl font-bold">Privacy Policy</h1>
+                    <div class="mt-6 bg-white p-6 rounded-lg shadow-md prose max-w-none">
+                       <p>Privacy Policy content placeholder...</p>
+                    </div>
+                </div>
+            </section>
             
             <!-- 2.1 Agency Login -->
             <section id="agency-login">
@@ -448,17 +569,45 @@
         
         <!-- Footer -->
         <footer class="bg-white border-t">
-             <div class="container mx-auto py-6 px-4 sm:px-6 lg:px-8 text-sm text-slate-500">
-                <div class="text-center">
-                    <p>&copy; 2025 Maryland State Innovation Team</p>
+            <div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-slate-600">
+                <div class="md:col-span-1">
+                    <div class="placeholder w-24 h-10 mb-4 flex items-center justify-center text-sm">LOGO</div>
+                    <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <!-- Social Icons -->
+                        <a href="#" class="text-slate-500 hover:text-slate-700">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="#" class="text-slate-500 hover:text-slate-700">
+                           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.585-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.585.069-4.85c.149-3.225 1.664-4.771 4.919-4.919C8.415 2.175 8.796 2.163 12 2.163m0-1.625C8.724.538 8.347.527 7.022.583 3.652.731 1.83 2.553.731 5.922.583 7.247.527 7.624.527 12s.056 4.753.194 6.078c.153 3.37 1.98 5.193 5.35 5.341C7.624 23.473 8.001 23.483 12 23.483s4.378-.01 5.692-.065c3.369-.149 5.191-1.971 5.34-5.34C23.473 16.753 23.483 16.376 23.483 12s-.01-4.378-.065-5.692c-.149-3.37-1.971-5.193-5.34-5.34C16.376.527 15.999.538 12 .538M12 6.848c-2.849 0-5.152 2.303-5.152 5.152s2.303 5.152 5.152 5.152 5.152-2.303 5.152-5.152S14.849 6.848 12 6.848m0 8.708c-1.966 0-3.556-1.59-3.556-3.556s1.59-3.556 3.556-3.556 3.556 1.59 3.556 3.556-1.59 3.556-3.556 3.556m6.406-9.688c-.766 0-1.387.62-1.387 1.387s.621 1.387 1.387 1.387 1.387-.621 1.387-1.387c0-.767-.62-1.387-1.387-1.387" clip-rule="evenodd"/></svg>
+                        </a>
+                        <a href="#" class="text-slate-500 hover:text-slate-700">
+                           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.267,4,12,4,12,4S5.733,4,4.186,4.418 C3.326,4.648,2.648,5.326,2.418,6.186C2,7.733,2,12,2,12s0,4.267,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.733,20,12,20,12,20s6.267,0,7.814-0.418c0.86-0.23,1.538-0.908,1.768-1.768C22,16.267,22,12,22,12S22,7.733,21.582,6.186z M10,15.464V8.536L16,12L10,15.464z"/></svg>
+                        </a>
+                         <a href="#" class="text-slate-500 hover:text-slate-700">
+                           <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.25 6.5 1.75 1.75 0 016.5 8.25zM19 19h-3v-4.75c0-1.4-.5-2.5-1.8-2.5-1 0-1.5.7-1.7 1.3-.1.2-.1.5-.1.8V19h-3v-9h3v1.5c.5-.7 1.3-1.5 3-1.5 2.2 0 4 1.4 4 4.5z"/></svg>
+                        </a>
+                    </div>
                 </div>
-                <nav class="mt-4 flex justify-center flex-wrap gap-x-6 gap-y-2">
-                    <a href="javascript:void(0)" class="hover:underline" onclick="navigateTo('about')">About</a>
-                    <a href="javascript:void(0)" class="hover:underline" onclick="navigateTo('faq')">FAQs</a>
-                    <a href="javascript:void(0)" class="hover:underline" onclick="navigateTo('contact')">Contact Us</a>
-                    <a href="javascript:void(0)" class="hover:underline" onclick="navigateTo('help')">Help</a>
-                    <a href="javascript:void(0)" class="hover:underline" onclick="goToAgencyPortal()">State Agency Portal</a>
-                </nav>
+                <div class="md:col-span-2 grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-semibold text-slate-900">Legal</h3>
+                        <ul class="mt-4 space-y-2 text-sm">
+                            <li><a href="javascript:void(0)" onclick="navigateTo('terms')" class="hover:underline">Terms of Service</a></li>
+                            <li><a href="javascript:void(0)" onclick="navigateTo('privacy')" class="hover:underline">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h3 class="font-semibold text-slate-900">Resources</h3>
+                        <ul class="mt-4 space-y-2 text-sm">
+                             <li><a href="javascript:void(0)" onclick="navigateTo('about')" class="hover:underline">About</a></li>
+                             <li><a href="javascript:void(0)" onclick="navigateTo('faq')" class="hover:underline">FAQs</a></li>
+                             <li><a href="javascript:void(0)" onclick="navigateTo('contact')" class="hover:underline">Contact Us</a></li>
+                             <li><a href="javascript:void(0)" onclick="navigateTo('help')" class="hover:underline">Help</a></li>
+                             <li><a href="javascript:void(0)" onclick="goToAgencyPortal()" class="hover:underline">State Agency Portal</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </footer>
     </div>
@@ -473,10 +622,9 @@
 
         const publicRoutes = [
             { id: 'homepage', name: 'Home' },
-            { id: 'explore-maryland', name: 'Explore Map' },
             { id: 'find-incentives', name: 'Find Incentives' },
-            { id: 'business-resources', name: 'Business Resources' },
-            { id: 'about', name: 'About' },
+            { id: 'explore-maryland', name: 'Explore Communities' },
+            { id: 'business-resources', name: 'Connect to Resources' },
         ];
         
         const agencyRoutes = [
@@ -489,6 +637,9 @@
         const agencyNav = document.getElementById('agency-nav');
         const mobileMainNav = document.getElementById('mobile-main-nav');
         const mobileAgencyNav = document.getElementById('mobile-agency-nav');
+        const authContainer = document.getElementById('auth-container');
+        const mobileAuthContainer = document.getElementById('mobile-auth-container');
+
 
         function buildNav(routes, desktopContainer, mobileContainer) {
             desktopContainer.innerHTML = '';
@@ -526,25 +677,20 @@
         }
 
         function updateActiveLinks() {
-            // Deselect all nav links first
             document.querySelectorAll('.nav-link, #mobile-menu a').forEach(link => {
                 link.classList.remove('active');
             });
             
             let activePage = appState.currentPage;
 
-            // If on a sub-page, highlight the parent nav item
-            if (['address-details'].includes(activePage)) {
-                activePage = 'explore-maryland';
-            }
-            if (['incentive-performance'].includes(activePage)) {
+            if (['address-details', 'terms', 'privacy', 'faq', 'contact', 'help', 'about'].includes(activePage)) {
+                 // No nav link is active for these footer pages
+            } else if (['incentive-performance'].includes(activePage)) {
                 activePage = 'agency-dashboard';
+                 document.querySelectorAll(`#agency-nav .nav-link[data-page="${activePage}"], #mobile-agency-nav a[data-page="${activePage}"]`).forEach(link => link.classList.add('active'));
+            } else {
+                document.querySelectorAll(`#main-nav .nav-link[data-page="${activePage}"], #mobile-main-nav a[data-page="${activePage}"]`).forEach(link => link.classList.add('active'));
             }
-            
-            // Add active class to the correct link
-            document.querySelectorAll(`.nav-link[data-page="${activePage}"], #mobile-menu a[data-page="${activePage}"]`).forEach(link => {
-                 link.classList.add('active');
-            });
         }
 
 
@@ -555,7 +701,6 @@
             });
             document.getElementById(pageId).classList.add('active');
 
-            // Handle sub-views for incentives page
             if (pageId === 'find-incentives') {
                 const listView = document.getElementById('incentive-list-view');
                 const detailView = document.getElementById('incentive-detail-view');
@@ -584,7 +729,6 @@
         }
         
         function saveLocation() {
-            // In a real app, this would require login
             alert("Location saved! (This would require login in a real app). View in 'My Project'.");
             navigateTo('my-project');
         }
@@ -596,7 +740,6 @@
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
             event.target.classList.add('active');
 
-            // Simple style for active tab button
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.className = 'tab-btn py-2 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300';
             });
@@ -606,8 +749,6 @@
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
-            const icons = document.querySelectorAll('#mobile-menu-button svg');
-            icons.forEach(icon => icon.classList.toggle('hidden'));
         }
 
         function closeMobileMenu() {
@@ -623,7 +764,7 @@
         
         function goHome() {
             appState.isAgency = false;
-            appState.isLoggedIn = false;
+            appState.isLoggedIn = false; // Always log out when going to main home
             navigateTo('homepage');
             updateNav();
             updateAuthUI();
@@ -636,27 +777,42 @@
         }
 
         function updateAuthUI() {
-            const container = document.getElementById('auth-container');
+            let desktopHtml = '';
+            let mobileHtml = '';
+
             if (appState.isAgency) {
                 if (appState.isLoggedIn) {
-                    container.innerHTML = `<button class="btn-outline" onclick="goHome()">Logout Agency</button>`;
+                    desktopHtml = `<button class="btn-outline" onclick="goHome()">Logout</button>`;
+                    mobileHtml = `<button class="w-full btn-outline" onclick="goHome()">Logout</button>`;
                 } else {
-                     container.innerHTML = `<button class="btn" onclick="navigateTo('agency-login')">Agency Login</button>`;
+                     desktopHtml = `<button class="btn" onclick="navigateTo('agency-login')">Agency Login</button>`;
+                     mobileHtml = `<button class="w-full btn" onclick="navigateTo('agency-login')">Agency Login</button>`;
                 }
             } else {
-                 container.innerHTML = `<button class="btn" onclick="navigateTo('my-project')">My Project (Login)</button>`;
+                 desktopHtml = `
+                    <button class="btn-outline" onclick="navigateTo('my-project')">Sign In</button>
+                    <button class="btn" onclick="navigateTo('my-project')">Register</button>
+                 `;
+                 mobileHtml = `
+                    <button class="flex-1 btn-outline" onclick="navigateTo('my-project')">Sign In</button>
+                    <button class="flex-1 btn" onclick="navigateTo('my-project')">Register</button>
+                 `;
             }
+
+            authContainer.innerHTML = desktopHtml;
+            mobileAuthContainer.innerHTML = mobileHtml;
         }
 
         // Initial setup
         buildNav(publicRoutes, mainNav, mobileMainNav);
         buildNav(agencyRoutes, agencyNav, mobileAgencyNav);
         updateNav();
+        updateAuthUI();
         navigateTo('homepage');
-        // Set initial active tab for location profile
         document.querySelector('.tab-btn').click();
 
     </script>
 </body>
 </html>
+
 
