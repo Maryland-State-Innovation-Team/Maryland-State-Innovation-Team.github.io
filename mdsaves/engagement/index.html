@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarylandSaves Engagement Planning Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom Slider Styles */
+        input[type=range] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #d1d5db; /* gray-300 */
+            border-radius: 5px;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .2s;
+        }
+        input[type=range]:hover {
+            opacity: 1;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #3b82f6; /* blue-500 */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+        input[type=range]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #3b82f6; /* blue-500 */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <!-- Header -->
+        <header class="text-center mb-8 md:mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">MarylandSaves Engagement Strategy Planner</h1>
+            <p class="mt-2 text-lg text-gray-600">Analyze the impact of employer vs. employee engagement on saver enrollment.</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Controls Column -->
+            <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                <h2 class="text-2xl font-semibold mb-6 border-b pb-4">Strategy Levers</h2>
+                
+                <!-- Engagement Budget -->
+                <div class="mb-6">
+                    <label for="engagementBudget" class="block text-sm font-medium text-gray-700 mb-1">Total Engagement Budget (Units)</label>
+                    <div class="flex items-center">
+                        <input type="number" id="engagementBudget" value="20000" class="w-full bg-gray-100 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">Assume 1 unit = 1 employer or 1 employee engagement.</p>
+                </div>
+
+                <!-- Engagement Allocation -->
+                <div class="mb-6">
+                    <label for="employerRatio" class="block text-sm font-medium text-gray-700">Engagement Allocation</label>
+                    <input type="range" id="employerRatio" min="0" max="100" value="50" class="w-full mt-2">
+                    <div class="flex justify-between text-xs font-medium mt-1">
+                        <span class="text-red-600">100% Employee</span>
+                        <span id="employerRatioValue" class="font-bold text-blue-600">50% Employer / 50% Employee</span>
+                        <span class="text-green-600">100% Employer</span>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-8 mb-4 border-b pb-2">Impact Assumptions</h3>
+                
+                <!-- Employer Engagement Impact -->
+                <div class="mb-6">
+                    <label for="employerImpact" class="block text-sm font-medium text-gray-700">Employer Registration Rate (%)</label>
+                    <div class="flex items-center space-x-3">
+                        <input type="range" id="employerImpact" min="0" max="100" value="10" class="w-full">
+                        <span id="employerImpactValue" class="font-semibold text-blue-600 bg-blue-100 rounded-md py-1 px-2 text-sm">10%</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">Percentage of engaged employers that will register.</p>
+                </div>
+
+                <!-- Employee Engagement Impact -->
+                <div>
+                    <label for="employeeImpact" class="block text-sm font-medium text-gray-700">Opt-Out Rate Reduction (%)</label>
+                     <div class="flex items-center space-x-3">
+                        <input type="range" id="employeeImpact" min="0" max="100" value="50" class="w-full">
+                        <span id="employeeImpactValue" class="font-semibold text-blue-600 bg-blue-100 rounded-md py-1 px-2 text-sm">50%</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">Percentage decrease in the 23% opt-out rate for engaged employees.</p>
+                </div>
+            </div>
+
+            <!-- Results Column -->
+            <div class="lg:col-span-2">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                    <h2 class="text-2xl font-semibold mb-4 border-b pb-4">Projected Outcomes</h2>
+                    
+                    <!-- Primary Metric -->
+                    <div class="bg-blue-500 text-white text-center p-6 rounded-lg mb-6">
+                        <p class="text-lg font-medium opacity-80">Projected Total Active Savers</p>
+                        <p id="totalSavers" class="text-5xl font-bold">--</p>
+                    </div>
+
+                    <!-- Secondary Metrics Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <p class="text-sm font-medium text-gray-600">Total New Savers</p>
+                            <p id="newSavers" class="text-2xl font-semibold text-green-600">--</p>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <p class="text-sm font-medium text-gray-600">New Employers Registered</p>
+                            <p id="newEmployers" class="text-2xl font-semibold text-gray-900">--</p>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <p class="text-sm font-medium text-gray-600">Newly Eligible Employees</p>
+                            <p id="newEmployees" class="text-2xl font-semibold text-gray-900">--</p>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                             <p class="text-sm font-medium text-gray-600">Final Opt-Out Rate (New Cohort)</p>
+                             <p id="finalOptOutRate" class="text-2xl font-semibold text-red-600">--</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Methodology Section -->
+                <div class="mt-8 p-4 bg-gray-100 rounded-lg text-sm text-gray-600">
+                    <h3 class="font-semibold text-gray-800 mb-2">How it works:</h3>
+                    <p>This model first allocates your engagement budget. The employer portion generates newly registered employers, creating a pool of newly eligible employees. The employee engagement budget is then applied to this new pool, reducing their opt-out rate. The final number of savers is the sum of those from the engaged and un-engaged portions of this new employee cohort, added to the program's current baseline.</p>
+                    <p class="mt-2 font-medium"><strong>Baseline assumptions:</strong> 108,080 potential employers, 13 employees/employer, 23% base opt-out rate, 15,188 current savers.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- DOM Elements ---
+        const engagementBudgetEl = document.getElementById('engagementBudget');
+        const employerRatioEl = document.getElementById('employerRatio');
+        const employerImpactEl = document.getElementById('employerImpact');
+        const employeeImpactEl = document.getElementById('employeeImpact');
+        
+        // --- Value Display Elements ---
+        const employerRatioValueEl = document.getElementById('employerRatioValue');
+        const employerImpactValueEl = document.getElementById('employerImpactValue');
+        const employeeImpactValueEl = document.getElementById('employeeImpactValue');
+        
+        // --- Output Elements ---
+        const totalSaversEl = document.getElementById('totalSavers');
+        const newSaversEl = document.getElementById('newSavers');
+        const newEmployersEl = document.getElementById('newEmployers');
+        const newEmployeesEl = document.getElementById('newEmployees');
+        const finalOptOutRateEl = document.getElementById('finalOptOutRate');
+
+        // --- Model Constants ---
+        const CURRENT_SAVERS = 15188;
+        const CURRENT_REGISTERED_EMPLOYERS = 5404;
+        const TOTAL_POTENTIAL_EMPLOYERS = 108080;
+        const UNREGISTERED_EMPLOYERS = TOTAL_POTENTIAL_EMPLOYERS - CURRENT_REGISTERED_EMPLOYERS;
+        const AVG_EMPLOYEES_PER_EMPLOYER = 13;
+        const BASE_OPT_OUT_RATE = 0.23; // 23%
+        const BASE_PARTICIPATION_RATE = 1 - BASE_OPT_OUT_RATE;
+
+        // --- Main Calculation and Update Function ---
+        function calculateAndDisplay() {
+            // 1. Get user inputs
+            const budget = parseInt(engagementBudgetEl.value) || 0;
+            const employerRatio = parseInt(employerRatioEl.value);
+            const employerConversionRate = parseInt(employerImpactEl.value) / 100;
+            const employeeOptOutReduction = parseInt(employeeImpactEl.value) / 100;
+
+            // 2. Update slider value displays
+            employerRatioValueEl.textContent = `${employerRatio}% Employer / ${100 - employerRatio}% Employee`;
+            employerImpactValueEl.textContent = `${employerImpactEl.value}%`;
+            employeeImpactValueEl.textContent = `${employeeImpactEl.value}%`;
+            
+            // 3. Perform calculations
+            const employersToEngage = budget * (employerRatio / 100);
+            const employeesToEngage = budget * (1 - (employerRatio / 100));
+
+            let newEmployers = employersToEngage * employerConversionRate;
+            // Cap new employers at the number available
+            newEmployers = Math.min(newEmployers, UNREGISTERED_EMPLOYERS);
+            
+            const newlyEligibleEmployees = newEmployers * AVG_EMPLOYEES_PER_EMPLOYER;
+
+            // Apply employee engagement budget to the newly eligible pool
+            const engagedEmployees = Math.min(employeesToEngage, newlyEligibleEmployees);
+            const unengagedEmployees = newlyEligibleEmployees > 0 ? newlyEligibleEmployees - engagedEmployees : 0;
+            
+            // Calculate the improved participation rate for the engaged group
+            const newOptOutRateForEngaged = BASE_OPT_OUT_RATE * (1 - employeeOptOutReduction);
+            const newParticipationRateForEngaged = 1 - newOptOutRateForEngaged;
+
+            // Calculate new savers from each group
+            const newSaversFromEngaged = engagedEmployees * newParticipationRateForEngaged;
+            const newSaversFromUnengaged = unengagedEmployees * BASE_PARTICIPATION_RATE;
+            
+            const totalNewSavers = newSaversFromEngaged + newSaversFromUnengaged;
+            const projectedTotalSavers = CURRENT_SAVERS + totalNewSavers;
+
+            // Calculate the effective opt-out rate for the entire new cohort
+            const totalOptOuts = (engagedEmployees * newOptOutRateForEngaged) + (unengagedEmployees * BASE_OPT_OUT_RATE);
+            const effectiveOptOutRate = newlyEligibleEmployees > 0 ? (totalOptOuts / newlyEligibleEmployees) * 100 : BASE_OPT_OUT_RATE * 100;
+
+            // 4. Update the display with formatted numbers
+            const formatNumber = (num) => Math.round(num).toLocaleString('en-US');
+
+            totalSaversEl.textContent = formatNumber(projectedTotalSavers);
+            newSaversEl.textContent = `+${formatNumber(totalNewSavers)}`;
+            newEmployersEl.textContent = formatNumber(newEmployers);
+            newEmployeesEl.textContent = formatNumber(newlyEligibleEmployees);
+            finalOptOutRateEl.textContent = `${effectiveOptOutRate.toFixed(1)}%`;
+        }
+
+        // --- Event Listeners ---
+        const inputs = [engagementBudgetEl, employerRatioEl, employerImpactEl, employeeImpactEl];
+        inputs.forEach(input => input.addEventListener('input', calculateAndDisplay));
+
+        // --- Initial Calculation on Page Load ---
+        window.addEventListener('DOMContentLoaded', calculateAndDisplay);
+    </script>
+</body>
+</html>
