@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Choropleth Map</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrolling on the main page */
+        }
+        /* Set a height for the map container */
+        #map { 
+            height: calc(100vh - 120px); /* Adjust based on header/footer height */
+            width: 100%;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .leaflet-container {
+            background: #f9fafb; /* Light gray background for the map */
+        }
+        .info {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .info h4 {
+            margin: 0 0 5px;
+            color: #333;
+            font-weight: 600;
+        }
+        .legend {
+            line-height: 18px;
+            color: #555;
+        }
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.9;
+            border-radius: 4px;
+        }
+        .info-panel {
+            min-width: 250px;
+        }
+        .leaflet-right {
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="p-4 md:p-6 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-2xl font-bold text-gray-800">Community Indicator Map</h1>
+            <p class="text-gray-600 mt-1">Select an indicator to visualize data across different census tracts.</p>
+            <div class="mt-4">
+                <label for="indicator-select" class="block text-sm font-medium text-gray-700 mb-1">Select Indicator:</label>
+                <select id="indicator-select" class="w-full md:w-1/3 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></select>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-4 md:p-6">
+        <div id="map"></div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+    <script>
+        // --- 1. DATA LOADING & INITIALIZATION ---
+        // This section handles loading the GeoJSON data. There are two options:
+        // A) Fetching a real 'indicator_proto.geojson' file.
+        // B) Generating mock data for demonstration purposes.
+        // To use your real data, uncomment Option A and comment out all of Option B.
+
+        // --- Option A: Load Real Data ---
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('indicator_proto.geojson')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    initializeApplication(data); // Initialize the map with the loaded data
+                })
+                .catch(error => {
+                    console.error('Error loading or parsing GeoJSON:', error);
+                    // Display an error message to the user on the map container itself
+                    const mapContainer = document.getElementById('map');
+                    mapContainer.innerHTML = `
+                        <div class="h-full w-full flex items-center justify-center bg-red-100 text-red-800 p-6 rounded-lg shadow-md border border-red-200">
+                            <div>
+                                <h3 class="font-bold text-lg mb-2">Error Loading Map Data</h3>
+                                <p>Could not load data from 'indicator_proto.geojson'.</p>
+                                <p class="mt-2 text-sm">Please check the following:</p>
+                                <ul class="list-disc list-inside text-sm mt-1">
+                                    <li>The file is in the same directory as this HTML file.</li>
+                                    <li>The file is a valid GeoJSON format.</li>
+                                    <li>There are no network issues preventing the file from loading.</li>
+                                </ul>
+                                <p class="mt-2 text-sm">See the browser's developer console for more technical details.</p>
+                            </div>
+                        </div>`;
+                    mapContainer.style.height = 'auto'; // Adjust height to fit error message
+                });
+        });
+
+
+        // --- Option B: Use Mock Data (for development) ---
+        // This section generates sample data so the map works out of the box.
+        // COMMENT OUT THIS ENTIRE SECTION (from here to the initializeApplication call) TO USE REAL DATA.
+        // const mockGeoJsonData = {
+        //     "type": "FeatureCollection",
+        //     "features": []
+        // };
+        // // Helper function to generate random data for mock features
+        // function generateRandomProps() {
+        //     return {
+        //         "GEOID": `24033${Math.floor(1000 + Math.random() * 9000)}`,
+        //         "pop2023": Math.floor(1000 + Math.random() * 7000),
+        //         "pop_change2223": Math.floor(-50 + Math.random() * 200),
+        //         "pop2025": Math.floor(1100 + Math.random() * 7200),
+        //         "pop2030": Math.floor(1200 + Math.random() * 7500),
+        //         "pop_change2530": Math.floor(-40 + Math.random() * 250),
+        //         "grocery_access_score": Math.floor(1 + Math.random() * 5),
+        //         "childcare_access_score": Math.floor(1 + Math.random() * 5),
+        //         "grocery_access_score_v2": Math.random() * 10,
+        //         "childcare_infant_access_score_v2": Math.random() * 2,
+        //         "childcare_toddlerpreschool_access_score_v2": Math.random() * 2.5,
+        //         "childcare_school_access_score_v2": Math.random() * 3,
+        //         "tract_name": `Tract ${Math.floor(8000 + Math.random() * 1000)}`,
+        //         "county_name": "Prince George's County",
+        //     };
+        // }
+        // // Create some simple square polygon geometries for mocking
+        // for (let i = 0; i < 5; i++) {
+        //     for (let j = 0; j < 4; j++) {
+        //         const x = -77.0 + i * 0.05;
+        //         const y = 38.9 + j * 0.05;
+        //         mockGeoJsonData.features.push({
+        //             "type": "Feature",
+        //             "properties": generateRandomProps(),
+        //             "geometry": {
+        //                 "type": "Polygon",
+        //                 "coordinates": [[
+        //                     [x, y],
+        //                     [x + 0.04, y],
+        //                     [x + 0.04, y + 0.04],
+        //                     [x, y + 0.04],
+        //                     [x, y]
+        //                 ]]
+        //             }
+        //         });
+        //     }
+        // }
+        // // Initialize the application with the mock data once the DOM is ready.
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     initializeApplication(mockGeoJsonData);
+        // });
+        
+        // --- 2. INDICATOR CONFIGURATION ---
+        const indicators = {
+            'pop2023': { 
+                label: 'Population (2023)', 
+                unit: 'people', 
+                type: 'population' 
+            },
+            'pop_change2223': { 
+                label: 'Population Change (2022-2023)', 
+                unit: 'people', 
+                type: 'population_change' 
+            },
+            'pop2025': { 
+                label: 'Projected Population (2025)', 
+                unit: 'people', 
+                type: 'population' 
+            },
+            'pop2030': { 
+                label: 'Projected Population (2030)', 
+                unit: 'people', 
+                type: 'population' 
+            },
+            'pop_change2530': { 
+                label: 'Projected Population Change (2025-2030)', 
+                unit: 'people', 
+                type: 'population_change' 
+            },
+            'grocery_access_score': { 
+                label: 'Grocery Access Score', 
+                unit: 'score', 
+                type: 'score_v1' 
+            },
+            'childcare_access_score': { 
+                label: 'Childcare Access Score', 
+                unit: 'score', 
+                type: 'score_v1' 
+            },
+            'grocery_access_score_v2': {
+                label: 'Grocery Access Score (v2)',
+                unit: 'quality per capita',
+                type: 'score_v2',
+                description: 'Measures grocery quality per capita within a reasonable distance (1-10 miles depending on local car ownership). A score of 5 suggests, on average, one full-service grocery store is available per resident.'
+            },
+            'childcare_infant_access_score_v2': {
+                label: 'Infant Childcare Access (v2)',
+                unit: 'seats per capita',
+                type: 'score_v2',
+                description: 'Measures licensed infant seat capacity per capita within a reasonable distance (1-10 miles depending on local car ownership).'
+            },
+            'childcare_toddlerpreschool_access_score_v2': {
+                label: 'Toddler/Preschool Childcare Access (v2)',
+                unit: 'seats per capita',
+                type: 'score_v2',
+                description: 'Measures licensed toddler/preschool seat capacity per capita within a reasonable distance (1-10 miles depending on local car ownership).'
+            },
+            'childcare_school_access_score_v2': {
+                label: 'School-Age Childcare Access (v2)',
+                unit: 'seats per capita',
+                type: 'score_v2',
+                description: 'Measures licensed school-age seat capacity per capita within a reasonable distance (1-10 miles depending on local car ownership).'
+            }
+        };
+
+        // --- 3. APPLICATION SETUP FUNCTION ---
+        // All the main map logic is contained in this function.
+        // It is called by either Option A (real data) or Option B (mock data) above.
+        function initializeApplication(geojsonData) {
+            // --- MAP INITIALIZATION ---
+            const map = L.map('map').setView([38.98, -76.93], 11);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(map);
+
+            let geojsonLayer;
+            let infoPanel;
+            let legend;
+            let currentIndicator = 'pop2023'; // Default indicator
+            let lastClickedProps = null; // To store the properties of the last clicked polygon
+            
+            // Variables to hold the current classification breaks and colors for styling
+            // Initialize to empty arrays to prevent error on initial load before updateMap is called.
+            let currentBreaks = [];
+            let currentColors = [];
+
+            // --- POPULATE DROPDOWN ---
+            const select = document.getElementById('indicator-select');
+            for (const key in indicators) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = indicators[key].label;
+                select.appendChild(option);
+            }
+            select.addEventListener('change', (e) => {
+                currentIndicator = e.target.value;
+                updateMap();
+                // If a polygon was previously clicked, update its info with the new indicator
+                if (lastClickedProps) {
+                    infoPanel.update(lastClickedProps);
+                }
+            });
+
+            // --- HELPER FUNCTIONS (COLOR, BREAKS) ---
+            function getQuantileBreaks(data, indicator, numClasses) {
+                const values = data.features
+                    .map(f => f.properties[indicator])
+                    .filter(v => v !== null && !isNaN(v))
+                    .sort((a, b) => a - b);
+                
+                if (values.length === 0) return [];
+
+                const breaks = [];
+                for (let i = 1; i < numClasses; i++) {
+                    const index = Math.floor((i / numClasses) * values.length);
+                    breaks.push(values[index]);
+                }
+                return [values[0], ...breaks];
+            }
+
+            function getColor(value, breaks, colors) {
+                // Return a default color if data is invalid or if breaks/colors are not yet calculated
+                if (value === null || isNaN(value) || !breaks || breaks.length === 0) {
+                    return '#ccc'; 
+                }
+                for (let i = breaks.length - 1; i >= 0; i--) {
+                    if (value >= breaks[i]) {
+                        return colors[i];
+                    }
+                }
+                return '#ccc'; // Default color
+            }
+            
+            // Diverging colors for population change
+            const popChangeColors = ['#b2182b','#d6604d','#f4a582','#fddbc7','#d1e5f0','#92c5de','#4393c3','#2166ac'].reverse();
+            // Sequential colors for population and scores
+            const seqColors = ['#f7fbff', '#deebf7', '#c6dbef', '#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#084594'];
+            const scoreV1Colors = ['#ffffcc','#c7e9b4','#7fcdbb','#41b6c4','#2c7fb8'];
+            const scoreV2Colors = ['#edf8e9', '#bae4b3', '#74c476', '#31a354', '#006d2c'];
+
+            // --- MAP UPDATE LOGIC ---
+            function updateMap() {
+                const config = indicators[currentIndicator];
+                const data = geojsonData; // Use the data passed into the function
+                let breaks;
+                let colors;
+                
+                // Determine breaks and colors based on indicator type
+                switch (config.type) {
+                    case 'population':
+                        breaks = getQuantileBreaks(data, currentIndicator, 8);
+                        colors = seqColors;
+                        break;
+                    case 'population_change':
+                        // Use quantile breaks for population_change (not symmetrical)
+                        breaks = getQuantileBreaks(data, currentIndicator, 8);
+                        colors = popChangeColors;
+                        break;
+                    case 'score_v1':
+                        breaks = [1, 2, 3, 4, 5];
+                        colors = scoreV1Colors;
+                        break;
+                    case 'score_v2':
+                        breaks = getQuantileBreaks(data, currentIndicator, 5);
+                        colors = scoreV2Colors;
+                        break;
+                    default:
+                        breaks = [];
+                        colors = [];
+                }
+
+                // Store the calculated breaks and colors to be used by the style function
+                currentBreaks = breaks;
+                currentColors = colors;
+                
+                // Restyle the GeoJSON layer using the new breaks and colors
+                if (geojsonLayer) {
+                    geojsonLayer.setStyle(style);
+                }
+                
+                // Update the legend
+                updateLegend(breaks, colors, config);
+            }
+
+            // --- INTERACTION AND UI CONTROLS ---
+            infoPanel = L.control();
+            infoPanel.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info info-panel');
+                this.update();
+                return this._div;
+            };
+            infoPanel.update = function (props) {
+                const indicatorConfig = indicators[currentIndicator];
+                this._div.innerHTML = '<h4>Tract Information</h4>' + (props ?
+                    `<b>GEOID:</b> ${props.GEOID}<br/>` +
+                    `<b>Name:</b> ${props.tract_name}<br/>` +
+                    `<b>County:</b> ${props.county_name}<br/>` +
+                    `<b>${indicatorConfig.label}:</b> ${formatValue(props[currentIndicator], indicatorConfig.type)} ${indicatorConfig.unit}`
+                    : 'Click on a tract');
+            };
+            infoPanel.addTo(map);
+
+            legend = L.control({position: 'bottomright'});
+            legend.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info legend');
+                return this._div;
+            };
+            legend.addTo(map);
+
+            function updateLegend(breaks, colors, config) {
+                const div = legend.getContainer();
+                let labels = [];
+                
+                div.innerHTML = `<h4 class="font-semibold">${config.label}</h4><p class="text-xs text-gray-500 mb-2">${config.unit}</p>`;
+
+                if (config.type === 'score_v2') {
+                    const quintileNames = ['Lowest', 'Low', 'Middle', 'High', 'Highest'];
+                    for (let i = 0; i < quintileNames.length; i++) {
+                        const from = breaks[i];
+                        const to = breaks[i + 1];
+                        labels.push(
+                            `<i style="background:${colors[i]}"></i> ${quintileNames[i]}` +
+                            (to !== undefined ? ` (${formatValue(from, config.type)} &ndash; ${formatValue(to, config.type)})` : ` (${formatValue(from, config.type)}+)`)
+                        );
+                    }
+                } else if (config.type === 'score_v1') {
+                     for (let i = 0; i < breaks.length; i++) {
+                        labels.push(`<i style="background:${colors[i]}"></i> Score of ${breaks[i]}`);
+                    }
+                } else {
+                     for (let i = 0; i < breaks.length; i++) {
+                        const from = breaks[i];
+                        const to = breaks[i + 1];
+                        labels.push(
+                            `<i style="background:${colors[i]}"></i> ` +
+                            formatValue(from, config.type) + (to !== undefined ? '&ndash;' + formatValue(to, config.type) : '+'));
+                    }
+                }
+
+                div.innerHTML += labels.join('<br>');
+                
+                if (config.description) {
+                     div.innerHTML += `<p class="text-xs text-gray-600 mt-2 pt-2 border-t border-gray-200">${config.description}</p>`;
+                }
+            }
+            
+            function formatValue(value, type) {
+                if (value === null || typeof value === 'undefined') return 'N/A';
+                if (type === 'score_v2') return value.toFixed(2);
+                return Math.round(value).toLocaleString();
+            }
+
+            // --- STYLING AND EVENT LISTENERS ---
+            function style(feature) {
+                const value = feature.properties[currentIndicator];
+                return {
+                    fillColor: getColor(value, currentBreaks, currentColors),
+                    weight: 1,
+                    opacity: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.8
+                };
+            }
+
+            function onEachFeature(feature, layer) {
+                layer.on({
+                    mouseover: e => {
+                        const layer = e.target;
+                        layer.setStyle({
+                            weight: 3,
+                            color: '#4a5568',
+                            dashArray: '',
+                            fillOpacity: 0.9
+                        });
+                        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                            layer.bringToFront();
+                        }
+                    },
+                    mouseout: e => {
+                        geojsonLayer.resetStyle(e.target);
+                    },
+                    click: e => {
+                        map.fitBounds(e.target.getBounds());
+                        lastClickedProps = e.target.feature.properties; // Store props of clicked feature
+                        infoPanel.update(lastClickedProps);
+                    }
+                });
+            }
+            
+            geojsonLayer = L.geoJson(geojsonData, {
+                style: style, // Use the style function for initial styling
+                onEachFeature: onEachFeature
+            }).addTo(map);
+
+            // --- INITIAL MAP RENDER ---
+            updateMap();
+        }
+
+    </script>
+</body>
+</html>
+
