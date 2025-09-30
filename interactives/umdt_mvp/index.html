@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Communities - Maryland</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <!-- Leaflet Geocoder Plugin -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+    <!-- Leaflet MarkerCluster Plugin -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent body scroll */
+        }
+        
+        /* Custom Leaflet styles to match mockup */
+        .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+            background-color: white !important;
+            color: #334155 !important;
+            border-color: #cbd5e1 !important;
+            border-radius: 0.5rem !important;
+        }
+        .leaflet-control-geocoder-icon {
+            background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>');
+        }
+        .leaflet-touch .leaflet-bar {
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        /* Side panel transition */
+        #side-panel {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(-100%);
+        }
+        #side-panel.show {
+            transform: translateX(0);
+        }
+        
+        /* Custom scrollbar for side panel */
+        #side-panel-content::-webkit-scrollbar, #map-controls-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        #side-panel-content::-webkit-scrollbar-track, #map-controls-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        #side-panel-content::-webkit-scrollbar-thumb, #map-controls-scroll::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 10px;
+        }
+        #side-panel-content::-webkit-scrollbar-thumb:hover, #map-controls-scroll::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        .info-legend {
+            padding: 8px;
+            background: white;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            line-height: 1.2;
+        }
+        .info-legend h4 {
+            margin: 0 0 5px;
+            font-weight: bold;
+        }
+        .info-legend i {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            opacity: 0.9;
+            border-radius: 4px;
+            flex-shrink: 0; /* Prevents color swatch from shrinking */
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+        }
+        .legend-item span {
+            white-space: nowrap;
+        }
+
+        /* Geocoder Search Results Panel */
+        #geocoder-result-panel {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Transition for map controls when side panel opens */
+        #map-controls-container {
+            transition: transform 0.3s ease-in-out;
+        }
+        #side-panel.show ~ #map-controls-container {
+            /* On mobile, move controls completely off-screen */
+            transform: translateX(-120%);
+        }
+         @media (min-width: 768px) {
+            #side-panel.show ~ #map-controls-container {
+                /* On desktop, move it right by the width of the panel + a margin */
+                transform: translateX(calc(33.333vw + 1rem));
+            }
+        }
+        @media (min-width: 1024px) {
+            #side-panel.show ~ #map-controls-container {
+                 transform: translateX(calc(25vw + 1rem));
+            }
+        }
+        .leaflet-control-geocoder {
+            z-index: 1001 !important; /* Ensure geocoder is on top */
+        }
+        .leaflet-top.leaflet-right .leaflet-control-geocoder {
+            margin-top: 1rem;
+            margin-right: 1rem;
+        }
+
+        /* Custom tooltip for explanations */
+        .info-tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .info-tooltip .tooltip-text {
+            visibility: hidden;
+            width: 250px;
+            background-color: #334155;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            right: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+        .info-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+    <div class="relative h-screen w-screen flex">
+        <!-- Map Container -->
+        <div id="map" class="h-full w-full z-0"></div>
+
+        <!-- Side Panel for Feature Details -->
+        <div id="side-panel" class="absolute top-0 left-0 h-screen w-full md:w-1/3 lg:w-1/4 bg-white shadow-2xl z-20 flex flex-col">
+            <div class="p-4 border-b flex justify-between items-center">
+                <h2 id="panel-title" class="text-xl font-bold text-slate-900">Tract Details</h2>
+                <button id="close-panel-btn" class="p-1 rounded-full hover:bg-slate-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div id="side-panel-content" class="flex-grow overflow-y-auto p-4 space-y-4">
+                <!-- Content will be injected here by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Top-left controls: Choropleth dropdown & Toggles -->
+        <div id="map-controls-container" class="absolute top-4 left-4 bg-white p-4 rounded-lg shadow-lg z-10 w-auto max-w-sm flex flex-col max-h-[calc(100vh-2rem)]">
+            <div>
+                <h3 class="font-semibold mb-2 text-slate-700">Map Variable</h3>
+                <select id="choropleth-select" class="w-full p-2 rounded-md border-2 border-slate-300 focus:ring-slate-500 focus:border-slate-500">
+                    <!-- Options will be injected here -->
+                </select>
+            </div>
+            <div id="map-controls-scroll" class="overflow-y-auto mt-4 pr-2">
+                 <!-- Base Layer Toggle -->
+                 <div>
+                    <h3 class="font-semibold mb-2 text-slate-700">Base Layers</h3>
+                     <div class="space-y-1 text-sm">
+                        <label class="flex items-center"><input type="checkbox" id="tract-toggle" onchange="toggleTractLayer(this)" checked class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Community Tracts</span></label>
+                    </div>
+                 </div>
+                 <!-- Polygon Toggles -->
+                <div class="mt-4">
+                    <h3 class="font-semibold mb-2 text-slate-700">Incentive Areas</h3>
+                    <div class="space-y-1 text-sm">
+                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="brni_areas" data-url="brni_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">BRNI Areas</span></label>
+                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enterprise_zone_focus_areas" data-url="enterprise_zone_focus_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Enterprise Zone Focus Areas</span></label>
+                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enterprise_zones" data-url="enterprise_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Enterprise Zones</span></label>
+                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="main_street_areas" data-url="main_street_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Main Street Areas</span></label>
+                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="opportunity_zones" data-url="opportunity_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Opportunity Zones</span></label>
+                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="priority_funding_areas" data-url="priority_funding_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Priority Funding Areas</span></label>
+                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="rise_zones" data-url="rise_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">RISE Zones</span></label>
+                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="sustainable_communities" data-url="sustainable_communities.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Sustainable Communities</span></label>
+                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="transit_oriented_development" data-url="transit_oriented_development.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Transit Oriented Development</span></label>
+                    </div>
+                </div>
+                 <!-- Point Toggles -->
+                <div class="mt-4">
+                    <h3 class="font-semibold mb-2 text-slate-700">Points of Interest</h3>
+                    <div class="space-y-1 text-sm">
+                        <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="childcare" data-url="childcare.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Childcare Locations</span></label>
+                        <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="grocery" data-url="grocery.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Grocery Locations</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Geocoder Search Result Panel -->
+        <div id="geocoder-result-panel" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-xl z-30 w-full max-w-lg opacity-0 pointer-events-none">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-slate-900">Address Insight</h2>
+                <button id="close-geocoder-panel-btn" class="p-1 rounded-full hover:bg-slate-200">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div id="geocoder-result-content">
+                <!-- Geocoder result content will be injected here -->
+            </div>
+        </div>
+    </div>
+
+<script>
+// --- GLOBAL STATE AND CONFIGURATION ---
+let map; // Leaflet map object
+let geojsonLayer; // Main choropleth layer
+const overlayLayers = {}; // To store and manage toggleable layers
+const preloadedOverlayData = {}; // To store data loaded from files
+
+const incentiveStyles = {
+    'brni_areas': { color: '#e41a1c', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' },
+    'enterprise_zone_focus_areas': { color: '#377eb8', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' },
+    'enterprise_zones': { color: '#4daf4a', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' },
+    'main_street_areas': { color: '#984ea3', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' },
+    'opportunity_zones': { color: '#ff7f00', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' },
+    'priority_funding_areas': { color: '#ffff33', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' },
+    'rise_zones': { color: '#a65628', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' },
+    'sustainable_communities': { color: '#f781bf', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' },
+    'transit_oriented_development': { color: '#999999', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' }
+};
+
+// Helper function to safely parse string values to floats
+function safeParseFloat(value, defaultValue = 0) {
+    const parsed = parseFloat(value);
+    return isNaN(parsed) ? defaultValue : parsed;
+}
+const formatPercent = (val) => `${(safeParseFloat(val) * 100).toFixed(1)}%`;
+const formatCurrency = (val) => `$${Math.round(safeParseFloat(val)).toLocaleString()}`;
+const formatNumber = (val) => Math.round(safeParseFloat(val)).toLocaleString();
+function truncateCommunityList(listString, maxVisible = 2) {
+    // Split the string into an array of individual community names
+    const communities = listString.split(', ');
+
+    // If the number of communities is less than or equal to our max,
+    // there's no need to truncate, so we return the original string.
+    if (communities.length <= maxVisible) {
+        return listString;
+    }
+
+    // Grab the first few communities that we want to remain visible
+    const visibleCommunities = communities.slice(0, maxVisible);
+
+    // Calculate how many communities are being hidden
+    const hiddenCount = communities.length - maxVisible;
+    
+    // For better grammar, determine if we need "community" or "communities"
+    const communityWord = hiddenCount === 1 ? 'community' : 'communities';
+
+    // Join the visible communities and append the dynamic summary
+    return `${visibleCommunities.join(', ')} and ${hiddenCount} other ${communityWord}`;
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // --- MAP INITIALIZATION ---
+    map = L.map('map', {
+        center: [39.0458, -76.6413], // Centered on Maryland
+        zoom: 9,
+        zoomControl: false // We will add it in a different position
+    });
+    
+    // Create custom panes to control layer order
+    map.createPane('incentivePane');
+    map.getPane('incentivePane').style.zIndex = 450; // Lower level for incentives
+    map.createPane('tractPane');
+    map.getPane('tractPane').style.zIndex = 400; // Higher level for tracts
+    map.createPane('clusterTopPane');
+    map.getPane('clusterTopPane').style.zIndex = 650;
+
+    const mapboxToken = 'pk.eyJ1IjoiYW1pbGxlci1tZGdvdiIsImEiOiJjbWc1ZW1hcm8wMWZ0MmtweWZtcmVxeTBtIn0.JS4bkhCiIv6oB_0WEQRpwg';
+    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
+        tileSize: 512,
+        maxZoom: 18,
+        zoomOffset: -1,
+        accessToken: mapboxToken
+    }).addTo(map);
+
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+    // --- DATA LOADING ---
+    let tractData;
+    try {
+        const response = await fetch('tract_supply_demand_gap.geojson');
+        if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
+        tractData = await response.json();
+        console.log('Successfully loaded live tract data.');
+    } catch (error) {
+        console.error('Failed to load live tract data:', error);
+    }
+
+    const overlayFiles = [
+        // Incentive Areas
+        'brni_areas.geojson', 'enterprise_zone_focus_areas.geojson', 'enterprise_zones.geojson',
+        'main_street_areas.geojson', 'opportunity_zones.geojson', 'priority_funding_areas.geojson',
+        'rise_zones.geojson', 'sustainable_communities.geojson', 'transit_oriented_development.geojson',
+        // Points of Interest
+        'childcare.geojson', 'grocery.geojson'
+    ];
+    try {
+        await Promise.all(overlayFiles.map(async (file) => {
+            const response = await fetch(file);
+            if (!response.ok) throw new Error(`Failed to load ${file}`);
+            const data = await response.json();
+            const layerName = file.split('.')[0];
+            preloadedOverlayData[layerName] = data;
+        }));
+        console.log('Successfully pre-loaded all overlay data.');
+    } catch (error) {
+        console.error('Failed to pre-load overlay data:', error);
+    }
+
+    initializeMap(tractData);
+});
+
+
+function initializeMap(tractData) {
+    // --- CHOROPLETH AND LEGEND LOGIC ---
+    let currentVariable = 'pop2025'; // Default variable
+    const legend = L.control({ position: 'bottomright' });
+    const choroplethSelect = document.getElementById('choropleth-select');
+
+    const choroplethOptions = {
+        'pop2025': { label: 'Population (2025)', format: (d) => formatNumber(d) },
+        'pop_change2530': { label: 'Projected Pop. Change (25-30)', format: (d) => formatNumber(d) },
+        'avg_household_income': { label: 'Avg. Household Income', format: (d) => formatCurrency(d) },
+        'vehicle_ownership_pct': { label: '% Vehicle Ownership', format: (d) => `${(d * 100).toFixed(1)}%` },
+        'pct_under5': { label: '% Population Under 5', format: (d) => `${(d * 100).toFixed(1)}%` },
+        'childcare_spending_per_under5': { label: 'Childcare Spending (per child)', format: (d) => formatCurrency(d) },
+        'childcare_supply_score': { label: 'Childcare Supply (Seats)', format: (d) => formatNumber(d) },
+        'childcare_demand_score': { label: 'Childcare Demand (Seats)', format: (d) => formatNumber(d) },
+        'childcare_unmet_demand': { label: 'Childcare Unmet Demand (Seats)', format: (d) => formatNumber(d) },
+        'grocery_supply_score': { label: 'Grocery Supply Score', format: (d) => d.toFixed(2) },
+        'grocery_demand_score': { label: 'Grocery Demand Score', format: (d) => d.toFixed(2) },
+        'grocery_unmet_demand': { label: 'Grocery Unmet Demand Score', format: (d) => d.toFixed(2) },
+    };
+
+    Object.keys(choroplethOptions).forEach(key => {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = choroplethOptions[key].label;
+        choroplethSelect.appendChild(option);
+    });
+    choroplethSelect.value = currentVariable;
+    
+    // --- COLOR SCALES ---
+    const sequentialColors = ['#eff3ff', '#bdd7e7', '#6baed6', '#3182bd', '#08519c'];
+    // Red (Need) -> Yellow (Neutral) -> Blue (Abundance)
+    const divergingColors = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'].reverse();
+
+
+    function getQuantiles(data, numQuantiles) {
+        const sorted = data.filter(v => !isNaN(v)).sort((a, b) => a - b);
+        const quantiles = [];
+        for (let i = 1; i < numQuantiles; i++) {
+            const pos = (sorted.length - 1) * (i / numQuantiles);
+            const base = Math.floor(pos);
+            const rest = pos - base;
+            if (sorted[base + 1] !== undefined) {
+                quantiles.push(sorted[base] + rest * (sorted[base + 1] - sorted[base]));
+            } else {
+                quantiles.push(sorted[base]);
+            }
+        }
+        return quantiles;
+    }
+
+    function getDivergingBreaks(values) {
+        const max = Math.max(...values.map(v => Math.abs(v)));
+        return [
+            -max * 0.66,
+            -max * 0.33,
+            0,
+            max * 0.33,
+            max * 0.66,
+        ];
+    }
+
+    function getColor(d, breaks, colors) {
+        if (colors.length === 6) { // Diverging
+            return d > breaks[4] ? colors[5] :
+                   d > breaks[3] ? colors[4] :
+                   d > breaks[2] ? colors[3] :
+                   d > breaks[1] ? colors[2] :
+                   d > breaks[0] ? colors[1] :
+                                   colors[0];
+        } else { // Sequential
+            return d > breaks[3] ? colors[4] :
+                   d > breaks[2] ? colors[3] :
+                   d > breaks[1] ? colors[2] :
+                   d > breaks[0] ? colors[1] :
+                                   colors[0];
+        }
+    }
+
+    function style(feature) {
+        const isDiverging = currentVariable.includes('unmet_demand');
+        const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable]));
+        const breaks = isDiverging ? getDivergingBreaks(values) : getQuantiles(values, sequentialColors.length);
+        const colors = isDiverging ? divergingColors : sequentialColors;
+        const value = safeParseFloat(feature.properties[currentVariable]);
+
+        return {
+            fillColor: getColor(value, breaks, colors),
+            weight: 2,
+            opacity: 1,
+            color: null,
+            fillOpacity: 0.8,
+            pane: 'tractPane'
+        };
+    }
+    
+    legend.onAdd = function (map) {
+        const div = L.DomUtil.create('div', 'info-legend');
+        const isDiverging = currentVariable.includes('unmet_demand');
+        const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable])).filter(v => !isNaN(v));
+        if(values.length === 0) return div;
+        
+        const colors = isDiverging ? divergingColors : sequentialColors;
+        const breaks = isDiverging ? getDivergingBreaks(values) : getQuantiles(values, colors.length);
+        const formatter = choroplethOptions[currentVariable].format;
+        
+        let content = `<h4>${choroplethOptions[currentVariable].label}</h4>`;
+        
+        if (isDiverging) {
+             content += `<div class="legend-item"><i style="background:${colors[5]}"></i><span>More Demand (Need)</span></div>`;
+             content += `<div class="legend-item"><i style="background:${colors[2]}"></i><span>Balanced</span></div>`;
+             content += `<div class="legend-item"><i style="background:${colors[0]}"></i><span>More Supply (Abundance)</span></div>`;
+        } else {
+            for (let i = 0; i < colors.length; i++) {
+                const from = i === 0 ? Math.min(...values) : breaks[i - 1];
+                const to = i === colors.length - 1 ? Math.max(...values) : breaks[i];
+                 content +=
+                    `<div class="legend-item">
+                        <i style="background:${colors[i]}"></i>
+                        <span>${formatter(from)}${to ? ' &ndash; ' + formatter(to) : '+'}</span>
+                    </div>`;
+            }
+        }
+        div.innerHTML = content;
+        return div;
+    };
+
+
+    function updateMap() {
+        currentVariable = choroplethSelect.value;
+        if (geojsonLayer) {
+            geojsonLayer.setStyle(style);
+        }
+        if (legend._map) { 
+            legend.remove();
+        }
+        legend.addTo(map);
+    }
+    
+    choroplethSelect.addEventListener('change', updateMap);
+
+
+    // --- FEATURE INTERACTION (CLICK, HOVER) ---
+    let lastClickedLayer = null;
+
+    function highlightFeature(e) {
+        const layer = e.target;
+        layer.setStyle({ weight: 4, color: '#334155', dashArray: '' });
+        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) layer.bringToFront();
+    }
+
+    function resetHighlight(e) { geojsonLayer.resetStyle(e.target); }
+
+    function onEachFeature(feature, layer) {
+        layer.on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight,
+            click: (e) => {
+                map.fitBounds(e.target.getBounds());
+                displayFeatureInfo(feature.properties);
+                if (lastClickedLayer) geojsonLayer.resetStyle(lastClickedLayer);
+                e.target.setStyle({ weight: 4, color: '#334155', dashArray: '' });
+                lastClickedLayer = e.target;
+            }
+        });
+    }
+    
+    geojsonLayer = L.geoJSON(tractData, { style: style, onEachFeature: onEachFeature }).addTo(map);
+    updateMap();
+
+
+    // --- SIDE PANEL LOGIC ---
+    const sidePanel = document.getElementById('side-panel');
+    const panelTitle = document.getElementById('panel-title');
+    const panelContent = document.getElementById('side-panel-content');
+    const closePanelBtn = document.getElementById('close-panel-btn');
+
+    closePanelBtn.addEventListener('click', () => {
+        sidePanel.classList.remove('show');
+        if (lastClickedLayer) {
+             geojsonLayer.resetStyle(lastClickedLayer);
+             lastClickedLayer = null;
+        }
+    });
+
+    function makeLinks(text) {
+        // Add Tailwind classes to existing <a> tags only if not already present
+        return text.replace(/<a\s+([^>]*href=['"][^'"]+['"][^>]*)>/gi, (match, attrs) => {
+            // If class already present, just return the match
+            if (/class\s*=/.test(attrs)) return match;
+            // Otherwise, add the classes
+            return `<a ${attrs} class="text-blue-600 font-semibold hover:underline">`;
+        });
+    }
+
+    function displayFeatureInfo(properties) {
+        panelTitle.textContent = `${truncateCommunityList(properties.tract_name)}, ${properties.county_name}`;
+
+        const createList = (items, title) => {
+            if (!items || items.length === 0) return '';
+            return `
+                <div class="bg-slate-50 p-3 rounded-lg mt-2">
+                    <h4 class="font-semibold text-slate-600 mb-2">${title}</h4>
+                    <ul class="list-disc list-inside space-y-1 text-sm text-slate-700">
+                        ${items.map(item => `<li>${makeLinks(item)}</li>`).join('')}
+                    </ul>
+                </div>`;
+        };
+        
+        const createPlanAreas = (items) => {
+             if (!items || items.length === 0) return '';
+             return `
+                <div class="bg-slate-50 p-3 rounded-lg">
+                    <h4 class="font-semibold text-slate-600 mb-2">Relevant Plans</h4>
+                    ${items.map(p => `
+                        <div class="mt-2 text-sm">
+                            <p class="font-medium text-slate-800">${p.area_name} (${p.plan_year})</p>
+                            <p class="text-slate-600 italic">"${p.community_vision}"</p>
+                        </div>
+                    `).join('')}
+                </div>`;
+        }
+        
+        const popChange = formatNumber(safeParseFloat(properties.pop_change2530));
+
+        panelContent.innerHTML = `
+            <div>
+                <h3 class="text-lg font-semibold text-slate-800 mb-2">Population</h3>
+                <div class="grid grid-cols-2 gap-2 text-sm">
+                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Population (2025):</span> ${formatNumber(properties.pop2025)}</div>
+                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Projected Pop. (2030):</span> ${formatNumber(properties.pop2030)}</div>
+                    <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Projected Change (25-30):</span> <span class="${popChange > 0 ? 'text-green-600' : 'text-red-600'}">${popChange.toLocaleString()}</span></div>
+                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">% Under 5:</span> ${formatPercent(properties.pct_under5)}</div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-slate-800 mb-2">Demographics & Economics</h3>
+                <div class="grid grid-cols-2 gap-2 text-sm">
+                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Avg. HH Income:</span> ${formatCurrency(properties.avg_household_income)}</div>
+                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">% Vehicle Own:</span> ${formatPercent(properties.vehicle_ownership_pct)}</div>
+                    <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Race/Ethnicity:</span><br/> White: ${formatPercent(properties.pct_white)}<br/>Black: ${formatPercent(properties.pct_black)}<br/>Hispanic: ${formatPercent(properties.pct_hispanic)}</div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Needs & Opportunities</h3>
+                <p class="text-sm p-3 bg-blue-50 border-l-4 border-blue-400 text-blue-800 rounded-r-md"><em>${properties.incentive_intro}</em></p>
+                
+                <div class="mt-4 p-4 border rounded-lg">
+                    <h4 class="text-md font-semibold text-slate-700">Childcare</h4>
+                    <div class="grid grid-cols-3 gap-2 text-sm mt-2">
+                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Supply:</span> ${formatNumber(properties.childcare_supply_score)} seats</div>
+                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Demand:</span> ${formatNumber(properties.childcare_demand_score)} seats</div>
+                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Unmet Demand:</span> ${formatNumber(properties.childcare_unmet_demand)} seats 
+                             <div class="info-tooltip inline-block ml-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                                <span class="tooltip-text">Child care unmet demand is the number of children 5 and under in households where all parents are in the laborforce, minus the licensed capacity of local child care providers. Positive scores reflect community need.</span>
+                            </div>
+                         </div>
+                    </div>
+                    ${createList(properties.childcare_need_quotes, 'Community Voices on Need')}
+                    ${createList(properties.childcare_planning_quotes, 'Community Voices on Planning')}
+                    ${createList(properties.incentive_childcare_advice, 'Incentive Advice')}
+                </div>
+                
+                <div class="mt-4 p-4 border rounded-lg">
+                    <h4 class="text-md font-semibold text-slate-700">Fresh Food & Groceries</h4>
+                     <div class="grid grid-cols-3 gap-2 text-sm mt-2">
+                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Supply Score:</span> ${properties.grocery_supply_score.toFixed(2)}</div>
+                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Demand Score:</span> ${properties.grocery_demand_score.toFixed(2)}</div>
+                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Unmet Demand:</span> ${properties.grocery_unmet_demand.toFixed(2)}
+                            <div class="info-tooltip inline-block ml-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                                <span class="tooltip-text">Fresh food unmet demand is the difference between an assumed universal demand (1.0) and the local supply score. Supply is rated 1-5 for local stores, with scores below 1 indicating poor access. Positive scores reflect need.</span>
+                            </div>
+                         </div>
+                    </div>
+                    ${createList(properties.fresh_food_need_quotes, 'Community Voices on Need')}
+                    ${createList(properties.fresh_food_planning_quotes, 'Community Voices on Planning')}
+                    ${createList(properties.incentive_fresh_food_advice, 'Incentive Advice')}
+                </div>
+                
+                ${createPlanAreas(properties.plan_areas)}
+            </div>
+        `;
+        sidePanel.classList.add('show');
+    }
+
+    // --- GEOCODING LOGIC ---
+    // ... (No changes here, remains the same)
+    const geocoderResultPanel = document.getElementById('geocoder-result-panel');
+    const geocoderResultContent = document.getElementById('geocoder-result-content');
+    const closeGeocoderPanelBtn = document.getElementById('close-geocoder-panel-btn');
+
+    L.Control.geocoder({
+        defaultMarkGeocode: false,
+        placeholder: 'Search for an address...',
+        position: 'topright'
+    }).on('markgeocode', function(e) {
+        const latlng = e.geocode.center;
+        let foundFeature = null;
+
+        geojsonLayer.eachLayer(function(layer) {
+            if (isPointInMultiPolygonLayer_Custom(latlng, layer)) {
+                foundFeature = layer.feature;
+            }
+        });
+
+        if (foundFeature) {
+            map.setView(latlng, 15);
+            L.marker(latlng).addTo(map)
+                .bindPopup(e.geocode.name)
+                .openPopup();
+            displayGeocoderResult(foundFeature.properties, e.geocode.name);
+        } else {
+            displayGeocoderResult(null, e.geocode.name);
+        }
+
+    }).addTo(map);
+
+    function displayGeocoderResult(properties, addressName) {
+        if (properties) {
+             geocoderResultContent.innerHTML = `
+                <p class="text-slate-600 mb-2">The address <strong class="text-slate-800">${addressName}</strong> is located within:</p>
+                <h3 class="text-lg font-bold text-slate-900">${truncateCommunityList(properties.tract_name)}, ${properties.county_name}</h3>
+                <p class="text-sm text-slate-500 mb-4">(GEOID: ${properties.GEOID})</p>
+                <p class="text-sm">This area's 2025 population is <strong class="text-slate-800">${formatNumber(safeParseFloat(properties.pop2025))}</strong> with an average household income of <strong class="text-slate-800">${formatCurrency(safeParseFloat(properties.avg_household_income))}</strong>.</p>
+                <button id="view-full-details-btn" class="mt-4 w-full bg-slate-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-slate-800 transition-colors">View Full Tract Details</button>
+             `;
+             document.getElementById('view-full-details-btn').onclick = () => {
+                const feature = tractData.features.find(f => f.properties.GEOID === properties.GEOID);
+                const layer = geojsonLayer.getLayers().find(l => l.feature === feature);
+                if (layer) {
+                    layer.fire('click');
+                }
+                geocoderResultPanel.classList.remove('opacity-100');
+                geocoderResultPanel.classList.add('opacity-0', 'pointer-events-none');
+             };
+        } else {
+             geocoderResultContent.innerHTML = `
+                <p class="text-slate-600 mb-2">The address <strong class="text-slate-800">${addressName}</strong> was found, but it does not fall within any of the community data tracts on the map.</p>
+             `;
+        }
+        geocoderResultPanel.classList.remove('opacity-0', 'pointer-events-none');
+        geocoderResultPanel.classList.add('opacity-100');
+    }
+
+    closeGeocoderPanelBtn.addEventListener('click', () => {
+        geocoderResultPanel.classList.remove('opacity-100');
+        geocoderResultPanel.classList.add('opacity-0', 'pointer-events-none');
+    });
+
+    // --- POINT IN POLYGON HELPER FUNCTIONS ---
+    function isPointInPolygon(point, vs) {
+        var x = point.lng, y = point.lat;
+        var inside = false;
+        for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+            var xi = vs[i].lng, yi = vs[i].lat;
+            var xj = vs[j].lng, yj = vs[j].lat;
+            var intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+            if (intersect) inside = !inside;
+        }
+        return inside;
+    };
+
+    function isPointInSingleLeafletPolygon_Custom(latlng, leafletPolygon) {
+        if (!latlng || !(leafletPolygon instanceof L.Polygon)) return false;
+        
+        const allLatLngs = leafletPolygon.getLatLngs();
+        if (!allLatLngs || allLatLngs.length === 0) return false;
+
+        const outerRingVertices = (allLatLngs[0] instanceof L.LatLng) ? allLatLngs : allLatLngs[0];
+
+        if (!isPointInPolygon(latlng, outerRingVertices)) return false;
+
+        if (!(allLatLngs[0] instanceof L.LatLng)) {
+            for (let i = 1; i < allLatLngs.length; i++) {
+                if (isPointInPolygon(latlng, allLatLngs[i])) return false; 
+            }
+        }
+        
+        return true;
+    }
+
+    function isPointInMultiPolygonLayer_Custom(latlng, multiPolygonFeatureLayer) {
+        if (!latlng || !multiPolygonFeatureLayer) return false;
+        if (typeof multiPolygonFeatureLayer.getLayers === 'function') {
+            const individualPolygons = multiPolygonFeatureLayer.getLayers();
+            for (let i = 0; i < individualPolygons.length; i++) {
+                const polygon = individualPolygons[i];
+                if (polygon instanceof L.Polygon) {
+                    if (isPointInSingleLeafletPolygon_Custom(latlng, polygon)) return true;
+                }
+            }
+        } else if (multiPolygonFeatureLayer instanceof L.Polygon) {
+            return isPointInSingleLeafletPolygon_Custom(latlng, multiPolygonFeatureLayer);
+        }
+        return false;
+    }
+}
+
+// --- OVERLAY LAYER TOGGLE LOGIC ---
+function toggleTractLayer(checkbox) {
+    if (checkbox.checked) {
+        if (!map.hasLayer(geojsonLayer)) {
+            map.addLayer(geojsonLayer);
+        }
+    } else {
+        if (map.hasLayer(geojsonLayer)) {
+            map.removeLayer(geojsonLayer);
+        }
+    }
+}
+
+async function togglePolygonLayer(checkbox) {
+    const layerName = checkbox.dataset.name;
+    const url = checkbox.dataset.url;
+
+    if (checkbox.checked) {
+        if (overlayLayers[layerName]) {
+            map.addLayer(overlayLayers[layerName]);
+            return;
+        }
+        
+        checkbox.parentElement.classList.add('animate-pulse');
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Failed to load ${url}`);
+            const data = await response.json();
+            
+            const style = incentiveStyles[layerName] || { color: '#000000', weight: 2 };
+            const layer = L.geoJSON(data, {
+                style: {...style, pane: 'incentivePane' }, // Assign to correct pane
+                interactive: false
+                // ,onEachFeature: (feature, layer) => {
+                //     const name = feature.properties.name || feature.properties.Name || layerName.replace(/_/g, ' ');
+                //     layer.bindPopup(`<div class="font-bold">${name}</div>`);
+                // }
+            });
+            overlayLayers[layerName] = layer;
+            map.addLayer(layer);
+        } catch (error) {
+            console.error(`Failed to load ${layerName}:`, error);
+            alert(`Could not load the layer: ${layerName}. Check the console for details.`);
+            checkbox.checked = false; // Uncheck on error
+        } finally {
+            checkbox.parentElement.classList.remove('animate-pulse');
+        }
+    } else {
+        if (overlayLayers[layerName]) {
+            map.removeLayer(overlayLayers[layerName]);
+        }
+    }
+}
+
+async function togglePointLayer(checkbox) {
+    const layerName = checkbox.dataset.name;
+    const url = checkbox.dataset.url;
+
+    if (checkbox.checked) {
+        if (overlayLayers[layerName]) {
+            map.addLayer(overlayLayers[layerName]);
+            return;
+        }
+
+        checkbox.parentElement.classList.add('animate-pulse');
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Failed to load ${url}`);
+            const data = await response.json();
+            
+            const markers = L.markerClusterGroup({
+                clusterPane: 'clusterTopPane' // Use the new pane for clusters and polygons
+            });
+            const isChildcare = layerName === 'childcare';
+            const pointStyle = {
+                radius: 6,
+                fillColor: isChildcare ? "#fca5a5" : "#6ee7b7", // red for childcare, green for grocery
+                color: "#000",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
+            };
+
+            if (data.type === 'FeatureCollection' && data.features) {
+                data.features.forEach(feature => {
+                    if (feature.geometry && feature.geometry.type === 'Point' && feature.geometry.coordinates) {
+                        const properties = feature.properties;
+                        const latlng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]]; 
+                        const marker = L.circleMarker(latlng, { ...pointStyle, pane: 'clusterTopPane' });
+                        
+                        let popupContent = '';
+                        if (isChildcare) {
+                            popupContent = `
+                                <div class="font-bold text-base">${properties.gen_listing_name_original_text || 'N/A'}</div>
+                                <div><strong>Capacity (Under 6):</strong> ${properties.licensed_capacity_under6 || 'N/A'}</div>
+                            `;
+                        } else { // Grocery
+                             popupContent = `
+                                <div class="font-bold text-base">${properties.name || 'N/A'}</div>
+                                <div><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
+                                <div><strong>Quality:</strong> ${properties.quality || 'N/A'}</div>
+                            `;
+                        }
+                        marker.bindPopup(popupContent);
+                        markers.addLayer(marker); // Add marker to the cluster group
+                    }
+                });
+            }
+
+            overlayLayers[layerName] = markers;
+            map.addLayer(markers);
+
+        } catch (error) {
+            console.error(`Failed to load ${layerName}:`, error);
+             alert(`Could not load the layer: ${layerName}. Check the console for details.`);
+            checkbox.checked = false;
+        } finally {
+             checkbox.parentElement.classList.remove('animate-pulse');
+        }
+        
+    } else {
+        if (overlayLayers[layerName]) {
+            map.removeLayer(overlayLayers[layerName]);
+        }
+    }
+}
+
+</script>
+</body>
+</html>
