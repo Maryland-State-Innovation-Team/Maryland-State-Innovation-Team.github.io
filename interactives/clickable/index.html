@@ -85,11 +85,10 @@
         }
     </style>
 </head>
-<body class="bg-white text-slate-800">
+<body class="bg-slate-50 text-slate-800">
 
     <div id="app" class="min-h-screen flex flex-col">
 
-        <!-- Header -->
         <header class="bg-white border-b sticky top-0 z-50">
             <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
@@ -99,17 +98,14 @@
                         </div>
                         <div class="hidden md:block">
                             <div id="main-nav" class="ml-10 flex items-baseline space-x-1">
-                                <!-- Public Nav Links will be injected here -->
-                            </div>
+                                </div>
                             <div id="agency-nav" class="ml-10 flex items-baseline space-x-1" style="display: none;">
-                                <!-- Agency Nav Links will be injected here -->
-                            </div>
+                                </div>
                         </div>
                     </div>
                     <div class="hidden md:block">
                         <div id="auth-container" class="ml-4 flex items-center md:ml-6 space-x-2">
-                            <!-- Auth buttons will be injected here -->
-                        </div>
+                            </div>
                     </div>
                     <div class="-mr-2 flex md:hidden">
                         <button type="button" class="bg-white inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMobileMenu()">
@@ -120,24 +116,19 @@
                     </div>
                 </div>
             </nav>
-            <!-- Mobile menu, show/hide based on menu state. -->
             <div class="md:hidden hidden" id="mobile-menu">
                 <div id="mobile-main-nav" class="px-2 pt-2 pb-3 space-y-1 sm:px-3"></div>
                 <div id="mobile-agency-nav" class="px-2 pt-2 pb-3 space-y-1 sm:px-3" style="display: none;"></div>
                 <div class="pt-4 pb-3 border-t border-slate-200">
                     <div id="mobile-auth-container" class="flex items-center px-5 space-x-2">
-                         <!-- Mobile Auth buttons will be injected here -->
-                    </div>
+                         </div>
                 </div>
             </div>
         </header>
 
-        <!-- Main Content -->
         <main class="flex-grow">
 
-            <!-- 1.1 Homepage -->
             <section id="homepage" class="active">
-                <!-- Hero Section -->
                 <div class="bg-slate-50">
                     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-24 flex items-center justify-center text-center">
                         <div class="relative">
@@ -154,8 +145,7 @@
                     </div>
                 </div>
 
-                <!-- User Personas Section -->
-                 <div class="py-16">
+                <div class="py-16 bg-white">
                     <div class="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
                         <div>
                             <h2 class="text-xl font-bold">For Small Business Owners</h2>
@@ -180,7 +170,6 @@
                     </div>
                 </div>
 
-                <!-- Incentives Grid -->
                 <div class="bg-slate-50 py-16">
                     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                         <h2 class="text-3xl font-bold">Incentives pulled across state and local agencies</h2>
@@ -198,8 +187,7 @@
                     </div>
                 </div>
                 
-                <!-- Testimonials -->
-                <div class="py-16">
+                <div class="py-16 bg-white">
                      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                         <h2 class="text-3xl font-bold">Testimonials</h2>
                         <p class="mt-2 text-slate-600">Subheading</p>
@@ -239,17 +227,14 @@
                 </div>
             </section>
 
-            <!-- 1.2 Explore Maryland (Interactive Map) -->
             <section id="explore-maryland">
                  <div class="flex flex-col md:flex-row h-[calc(100vh-64px)]">
-                    <!-- Left Panel -->
                     <div id="location-profile-panel" class="w-full md:w-1/3 lg:w-1/4 bg-white p-4 overflow-y-auto shadow-lg" style="display: none;">
                         <h2 class="text-lg font-bold hover:underline" onclick="navigateTo('address-details')">Location Profile</h2>
                         <p class="text-sm text-slate-500">123 Main St, Annapolis, MD</p>
                         
                         <div class="mt-4">
-                             <!-- Tabs -->
-                            <div class="border-b border-gray-200">
+                             <div class="border-b border-gray-200">
                                 <nav class="-mb-px flex space-x-4" aria-label="Tabs">
                                     <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
                                     <button class="tab-btn" onclick="switchTab('incentives')">Incentives</button>
@@ -257,7 +242,6 @@
                                 </nav>
                             </div>
                             
-                            <!-- Tab Content -->
                             <div id="tab-overview" class="tab-content active mt-4 space-y-4">
                                 <div class="p-3 bg-slate-100 rounded-md">
                                     <h3 class="font-semibold">Viability Score (Grocery)</h3>
@@ -284,7 +268,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Map Area -->
                     <div class="flex-grow bg-slate-200 relative">
                         <div class="absolute top-4 left-4 bg-white p-4 rounded-md shadow-lg z-10 w-full max-w-md">
                              <div class="relative">
@@ -308,7 +291,6 @@
                 </div>
             </section>
             
-            <!-- 1.2.1 Address Details Page -->
             <section id="address-details">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <button class="btn-outline mb-4" onclick="navigateTo('explore-maryland')">&larr; Back to Map</button>
@@ -330,34 +312,124 @@
                 </div>
             </section>
 
-            <!-- 1.3 Find Incentives -->
             <section id="find-incentives">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <div id="incentive-list-view">
-                        <h1 class="text-3xl font-bold">Find Incentives</h1>
-                        <div class="mt-6 p-4 bg-white rounded-md shadow-sm">
-                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                                <input type="text" placeholder="Search by keyword..." class="md:col-span-2 p-2 rounded-md border border-slate-300">
-                                <div class="placeholder h-10">Filter by Eligibility</div>
-                                <div class="placeholder h-10">Filter by Location</div>
-                            </div>
-                            <div class="mt-4 flex justify-end">
-                                <button class="btn">Download as CSV</button>
-                            </div>
-                        </div>
-                        <div class="mt-6 space-y-4">
-                            <div class="p-4 bg-white rounded-md shadow-sm flex justify-between items-center">
-                                <div class="placeholder h-16 flex-grow mr-4">Incentive A: Description</div>
-                                <button class="btn-outline" onclick="navigateTo('find-incentives', 'detail')">View Details</button>
-                            </div>
-                            <div class="p-4 bg-white rounded-md shadow-sm flex justify-between items-center">
-                                <div class="placeholder h-16 flex-grow mr-4">Incentive B: Description</div>
-                                <button class="btn-outline" onclick="navigateTo('find-incentives', 'detail')">View Details</button>
-                            </div>
-                            <div class="p-4 bg-white rounded-md shadow-sm flex justify-between items-center">
-                                <div class="placeholder h-16 flex-grow mr-4">Incentive C: Description</div>
-                                <button class="btn-outline" onclick="navigateTo('find-incentives', 'detail')">View Details</button>
-                            </div>
+                        <h1 class="text-3xl font-bold mb-8">Find State Funding for Your Business</h1>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                            <aside class="lg:col-span-1">
+                                <div class="bg-white p-4 rounded-lg shadow-sm">
+                                    <div class="border-b py-4">
+                                        <div class="flex justify-between items-center font-medium">
+                                            <span>Business Category</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" /></svg>
+                                        </div>
+                                    </div>
+                                    <div class="border-b py-4">
+                                        <div class="flex justify-between items-center font-medium">
+                                            <div class="flex items-center">
+                                                <span>Location</span>
+                                                <span class="ml-2 bg-slate-800 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">1</span>
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" /></svg>
+                                        </div>
+                                    </div>
+                                    <div class="border-b py-4">
+                                        <div class="flex justify-between items-center font-medium">
+                                            <span>Status</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" /></svg>
+                                        </div>
+                                    </div>
+                                    <div class="py-4">
+                                        <div class="flex justify-between items-center font-medium">
+                                            <span>Type of Funding</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" /></svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </aside>
+
+                            <main class="lg:col-span-3">
+                                <div class="relative">
+                                    <div class="flex items-center gap-2 w-full p-2 pr-10 text-sm text-slate-900 border border-slate-300 rounded-lg bg-white shadow-sm focus-within:ring-2 focus-within:ring-slate-500 focus-within:border-slate-500">
+                                        <span class="flex items-center gap-1.5 bg-slate-200 text-slate-800 text-sm font-medium px-2.5 py-1 rounded-md">
+                                            renovation
+                                            <button class="text-slate-500 hover:text-slate-800">&times;</button>
+                                        </span>
+                                        <span class="flex items-center gap-1.5 bg-slate-200 text-slate-800 text-sm font-medium px-2.5 py-1 rounded-md">
+                                            food
+                                            <button class="text-slate-500 hover:text-slate-800">&times;</button>
+                                        </span>
+                                        <input type="text" placeholder="Search..." class="flex-grow p-1 bg-transparent border-0 focus:ring-0">
+                                    </div>
+                                    <button class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+                                    </button>
+                                </div>
+                                
+                                <div class="flex items-center flex-wrap gap-2 mt-4">
+                                    <span class="flex items-center gap-1.5 bg-slate-700 text-white text-sm font-medium px-2.5 py-1 rounded-full">
+                                        renovation
+                                        <button class="text-slate-300 hover:text-white">&times;</button>
+                                    </span>
+                                    <span class="flex items-center gap-1.5 bg-slate-700 text-white text-sm font-medium px-2.5 py-1 rounded-full">
+                                        food
+                                        <button class="text-slate-300 hover:text-white">&times;</button>
+                                    </span>
+                                    <span class="flex items-center gap-1.5 bg-slate-700 text-white text-sm font-medium px-2.5 py-1 rounded-full">
+                                        Prince George's County
+                                        <button class="text-slate-300 hover:text-white">&times;</button>
+                                    </span>
+                                    <a href="#" class="ml-2 text-sm text-slate-600 hover:underline">Clear all</a>
+                                </div>
+
+                                <div class="flex justify-between items-center mt-6 mb-2">
+                                    <p class="text-sm text-slate-600">3 results</p>
+                                    <button class="btn text-sm py-2 px-4">Download results as CSV</button>
+                                </div>
+
+                                <div class="bg-white rounded-lg shadow-sm overflow-x-auto">
+                                    <table class="min-w-full divide-y divide-slate-200">
+                                        <thead class="bg-slate-50">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                                    <div class="flex items-center">Title <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg></div>
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                                    <div class="flex items-center">Deadline <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg></div>
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                                    <div class="flex items-center">Estimated Total Funding <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg></div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-slate-200 text-sm">
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap text-slate-800 font-medium">
+                                                    <a href="javascript:void(0)" class="hover:underline" onclick="navigateTo('find-incentives', 'detail')">Incentive A</a>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-slate-600">October 24, 2025</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-slate-600">$15,000</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap text-slate-800 font-medium">
+                                                    <a href="javascript:void(0)" class="hover:underline" onclick="navigateTo('find-incentives', 'detail')">Incentive B</a>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-slate-600">October 24, 2025</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-slate-600">$5,000</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap text-slate-800 font-medium">
+                                                    <a href="javascript:void(0)" class="hover:underline" onclick="navigateTo('find-incentives', 'detail')">Incentive C</a>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-slate-600">October 24, 2025</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-slate-600">$50,000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </main>
                         </div>
                     </div>
                     <div id="incentive-detail-view" style="display: none;">
@@ -380,7 +452,6 @@
                 </div>
             </section>
 
-            <!-- 1.4 Business Resources -->
             <section id="business-resources">
                  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                      <h1 class="text-3xl font-bold">Business Resources</h1>
@@ -399,7 +470,6 @@
                  </div>
             </section>
 
-            <!-- 1.5 My Project (User Profile) -->
             <section id="my-project">
                  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                      <h1 class="text-3xl font-bold">My Project</h1>
@@ -418,7 +488,6 @@
                  </div>
             </section>
             
-            <!-- 1.6 About / Data / FAQ -->
             <section id="about">
                  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                      <h1 class="text-3xl font-bold">About This Tool</h1>
@@ -428,7 +497,6 @@
                  </div>
             </section>
 
-            <!-- Footer Pages -->
             <section id="faq">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <h1 class="text-3xl font-bold">Frequently Asked Questions</h1>
@@ -470,7 +538,6 @@
                 </div>
             </section>
             
-            <!-- 2.1 Agency Login -->
             <section id="agency-login">
                 <div class="min-h-[calc(100vh-128px)] flex items-center justify-center">
                     <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
@@ -490,7 +557,6 @@
                 </div>
             </section>
 
-            <!-- 2.2 Agency Dashboard -->
             <section id="agency-dashboard">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <h1 class="text-3xl font-bold">Agency Dashboard</h1>
@@ -522,7 +588,6 @@
                 </div>
             </section>
             
-            <!-- 2.2.1 Incentive Performance -->
             <section id="incentive-performance">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <button class="btn-outline mb-4" onclick="navigateTo('agency-dashboard')">&larr; Back to Dashboard</button>
@@ -542,7 +607,6 @@
                 </div>
             </section>
 
-            <!-- 2.3 Incentive Management -->
             <section id="agency-management">
                  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                      <div class="flex justify-between items-center">
@@ -555,7 +619,6 @@
                  </div>
             </section>
 
-             <!-- 2.4 Agency Account Management -->
              <section id="agency-account">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <h1 class="text-3xl font-bold">Account Management</h1>
@@ -567,14 +630,12 @@
 
         </main>
         
-        <!-- Footer -->
         <footer class="bg-white border-t">
             <div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-slate-600">
                 <div class="md:col-span-1">
                     <div class="placeholder w-24 h-10 mb-4 flex items-center justify-center text-sm">LOGO</div>
                     <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
                     <div class="flex space-x-4 mt-4">
-                        <!-- Social Icons -->
                         <a href="#" class="text-slate-500 hover:text-slate-700">
                             <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         </a>
@@ -690,6 +751,7 @@
                  document.querySelectorAll(`#agency-nav .nav-link[data-page="${activePage}"], #mobile-agency-nav a[data-page="${activePage}"]`).forEach(link => link.classList.add('active'));
             } else {
                 document.querySelectorAll(`#main-nav .nav-link[data-page="${activePage}"], #mobile-main-nav a[data-page="${activePage}"]`).forEach(link => link.classList.add('active'));
+                 document.querySelectorAll(`#agency-nav .nav-link[data-page="${activePage}"], #mobile-agency-nav a[data-page="${activePage}"]`).forEach(link => link.classList.add('active'));
             }
         }
 
@@ -751,15 +813,24 @@
             menu.classList.toggle('hidden');
         }
 
+
+
         function closeMobileMenu() {
             document.getElementById('mobile-menu').classList.add('hidden');
         }
 
         function goToAgencyPortal() {
             appState.isAgency = true;
-            navigateTo('agency-login');
+            // For prototype purposes, let's assume they might go to login first
+            // or directly to dashboard if already logged in. We'll send to login.
+             if (appState.isLoggedIn) {
+                navigateTo('agency-dashboard');
+            } else {
+                navigateTo('agency-login');
+            }
             updateNav();
             updateAuthUI();
+            closeMobileMenu();
         }
         
         function goHome() {
@@ -772,8 +843,15 @@
 
         function loginAsAgency() {
             appState.isLoggedIn = true;
+            appState.isAgency = true;
             navigateTo('agency-dashboard');
+            updateNav();
             updateAuthUI();
+        }
+        
+        function logout() {
+            appState.isLoggedIn = false;
+            goHome(); // This resets agency state and returns to homepage
         }
 
         function updateAuthUI() {
@@ -782,8 +860,8 @@
 
             if (appState.isAgency) {
                 if (appState.isLoggedIn) {
-                    desktopHtml = `<button class="btn-outline" onclick="goHome()">Logout</button>`;
-                    mobileHtml = `<button class="w-full btn-outline" onclick="goHome()">Logout</button>`;
+                    desktopHtml = `<button class="btn-outline" onclick="logout()">Logout</button>`;
+                    mobileHtml = `<button class="w-full btn-outline" onclick="logout()">Logout</button>`;
                 } else {
                      desktopHtml = `<button class="btn" onclick="navigateTo('agency-login')">Agency Login</button>`;
                      mobileHtml = `<button class="w-full btn" onclick="navigateTo('agency-login')">Agency Login</button>`;
@@ -804,15 +882,17 @@
         }
 
         // Initial setup
-        buildNav(publicRoutes, mainNav, mobileMainNav);
-        buildNav(agencyRoutes, agencyNav, mobileAgencyNav);
-        updateNav();
-        updateAuthUI();
-        navigateTo('homepage');
-        document.querySelector('.tab-btn').click();
+        document.addEventListener('DOMContentLoaded', () => {
+            buildNav(publicRoutes, mainNav, mobileMainNav);
+            buildNav(agencyRoutes, agencyNav, mobileAgencyNav);
+            updateNav();
+            updateAuthUI();
+            navigateTo('homepage');
+            if (document.querySelector('.tab-btn')) {
+                document.querySelector('.tab-btn').click();
+            }
+        });
 
     </script>
 </body>
 </html>
-
-
