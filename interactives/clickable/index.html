@@ -83,6 +83,19 @@
         [onclick] {
             cursor: pointer;
         }
+        /* Styles for FAQ Accordion */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details > summary .accordion-icon {
+            transition: transform 0.2s ease-in-out;
+        }
+        details[open] > summary .accordion-icon {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -313,8 +326,8 @@
             </section>
 
             <section id="find-incentives">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                    <div id="incentive-list-view">
+                <div id="incentive-list-view">
+                    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                         <h1 class="text-3xl font-bold mb-8">Find State Funding for Your Business</h1>
                         
                         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -399,10 +412,10 @@
                                         <tbody class="bg-white divide-y divide-slate-200 text-sm">
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-nowrap text-slate-800 font-medium">
-                                                    <a href="javascript:void(0)" class="hover:underline" onclick="navigateTo('find-incentives', 'detail')">Incentive A</a>
+                                                    <a href="javascript:void(0)" class="hover:underline" onclick="navigateTo('find-incentives', 'detail')">Child Care Capital Support Revolving Loan Fund</a>
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-slate-600">October 24, 2025</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-slate-600">$15,000</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-slate-600">October 31, 2025</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-slate-600">$5,000 - $10,000</td>
                                             </tr>
                                             <tr>
                                                 <td class="px-6 py-4 whitespace-nowrap text-slate-800 font-medium">
@@ -424,22 +437,200 @@
                             </main>
                         </div>
                     </div>
-                    <div id="incentive-detail-view" style="display: none;">
-                         <button class="btn-outline mb-4" onclick="navigateTo('find-incentives', 'list')">&larr; Back to List</button>
-                         <h1 class="text-3xl font-bold">Incentive Detail Page</h1>
-                         <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <div class="md:col-span-2 bg-white p-6 rounded-md shadow-sm">
-                                <div class="placeholder h-64">Full Description, Eligibility, Award Amounts, Deadlines</div>
-                            </div>
-                            <div class="space-y-4">
-                                <div class="bg-white p-6 rounded-md shadow-sm">
-                                    <h2 class="font-semibold mb-2">Program Contact</h2>
-                                    <div class="placeholder h-20">Contact Info Placeholder</div>
+                </div>
+                <div id="incentive-detail-view" style="display: none;">
+                    <div class="bg-slate-100">
+                        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                            <button class="text-sm font-semibold text-slate-700 hover:text-slate-900 mb-4" onclick="navigateTo('find-incentives', 'list')">&larr; Back to search</button>
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                                <div class="lg:col-span-2 space-y-4">
+                                    <h1 class="text-4xl font-bold text-slate-900">Child Care Capital Support Revolving Loan Fund</h1>
+                                    <div class="flex flex-wrap items-center gap-3">
+                                        <span class="inline-block bg-slate-200 text-slate-800 text-sm font-medium px-3 py-1 rounded-full">$5,000-$10,000</span>
+                                        <span class="inline-block bg-red-100 text-red-700 text-sm font-medium px-3 py-1 rounded-full">Applications are not currently being accepted</span>
+                                    </div>
+                                    <p class="text-slate-600">Apply by 11:59 PM, October 31, 2025</p>
+                                    <button class="btn bg-slate-400 cursor-not-allowed" disabled>Apply Now</button>
                                 </div>
-                                 <button class="btn w-full">Apply Now (External Link)</button>
-                                 <button class="btn-outline w-full">Check My Eligibility</button>
+                                <div class="bg-white p-6 rounded-lg border border-slate-200 space-y-4">
+                                    <div>
+                                        <h3 class="text-sm font-medium text-slate-500">Geographic Area</h3>
+                                        <p class="font-semibold text-slate-800">Location-Based</p>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <h3 class="text-sm font-medium text-slate-500">Business Category</h3>
+                                        <p class="font-semibold text-slate-800">Small Business</p>
+                                    </div>
+                                    <hr>
+                                    <div class="flex items-center space-x-4 text-slate-600">
+                                        <a href="#" class="hover:text-slate-900 flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" /></svg> Share</a>
+                                        <a href="#" class="hover:text-slate-900 flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v3a2 2 0 002 2h6a2 2 0 002-2v-3h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm8 0H7v3h6V4zm0 8H7v3h6v-3z" clip-rule="evenodd" /></svg> Print</a>
+                                    </div>
+                                    <p class="text-xs text-slate-500 text-right">Last updated October 3, 2025</p>
+                                </div>
                             </div>
-                         </div>
+                        </div>
+                    </div>
+                     <div class="bg-white">
+                        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                            <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
+                                <aside class="lg:col-span-1">
+                                    <div class="sticky top-24">
+                                        <h2 class="font-semibold text-lg text-slate-800">Contents</h2>
+                                        <nav class="mt-4">
+                                            <ul class="space-y-3">
+                                                <li><a href="#description" class="font-medium text-slate-600 hover:text-slate-900">Description</a></li>
+                                                <li><a href="#applicant-eligibility" class="font-medium text-slate-600 hover:text-slate-900">Applicant Eligibility</a></li>
+                                                <li><a href="#loan-terms" class="font-medium text-slate-600 hover:text-slate-900">Loan Terms</a></li>
+                                                <li><a href="#benefits" class="font-medium text-slate-600 hover:text-slate-900">Benefits</a></li>
+                                                <li><a href="#how-to-apply" class="font-medium text-slate-600 hover:text-slate-900">How to Apply</a></li>
+                                                <li><a href="#contact" class="font-medium text-slate-600 hover:text-slate-900">Contact</a></li>
+                                                <li><a href="#faqs" class="font-medium text-slate-600 hover:text-slate-900">FAQs</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </aside>
+                                <main class="lg:col-span-3 prose-slate max-w-none">
+                                    <div id="description" class="scroll-mt-20">
+                                        <h2 class="text-2xl font-bold text-slate-800 mb-4">Description</h2>
+                                        <p class="text-slate-600">The Child Care Capital Support Revolving Loan Fund is a financing resource operated by the Department of Commerce, with support from the State Department of Education, to provide no-interest loans for capital expenses to child care providers who participate in the State Department of Education's Child Care Scholarship Program.</p>
+                                    </div>
+                                    <hr class="my-12">
+                                    <div id="applicant-eligibility" class="scroll-mt-20">
+                                        <h2 class="text-2xl font-bold text-slate-800 mb-4">Applicant Eligibility</h2>
+                                        <h3 class="text-xl font-semibold text-slate-800 mt-6 mb-3">Qualifying Borrowers</h3>
+                                        <p class="text-slate-600">The Child Care Provider must be licensed by the State Department of Education and a participant in the State Department of Education's Child Care Scholarship Program. Priority is given to Maryland child care providers:</p>
+                                        <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                                            <li>Located in underserved communities or areas designated by the State Department of Education as lacking available child care slots,</li>
+                                            <li>Located in rural communities,</li>
+                                            <li>Serving primarily low-income populations in areas of high poverty,</li>
+                                            <li>Serving children with special needs, and</li>
+                                            <li>Serving children ages 2 and younger.</li>
+                                        </ul>
+                                        <h3 class="text-xl font-semibold text-slate-800 mt-6 mb-3">Qualifying Capital Expenses</h3>
+                                        <p class="text-slate-600">Loans may only be used for capital expenses related to a child care facility including: Acquisition, Expansion, Renovation, and New Construction.</p>
+                                        <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                                            <li><strong>Acquisition:</strong> Purchase of an existing child care facility</li>
+                                            <li><strong>Expansion:</strong> Construction or purchase of add'l space to an existing child care facility)</li>
+                                            <li><strong>Renovation:</strong> Repairs, renovation, upgrades of an existing child care facility</li>
+                                            <li><strong>New Construction:</strong> Construction of a new child care facility</li>
+                                        </ul>
+                                        <h3 class="text-xl font-semibold text-slate-800 mt-6 mb-3">Restrictions</h3>
+                                        <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                                            <li>Businesses other than child care providers are not eligible.</li>
+                                            <li>Loans are intended for current projects and may not be used to refinance existing debt.</li>
+                                            <li>Proceeds cannot be used for working capital or operations (for example: marketing, payroll, lease or rent expense, supplies, utilities, etc).</li>
+                                        </ul>
+                                    </div>
+                                     <hr class="my-12">
+                                    <div id="loan-terms" class="scroll-mt-20">
+                                        <h2 class="text-2xl font-bold text-slate-800 mb-4">Loan Terms</h2>
+                                        <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                                            <li>Applicant must possess a valid child care license to apply.</li>
+                                            <li>Loan proceeds must be used for a child care facility location operating in Maryland.</li>
+                                            <li>Loans must be repaid within five years after receiving the loan proceeds.</li>
+                                            <li>Additional funds may be added to the project by the owner, sponsor or other intermediary.</li>
+                                            <li>Collateral is required and may include, but is not limited to personal guarantees, liens on business assets and pledges of accounts.</li>
+                                        </ul>
+                                    </div>
+                                     <hr class="my-12">
+                                    <div id="benefits" class="scroll-mt-20">
+                                        <h2 class="text-2xl font-bold text-slate-800 mb-4">Benefits</h2>
+                                        <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                                            <li>With no-interest or application fees charged, the Child Care Capital Support Revolving Loan Fund offers a convenient, cost-effective financing resource for qualifying providers seeking to make capital improvements to maintain or grow child care enrollment.</li>
+                                            <li>There are no prepayment penalties.</li>
+                                        </ul>
+                                    </div>
+                                     <hr class="my-12">
+                                    <div id="how-to-apply" class="scroll-mt-20">
+                                        <h2 class="text-2xl font-bold text-slate-800 mb-4">How to Apply</h2>
+                                        <p class="text-slate-600"><strong>Applications are not currently being accepted.</strong></p>
+                                        <p class="text-slate-600">For applications to be considered the information listed below must be provided. Applicants should work with their advisor(s) completing the application. Incomplete applications cannot be considered.</p>
+                                        <ul class="list-disc pl-5 space-y-2 text-slate-600 mt-4">
+                                            <li>A listing of all owners and percentages of ownership; resume of principal owner(s).</li>
+                                            <li>Valid Maryland State Department of Education (MSDE) license.</li>
+                                            <li>Evidence of participation in MSDE Child Care Scholarship Program.</li>
+                                            <li>A description of the child care facility (when established, where located, staffing, enrollment figures, programs provided)</li>
+                                            <li>A summary of how the loan will be used (e.g. renovations, repairs, equipment, furnishings, expansion)</li>
+                                            <li>Financial projections demonstrating the capacity to meet operating expenses (payroll, utilities, supplies etc. and repay the no-interest loan within five years after receiving the funds. (template provided on the application).</li>
+                                            <li>Current Personal Financial Statement of principal owner(s).</li>
+                                            <li>Personal Federal Income Tax Returns with all Schedules (most recent three years).</li>
+                                            <li>Business Federal Income Tax Returns with all Schedules (most recent three years).</li>
+                                            <li>Description and estimated value of collateral to be provided to secure the loan.</li>
+                                        </ul>
+                                        <h3 class="text-xl font-semibold text-slate-800 mt-6 mb-3">Electronic Funds Transfer (EFT) Program</h3>
+                                        <p class="text-slate-600">The state of Maryland requires all contractors to be registered to receive state payments by electronic funds transfer (EFT) before any contract exceeding $200,000 is approved by the Maryland Board of Public Works. Additionally, all vendors are encouraged to register to be paid electronically. The State has the ability to process vendor payments electronically using the CCD and CCD+ and CTX payment formats.</p>
+                                        <p class="text-slate-600">The CCD+ payment format will contain summarized information and will not provide details concerning each invoice amount included in the check total. However, vendors may obtain the detailed information on an electronic payment via the One Stop Vendor Payment Inquiry System. The CTX payment format will contain the total payment amount and details concerning each invoice amount included in the check total.</p>
+                                        <p class="text-slate-600">Vendors must contact their bank in order to receive the CTX format, and the depositing bank may charge a fee for this format. Vendors need to discuss potential charges with their bank. If you want to receive all payments from the State using the Electronic Funds Transfer program, complete and submit form GADX-10 (fax or mail.)</p>
+                                        <div class="mt-4 p-4 bg-slate-50 rounded-md text-slate-600">
+                                            <p><strong>Fax:</strong> 410-974-2309</p>
+                                            <p class="mt-2"><strong>Mailing address:</strong><br>
+                                            EFT Registration<br>
+                                            General Accounting Division<br>
+                                            P.O. Box 746<br>
+                                            Annapolis MD 21404-0746
+                                            </p>
+                                        </div>
+                                    </div>
+                                     <hr class="my-12">
+                                     <div id="contact" class="scroll-mt-20">
+                                        <h2 class="text-2xl font-bold text-slate-800 mb-4">Contact</h2>
+                                        <p class="text-slate-600">Questions can be directed to <a href="mailto:childcare.commerce@maryland.gov" class="text-slate-800 font-semibold underline hover:text-slate-600">childcare.commerce@maryland.gov</a>.</p>
+                                    </div>
+                                     <hr class="my-12">
+                                    <div id="faqs" class="scroll-mt-20">
+                                        <h2 class="text-2xl font-bold text-slate-800 mb-4">FAQs</h2>
+                                        <div class="space-y-4">
+                                            <details class="group border rounded-md p-4" open>
+                                                <summary class="flex justify-between items-center font-medium cursor-pointer">
+                                                    I am not currently licensed or I have a license for my existing location but want to buy a second location that will not be licensed initially? Can I still apply for the loan?
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 accordion-icon" viewBox="0 0 20 20" fill="currentColor">
+                                                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </summary>
+                                                <div class="mt-4 text-slate-600">
+                                                    <p>Yes. You can apply and applications for new providers and additional locations will be evaluated on a case-by-case basis. You are encouraged to contact the licensing authority to ensure any acquisition that you are considering will qualify for licensure as a child care facility before making a purchase.</p>
+                                                </div>
+                                            </details>
+                                            <details class="group border rounded-md p-4">
+                                                <summary class="flex justify-between items-center font-medium cursor-pointer">
+                                                    I do not own a home or a business. Do I still qualify for the loan?
+                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 accordion-icon" viewBox="0 0 20 20" fill="currentColor">
+                                                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </summary>
+                                                 <div class="mt-4 text-slate-600">
+                                                    <p>Answer placeholder text. More information would be provided here to answer the user's question in a real application.</p>
+                                                </div>
+                                            </details>
+                                            <details class="group border rounded-md p-4">
+                                                <summary class="flex justify-between items-center font-medium cursor-pointer">
+                                                    Do I have to submit all my receipts once the project is completed?
+                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 accordion-icon" viewBox="0 0 20 20" fill="currentColor">
+                                                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </summary>
+                                                 <div class="mt-4 text-slate-600">
+                                                    <p>Answer placeholder text. More information would be provided here to answer the user's question in a real application.</p>
+                                                </div>
+                                            </details>
+                                             <details class="group border rounded-md p-4">
+                                                <summary class="flex justify-between items-center font-medium cursor-pointer">
+                                                    How will anyone know if I used the money to complete the project that I requested a loan for?
+                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 accordion-icon" viewBox="0 0 20 20" fill="currentColor">
+                                                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </summary>
+                                                 <div class="mt-4 text-slate-600">
+                                                    <p>Answer placeholder text. More information would be provided here to answer the user's question in a real application.</p>
+                                                </div>
+                                            </details>
+                                        </div>
+                                    </div>
+                                </main>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -664,7 +855,7 @@
             </div>
         </footer>
     </div>
-
+    
     <script>
         const appState = {
             currentPage: 'homepage',
