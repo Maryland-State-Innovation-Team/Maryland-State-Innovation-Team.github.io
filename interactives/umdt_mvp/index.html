@@ -397,7 +397,7 @@ function initializeMap(tractData) {
         const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable])).filter(v => !isNaN(v));
         if(values.length === 0) return div;
         
-        const colors = isDiverging ? diverging.colors : sequentialColors;
+        const colors = isDiverging ? divergingColors : sequentialColors;
         const breaks = isDiverging ? getDivergingBreaks(values) : getQuantiles(values, colors.length);
         const formatter = choroplethOptions[currentVariable].format;
         
