@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
-    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -25,41 +25,38 @@
             overflow: hidden; /* Prevent body scroll */
         }
         
-        /* Custom Leaflet styles to match mockup */
+        /* Custom Leaflet styles */
         .leaflet-control-zoom-in, .leaflet-control-zoom-out {
             background-color: white !important;
             color: #334155 !important;
             border-color: #cbd5e1 !important;
             border-radius: 0.5rem !important;
         }
-        .leaflet-control-geocoder-icon {
-            background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>');
-        }
         .leaflet-touch .leaflet-bar {
             box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
         }
 
-        /* Side panel transition */
-        #side-panel {
+        /* Side panel transitions */
+        #side-panel, #address-panel {
             transition: transform 0.3s ease-in-out;
             transform: translateX(-100%);
         }
-        #side-panel.show {
+        #side-panel.show, #address-panel.show {
             transform: translateX(0);
         }
         
-        /* Custom scrollbar for side panel */
-        #side-panel-content::-webkit-scrollbar, #map-controls-scroll::-webkit-scrollbar {
+        /* Custom scrollbar for side panels */
+        #side-panel-content::-webkit-scrollbar, #address-panel-content::-webkit-scrollbar, #map-controls-scroll::-webkit-scrollbar {
             width: 8px;
         }
-        #side-panel-content::-webkit-scrollbar-track, #map-controls-scroll::-webkit-scrollbar-track {
+        #side-panel-content::-webkit-scrollbar-track, #address-panel-content::-webkit-scrollbar-track, #map-controls-scroll::-webkit-scrollbar-track {
             background: #f1f5f9;
         }
-        #side-panel-content::-webkit-scrollbar-thumb, #map-controls-scroll::-webkit-scrollbar-thumb {
+        #side-panel-content::-webkit-scrollbar-thumb, #address-panel-content::-webkit-scrollbar-thumb, #map-controls-scroll::-webkit-scrollbar-thumb {
             background: #94a3b8;
             border-radius: 10px;
         }
-        #side-panel-content::-webkit-scrollbar-thumb:hover, #map-controls-scroll::-webkit-scrollbar-thumb:hover {
+        #side-panel-content::-webkit-scrollbar-thumb:hover, #address-panel-content::-webkit-scrollbar-thumb:hover, #map-controls-scroll::-webkit-scrollbar-thumb:hover {
             background: #64748b;
         }
 
@@ -80,7 +77,7 @@
             margin-right: 8px;
             opacity: 0.9;
             border-radius: 4px;
-            flex-shrink: 0; /* Prevents color swatch from shrinking */
+            flex-shrink: 0;
         }
         .legend-item {
             display: flex;
@@ -89,39 +86,25 @@
         .legend-item span {
             white-space: nowrap;
         }
-
-        /* Geocoder Search Results Panel */
-        #geocoder-result-panel {
-            transition: opacity 0.3s ease-in-out;
-        }
-
+        
         /* Transition for map controls when side panel opens */
         #map-controls-container {
             transition: transform 0.3s ease-in-out;
         }
-        #side-panel.show ~ #map-controls-container {
-            /* On mobile, move controls completely off-screen */
-            transform: translateX(-120%);
+        #side-panel.show ~ #map-controls-container, #address-panel.show ~ #map-controls-container {
+            transform: translateX(-120%); /* Mobile */
         }
          @media (min-width: 768px) {
-            #side-panel.show ~ #map-controls-container {
-                /* On desktop, move it right by the width of the panel + a margin */
-                transform: translateX(calc(33.333vw + 1rem));
+            #side-panel.show ~ #map-controls-container, #address-panel.show ~ #map-controls-container {
+                transform: translateX(calc(33.333vw + 1rem)); /* Desktop */
             }
         }
         @media (min-width: 1024px) {
-            #side-panel.show ~ #map-controls-container {
+            #side-panel.show ~ #map-controls-container, #address-panel.show ~ #map-controls-container {
                  transform: translateX(calc(25vw + 1rem));
             }
         }
-        .leaflet-control-geocoder {
-            z-index: 1001 !important; /* Ensure geocoder is on top */
-        }
-        .leaflet-top.leaflet-right .leaflet-control-geocoder {
-            margin-top: 1rem;
-            margin-right: 1rem;
-        }
-
+       
         /* Custom tooltip for explanations */
         .info-tooltip {
             position: relative;
@@ -150,6 +133,14 @@
             visibility: visible;
             opacity: 1;
         }
+        
+        /* Style adjustments for Mapbox Search input */
+        .mapboxgl-ctrl-geocoder--input {
+            min-width: 300px !important;
+        }
+        .leaflet-control-mapbox-search {
+            margin: 1rem 1rem 0 0;
+        }
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800">
@@ -159,12 +150,23 @@
 
         <div id="side-panel" class="absolute top-0 left-0 h-screen w-full md:w-1/3 lg:w-1/4 bg-white shadow-2xl z-20 flex flex-col">
             <div class="p-4 border-b flex justify-between items-center">
-                <h2 id="panel-title" class="text-xl font-bold text-slate-900">Tract Details</h2>
+                <h2 id="panel-title" class="text-xl font-bold text-slate-900">Community Details</h2>
                 <button id="close-panel-btn" class="p-1 rounded-full hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400" aria-label="Close details panel">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
             </div>
             <div id="side-panel-content" class="flex-grow overflow-y-auto p-4 space-y-4">
+                </div>
+        </div>
+        
+        <div id="address-panel" class="absolute top-0 left-0 h-screen w-full md:w-1/3 lg:w-1/4 bg-white shadow-2xl z-20 flex flex-col">
+            <div class="p-4 border-b flex justify-between items-center">
+                <h2 id="address-panel-title" class="text-xl font-bold text-slate-900">Address Details</h2>
+                <button id="close-address-panel-btn" class="p-1 rounded-full hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400" aria-label="Close address panel">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div id="address-panel-content" class="flex-grow overflow-y-auto p-4 space-y-4">
                 </div>
         </div>
         
@@ -204,25 +206,17 @@
                 </div>
             </div>
         </div>
-
-        <div id="geocoder-result-panel" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-xl z-30 w-full max-w-lg opacity-0 pointer-events-none">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-bold text-slate-900">Address Insight</h2>
-                <button id="close-geocoder-panel-btn" class="p-1 rounded-full hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400" aria-label="Close address insight panel">
-                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                </button>
-            </div>
-            <div id="geocoder-result-content">
-                </div>
-        </div>
     </div>
 
 <script>
 // --- GLOBAL STATE AND CONFIGURATION ---
 let map; // Leaflet map object
 let geojsonLayer; // Main choropleth layer
+let searchMarker; // Marker for the searched address
 const overlayLayers = {}; // To store and manage toggleable layers
-const preloadedOverlayData = {}; // To store data loaded from files
+
+const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYW1pbGxlci1tZGdvdiIsImEiOiJjbWc1ZW1hcm8wMWZ0MmtweWZtcmVxeTBtIn0.JS4bkhCiIv6oB_0WEQRpwg';
+const TILESET_ID = 'amiller-mdgov.parcels-tileset';
 
 const incentiveStyles = {
     'brni_areas': { color: '#e41a1c', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' },
@@ -236,34 +230,31 @@ const incentiveStyles = {
     'transit_oriented_development': { color: '#999999', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' }
 };
 
-// Helper function to safely parse string values to floats
+// --- HELPER FUNCTIONS ---
 function safeParseFloat(value, defaultValue = 0) {
     const parsed = parseFloat(value);
     return isNaN(parsed) ? defaultValue : parsed;
 }
 const formatPercent = (val) => `${(safeParseFloat(val) * 100).toFixed(1)}%`;
 const formatCurrency = (val) => `$${Math.round(safeParseFloat(val)).toLocaleString()}`;
-const formatNumber = (val) => Math.round(safeParseFloat(val)).toLocaleString();
+const formatNumber = (val) => val ? Math.round(safeParseFloat(val)).toLocaleString() : 'N/A';
+const formatDate = (val) => val ? new Date(val).toLocaleDateString() : 'N/A';
+const formatValue = (val) => val ? val : 'N/A';
+function formatYmd(ymd) {
+    if (!ymd || ymd.length !== 8) return 'N/A';
+    const year = ymd.substring(0, 4);
+    const month = ymd.substring(4, 6);
+    const day = ymd.substring(6, 8);
+    return `${month}/${day}/${year}`;
+}
+
 function truncateCommunityList(listString, maxVisible = 2) {
-    // Split the string into an array of individual community names
+    if (!listString) return "Unnamed Area";
     const communities = listString.split(', ');
-
-    // If the number of communities is less than or equal to our max,
-    // there's no need to truncate, so we return the original string.
-    if (communities.length <= maxVisible) {
-        return listString;
-    }
-
-    // Grab the first few communities that we want to remain visible
+    if (communities.length <= maxVisible) return listString;
     const visibleCommunities = communities.slice(0, maxVisible);
-
-    // Calculate how many communities are being hidden
     const hiddenCount = communities.length - maxVisible;
-    
-    // For better grammar, determine if we need "community" or "communities"
     const communityWord = hiddenCount === 1 ? 'community' : 'communities';
-
-    // Join the visible communities and append the dynamic summary
     return `${visibleCommunities.join(', ')} and ${hiddenCount} other ${communityWord}`;
 }
 
@@ -272,24 +263,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     map = L.map('map', {
         center: [39.0458, -76.6413], // Centered on Maryland
         zoom: 9,
-        zoomControl: false // We will add it in a different position
+        zoomControl: false 
     });
     
     // Create custom panes to control layer order
     map.createPane('incentivePane');
-    map.getPane('incentivePane').style.zIndex = 450; // Lower level for incentives
+    map.getPane('incentivePane').style.zIndex = 450;
     map.createPane('tractPane');
-    map.getPane('tractPane').style.zIndex = 400; // Higher level for tracts
+    map.getPane('tractPane').style.zIndex = 400;
     map.createPane('clusterTopPane');
     map.getPane('clusterTopPane').style.zIndex = 650;
 
-    const mapboxToken = 'pk.eyJ1IjoiYW1pbGxlci1tZGdvdiIsImEiOiJjbWc1ZW1hcm8wMWZ0MmtweWZtcmVxeTBtIn0.JS4bkhCiIv6oB_0WEQRpwg';
-    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-        attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
+    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         tileSize: 512,
         maxZoom: 18,
         zoomOffset: -1,
-        accessToken: mapboxToken
+        accessToken: MAPBOX_ACCESS_TOKEN
     }).addTo(map);
 
     L.control.zoom({ position: 'bottomright' }).addTo(map);
@@ -300,30 +290,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         const response = await fetch('tract_supply_demand_gap.geojson');
         if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
         tractData = await response.json();
-        console.log('Successfully loaded live tract data.');
+        console.log('Successfully loaded tract data.');
     } catch (error) {
-        console.error('Failed to load live tract data:', error);
-    }
-
-    const overlayFiles = [
-        // Incentive Areas
-        'brni_areas.geojson', 'enterprise_zone_focus_areas.geojson', 'enterprise_zones.geojson',
-        'main_street_areas.geojson', 'opportunity_zones.geojson', 'priority_funding_areas.geojson',
-        'rise_zones.geojson', 'sustainable_communities.geojson', 'transit_oriented_development.geojson',
-        // Points of Interest
-        'childcare.geojson', 'grocery.geojson'
-    ];
-    try {
-        await Promise.all(overlayFiles.map(async (file) => {
-            const response = await fetch(file);
-            if (!response.ok) throw new Error(`Failed to load ${file}`);
-            const data = await response.json();
-            const layerName = file.split('.')[0];
-            preloadedOverlayData[layerName] = data;
-        }));
-        console.log('Successfully pre-loaded all overlay data.');
-    } catch (error) {
-        console.error('Failed to pre-load overlay data:', error);
+        console.error('Failed to load tract data:', error);
+        alert('Could not load community data. The map may not function correctly.');
+        return;
     }
 
     initializeMap(tractData);
@@ -332,7 +303,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function initializeMap(tractData) {
     // --- CHOROPLETH AND LEGEND LOGIC ---
-    let currentVariable = 'pop2025'; // Default variable
+    let currentVariable = 'pop2025';
     const legend = L.control({ position: 'bottomright' });
     const choroplethSelect = document.getElementById('choropleth-select');
 
@@ -366,17 +337,16 @@ function initializeMap(tractData) {
     
     // --- COLOR SCALES ---
     const sequentialColors = ['#eff3ff', '#bdd7e7', '#6baed6', '#3182bd', '#08519c'];
-    // Red (Need) -> Yellow (Neutral) -> Blue (Abundance)
     const divergingColors = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'].reverse();
 
     function isDivergingVariable(variable) {
-        const divergingKeywords = ['unmet_demand', 'growth', 'net_business', 'formations', 'index'];
+        const divergingKeywords = ['unmet_demand', 'growth', 'net_business', 'formations', 'index', 'pop_change'];
         return divergingKeywords.some(keyword => variable.includes(keyword));
     }
 
-
     function getQuantiles(data, numQuantiles) {
         const sorted = data.filter(v => !isNaN(v)).sort((a, b) => a - b);
+        if (sorted.length === 0) return [];
         const quantiles = [];
         for (let i = 1; i < numQuantiles; i++) {
             const pos = (sorted.length - 1) * (i / numQuantiles);
@@ -393,45 +363,30 @@ function initializeMap(tractData) {
 
     function getDivergingBreaks(values) {
         const max = Math.max(...values.map(v => Math.abs(v)));
-        return [
-            -max * 0.66,
-            -max * 0.33,
-            0,
-            max * 0.33,
-            max * 0.66,
-        ];
+        return [-max * 0.66, -max * 0.33, 0, max * 0.33, max * 0.66, ];
     }
 
     function getColor(d, breaks, colors) {
         if (colors.length === 6) { // Diverging
-            return d > breaks[4] ? colors[5] :
-                   d > breaks[3] ? colors[4] :
-                   d > breaks[2] ? colors[3] :
-                   d > breaks[1] ? colors[2] :
-                   d > breaks[0] ? colors[1] :
-                                   colors[0];
+            return d > breaks[4] ? colors[5] : d > breaks[3] ? colors[4] : d > breaks[2] ? colors[3] : d > breaks[1] ? colors[2] : d > breaks[0] ? colors[1] : colors[0];
         } else { // Sequential
-            return d > breaks[3] ? colors[4] :
-                   d > breaks[2] ? colors[3] :
-                   d > breaks[1] ? colors[2] :
-                   d > breaks[0] ? colors[1] :
-                                   colors[0];
+            return d > breaks[3] ? colors[4] : d > breaks[2] ? colors[3] : d > breaks[1] ? colors[2] : d > breaks[0] ? colors[1] : colors[0];
         }
     }
 
     function style(feature) {
         const isDiverging = isDivergingVariable(currentVariable);
         const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable]));
-        const breaks = isDiverging ? getDivergingBreaks(values) : getQuantiles(values, sequentialColors.length);
         const colors = isDiverging ? divergingColors : sequentialColors;
+        const breaks = isDiverging ? getDivergingBreaks(values) : getQuantiles(values, colors.length);
         const value = safeParseFloat(feature.properties[currentVariable]);
 
         return {
             fillColor: getColor(value, breaks, colors),
-            weight: 2,
+            weight: 1,
             opacity: 1,
-            color: null,
-            fillOpacity: 0.8,
+            color: 'white',
+            fillOpacity: 0.7,
             pane: 'tractPane'
         };
     }
@@ -442,7 +397,7 @@ function initializeMap(tractData) {
         const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable])).filter(v => !isNaN(v));
         if(values.length === 0) return div;
         
-        const colors = isDiverging ? divergingColors : sequentialColors;
+        const colors = isDiverging ? diverging.colors : sequentialColors;
         const breaks = isDiverging ? getDivergingBreaks(values) : getQuantiles(values, colors.length);
         const formatter = choroplethOptions[currentVariable].format;
         
@@ -476,17 +431,12 @@ function initializeMap(tractData) {
 
     function updateMap() {
         currentVariable = choroplethSelect.value;
-        if (geojsonLayer) {
-            geojsonLayer.setStyle(style);
-        }
-        if (legend._map) { 
-            legend.remove();
-        }
+        if (geojsonLayer) geojsonLayer.setStyle(style);
+        if (legend._map) legend.remove();
         legend.addTo(map);
     }
     
     choroplethSelect.addEventListener('change', updateMap);
-
 
     // --- FEATURE INTERACTION (CLICK, HOVER) ---
     let lastClickedLayer = null;
@@ -516,8 +466,7 @@ function initializeMap(tractData) {
     geojsonLayer = L.geoJSON(tractData, { style: style, onEachFeature: onEachFeature }).addTo(map);
     updateMap();
 
-
-    // --- SIDE PANEL LOGIC ---
+    // --- SIDE PANEL LOGIC (for Tracts) ---
     const sidePanel = document.getElementById('side-panel');
     const panelTitle = document.getElementById('panel-title');
     const panelContent = document.getElementById('side-panel-content');
@@ -530,18 +479,21 @@ function initializeMap(tractData) {
              lastClickedLayer = null;
         }
     });
+    
+    // --- SIDE PANEL LOGIC (for Addresses) ---
+    const addressPanel = document.getElementById('address-panel');
+    const closeAddressPanelBtn = document.getElementById('close-address-panel-btn');
+    closeAddressPanelBtn.addEventListener('click', () => addressPanel.classList.remove('show'));
 
     function makeLinks(text) {
-        // Add Tailwind classes to existing <a> tags only if not already present
         return text.replace(/<a\s+([^>]*href=['"][^'"]+['"][^>]*)>/gi, (match, attrs) => {
-            // If class already present, just return the match
             if (/class\s*=/.test(attrs)) return match;
-            // Otherwise, add the classes
             return `<a ${attrs} class="text-blue-600 font-semibold hover:underline">`;
         });
     }
 
     function displayFeatureInfo(properties) {
+        if (addressPanel.classList.contains('show')) addressPanel.classList.remove('show'); // Close address panel if open
         panelTitle.textContent = `${truncateCommunityList(properties.tract_name)}, ${properties.county_name}`;
 
         const createList = (items, title) => {
@@ -642,68 +594,126 @@ function initializeMap(tractData) {
         sidePanel.classList.add('show');
     }
 
-    // --- GEOCODING LOGIC ---
-    const geocoderResultPanel = document.getElementById('geocoder-result-panel');
-    const geocoderResultContent = document.getElementById('geocoder-result-content');
-    const closeGeocoderPanelBtn = document.getElementById('close-geocoder-panel-btn');
-
+    // --- ADDRESS SEARCH WITH LEAFLET-CONTROL-GEOCODER ---
     L.Control.geocoder({
-        defaultMarkGeocode: false,
+        position: 'topright',
         placeholder: 'Search for an address...',
-        position: 'topright'
-    }).on('markgeocode', function(e) {
-        const latlng = e.geocode.center;
-        let foundFeature = null;
+        defaultMarkGeocode: false, // We'll add our own marker
+        geocoder: L.Control.Geocoder.mapbox({ apiKey: MAPBOX_ACCESS_TOKEN })
+    })
+    .on('markgeocode', async function(e) {
+        const { center, name } = e.geocode;
+        const latlng = { lat: center.lat, lng: center.lng };
+        const [longitude, latitude] = [center.lng, center.lat];
 
-        geojsonLayer.eachLayer(function(layer) {
-            if (isPointInMultiPolygonLayer_Custom(latlng, layer)) {
+        // Clear UI
+        if (sidePanel.classList.contains('show')) sidePanel.classList.remove('show');
+        if (addressPanel.classList.contains('show')) addressPanel.classList.remove('show');
+        if (searchMarker) map.removeLayer(searchMarker);
+
+        // Add marker and set view
+        searchMarker = L.marker(latlng).addTo(map);
+        map.setView(latlng, 16);
+
+        // Fetch data and display panel
+        const [parcelData, tractFeature] = await Promise.all([
+            queryParcelData(longitude, latitude),
+            findTractForPoint(latlng)
+        ]);
+        
+        displayAddressInfo(name, parcelData, tractFeature?.properties);
+    })
+    .addTo(map);
+
+    /**
+     * Queries the custom Mapbox tileset to find feature properties at a specific coordinate.
+     */
+    async function queryParcelData(longitude, latitude) {
+        const tilequeryUrl = `https://api.mapbox.com/v4/${TILESET_ID}/tilequery/${longitude},${latitude}.json?access_token=${MAPBOX_ACCESS_TOKEN}`;
+        try {
+            const response = await fetch(tilequeryUrl);
+            if (!response.ok) throw new Error('Tilequery request failed');
+            const data = await response.json();
+            const parcelFeature = data.features.find(f => f.properties.tilequery.layer === 'parcels_0825');
+            return parcelFeature ? parcelFeature.properties : null;
+        } catch (error) {
+            console.error("Error fetching parcel data:", error);
+            return null;
+        }
+    }
+    
+    /**
+     * Finds the census tract that contains the given point.
+     */
+    function findTractForPoint(latlng) {
+        let foundFeature = null;
+        geojsonLayer.eachLayer(layer => {
+            if (!foundFeature && isPointInMultiPolygonLayer_Custom(latlng, layer)) {
                 foundFeature = layer.feature;
             }
         });
-
-        if (foundFeature) {
-            map.setView(latlng, 15);
-            L.marker(latlng).addTo(map)
-                .bindPopup(e.geocode.name)
-                .openPopup();
-            displayGeocoderResult(foundFeature.properties, e.geocode.name);
-        } else {
-            displayGeocoderResult(null, e.geocode.name);
-        }
-
-    }).addTo(map);
-
-    function displayGeocoderResult(properties, addressName) {
-        if (properties) {
-             geocoderResultContent.innerHTML = `
-                <p class="text-slate-600 mb-2">The address <strong class="text-slate-800">${addressName}</strong> is located within:</p>
-                <h3 class="text-lg font-bold text-slate-900">${truncateCommunityList(properties.tract_name)}, ${properties.county_name}</h3>
-                <p class="text-sm text-slate-500 mb-4">(GEOID: ${properties.GEOID})</p>
-                <p class="text-sm">This area's 2025 population is <strong class="text-slate-800">${formatNumber(safeParseFloat(properties.pop2025))}</strong> with an average household income of <strong class="text-slate-800">${formatCurrency(safeParseFloat(properties.avg_household_income))}</strong>.</p>
-                <button id="view-full-details-btn" class="mt-4 w-full bg-slate-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-slate-800 transition-colors">View Full Tract Details</button>
-             `;
-             document.getElementById('view-full-details-btn').onclick = () => {
-                const feature = tractData.features.find(f => f.properties.GEOID === properties.GEOID);
-                const layer = geojsonLayer.getLayers().find(l => l.feature === feature);
-                if (layer) {
-                    layer.fire('click');
-                }
-                geocoderResultPanel.classList.remove('opacity-100');
-                geocoderResultPanel.classList.add('opacity-0', 'pointer-events-none');
-             };
-        } else {
-             geocoderResultContent.innerHTML = `
-                <p class="text-slate-600 mb-2">The address <strong class="text-slate-800">${addressName}</strong> was found, but it does not fall within any of the community data tracts on the map.</p>
-             `;
-        }
-        geocoderResultPanel.classList.remove('opacity-0', 'pointer-events-none');
-        geocoderResultPanel.classList.add('opacity-100');
+        return foundFeature;
     }
+    
+    /**
+     * Displays combined parcel and tract data in the address side panel.
+     */
+    function displayAddressInfo(addressName, parcelProps, tractProps) {
+        const panelTitle = document.getElementById('address-panel-title');
+        const panelContent = document.getElementById('address-panel-content');
+        
+        // Use the parcel's address if available, otherwise use the geocoded name
+        const displayTitle = parcelProps?.ADDRESS ? `${parcelProps.ADDRESS}, ${parcelProps.CITY}` : addressName;
+        panelTitle.textContent = displayTitle;
+        
+        let contentHTML = '';
 
-    closeGeocoderPanelBtn.addEventListener('click', () => {
-        geocoderResultPanel.classList.remove('opacity-100');
-        geocoderResultPanel.classList.add('opacity-0', 'pointer-events-none');
-    });
+        // Parcel Information Section
+        if (parcelProps) {
+            // Clean up land use description (e.g., "OFFICE Office Building" -> "Office Building")
+            const useDescription = parcelProps.DESCCIUSE ? parcelProps.DESCCIUSE.split(' ').slice(1).join(' ') : formatValue(parcelProps.DESCLU);
+
+            contentHTML += `
+                <div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Parcel Details</h3>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                        <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Land Use:</span> ${useDescription}</div>
+                        <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Zoning:</span> ${formatValue(parcelProps.ZONING)}</div>
+                        <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Year Built:</span> ${formatValue(parcelProps.YEARBLT)}</div>
+                        <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Acres:</span> ${formatValue(parcelProps.ACRES)}</div>
+                        <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Structure SqFt:</span> ${formatNumber(parcelProps.SQFTSTRC)}</div>
+                        <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Last Sale:</span> ${formatYmd(parcelProps.TRADATE)} for ${formatCurrency(parcelProps.CONSIDR1)}</div>
+                    </div>
+                </div>`;
+        } else {
+            contentHTML += `<p class="text-sm p-3 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 rounded-r-md">No specific parcel data found for this location.</p>`;
+        }
+        
+        // Tract Information Section
+        if (tractProps) {
+            contentHTML += `
+                <div class="mt-4">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Context</h3>
+                    <div class="p-3 bg-blue-50 border-l-4 border-blue-400 rounded-r-md">
+                        <p class="text-sm text-slate-700">This address is within the community of <strong class="font-semibold">${truncateCommunityList(tractProps.tract_name)}, ${tractProps.county_name}</strong>.</p>
+                        <button id="view-full-details-btn" class="mt-3 w-full bg-slate-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-slate-800 transition-colors">Explore Full Community Details</button>
+                    </div>
+                </div>`;
+        } else {
+            contentHTML += `<p class="mt-4 text-sm p-3 bg-slate-100 text-slate-600">This address does not fall within a designated community area on the map.</p>`;
+        }
+        
+        panelContent.innerHTML = contentHTML;
+
+        // Add event listener for the button if it exists
+        if (tractProps) {
+            document.getElementById('view-full-details-btn').onclick = () => {
+                displayFeatureInfo(tractProps);
+            };
+        }
+        
+        addressPanel.classList.add('show');
+    }
 
     // --- POINT IN POLYGON HELPER FUNCTIONS ---
     function isPointInPolygon(point, vs) {
@@ -720,20 +730,15 @@ function initializeMap(tractData) {
 
     function isPointInSingleLeafletPolygon_Custom(latlng, leafletPolygon) {
         if (!latlng || !(leafletPolygon instanceof L.Polygon)) return false;
-        
         const allLatLngs = leafletPolygon.getLatLngs();
         if (!allLatLngs || allLatLngs.length === 0) return false;
-
         const outerRingVertices = (allLatLngs[0] instanceof L.LatLng) ? allLatLngs : allLatLngs[0];
-
         if (!isPointInPolygon(latlng, outerRingVertices)) return false;
-
         if (!(allLatLngs[0] instanceof L.LatLng)) {
             for (let i = 1; i < allLatLngs.length; i++) {
                 if (isPointInPolygon(latlng, allLatLngs[i])) return false; 
             }
         }
-        
         return true;
     }
 
@@ -757,13 +762,9 @@ function initializeMap(tractData) {
 // --- OVERLAY LAYER TOGGLE LOGIC ---
 function toggleTractLayer(checkbox) {
     if (checkbox.checked) {
-        if (!map.hasLayer(geojsonLayer)) {
-            map.addLayer(geojsonLayer);
-        }
+        if (!map.hasLayer(geojsonLayer)) map.addLayer(geojsonLayer);
     } else {
-        if (map.hasLayer(geojsonLayer)) {
-            map.removeLayer(geojsonLayer);
-        }
+        if (map.hasLayer(geojsonLayer)) map.removeLayer(geojsonLayer);
     }
 }
 
@@ -785,26 +786,20 @@ async function togglePolygonLayer(checkbox) {
             
             const style = incentiveStyles[layerName] || { color: '#000000', weight: 2 };
             const layer = L.geoJSON(data, {
-                style: {...style, pane: 'incentivePane' }, // Assign to correct pane
+                style: {...style, pane: 'incentivePane' },
                 interactive: false
-                // ,onEachFeature: (feature, layer) => {
-                //     const name = feature.properties.name || feature.properties.Name || layerName.replace(/_/g, ' ');
-                //     layer.bindPopup(`<div class="font-bold">${name}</div>`);
-                // }
             });
             overlayLayers[layerName] = layer;
             map.addLayer(layer);
         } catch (error) {
             console.error(`Failed to load ${layerName}:`, error);
-            alert(`Could not load the layer: ${layerName}. Check the console for details.`);
-            checkbox.checked = false; // Uncheck on error
+            alert(`Could not load the layer: ${layerName}.`);
+            checkbox.checked = false;
         } finally {
             checkbox.parentElement.classList.remove('animate-pulse');
         }
     } else {
-        if (overlayLayers[layerName]) {
-            map.removeLayer(overlayLayers[layerName]);
-        }
+        if (overlayLayers[layerName]) map.removeLayer(overlayLayers[layerName]);
     }
 }
 
@@ -824,13 +819,11 @@ async function togglePointLayer(checkbox) {
             if (!response.ok) throw new Error(`Failed to load ${url}`);
             const data = await response.json();
             
-            const markers = L.markerClusterGroup({
-                clusterPane: 'clusterTopPane'
-            });
+            const markers = L.markerClusterGroup({ clusterPane: 'clusterTopPane' });
             const isChildcare = layerName === 'childcare';
             const pointStyle = {
                 radius: 6,
-                fillColor: isChildcare ? "#fca5a5" : "#6ee7b7", // red for childcare, green for grocery
+                fillColor: isChildcare ? "#fca5a5" : "#6ee7b7",
                 color: "#000",
                 weight: 1,
                 opacity: 1,
@@ -844,43 +837,32 @@ async function togglePointLayer(checkbox) {
                         const latlng = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]]; 
                         const marker = L.circleMarker(latlng, { ...pointStyle, pane: 'clusterTopPane' });
                         
-                        let popupContent = '';
-                        if (isChildcare) {
-                            popupContent = `
+                        let popupContent = isChildcare ? `
                                 <div class="font-bold text-base">${properties.gen_listing_name_original_text || 'N/A'}</div>
                                 <div><strong>Capacity (Under 6):</strong> ${properties.licensed_capacity_under6 || 'N/A'}</div>
-                            `;
-                        } else { // Grocery
-                             popupContent = `
+                            ` : `
                                 <div class="font-bold text-base">${properties.name || 'N/A'}</div>
                                 <div><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
                                 <div><strong>Quality:</strong> ${properties.quality || 'N/A'}</div>
                             `;
-                        }
                         marker.bindPopup(popupContent);
-                        markers.addLayer(marker); // Add marker to the cluster group
+                        markers.addLayer(marker);
                     }
                 });
             }
-
             overlayLayers[layerName] = markers;
             map.addLayer(markers);
-
         } catch (error) {
             console.error(`Failed to load ${layerName}:`, error);
-             alert(`Could not load the layer: ${layerName}. Check the console for details.`);
+             alert(`Could not load the layer: ${layerName}.`);
             checkbox.checked = false;
         } finally {
              checkbox.parentElement.classList.remove('animate-pulse');
         }
-        
     } else {
-        if (overlayLayers[layerName]) {
-            map.removeLayer(overlayLayers[layerName]);
-        }
+        if (overlayLayers[layerName]) map.removeLayer(overlayLayers[layerName]);
     }
 }
-
 </script>
 </body>
 </html>
