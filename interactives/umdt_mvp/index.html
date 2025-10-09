@@ -262,7 +262,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     // --- MAP INITIALIZATION ---
     map = L.map('map', {
         center: [39.0458, -76.6413], // Centered on Maryland
-        zoom: 9,
+        maxBounds: [[37.72521, -79.93165], [39.90463, -74.60361]],
+        zoom: 8,
+        minZoom: 7,
         zoomControl: false 
     });
     
