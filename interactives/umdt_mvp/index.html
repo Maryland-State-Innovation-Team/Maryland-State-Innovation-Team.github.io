@@ -599,7 +599,13 @@ function initializeMap(tractData) {
         position: 'topright',
         placeholder: 'Search for an address...',
         defaultMarkGeocode: false, // We'll add our own marker
-        geocoder: L.Control.Geocoder.mapbox({ apiKey: MAPBOX_ACCESS_TOKEN })
+        geocoder: L.Control.Geocoder.mapbox({ 
+            apiKey: MAPBOX_ACCESS_TOKEN,
+            geocodingQueryParams: {
+                country: 'us',
+                bbox: [-79.93165, 37.72521, -74.60361, 39.90463]
+            }
+        })
     })
     .on('markgeocode', async function(e) {
         const { center, name } = e.geocode;
