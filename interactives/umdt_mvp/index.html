@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // --- MAP INITIALIZATION ---
     map = L.map('map', {
         center: [39.0458, -76.6413], // Centered on Maryland
-        maxBounds: [[37.72521, -79.93165], [39.90463, -74.60361]],
+        maxBounds: [[37.72521, -82], [39.90463, -74.60361]],
         zoom: 8,
         minZoom: 7,
         zoomControl: false 
@@ -313,7 +313,7 @@ function initializeMap(tractData) {
         'pop2025': { label: 'Population (2025)', format: (d) => formatNumber(d) },
         'pop_change2530': { label: 'Projected Pop. Change (25-30)', format: (d) => formatNumber(d) },
         'avg_household_income': { label: 'Avg. Household Income', format: (d) => formatCurrency(d) },
-        'vehicle_ownership_pct': { label: '% Vehicle Ownership', format: (d) => formatPercent(d) },
+        'transportation_barrier_pct': { label: '% Transportation Barriers', format: (d) => formatPercent(d) },
         'pct_under5': { label: '% Population Under 5', format: (d) => formatPercent(d) },
         'childcare_spending_per_under5': { label: 'Childcare Spending (per child)', format: (d) => formatCurrency(d) },
         'childcare_unmet_demand': { label: 'Childcare Unmet Demand (Seats)', format: (d) => formatNumber(d) },
@@ -377,6 +377,17 @@ function initializeMap(tractData) {
     }
 
     function style(feature) {
+        if (currentVariable === 'grocery_unmet_demand') {
+            const value = safeParseFloat(feature.properties.grocery_unmet_demand);
+            return {
+                fillColor: value === 1 ? '#d73027' : '#f0f0f0', // A strong red for priority areas, neutral gray otherwise
+                weight: 1,
+                opacity: 1,
+                color: 'white',
+                fillOpacity: 0.7,
+                pane: 'tractPane'
+            };
+        } 
         const isDiverging = isDivergingVariable(currentVariable);
         const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable]));
         const colors = isDiverging ? divergingColors : sequentialColors;
@@ -395,6 +406,16 @@ function initializeMap(tractData) {
     
     legend.onAdd = function (map) {
         const div = L.DomUtil.create('div', 'info-legend');
+
+        if (currentVariable === 'grocery_unmet_demand') {
+            div.innerHTML = `
+                <h4>Grocery Unmet Demand</h4>
+                <div class="legend-item"><i style="background:#d73027"></i><span>Priority Area (High Need, Low Access)</span></div>
+                <div class="legend-item"><i style="background:#f0f0f0"></i><span>Not a Priority Area</span></div>
+            `;
+            return div;
+        }
+
         const isDiverging = isDivergingVariable(currentVariable);
         const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable])).filter(v => !isNaN(v));
         if(values.length === 0) return div;
@@ -581,7 +602,7 @@ function initializeMap(tractData) {
                          <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Unmet Demand:</span> ${properties.grocery_unmet_demand.toFixed(2)}
                             <div class="info-tooltip inline-block ml-1" tabindex="0">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
-                                <span class="tooltip-text">Fresh food unmet demand is the difference between an assumed universal demand (1.0) and the local supply score. Supply is rated 1-5 for local stores, with scores below 1 indicating poor access. Positive scores reflect need.</span>
+                                <span class="tooltip-text">A score of 1 identifies a priority area where **High Need** (food insecurity in the top 25% for the state) overlaps with **Low Access** (grocery supply score is less than perfect). A score of 0 indicates the area does not meet both of these criteria.</span>
                             </div>
                          </div>
                     </div>
