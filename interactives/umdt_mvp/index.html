@@ -305,24 +305,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function initializeMap(tractData) {
     // --- CHOROPLETH AND LEGEND LOGIC ---
-    let currentVariable = 'pop2025';
+    let currentVariable = 'childcare_unmet_demand';
     const legend = L.control({ position: 'bottomright' });
     const choroplethSelect = document.getElementById('choropleth-select');
 
     const choroplethOptions = {
+        'childcare_unmet_demand': { label: 'Childcare Opportunity Score', format: (d) => formatNumber(d) },
+        'childcare_supply_score': { label: 'Childcare Access Score', format: (d) => formatNumber(d) },
+        'childcare_demand_score': { label: 'Childcare Demand Score', format: (d) => formatNumber(d) },
+        'grocery_unmet_demand': { label: 'Fresh Food Opportunity Score', format: (d) => d.toFixed(2) },
+        'grocery_supply_score': { label: 'Fresh Food Access Score', format: (d) => d.toFixed(2) },
+        'grocery_demand_score': { label: 'Fresh Food Demand Score', format: (d) => d.toFixed(2) },
+        'grocery_need_score': { label: 'Fresh Food Need', format: (d) => formatPercent(d) },
+        'childcare_spending_per_under5': { label: 'Childcare Spending (per child)', format: (d) => formatCurrency(d) },
+        'per_household_food_at_home': { label: 'Grocery spending (per household)', format: (d) => formatCurrency(d) },
         'pop2025': { label: 'Population (2025)', format: (d) => formatNumber(d) },
         'pop_change2530': { label: 'Projected Pop. Change (25-30)', format: (d) => formatNumber(d) },
         'avg_household_income': { label: 'Avg. Household Income', format: (d) => formatCurrency(d) },
         'transportation_barrier_pct': { label: '% Transportation Barriers', format: (d) => formatPercent(d) },
         'pct_under5': { label: '% Population Under 5', format: (d) => formatPercent(d) },
-        'childcare_spending_per_under5': { label: 'Childcare Spending (per child)', format: (d) => formatCurrency(d) },
-        'childcare_unmet_demand': { label: 'Childcare Unmet Demand (Seats)', format: (d) => formatNumber(d) },
-        'childcare_supply_score': { label: 'Childcare Supply (Seats)', format: (d) => formatNumber(d) },
-        'childcare_demand_score': { label: 'Childcare Demand (Seats)', format: (d) => formatNumber(d) },
-        'grocery_unmet_demand': { label: 'Grocery Unmet Demand Score', format: (d) => d.toFixed(2) },
-        'grocery_supply_score': { label: 'Grocery Supply Score', format: (d) => d.toFixed(2) },
-        'grocery_demand_score': { label: 'Latent Grocery Demand Score', format: (d) => d.toFixed(2) },
-        'grocery_need_score': { label: 'Grocery Need (Food Insecurity)', format: (d) => formatPercent(d) },
         'community_momentum_index': { label: 'Community Momentum Index', format: (d) => formatPercent(d) },
         'net_business_formations': { label: 'Net Business Formations (22-23)', format: (d) => formatPercent(d) },
         'job_growth_employees': { label: 'Job Growth (Employees, 22-23)', format: (d) => formatPercent(d) },
@@ -370,6 +371,7 @@ function initializeMap(tractData) {
     }
 
     function getColor(d, breaks, colors) {
+        if (d === null || isNaN(d)) return '#bdbdbd'; // Grey for null/NaN
         if (colors.length === 6) { // Diverging
             return d > breaks[4] ? colors[5] : d > breaks[3] ? colors[4] : d > breaks[2] ? colors[3] : d > breaks[1] ? colors[2] : d > breaks[0] ? colors[1] : colors[0];
         } else { // Sequential
@@ -381,11 +383,10 @@ function initializeMap(tractData) {
         const isDiverging = isDivergingVariable(currentVariable);
         const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable]));
         const colors = isDiverging ? divergingColors : sequentialColors;
-        const breaks = isDiverging ? getDivergingBreaks(values) : getQuantiles(values, colors.length);
+        const breaks = isDiverging ? getDivergingBreaks(values.filter(v => !isNaN(v))) : getQuantiles(values.filter(v => !isNaN(v)), colors.length);
         const value = safeParseFloat(feature.properties[currentVariable]);
-
         return {
-            fillColor: getColor(value, breaks, colors),
+            fillColor: (value === null || isNaN(value)) ? '#bdbdbd' : getColor(value, breaks, colors),
             weight: 1,
             opacity: 1,
             color: 'white',
@@ -408,26 +409,28 @@ function initializeMap(tractData) {
         let content = `<h4>${choroplethOptions[currentVariable].label}</h4>`;
         
         if (isDiverging) {
-             if (currentVariable.includes('unmet_demand')) {
-                content += `<div class="legend-item"><i style="background:${colors[5]}"></i><span>More Demand (Need)</span></div>`;
+            if (currentVariable.includes('unmet_demand')) {
+                content += `<div class="legend-item"><i style="background:${colors[5]}"></i><span>More Demand</span></div>`;
                 content += `<div class="legend-item"><i style="background:${colors[2]}"></i><span>Balanced</span></div>`;
-                content += `<div class="legend-item"><i style="background:${colors[0]}"></i><span>More Supply (Abundance)</span></div>`;
-             } else { // For growth rates
+                content += `<div class="legend-item"><i style="background:${colors[0]}"></i><span>More Access</span></div>`;
+            } else { // For growth rates
                 content += `<div class="legend-item"><i style="background:${colors[5]}"></i><span>High Growth</span></div>`;
                 content += `<div class="legend-item"><i style="background:${colors[2]}"></i><span>Stable</span></div>`;
                 content += `<div class="legend-item"><i style="background:${colors[0]}"></i><span>Decline</span></div>`;
-             }
+            }
         } else {
             for (let i = 0; i < colors.length; i++) {
                 const from = i === 0 ? Math.min(...values) : breaks[i - 1];
                 const to = i === colors.length - 1 ? Math.max(...values) : breaks[i];
-                 content +=
+                content +=
                     `<div class="legend-item">
                         <i style="background:${colors[i]}"></i>
                         <span>${formatter(from)}${to ? ' &ndash; ' + formatter(to) : '+'}</span>
                     </div>`;
             }
         }
+        // Add No Data entry
+        content += `<div class="legend-item"><i style="background:#bdbdbd"></i><span>No Data</span></div>`;
         div.innerHTML = content;
         return div;
     };
@@ -503,12 +506,12 @@ function initializeMap(tractData) {
         const createList = (items, title) => {
             if (!items || items.length === 0) return '';
             return `
-                <div class="bg-slate-50 p-3 rounded-lg mt-2">
-                    <h4 class="font-semibold text-slate-600 mb-2">${title}</h4>
-                    <ul class="list-disc list-inside space-y-1 text-sm text-slate-700">
+                <details class="bg-slate-50 p-3 rounded-lg mt-2" style="margin-top:0.5rem;">
+                    <summary class="font-semibold text-slate-600 mb-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">${title}</summary>
+                    <ul class="list-disc list-inside space-y-1 text-sm text-slate-700 mt-2">
                         ${items.map(item => `<li>${makeLinks(item)}</li>`).join('')}
                     </ul>
-                </div>`;
+                </details>`;
         };
         
         const createPlanAreas = (items) => {
@@ -580,7 +583,12 @@ function initializeMap(tractData) {
                     <div class="grid grid-cols-2 gap-2 text-sm mt-2">
                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Supply Score:</span> ${properties.grocery_supply_score.toFixed(2)}</div>
                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Need Score (Insecurity):</span> ${formatPercent(properties.grocery_need_score)}</div>
-                        <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Latent Demand Score:</span> ${properties.grocery_demand_score.toFixed(2)}</div>
+                        <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Latent Demand Score:</span> ${properties.grocery_demand_score.toFixed(2)}
+                            <div class="info-tooltip inline-block ml-1" tabindex="0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                                <span class="tooltip-text">Estimates how much more people would spend on fresh food if they had good access to high-quality stores, based on local demographics and current access.</span>
+                            </div>
+                        </div>
                         <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Unmet Demand Score:</span> ${properties.grocery_unmet_demand.toFixed(2)}
                             <div class="info-tooltip inline-block ml-1" tabindex="0">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
