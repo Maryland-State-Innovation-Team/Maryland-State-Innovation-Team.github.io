@@ -321,7 +321,8 @@ function initializeMap(tractData) {
         'childcare_demand_score': { label: 'Childcare Demand (Seats)', format: (d) => formatNumber(d) },
         'grocery_unmet_demand': { label: 'Grocery Unmet Demand Score', format: (d) => d.toFixed(2) },
         'grocery_supply_score': { label: 'Grocery Supply Score', format: (d) => d.toFixed(2) },
-        'grocery_demand_score': { label: 'Grocery Demand Score', format: (d) => d.toFixed(2) },
+        'grocery_demand_score': { label: 'Latent Grocery Demand Score', format: (d) => d.toFixed(2) },
+        'grocery_need_score': { label: 'Grocery Need (Food Insecurity)', format: (d) => formatPercent(d) }, // <-- ADDED
         'community_momentum_index': { label: 'Community Momentum Index', format: (d) => formatPercent(d) },
         'net_business_formations': { label: 'Net Business Formations (22-23)', format: (d) => formatPercent(d) },
         'job_growth_employees': { label: 'Job Growth (Employees, 22-23)', format: (d) => formatPercent(d) },
@@ -377,17 +378,6 @@ function initializeMap(tractData) {
     }
 
     function style(feature) {
-        if (currentVariable === 'grocery_unmet_demand') {
-            const value = safeParseFloat(feature.properties.grocery_unmet_demand);
-            return {
-                fillColor: value === 1 ? '#d73027' : '#f0f0f0', // A strong red for priority areas, neutral gray otherwise
-                weight: 1,
-                opacity: 1,
-                color: 'white',
-                fillOpacity: 0.7,
-                pane: 'tractPane'
-            };
-        } 
         const isDiverging = isDivergingVariable(currentVariable);
         const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable]));
         const colors = isDiverging ? divergingColors : sequentialColors;
@@ -406,15 +396,6 @@ function initializeMap(tractData) {
     
     legend.onAdd = function (map) {
         const div = L.DomUtil.create('div', 'info-legend');
-
-        if (currentVariable === 'grocery_unmet_demand') {
-            div.innerHTML = `
-                <h4>Grocery Unmet Demand</h4>
-                <div class="legend-item"><i style="background:#d73027"></i><span>Priority Area (High Need, Low Access)</span></div>
-                <div class="legend-item"><i style="background:#f0f0f0"></i><span>Not a Priority Area</span></div>
-            `;
-            return div;
-        }
 
         const isDiverging = isDivergingVariable(currentVariable);
         const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable])).filter(v => !isNaN(v));
@@ -596,15 +577,16 @@ function initializeMap(tractData) {
                 
                 <div class="mt-4 p-4 border rounded-lg">
                     <h4 class="text-md font-semibold text-slate-700">Fresh Food & Groceries</h4>
-                     <div class="grid grid-cols-3 gap-2 text-sm mt-2">
-                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Supply Score:</span> ${properties.grocery_supply_score.toFixed(2)}</div>
-                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Demand Score:</span> ${properties.grocery_demand_score.toFixed(2)}</div>
-                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Unmet Demand:</span> ${properties.grocery_unmet_demand.toFixed(2)}
+                    <div class="grid grid-cols-2 gap-2 text-sm mt-2">
+                        <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Supply Score:</span> ${properties.grocery_supply_score.toFixed(2)}</div>
+                        <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Need Score (Insecurity):</span> ${formatPercent(properties.grocery_need_score)}</div>
+                        <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Latent Demand Score:</span> ${properties.grocery_demand_score.toFixed(2)}</div>
+                        <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Unmet Demand Score:</span> ${properties.grocery_unmet_demand.toFixed(2)}
                             <div class="info-tooltip inline-block ml-1" tabindex="0">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
-                                <span class="tooltip-text">A score of 1 identifies a priority area where **High Need** (food insecurity in the top 25% for the state) overlaps with **Low Access** (grocery supply score is less than perfect). A score of 0 indicates the area does not meet both of these criteria.</span>
+                                <span class="tooltip-text">Measures the gap between potential and actual grocery access. Positive scores indicate high latent demand and low current supply, signaling a strong market opportunity. Negative scores suggest supply meets or exceeds demand.</span>
                             </div>
-                         </div>
+                        </div>
                     </div>
                     ${createList(properties.fresh_food_need_quotes, 'Community Voices on Need')}
                     ${createList(properties.fresh_food_planning_quotes, 'Community Voices on Planning')}
