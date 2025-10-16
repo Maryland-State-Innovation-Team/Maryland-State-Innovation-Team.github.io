@@ -197,7 +197,7 @@
         <p class="text-lg">Loading Community Data...</p>
     </div>
 
-    <div class="relative h-screen w-screen flex">
+    <div id="app-container" class="relative w-screen flex">
         <div id="map" class="h-full w-full z-0"></div>
 
         <div id="side-panel" class="absolute bottom-0 left-0 w-full h-1/2 max-h-[50vh] bg-white shadow-2xl z-[1001] flex flex-col md:top-0 md:bottom-auto md:w-1/3 md:h-screen md:max-h-full lg:w-1/4">            <div class="p-4 border-b flex justify-between items-center">
@@ -856,6 +856,21 @@ async function togglePointLayer(checkbox) {
         if (overlayLayers[layerName]) map.removeLayer(overlayLayers[layerName]);
     }
 }
+function setAppHeight() {
+    const appContainer = document.getElementById('app-container');
+    // Use window.innerHeight to get the actual visible height
+    appContainer.style.height = `${window.innerHeight}px`;
+
+    if (map) {
+        map.invalidateSize();
+    }
+}
+
+// Set the height when the page loads
+document.addEventListener('DOMContentLoaded', setAppHeight);
+
+// Also set the height when the window is resized (e.g., orientation change)
+window.addEventListener('resize', setAppHeight);
 </script>
 </body>
 </html>
