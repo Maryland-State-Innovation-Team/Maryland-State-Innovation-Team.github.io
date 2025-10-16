@@ -231,15 +231,16 @@ const incentiveStyles = {
 };
 
 // --- HELPER FUNCTIONS ---
-function safeParseFloat(value, defaultValue = 0) {
+function safeParseFloat(value, defaultValue = null) {
     const parsed = parseFloat(value);
     return isNaN(parsed) ? defaultValue : parsed;
 }
-const formatPercent = (val) => `${(safeParseFloat(val) * 100).toFixed(1)}%`;
-const formatCurrency = (val) => `$${Math.round(safeParseFloat(val)).toLocaleString()}`;
-const formatNumber = (val) => val ? Math.round(safeParseFloat(val)).toLocaleString() : 'N/A';
-const formatDate = (val) => val ? new Date(val).toLocaleDateString() : 'N/A';
-const formatValue = (val) => val ? val : 'N/A';
+const formatPercent = (val) => `${(safeParseFloat(val, 0) * 100).toFixed(1)}%`;
+const formatCurrency = (val) => `$${Math.round(safeParseFloat(val, 0)).toLocaleString()}`;
+const formatNumber = (val) => (val != null) ? Math.round(safeParseFloat(val)).toLocaleString() : 'N/A';
+const formatDate = (val) => (val != null && val) ? new Date(val).toLocaleDateString() : 'N/A';
+const formatValue = (val) => (val != null) ? val : 'N/A';
+
 function formatYmd(ymd) {
     if (!ymd || ymd.length !== 8) return 'N/A';
     const year = ymd.substring(0, 4);
@@ -269,6 +270,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
     
     // Create custom panes to control layer order
+    map.createPane('countyPane');
+    map.getPane('countyPane').style.zIndex = 475; // Above tracts, below incentives
     map.createPane('incentivePane');
     map.getPane('incentivePane').style.zIndex = 450;
     map.createPane('tractPane');
@@ -287,19 +290,40 @@ document.addEventListener('DOMContentLoaded', async () => {
     L.control.zoom({ position: 'bottomright' }).addTo(map);
 
     // --- DATA LOADING ---
-    let tractData;
     try {
-        const response = await fetch('tract_supply_demand_gap.geojson');
-        if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
-        tractData = await response.json();
-        console.log('Successfully loaded tract data.');
-    } catch (error) {
-        console.error('Failed to load tract data:', error);
-        alert('Could not load community data. The map may not function correctly.');
-        return;
-    }
+        // Load both files at the same time
+        const [tractResponse, countyResponse] = await Promise.all([
+            fetch('tract_supply_demand_gap.geojson'),
+            fetch('counties.geojson')
+        ]);
 
-    initializeMap(tractData);
+        if (!tractResponse.ok || !countyResponse.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const tractData = await tractResponse.json();
+        const countyData = await countyResponse.json();
+        
+        console.log('Successfully loaded tract and county data.');
+        
+        // Add the new county border layer
+        const countyLayer = L.geoJSON(countyData, {
+            style: {
+                fillOpacity: 0,    // No fill
+                color: '#FFFFFF',  // White border
+                weight: 2,         // Thicker border
+                opacity: 0.8       // Slightly transparent
+            },
+            interactive: false,    // Make it non-clickable
+            pane: 'countyPane'     // Add to the custom pane
+        }).addTo(map);
+
+        initializeMap(tractData); // Initialize the rest of the map with the tract data
+
+    } catch (error) {
+        console.error('Failed to load map data:', error);
+        alert('Could not load community or county data. The map may not function correctly.');
+    }
 });
 
 
@@ -340,8 +364,14 @@ function initializeMap(tractData) {
     choroplethSelect.value = currentVariable;
     
     // --- COLOR SCALES ---
-    const sequentialColors = ['#eff3ff', '#bdd7e7', '#6baed6', '#3182bd', '#08519c'];
-    const divergingColors = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'].reverse();
+    const sequentialColors = [
+        '#eff3ff',
+        '#bdd7e7',
+        '#6baed6',
+        '#3182bd',
+        '#08519c'
+    ];
+    const divergingColors = ['#e41d3d', '#f89747', '#fee8a0', '#a6d8f0', '#28a0cb', '#005ea2'].reverse();
 
     function isDivergingVariable(variable) {
         const divergingKeywords = ['unmet_demand', 'growth', 'net_business', 'formations', 'index', 'pop_change'];
@@ -366,12 +396,11 @@ function initializeMap(tractData) {
     }
 
     function getDivergingBreaks(values) {
-        const max = Math.max(...values.map(v => Math.abs(v)));
-        return [-max * 0.66, -max * 0.33, 0, max * 0.33, max * 0.66, ];
+        const numBreaks = divergingColors.length; 
+        return getQuantiles(values, numBreaks);
     }
 
     function getColor(d, breaks, colors) {
-        if (d === null || isNaN(d)) return '#bdbdbd'; // Grey for null/NaN
         if (colors.length === 6) { // Diverging
             return d > breaks[4] ? colors[5] : d > breaks[3] ? colors[4] : d > breaks[2] ? colors[3] : d > breaks[1] ? colors[2] : d > breaks[0] ? colors[1] : colors[0];
         } else { // Sequential
@@ -381,13 +410,25 @@ function initializeMap(tractData) {
 
     function style(feature) {
         const isDiverging = isDivergingVariable(currentVariable);
-        const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable]));
+        
+        // Get all values, but filter out nulls before calculating breaks
+        const values = tractData.features
+            .map(f => safeParseFloat(f.properties[currentVariable]))
+            .filter(v => v !== null);
+
+        // If there's no valid data for this variable at all, color everything grey.
+        if (values.length === 0) {
+            return { fillColor: '#636363', weight: 0, color: 'white', fillOpacity: 0.7, pane: 'tractPane' };
+        }
+
         const colors = isDiverging ? divergingColors : sequentialColors;
-        const breaks = isDiverging ? getDivergingBreaks(values.filter(v => !isNaN(v))) : getQuantiles(values.filter(v => !isNaN(v)), colors.length);
+        const breaks = isDiverging ? getDivergingBreaks(values) : getQuantiles(values, colors.length);
+        
         const value = safeParseFloat(feature.properties[currentVariable]);
+        
         return {
-            fillColor: (value === null || isNaN(value)) ? '#bdbdbd' : getColor(value, breaks, colors),
-            weight: 1,
+            fillColor: (value === null) ? '#636363' : getColor(value, breaks, colors),
+            weight: 0,
             opacity: 1,
             color: 'white',
             fillOpacity: 0.7,
@@ -430,7 +471,7 @@ function initializeMap(tractData) {
             }
         }
         // Add No Data entry
-        content += `<div class="legend-item"><i style="background:#bdbdbd"></i><span>No Data</span></div>`;
+        content += `<div class="legend-item"><i style="background:#636363"></i><span>No Data</span></div>`;
         div.innerHTML = content;
         return div;
     };
@@ -545,7 +586,7 @@ function initializeMap(tractData) {
                 <h3 class="text-lg font-semibold text-slate-800 mb-2">Demographics & Economics</h3>
                 <div class="grid grid-cols-2 gap-2 text-sm">
                     <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Avg. HH Income:</span> ${formatCurrency(properties.avg_household_income)}</div>
-                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">% Vehicle Own:</span> ${formatPercent(properties.vehicle_ownership_pct)}</div>
+                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">% Transporation Barriers:</span> ${formatPercent(properties.transportation_barrier_pct)}</div>
                     <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">
                         Momentum Index (22-23):</span> ${formatPercent(properties.community_momentum_index)}
                         <div class="info-tooltip inline-block ml-1" tabindex="0">
@@ -564,12 +605,12 @@ function initializeMap(tractData) {
                 <div class="mt-4 p-4 border rounded-lg">
                     <h4 class="text-md font-semibold text-slate-700">Childcare</h4>
                     <div class="grid grid-cols-3 gap-2 text-sm mt-2">
-                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Supply:</span> ${formatNumber(properties.childcare_supply_score)} seats</div>
+                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Access:</span> ${formatNumber(properties.childcare_supply_score)} seats</div>
                          <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Demand:</span> ${formatNumber(properties.childcare_demand_score)} seats</div>
-                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Unmet Demand:</span> ${formatNumber(properties.childcare_unmet_demand)} seats 
+                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Opportunity:</span> ${formatNumber(properties.childcare_unmet_demand)} seats 
                              <div class="info-tooltip inline-block ml-1" tabindex="0">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
-                                <span class="tooltip-text">Child care unmet demand is the number of children 5 and under in households where all parents are in the laborforce, minus the licensed capacity of local child care providers. Positive scores reflect community need.</span>
+                                <span class="tooltip-text">Child care opportunity score is the number of children 5 and under in households where all parents are in the laborforce, minus the licensed capacity of local child care providers. Positive scores reflect unmet community demand.</span>
                             </div>
                          </div>
                     </div>
@@ -581,8 +622,8 @@ function initializeMap(tractData) {
                 <div class="mt-4 p-4 border rounded-lg">
                     <h4 class="text-md font-semibold text-slate-700">Fresh Food & Groceries</h4>
                     <div class="grid grid-cols-2 gap-2 text-sm mt-2">
-                        <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Supply Score:</span> ${properties.grocery_supply_score.toFixed(2)}</div>
-                        <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Need Score (Insecurity):</span> ${formatPercent(properties.grocery_need_score)}</div>
+                        <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Access Score:</span> ${properties.grocery_supply_score.toFixed(2)}</div>
+                        <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Need Score:</span> ${formatPercent(properties.grocery_need_score)}</div>
                         <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Latent Demand Score:</span> ${properties.grocery_demand_score.toFixed(2)}
                             <div class="info-tooltip inline-block ml-1" tabindex="0">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
@@ -592,7 +633,7 @@ function initializeMap(tractData) {
                         <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Unmet Demand Score:</span> ${properties.grocery_unmet_demand.toFixed(2)}
                             <div class="info-tooltip inline-block ml-1" tabindex="0">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
-                                <span class="tooltip-text">Measures the gap between potential and actual grocery access. Positive scores indicate high latent demand and low current supply, signaling a strong market opportunity. Negative scores suggest supply meets or exceeds demand.</span>
+                                <span class="tooltip-text">Measures the gap between potential and actual grocery access. Positive scores indicate high latent demand and low current access, signaling a strong market opportunity. Negative scores suggest access meets or exceeds demand.</span>
                             </div>
                         </div>
                     </div>
