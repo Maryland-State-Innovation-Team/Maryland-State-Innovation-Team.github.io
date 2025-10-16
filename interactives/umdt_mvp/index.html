@@ -663,12 +663,26 @@ function initializeMap(tractData) {
         const { center, name } = e.geocode;
         if (sidePanel.classList.contains('show')) sidePanel.classList.remove('show');
         if (searchMarker) map.removeLayer(searchMarker);
-        searchMarker = L.marker(center).addTo(map);
-        map.setView(center, 16);
+
+        // Fetch the data for the location
         const [parcelData, tractFeature] = await Promise.all([
             queryParcelData(center.lng, center.lat),
             findTractForPoint(center)
         ]);
+
+        // Create the marker and add it to the map
+        searchMarker = L.marker(center).addTo(map);
+
+        // Bind a click event to the new marker. When clicked, it will
+        // re-run the displayAddressInfo function with the saved data.
+        searchMarker.on('click', () => {
+            displayAddressInfo(name, parcelData, tractFeature?.properties);
+        });
+
+        // Set the map view
+        map.setView(center, 16);
+
+        // Display the panel for the first time
         displayAddressInfo(name, parcelData, tractFeature?.properties);
     })
     .addTo(map);
