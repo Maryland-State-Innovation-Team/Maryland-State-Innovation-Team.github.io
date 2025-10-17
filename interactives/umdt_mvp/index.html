@@ -36,6 +36,10 @@
             box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
         }
 
+        .leaflet-control-custom {
+            cursor: pointer;
+        }
+
         /* --- Side panel transitions for desktop and mobile --- */
         #side-panel {
             transition: transform 0.3s ease-in-out;
@@ -52,6 +56,10 @@
             }
             #side-panel.show {
                 transform: translateY(0); /* Slide into view */
+            }
+            /* --- NEW: On mobile, hide controls when the panel is shown --- */
+            #side-panel.show ~ #map-controls-container {
+                transform: translateX(-120%);
             }
         }
 
@@ -97,27 +105,27 @@
             white-space: nowrap;
         }
         
-        /* --- Transition for map controls now handles minimized state --- */
         #map-controls-container {
             transition: transform 0.3s ease-in-out;
         }
+        
+        /* This rule is universal: if it's minimized, it's off-screen. */
         #map-controls-container.minimized {
-             transform: translateX(-120%);
+            transform: translateX(-120%);
         }
-        #side-panel.show ~ #map-controls-container {
-            transform: translateX(-120%); /* Hide when side panel is open */
-        }
-         @media (min-width: 768px) {
-            #side-panel.show ~ #map-controls-container {
+
+        /* On DESKTOP, slide the controls over ONLY IF they are NOT minimized */
+        @media (min-width: 768px) {
+            #side-panel.show ~ #map-controls-container:not(.minimized) {
                 transform: translateX(calc(33.333vw + 1rem));
             }
         }
         @media (min-width: 1024px) {
-            #side-panel.show ~ #map-controls-container {
-                 transform: translateX(calc(25vw + 1rem));
+            #side-panel.show ~ #map-controls-container:not(.minimized) {
+                transform: translateX(calc(25vw + 1rem));
             }
         }
-       
+    
         /* Custom tooltip for explanations */
         .info-tooltip {
             position: relative;
@@ -532,6 +540,25 @@ function initializeMap(tractData) {
     // --- SIDE PANEL LOGIC ---
     const sidePanel = document.getElementById('side-panel');
     const panelTitle = document.getElementById('panel-title');
+
+    function openSidePanel() {
+        // On mobile, if controls are open, minimize them first.
+        if (window.innerWidth < 768 && !controlsContainer.classList.contains('minimized')) {
+            controlsContainer.classList.add('minimized');
+            if(showControlsControl) showControlsControl.getContainer().style.display = 'block';
+        }
+        sidePanel.classList.add('show');
+    }
+
+    function openControlsPanel() {
+        // On mobile, if the side panel is open, close it first.
+        if (window.innerWidth < 768 && sidePanel.classList.contains('show')) {
+            sidePanel.classList.remove('show');
+        }
+        controlsContainer.classList.remove('minimized');
+        if(showControlsControl) showControlsControl.getContainer().style.display = 'none';
+    }
+
     const panelContent = document.getElementById('side-panel-content');
     const closePanelBtn = document.getElementById('close-panel-btn');
 
@@ -551,6 +578,10 @@ function initializeMap(tractData) {
     }
 
     function displayFeatureInfo(properties) {
+        if (window.innerWidth < 768 && !document.getElementById('map-controls-container').classList.contains('minimized')) {
+            document.getElementById('map-controls-container').classList.add('minimized');
+            if (showControlsControl) showControlsControl.getContainer().style.display = 'block';
+        }
         panelTitle.textContent = `${truncateCommunityList(properties.tract_name)}, ${properties.county_name}`;
         
         const createList = (items, title) => {
@@ -646,7 +677,7 @@ function initializeMap(tractData) {
                 ${createPlanAreas(properties.plan_areas)}
             </div>
         `;
-        sidePanel.classList.add('show');
+        openSidePanel();
     }
 
     // --- ADDRESS SEARCH ---
@@ -710,6 +741,10 @@ function initializeMap(tractData) {
     }
     
     function displayAddressInfo(addressName, parcelProps, tractProps) {
+        if (window.innerWidth < 768 && !document.getElementById('map-controls-container').classList.contains('minimized')) {
+            document.getElementById('map-controls-container').classList.add('minimized');
+            if (showControlsControl) showControlsControl.getContainer().style.display = 'block';
+        }
         const displayTitle = parcelProps?.ADDRESS ? `${parcelProps.ADDRESS}, ${parcelProps.CITY}` : addressName;
         panelTitle.textContent = displayTitle; // Use the main panel's title element
         let html = '';
@@ -749,7 +784,7 @@ function initializeMap(tractData) {
             document.getElementById('view-full-details-btn').onclick = () => displayFeatureInfo(tractProps);
         }
 
-        sidePanel.classList.add('show'); // Show the main side panel
+        openSidePanel();
     }
 
     // --- POINT IN POLYGON HELPERS ---
@@ -771,8 +806,7 @@ function initializeMap(tractData) {
 
             L.DomEvent.on(btn, 'click', (e) => {
                 L.DomEvent.stop(e);
-                controlsContainer.classList.remove('minimized');
-                btn.style.display = 'none';
+                openControlsPanel();
             });
             return btn;
         },
