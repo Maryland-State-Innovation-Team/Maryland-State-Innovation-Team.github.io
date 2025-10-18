@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-
+    <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -267,6 +267,7 @@ let geojsonLayer; // Main choropleth layer
 let searchMarker; // Marker for the searched address
 let showControlsControl; // To hold the "show" button control
 const overlayLayers = {}; // To store and manage toggleable layers
+let allIncentives = []; // To store all state and local incentives
 
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYW1pbGxlci1tZGdvdiIsImEiOiJjbWc1ZW1hcm8wMWZ0MmtweWZtcmVxeTBtIn0.JS4bkhCiIv6oB_0WEQRpwg';
 const TILESET_ID = 'amiller-mdgov.parcels-tileset';
@@ -281,6 +282,17 @@ const incentiveStyles = {
     'rise_zones': { color: '#a65628', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' },
     'sustainable_communities': { color: '#f781bf', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' },
     'transit_oriented_development': { color: '#999999', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' }
+};
+const INCENTIVE_AREA_MAP = {
+    'brni_areas': 'BRNI Areas',
+    'enterprise_zone_focus_areas': 'Enterprise Zone Focus Areas',
+    'enterprise_zones': 'Enterprise Zones',
+    'main_street_areas': 'Main Street Areas',
+    'opportunity_zones': 'Opportunity Zones',
+    'priority_funding_areas': 'Priority Funding Areas',
+    'rise_zones': 'RISE Zones',
+    'sustainable_communities': 'Sustainable Communities',
+    'transit_oriented_development': 'Transit Oriented Development'
 };
 
 // --- HELPER FUNCTIONS ---
@@ -346,19 +358,32 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- DATA LOADING ---
     try {
-        const [tractResponse, countyResponse] = await Promise.all([
+        const [tractResponse, countyResponse, stateIncentivesResponse, localIncentivesResponse] = await Promise.all([
             fetch('tract_supply_demand_gap.geojson'),
-            fetch('counties.geojson')
+            fetch('counties.geojson'),
+            fetch('state_incentives_structured.json'),
+            fetch('local_incentives_structured.json')
         ]);
 
-        if (!tractResponse.ok || !countyResponse.ok) {
+        if (!tractResponse.ok || !countyResponse.ok || !stateIncentivesResponse.ok || !localIncentivesResponse.ok) {
             throw new Error('Network response was not ok');
         }
 
         const tractData = await tractResponse.json();
         const countyData = await countyResponse.json();
+        const stateIncentives = await stateIncentivesResponse.json();
+        const localIncentives = await localIncentivesResponse.json();
         
-        console.log('Successfully loaded tract and county data.');
+        // Combine state and local incentives into one array, extracting the structured data
+        const processIncentives = (incentives, source) => {
+            return incentives.map(inc => ({ ...inc.structured_extraction, source: source }));
+        };
+        allIncentives = [
+            ...processIncentives(stateIncentives, 'State'),
+            ...processIncentives(localIncentives, 'Local')
+        ];
+        
+        console.log(`Successfully loaded ${allIncentives.length} total incentives.`);
         
         const countyLayer = L.geoJSON(countyData, {
             style: {
@@ -368,6 +393,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         }).addTo(map);
 
         initializeMap(tractData);
+
+        // Pre-load incentive area layers in the background
+        await preloadPolygonLayers();
 
     } catch (error) {
         console.error('Failed to load map data:', error);
@@ -569,13 +597,79 @@ function initializeMap(tractData) {
             lastClickedLayer = null;
         }
     });
+    
+    // --- NEW INCENTIVE HELPER FUNCTIONS ---
+    function filterIncentives(tractProps, industry, point = null) {
+        if (!tractProps || !allIncentives) return [];
 
-    function makeLinks(text) {
-        return text.replace(/<a\s+([^>]*href=['"][^'"]+['"][^>]*)>/gi, (match, attrs) => {
-            if (/class\s*=/.test(attrs)) return match;
-            return `<a ${attrs} class="text-blue-600 font-semibold hover:underline">`;
+        const county = tractProps.county_name;
+
+        // Create a reverse map for quick lookups (Human Name -> Machine Name)
+        const reverseIncentiveMap = Object.fromEntries(
+            Object.entries(INCENTIVE_AREA_MAP).map(([key, value]) => [value, key])
+        );
+
+        return allIncentives.filter(inc => {
+            // 0. Filter by for-profit
+            const eligibleOrganizationTypes = inc.eligible_organization_types || [];
+            if (!eligibleOrganizationTypes.includes('for-profit')) {
+                return false;
+            }  
+            // 1. Filter by Industry
+            const industryMatch = (inc.list_of_eligible_industries?.includes(industry) ||
+                                inc.list_of_prioritized_industries?.includes(industry));
+            if (!industryMatch) return false;
+
+            // 2. Filter by Geography
+            // County Match
+            const countyMatch = (inc.list_of_eligible_counties?.includes('All') ||
+                                inc.list_of_eligible_counties?.includes(county) ||
+                                inc.list_of_prioritized_counties?.includes('All') ||
+                                inc.list_of_prioritized_counties?.includes(county));
+
+            // Incentive Area Match (only if a point is provided)
+            let incentiveAreaMatch = false;
+            if (point && inc.list_of_incentive_areas && inc.list_of_incentive_areas.length > 0) {
+                // **MODIFIED LOGIC STARTS HERE**
+                incentiveAreaMatch = inc.list_of_incentive_areas.some(humanName => {
+                    // Use the reverse map to find the machine-friendly layer name
+                    const layerName = reverseIncentiveMap[humanName];
+                    if (!layerName) return false; // Skip if the name from the JSON isn't in our map
+
+                    const layer = overlayLayers[layerName];
+                    // Check if the layer has been loaded (no visibility check needed here)
+                    return layer && isPointInLayer_Turf(point, layer);
+                });
+                // **MODIFIED LOGIC ENDS HERE**
+            }
+
+            return countyMatch || incentiveAreaMatch;
         });
     }
+
+    function createIncentiveListHTML(incentives, type) {
+        if (!incentives || incentives.length === 0) {
+            return `<p class="text-sm text-slate-600 mt-2">No specific ${type.toLowerCase()} incentives found for this area.</p>`;
+        }
+        
+        return `
+            <details class="bg-slate-50 p-3 rounded-lg mt-2" style="margin-top:0.5rem;">
+                <summary class="font-semibold text-slate-600 mb-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">Relevant ${type} Incentives (${incentives.length})</summary>
+                <div class="space-y-3 mt-2">
+                    ${incentives.map(inc => `
+                        <div class="text-sm border-t pt-2">
+                            <p class="font-bold text-slate-800">
+                                <a href="${inc.URL}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">${inc.program_name}</a> 
+                                <span class="text-xs font-medium bg-slate-200 text-slate-700 py-0.5 px-1.5 rounded-full ml-1">${inc.source}</span>
+                            </p>
+                            <p class="text-slate-600 mt-1">${inc.program_description}</p>
+                            ${inc.assistance_type ? `<p class="mt-1"><strong class="font-medium text-slate-700">Assistance Type:</strong> ${inc.assistance_type.join(', ')}</p>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            </details>`;
+    }
+
 
     function displayFeatureInfo(properties) {
         if (window.innerWidth < 768 && !document.getElementById('map-controls-container').classList.contains('minimized')) {
@@ -590,7 +684,7 @@ function initializeMap(tractData) {
                 <details class="bg-slate-50 p-3 rounded-lg mt-2" style="margin-top:0.5rem;">
                     <summary class="font-semibold text-slate-600 mb-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">${title}</summary>
                     <ul class="list-disc list-inside space-y-1 text-sm text-slate-700 mt-2">
-                        ${items.map(item => `<li>${makeLinks(item)}</li>`).join('')}
+                        ${items.map(item => `<li>${item}</li>`).join('')}
                     </ul>
                 </details>`;
         };
@@ -607,6 +701,11 @@ function initializeMap(tractData) {
                     `).join('')}
                 </div>`;
         }
+        
+        // --- NEW: Filter incentives for the tract ---
+        const childcareIncentives = filterIncentives(properties, 'Child Care Services');
+        const freshFoodIncentives = filterIncentives(properties, 'Grocery Stores');
+
         const popChange = safeParseFloat(properties.pop_change2530);
         panelContent.innerHTML = `
             <div>
@@ -635,7 +734,6 @@ function initializeMap(tractData) {
             </div>
             <div>
                 <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Needs & Opportunities</h3>
-                <p class="text-sm p-3 bg-blue-50 border-l-4 border-blue-400 text-blue-800 rounded-r-md"><em>${properties.incentive_intro}</em></p>
                 <div class="mt-4 p-4 border rounded-lg">
                     <h4 class="text-md font-semibold text-slate-700">Childcare</h4>
                     <div class="grid grid-cols-3 gap-2 text-sm mt-2">
@@ -650,7 +748,7 @@ function initializeMap(tractData) {
                     </div>
                     ${createList(properties.childcare_need_quotes, 'Community Voices on Need')}
                     ${createList(properties.childcare_planning_quotes, 'Community Voices on Planning')}
-                    ${createList(properties.incentive_childcare_advice, 'Incentive Advice')}
+                    ${createIncentiveListHTML(childcareIncentives, 'Childcare')}
                 </div>
                 <div class="mt-4 p-4 border rounded-lg">
                     <h4 class="text-md font-semibold text-slate-700">Fresh Food & Groceries</h4>
@@ -672,7 +770,7 @@ function initializeMap(tractData) {
                     </div>
                     ${createList(properties.fresh_food_need_quotes, 'Community Voices on Need')}
                     ${createList(properties.fresh_food_planning_quotes, 'Community Voices on Planning')}
-                    ${createList(properties.incentive_fresh_food_advice, 'Incentive Advice')}
+                    ${createIncentiveListHTML(freshFoodIncentives, 'Fresh Food')}
                 </div>
                 ${createPlanAreas(properties.plan_areas)}
             </div>
@@ -695,26 +793,21 @@ function initializeMap(tractData) {
         if (sidePanel.classList.contains('show')) sidePanel.classList.remove('show');
         if (searchMarker) map.removeLayer(searchMarker);
 
-        // Fetch the data for the location
         const [parcelData, tractFeature] = await Promise.all([
             queryParcelData(center.lng, center.lat),
             findTractForPoint(center)
         ]);
 
-        // Create the marker and add it to the map
         searchMarker = L.marker(center).addTo(map);
 
-        // Bind a click event to the new marker. When clicked, it will
-        // re-run the displayAddressInfo function with the saved data.
+        // MODIFIED: Pass the 'center' point to the click handler
         searchMarker.on('click', () => {
-            displayAddressInfo(name, parcelData, tractFeature?.properties);
+            displayAddressInfo(name, parcelData, tractFeature?.properties, center);
         });
 
-        // Set the map view
         map.setView(center, 16);
-
-        // Display the panel for the first time
-        displayAddressInfo(name, parcelData, tractFeature?.properties);
+        // MODIFIED: Pass 'center' to display function
+        displayAddressInfo(name, parcelData, tractFeature?.properties, center);
     })
     .addTo(map);
 
@@ -735,18 +828,19 @@ function initializeMap(tractData) {
     function findTractForPoint(latlng) {
         let found = null;
         geojsonLayer.eachLayer(layer => {
-            if (!found && isPointInMultiPolygonLayer_Custom(latlng, layer)) found = layer.feature;
+            if (!found && isPointInLayer_Turf(latlng, layer)) found = layer.feature;
         });
         return found;
     }
     
-    function displayAddressInfo(addressName, parcelProps, tractProps) {
+    // MODIFIED: Added 'point' parameter
+    function displayAddressInfo(addressName, parcelProps, tractProps, point) {
         if (window.innerWidth < 768 && !document.getElementById('map-controls-container').classList.contains('minimized')) {
             document.getElementById('map-controls-container').classList.add('minimized');
             if (showControlsControl) showControlsControl.getContainer().style.display = 'block';
         }
         const displayTitle = parcelProps?.ADDRESS ? `${parcelProps.ADDRESS}, ${parcelProps.CITY}` : addressName;
-        panelTitle.textContent = displayTitle; // Use the main panel's title element
+        panelTitle.textContent = displayTitle; 
         let html = '';
 
         if (parcelProps) {
@@ -768,17 +862,61 @@ function initializeMap(tractData) {
         }
 
         if (tractProps) {
+            // --- NEW: Filter incentives for the specific address point ---
+            const childcareIncentives = filterIncentives(tractProps, 'Child Care Services', point);
+            const freshFoodIncentives = filterIncentives(tractProps, 'Grocery Stores', point);
+
+            // --- NEW: Find overlapping incentive areas ---
+            const overlappingAreas = [];
+            // Select all checkboxes for polygon layers
+            const incentiveCheckboxes = document.querySelectorAll('input[onchange="togglePolygonLayer(this)"]');
+            incentiveCheckboxes.forEach(checkbox => {
+                const layerName = checkbox.dataset.name;
+                const layer = overlayLayers[layerName];
+                if (layer){
+                    if (isPointInLayer_Turf(point, layer)) {
+                        // Get the user-friendly name from the label next to the checkbox
+                        const label = checkbox.nextElementSibling.textContent.trim();
+                        overlappingAreas.push(label);
+                    }
+                }
+            });
+
+            // --- NEW: Generate HTML for the list of overlapping areas ---
+            let incentiveAreasHTML = '';
+            if (overlappingAreas.length > 0) {
+                incentiveAreasHTML = `
+                    <div class="mt-4">
+                        <h4 class="font-semibold text-slate-700 text-sm mb-2">Overlapping Incentive Areas</h4>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-slate-700 bg-slate-50 p-3 rounded-lg">
+                            ${overlappingAreas.map(area => `<li>${area}</li>`).join('')}
+                        </ul>
+                    </div>`;
+            } else {
+                 incentiveAreasHTML = `
+                    <div class="mt-4">
+                         <p class="text-sm text-slate-600 italic">No currently visible incentive areas overlap this point. Toggle layers on to check for others.</p>
+                    </div>`;
+            }
+
             html += `
                 <div class="mt-4">
                     <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Context</h3>
                     <div class="p-3 bg-blue-50 border-l-4 border-blue-400 rounded-r-md">
                         <p class="text-sm text-slate-700">This address is in <strong class="font-semibold">${truncateCommunityList(tractProps.tract_name)}, ${tractProps.county_name}</strong>.</p>
-                        <button id="view-full-details-btn" class="mt-3 w-full bg-slate-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-slate-800">Explore Community Details</button>
+                        <button id="view-full-details-btn" class="mt-3 w-full bg-slate-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-slate-800">Explore Full Community Details</button>
+                    </div>
+                    
+                    ${incentiveAreasHTML}
+
+                    <div class="mt-2">
+                        ${createIncentiveListHTML(childcareIncentives, 'Childcare')}
+                        ${createIncentiveListHTML(freshFoodIncentives, 'Fresh Food')}
                     </div>
                 </div>`;
         }
 
-        panelContent.innerHTML = html; // Use the main panel's content element
+        panelContent.innerHTML = html;
 
         if (tractProps) {
             document.getElementById('view-full-details-btn').onclick = () => displayFeatureInfo(tractProps);
@@ -788,21 +926,41 @@ function initializeMap(tractData) {
     }
 
     // --- POINT IN POLYGON HELPERS ---
-    function isPointInPolygon(point, vs) { var x = point.lng, y = point.lat; var inside = false; for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) { var xi = vs[i].lng, yi = vs[i].lat; var xj = vs[j].lng, yj = vs[j].lat; var intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi); if (intersect) inside = !inside; } return inside; };
-    function isPointInSingleLeafletPolygon_Custom(latlng, leafletPolygon) { if (!latlng || !(leafletPolygon instanceof L.Polygon)) return false; const allLatLngs = leafletPolygon.getLatLngs(); if (!allLatLngs || allLatLngs.length === 0) return false; const outerRingVertices = (allLatLngs[0] instanceof L.LatLng) ? allLatLngs : allLatLngs[0]; if (!isPointInPolygon(latlng, outerRingVertices)) return false; if (!(allLatLngs[0] instanceof L.LatLng)) { for (let i = 1; i < allLatLngs.length; i++) { if (isPointInPolygon(latlng, allLatLngs[i])) return false; } } return true; }
-    function isPointInMultiPolygonLayer_Custom(latlng, multiPolygonFeatureLayer) { if (!latlng || !multiPolygonFeatureLayer) return false; if (typeof multiPolygonFeatureLayer.getLayers === 'function') { const individualPolygons = multiPolygonFeatureLayer.getLayers(); for (let i = 0; i < individualPolygons.length; i++) { const polygon = individualPolygons[i]; if (polygon instanceof L.Polygon) { if (isPointInSingleLeafletPolygon_Custom(latlng, polygon)) return true; } } } else if (multiPolygonFeatureLayer instanceof L.Polygon) { return isPointInSingleLeafletPolygon_Custom(latlng, multiPolygonFeatureLayer); } return false; }
+    function isPointInLayer_Turf(point, layer) {
+        if (!point || !layer) return false;
+
+        const turfPoint = [point.lng, point.lat];
+        const geojson = layer.toGeoJSON();
+
+        try {
+            if (geojson.type === 'FeatureCollection') {
+                // If it's a collection, check each feature within it
+                for (const feature of geojson.features) {
+                    if (turf.booleanPointInPolygon(turfPoint, feature)) {
+                        return true; // Found a match, so we're done
+                    }
+                }
+                return false; // Checked all features, no match found
+            } else {
+                // If it's a single feature, check it directly
+                return turf.booleanPointInPolygon(turfPoint, geojson);
+            }
+        } catch (e) {
+            console.error("Turf.js failed to process a geometry.", e, geojson);
+            return false; // Prevent the app from crashing on bad data
+        }
+    }
 
     // --- MINIMIZABLE CONTROLS LOGIC ---
     const controlsContainer = document.getElementById('map-controls-container');
     const minimizeBtn = document.getElementById('minimize-controls-btn');
 
-    // Create a new Leaflet control for the "show" button
     const ShowControlsControl = L.Control.extend({
         onAdd: function(map) {
             const btn = L.DomUtil.create('button', 'leaflet-bar leaflet-control leaflet-control-custom bg-white p-2 rounded-lg shadow-lg');
             btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`;
             btn.title = "Show Map Controls";
-            btn.style.display = 'none'; // Initially hidden
+            btn.style.display = 'none'; 
 
             L.DomEvent.on(btn, 'click', (e) => {
                 L.DomEvent.stop(e);
@@ -820,7 +978,6 @@ function initializeMap(tractData) {
         controlsContainer.classList.add('minimized');
         showControlsControl.getContainer().style.display = 'block';
     });
-    // Check screen width to minimize controls by default on mobile
     if (window.innerWidth < 768) {
         controlsContainer.classList.add('minimized');
         showControlsControl.getContainer().style.display = 'block';
@@ -904,20 +1061,49 @@ async function togglePointLayer(checkbox) {
         if (overlayLayers[layerName]) map.removeLayer(overlayLayers[layerName]);
     }
 }
+
+async function preloadPolygonLayers() {
+    console.log("Pre-loading all incentive polygon layers...");
+    const incentiveCheckboxes = document.querySelectorAll('input[onchange="togglePolygonLayer(this)"]');
+    
+    const loadingPromises = Array.from(incentiveCheckboxes).map(async (checkbox) => {
+        const layerName = checkbox.dataset.name;
+        const url = checkbox.dataset.url;
+        
+        // Skip if already loaded for some reason
+        if (overlayLayers[layerName]) return;
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Failed to pre-load ${url}`);
+            const data = await response.json();
+            const style = incentiveStyles[layerName] || { color: '#000000', weight: 2 };
+            
+            // Create the layer and store it, but DO NOT add it to the map
+            const layer = L.geoJSON(data, { style: {...style, pane: 'incentivePane' }, interactive: false });
+            overlayLayers[layerName] = layer;
+        } catch (error) {
+            console.error(`Error pre-loading layer '${layerName}':`, error);
+        }
+    });
+
+    try {
+        await Promise.all(loadingPromises);
+        console.log("All incentive polygon layers have been pre-loaded.");
+    } catch (error) {
+        console.error("An error occurred during the pre-loading process.", error);
+    }
+}
+
 function setAppHeight() {
     const appContainer = document.getElementById('app-container');
-    // Use window.innerHeight to get the actual visible height
     appContainer.style.height = `${window.innerHeight}px`;
-
     if (map) {
         map.invalidateSize();
     }
 }
 
-// Set the height when the page loads
 document.addEventListener('DOMContentLoaded', setAppHeight);
-
-// Also set the height when the window is resized (e.g., orientation change)
 window.addEventListener('resize', setAppHeight);
 </script>
 </body>
