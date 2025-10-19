@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Incentives - Maryland Community Business Compass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .prose-slate {
+            color: #475569; /* slate-600 */
+        }
+        .prose-slate h2, .prose-slate h3 {
+            color: #1e293b; /* slate-800 */
+        }
+        .prose-slate ul > li::before {
+             background-color: #64748b; /* slate-500 */
+        }
+        .prose-slate a {
+            color: #334155; /* slate-700 */
+            font-weight: 500;
+        }
+        .prose-slate a:hover {
+            color: #1e293b; /* slate-800 */
+        }
+        /* Style for the filter accordion */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details > summary .accordion-icon { transition: transform 0.2s ease-in-out; }
+        details[open] > summary .accordion-icon { transform: rotate(180deg); }
+        .btn {
+            display: inline-block;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            background-color: #334155; /* slate-700 */
+            color: #ffffff;
+            border-radius: 0.375rem; /* rounded-md */
+            font-weight: 600;
+            transition: background-color 0.2s;
+            font-size: 0.875rem;
+        }
+        .btn:hover { background-color: #1e293b; /* slate-800 */ }
+        .btn-outline {
+            display: inline-block;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            background-color: transparent;
+            color: #334155; /* slate-700 */
+            border: 1px solid #94a3b8; /* slate-400 */
+            border-radius: 0.375rem; /* rounded-md */
+            font-weight: 600;
+            transition: background-color 0.2s, border-color 0.2s;
+            font-size: 0.875rem;
+        }
+        .btn-outline:hover {
+            background-color: #f1f5f9; /* slate-100 */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app" class="min-h-screen flex flex-col">
+        <nav class="bg-white shadow-md sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center">
+                        <a href="/" class="font-bold text-lg text-slate-800">Maryland Community Business Compass</a>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="/" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 px-3 py-2 rounded-md text-sm font-medium">Explore Communities</a>
+                            <a href="/incentives/" class="bg-slate-100 text-slate-800 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Find Incentives</a>
+                        </div>
+                    </div>
+                    <div class="-mr-2 flex md:hidden">
+                        <button id="mobile-menu-button" type="button" class="bg-slate-100 inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-slate-800 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-100 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <svg id="menu-open-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                            <svg id="menu-close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="md:hidden hidden" id="mobile-menu">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="#" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 block px-3 py-2 rounded-md text-base font-medium">Explore Communities</a>
+                    <a href="#" class="bg-slate-100 text-slate-800 block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Find Incentives</a>
+                </div>
+            </div>
+        </nav>
+
+        <main class="flex-grow">
+            <div id="incentive-list-view">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <h1 class="text-3xl font-bold mb-8 text-slate-900">Find State & Local Funding</h1>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                        <aside id="filters-sidebar" class="lg:col-span-1">
+                            <div class="bg-white p-4 rounded-lg shadow-sm sticky top-24">
+                                </div>
+                        </aside>
+
+                        <main class="lg:col-span-3">
+                            <div class="relative">
+                                <input type="text" id="search-input" placeholder="Search by keyword, program name, or agency..." class="w-full p-3 pl-10 text-sm text-slate-900 border border-slate-300 rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-slate-500 focus:border-slate-500">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+                                </div>
+                            </div>
+                            <div id="active-filters-container" class="flex items-center flex-wrap gap-2 mt-4 min-h-[30px]"></div>
+                            <div class="flex justify-between items-center mt-6 mb-2">
+                                <p id="results-count" class="text-sm text-slate-600">Loading results...</p>
+                                <button id="download-csv-btn" class="btn">Download results as CSV</button>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-sm overflow-x-auto">
+                                <table class="min-w-full divide-y divide-slate-200">
+                                    <thead class="bg-slate-50">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Program Name</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Agency</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Assistance Type</th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Deadline</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="results-table-body" class="bg-white divide-y divide-slate-200 text-sm">
+                                        <tr><td colspan="4" class="text-center p-8 text-slate-500">Loading incentives...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+            </div>
+
+            <div id="incentive-detail-view" style="display: none;">
+                <div class="bg-slate-100">
+                    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                        <a href="#" id="back-to-search-btn" class="text-sm font-semibold text-slate-700 hover:text-slate-900 mb-4 inline-block">&larr; Back to search</a>
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                            <div class="lg:col-span-2 space-y-4">
+                                <h1 id="detail-title" class="text-4xl font-bold text-slate-900"></h1>
+                                <div id="detail-tags" class="flex flex-wrap items-center gap-3"></div>
+                                <p id="detail-deadline" class="text-slate-600"></p>
+                                <div id="detail-button-container" class="mt-4"></div>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg border border-slate-200 space-y-4">
+                                <div id="detail-agency-box">
+                                    <h3 class="text-sm font-medium text-slate-500">Agency</h3>
+                                    <p id="detail-agency" class="font-semibold text-slate-800"></p>
+                                </div>
+                                <hr>
+                                <div id="detail-geo-box">
+                                    <h3 class="text-sm font-medium text-slate-500">Geographic Area</h3>
+                                    <p id="detail-geo" class="font-semibold text-slate-800"></p>
+                                </div>
+                                <hr>
+                                <div id="detail-org-box">
+                                    <h3 class="text-sm font-medium text-slate-500">Eligible Organization Type</h3>
+                                    <p id="detail-org" class="font-semibold text-slate-800 capitalize"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="bg-white">
+                    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                        <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
+                            <aside class="lg:col-span-1">
+                                <div id="detail-contents-nav-container" class="sticky top-24">
+                                    <h2 class="font-semibold text-lg text-slate-800">Contents</h2>
+                                    <nav class="mt-4">
+                                        <ul id="detail-contents-nav" class="space-y-3">
+                                            </ul>
+                                    </nav>
+                                </div>
+                            </aside>
+                            <main id="detail-main-content" class="lg:col-span-3 prose-slate max-w-none">
+                                </main>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- STATE MANAGEMENT ---
+            let allIncentives = [];
+            let displayedIncentives = [];
+            const activeFilters = {
+                searchTerm: '',
+                counties: new Set(),
+                incentiveAreas: new Set(),
+                orgTypes: new Set(),
+                assistanceTypes: new Set(),
+                industries: new Set(),
+            };
+            const filterConfig = {
+                counties: {
+                    title: 'County',
+                    key: 'list_of_eligible_counties',
+                    options: ["Allegany", "Anne Arundel", "Baltimore", "Baltimore City", "Calvert", "Caroline", "Carroll", "Cecil", "Charles", "Dorchester", "Frederick", "Garrett", "Harford", "Howard", "Kent", "Montgomery", "Prince George's", "Queen Anne's", "St. Mary's", "Somerset", "Talbot", "Washington", "Wicomico", "Worcester"]
+                },
+                incentiveAreas: {
+                    title: 'Incentive Area',
+                    key: 'list_of_incentive_areas',
+                    options: ["BRNI Areas", "Enterprise Zone Focus Areas", "Enterprise Zones", "Main Street Areas", "Opportunity Zones", "Priority Funding Areas", "RISE Zones", "Sustainable Communities", "Transit Oriented Development", "ENOUGH Act"]
+                },
+                orgTypes: {
+                    title: 'Organization Type',
+                    key: 'eligible_organization_types',
+                    options: ["non-profit", "for-profit", "individuals", "higher education institution", "government"]
+                },
+                assistanceTypes: {
+                    title: 'Assistance Type',
+                    key: 'assistance_type',
+                    options: ["loan", "grant", "tax-credit", "support"]
+                },
+                industries: {
+                    title: 'Industry',
+                    key: 'list_of_eligible_industries',
+                    options: ["Child Care Services", "Grocery Stores", "Non-profit", "Agriculture, Forestry, Fishing and Hunting", "Mining, Quarrying, and Oil and Gas Extraction", "Utilities", "Construction", "Manufacturing", "Wholesale Trade", "Retail Trade", "Transportation and Warehousing", "Information", "Finance and Insurance", "Real Estate and Rental and Leasing", "Professional, Scientific, and Technical Services", "Management of Companies and Enterprises", "Administrative and Support and Waste Management and Remediation Services", "Educational Services", "Health Care and Social Assistance", "Arts, Entertainment, and Recreation", "Accommodation and Food Services", "Other Services (except Public Administration)", "Public Administration"]
+                }
+            };
+
+            // --- DOM ELEMENTS ---
+            const listView = document.getElementById('incentive-list-view');
+            const detailView = document.getElementById('incentive-detail-view');
+            const searchInput = document.getElementById('search-input');
+            const resultsCount = document.getElementById('results-count');
+            const tableBody = document.getElementById('results-table-body');
+            const filtersSidebar = document.getElementById('filters-sidebar').querySelector('div');
+            const activeFiltersContainer = document.getElementById('active-filters-container');
+            const downloadBtn = document.getElementById('download-csv-btn');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const backToSearchBtn = document.getElementById('back-to-search-btn');
+
+            // --- UTILITY FUNCTIONS ---
+            const slugify = (text) => text.toString().toLowerCase()
+                .replace(/\s+/g, '-')
+                .replace(/[^\w\-]+/g, '')
+                .replace(/\-\-+/g, '-')
+                .replace(/^-+/, '')
+                .replace(/-+$/, '');
+
+            // --- DATA FETCHING & INITIALIZATION ---
+            async function initializeApp() {
+                renderFilterUI();
+                try {
+                    const [localRes, stateRes] = await Promise.all([
+                        fetch('/incentives/local_incentives_structured.json'),
+                        fetch('/incentives/state_incentives_structured.json')
+                    ]);
+                    if (!localRes.ok || !stateRes.ok) throw new Error("Network response was not ok.");
+
+                    const localData = await localRes.json();
+                    const stateData = await stateRes.json();
+                    
+                    allIncentives = [...localData, ...stateData]
+                        .filter(item => item.structured_extraction && item.structured_extraction.program_name)
+                        .map(item => ({ ...item, slug: slugify(item.structured_extraction.program_name) }));
+                    
+                    handleRouting();
+                } catch (error) {
+                    console.error("Failed to load incentive data:", error);
+                    tableBody.innerHTML = `<tr><td colspan="4" class="text-center p-8 text-red-600">Error loading data. Please check the console and ensure JSON files are in the correct location.</td></tr>`;
+                    resultsCount.textContent = '0 results';
+                }
+            }
+
+            // --- ROUTING & VIEW MANAGEMENT ---
+            function handleRouting() {
+                const hash = window.location.hash;
+                const match = hash.match(/^#\/incentive\/(.*)$/);
+
+                if (match && match[1]) {
+                    const slug = match[1];
+                    const incentive = allIncentives.find(item => item.slug === slug);
+                    if (incentive) {
+                        renderDetailView(incentive);
+                        showDetailView();
+                    } else {
+                        showListView();
+                    }
+                } else {
+                    showListView();
+                }
+            }
+
+            function showListView() {
+                listView.style.display = 'block';
+                detailView.style.display = 'none';
+                window.scrollTo(0, 0);
+                if (window.location.hash) {
+                     history.pushState("", document.title, window.location.pathname + window.location.search);
+                }
+                applyFilters();
+            }
+
+            function showDetailView() {
+                listView.style.display = 'none';
+                detailView.style.display = 'block';
+                window.scrollTo(0, 0);
+            }
+            
+            // --- RENDERING FUNCTIONS (LIST) ---
+            function renderFilterUI() {
+                const sidebarContent = Object.entries(filterConfig).map(([filterKey, config]) => {
+                    const checkboxes = config.options.map(option => `
+                        <label class="flex items-center space-x-2 text-sm text-slate-700">
+                            <input type="checkbox" data-filter-key="${filterKey}" value="${option}" class="h-4 w-4 rounded border-gray-300 text-slate-600 focus:ring-slate-500">
+                            <span>${option}</span>
+                        </label>
+                    `).join('');
+
+                    return `
+                        <details class="border-b" ${filterKey === 'counties' ? 'open' : ''}>
+                            <summary class="flex justify-between items-center font-medium cursor-pointer py-4">
+                                <span>${config.title}</span>
+                                <svg class="h-5 w-5 text-slate-500 accordion-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                            </summary>
+                            <div class="pb-4 space-y-2 pl-2">${checkboxes}</div>
+                        </details>
+                    `;
+                }).join('');
+                filtersSidebar.innerHTML = `<h3 class="text-lg font-semibold mb-2">Filter Incentives</h3><div class="overflow-y-auto pr-2" style="max-height: calc(100vh - 12rem);">${sidebarContent}</div>`;
+            }
+
+            function renderActiveFilterTags() {
+                let tagsHtml = '';
+                let hasFilters = false;
+                for (const key in activeFilters) {
+                    if (key !== 'searchTerm' && activeFilters[key].size > 0) {
+                        hasFilters = true;
+                        activeFilters[key].forEach(value => {
+                            tagsHtml += `
+                                <span class="flex items-center gap-1.5 bg-slate-700 text-white text-sm font-medium px-2.5 py-1 rounded-md">
+                                    ${value}
+                                    <button data-filter-key="${key}" data-value="${value}" class="text-slate-300 hover:text-white font-bold text-md leading-none">&times;</button>
+                                </span>
+                            `;
+                        });
+                    }
+                }
+
+                if (hasFilters) {
+                     activeFiltersContainer.innerHTML = tagsHtml + `<button id="clear-all-filters" class="ml-2 text-sm text-slate-600 hover:underline">Clear all</button>`;
+                } else {
+                    activeFiltersContainer.innerHTML = '';
+                }
+            }
+
+            function renderTable(incentives) {
+                if (incentives.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="4" class="text-center p-8 text-slate-500">No incentives match your criteria.</td></tr>`;
+                    return;
+                }
+                tableBody.innerHTML = incentives.map(item => {
+                    const data = item.structured_extraction;
+                    const agency = data.agency || 'N/A';
+                    const assistance = data.assistance_type?.join(', ') || 'N/A';
+                    const deadline = data.application_deadline_string || 'N/A';
+
+                    return `
+                        <tr>
+                            <td class="px-6 py-4 whitespace-normal text-slate-800 font-medium">
+                                <a href="#/incentive/${item.slug}" class="hover:underline">${data.program_name}</a>
+                            </td>
+                            <td class="px-6 py-4 whitespace-normal text-slate-600">${agency}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-slate-600 capitalize">${assistance}</td>
+                            <td class="px-6 py-4 whitespace-normal text-slate-600">${deadline}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+            
+            // --- RENDERING FUNCTIONS (DETAIL) ---
+            function renderDetailView(item) {
+                const data = item.structured_extraction;
+
+                document.getElementById('detail-title').textContent = data.program_name;
+                document.getElementById('detail-deadline').textContent = data.application_deadline_string ? `Deadline: ${data.application_deadline_string}` : '';
+                
+                let tagsHtml = '';
+                data.assistance_type?.forEach(type => {
+                     tagsHtml += `<span class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full capitalize">${type}</span>`;
+                });
+                document.getElementById('detail-tags').innerHTML = tagsHtml;
+
+                const buttonContainer = document.getElementById('detail-button-container');
+                if (data.URL) {
+                    buttonContainer.innerHTML = `<a href="${data.URL}" target="_blank" rel="noopener noreferrer" class="btn">Learn More & Apply</a>`;
+                } else {
+                    buttonContainer.innerHTML = `<button class="btn bg-slate-400 cursor-not-allowed" disabled>Application Link Not Available</button>`;
+                }
+
+                document.getElementById('detail-agency').textContent = data.agency || 'Not Specified';
+                document.getElementById('detail-geo').textContent = data.list_of_eligible_counties?.join(', ') || 'Varies';
+                document.getElementById('detail-org').textContent = data.eligible_organization_types?.join(', ') || 'Varies';
+
+                const mainContent = document.getElementById('detail-main-content');
+                const contentsNav = document.getElementById('detail-contents-nav');
+                mainContent.innerHTML = '';
+                contentsNav.innerHTML = '';
+                
+                const sections = {
+                    'Description': data.program_description,
+                    'Eligibility': { 'Audience': data.program_audience, 'Geographic': data.geographic_eligibility, 'Requirements': data.requirements_list },
+                    'Use of Funds': data.use_of_funds,
+                    'Application Process': data.application_process_overview,
+                    'Contact': { 'Name': data.contact_name, 'Email': data.contact_email, 'Phone': data.contact_phone },
+                };
+
+                Object.entries(sections).forEach(([title, content]) => {
+                    if (!content || (Array.isArray(content) && content.length === 0)) return;
+
+                    const sectionId = slugify(title);
+                    let sectionHtml = `<div id="${sectionId}" class="scroll-mt-24">`;
+                    sectionHtml += `<h2 class="text-2xl font-bold mb-4">${title}</h2>`;
+
+                    if (typeof content === 'object' && !Array.isArray(content)) {
+                        let subContentHtml = '';
+                        if(title === 'Eligibility') {
+                             if(content.Audience) subContentHtml += `<h3 class="text-xl font-semibold mt-6 mb-3">Program Audience</h3><p>${content.Audience}</p>`;
+                             if(content.Geographic) subContentHtml += `<h3 class="text-xl font-semibold mt-6 mb-3">Geographic Eligibility</h3><p>${content.Geographic}</p>`;
+                             if(content.Requirements?.length > 0) subContentHtml += `<h3 class="text-xl font-semibold mt-6 mb-3">Requirements</h3><ul class="list-disc pl-5 space-y-2">${content.Requirements.map(req => `<li>${req}</li>`).join('')}</ul>`;
+                        }
+                        if(title === 'Contact') {
+                            if(content.Name && content.Name.trim()) subContentHtml += `<p><strong>Name:</strong> ${content.Name}</p>`;
+                            if(content.Email && content.Email.trim()) subContentHtml += `<p><strong>Email:</strong> <a href="mailto:${content.Email}">${content.Email}</a></p>`;
+                            if(content.Phone && content.Phone.trim()) subContentHtml += `<p><strong>Phone:</strong> ${content.Phone}</p>`;
+                        }
+                        if (!subContentHtml) return;
+                        sectionHtml += subContentHtml;
+                    } else if (typeof content === 'string' && content.trim()){
+                        sectionHtml += `<p>${content.replace(/\n/g, '<br>')}</p>`;
+                    } else {
+                        return;
+                    }
+
+                    sectionHtml += '</div>';
+                    mainContent.innerHTML += (mainContent.innerHTML ? '<hr class="my-12">' : '') + sectionHtml;
+                    contentsNav.innerHTML += `<li><a href="#${sectionId}" class="font-medium text-slate-600 hover:text-slate-900">${title}</a></li>`;
+                });
+                
+                document.getElementById('detail-contents-nav-container').style.display = contentsNav.innerHTML ? 'block' : 'none';
+            }
+
+            // --- FILTERING LOGIC ---
+            function applyFilters() {
+                const term = activeFilters.searchTerm.toLowerCase();
+                displayedIncentives = allIncentives.filter(item => {
+                    const data = item.structured_extraction;
+                    if (term && !(data.program_name?.toLowerCase().includes(term) || data.program_description?.toLowerCase().includes(term) || data.agency?.toLowerCase().includes(term))) {
+                        return false;
+                    }
+                    for (const [key, config] of Object.entries(filterConfig)) {
+                         const filterSet = activeFilters[key];
+                         if (filterSet.size > 0) {
+                             const itemValues = data[config.key] || [];
+                             const hasMatch = itemValues.some(val => filterSet.has(val) || (key === 'counties' && (val === 'All' || filterSet.has('All'))));
+                             if (!hasMatch) return false;
+                         }
+                    }
+                    return true;
+                });
+                resultsCount.textContent = `${displayedIncentives.length} results`;
+                renderTable(displayedIncentives);
+                renderActiveFilterTags();
+            }
+
+            // --- EVENT HANDLERS ---
+            function handleFilterChange(e) {
+                if (e.target.type !== 'checkbox') return;
+                const { filterKey } = e.target.dataset;
+                const { value } = e.target;
+                if (e.target.checked) {
+                    activeFilters[filterKey].add(value);
+                } else {
+                    activeFilters[filterKey].delete(value);
+                }
+                applyFilters();
+            }
+
+            function handleActiveFilterClick(e) {
+                const button = e.target.closest('button');
+                if (!button) return;
+                if(button.id === 'clear-all-filters'){
+                    document.querySelectorAll('#filters-sidebar input[type="checkbox"]').forEach(cb => cb.checked = false);
+                    Object.keys(activeFilters).forEach(key => { if(key !== 'searchTerm') activeFilters[key].clear(); });
+                } else {
+                    const { filterKey, value } = button.dataset;
+                    if (filterKey && value) {
+                        activeFilters[filterKey].delete(value);
+                        const checkbox = document.querySelector(`input[data-filter-key="${filterKey}"][value="${value}"]`);
+                        if (checkbox) checkbox.checked = false;
+                    }
+                }
+                applyFilters();
+            }
+            
+            function handleSmoothScroll(e) {
+                if (e.target.tagName === 'A' && e.target.hash) {
+                    e.preventDefault();
+                    const targetElement = document.getElementById(e.target.hash.substring(1));
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            }
+
+            function downloadCSV() {
+                if (displayedIncentives.length === 0) { alert("No results to download."); return; }
+                const headers = ["Program Name", "Agency", "URL", "Eligible Counties", "Assistance Type", "Eligible Organization Types", "Eligible Industries", "Application Deadline", "Summary"];
+                const rows = displayedIncentives.map(item => { const d = item.structured_extraction; return [d.program_name, d.agency, d.URL, d.list_of_eligible_counties?.join('; '), d.assistance_type?.join('; '), d.eligible_organization_types?.join('; '), d.list_of_eligible_industries?.join('; '), d.application_deadline_string, item.summary || d.program_description]; });
+                const escapeCSV = (s) => (s === null || s === undefined) ? '' : `"${String(s).replace(/"/g, '""')}"`;
+                let csvContent = "data:text/csv;charset=utf-8," + headers.map(escapeCSV).join(',') + '\r\n' + rows.map(r => r.map(escapeCSV).join(',')).join('\r\n');
+                const link = document.createElement("a");
+                link.setAttribute("href", encodeURI(csvContent));
+                link.setAttribute("download", "maryland_incentives.csv");
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            // --- EVENT LISTENERS ---
+            window.addEventListener('hashchange', handleRouting);
+            backToSearchBtn.addEventListener('click', (e) => { e.preventDefault(); showListView(); });
+            searchInput.addEventListener('input', (e) => { activeFilters.searchTerm = e.target.value; applyFilters(); });
+            filtersSidebar.addEventListener('change', handleFilterChange);
+            activeFiltersContainer.addEventListener('click', handleActiveFilterClick);
+            downloadBtn.addEventListener('click', downloadCSV);
+            document.getElementById('detail-contents-nav-container').addEventListener('click', handleSmoothScroll);
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                document.getElementById('menu-open-icon').classList.toggle('hidden');
+                document.getElementById('menu-close-icon').classList.toggle('hidden');
+            });
+            
+            // --- START THE APP ---
+            initializeApp();
+        });
+    </script>
+
+</body>
+</html>

@@ -40,6 +40,21 @@
             cursor: pointer;
         }
 
+        .leaflet-bottom {
+            /* Add transition for smooth movement on all Leaflet controls at the bottom */
+            transition: transform 0.3s ease-in-out;
+            /* Ensure it appears above the panel's shadow */
+            z-index: 1002 !important;
+        }
+
+        @media (max-width: 767px) {
+            /* When the body has this class, move the bottom controls up */
+            body.panel-is-open .leaflet-bottom {
+                /* Move it up by the height of the panel (50vh) plus some extra space (2rem) */
+                transform: translateY(calc(-50vh + 2rem));
+            }
+        }
+
         /* --- Side panel transitions for desktop and mobile --- */
         #side-panel {
             transition: transform 0.3s ease-in-out;
@@ -196,6 +211,47 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
+        /* --- Sector Modal Styles --- */
+        #sector-modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 20000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+        }
+        #sector-modal-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* --- Smart Research Accordion --- */
+        .accordion-header {
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .accordion-item.open .accordion-content {
+            max-height: 1500px; /* Adjust as needed */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .accordion-item.open .accordion-arrow {
+            transform: rotate(90deg);
+        }
+        .accordion-arrow {
+            transition: transform 0.3s ease;
+        }
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800">
@@ -205,56 +261,125 @@
         <p class="text-lg">Loading Community Data...</p>
     </div>
 
-    <div id="app-container" class="relative w-screen flex">
-        <div id="map" class="h-full w-full z-0"></div>
-
-        <div id="side-panel" class="absolute bottom-0 left-0 w-full h-1/2 max-h-[50vh] bg-white shadow-2xl z-[1001] flex flex-col md:top-0 md:bottom-auto md:w-1/3 md:h-screen md:max-h-full lg:w-1/4">            <div class="p-4 border-b flex justify-between items-center">
-                <h2 id="panel-title" class="text-xl font-bold text-slate-900">Community Details</h2>
-                <button id="close-panel-btn" class="p-1 rounded-full hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400" aria-label="Close details panel">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+    <div id="sector-modal-overlay" class="hidden">
+        <div id="sector-modal-content" class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-md text-center">
+            <h2 class="text-2xl font-bold text-slate-800">See Your Market. Seize Your Opportunity.</h2>
+            <p class="mt-2 text-slate-600">Select the opportunity you are exploring. Stay tuned for more opportunity types in the future.</p>
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button data-sector="childcare" class="sector-choice-btn group border-2 border-slate-200 hover:border-blue-500 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-6 text-center transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-slate-500 group-hover:text-blue-600" fill="currentColor" viewBox="0 -960 960 960"><path d="M580-490q-21 0-35.5-14.5T530-540q0-21 14.5-35.5T580-590q21 0 35.5 14.5T630-540q0 21-14.5 35.5T580-490Zm-200 0q-21 0-35.5-14.5T330-540q0-21 14.5-35.5T380-590q21 0 35.5 14.5T430-540q0 21-14.5 35.5T380-490Zm100 210q-60 0-108.5-33T300-400h360q-23 54-71.5 87T480-280Zm0 160q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-480q0-75 28.5-140.5t77-114q48.5-48.5 114-77T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm0-80q116 0 198-82t82-198q0-116-82-198t-198-82h-12q-6 0-12 2-6 6-8 13t-2 15q0 21 14.5 35.5T496-680q9 0 16.5-3t15.5-3q12 0 20 9t8 21q0 23-21.5 29.5T496-620q-45 0-77.5-32.5T386-730v-6q0-3 1-8-83 30-135 101t-52 163q0 116 82 198t198 82Zm0-280Z"/></svg>
+                    <span class="mt-2 block font-semibold text-slate-700">Childcare</span>
+                </button>
+                <button data-sector="fresh-food" class="sector-choice-btn group border-2 border-slate-200 hover:border-green-500 hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-lg p-6 text-center transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-slate-500 group-hover:text-green-600" fill="currentColor" viewBox="0 -960 960 960"><path d="M640-80q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170T640-80Zm0-80q66 0 113-47t47-113q0-66-47-113t-113-47q-66 0-113 47t-47 113q0 66 47 113t113 47Zm-480 0q-33 0-56.5-23.5T80-240v-304q0-8 1.5-16t4.5-16l80-184h-6q-17 0-28.5-11.5T120-800v-40q0-17 11.5-28.5T160-880h280q17 0 28.5 11.5T480-840v40q0 17-11.5 28.5T440-760h-6l66 152q-19 10-36 21t-32 25l-84-198h-96l-92 216v304h170q5 21 13.5 41.5T364-160H160Zm480-440q-42 0-71-29t-29-71q0-42 29-71t71-29v200q0-42 29-71t71-29q42 0 71 29t29 71H640Z"/></svg>
+                    <span class="mt-2 block font-semibold text-slate-700">Fresh Food</span>
                 </button>
             </div>
-            <div id="side-panel-content" class="flex-grow overflow-y-auto p-4 space-y-4"></div>
+             <button data-sector="other" class="sector-choice-btn group mt-4 w-full border-2 border-slate-200 hover:border-slate-400 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-400 rounded-lg p-4 text-center transition">
+                <span class="font-semibold text-slate-700">Other / Not Sure</span>
+            </button>
         </div>
-        
-        <div id="map-controls-container" class="absolute top-4 left-4 bg-white p-4 rounded-lg shadow-lg z-10 w-auto max-w-sm flex flex-col max-h-[calc(100vh-2rem)]">
-            <div class="flex justify-between items-center mb-2">
-                <label for="choropleth-select" class="font-semibold text-slate-700 block">Map Variable</label>
-                <button id="minimize-controls-btn" title="Minimize Controls" class="p-1 rounded-full hover:bg-slate-200">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                </button>
-            </div>
-            <div>
-                <select id="choropleth-select" class="w-full p-2 rounded-md border-2 border-slate-300 focus:ring-slate-500 focus:border-slate-500">
-                    </select>
-            </div>
-            <div id="map-controls-scroll" class="overflow-y-auto mt-4 pr-2">
-                 <div>
-                    <h3 class="font-semibold mb-2 text-slate-700">Base Layers</h3>
-                     <div class="space-y-1 text-sm">
-                        <label class="flex items-center"><input type="checkbox" id="tract-toggle" onchange="toggleTractLayer(this)" checked class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Community Tracts</span></label>
+    </div>
+    
+    <div id="app-container" class="relative w-screen flex flex-col">
+        <nav class="bg-white shadow-md z-[1002]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center">
+                        <a href="/" class="font-bold text-lg text-slate-800">Maryland Community Business Compass</a>
                     </div>
-                 </div>
-                 <div class="mt-4">
-                    <h3 class="font-semibold mb-2 text-slate-700">Incentive Areas</h3>
-                    <div class="space-y-1 text-sm">
-                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enough_grantees" data-url="enough_grantees.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">ENOUGH Act</span></label>
-                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="brni_areas" data-url="brni_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">BRNI Areas</span></label>
-                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enterprise_zone_focus_areas" data-url="enterprise_zone_focus_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Enterprise Zone Focus Areas</span></label>
-                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enterprise_zones" data-url="enterprise_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Enterprise Zones</span></label>
-                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="main_street_areas" data-url="main_street_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Main Street Areas</span></label>
-                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="opportunity_zones" data-url="opportunity_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Opportunity Zones</span></label>
-                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="priority_funding_areas" data-url="priority_funding_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Priority Funding Areas</span></label>
-                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="rise_zones" data-url="rise_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">RISE Zones</span></label>
-                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="sustainable_communities" data-url="sustainable_communities.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Sustainable Communities</span></label>
-                        <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="transit_oriented_development" data-url="transit_oriented_development.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Transit Oriented Development</span></label>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="/" class="bg-slate-100 text-slate-800 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Explore Communities</a>
+                            <a href="/incentives/" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 px-3 py-2 rounded-md text-sm font-medium">Find Incentives</a>
+                        </div>
+                    </div>
+                    <div class="-mr-2 flex md:hidden">
+                        <button id="mobile-menu-button" type="button" class="bg-slate-100 inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-slate-800 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-100 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
                     </div>
                 </div>
-                 <div class="mt-4">
-                    <h3 class="font-semibold mb-2 text-slate-700">Points of Interest</h3>
-                    <div class="space-y-1 text-sm">
-                        <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="childcare" data-url="childcare.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Childcare Locations</span></label>
-                        <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="grocery" data-url="grocery.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Grocery Locations</span></label>
+            </div>
+            <div class="md:hidden hidden" id="mobile-menu">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="/" class="bg-slate-100 text-slate-800 block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Explore Communities</a>
+                    <a href="/incentives/" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 block px-3 py-2 rounded-md text-base font-medium">Find Incentives</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="relative flex-grow">
+            <div id="map" class="h-full w-full z-0"></div>
+            
+             <div class="absolute top-4 left-1/2 -translate-x-1/2 z-[1001] bg-white p-2 rounded-lg shadow-lg flex items-center space-x-4">
+                 <div>
+                    <label for="map-mode-select" class="block text-xs font-medium text-slate-500">Map Mode</label>
+                    <select id="map-mode-select" class="p-1 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-sm font-semibold">
+                        <option value="smartResearch" selected>Smart Research</option>
+                        <option value="freeExplore">Free Explore</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="sector-select" class="block text-xs font-medium text-slate-500">My Sector</label>
+                    <select id="sector-select" class="p-1 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-sm font-semibold">
+                        <option value="childcare">Childcare</option>
+                        <option value="fresh-food">Fresh Food</option>
+                        <option value="other">Other / Not Sure</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="side-panel" class="absolute bottom-0 left-0 w-full h-1/2 max-h-[50vh] bg-white shadow-2xl z-[1001] flex flex-col md:top-0 md:bottom-auto md:w-1/3 md:h-screen md:max-h-full lg:w-1/4">            <div class="p-4 border-b flex justify-between items-center">
+                    <h2 id="panel-title" class="text-xl font-bold text-slate-900">Community Details</h2>
+                    <button id="close-panel-btn" class="p-1 rounded-full hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400" aria-label="Close details panel">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+                <div id="side-panel-content" class="flex-grow overflow-y-auto p-4 space-y-4"></div>
+            </div>
+            
+            <div id="map-controls-container" class="absolute top-4 left-4 bg-white p-4 rounded-lg shadow-lg z-10 w-auto max-w-sm flex flex-col max-h-[calc(100vh-8rem)]">
+                <div class="flex justify-between items-center mb-2">
+                    <label for="choropleth-select" class="font-semibold text-slate-700 block">Map Variable</label>
+                    <button id="minimize-controls-btn" title="Minimize Controls" class="p-1 rounded-full hover:bg-slate-200">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                    </button>
+                </div>
+                <div>
+                    <select id="choropleth-select" class="w-full p-2 rounded-md border-2 border-slate-300 focus:ring-slate-500 focus:border-slate-500">
+                        </select>
+                </div>
+                <div id="map-controls-scroll" class="overflow-y-auto mt-4 pr-2">
+                     <div>
+                        <h3 class="font-semibold mb-2 text-slate-700">Base Layers</h3>
+                         <div class="space-y-1 text-sm">
+                            <label class="flex items-center"><input type="checkbox" id="tract-toggle" onchange="toggleTractLayer(this)" checked class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Community Tracts</span></label>
+                        </div>
+                     </div>
+                     <div class="mt-4">
+                        <h3 class="font-semibold mb-2 text-slate-700">Incentive Areas</h3>
+                        <div class="space-y-1 text-sm">
+                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enough_grantees" data-url="enough_grantees.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">ENOUGH Act</span></label>
+                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="brni_areas" data-url="brni_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">BRNI Areas</span></label>
+                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enterprise_zone_focus_areas" data-url="enterprise_zone_focus_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Enterprise Zone Focus Areas</span></label>
+                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enterprise_zones" data-url="enterprise_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Enterprise Zones</span></label>
+                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="main_street_areas" data-url="main_street_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Main Street Areas</span></label>
+                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="opportunity_zones" data-url="opportunity_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Opportunity Zones</span></label>
+                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="priority_funding_areas" data-url="priority_funding_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Priority Funding Areas</span></label>
+                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="rise_zones" data-url="rise_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">RISE Zones</span></label>
+                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="sustainable_communities" data-url="sustainable_communities.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Sustainable Communities</span></label>
+                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="transit_oriented_development" data-url="transit_oriented_development.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Transit Oriented Development</span></label>
+                        </div>
+                    </div>
+                     <div class="mt-4">
+                        <h3 class="font-semibold mb-2 text-slate-700">Points of Interest</h3>
+                        <div class="space-y-1 text-sm">
+                            <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="childcare" data-url="childcare.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Childcare Locations</span></label>
+                            <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="grocery" data-url="grocery.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Grocery Locations</span></label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -263,12 +388,18 @@
 
 <script>
 // --- GLOBAL STATE AND CONFIGURATION ---
-let map; // Leaflet map object
-let geojsonLayer; // Main choropleth layer
-let searchMarker; // Marker for the searched address
-let showControlsControl; // To hold the "show" button control
-const overlayLayers = {}; // To store and manage toggleable layers
-let allIncentives = []; // To store all state and local incentives
+let map;
+let geojsonLayer;
+let legend; 
+let searchMarker;
+let showControlsControl;
+const overlayLayers = {};
+let allIncentives = [];
+let tractData;
+let currentMapMode = 'smartResearch';
+let selectedSector = 'other';
+let choroplethSelect, controlsContainer, sidePanel, panelContent, panelTitle;
+let currentPanelContext = { type: null, data: null };
 
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYW1pbGxlci1tZGdvdiIsImEiOiJjbWc1ZW1hcm8wMWZ0MmtweWZtcmVxeTBtIn0.JS4bkhCiIv6oB_0WEQRpwg';
 const TILESET_ID = 'amiller-mdgov.parcels-tileset';
@@ -297,7 +428,32 @@ const INCENTIVE_AREA_MAP = {
     'transit_oriented_development': 'Transit Oriented Development'
 };
 
-// --- HELPER FUNCTIONS ---
+const CHOROPLETH_OPTIONS = {
+    // Childcare
+    'childcare_unmet_demand': { label: 'Childcare Opportunity Score', format: (d) => formatNumber(d), sector: 'childcare' },
+    'childcare_supply_score': { label: 'Childcare Access Score', format: (d) => formatNumber(d), sector: 'childcare' },
+    'childcare_demand_score': { label: 'Childcare Demand Score', format: (d) => formatNumber(d), sector: 'childcare' },
+    'childcare_spending_per_under5': { label: 'Childcare Spending (per child)', format: (d) => formatCurrency(d), sector: 'childcare' },
+    // Fresh Food
+    'grocery_unmet_demand': { label: 'Fresh Food Opportunity Score', format: (d) => d.toFixed(2), sector: 'fresh-food' },
+    'grocery_supply_score': { label: 'Fresh Food Access Score', format: (d) => d.toFixed(2), sector: 'fresh-food' },
+    'grocery_demand_score': { label: 'Fresh Food Demand Score', format: (d) => d.toFixed(2), sector: 'fresh-food' },
+    'grocery_need_score': { label: 'Fresh Food Need', format: (d) => formatPercent(d), sector: 'fresh-food' },
+    'per_household_food_at_home': { label: 'Grocery spending (per household)', format: (d) => formatCurrency(d), sector: 'fresh-food' },
+    // General
+    'pop2025': { label: 'Population (2025)', format: (d) => formatNumber(d), sector: 'general' },
+    'pop_change2530': { label: 'Projected Pop. Change (25-30)', format: (d) => formatNumber(d), sector: 'general' },
+    'avg_household_income': { label: 'Avg. Household Income', format: (d) => formatCurrency(d), sector: 'general' },
+    'transportation_barrier_pct': { label: '% Transportation Barriers', format: (d) => formatPercent(d), sector: 'general' },
+    'pct_under5': { label: '% Population Under 5', format: (d) => formatPercent(d), sector: 'general' },
+    'community_momentum_index': { label: 'Community Momentum Index', format: (d) => formatPercent(d), sector: 'general' },
+    'net_business_formations': { label: 'Net Business Formations (22-23)', format: (d) => formatPercent(d), sector: 'general' },
+    'job_growth_employees': { label: 'Job Growth (Employees, 22-23)', format: (d) => formatPercent(d), sector: 'general' },
+    'job_growth_payroll': { label: 'Job Growth (Payroll, 22-23)', format: (d) => formatPercent(d), sector: 'general' },
+    'license_growth_rate': { label: 'Business License Growth (22-23)', format: (d) => formatPercent(d), sector: 'general' },
+};
+
+// --- CORE HELPER FUNCTIONS (GLOBAL) ---
 function safeParseFloat(value, defaultValue = null) {
     const parsed = parseFloat(value);
     return isNaN(parsed) ? defaultValue : parsed;
@@ -305,8 +461,16 @@ function safeParseFloat(value, defaultValue = null) {
 const formatPercent = (val) => `${(safeParseFloat(val, 0) * 100).toFixed(1)}%`;
 const formatCurrency = (val) => `$${Math.round(safeParseFloat(val, 0)).toLocaleString()}`;
 const formatNumber = (val) => (val != null) ? Math.round(safeParseFloat(val)).toLocaleString() : 'N/A';
-const formatDate = (val) => (val != null && val) ? new Date(val).toLocaleDateString() : 'N/A';
 const formatValue = (val) => (val != null) ? val : 'N/A';
+
+function slugify(text) {
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
+}
 
 function formatYmd(ymd) {
     if (!ymd || ymd.length !== 8) return 'N/A';
@@ -326,27 +490,790 @@ function truncateCommunityList(listString, maxVisible = 2) {
     return `${visibleCommunities.join(', ')} and ${hiddenCount} other ${communityWord}`;
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const loadingOverlay = document.getElementById('loading-overlay'); // Get loader
+// --- ALL MAP LOGIC & HELPER FUNCTIONS (GLOBAL SCOPE) ---
+let lastClickedLayer = null;
+const sequentialColors = ['#eff3ff', '#bdd7e7', '#6baed6', '#3182bd', '#08519c'];
+const divergingColors = ['#e41d3d', '#f89747', '#fee8a0', '#a6d8f0', '#28a0cb', '#005ea2'].reverse();
 
-    // --- MAP INITIALIZATION ---
+function isDivergingVariable(variable) {
+    const divergingKeywords = ['unmet_demand', 'growth', 'net_business', 'formations', 'index', 'pop_change'];
+    return divergingKeywords.some(keyword => variable.includes(keyword));
+}
+
+function getQuantiles(data, numQuantiles) {
+    const sorted = data.filter(v => !isNaN(v)).sort((a, b) => a - b);
+    if (sorted.length === 0) return [];
+    const quantiles = [];
+    for (let i = 1; i < numQuantiles; i++) {
+        const pos = (sorted.length - 1) * (i / numQuantiles);
+        const base = Math.floor(pos);
+        const rest = pos - base;
+        if (sorted[base + 1] !== undefined) {
+            quantiles.push(sorted[base] + rest * (sorted[base + 1] - sorted[base]));
+        } else {
+            quantiles.push(sorted[base]);
+        }
+    }
+    return quantiles;
+}
+
+function getDivergingBreaks(values) {
+    return getQuantiles(values, divergingColors.length);
+}
+
+function getColor(d, breaks, colors) {
+    if (colors.length === 6) { // Diverging
+        return d > breaks[4] ? colors[5] : d > breaks[3] ? colors[4] : d > breaks[2] ? colors[3] : d > breaks[1] ? colors[2] : d > breaks[0] ? colors[1] : colors[0];
+    } else { // Sequential
+        return d > breaks[3] ? colors[4] : d > breaks[2] ? colors[3] : d > breaks[1] ? colors[2] : d > breaks[0] ? colors[1] : colors[0];
+    }
+}
+
+function style(feature) {
+    let currentVariable = choroplethSelect.value;
+    const isDiverging = isDivergingVariable(currentVariable);
+    const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable])).filter(v => v !== null);
+    if (values.length === 0) {
+        return { fillColor: '#636363', weight: 0, color: 'white', fillOpacity: 0.7, pane: 'tractPane' };
+    }
+    const colors = isDiverging ? divergingColors : sequentialColors;
+    const breaks = isDiverging ? getDivergingBreaks(values) : getQuantiles(values, colors.length);
+    const value = safeParseFloat(feature.properties[currentVariable]);
+    return {
+        fillColor: (value === null) ? '#636363' : getColor(value, breaks, colors),
+        weight: 0, opacity: 1, color: 'white', fillOpacity: 0.7, pane: 'tractPane'
+    };
+}
+
+function updateMap() {
+    if (geojsonLayer) geojsonLayer.setStyle(style);
+    if (legend && legend._map) legend.remove();
+    if (legend) legend.addTo(map);
+}
+
+function highlightFeature(e) {
+    const layer = e.target;
+    layer.setStyle({ weight: 4, color: '#334155', dashArray: '' });
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) layer.bringToFront();
+}
+
+function resetHighlight(e) { geojsonLayer.resetStyle(e.target); }
+
+function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click: (e) => {
+            map.fitBounds(e.target.getBounds());
+            if (currentMapMode === 'smartResearch') {
+                displaySmartResearchForTract(feature);
+            } else {
+                displayFeatureInfo(feature);
+            }
+            if (lastClickedLayer) geojsonLayer.resetStyle(lastClickedLayer);
+            e.target.setStyle({ weight: 4, color: '#334155', dashArray: '' });
+            lastClickedLayer = e.target;
+        }
+    });
+}
+
+function openSidePanel() {
+    if (window.innerWidth < 768) { // Only add class on mobile
+        document.body.classList.add('panel-is-open');
+    }
+    if (window.innerWidth < 768 && !controlsContainer.classList.contains('minimized')) {
+        controlsContainer.classList.add('minimized');
+        if (showControlsControl) showControlsControl.getContainer().style.display = 'block';
+    }
+    sidePanel.classList.add('show');
+}
+
+function openControlsPanel() {
+    if (window.innerWidth < 768 && sidePanel.classList.contains('show')) {
+        sidePanel.classList.remove('show');
+    }
+    controlsContainer.classList.remove('minimized');
+    if (showControlsControl) showControlsControl.getContainer().style.display = 'none';
+}
+
+function clearProviderLayers() {
+    const providerCheckboxes = document.querySelectorAll('input[data-name="childcare"], input[data-name="grocery"]');
+    providerCheckboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            checkbox.checked = false;
+            togglePointLayer(checkbox); // This function handles removing the layer.
+        }
+    });
+}
+
+function filterIncentives(industry, location) {
+    if (!location || !allIncentives) return [];
+    const county = location.type === 'tract' ? location.feature.properties.county_name : location.tractProps.county_name;
+    const reverseIncentiveMap = Object.fromEntries(Object.entries(INCENTIVE_AREA_MAP).map(([key, value]) => [value, key]));
+
+    return allIncentives.filter(inc => {
+        const eligibleOrganizationTypes = inc.eligible_organization_types || [];
+        if (!eligibleOrganizationTypes.includes('for-profit')) return false;
+
+        const eligibleIndustries = inc.list_of_eligible_industries || [];
+        const prioritizedIndustries = inc.list_of_prioritized_industries || [];
+        const industryMatch = eligibleIndustries.includes(industry) || prioritizedIndustries.includes(industry);
+        if (!industryMatch) return false;
+
+        const eligibleCounties = inc.list_of_eligible_counties || [];
+        const prioritizedCounties = inc.list_of_prioritized_counties || [];
+        const countyMatch = eligibleCounties.includes('All') || eligibleCounties.includes(county) || prioritizedCounties.includes('All') || prioritizedCounties.includes(county);
+
+        const incentiveAreas = inc.list_of_incentive_areas || [];
+        let incentiveAreaMatch = false;
+        if (incentiveAreas.length > 0) {
+            const OVERLAP_THRESHOLD_PERCENT = 10;
+            if (location.type === 'tract') {
+                const tractFeature = location.feature;
+                const tractArea = turf.area(tractFeature);
+                incentiveAreaMatch = incentiveAreas.some(humanName => {
+                    const layerName = reverseIncentiveMap[humanName];
+                    const incentiveLayer = overlayLayers[layerName];
+                    if (!incentiveLayer || tractArea === 0) return false;
+                    let totalIntersectionArea = 0;
+                    const incentiveGeoJSON = incentiveLayer.toGeoJSON();
+                    if (incentiveGeoJSON?.type === 'FeatureCollection' && incentiveGeoJSON.features) {
+                        for (const incentiveFeature of incentiveGeoJSON.features) {
+                            try {
+                                const intersection = turf.intersect(tractFeature, incentiveFeature);
+                                if (intersection) totalIntersectionArea += turf.area(intersection);
+                            } catch (e) { console.error(`Turf.js intersection failed for ${layerName}:`, e); }
+                        }
+                    }
+                    return totalIntersectionArea > 0 && (totalIntersectionArea / tractArea) * 100 >= OVERLAP_THRESHOLD_PERCENT;
+                });
+            } else if (location.type === 'point') {
+                incentiveAreaMatch = incentiveAreas.some(humanName => {
+                    const layerName = reverseIncentiveMap[humanName];
+                    const layer = overlayLayers[layerName];
+                    return layer && isPointInLayer_Turf(location.point, layer);
+                });
+            }
+        }
+        return countyMatch || incentiveAreaMatch;
+    });
+}
+
+function createIncentiveListHTML(incentives, type) {
+    if (!incentives || incentives.length === 0) {
+        return `<p class="text-sm text-slate-600 mt-2">No specific ${type.toLowerCase()} incentives found for this area.</p>`;
+    }
+    return `
+        <details class="bg-slate-50 p-3 rounded-lg mt-2" style="margin-top:0.5rem;">
+            <summary class="font-semibold text-slate-600 mb-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">Relevant ${type} Incentives (${incentives.length})</summary>
+            <div class="space-y-3 mt-2">
+                ${incentives.map(inc => `
+                    <div class="text-sm border-t pt-2">
+                        <p class="font-bold text-slate-800">
+                            <a href="/incentives/#/incentive/${slugify(inc.program_name)}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">${inc.program_name}</a> 
+                            <span class="text-xs font-medium bg-slate-200 text-slate-700 py-0.5 px-1.5 rounded-full ml-1">${inc.source}</span>
+                        </p>
+                        <p class="text-slate-600 mt-1">${inc.program_description}</p>
+                        ${inc.assistance_type ? `<p class="mt-1"><strong class="font-medium text-slate-700">Assistance Type:</strong> ${inc.assistance_type.join(', ')}</p>` : ''}
+                    </div>
+                `).join('')}
+            </div>
+        </details>`;
+}
+
+function displayFeatureInfo(tractFeature) {
+    const properties = tractFeature.properties;
+    panelTitle.textContent = `${truncateCommunityList(properties.tract_name)}, ${properties.county_name}`;
+    
+    const createList = (items, title) => {
+        if (!items || items.length === 0) return '';
+        return `
+            <details class="bg-slate-50 p-3 rounded-lg mt-2" style="margin-top:0.5rem;">
+                <summary class="font-semibold text-slate-600 mb-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">${title}</summary>
+                <ul class="list-disc list-inside space-y-1 text-sm text-slate-700 mt-2">
+                    ${items.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+            </details>`;
+    };
+    const createPlanAreas = (items) => {
+         if (!items || items.length === 0) return '';
+         return `
+            <div class="bg-slate-50 p-3 rounded-lg">
+                <h4 class="font-semibold text-slate-600 mb-2">Relevant Plans</h4>
+                ${items.map(p => `
+                    <div class="mt-2 text-sm">
+                        <p class="font-medium text-slate-800">${p.area_name} (${p.plan_year})</p>
+                        <p class="text-slate-600 italic">"${p.community_vision}"</p>
+                    </div>
+                `).join('')}
+            </div>`;
+    }
+    
+    const location = { type: 'tract', feature: tractFeature };
+    const childcareIncentives = filterIncentives('Child Care Services', location);
+    const freshFoodIncentives = filterIncentives('Grocery Stores', location);
+
+    const overlappingAreas = [];
+    const tractArea = turf.area(tractFeature);
+    const OVERLAP_THRESHOLD_PERCENT = 10;
+
+    if (tractArea > 0) {
+        for (const layerName in INCENTIVE_AREA_MAP) {
+            const incentiveLayer = overlayLayers[layerName];
+            if (incentiveLayer) {
+                let totalIntersectionArea = 0;
+                const incentiveGeoJSON = incentiveLayer.toGeoJSON();
+
+                if (incentiveGeoJSON && incentiveGeoJSON.type === 'FeatureCollection' && incentiveGeoJSON.features) {
+                    for (const incentiveFeature of incentiveGeoJSON.features) {
+                        try {
+                            const intersection = turf.intersect(tractFeature, incentiveFeature);
+                            if (intersection) totalIntersectionArea += turf.area(intersection);
+                        } catch (e) {
+                            console.error(`Turf.js intersection failed on a feature within ${layerName}:`, e);
+                        }
+                    }
+                }
+                
+                if (totalIntersectionArea > 0) {
+                    const percentage = (totalIntersectionArea / tractArea) * 100;
+                    if (percentage >= OVERLAP_THRESHOLD_PERCENT) {
+                        overlappingAreas.push(INCENTIVE_AREA_MAP[layerName]);
+                    }
+                }
+            }
+        }
+    }
+
+    let incentiveAreasHTML = '';
+    if (overlappingAreas.length > 0) {
+        incentiveAreasHTML = `
+            <div class="bg-slate-50 p-3 rounded-lg">
+                <h4 class="font-semibold text-slate-600 mb-2">Overlapping Incentive Areas</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm text-slate-700">
+                    ${overlappingAreas.map(area => `<li>${area}</li>`).join('')}
+                </ul>
+            </div>`;
+    }
+
+    const popChange = safeParseFloat(properties.pop_change2530);
+    panelContent.innerHTML = `
+        <div>
+            <h3 class="text-lg font-semibold text-slate-800 mb-2">Population</h3>
+            <div class="grid grid-cols-2 gap-2 text-sm">
+                <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Population (2025):</span> ${formatNumber(properties.pop2025)}</div>
+                <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Projected Pop. (2030):</span> ${formatNumber(properties.pop2030)}</div>
+                <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Projected Change (25-30):</span> <span class="${popChange > 0 ? 'text-green-700' : 'text-red-600'}">${formatNumber(popChange)}</span></div>
+                <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">% Under 5:</span> ${formatPercent(properties.pct_under5)}</div>
+            </div>
+        </div>
+        <div>
+            <h3 class="text-lg font-semibold text-slate-800 mb-2">Demographics & Economics</h3>
+            <div class="grid grid-cols-2 gap-2 text-sm">
+                <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Avg. HH Income:</span> ${formatCurrency(properties.avg_household_income)}</div>
+                <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">% Transporation Barriers:</span> ${formatPercent(properties.transportation_barrier_pct)}</div>
+                <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">
+                    Momentum Index (22-23):</span> ${formatPercent(properties.community_momentum_index)}
+                    <div class="info-tooltip inline-block ml-1" tabindex="0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                        <span class="tooltip-text">The Community Momentum Index measures economic vitality by averaging growth rates in business formations, licenses, jobs, and payroll. Positive scores reflect community economic growth.</span>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Race/Ethnicity:</span><br/> White: ${formatPercent(properties.pct_white)}<br/>Black: ${formatPercent(properties.pct_black)}<br/>Hispanic: ${formatPercent(properties.pct_hispanic)}</div>
+            </div>
+        </div>
+        ${incentiveAreasHTML}
+        <div>
+            <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Needs & Opportunities</h3>
+
+            ${(selectedSector === 'childcare' || selectedSector === 'other') ? `
+            <div class="mt-4 p-4 border rounded-lg">
+                <h4 class="text-md font-semibold text-slate-700">Childcare</h4>
+                <div class="grid grid-cols-3 gap-2 text-sm mt-2">
+                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Access:</span> ${formatNumber(properties.childcare_supply_score)} seats</div>
+                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Demand:</span> ${formatNumber(properties.childcare_demand_score)} seats</div>
+                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Opportunity:</span> ${formatNumber(properties.childcare_unmet_demand)} seats 
+                        <div class="info-tooltip inline-block ml-1" tabindex="0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                            <span class="tooltip-text">Child care opportunity score is the number of children 5 and under in households where all parents are in the laborforce, minus the licensed capacity of local child care providers. Positive scores reflect unmet community demand.</span>
+                        </div>
+                    </div>
+                </div>
+                ${createList(properties.childcare_need_quotes, 'Community Voices on Need')}
+                ${createList(properties.childcare_planning_quotes, 'Community Voices on Planning')}
+                ${createIncentiveListHTML(childcareIncentives, 'Childcare')}
+            </div>
+            ` : ''}
+
+            ${(selectedSector === 'fresh-food' || selectedSector === 'other') ? `
+            <div class="mt-4 p-4 border rounded-lg">
+                <h4 class="text-md font-semibold text-slate-700">Fresh Food & Groceries</h4>
+                <div class="grid grid-cols-2 gap-2 text-sm mt-2">
+                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Access Score:</span> ${properties.grocery_supply_score.toFixed(2)}</div>
+                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Need Score:</span> ${formatPercent(properties.grocery_need_score)}</div>
+                    <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Latent Demand Score:</span> ${properties.grocery_demand_score.toFixed(2)}
+                        <div class="info-tooltip inline-block ml-1" tabindex="0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                            <span class="tooltip-text">Estimates how much more people would spend on fresh food if they had good access to high-quality stores, based on local demographics and current access.</span>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Unmet Demand Score:</span> ${properties.grocery_unmet_demand.toFixed(2)}
+                        <div class="info-tooltip inline-block ml-1" tabindex="0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                            <span class="tooltip-text">Measures the gap between potential and actual grocery access. Positive scores indicate high latent demand and low current access, signaling a strong market opportunity. Negative scores suggest access meets or exceeds demand.</span>
+                        </div>
+                    </div>
+                </div>
+                ${createList(properties.fresh_food_need_quotes, 'Community Voices on Need')}
+                ${createList(properties.fresh_food_planning_quotes, 'Community Voices on Planning')}
+                ${createIncentiveListHTML(freshFoodIncentives, 'Fresh Food')}
+            </div>
+            ` : ''}
+        </div>
+        ${createPlanAreas(properties.plan_areas)}
+    `;
+    currentPanelContext = { type: 'tract', data: tractFeature };
+    openSidePanel();
+}
+
+function executeMapAction(action, context) {
+    if (!action) return;
+    const [command, value] = action.split(':');
+    
+    map.eachLayer(layer => {
+        if (layer.options && layer.options.isTemp) map.removeLayer(layer);
+    });
+    
+    if (command === 'showLayer') {
+        document.getElementById('choropleth-select').value = value;
+        updateMap();
+    } else if (command === 'togglePoints') {
+        const checkbox = document.querySelector(`input[data-name="${value}"]`);
+        if (checkbox && !checkbox.checked) {
+            checkbox.checked = true;
+            togglePointLayer(checkbox);
+        }
+    } else if (command === 'togglePolygons') {
+        const layers = value.split(',');
+        layers.forEach(layerName => {
+            const checkbox = document.querySelector(`input[data-name="${layerName}"]`);
+            if (checkbox && !checkbox.checked) {
+                checkbox.checked = true;
+                togglePolygonLayer(checkbox);
+            }
+        });
+    } else if (command === 'showNearest') {
+        const [layerName, count] = value.split(',');
+        showNearestPoints(context.location, layerName, parseInt(count, 10), context.container);
+    }
+}
+
+function createAccordionItem(question, answerHTML, mapAction = null, context = {}) {
+    const item = document.createElement('div');
+    item.className = 'accordion-item border rounded-lg';
+    item.innerHTML = `
+        <div class="accordion-header bg-slate-50 hover:bg-slate-100 p-4 flex justify-between items-center" tabindex="0">
+            <h4 class="font-semibold text-slate-700">${question}</h4>
+            <svg class="accordion-arrow h-5 w-5 text-slate-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+        </div>
+        <div class="accordion-content bg-white border-t border-slate-200">
+            <div class="p-4">${answerHTML}</div>
+        </div>
+    `;
+    const header = item.querySelector('.accordion-header');
+    header.addEventListener('click', () => {
+        clearProviderLayers();
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('#side-panel-content .accordion-item').forEach(el => el.classList.remove('open'));
+        if (!wasOpen) {
+            item.classList.add('open');
+            executeMapAction(mapAction, { ...context, container: item.querySelector('.accordion-content') });
+        }
+    });
+    return item;
+}
+
+function displaySmartResearchForTract(tractFeature) {
+    const p = tractFeature.properties;
+    panelTitle.textContent = `${truncateCommunityList(p.tract_name)}, ${p.county_name}`;
+    panelContent.innerHTML = '';
+
+    const questions = [];
+    const context = { location: { type: 'tract', feature: tractFeature } };
+
+    if (selectedSector === 'childcare') {
+        const unmet = safeParseFloat(p.childcare_unmet_demand, 0);
+        const needText = unmet > 0 ? `<strong>Yes</strong>, this area appears to need more childcare.` : `<strong>No</strong>, this area does not appear to have unmet demand for childcare.`;
+        questions.push(createAccordionItem(
+            "Is there a need for more childcare in this area?",
+            `<p>${needText} We estimate a gap of <strong>${formatNumber(unmet)} seats</strong>, based on a demand for ${formatNumber(p.childcare_demand_score)} seats and an existing supply of ${formatNumber(p.childcare_supply_score)} licensed seats.</p>`,
+            'showLayer:childcare_unmet_demand', context
+        ));
+        questions.push(createAccordionItem(
+            "Who are the other childcare providers in this area?",
+            `<p>Showing nearby licensed childcare providers on the map. The list below shows the closest providers to the center of this community area.</p><div id="nearest-providers-list"></div>`,
+            'showNearest:childcare,5', context
+        ));
+        if (p.childcare_need_quotes && p.childcare_need_quotes.length > 0) {
+             questions.push(createAccordionItem(
+                "What has this community said about childcare needs?",
+                `<ul class="list-disc list-inside space-y-2 text-slate-600 italic">${p.childcare_need_quotes.map(q => `<li>"${q}"</li>`).join('')}</ul>`,
+                null, context
+            ));
+        }
+    }
+    
+    if (selectedSector === 'fresh-food') {
+         const unmet = p.grocery_unmet_demand;
+         const needText = unmet > 0 ? `<strong>Yes</strong>, this area shows a significant opportunity for fresh food retail.` : `<strong>No</strong>, this area's current access appears to meet or exceed local demand.`;
+         questions.push(createAccordionItem(
+            "Is there a need for more fresh food options in this area?",
+            `<p>${needText} The opportunity score is <strong>${unmet.toFixed(2)}</strong>, reflecting a high latent demand and relatively low current access.</p>`,
+            'showLayer:grocery_unmet_demand', context
+        ));
+        questions.push(createAccordionItem(
+            "Who are the other fresh food providers in this area?",
+            `<p>Showing nearby grocery stores on the map. The list below shows the closest providers to the center of this community area.</p><div id="nearest-providers-list"></div>`,
+            'showNearest:grocery,5', context
+        ));
+         if (p.fresh_food_need_quotes && p.fresh_food_need_quotes.length > 0) {
+             questions.push(createAccordionItem(
+                "What has this community said about fresh food needs?",
+                `<ul class="list-disc list-inside space-y-2 text-slate-600 italic">${p.fresh_food_need_quotes.map(q => `<li>"${q}"</li>`).join('')}</ul>`,
+                null, context
+            ));
+        }
+    }
+    
+    const popChange = safeParseFloat(p.pop_change2530, 0);
+    const growthText = popChange > 50 ? `<strong>Yes</strong>, this area is projected to grow.` : popChange < -50 ? `<strong>No</strong>, this area is projected to see a population decline.` : `This area's population is projected to remain <strong>stable</strong>.`;
+    questions.push(createAccordionItem(
+        "Is this community projected to grow?",
+        `<p>${growthText} The population is projected to change by about <strong>${formatNumber(popChange)} people</strong> between 2025 and 2030.</p>`,
+        'showLayer:pop_change2530', context
+    ));
+
+    questions.push(createAccordionItem(
+        "What incentives might be available for my business here?",
+        `<p>Based on your selected industry and this location, here are some potentially relevant incentives. The map will highlight the boundaries for any location-based incentives.</p><div id="incentives-content"></div>`,
+        null, context
+    ));
+
+    questions.forEach(q => panelContent.appendChild(q));
+    
+    const incentivesContent = document.getElementById('incentives-content');
+    if (incentivesContent) {
+        const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
+        if (industry) {
+            const relevantIncentives = filterIncentives(industry, context.location);
+            incentivesContent.innerHTML = createIncentiveListHTML(relevantIncentives, industry.replace(' Services', ''));
+        } else {
+             incentivesContent.innerHTML = `<p class="text-sm text-slate-600">Select a 'Childcare' or 'Fresh Food' sector to see relevant incentives.</p>`;
+        }
+    }
+    currentPanelContext = { type: 'tract', data: tractFeature };
+    openSidePanel();
+}
+    
+function displaySmartResearchForAddress(addressName, parcelProps, tractProps, point) {
+    const displayTitle = parcelProps?.ADDRESS ? `${parcelProps.ADDRESS}, ${parcelProps.CITY}` : addressName;
+    panelTitle.textContent = displayTitle; 
+    panelContent.innerHTML = '';
+    
+    const questions = [];
+    const context = { location: { type: 'point', point, tractProps } };
+
+    if (selectedSector === 'childcare') {
+        const unmet = safeParseFloat(tractProps.childcare_unmet_demand, 0);
+        const needText = unmet > 0 ? `<strong>Yes</strong>, the community around this location appears to need more childcare.` : `<strong>No</strong>, this community does not appear to have unmet demand.`;
+         questions.push(createAccordionItem(
+            "Is there a need for more childcare near this location?",
+            `<p>${needText} The surrounding area has an estimated gap of <strong>${formatNumber(unmet)} seats</strong>.</p><p class="mt-2 text-sm">For more community details, <button id="view-full-details-btn" class="text-blue-600 underline">explore the full community area</button>.</p>`,
+            'showLayer:childcare_unmet_demand', context
+        ));
+         questions.push(createAccordionItem(
+            "Who are the other childcare providers near this location?",
+            `<p>Showing the closest licensed childcare providers to this address.</p><div id="nearest-providers-list"></div>`,
+            'showNearest:childcare,5', context
+        ));
+    }
+
+    if (selectedSector === 'fresh-food') {
+        const unmet = tractProps.grocery_unmet_demand;
+        const needText = unmet > 0 ? `<strong>Yes</strong>, the community around this location shows a significant opportunity for fresh food retail.` : `<strong>No</strong>, this community's current access appears to meet or exceed local demand.`;
+        questions.push(createAccordionItem(
+            "Is there a need for more fresh food options near this location?",
+            `<p>${needText} The surrounding community has an opportunity score of <strong>${unmet.toFixed(2)}</strong>.</p><p class="mt-2 text-sm">For more community details, <button id="view-full-details-btn" class="text-blue-600 underline">explore the full community area</button>.</p>`,
+            'showLayer:grocery_unmet_demand', context
+        ));
+        questions.push(createAccordionItem(
+            "Who are the other fresh food providers near this location?",
+            `<p>Showing the closest grocery stores to this address.</p><div id="nearest-providers-list"></div>`,
+            'showNearest:grocery,5', context
+        ));
+    }
+    
+    if (parcelProps && parcelProps.ZONING) {
+         questions.push(createAccordionItem(
+            "How is this address zoned?",
+            `<p>The zoning for this parcel is listed as <strong>${parcelProps.ZONING}</strong>. The land use is described as <strong>${parcelProps.DESCCIUSE ? parcelProps.DESCCIUSE.split(' ').slice(1).join(' ') : formatValue(parcelProps.DESCLU)}</strong>.</p><p class="mt-2 text-xs text-slate-500">Note: Always confirm zoning regulations with the local county or municipal authority.</p>`,
+            null, context
+        ));
+    }
+    
+    questions.push(createAccordionItem(
+        "What incentives might be available at this address?",
+        `<p>Based on your selected industry and this specific location, here are some potentially relevant incentives. The map will highlight the boundaries for any location-based incentives.</p><div id="incentives-content"></div>`,
+        null, context
+    ));
+
+    questions.forEach(q => panelContent.appendChild(q));
+
+    if (tractProps) {
+        const fullTractFeature = findTractForPoint(point);
+        const viewDetailsBtn = document.getElementById('view-full-details-btn');
+        if (viewDetailsBtn && fullTractFeature) {
+            viewDetailsBtn.onclick = () => {
+                // Call the Smart Research function for the full tract
+                displaySmartResearchForTract(fullTractFeature);
+            }
+        }
+    }
+    const incentivesContent = document.getElementById('incentives-content');
+    if (incentivesContent) {
+        const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
+        if (industry) {
+            const relevantIncentives = filterIncentives(industry, context.location);
+            incentivesContent.innerHTML = createIncentiveListHTML(relevantIncentives, industry.replace(' Services', ''));
+        } else {
+            incentivesContent.innerHTML = `<p class="text-sm text-slate-600">Select a 'Childcare' or 'Fresh Food' sector to see relevant incentives.</p>`;
+        }
+    }
+    currentPanelContext = { type: 'address', data: { addressName, parcelProps, tractProps, point } };
+    openSidePanel();
+}
+    
+async function showNearestPoints(location, layerName, count, container) {
+    if (!overlayLayers[layerName]) {
+        const checkbox = document.querySelector(`input[data-name="${layerName}"]`);
+        if (checkbox) {
+            checkbox.checked = true;
+            await togglePointLayer(checkbox);
+        }
+    }
+    const pointLayer = overlayLayers[layerName];
+    if (!pointLayer) {
+        container.innerHTML = `<p class="text-sm text-red-600">Could not load provider data.</p>`;
+        return;
+    }
+
+    const targetPoint = location.type === 'tract' ?
+        turf.centroid(location.feature).geometry.coordinates :
+        [location.point.lng, location.point.lat];
+
+    const allPoints = pointLayer.getLayers().map(l => ({
+        layer: l,
+        feature: l.feature || { properties: l.options.properties, geometry: { coordinates: [l.getLatLng().lng, l.getLatLng().lat] } }
+    }));
+    
+    const pointsWithDistance = allPoints.map(p => ({ ...p, distance: turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' }) }));
+    pointsWithDistance.sort((a, b) => a.distance - b.distance);
+    const nearest = pointsWithDistance.slice(0, count);
+
+    const listContainer = container.querySelector('#nearest-providers-list');
+    if (nearest.length === 0) {
+        listContainer.innerHTML = `<p class="text-sm text-slate-600 mt-2">No providers found in the immediate vicinity.</p>`;
+        return;
+    }
+    
+    listContainer.innerHTML = `
+        <ul class="space-y-3 mt-2">
+            ${nearest.map(p => {
+                const props = p.layer.getPopup().getContent().includes('Capacity') ? {
+                    name: p.layer.getPopup()._content.match(/<div class="font-bold text-base">(.*?)<\/div>/)[1],
+                    detail: p.layer.getPopup()._content.match(/<div><strong>Capacity \(Under 6\):<\/strong> (.*?)<\/div>/)[1]
+                } : {
+                    name: p.layer.getPopup()._content.match(/<div class="font-bold text-base">(.*?)<\/div>/)[1],
+                    detail: p.layer.getPopup()._content.match(/<div><strong>Type:<\/strong> (.*?)<\/div>/)[1]
+                };
+                const latlng = p.layer.getLatLng();
+                return `<li class="text-sm border-t pt-2 cursor-pointer hover:bg-slate-50 p-1 rounded" onclick="map.setView([${latlng.lat}, ${latlng.lng}], 17)">
+                            <p class="font-semibold text-slate-800">${props.name}</p>
+                            <p class="text-slate-600">${p.distance.toFixed(1)} miles away</p>
+                       </li>`;
+            }).join('')}
+        </ul>`;
+}
+    
+async function queryParcelData(longitude, latitude) {
+    const url = `https://api.mapbox.com/v4/${TILESET_ID}/tilequery/${longitude},${latitude}.json?access_token=${MAPBOX_ACCESS_TOKEN}`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Tilequery request failed');
+        const data = await response.json();
+        const parcel = data.features.find(f => f.properties.tilequery.layer === 'parcels_0825');
+        return parcel ? parcel.properties : null;
+    } catch (error) {
+        console.error("Error fetching parcel data:", error);
+        return null;
+    }
+}
+
+function findTractForPoint(latlng) {
+    let found = null;
+    if (geojsonLayer) {
+        geojsonLayer.eachLayer(layer => {
+            if (!found && isPointInLayer_Turf(latlng, layer)) found = layer.feature;
+        });
+    }
+    return found;
+}
+
+function displayAddressInfo(addressName, parcelProps, tractProps, point) {
+    const displayTitle = parcelProps?.ADDRESS ? `${parcelProps.ADDRESS}, ${parcelProps.CITY}` : addressName;
+    panelTitle.textContent = displayTitle; 
+    let html = '';
+
+    let parcelDetailsHTML = '';
+    if (parcelProps) {
+        const details = [];
+        const useDesc = parcelProps.DESCCIUSE ? parcelProps.DESCCIUSE.split(' ').slice(1).join(' ') : formatValue(parcelProps.DESCLU);
+        if (useDesc && useDesc !== 'N/A') {
+            details.push(`<div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Land Use:</span> ${useDesc}</div>`);
+        }
+        if (parcelProps.ZONING) {
+            details.push(`<div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Zoning:</span> ${formatValue(parcelProps.ZONING)}</div>`);
+        }
+        if (parcelProps.YEARBLT) {
+            details.push(`<div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Year Built:</span> ${formatValue(parcelProps.YEARBLT)}</div>`);
+        }
+        if (parcelProps.ACRES) {
+            details.push(`<div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Acres:</span> ${formatValue(parcelProps.ACRES)}</div>`);
+        }
+        if (parcelProps.SQFTSTRC) {
+            details.push(`<div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Structure SqFt:</span> ${formatNumber(parcelProps.SQFTSTRC)}</div>`);
+        }
+        
+        const salePrice = safeParseFloat(parcelProps.CONSIDR1);
+        if (salePrice > 0) {
+            details.push(`<div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Last Sale:</span> ${formatYmd(parcelProps.TRADATE)} for ${formatCurrency(salePrice)}</div>`);
+        }
+
+        if (details.length > 0) {
+            parcelDetailsHTML = `
+                <div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Parcel Details</h3>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                        ${details.join('')}
+                    </div>
+                </div>`;
+        }
+    }
+
+    if (!parcelDetailsHTML) {
+        parcelDetailsHTML = `<p class="text-sm p-3 bg-blue-50 border-l-4 border-blue-400 text-blue-800 rounded-r-md">This is a general location. No specific parcel data is available. Search for a full address to see more details.</p>`;
+    }
+
+    html += parcelDetailsHTML;
+
+    if (tractProps) {
+        const location = { type: 'point', point: point, tractProps: tractProps };
+        const childcareIncentives = filterIncentives('Child Care Services', location);
+        const freshFoodIncentives = filterIncentives('Grocery Stores', location);
+
+        const overlappingAreas = [];
+        const incentiveCheckboxes = document.querySelectorAll('input[onchange="togglePolygonLayer(this)"]');
+        incentiveCheckboxes.forEach(checkbox => {
+            const layerName = checkbox.dataset.name;
+            const layer = overlayLayers[layerName];
+            if (layer && isPointInLayer_Turf(point, layer)) {
+                const label = checkbox.nextElementSibling.textContent.trim();
+                overlappingAreas.push(label);
+            }
+        });
+
+        let incentiveAreasHTML = '';
+        if (overlappingAreas.length > 0) {
+            incentiveAreasHTML = `
+                <div class="mt-4">
+                    <h4 class="font-semibold text-slate-700 text-sm mb-2">Overlapping Incentive Areas</h4>
+                    <ul class="list-disc list-inside space-y-1 text-sm text-slate-700 bg-slate-50 p-3 rounded-lg">
+                        ${overlappingAreas.map(area => `<li>${area}</li>`).join('')}
+                    </ul>
+                </div>`;
+        } else {
+             incentiveAreasHTML = `
+                <div class="mt-4">
+                     <p class="text-sm text-slate-600 italic">No currently visible incentive areas overlap this point. Toggle layers on to check for others.</p>
+                </div>`;
+        }
+
+        html += `
+            <div class="mt-4">
+                <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Context</h3>
+                <div class="p-3 bg-blue-50 border-l-4 border-blue-400 rounded-r-md">
+                    <p class="text-sm text-slate-700">This address is in <strong class="font-semibold">${truncateCommunityList(tractProps.tract_name)}, ${tractProps.county_name}</strong>.</p>
+                    <button id="view-full-details-btn" class="mt-3 w-full bg-slate-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-slate-800">Explore Full Community Details</button>
+                </div>
+                ${incentiveAreasHTML}
+                <div class="mt-2">
+                    ${createIncentiveListHTML(childcareIncentives, 'Childcare')}
+                    ${createIncentiveListHTML(freshFoodIncentives, 'Fresh Food')}
+                </div>
+            </div>`;
+    }
+
+    panelContent.innerHTML = html;
+
+    if (tractProps) {
+        const fullTractFeature = findTractForPoint(point);
+        if (fullTractFeature) {
+            document.getElementById('view-full-details-btn').onclick = () => displayFeatureInfo(fullTractFeature);
+        }
+    }
+    currentPanelContext = { type: 'address', data: { addressName, parcelProps, tractProps, point } };
+    openSidePanel();
+}
+
+function isPointInLayer_Turf(point, layer) {
+    if (!point || !layer) return false;
+    const turfPoint = [point.lng, point.lat];
+    const geojson = layer.toGeoJSON();
+    try {
+        if (geojson.type === 'FeatureCollection') {
+            for (const feature of geojson.features) {
+                if (turf.booleanPointInPolygon(turfPoint, feature)) return true;
+            }
+            return false;
+        } else {
+            return turf.booleanPointInPolygon(turfPoint, geojson);
+        }
+    } catch (e) {
+        console.error("Turf.js failed to process a geometry.", e, geojson);
+        return false;
+    }
+}
+
+// --- DOCUMENT READY & INITIALIZATION ---
+document.addEventListener('DOMContentLoaded', async () => {
+    setupModalAndState();
+    setupNavbar();
+    setupTopControls();
+    
+    const loadingOverlay = document.getElementById('loading-overlay'); 
+
     map = L.map('map', {
-        center: [39.0458, -76.6413], // Centered on Maryland
+        center: [39.0458, -76.6413],
         maxBounds: [[37.72521, -82], [39.90463, -74.60361]],
         zoom: 8,
         minZoom: 7,
         zoomControl: false 
     });
     
-    // Create custom panes to control layer order
-    map.createPane('countyPane');
-    map.getPane('countyPane').style.zIndex = 475; // Above tracts, below incentives
-    map.createPane('incentivePane');
-    map.getPane('incentivePane').style.zIndex = 450;
-    map.createPane('tractPane');
-    map.getPane('tractPane').style.zIndex = 400;
-    map.createPane('clusterTopPane');
-    map.getPane('clusterTopPane').style.zIndex = 650;
+    map.createPane('countyPane').style.zIndex = 475;
+    map.createPane('incentivePane').style.zIndex = 450;
+    map.createPane('tractPane').style.zIndex = 400;
+    map.createPane('clusterTopPane').style.zIndex = 650;
 
     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -358,7 +1285,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-    // --- DATA LOADING ---
     try {
         const [tractResponse, countyResponse, stateIncentivesResponse, localIncentivesResponse] = await Promise.all([
             fetch('tract_supply_demand_gap_simplified.geojson'),
@@ -367,155 +1293,192 @@ document.addEventListener('DOMContentLoaded', async () => {
             fetch('incentives/local_incentives_structured.json')
         ]);
 
-        if (!tractResponse.ok || !countyResponse.ok || !stateIncentivesResponse.ok || !localIncentivesResponse.ok) {
-            throw new Error('Network response was not ok');
-        }
+        if (!tractResponse.ok) throw new Error('Network response was not ok');
 
-        const tractData = await tractResponse.json();
+        tractData = await tractResponse.json();
         const countyData = await countyResponse.json();
         const stateIncentives = await stateIncentivesResponse.json();
         const localIncentives = await localIncentivesResponse.json();
         
-        // Combine state and local incentives into one array, extracting the structured data
-        const processIncentives = (incentives, source) => {
-            return incentives.map(inc => ({ ...inc.structured_extraction, source: source }));
-        };
-        allIncentives = [
-            ...processIncentives(stateIncentives, 'State'),
-            ...processIncentives(localIncentives, 'Local')
-        ];
+        const processIncentives = (incentives, source) => incentives.map(inc => ({ ...inc.structured_extraction, source: source }));
+        allIncentives = [...processIncentives(stateIncentives, 'State'), ...processIncentives(localIncentives, 'Local')];
         
-        const countyLayer = L.geoJSON(countyData, {
-            style: {
-                fillOpacity: 0, color: '#FFFFFF', weight: 2, opacity: 0.8
-            },
+        L.geoJSON(countyData, {
+            style: { fillOpacity: 0, color: '#FFFFFF', weight: 2, opacity: 0.8 },
             interactive: false, pane: 'countyPane'
         }).addTo(map);
 
-        initializeMap(tractData);
-
-        // Pre-load incentive area layers in the background
+        initializeMap();
         await preloadPolygonLayers();
 
     } catch (error) {
         console.error('Failed to load map data:', error);
         alert('Could not load community or county data. The map may not function correctly.');
     } finally {
-        loadingOverlay.classList.add('hidden'); // Hide loader
+        loadingOverlay.classList.add('hidden');
     }
 });
 
-
-function initializeMap(tractData) {
-    // --- CHOROPLETH AND LEGEND LOGIC ---
-    let currentVariable = 'childcare_unmet_demand';
-    const legend = L.control({ position: 'bottomright' });
-    const choroplethSelect = document.getElementById('choropleth-select');
-
-    const choroplethOptions = {
-        'childcare_unmet_demand': { label: 'Childcare Opportunity Score', format: (d) => formatNumber(d) },
-        'childcare_supply_score': { label: 'Childcare Access Score', format: (d) => formatNumber(d) },
-        'childcare_demand_score': { label: 'Childcare Demand Score', format: (d) => formatNumber(d) },
-        'grocery_unmet_demand': { label: 'Fresh Food Opportunity Score', format: (d) => d.toFixed(2) },
-        'grocery_supply_score': { label: 'Fresh Food Access Score', format: (d) => d.toFixed(2) },
-        'grocery_demand_score': { label: 'Fresh Food Demand Score', format: (d) => d.toFixed(2) },
-        'grocery_need_score': { label: 'Fresh Food Need', format: (d) => formatPercent(d) },
-        'childcare_spending_per_under5': { label: 'Childcare Spending (per child)', format: (d) => formatCurrency(d) },
-        'per_household_food_at_home': { label: 'Grocery spending (per household)', format: (d) => formatCurrency(d) },
-        'pop2025': { label: 'Population (2025)', format: (d) => formatNumber(d) },
-        'pop_change2530': { label: 'Projected Pop. Change (25-30)', format: (d) => formatNumber(d) },
-        'avg_household_income': { label: 'Avg. Household Income', format: (d) => formatCurrency(d) },
-        'transportation_barrier_pct': { label: '% Transportation Barriers', format: (d) => formatPercent(d) },
-        'pct_under5': { label: '% Population Under 5', format: (d) => formatPercent(d) },
-        'community_momentum_index': { label: 'Community Momentum Index', format: (d) => formatPercent(d) },
-        'net_business_formations': { label: 'Net Business Formations (22-23)', format: (d) => formatPercent(d) },
-        'job_growth_employees': { label: 'Job Growth (Employees, 22-23)', format: (d) => formatPercent(d) },
-        'job_growth_payroll': { label: 'Job Growth (Payroll, 22-23)', format: (d) => formatPercent(d) },
-        'license_growth_rate': { label: 'Business License Growth (22-23)', format: (d) => formatPercent(d) },
-    };
-
-    Object.keys(choroplethOptions).forEach(key => {
-        const option = document.createElement('option');
-        option.value = key;
-        option.textContent = choroplethOptions[key].label;
-        choroplethSelect.appendChild(option);
+// --- SETUP FUNCTIONS ---
+function setupNavbar() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+        mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+        mobileMenu.classList.toggle('hidden');
+        mobileMenuButton.querySelectorAll('svg').forEach(svg => svg.classList.toggle('hidden'));
     });
-    choroplethSelect.value = currentVariable;
-    
-    // --- COLOR SCALES ---
-    const sequentialColors = ['#eff3ff', '#bdd7e7', '#6baed6', '#3182bd', '#08519c'];
-    const divergingColors = ['#e41d3d', '#f89747', '#fee8a0', '#a6d8f0', '#28a0cb', '#005ea2'].reverse();
+}
 
-    function isDivergingVariable(variable) {
-        const divergingKeywords = ['unmet_demand', 'growth', 'net_business', 'formations', 'index', 'pop_change'];
-        return divergingKeywords.some(keyword => variable.includes(keyword));
+function setupModalAndState() {
+    const storedSector = localStorage.getItem('selectedSector');
+    const modalOverlay = document.getElementById('sector-modal-overlay');
+
+    if (storedSector) {
+        selectedSector = storedSector;
+    } else {
+        modalOverlay.classList.remove('hidden');
     }
 
-    function getQuantiles(data, numQuantiles) {
-        const sorted = data.filter(v => !isNaN(v)).sort((a, b) => a - b);
-        if (sorted.length === 0) return [];
-        const quantiles = [];
-        for (let i = 1; i < numQuantiles; i++) {
-            const pos = (sorted.length - 1) * (i / numQuantiles);
-            const base = Math.floor(pos);
-            const rest = pos - base;
-            if (sorted[base + 1] !== undefined) {
-                quantiles.push(sorted[base] + rest * (sorted[base + 1] - sorted[base]));
-            } else {
-                quantiles.push(sorted[base]);
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) handleSectorSelection('other');
+    });
+
+    document.querySelectorAll('.sector-choice-btn').forEach(button => {
+        button.addEventListener('click', () => handleSectorSelection(button.dataset.sector));
+    });
+}
+
+function handleSectorSelection(sector) {
+    selectedSector = sector;
+    localStorage.setItem('selectedSector', sector);
+    document.getElementById('sector-modal-overlay').classList.add('hidden');
+    document.getElementById('sector-select').value = sector;
+    updateChoroplethOptions(sector);
+}
+
+function setupTopControls() {
+    const modeSelect = document.getElementById('map-mode-select');
+    const sectorSelect = document.getElementById('sector-select');
+    const mapControlsContainer = document.getElementById('map-controls-container');
+
+    modeSelect.value = currentMapMode;
+    sectorSelect.value = selectedSector;
+    
+    if (currentMapMode === 'smartResearch') {
+        mapControlsContainer.style.display = 'none';
+    }
+
+    modeSelect.addEventListener('change', (e) => {
+        sidePanel.classList.remove('show');
+        document.body.classList.remove('panel-is-open');
+        currentPanelContext = { type: null, data: null };
+        if (lastClickedLayer) geojsonLayer.resetStyle(lastClickedLayer);
+
+        currentMapMode = e.target.value;
+        if (currentMapMode === 'smartResearch') {
+            mapControlsContainer.style.display = 'none';
+             if (showControlsControl) showControlsControl.getContainer().style.display = 'none';
+        } else {
+            mapControlsContainer.style.display = 'flex';
+            openControlsPanel();
+        }
+    });
+
+    sectorSelect.addEventListener('change', (e) => {
+        selectedSector = e.target.value;
+        localStorage.setItem('selectedSector', selectedSector);
+        updateChoroplethOptions(selectedSector);
+
+        if (sidePanel.classList.contains('show') && currentPanelContext.data) {
+            if (currentMapMode === 'smartResearch') {
+                if (currentPanelContext.type === 'tract') {
+                    displaySmartResearchForTract(currentPanelContext.data);
+                } else if (currentPanelContext.type === 'address') {
+                    const { addressName, parcelProps, tractProps, point } = currentPanelContext.data;
+                    displaySmartResearchForAddress(addressName, parcelProps, tractProps, point);
+                }
+            } else { // Free Explore mode
+                if (currentPanelContext.type === 'tract') {
+                    displayFeatureInfo(currentPanelContext.data);
+                } else if (currentPanelContext.type === 'address') {
+                    const { addressName, parcelProps, tractProps, point } = currentPanelContext.data;
+                    displayAddressInfo(addressName, parcelProps, tractProps, point);
+                }
             }
         }
-        return quantiles;
-    }
+    });
+}
 
-    function getDivergingBreaks(values) {
-        return getQuantiles(values, divergingColors.length);
-    }
+function updateChoroplethOptions(sector) {
+    const select = document.getElementById('choropleth-select');
+    if (!select) return; // Guard clause
+    const currentVal = select.value;
+    select.innerHTML = '';
+    
+    let firstOption = null;
 
-    function getColor(d, breaks, colors) {
-        if (colors.length === 6) { // Diverging
-            return d > breaks[4] ? colors[5] : d > breaks[3] ? colors[4] : d > breaks[2] ? colors[3] : d > breaks[1] ? colors[2] : d > breaks[0] ? colors[1] : colors[0];
-        } else { // Sequential
-            return d > breaks[3] ? colors[4] : d > breaks[2] ? colors[3] : d > breaks[1] ? colors[2] : d > breaks[0] ? colors[1] : colors[0];
+    Object.entries(CHOROPLETH_OPTIONS).forEach(([key, option]) => {
+        if (sector === 'other' || option.sector === 'general' || option.sector === sector) {
+            const opt = document.createElement('option');
+            opt.value = key;
+            opt.textContent = option.label;
+            select.appendChild(opt);
+            if (!firstOption) firstOption = key;
         }
-    }
-
-    function style(feature) {
-        const isDiverging = isDivergingVariable(currentVariable);
-        const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable])).filter(v => v !== null);
-        if (values.length === 0) {
-            return { fillColor: '#636363', weight: 0, color: 'white', fillOpacity: 0.7, pane: 'tractPane' };
-        }
-        const colors = isDiverging ? divergingColors : sequentialColors;
-        const breaks = isDiverging ? getDivergingBreaks(values) : getQuantiles(values, colors.length);
-        const value = safeParseFloat(feature.properties[currentVariable]);
-        return {
-            fillColor: (value === null) ? '#636363' : getColor(value, breaks, colors),
-            weight: 0, opacity: 1, color: 'white', fillOpacity: 0.7, pane: 'tractPane'
-        };
+    });
+    
+    if (select.querySelector(`option[value="${currentVal}"]`)) {
+        select.value = currentVal;
+    } else {
+        select.value = {
+            'childcare': 'childcare_unmet_demand',
+            'fresh-food': 'grocery_unmet_demand',
+            'other': 'community_momentum_index'
+        }[sector] || firstOption;
     }
     
+    if (map && geojsonLayer) {
+        updateMap();
+    }
+}
+
+// --- INITIALIZATION FUNCTION ---
+function initializeMap() {
+    // Assign global element variables
+    choroplethSelect = document.getElementById('choropleth-select');
+    controlsContainer = document.getElementById('map-controls-container');
+    sidePanel = document.getElementById('side-panel');
+    panelContent = document.getElementById('side-panel-content');
+    panelTitle = document.getElementById('panel-title');
+
+    updateChoroplethOptions(selectedSector);
+    
+    legend = L.control({ position: 'bottomright' });
     legend.onAdd = function (map) {
         const div = L.DomUtil.create('div', 'info-legend');
+        let currentVariable = choroplethSelect.value;
         const isDiverging = isDivergingVariable(currentVariable);
         const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable])).filter(v => !isNaN(v));
-        if(values.length === 0) return div;
+        if (values.length === 0) return div;
+
         const colors = isDiverging ? divergingColors : sequentialColors;
-        let content = `<h4>${choroplethOptions[currentVariable].label}</h4>`;
+        let content = `<h4>${CHOROPLETH_OPTIONS[currentVariable].label}</h4>`;
         
         if (isDiverging) {
             if (currentVariable.includes('unmet_demand')) {
                 content += `<div class="legend-item"><i style="background:${colors[5]}"></i><span>More Demand</span></div>`;
                 content += `<div class="legend-item"><i style="background:${colors[2]}"></i><span>Balanced</span></div>`;
                 content += `<div class="legend-item"><i style="background:${colors[0]}"></i><span>More Access</span></div>`;
-            } else { // For growth rates
+            } else {
                 content += `<div class="legend-item"><i style="background:${colors[5]}"></i><span>High Growth</span></div>`;
                 content += `<div class="legend-item"><i style="background:${colors[2]}"></i><span>Stable</span></div>`;
                 content += `<div class="legend-item"><i style="background:${colors[0]}"></i><span>Decline</span></div>`;
             }
         } else {
              const breaks = getQuantiles(values, colors.length);
-             const formatter = choroplethOptions[currentVariable].format;
+             const formatter = CHOROPLETH_OPTIONS[currentVariable].format;
             for (let i = 0; i < colors.length; i++) {
                 const from = i === 0 ? Math.min(...values) : breaks[i - 1];
                 const to = i === colors.length - 1 ? Math.max(...values) : breaks[i];
@@ -526,353 +1489,18 @@ function initializeMap(tractData) {
         div.innerHTML = content;
         return div;
     };
-
-
-    function updateMap() {
-        currentVariable = choroplethSelect.value;
-        if (geojsonLayer) geojsonLayer.setStyle(style);
-        if (legend._map) legend.remove();
-        legend.addTo(map);
-    }
     
     choroplethSelect.addEventListener('change', updateMap);
-
-    // --- FEATURE INTERACTION (CLICK, HOVER) ---
-    let lastClickedLayer = null;
-
-    function highlightFeature(e) {
-        const layer = e.target;
-        layer.setStyle({ weight: 4, color: '#334155', dashArray: '' });
-        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) layer.bringToFront();
-    }
-
-    function resetHighlight(e) { geojsonLayer.resetStyle(e.target); }
-
-    function onEachFeature(feature, layer) {
-        layer.on({
-            mouseover: highlightFeature,
-            mouseout: resetHighlight,
-            click: (e) => {
-                map.fitBounds(e.target.getBounds());
-                displayFeatureInfo(feature);
-                if (lastClickedLayer) geojsonLayer.resetStyle(lastClickedLayer);
-                e.target.setStyle({ weight: 4, color: '#334155', dashArray: '' });
-                lastClickedLayer = e.target;
-            }
-        });
-    }
-    
-    geojsonLayer = L.geoJSON(tractData, { style: style, onEachFeature: onEachFeature }).addTo(map);
-    updateMap();
-
-    // --- SIDE PANEL LOGIC ---
-    const sidePanel = document.getElementById('side-panel');
-    const panelTitle = document.getElementById('panel-title');
-
-    function openSidePanel() {
-        // On mobile, if controls are open, minimize them first.
-        if (window.innerWidth < 768 && !controlsContainer.classList.contains('minimized')) {
-            controlsContainer.classList.add('minimized');
-            if(showControlsControl) showControlsControl.getContainer().style.display = 'block';
-        }
-        sidePanel.classList.add('show');
-    }
-
-    function openControlsPanel() {
-        // On mobile, if the side panel is open, close it first.
-        if (window.innerWidth < 768 && sidePanel.classList.contains('show')) {
-            sidePanel.classList.remove('show');
-        }
-        controlsContainer.classList.remove('minimized');
-        if(showControlsControl) showControlsControl.getContainer().style.display = 'none';
-    }
-
-    const panelContent = document.getElementById('side-panel-content');
-    const closePanelBtn = document.getElementById('close-panel-btn');
-
-    closePanelBtn.addEventListener('click', () => {
+    document.getElementById('close-panel-btn').addEventListener('click', () => {
         sidePanel.classList.remove('show');
+        document.body.classList.remove('panel-is-open');
+        currentPanelContext = { type: null, data: null };
         if (lastClickedLayer) {
             geojsonLayer.resetStyle(lastClickedLayer);
             lastClickedLayer = null;
         }
     });
-    
-    // A threshold of 10% means at least 10% of the tract must be covered by the incentive area.
-    const OVERLAP_THRESHOLD_PERCENT = 10;
 
-    function filterIncentives(industry, location) {
-        if (!location || !allIncentives) return [];
-
-        // Determine the county name from the location object
-        const county = location.type === 'tract' ? location.feature.properties.county_name : location.tractProps.county_name;
-
-        const reverseIncentiveMap = Object.fromEntries(
-            Object.entries(INCENTIVE_AREA_MAP).map(([key, value]) => [value, key])
-        );
-
-        return allIncentives.filter(inc => {
-            // --- Safely get properties, defaulting to empty arrays ---
-            const eligibleOrganizationTypes = inc.eligible_organization_types || [];
-            const eligibleIndustries = inc.list_of_eligible_industries || [];
-            const prioritizedIndustries = inc.list_of_prioritized_industries || [];
-            const incentiveAreas = inc.list_of_incentive_areas || [];
-            const eligibleCounties = inc.list_of_eligible_counties || [];
-            const prioritizedCounties = inc.list_of_prioritized_counties || [];
-
-            if (!eligibleOrganizationTypes.includes('for-profit')) {
-                return false;
-            }
-
-            // --- 1. Filter by Industry ---
-            const industryMatch = eligibleIndustries.includes(industry) || prioritizedIndustries.includes(industry);
-            if (!industryMatch) return false;
-
-            // --- 2. Filter by Geography ---
-            const countyMatch = eligibleCounties.includes('All') ||
-                                eligibleCounties.includes(county) ||
-                                prioritizedCounties.includes('All') ||
-                                prioritizedCounties.includes(county);
-
-            let incentiveAreaMatch = false;
-            if (incentiveAreas.length > 0) {
-                // --- LOGIC FOR TRACTS (Polygon Intersection) ---
-                if (location.type === 'tract') {
-                    const tractFeature = location.feature;
-                    const tractArea = turf.area(tractFeature);
-
-                    incentiveAreaMatch = incentiveAreas.some(humanName => {
-                        const layerName = reverseIncentiveMap[humanName];
-                        const incentiveLayer = overlayLayers[layerName];
-                        if (!incentiveLayer || tractArea === 0) return false;
-
-                        let totalIntersectionArea = 0;
-                        const incentiveGeoJSON = incentiveLayer.toGeoJSON();
-
-                        if (incentiveGeoJSON && incentiveGeoJSON.type === 'FeatureCollection' && incentiveGeoJSON.features) {
-                            // Loop through each individual feature in the incentive layer
-                            for (const incentiveFeature of incentiveGeoJSON.features) {
-                                try {
-                                    const intersection = turf.intersect(tractFeature, incentiveFeature);
-                                    if (intersection) {
-                                        totalIntersectionArea += turf.area(intersection);
-                                    }
-                                } catch (e) {
-                                    console.error(`Turf.js intersection failed within filterIncentives for ${layerName}:`, e);
-                                }
-                            }
-                        }
-
-                        // Now, check if the total accumulated intersection area meets the threshold
-                        if (totalIntersectionArea > 0) {
-                            const percentage = (totalIntersectionArea / tractArea) * 100;
-                            return percentage >= OVERLAP_THRESHOLD_PERCENT;
-                        }
-                        return false;
-                    });
-                }
-                // --- LOGIC FOR ADDRESSES (Point in Polygon) ---
-                else if (location.type === 'point') {
-                    incentiveAreaMatch = incentiveAreas.some(humanName => {
-                        const layerName = reverseIncentiveMap[humanName];
-                        const layer = overlayLayers[layerName];
-                        return layer && isPointInLayer_Turf(location.point, layer);
-                    });
-                }
-            }
-
-            return countyMatch || incentiveAreaMatch;
-        });
-    }
-
-    function createIncentiveListHTML(incentives, type) {
-        if (!incentives || incentives.length === 0) {
-            return `<p class="text-sm text-slate-600 mt-2">No specific ${type.toLowerCase()} incentives found for this area.</p>`;
-        }
-        
-        return `
-            <details class="bg-slate-50 p-3 rounded-lg mt-2" style="margin-top:0.5rem;">
-                <summary class="font-semibold text-slate-600 mb-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">Relevant ${type} Incentives (${incentives.length})</summary>
-                <div class="space-y-3 mt-2">
-                    ${incentives.map(inc => `
-                        <div class="text-sm border-t pt-2">
-                            <p class="font-bold text-slate-800">
-                                <a href="${inc.URL}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">${inc.program_name}</a> 
-                                <span class="text-xs font-medium bg-slate-200 text-slate-700 py-0.5 px-1.5 rounded-full ml-1">${inc.source}</span>
-                            </p>
-                            <p class="text-slate-600 mt-1">${inc.program_description}</p>
-                            ${inc.assistance_type ? `<p class="mt-1"><strong class="font-medium text-slate-700">Assistance Type:</strong> ${inc.assistance_type.join(', ')}</p>` : ''}
-                        </div>
-                    `).join('')}
-                </div>
-            </details>`;
-    }
-
-
-    function displayFeatureInfo(tractFeature) {
-        const properties = tractFeature.properties; // Get properties from the feature
-        if (window.innerWidth < 768 && !document.getElementById('map-controls-container').classList.contains('minimized')) {
-            document.getElementById('map-controls-container').classList.add('minimized');
-            if (showControlsControl) showControlsControl.getContainer().style.display = 'block';
-        }
-        panelTitle.textContent = `${truncateCommunityList(properties.tract_name)}, ${properties.county_name}`;
-        
-        const createList = (items, title) => {
-            if (!items || items.length === 0) return '';
-            return `
-                <details class="bg-slate-50 p-3 rounded-lg mt-2" style="margin-top:0.5rem;">
-                    <summary class="font-semibold text-slate-600 mb-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">${title}</summary>
-                    <ul class="list-disc list-inside space-y-1 text-sm text-slate-700 mt-2">
-                        ${items.map(item => `<li>${item}</li>`).join('')}
-                    </ul>
-                </details>`;
-        };
-        const createPlanAreas = (items) => {
-             if (!items || items.length === 0) return '';
-             return `
-                <div class="bg-slate-50 p-3 rounded-lg">
-                    <h4 class="font-semibold text-slate-600 mb-2">Relevant Plans</h4>
-                    ${items.map(p => `
-                        <div class="mt-2 text-sm">
-                            <p class="font-medium text-slate-800">${p.area_name} (${p.plan_year})</p>
-                            <p class="text-slate-600 italic">"${p.community_vision}"</p>
-                        </div>
-                    `).join('')}
-                </div>`;
-        }
-        
-        const location = { type: 'tract', feature: tractFeature };
-        const childcareIncentives = filterIncentives('Child Care Services', location);
-        const freshFoodIncentives = filterIncentives('Grocery Stores', location);
-
-        // --- Find overlapping incentive areas for the tract ---
-        const overlappingAreas = [];
-        const tractArea = turf.area(tractFeature);
-
-        if (tractArea > 0) {
-            // Iterate through the machine-friendly names from our map
-            for (const layerName in INCENTIVE_AREA_MAP) {
-                const incentiveLayer = overlayLayers[layerName];
-                if (incentiveLayer) {
-                    let totalIntersectionArea = 0;
-                    const incentiveGeoJSON = incentiveLayer.toGeoJSON();
-
-                    // Check if the layer is a FeatureCollection with features
-                    if (incentiveGeoJSON && incentiveGeoJSON.type === 'FeatureCollection' && incentiveGeoJSON.features) {
-                        // Loop through each individual feature in the incentive layer
-                        for (const incentiveFeature of incentiveGeoJSON.features) {
-                            try {
-                                const intersection = turf.intersect(tractFeature, incentiveFeature);
-                                if (intersection) {
-                                    // Add the area of this specific intersection to the total
-                                    totalIntersectionArea += turf.area(intersection);
-                                }
-                            } catch (e) {
-                                // This might catch errors with individual invalid geometries
-                                console.error(`Turf.js intersection failed on a feature within ${layerName}:`, e);
-                            }
-                        }
-                    }
-                    
-                    // Now, check if the total accumulated intersection area meets the threshold
-                    if (totalIntersectionArea > 0) {
-                        const percentage = (totalIntersectionArea / tractArea) * 100;
-                        if (percentage >= OVERLAP_THRESHOLD_PERCENT) {
-                            // Get the human-friendly name from the map
-                            overlappingAreas.push(INCENTIVE_AREA_MAP[layerName]);
-                        }
-                    }
-                }
-            }
-        }
-
-        // --- Generate HTML for the list of overlapping areas ---
-        let incentiveAreasHTML = '';
-        if (overlappingAreas.length > 0) {
-            incentiveAreasHTML = `
-                <div class="bg-slate-50 p-3 rounded-lg">
-                    <h4 class="font-semibold text-slate-600 mb-2">Overlapping Incentive Areas</h4>
-                    <ul class="list-disc list-inside space-y-1 text-sm text-slate-700">
-                        ${overlappingAreas.map(area => `<li>${area}</li>`).join('')}
-                    </ul>
-                </div>`;
-        }
-
-        const popChange = safeParseFloat(properties.pop_change2530);
-        panelContent.innerHTML = `
-            <div>
-                <h3 class="text-lg font-semibold text-slate-800 mb-2">Population</h3>
-                <div class="grid grid-cols-2 gap-2 text-sm">
-                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Population (2025):</span> ${formatNumber(properties.pop2025)}</div>
-                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Projected Pop. (2030):</span> ${formatNumber(properties.pop2030)}</div>
-                    <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Projected Change (25-30):</span> <span class="${popChange > 0 ? 'text-green-700' : 'text-red-600'}">${formatNumber(popChange)}</span></div>
-                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">% Under 5:</span> ${formatPercent(properties.pct_under5)}</div>
-                </div>
-            </div>
-            <div>
-                <h3 class="text-lg font-semibold text-slate-800 mb-2">Demographics & Economics</h3>
-                <div class="grid grid-cols-2 gap-2 text-sm">
-                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Avg. HH Income:</span> ${formatCurrency(properties.avg_household_income)}</div>
-                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">% Transporation Barriers:</span> ${formatPercent(properties.transportation_barrier_pct)}</div>
-                    <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">
-                        Momentum Index (22-23):</span> ${formatPercent(properties.community_momentum_index)}
-                        <div class="info-tooltip inline-block ml-1" tabindex="0">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
-                            <span class="tooltip-text">The Community Momentum Index measures economic vitality by averaging growth rates in business formations, licenses, jobs, and payroll. Positive scores reflect community economic growth.</span>
-                        </div>
-                    </div>
-                    <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Race/Ethnicity:</span><br/> White: ${formatPercent(properties.pct_white)}<br/>Black: ${formatPercent(properties.pct_black)}<br/>Hispanic: ${formatPercent(properties.pct_hispanic)}</div>
-                </div>
-            </div>
-            ${incentiveAreasHTML}
-
-            <div>
-                <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Needs & Opportunities</h3>
-                <div class="mt-4 p-4 border rounded-lg">
-                    <h4 class="text-md font-semibold text-slate-700">Childcare</h4>
-                    <div class="grid grid-cols-3 gap-2 text-sm mt-2">
-                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Access:</span> ${formatNumber(properties.childcare_supply_score)} seats</div>
-                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Demand:</span> ${formatNumber(properties.childcare_demand_score)} seats</div>
-                         <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Opportunity:</span> ${formatNumber(properties.childcare_unmet_demand)} seats 
-                             <div class="info-tooltip inline-block ml-1" tabindex="0">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
-                                <span class="tooltip-text">Child care opportunity score is the number of children 5 and under in households where all parents are in the laborforce, minus the licensed capacity of local child care providers. Positive scores reflect unmet community demand.</span>
-                            </div>
-                         </div>
-                    </div>
-                    ${createList(properties.childcare_need_quotes, 'Community Voices on Need')}
-                    ${createList(properties.childcare_planning_quotes, 'Community Voices on Planning')}
-                    ${createIncentiveListHTML(childcareIncentives, 'Childcare')}
-                </div>
-                <div class="mt-4 p-4 border rounded-lg">
-                    <h4 class="text-md font-semibold text-slate-700">Fresh Food & Groceries</h4>
-                    <div class="grid grid-cols-2 gap-2 text-sm mt-2">
-                        <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Access Score:</span> ${properties.grocery_supply_score.toFixed(2)}</div>
-                        <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Need Score:</span> ${formatPercent(properties.grocery_need_score)}</div>
-                        <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Latent Demand Score:</span> ${properties.grocery_demand_score.toFixed(2)}
-                            <div class="info-tooltip inline-block ml-1" tabindex="0">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
-                                <span class="tooltip-text">Estimates how much more people would spend on fresh food if they had good access to high-quality stores, based on local demographics and current access.</span>
-                            </div>
-                        </div>
-                        <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Unmet Demand Score:</span> ${properties.grocery_unmet_demand.toFixed(2)}
-                            <div class="info-tooltip inline-block ml-1" tabindex="0">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
-                                <span class="tooltip-text">Measures the gap between potential and actual grocery access. Positive scores indicate high latent demand and low current access, signaling a strong market opportunity. Negative scores suggest access meets or exceeds demand.</span>
-                            </div>
-                        </div>
-                    </div>
-                    ${createList(properties.fresh_food_need_quotes, 'Community Voices on Need')}
-                    ${createList(properties.fresh_food_planning_quotes, 'Community Voices on Planning')}
-                    ${createIncentiveListHTML(freshFoodIncentives, 'Fresh Food')}
-                </div>
-                ${createPlanAreas(properties.plan_areas)}
-            </div>
-        `;
-        openSidePanel();
-    }
-
-    // --- ADDRESS SEARCH ---
     L.Control.geocoder({
         position: 'topright',
         placeholder: 'Search for an address...',
@@ -885,6 +1513,7 @@ function initializeMap(tractData) {
     .on('markgeocode', async function(e) {
         const { center, name } = e.geocode;
         if (sidePanel.classList.contains('show')) sidePanel.classList.remove('show');
+        document.body.classList.remove('panel-is-open');
         if (searchMarker) map.removeLayer(searchMarker);
 
         const [parcelData, tractFeature] = await Promise.all([
@@ -893,201 +1522,30 @@ function initializeMap(tractData) {
         ]);
 
         searchMarker = L.marker(center).addTo(map);
-
-        // Pass the 'center' point to the click handler
         searchMarker.on('click', () => {
-            displayAddressInfo(name, parcelData, tractFeature?.properties, center);
+            if (currentMapMode === 'smartResearch') {
+                displaySmartResearchForAddress(name, parcelData, tractFeature?.properties, center);
+            } else {
+                displayAddressInfo(name, parcelData, tractFeature?.properties, center);
+            }
         });
 
         map.setView(center, 16);
-        // Pass 'center' to display function
-        displayAddressInfo(name, parcelData, tractFeature?.properties, center);
+        if (currentMapMode === 'smartResearch') {
+            displaySmartResearchForAddress(name, parcelData, tractFeature?.properties, center);
+        } else {
+            displayAddressInfo(name, parcelData, tractFeature?.properties, center);
+        }
     })
     .addTo(map);
 
-    async function queryParcelData(longitude, latitude) {
-        const url = `https://api.mapbox.com/v4/${TILESET_ID}/tilequery/${longitude},${latitude}.json?access_token=${MAPBOX_ACCESS_TOKEN}`;
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error('Tilequery request failed');
-            const data = await response.json();
-            const parcel = data.features.find(f => f.properties.tilequery.layer === 'parcels_0825');
-            return parcel ? parcel.properties : null;
-        } catch (error) {
-            console.error("Error fetching parcel data:", error);
-            return null;
-        }
-    }
-    
-    function findTractForPoint(latlng) {
-        let found = null;
-        geojsonLayer.eachLayer(layer => {
-            if (!found && isPointInLayer_Turf(latlng, layer)) found = layer.feature;
-        });
-        return found;
-    }
-    
-    // Added 'point' parameter
-    function displayAddressInfo(addressName, parcelProps, tractProps, point) {
-        if (window.innerWidth < 768 && !document.getElementById('map-controls-container').classList.contains('minimized')) {
-            document.getElementById('map-controls-container').classList.add('minimized');
-            if (showControlsControl) showControlsControl.getContainer().style.display = 'block';
-        }
-        const displayTitle = parcelProps?.ADDRESS ? `${parcelProps.ADDRESS}, ${parcelProps.CITY}` : addressName;
-        panelTitle.textContent = displayTitle; 
-        let html = '';
-
-        let parcelDetailsHTML = '';
-        if (parcelProps) {
-            const details = []; // This will hold the HTML for each valid detail.
-
-            // 1. Check each piece of data before adding it to the details array.
-            const useDesc = parcelProps.DESCCIUSE ? parcelProps.DESCCIUSE.split(' ').slice(1).join(' ') : formatValue(parcelProps.DESCLU);
-            if (useDesc && useDesc !== 'N/A') {
-                details.push(`<div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Land Use:</span> ${useDesc}</div>`);
-            }
-            if (parcelProps.ZONING) {
-                details.push(`<div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Zoning:</span> ${formatValue(parcelProps.ZONING)}</div>`);
-            }
-            if (parcelProps.YEARBLT) {
-                details.push(`<div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Year Built:</span> ${formatValue(parcelProps.YEARBLT)}</div>`);
-            }
-            if (parcelProps.ACRES) {
-                details.push(`<div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Acres:</span> ${formatValue(parcelProps.ACRES)}</div>`);
-            }
-            if (parcelProps.SQFTSTRC) {
-                details.push(`<div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Structure SqFt:</span> ${formatNumber(parcelProps.SQFTSTRC)}</div>`);
-            }
-            
-            // 2. Special check for Last Sale to ensure the price is greater than $0.
-            const salePrice = safeParseFloat(parcelProps.CONSIDR1);
-            if (salePrice > 0) {
-                details.push(`<div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Last Sale:</span> ${formatYmd(parcelProps.TRADATE)} for ${formatCurrency(salePrice)}</div>`);
-            }
-
-            // 3. Only build the "Parcel Details" section if we found at least one valid detail.
-            if (details.length > 0) {
-                parcelDetailsHTML = `
-                    <div>
-                        <h3 class="text-lg font-semibold text-slate-800 mb-2">Parcel Details</h3>
-                        <div class="grid grid-cols-2 gap-2 text-sm">
-                            ${details.join('')}
-                        </div>
-                    </div>`;
-            }
-        }
-
-        // If parcelDetailsHTML is still empty, it means all data was missing.
-        // Show a helpful message instead of the old yellow warning.
-        if (!parcelDetailsHTML) {
-            parcelDetailsHTML = `<p class="text-sm p-3 bg-blue-50 border-l-4 border-blue-400 text-blue-800 rounded-r-md">This is a general location. No specific parcel data is available. Search for a full address to see more details.</p>`;
-        }
-
-        if (tractProps) {
-            // --- Filter incentives for the specific address point ---
-            const location = { type: 'point', point: point, tractProps: tractProps };
-            const childcareIncentives = filterIncentives('Child Care Services', location);
-            const freshFoodIncentives = filterIncentives('Grocery Stores', location);
-
-            // --- Find overlapping incentive areas ---
-            const overlappingAreas = [];
-            // Select all checkboxes for polygon layers
-            const incentiveCheckboxes = document.querySelectorAll('input[onchange="togglePolygonLayer(this)"]');
-            incentiveCheckboxes.forEach(checkbox => {
-                const layerName = checkbox.dataset.name;
-                const layer = overlayLayers[layerName];
-                if (layer){
-                    if (isPointInLayer_Turf(point, layer)) {
-                        // Get the user-friendly name from the label next to the checkbox
-                        const label = checkbox.nextElementSibling.textContent.trim();
-                        overlappingAreas.push(label);
-                    }
-                }
-            });
-
-            // --- Generate HTML for the list of overlapping areas ---
-            let incentiveAreasHTML = '';
-            if (overlappingAreas.length > 0) {
-                incentiveAreasHTML = `
-                    <div class="mt-4">
-                        <h4 class="font-semibold text-slate-700 text-sm mb-2">Overlapping Incentive Areas</h4>
-                        <ul class="list-disc list-inside space-y-1 text-sm text-slate-700 bg-slate-50 p-3 rounded-lg">
-                            ${overlappingAreas.map(area => `<li>${area}</li>`).join('')}
-                        </ul>
-                    </div>`;
-            } else {
-                 incentiveAreasHTML = `
-                    <div class="mt-4">
-                         <p class="text-sm text-slate-600 italic">No currently visible incentive areas overlap this point. Toggle layers on to check for others.</p>
-                    </div>`;
-            }
-
-            html += `
-                <div class="mt-4">
-                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Context</h3>
-                    <div class="p-3 bg-blue-50 border-l-4 border-blue-400 rounded-r-md">
-                        <p class="text-sm text-slate-700">This address is in <strong class="font-semibold">${truncateCommunityList(tractProps.tract_name)}, ${tractProps.county_name}</strong>.</p>
-                        <button id="view-full-details-btn" class="mt-3 w-full bg-slate-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-slate-800">Explore Full Community Details</button>
-                    </div>
-                    
-                    ${incentiveAreasHTML}
-
-                    <div class="mt-2">
-                        ${createIncentiveListHTML(childcareIncentives, 'Childcare')}
-                        ${createIncentiveListHTML(freshFoodIncentives, 'Fresh Food')}
-                    </div>
-                </div>`;
-        }
-
-        panelContent.innerHTML = html;
-
-        if (tractProps) {
-            const fullTractFeature = findTractForPoint(point);
-            if (fullTractFeature) {
-                document.getElementById('view-full-details-btn').onclick = () => displayFeatureInfo(fullTractFeature);
-            }
-        }
-
-        openSidePanel();
-    }
-
-    // --- POINT IN POLYGON HELPERS ---
-    function isPointInLayer_Turf(point, layer) {
-        if (!point || !layer) return false;
-
-        const turfPoint = [point.lng, point.lat];
-        const geojson = layer.toGeoJSON();
-
-        try {
-            if (geojson.type === 'FeatureCollection') {
-                // If it's a collection, check each feature within it
-                for (const feature of geojson.features) {
-                    if (turf.booleanPointInPolygon(turfPoint, feature)) {
-                        return true; // Found a match, so we're done
-                    }
-                }
-                return false; // Checked all features, no match found
-            } else {
-                // If it's a single feature, check it directly
-                return turf.booleanPointInPolygon(turfPoint, geojson);
-            }
-        } catch (e) {
-            console.error("Turf.js failed to process a geometry.", e, geojson);
-            return false; // Prevent the app from crashing on bad data
-        }
-    }
-
-    // --- MINIMIZABLE CONTROLS LOGIC ---
-    const controlsContainer = document.getElementById('map-controls-container');
     const minimizeBtn = document.getElementById('minimize-controls-btn');
-
     const ShowControlsControl = L.Control.extend({
         onAdd: function(map) {
             const btn = L.DomUtil.create('button', 'leaflet-bar leaflet-control leaflet-control-custom bg-white p-2 rounded-lg shadow-lg');
             btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`;
             btn.title = "Show Map Controls";
             btn.style.display = 'none'; 
-
             L.DomEvent.on(btn, 'click', (e) => {
                 L.DomEvent.stop(e);
                 openControlsPanel();
@@ -1096,10 +1554,8 @@ function initializeMap(tractData) {
         },
         onRemove: function(map) {}
     });
-    
     showControlsControl = new ShowControlsControl({ position: 'topright' });
     map.addControl(showControlsControl);
-
     minimizeBtn.addEventListener('click', () => {
         controlsContainer.classList.add('minimized');
         showControlsControl.getContainer().style.display = 'block';
@@ -1108,6 +1564,9 @@ function initializeMap(tractData) {
         controlsContainer.classList.add('minimized');
         showControlsControl.getContainer().style.display = 'block';
     }
+
+    geojsonLayer = L.geoJSON(tractData, { style: style, onEachFeature: onEachFeature }).addTo(map);
+    updateMap();
 }
 
 // --- OVERLAY LAYER TOGGLE LOGIC ---
@@ -1157,11 +1616,13 @@ async function togglePointLayer(checkbox) {
             const pointStyle = { radius: 6, fillColor: isChildcare ? "#fca5a5" : "#6ee7b7", color: "#000", weight: 1, opacity: 1, fillOpacity: 0.8 };
 
             if (data.type === 'FeatureCollection' && data.features) {
-                data.features.forEach(feature => {
-                    if (feature.geometry && feature.geometry.type === 'Point') {
-                        const { properties, geometry } = feature;
-                        const marker = L.circleMarker([geometry.coordinates[1], geometry.coordinates[0]], { ...pointStyle, pane: 'clusterTopPane' });
-                        let popupContent = isChildcare ? `
+                const geojsonLayerForPoints = L.geoJSON(data, {
+                    pointToLayer: function(feature, latlng) {
+                        return L.circleMarker(latlng, {...pointStyle, pane: 'clusterTopPane'});
+                    },
+                    onEachFeature: function(feature, layer) {
+                        const { properties } = feature;
+                         let popupContent = isChildcare ? `
                                 <div class="font-bold text-base">${properties.gen_listing_name_original_text || 'N/A'}</div>
                                 <div><strong>Capacity (Under 6):</strong> ${properties.licensed_capacity_under6 || 'N/A'}</div>
                             ` : `
@@ -1169,10 +1630,10 @@ async function togglePointLayer(checkbox) {
                                 <div><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
                                 <div><strong>Quality:</strong> ${properties.quality || 'N/A'}</div>
                             `;
-                        marker.bindPopup(popupContent);
-                        markers.addLayer(marker);
+                        layer.bindPopup(popupContent);
                     }
                 });
+                markers.addLayer(geojsonLayerForPoints);
             }
             overlayLayers[layerName] = markers;
             map.addLayer(markers);
@@ -1194,17 +1655,12 @@ async function preloadPolygonLayers() {
     const loadingPromises = Array.from(incentiveCheckboxes).map(async (checkbox) => {
         const layerName = checkbox.dataset.name;
         const url = checkbox.dataset.url;
-        
-        // Skip if already loaded for some reason
         if (overlayLayers[layerName]) return;
-
         try {
             const response = await fetch(url);
             if (!response.ok) throw new Error(`Failed to pre-load ${url}`);
             const data = await response.json();
             const style = incentiveStyles[layerName] || { color: '#000000', weight: 2 };
-            
-            // Create the layer and store it, but DO NOT add it to the map
             const layer = L.geoJSON(data, { style: {...style, pane: 'incentivePane' }, interactive: false });
             overlayLayers[layerName] = layer;
         } catch (error) {
