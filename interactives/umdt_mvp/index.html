@@ -286,12 +286,12 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center">
-                        <a href="/" class="font-bold text-lg text-slate-800">Maryland Community Business Compass</a>
+                        <a href="./" class="font-bold text-lg text-slate-800">Maryland Community Business Compass</a>
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="/" class="bg-slate-100 text-slate-800 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Explore Communities</a>
-                            <a href="/incentives/" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 px-3 py-2 rounded-md text-sm font-medium">Find Incentives</a>
+                            <a href="./" class="bg-slate-100 text-slate-800 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Explore Communities</a>
+                            <a href="incentives/" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 px-3 py-2 rounded-md text-sm font-medium">Find Incentives</a>
                         </div>
                     </div>
                     <div class="-mr-2 flex md:hidden">
@@ -306,7 +306,7 @@
             <div class="md:hidden hidden" id="mobile-menu">
                 <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                     <a href="/" class="bg-slate-100 text-slate-800 block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Explore Communities</a>
-                    <a href="/incentives/" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 block px-3 py-2 rounded-md text-base font-medium">Find Incentives</a>
+                    <a href="incentives/" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 block px-3 py-2 rounded-md text-base font-medium">Find Incentives</a>
                 </div>
             </div>
         </nav>
@@ -670,7 +670,7 @@ function createIncentiveListHTML(incentives, type) {
                 ${incentives.map(inc => `
                     <div class="text-sm border-t pt-2">
                         <p class="font-bold text-slate-800">
-                            <a href="/incentives/#/incentive/${slugify(inc.program_name)}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">${inc.program_name}</a> 
+                            <a href="incentives/#/incentive/${slugify(inc.program_name)}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">${inc.program_name}</a> 
                             <span class="text-xs font-medium bg-slate-200 text-slate-700 py-0.5 px-1.5 rounded-full ml-1">${inc.source}</span>
                         </p>
                         <p class="text-slate-600 mt-1">${inc.program_description}</p>
