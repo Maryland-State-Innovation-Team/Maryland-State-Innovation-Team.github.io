@@ -75,12 +75,12 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center">
-                        <a href="/" class="font-bold text-lg text-slate-800">Maryland Community Business Compass</a>
+                        <a href="../" class="font-bold text-lg text-slate-800">Maryland Community Business Compass</a>
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="/" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 px-3 py-2 rounded-md text-sm font-medium">Explore Communities</a>
-                            <a href="/incentives/" class="bg-slate-100 text-slate-800 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Find Incentives</a>
+                            <a href="../" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 px-3 py-2 rounded-md text-sm font-medium">Explore Communities</a>
+                            <a href="incentives/" class="bg-slate-100 text-slate-800 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Find Incentives</a>
                         </div>
                     </div>
                     <div class="-mr-2 flex md:hidden">
@@ -261,8 +261,8 @@
                 renderFilterUI();
                 try {
                     const [localRes, stateRes] = await Promise.all([
-                        fetch('/incentives/local_incentives_structured.json'),
-                        fetch('/incentives/state_incentives_structured.json')
+                        fetch('local_incentives_structured.json'),
+                        fetch('state_incentives_structured.json')
                     ]);
                     if (!localRes.ok || !stateRes.ok) throw new Error("Network response was not ok.");
 
