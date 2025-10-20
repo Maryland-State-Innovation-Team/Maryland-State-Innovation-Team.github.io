@@ -258,11 +258,10 @@
             /* The top-center selectors have z-index 1001. This ensures the panel is on top. */
             z-index: 1003; 
         }
-        .leaflet-control-container {
-            /* Set positioning to enable z-index */
-            position: relative;
-            /* This parent of all map controls now lives in the same context as the selectors (z-1001).
-            This ensures the geocoder, layer button, and zoom controls appear on top. */
+        .leaflet-top.leaflet-right {
+            /* This container is already position:absolute by default.
+            This z-index lifts it and everything inside it (the geocoder)
+            above the selectors (z-1001) without affecting other controls. */
             z-index: 1002;
         }
     </style>
