@@ -252,6 +252,19 @@
         .accordion-arrow {
             transition: transform 0.3s ease;
         }
+
+        /* --- Fix for Mobile Control Overlap --- */
+        #map-controls-container {
+            /* The top-center selectors have z-index 1001. This ensures the panel is on top. */
+            z-index: 1003; 
+        }
+        .leaflet-control-container {
+            /* Set positioning to enable z-index */
+            position: relative;
+            /* This parent of all map controls now lives in the same context as the selectors (z-1001).
+            This ensures the geocoder, layer button, and zoom controls appear on top. */
+            z-index: 1002;
+        }
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800">
@@ -312,23 +325,22 @@
         </nav>
         
         <div class="relative flex-grow">
-            <div id="map" class="h-full w-full z-0"></div>
-            
-             <div class="absolute top-4 left-1/2 -translate-x-1/2 z-[1001] bg-white p-2 rounded-lg shadow-lg flex items-center space-x-4">
-                 <div>
-                    <label for="map-mode-select" class="block text-xs font-medium text-slate-500">Map Mode</label>
-                    <select id="map-mode-select" class="p-1 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-sm font-semibold">
-                        <option value="smartResearch" selected>Smart Research</option>
-                        <option value="freeExplore">Free Explore</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="sector-select" class="block text-xs font-medium text-slate-500">My Sector</label>
-                    <select id="sector-select" class="p-1 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-sm font-semibold">
-                        <option value="childcare">Childcare</option>
-                        <option value="fresh-food">Fresh Food</option>
-                        <option value="other">Other / Not Sure</option>
-                    </select>
+            <div id="map" class="h-full w-full z-0">
+                <div class="absolute top-4 left-4 md:left-1/2 md:-translate-x-1/2 z-[1001] bg-white p-2 rounded-lg shadow-lg flex items-center space-x-4">                    <div>
+                        <label for="map-mode-select" class="block text-xs font-medium text-slate-500">Map Mode</label>
+                        <select id="map-mode-select" class="p-1 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-sm font-semibold">
+                            <option value="smartResearch" selected>Smart Research</option>
+                            <option value="freeExplore">Free Explore</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="sector-select" class="block text-xs font-medium text-slate-500">My Sector</label>
+                        <select id="sector-select" class="p-1 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-sm font-semibold">
+                            <option value="childcare">Childcare</option>
+                            <option value="fresh-food">Fresh Food</option>
+                            <option value="other">Other / Not Sure</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -1365,10 +1377,6 @@ function setupTopControls() {
 
     modeSelect.value = currentMapMode;
     sectorSelect.value = selectedSector;
-    
-    if (currentMapMode === 'smartResearch') {
-        mapControlsContainer.style.display = 'none';
-    }
 
     modeSelect.addEventListener('change', (e) => {
         sidePanel.classList.remove('show');
@@ -1377,11 +1385,12 @@ function setupTopControls() {
         if (lastClickedLayer) geojsonLayer.resetStyle(lastClickedLayer);
 
         currentMapMode = e.target.value;
-        if (currentMapMode === 'smartResearch') {
-            mapControlsContainer.style.display = 'none';
-             if (showControlsControl) showControlsControl.getContainer().style.display = 'none';
-        } else {
-            mapControlsContainer.style.display = 'flex';
+        // Ensure the control container is always visible, regardless of mode.
+        mapControlsContainer.style.display = 'flex';
+
+        // If switching to Free Explore, explicitly open the controls panel.
+        // Otherwise, leave it in its current state (minimized or open).
+        if (currentMapMode === 'freeExplore') {
             openControlsPanel();
         }
     });
