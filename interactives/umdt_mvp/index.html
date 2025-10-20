@@ -269,10 +269,25 @@
 </head>
 <body class="bg-slate-100 text-slate-800">
 
+    <body class="bg-slate-100 text-slate-800">
+
+    <div id="tour-overlay" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 z-[30000] flex items-center justify-center p-4">
+        <div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full text-center">
+            <h2 class="text-2xl font-bold text-slate-800 mb-3">Welcome! 👋</h2>
+            <p class="text-slate-600">
+                We recommend getting started in the currently selected '<strong>Smart Research</strong>' mode. Once you're familiar with the data, check out '<strong>Free Explore</strong>'.
+            </p>
+            <p class="mt-4 text-slate-600">
+                To get started, <strong>click anywhere in Maryland</strong> to answer your <strong id="tour-sector-name"></strong> business questions, or use the <svg xmlns="http://www.w3.org/2000/svg" class="inline h-5 w-5 -mt-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg> icon in the top right to search for a specific address.
+            </p>
+            <button id="close-tour-btn" class="mt-6 w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition">Got It!</button>
+        </div>
+    </div>
     <div id="loading-overlay">
         <div class="spinner"></div>
         <p class="text-lg">Loading Community Data...</p>
     </div>
+    
 
     <div id="sector-modal-overlay" class="hidden">
         <div id="sector-modal-content" class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-md text-center">
@@ -412,6 +427,7 @@ let currentMapMode = 'smartResearch';
 let selectedSector = 'other';
 let choroplethSelect, controlsContainer, sidePanel, panelContent, panelTitle;
 let currentPanelContext = { type: null, data: null };
+let isFirstTimeUser = false;
 
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYW1pbGxlci1tZGdvdiIsImEiOiJjbWc1ZW1hcm8wMWZ0MmtweWZtcmVxeTBtIn0.JS4bkhCiIv6oB_0WEQRpwg';
 const TILESET_ID = 'amiller-mdgov.parcels-tileset';
@@ -1271,6 +1287,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupModalAndState();
     setupNavbar();
     setupTopControls();
+    setupTour();
     
     const loadingOverlay = document.getElementById('loading-overlay'); 
 
@@ -1332,6 +1349,32 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // --- SETUP FUNCTIONS ---
+function setupTour() {
+    const tourOverlay = document.getElementById('tour-overlay');
+    const closeTourBtn = document.getElementById('close-tour-btn');
+
+    if (tourOverlay && closeTourBtn) {
+        closeTourBtn.addEventListener('click', () => {
+            tourOverlay.classList.add('hidden');
+        });
+    }
+}
+
+function showTour(sector) {
+    const tourOverlay = document.getElementById('tour-overlay');
+    const sectorNameSpan = document.getElementById('tour-sector-name');
+
+    let sectorDisplayName = 'business'; // default
+    if (sector === 'childcare') {
+        sectorDisplayName = 'childcare';
+    } else if (sector === 'fresh-food') {
+        sectorDisplayName = 'fresh food';
+    }
+
+    sectorNameSpan.textContent = sectorDisplayName;
+    tourOverlay.classList.remove('hidden');
+}
+
 function setupNavbar() {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -1350,6 +1393,7 @@ function setupModalAndState() {
     if (storedSector) {
         selectedSector = storedSector;
     } else {
+        isFirstTimeUser = true;
         modalOverlay.classList.remove('hidden');
     }
 
@@ -1368,6 +1412,11 @@ function handleSectorSelection(sector) {
     document.getElementById('sector-modal-overlay').classList.add('hidden');
     document.getElementById('sector-select').value = sector;
     updateChoroplethOptions(sector);
+
+    if (isFirstTimeUser) {
+        showTour(sector);
+        isFirstTimeUser = false; // Prevent tour from showing again this session
+    }
 }
 
 function setupTopControls() {
