@@ -332,7 +332,7 @@
             </div>
             <div class="md:hidden hidden" id="mobile-menu">
                 <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    <a href="/" class="bg-slate-100 text-slate-800 block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Explore Communities</a>
+                    <a href="./" class="bg-slate-100 text-slate-800 block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Explore Communities</a>
                     <a href="incentives/" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 block px-3 py-2 rounded-md text-base font-medium">Find Incentives</a>
                 </div>
             </div>
@@ -635,33 +635,38 @@ function clearProviderLayers() {
 
 function filterIncentives(industry, location) {
     if (!location || !allIncentives) return [];
-    const county = location.type === 'tract' ? location.feature.properties.county_name : location.tractProps.county_name;
+    const county = (location.type === 'tract' ? location.feature.properties.county_name : location.tractProps.county_name).replace(' County', '').trim();
     const reverseIncentiveMap = Object.fromEntries(Object.entries(INCENTIVE_AREA_MAP).map(([key, value]) => [value, key]));
 
-    return allIncentives.filter(inc => {
+    // Use .map and .filter to return a modified list of incentives
+    return allIncentives.map(inc => {
         const eligibleOrganizationTypes = inc.eligible_organization_types || [];
-        if (!eligibleOrganizationTypes.includes('for-profit')) return false;
+        if (!eligibleOrganizationTypes.includes('for-profit')) return null;
 
         const eligibleIndustries = inc.list_of_eligible_industries || [];
         const prioritizedIndustries = inc.list_of_prioritized_industries || [];
         const industryMatch = eligibleIndustries.includes(industry) || prioritizedIndustries.includes(industry);
-        if (!industryMatch) return false;
+        if (!industryMatch) return null;
 
         const eligibleCounties = inc.list_of_eligible_counties || [];
         const prioritizedCounties = inc.list_of_prioritized_counties || [];
         const countyMatch = eligibleCounties.includes('All') || eligibleCounties.includes(county) || prioritizedCounties.includes('All') || prioritizedCounties.includes(county);
 
         const incentiveAreas = inc.list_of_incentive_areas || [];
-        let incentiveAreaMatch = false;
+        let matchingIncentiveAreas = []; // <-- Capture all matching areas
+
         if (incentiveAreas.length > 0) {
             const OVERLAP_THRESHOLD_PERCENT = 10;
             if (location.type === 'tract') {
                 const tractFeature = location.feature;
                 const tractArea = turf.area(tractFeature);
-                incentiveAreaMatch = incentiveAreas.some(humanName => {
+                
+                // Filter to find all areas that meet the criteria, not just the first one
+                matchingIncentiveAreas = incentiveAreas.filter(humanName => {
                     const layerName = reverseIncentiveMap[humanName];
                     const incentiveLayer = overlayLayers[layerName];
                     if (!incentiveLayer || tractArea === 0) return false;
+                    
                     let totalIntersectionArea = 0;
                     const incentiveGeoJSON = incentiveLayer.toGeoJSON();
                     if (incentiveGeoJSON?.type === 'FeatureCollection' && incentiveGeoJSON.features) {
@@ -675,35 +680,55 @@ function filterIncentives(industry, location) {
                     return totalIntersectionArea > 0 && (totalIntersectionArea / tractArea) * 100 >= OVERLAP_THRESHOLD_PERCENT;
                 });
             } else if (location.type === 'point') {
-                incentiveAreaMatch = incentiveAreas.some(humanName => {
+                matchingIncentiveAreas = incentiveAreas.filter(humanName => {
                     const layerName = reverseIncentiveMap[humanName];
                     const layer = overlayLayers[layerName];
                     return layer && isPointInLayer_Turf(location.point, layer);
                 });
             }
         }
-        return countyMatch || incentiveAreaMatch;
-    });
+        
+        // Only return the incentive if it matches by county OR has matching incentive areas
+        if (countyMatch || matchingIncentiveAreas.length > 0) {
+            // Return a copy of the incentive with the matching areas attached
+            return { ...inc, matchingIncentiveAreas };
+        }
+
+        return null;
+    }).filter(Boolean); // Filter out the null values
 }
 
-function createIncentiveListHTML(incentives, type) {
+function createIncentiveListHTML(incentives, type, industry, county) {
     if (!incentives || incentives.length === 0) {
         return `<p class="text-sm text-slate-600 mt-2">No specific ${type.toLowerCase()} incentives found for this area.</p>`;
     }
+
     return `
         <details class="bg-slate-50 p-3 rounded-lg mt-2" style="margin-top:0.5rem;">
             <summary class="font-semibold text-slate-600 mb-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">Relevant ${type} Incentives (${incentives.length})</summary>
             <div class="space-y-3 mt-2">
-                ${incentives.map(inc => `
-                    <div class="text-sm border-t pt-2">
-                        <p class="font-bold text-slate-800">
-                            <a href="incentives/#/incentive/${slugify(inc.program_name)}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">${inc.program_name}</a> 
-                            <span class="text-xs font-medium bg-slate-200 text-slate-700 py-0.5 px-1.5 rounded-full ml-1">${inc.source}</span>
-                        </p>
-                        <p class="text-slate-600 mt-1">${inc.program_description}</p>
-                        ${inc.assistance_type ? `<p class="mt-1"><strong class="font-medium text-slate-700">Assistance Type:</strong> ${inc.assistance_type.join(', ')}</p>` : ''}
-                    </div>
-                `).join('')}
+                ${incentives.map(inc => {
+                    const params = new URLSearchParams();
+                    // Use the full 'industry' and 'county' for the URL params
+                    params.set('industries', industry); 
+                    params.set('counties', county);
+                    
+                    if (inc.matchingIncentiveAreas && inc.matchingIncentiveAreas.length > 0) {
+                        params.set('incentiveAreas', inc.matchingIncentiveAreas.join(','));
+                    }
+                    const queryString = params.toString();
+
+                    return `
+                        <div class="text-sm border-t pt-2">
+                            <p class="font-bold text-slate-800">
+                                <a href="incentives/?${queryString}#/incentive/${slugify(inc.program_name)}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">${inc.program_name}</a> 
+                                <span class="text-xs font-medium bg-slate-200 text-slate-700 py-0.5 px-1.5 rounded-full ml-1">${inc.source}</span>
+                            </p>
+                            <p class="text-slate-600 mt-1">${inc.program_description}</p>
+                            ${inc.assistance_type ? `<p class="mt-1"><strong class="font-medium text-slate-700">Assistance Type:</strong> ${inc.assistance_type.join(', ')}</p>` : ''}
+                        </div>
+                    `;
+                }).join('')}
             </div>
         </details>`;
 }
@@ -737,6 +762,7 @@ function displayFeatureInfo(tractFeature) {
     }
     
     const location = { type: 'tract', feature: tractFeature };
+    const county = location.feature.properties.county_name.replace(' County', '').trim();
     const childcareIncentives = filterIncentives('Child Care Services', location);
     const freshFoodIncentives = filterIncentives('Grocery Stores', location);
 
@@ -828,7 +854,7 @@ function displayFeatureInfo(tractFeature) {
                 </div>
                 ${createList(properties.childcare_need_quotes, 'Community Voices on Need')}
                 ${createList(properties.childcare_planning_quotes, 'Community Voices on Planning')}
-                ${createIncentiveListHTML(childcareIncentives, 'Childcare')}
+                ${createIncentiveListHTML(childcareIncentives, 'Childcare', 'Child Care Services', county)}
             </div>
             ` : ''}
 
@@ -853,7 +879,7 @@ function displayFeatureInfo(tractFeature) {
                 </div>
                 ${createList(properties.fresh_food_need_quotes, 'Community Voices on Need')}
                 ${createList(properties.fresh_food_planning_quotes, 'Community Voices on Planning')}
-                ${createIncentiveListHTML(freshFoodIncentives, 'Fresh Food')}
+                ${createIncentiveListHTML(freshFoodIncentives, 'Fresh Food', 'Grocery Stores', county)}
             </div>
             ` : ''}
         </div>
@@ -991,9 +1017,11 @@ function displaySmartResearchForTract(tractFeature) {
     const incentivesContent = document.getElementById('incentives-content');
     if (incentivesContent) {
         const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
+        const county = context.location.feature.properties.county_name.replace(' County', '').trim();
         if (industry) {
             const relevantIncentives = filterIncentives(industry, context.location);
-            incentivesContent.innerHTML = createIncentiveListHTML(relevantIncentives, industry.replace(' Services', ''));
+            const displayType = industry === 'Child Care Services' ? 'Childcare' : 'Fresh Food';
+            incentivesContent.innerHTML = createIncentiveListHTML(relevantIncentives, displayType, industry, county);
         } else {
              incentivesContent.innerHTML = `<p class="text-sm text-slate-600">Select a 'Childcare' or 'Fresh Food' sector to see relevant incentives.</p>`;
         }
@@ -1069,9 +1097,11 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
     const incentivesContent = document.getElementById('incentives-content');
     if (incentivesContent) {
         const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
+        const county = context.location.tractProps.county_name.replace(' County', '').trim();
         if (industry) {
             const relevantIncentives = filterIncentives(industry, context.location);
-            incentivesContent.innerHTML = createIncentiveListHTML(relevantIncentives, industry.replace(' Services', ''));
+            const displayType = industry === 'Child Care Services' ? 'Childcare' : 'Fresh Food';
+            incentivesContent.innerHTML = createIncentiveListHTML(relevantIncentives, displayType, industry, county);
         } else {
             incentivesContent.innerHTML = `<p class="text-sm text-slate-600">Select a 'Childcare' or 'Fresh Food' sector to see relevant incentives.</p>`;
         }
@@ -1205,6 +1235,7 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
 
     if (tractProps) {
         const location = { type: 'point', point: point, tractProps: tractProps };
+        const county = location.tractProps.county_name.replace(' County', '').trim();
         const childcareIncentives = filterIncentives('Child Care Services', location);
         const freshFoodIncentives = filterIncentives('Grocery Stores', location);
 
@@ -1244,8 +1275,11 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
                 </div>
                 ${incentiveAreasHTML}
                 <div class="mt-2">
-                    ${createIncentiveListHTML(childcareIncentives, 'Childcare')}
-                    ${createIncentiveListHTML(freshFoodIncentives, 'Fresh Food')}
+                    ${selectedSector === 'childcare'
+                        ? createIncentiveListHTML(childcareIncentives, 'Childcare', 'Child Care Services', county)
+                        : selectedSector === 'fresh-food'
+                            ? createIncentiveListHTML(freshFoodIncentives, 'Fresh Food', 'Grocery Stores', county)
+                            : `<p class="text-sm text-slate-600">Select a 'Childcare' or 'Fresh Food' sector to see relevant incentives.</p>`}
                 </div>
             </div>`;
     }
