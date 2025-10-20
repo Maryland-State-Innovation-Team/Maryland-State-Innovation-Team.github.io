@@ -80,7 +80,7 @@
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
                             <a href="../" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 px-3 py-2 rounded-md text-sm font-medium">Explore Communities</a>
-                            <a href="incentives/" class="bg-slate-100 text-slate-800 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Find Incentives</a>
+                            <a href="../incentives/" class="bg-slate-100 text-slate-800 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Find Incentives</a>
                         </div>
                     </div>
                     <div class="-mr-2 flex md:hidden">
@@ -94,8 +94,8 @@
             </div>
             <div class="md:hidden hidden" id="mobile-menu">
                 <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    <a href="#" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 block px-3 py-2 rounded-md text-base font-medium">Explore Communities</a>
-                    <a href="#" class="bg-slate-100 text-slate-800 block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Find Incentives</a>
+                    <a href="../" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 block px-3 py-2 rounded-md text-base font-medium">Explore Communities</a>
+                    <a href="../incentives/" class="bg-slate-100 text-slate-800 block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Find Incentives</a>
                 </div>
             </div>
         </nav>
@@ -259,6 +259,8 @@
             // --- DATA FETCHING & INITIALIZATION ---
             async function initializeApp() {
                 renderFilterUI();
+                applyFiltersFromUrl(); // Read URL params on initial load
+                updateCheckboxesFromState(); // Sync checkboxes with state read from URL
                 try {
                     const [localRes, stateRes] = await Promise.all([
                         fetch('local_incentives_structured.json'),
@@ -279,6 +281,66 @@
                     tableBody.innerHTML = `<tr><td colspan="4" class="text-center p-8 text-red-600">Error loading data. Please check the console and ensure JSON files are in the correct location.</td></tr>`;
                     resultsCount.textContent = '0 results';
                 }
+            }
+
+            // --- URL & STATE SYNC FUNCTIONS ---
+            /**
+             * Updates the URL's query string based on the current activeFilters object.
+             * Uses replaceState to avoid creating new browser history entries for each filter change.
+             */
+            function updateUrlWithFilters() {
+                const params = new URLSearchParams();
+                if (activeFilters.searchTerm) {
+                    params.set('searchTerm', activeFilters.searchTerm);
+                }
+                for (const key in filterConfig) {
+                    if (activeFilters[key] && activeFilters[key].size > 0) {
+                        params.set(key, Array.from(activeFilters[key]).join(','));
+                    }
+                }
+                const queryString = params.toString();
+                const newPath = queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname;
+
+                // Only update if the path and query (pre-hash) have changed
+                if (newPath !== `${window.location.pathname}${window.location.search}`) {
+                    history.replaceState(null, '', `${newPath}${window.location.hash}`);
+                }
+            }
+
+            /**
+             * Reads filter values from the URL's query string on page load
+             * and populates the activeFilters state object.
+             */
+            function applyFiltersFromUrl() {
+                const params = new URLSearchParams(window.location.search);
+                if (params.has('searchTerm')) {
+                    const term = params.get('searchTerm');
+                    activeFilters.searchTerm = term;
+                    searchInput.value = term;
+                }
+                for (const key in filterConfig) {
+                    if (params.has(key)) {
+                        const values = params.get(key).split(',');
+                        values.forEach(value => {
+                            if (value) activeFilters[key].add(decodeURIComponent(value));
+                        });
+                    }
+                }
+            }
+
+            /**
+             * Syncs the state of the UI checkboxes to match the activeFilters object.
+             * This is called after reading filters from the URL.
+             */
+            function updateCheckboxesFromState() {
+                document.querySelectorAll('#filters-sidebar input[type="checkbox"]').forEach(cb => {
+                    const { filterKey } = cb.dataset;
+                    if (activeFilters[filterKey] && activeFilters[filterKey].has(cb.value)) {
+                        cb.checked = true;
+                    } else {
+                        cb.checked = false;
+                    }
+                });
             }
 
             // --- ROUTING & VIEW MANAGEMENT ---
@@ -480,6 +542,7 @@
                 resultsCount.textContent = `${displayedIncentives.length} results`;
                 renderTable(displayedIncentives);
                 renderActiveFilterTags();
+                updateUrlWithFilters(); // Sync URL with state after applying filters
             }
 
             // --- EVENT HANDLERS ---
