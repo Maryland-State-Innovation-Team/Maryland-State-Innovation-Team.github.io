@@ -712,10 +712,7 @@ function createIncentiveListHTML(incentives, type, industry, county) {
                     // Use the full 'industry' and 'county' for the URL params
                     params.set('industries', industry); 
                     params.set('counties', county);
-                    
-                    if (inc.matchingIncentiveAreas && inc.matchingIncentiveAreas.length > 0) {
-                        params.set('incentiveAreas', inc.matchingIncentiveAreas.join(','));
-                    }
+
                     const queryString = params.toString();
 
                     return `
