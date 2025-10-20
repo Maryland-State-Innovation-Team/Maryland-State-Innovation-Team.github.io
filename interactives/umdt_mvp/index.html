@@ -262,7 +262,7 @@
             /* This container is already position:absolute by default.
             This z-index lifts it and everything inside it (the geocoder)
             above the selectors (z-1001) without affecting other controls. */
-            z-index: 1002;
+            z-index: 1003;
         }
     </style>
 </head>
@@ -1386,7 +1386,8 @@ function setupNavbar() {
 }
 
 function setupModalAndState() {
-    const storedSector = localStorage.getItem('selectedSector');
+    // const storedSector = localStorage.getItem('selectedSector');
+    const storedSector = null; // TODO: Temporary, remove for production;
     const modalOverlay = document.getElementById('sector-modal-overlay');
 
     if (storedSector) {
@@ -1433,13 +1434,15 @@ function setupTopControls() {
         if (lastClickedLayer) geojsonLayer.resetStyle(lastClickedLayer);
 
         currentMapMode = e.target.value;
-        // Ensure the control container is always visible, regardless of mode.
-        mapControlsContainer.style.display = 'flex';
-
-        // If switching to Free Explore, explicitly open the controls panel.
-        // Otherwise, leave it in its current state (minimized or open).
         if (currentMapMode === 'freeExplore') {
+            // When switching to Free Explore, open the controls panel.
             openControlsPanel();
+        } else {
+            // When switching back to Smart Research, minimize the controls.
+            controlsContainer.classList.add('minimized');
+            if (showControlsControl) {
+                showControlsControl.getContainer().style.display = 'block';
+            }
         }
     });
 
@@ -1486,15 +1489,11 @@ function updateChoroplethOptions(sector) {
         }
     });
     
-    if (select.querySelector(`option[value="${currentVal}"]`)) {
-        select.value = currentVal;
-    } else {
-        select.value = {
-            'childcare': 'childcare_unmet_demand',
-            'fresh-food': 'grocery_unmet_demand',
-            'other': 'community_momentum_index'
-        }[sector] || firstOption;
-    }
+    select.value = {
+        'childcare': 'childcare_unmet_demand',
+        'fresh-food': 'grocery_unmet_demand',
+        'other': 'community_momentum_index'
+    }[sector] || firstOption;
     
     if (map && geojsonLayer) {
         updateMap();
