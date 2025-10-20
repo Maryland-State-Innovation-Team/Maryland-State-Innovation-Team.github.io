@@ -712,6 +712,8 @@ function createIncentiveListHTML(incentives, type, industry, county) {
                     // Use the full 'industry' and 'county' for the URL params
                     params.set('industries', industry); 
                     params.set('counties', county);
+                    // Filter for-profit
+                    params.set('orgTypes', 'for-profit');
 
                     const queryString = params.toString();
 
