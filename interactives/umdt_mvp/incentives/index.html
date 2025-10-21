@@ -71,7 +71,7 @@
 <body>
 
     <div id="app" class="min-h-screen flex flex-col">
-        <nav class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="bg-white shadow-md sticky top-0 z-50" aria-label="Main">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center">
@@ -106,12 +106,12 @@
                     <h1 class="text-3xl font-bold mb-8 text-slate-900">Find State & Local Funding</h1>
                     
                     <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                        <aside id="filters-sidebar" class="lg:col-span-1">
+                        <aside id="filters-sidebar" aria-label="Incentive Filters" class="lg:col-span-1">
                             <div class="bg-white p-4 rounded-lg shadow-sm sticky top-24">
                                 </div>
                         </aside>
 
-                        <main class="lg:col-span-3">
+                        <div class="lg:col-span-3">
                             <div class="relative">
                                 <input type="text" id="search-input" placeholder="Search by keyword, program name, or agency..." class="w-full p-3 pl-10 text-sm text-slate-900 border border-slate-300 rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-slate-500 focus:border-slate-500">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-500">
@@ -138,7 +138,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </main>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -156,17 +156,17 @@
                             </div>
                             <div class="bg-white p-6 rounded-lg border border-slate-200 space-y-4">
                                 <div id="detail-agency-box">
-                                    <h3 class="text-sm font-medium text-slate-500">Agency</h3>
+                                    <h2 class="text-sm font-medium text-slate-500">Agency</h3>
                                     <p id="detail-agency" class="font-semibold text-slate-800"></p>
                                 </div>
                                 <hr>
                                 <div id="detail-geo-box">
-                                    <h3 class="text-sm font-medium text-slate-500">Geographic Area</h3>
+                                    <h2 class="text-sm font-medium text-slate-500">Geographic Area</h3>
                                     <p id="detail-geo" class="font-semibold text-slate-800"></p>
                                 </div>
                                 <hr>
                                 <div id="detail-org-box">
-                                    <h3 class="text-sm font-medium text-slate-500">Eligible Organization Type</h3>
+                                    <h2 class="text-sm font-medium text-slate-500">Eligible Organization Type</h3>
                                     <p id="detail-org" class="font-semibold text-slate-800 capitalize"></p>
                                 </div>
                             </div>
@@ -176,17 +176,17 @@
                  <div class="bg-white">
                     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
                         <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
-                            <aside class="lg:col-span-1">
+                            <aside class="lg:col-span-1" aria-label="Page Contents">
                                 <div id="detail-contents-nav-container" class="sticky top-24">
                                     <h2 class="font-semibold text-lg text-slate-800">Contents</h2>
-                                    <nav class="mt-4">
+                                    <nav class="mt-4" aria-label="Detail Contents">
                                         <ul id="detail-contents-nav" class="space-y-3">
                                             </ul>
                                     </nav>
                                 </div>
                             </aside>
-                            <main id="detail-main-content" class="lg:col-span-3 prose-slate max-w-none">
-                                </main>
+                            <div  id="detail-main-content" class="lg:col-span-3 prose-slate max-w-none">
+                            </div >
                         </div>
                     </div>
                 </div>
