@@ -663,6 +663,10 @@ function filterIncentives(industry, location) {
     return allIncentives.map(inc => {
         const eligibleOrganizationTypes = inc.eligible_organization_types || [];
         if (!eligibleOrganizationTypes.includes('for-profit')) return null;
+        const assistanceTypes = inc.assistance_type || [];
+        if (assistanceTypes.length == 1 && assistanceTypes.includes('support')) {
+            return null;
+        }
 
         const eligibleIndustries = inc.list_of_eligible_industries || [];
         const prioritizedIndustries = inc.list_of_prioritized_industries || [];

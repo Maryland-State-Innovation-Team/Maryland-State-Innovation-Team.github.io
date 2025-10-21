@@ -273,6 +273,11 @@
                     
                     allIncentives = [...localData, ...stateData]
                         .filter(item => item.structured_extraction && item.structured_extraction.program_name)
+                        // Filter out incentives where the only assistance_type is 'support'
+                        .filter(item => {
+                            const types = item.structured_extraction.assistance_type;
+                            return !(Array.isArray(types) && types.length === 1 && types[0] === 'support');
+                        })
                         .map(item => ({ ...item, slug: slugify(item.structured_extraction.program_name) }));
                     
                     handleRouting();
