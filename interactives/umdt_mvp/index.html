@@ -427,6 +427,7 @@ let selectedSector = 'other';
 let choroplethSelect, controlsContainer, sidePanel, panelContent, panelTitle;
 let currentPanelContext = { type: null, data: null };
 let isFirstTimeUser = false;
+let choroplethBreaks;
 
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYW1pbGxlci1tZGdvdiIsImEiOiJjbWc1ZW1hcm8wMWZ0MmtweWZtcmVxeTBtIn0.JS4bkhCiIv6oB_0WEQRpwg';
 const TILESET_ID = 'amiller-mdgov.parcels-tileset';
@@ -549,23 +550,27 @@ function getDivergingBreaks(values) {
 }
 
 function getColor(d, breaks, colors) {
-    if (colors.length === 6) { // Diverging
-        return d > breaks[4] ? colors[5] : d > breaks[3] ? colors[4] : d > breaks[2] ? colors[3] : d > breaks[1] ? colors[2] : d > breaks[0] ? colors[1] : colors[0];
-    } else { // Sequential
-        return d > breaks[3] ? colors[4] : d > breaks[2] ? colors[3] : d > breaks[1] ? colors[2] : d > breaks[0] ? colors[1] : colors[0];
+    if (d > breaks[breaks.length - 1]) return colors[colors.length - 1];
+    for (let i = 0; i < breaks.length; i++) {
+        if (d <= breaks[i]) return colors[i];
     }
+    return colors[0]; // Fallback for values below the first break
 }
 
 function style(feature) {
     let currentVariable = choroplethSelect.value;
     const isDiverging = isDivergingVariable(currentVariable);
-    const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable])).filter(v => v !== null);
-    if (values.length === 0) {
+    
+    const breaks = choroplethBreaks[currentVariable];
+    
+    if (!breaks || breaks.length === 0) {
+        // If no breaks are available for this variable, return a default style
         return { fillColor: '#636363', weight: 0, color: 'white', fillOpacity: 0.7, pane: 'tractPane' };
     }
+
     const colors = isDiverging ? divergingColors : sequentialColors;
-    const breaks = isDiverging ? getDivergingBreaks(values) : getQuantiles(values, colors.length);
     const value = safeParseFloat(feature.properties[currentVariable]);
+
     return {
         fillColor: (value === null) ? '#636363' : getColor(value, breaks, colors),
         weight: 0, opacity: 1, color: 'white', fillOpacity: 0.7, pane: 'tractPane'
@@ -656,30 +661,17 @@ function filterIncentives(industry, location) {
         let matchingIncentiveAreas = []; // <-- Capture all matching areas
 
         if (incentiveAreas.length > 0) {
-            const OVERLAP_THRESHOLD_PERCENT = 10;
             if (location.type === 'tract') {
                 const tractFeature = location.feature;
-                const tractArea = turf.area(tractFeature);
-                
-                // Filter to find all areas that meet the criteria, not just the first one
-                matchingIncentiveAreas = incentiveAreas.filter(humanName => {
-                    const layerName = reverseIncentiveMap[humanName];
-                    const incentiveLayer = overlayLayers[layerName];
-                    if (!incentiveLayer || tractArea === 0) return false;
-                    
-                    let totalIntersectionArea = 0;
-                    const incentiveGeoJSON = incentiveLayer.toGeoJSON();
-                    if (incentiveGeoJSON?.type === 'FeatureCollection' && incentiveGeoJSON.features) {
-                        for (const incentiveFeature of incentiveGeoJSON.features) {
-                            try {
-                                const intersection = turf.intersect(tractFeature, incentiveFeature);
-                                if (intersection) totalIntersectionArea += turf.area(intersection);
-                            } catch (e) { console.error(`Turf.js intersection failed for ${layerName}:`, e); }
-                        }
-                    }
-                    return totalIntersectionArea > 0 && (totalIntersectionArea / tractArea) * 100 >= OVERLAP_THRESHOLD_PERCENT;
-                });
-            } else if (location.type === 'point') {
+                // Directly get the pre-calculated list of overlaps from the tract's properties.
+                const precalculatedOverlaps = tractFeature.properties.incentive_areas || [];
+
+                // Filter the incentive's required areas against the tract's known overlaps.
+                matchingIncentiveAreas = incentiveAreas.filter(humanName => 
+                    precalculatedOverlaps.includes(humanName)
+                );
+
+            } else if (location.type === 'point') { // This part stays the same
                 matchingIncentiveAreas = incentiveAreas.filter(humanName => {
                     const layerName = reverseIncentiveMap[humanName];
                     const layer = overlayLayers[layerName];
@@ -765,37 +757,7 @@ function displayFeatureInfo(tractFeature) {
     const childcareIncentives = filterIncentives('Child Care Services', location);
     const freshFoodIncentives = filterIncentives('Grocery Stores', location);
 
-    const overlappingAreas = [];
-    const tractArea = turf.area(tractFeature);
-    const OVERLAP_THRESHOLD_PERCENT = 10;
-
-    if (tractArea > 0) {
-        for (const layerName in INCENTIVE_AREA_MAP) {
-            const incentiveLayer = overlayLayers[layerName];
-            if (incentiveLayer) {
-                let totalIntersectionArea = 0;
-                const incentiveGeoJSON = incentiveLayer.toGeoJSON();
-
-                if (incentiveGeoJSON && incentiveGeoJSON.type === 'FeatureCollection' && incentiveGeoJSON.features) {
-                    for (const incentiveFeature of incentiveGeoJSON.features) {
-                        try {
-                            const intersection = turf.intersect(tractFeature, incentiveFeature);
-                            if (intersection) totalIntersectionArea += turf.area(intersection);
-                        } catch (e) {
-                            console.error(`Turf.js intersection failed on a feature within ${layerName}:`, e);
-                        }
-                    }
-                }
-                
-                if (totalIntersectionArea > 0) {
-                    const percentage = (totalIntersectionArea / tractArea) * 100;
-                    if (percentage >= OVERLAP_THRESHOLD_PERCENT) {
-                        overlappingAreas.push(INCENTIVE_AREA_MAP[layerName]);
-                    }
-                }
-            }
-        }
-    }
+    const overlappingAreas = tractFeature.properties.incentive_areas || [];
 
     let incentiveAreasHTML = '';
     if (overlappingAreas.length > 0) {
@@ -1347,19 +1309,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     L.control.zoom({ position: 'bottomright' }).addTo(map);
 
     try {
-        const [tractResponse, countyResponse, stateIncentivesResponse, localIncentivesResponse] = await Promise.all([
+        const [tractResponse, countyResponse, stateIncentivesResponse, localIncentivesResponse, breaksResponse] = await Promise.all([
             fetch('tract_supply_demand_gap_simplified.geojson'),
             fetch('counties.geojson'),
             fetch('incentives/state_incentives_structured.json'),
-            fetch('incentives/local_incentives_structured.json')
+            fetch('incentives/local_incentives_structured.json'),
+            fetch('breaks.json')
         ]);
 
         if (!tractResponse.ok) throw new Error('Network response was not ok');
+        if (!breaksResponse.ok) throw new Error('Could not load breaks.json');
 
         tractData = await tractResponse.json();
         const countyData = await countyResponse.json();
         const stateIncentives = await stateIncentivesResponse.json();
         const localIncentives = await localIncentivesResponse.json();
+        choroplethBreaks = await breaksResponse.json();
         
         const processIncentives = (incentives, source) => incentives.map(inc => ({ ...inc.structured_extraction, source: source }));
         allIncentives = [...processIncentives(stateIncentives, 'State'), ...processIncentives(localIncentives, 'Local')];
@@ -1649,10 +1614,9 @@ function initializeMap() {
         controlsContainer.classList.add('minimized');
         showControlsControl.getContainer().style.display = 'block';
     });
-    if (window.innerWidth < 768) {
-        controlsContainer.classList.add('minimized');
-        showControlsControl.getContainer().style.display = 'block';
-    }
+    // Minimize by default
+    controlsContainer.classList.add('minimized');
+    showControlsControl.getContainer().style.display = 'block';
 
     geojsonLayer = L.geoJSON(tractData, { style: style, onEachFeature: onEachFeature }).addTo(map);
     updateMap();
