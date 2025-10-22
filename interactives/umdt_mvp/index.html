@@ -612,6 +612,37 @@ function truncateCommunityList(listString, maxVisible = 2) {
     return `${visibleCommunities.join(', ')} and ${hiddenCount} other ${communityWord}`;
 }
 
+// --- Add this function near your other helper functions ---
+function getMapPadding() {
+    const sidePanel = document.getElementById('side-panel');
+    const defaultPadding = 50; // A small buffer around the edges of the visible map area
+
+    // If the panel isn't visible, just apply the default buffer
+    if (!sidePanel.classList.contains('show')) {
+        return { 
+            paddingTopLeft: [defaultPadding, defaultPadding], 
+            paddingBottomRight: [defaultPadding, defaultPadding] 
+        };
+    }
+
+    // On mobile, the panel comes from the bottom (50% of the screen height)
+    if (window.innerWidth < 768) { 
+        const panelHeight = window.innerHeight * 0.5; // Panel is 50vh
+        return {
+            paddingTopLeft: [defaultPadding, defaultPadding],
+            paddingBottomRight: [defaultPadding, panelHeight + defaultPadding] // Add padding to the bottom
+        };
+    } 
+    // On desktop, the panel comes from the left
+    else { 
+        const panelWidth = sidePanel.offsetWidth;
+        return {
+            paddingTopLeft: [panelWidth + defaultPadding, defaultPadding], // Add padding to the left
+            paddingBottomRight: [defaultPadding, defaultPadding]
+        };
+    }
+}
+
 // --- ALL MAP LOGIC & HELPER FUNCTIONS (GLOBAL SCOPE) ---
 let lastClickedLayer = null;
 const sequentialColors = ['#eff3ff', '#bdd7e7', '#6baed6', '#3182bd', '#08519c'];
@@ -698,12 +729,13 @@ function onEachFeature(feature, layer) {
         mouseover: highlightFeature,
         mouseout: resetHighlight,
         click: (e) => {
-            map.fitBounds(e.target.getBounds(), { padding: [150, 150] });
             if (currentMapMode === 'smartResearch') {
                 displaySmartResearchForTract(feature);
             } else {
                 displayFeatureInfo(feature);
             }
+            map.fitBounds(e.target.getBounds(), getMapPadding());
+            
             if (lastClickedLayer) geojsonLayer.resetStyle(lastClickedLayer);
             e.target.setStyle({ weight: 4, color: '#334155', dashArray: '' });
             lastClickedLayer = e.target;
@@ -1762,12 +1794,16 @@ function initializeMap() {
             }
         });
 
-        map.setView(center, 14);
         if (currentMapMode === 'smartResearch') {
             displaySmartResearchForAddress(name, parcelData, tractFeature?.properties, center);
         } else {
             displayAddressInfo(name, parcelData, tractFeature?.properties, center);
         }
+
+        // Create a small bounding box around the point to use fitBounds
+        const bounds = L.latLng(center).toBounds(100); // 100-meter radius
+        // Use fitBounds with the dynamic padding and a maxZoom to prevent zooming in too far
+        map.fitBounds(bounds, { ...getMapPadding(), maxZoom: 16 });
     })
     .addTo(map);
 
