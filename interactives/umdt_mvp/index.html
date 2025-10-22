@@ -1562,7 +1562,15 @@ function setupTopControls() {
 
         // Logic for managing the map controls visibility
         if (currentMapMode === 'freeExplore') {
-            openControlsPanel();
+            // On desktop, always open the controls panel.
+            if (window.innerWidth >= 768) {
+                openControlsPanel();
+            } else {
+                // On mobile, ONLY open the controls panel if the side panel is NOT already open.
+                if (!sidePanel.classList.contains('show')) {
+                    openControlsPanel();
+                }
+            }
         } else {
             controlsContainer.classList.add('minimized');
             if (showControlsControl) {
