@@ -122,6 +122,20 @@
         .legend-item span {
             white-space: nowrap;
         }
+
+        .legend-label-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            width: 100%;
+            gap: 8px; /* Adds a little space between number and text */
+        }
+        .legend-context-label {
+            font-size: 0.9em;
+            font-style: italic;
+            color: #475569; /* slate-600 */
+            text-align: right;
+        }
         
         #map-controls-container {
             transition: transform 0.3s ease-in-out;
@@ -517,9 +531,10 @@ const CHOROPLETH_OPTIONS = {
     'childcare_demand_score': { label: 'Childcare Demand Score', format: (d) => formatNumber(d), sector: 'childcare' },
     'childcare_spending_per_under5': { label: 'Childcare Spending (per child)', format: (d) => formatCurrency(d), sector: 'childcare' },
     // Fresh Food
-    'grocery_unmet_demand': { label: 'Fresh Food Opportunity Score', format: (d) => d.toFixed(2), sector: 'fresh-food' },
-    'grocery_supply_score': { label: 'Fresh Food Access Score', format: (d) => d.toFixed(2), sector: 'fresh-food' },
-    'grocery_demand_score': { label: 'Fresh Food Demand Score', format: (d) => d.toFixed(2), sector: 'fresh-food' },
+    'grocery_unmet_demand': { label: 'Fresh Food Opportunity Score', format: (d) => d.toFixed(0), sector: 'fresh-food' },
+    'grocery_supply_score': { label: 'Fresh Food Access Score', format: (d) => d.toFixed(0), sector: 'fresh-food' },
+    'grocery_demand_score': { label: 'Fresh Food Demand Score', format: (d) => d.toFixed(0), sector: 'fresh-food' },
+    'grocery_latent_demand_score': { label: 'Fresh Food Latent Demand Score', format: (d) => d.toFixed(0), sector: 'fresh-food' },
     'grocery_need_score': { label: 'Fresh Food Need', format: (d) => formatPercent(d), sector: 'fresh-food' },
     'per_household_food_at_home': { label: 'Grocery spending (per household)', format: (d) => formatCurrency(d), sector: 'fresh-food' },
     // General
@@ -1649,33 +1664,57 @@ function initializeMap() {
         const div = L.DomUtil.create('div', 'info-legend');
         div.setAttribute('role', 'region');
         div.setAttribute('aria-label', 'Map Legend');
-        let currentVariable = choroplethSelect.value;
-        const isDiverging = isDivergingVariable(currentVariable);
-        const values = tractData.features.map(f => safeParseFloat(f.properties[currentVariable])).filter(v => !isNaN(v));
-        if (values.length === 0) return div;
-
-        const colors = isDiverging ? divergingColors : sequentialColors;
-        let content = `<div class="font-bold mb-1 text-slate-800">${CHOROPLETH_OPTIONS[currentVariable].label}</div>`;
         
-        if (isDiverging) {
-            if (currentVariable.includes('unmet_demand')) {
-                content += `<div class="legend-item"><i style="background:${colors[5]}"></i><span>More Demand</span></div>`;
-                content += `<div class="legend-item"><i style="background:${colors[2]}"></i><span>Balanced</span></div>`;
-                content += `<div class="legend-item"><i style="background:${colors[0]}"></i><span>More Access</span></div>`;
+        const currentVariable = choroplethSelect.value;
+        const isDiverging = isDivergingVariable(currentVariable);
+        const breaks = choroplethBreaks[currentVariable];
+        const colors = isDiverging ? divergingColors : sequentialColors;
+        const formatter = CHOROPLETH_OPTIONS[currentVariable].format;
+
+        let content = `<div class="font-bold mb-1 text-slate-800">${CHOROPLETH_OPTIONS[currentVariable].label}</div>`;
+
+        if (breaks && breaks.length > 0) {
+            if (isDiverging) {
+                // --- New In-line Logic for Diverging Scales ---
+                const highLabelText = currentVariable.includes('unmet_demand') ? 'More Demand' : 'High Growth';
+                const lowLabelText = currentVariable.includes('unmet_demand') ? 'More Access' : 'Decline';
+
+                // Loop through all colors in reverse (to display high values at the top)
+                for (let i = colors.length - 1; i >= 0; i--) {
+                    let numericLabel;
+                    let contextualLabel = ''; // Default to an empty string
+
+                    // Determine the numeric range for the current color
+                    if (i === colors.length - 1) { // Topmost item
+                        numericLabel = `${formatter(breaks[i - 1])}+`;
+                        contextualLabel = `<span class="legend-context-label">${highLabelText}</span>`;
+                    } else if (i === 0) { // Bottommost item
+                        numericLabel = `< ${formatter(breaks[0])}`;
+                        contextualLabel = `<span class="legend-context-label">${lowLabelText}</span>`;
+                    } else { // All middle items
+                        numericLabel = `${formatter(breaks[i - 1])} to ${formatter(breaks[i])}`;
+                    }
+                    
+                    // Combine the parts inside the new wrapper span
+                    content += `<div class="legend-item"><i style="background:${colors[i]}"></i><span class="legend-label-wrapper"><span>${numericLabel}</span>${contextualLabel}</span></div>`;
+                }
+
             } else {
-                content += `<div class="legend-item"><i style="background:${colors[5]}"></i><span>High Growth</span></div>`;
-                content += `<div class="legend-item"><i style="background:${colors[2]}"></i><span>Stable</span></div>`;
-                content += `<div class="legend-item"><i style="background:${colors[0]}"></i><span>Decline</span></div>`;
-            }
-        } else {
-             const breaks = getQuantiles(values, colors.length);
-             const formatter = CHOROPLETH_OPTIONS[currentVariable].format;
-            for (let i = 0; i < colors.length; i++) {
-                const from = i === 0 ? Math.min(...values) : breaks[i - 1];
-                const to = i === colors.length - 1 ? Math.max(...values) : breaks[i];
-                content += `<div class="legend-item"><i style="background:${colors[i]}"></i><span>${formatter(from)}${to ? ' &ndash; ' + formatter(to) : '+'}</span></div>`;
+                // --- Original Logic for Sequential Scales ---
+                for (let i = 0; i < colors.length; i++) {
+                    let label;
+                    if (i === 0) {
+                        label = `< ${formatter(breaks[0])}`;
+                    } else if (i === colors.length - 1) {
+                        label = `${formatter(breaks[i - 1])}+`;
+                    } else {
+                        label = `${formatter(breaks[i - 1])} to ${formatter(breaks[i])}`;
+                    }
+                    content += `<div class="legend-item"><i style="background:${colors[i]}"></i><span>${label}</span></div>`;
+                }
             }
         }
+
         content += `<div class="legend-item"><i style="background:#636363"></i><span>No Data</span></div>`;
         div.innerHTML = content;
         return div;
