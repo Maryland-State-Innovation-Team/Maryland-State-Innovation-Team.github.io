@@ -235,19 +235,25 @@
             transition: background-color 0.2s ease-in-out;
         }
         .accordion-content {
-            max-height: 0;
+            display: grid;
+            grid-template-rows: 0fr; /* Start with the content row having zero height */
             overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-            padding-top: 0;
-            padding-bottom: 0;
+            transition: grid-template-rows 0.3s ease-out;
         }
+
         .accordion-item.open .accordion-content {
-            max-height: 1500px; /* Adjust as needed */
-            padding-top: 1rem;
-            padding-bottom: 1rem;
+            grid-template-rows: 1fr; /* Animate to one fractional unit, which fits the content */
         }
-        .accordion-item.open .accordion-arrow {
-            transform: rotate(90deg);
+
+        /* We need to wrap the content in a div to prevent margin collapse issues */
+        .accordion-content > div {
+            min-height: 0;
+            padding: 0 1rem; /* Adjust padding here */
+        }
+
+        .accordion-item.open .accordion-content > div {
+            padding: 1rem;
+            /* You could also transition padding here if you like */
         }
         .accordion-arrow {
             transition: transform 0.3s ease;
@@ -276,6 +282,23 @@
             clip: rect(0, 0, 0, 0);
             white-space: nowrap;
             border-width: 0;
+        }
+
+        .quote-category-tag {
+            display: inline-block;
+            background-color: #e2e8f0; /* Tailwind slate-200 */
+            color: #475569;      /* Tailwind slate-600 */
+            padding: 2px 10px;
+            border-radius: 9999px; /* Pill shape */
+            font-size: 0.75rem;    /* text-xs */
+            font-weight: 600;      /* semibold */
+            font-style: normal;    /* Override parent italic style */
+            margin-bottom: 0.25rem;
+        }
+
+        blockquote b {
+            color: #1e293b; /* Tailwind slate-800 */
+            font-weight: 600; /* semibold */
         }
     </style>
 </head>
@@ -445,6 +468,12 @@ let currentPanelContext = { type: null, data: null };
 let isFirstTimeUser = false;
 let choroplethBreaks;
 
+const QUOTE_CATEGORY_MAP = {
+    'first-person perspective': 'Individual Voice',
+    'summarized community perspective': 'Community Voice',
+    'relevant fact/statistic': 'Community Fact'
+};
+
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYW1pbGxlci1tZGdvdiIsImEiOiJjbWc1ZW1hcm8wMWZ0MmtweWZtcmVxeTBtIn0.JS4bkhCiIv6oB_0WEQRpwg';
 const TILESET_ID = 'amiller-mdgov.parcels-tileset';
 
@@ -522,6 +551,31 @@ function formatYmd(ymd) {
     const month = ymd.substring(4, 6);
     const day = ymd.substring(6, 8);
     return `${month}/${day}/${year}`;
+}
+
+function createQuotesSection(quotesArray, topic, title) {
+    if (!quotesArray || quotesArray.length === 0) return '';
+
+    const relevantQuotes = quotesArray.filter(q => q.topic && q.topic.includes(topic));
+
+    if (relevantQuotes.length === 0) return '';
+
+    return `
+        <details class="bg-slate-50 p-3 rounded-lg mt-2">
+            <summary class="font-semibold text-slate-600 mb-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">${title}</summary>
+            <ul class="space-y-6 text-sm mt-4">
+                ${relevantQuotes.map(quote => {
+                    const categoryText = QUOTE_CATEGORY_MAP[quote.category] || 'Community Voice';
+                    return `
+                        <li class="space-y-2">
+                            <span class="quote-category-tag">${categoryText}</span>
+                            <blockquote class="pl-4 border-l-4 border-slate-300 text-slate-600 leading-relaxed">
+                                ${quote.briefing_quote}
+                            </blockquote>
+                        </li>`;
+                }).join('')}
+            </ul>
+        </details>`;
 }
 
 function truncateCommunityList(listString, maxVisible = 2) {
@@ -747,17 +801,7 @@ function createIncentiveListHTML(incentives, type, industry, county) {
 function displayFeatureInfo(tractFeature) {
     const properties = tractFeature.properties;
     panelTitle.textContent = `${truncateCommunityList(properties.tract_name)}, ${properties.county_name}`;
-    
-    const createList = (items, title) => {
-        if (!items || items.length === 0) return '';
-        return `
-            <details class="bg-slate-50 p-3 rounded-lg mt-2" style="margin-top:0.5rem;">
-                <summary class="font-semibold text-slate-600 mb-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">${title}</summary>
-                <ul class="list-disc list-inside space-y-1 text-sm text-slate-700 mt-2">
-                    ${items.map(item => `<li>${item}</li>`).join('')}
-                </ul>
-            </details>`;
-    };
+
     const createPlanAreas = (items) => {
          if (!items || items.length === 0) return '';
          return `
@@ -765,7 +809,7 @@ function displayFeatureInfo(tractFeature) {
                 <h4 class="font-semibold text-slate-600 mb-2">Relevant Plans</h4>
                 ${items.map(p => `
                     <div class="mt-2 text-sm">
-                        <p class="font-medium text-slate-800">${p.area_name} (${p.plan_year})</p>
+                        <p class="font-medium text-slate-800">${p.area_name} ${p.plan_year ? '(' + p.plan_year + ')' : ''}</p>
                         <p class="text-slate-600 italic">"${p.community_vision}"</p>
                     </div>
                 `).join('')}
@@ -833,8 +877,7 @@ function displayFeatureInfo(tractFeature) {
                         </div>
                     </div>
                 </div>
-                ${createList(properties.childcare_need_quotes, 'Community Voices on Need')}
-                ${createList(properties.childcare_planning_quotes, 'Community Voices on Planning')}
+                ${createQuotesSection(properties.plan_quotes, 'Child Care', 'Community Voices on Childcare')}
                 ${createIncentiveListHTML(childcareIncentives, 'Childcare', 'Child Care Services', county)}
             </div>
             ` : ''}
@@ -858,8 +901,7 @@ function displayFeatureInfo(tractFeature) {
                         </div>
                     </div>
                 </div>
-                ${createList(properties.fresh_food_need_quotes, 'Community Voices on Need')}
-                ${createList(properties.fresh_food_planning_quotes, 'Community Voices on Planning')}
+                ${createQuotesSection(properties.plan_quotes, 'Fresh Food', 'Community Voices on Fresh Food')}
                 ${createIncentiveListHTML(freshFoodIncentives, 'Fresh Food', 'Grocery Stores', county)}
             </div>
             ` : ''}
@@ -911,7 +953,7 @@ function createAccordionItem(question, answerHTML, mapAction = null, context = {
             <svg class="accordion-arrow h-5 w-5 text-slate-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
         </div>
         <div class="accordion-content bg-white border-t border-slate-200">
-            <div class="p-4">${answerHTML}</div>
+            <div>${answerHTML}</div>
         </div>
     `;
     const header = item.querySelector('.accordion-header');
@@ -921,7 +963,7 @@ function createAccordionItem(question, answerHTML, mapAction = null, context = {
         document.querySelectorAll('#side-panel-content .accordion-item').forEach(el => el.classList.remove('open'));
         if (!wasOpen) {
             item.classList.add('open');
-            executeMapAction(mapAction, { ...context, container: item.querySelector('.accordion-content') });
+            executeMapAction(mapAction, { ...context, container: item.querySelector('.accordion-content div') });
         }
     });
     return item;
@@ -948,12 +990,22 @@ function displaySmartResearchForTract(tractFeature) {
             `<p>Showing nearby licensed childcare providers on the map. The list below shows the closest providers to the center of this community area.</p><div id="nearest-providers-list"></div>`,
             'showNearest:childcare,5', context
         ));
-        if (p.childcare_need_quotes && p.childcare_need_quotes.length > 0) {
-             questions.push(createAccordionItem(
-                "What has this community said about childcare needs?",
-                `<ul class="list-disc list-inside space-y-2 text-slate-600 italic">${p.childcare_need_quotes.map(q => `<li>"${q}"</li>`).join('')}</ul>`,
-                null, context
-            ));
+        const childcareQuotes = p.plan_quotes?.filter(q => q.topic.includes('Child Care')) || [];
+        if (childcareQuotes.length > 0) {
+            const quotesHTML = `<ul class="space-y-6 text-slate-600">${childcareQuotes.map(q => {
+                const categoryText = QUOTE_CATEGORY_MAP[q.category] || 'Community Voice';
+                return `<li class="space-y-2">
+                            <span class="quote-category-tag">${categoryText}</span>
+                            <blockquote class="pl-4 border-l-4 border-slate-300 leading-relaxed">
+                                ${q.briefing_quote}
+                            </blockquote>
+                        </li>`;
+            }).join('')}</ul>`;
+            questions.push(createAccordionItem(
+            "What has this community said about childcare needs?",
+            quotesHTML,
+            null, context
+        ));
         }
     }
     
@@ -970,12 +1022,22 @@ function displaySmartResearchForTract(tractFeature) {
             `<p>Showing nearby grocery stores on the map. The list below shows the closest providers to the center of this community area.</p><div id="nearest-providers-list"></div>`,
             'showNearest:grocery,5', context
         ));
-         if (p.fresh_food_need_quotes && p.fresh_food_need_quotes.length > 0) {
-             questions.push(createAccordionItem(
-                "What has this community said about fresh food needs?",
-                `<ul class="list-disc list-inside space-y-2 text-slate-600 italic">${p.fresh_food_need_quotes.map(q => `<li>"${q}"</li>`).join('')}</ul>`,
-                null, context
-            ));
+        const freshFoodQuotes = p.plan_quotes?.filter(q => q.topic.includes('Fresh Food')) || [];
+        if (freshFoodQuotes.length > 0) {
+            const quotesHTML = `<ul class="space-y-6 text-slate-600">${freshFoodQuotes.map(q => {
+                const categoryText = QUOTE_CATEGORY_MAP[q.category] || 'Community Voice';
+                return `<li class="space-y-2">
+                            <span class="quote-category-tag">${categoryText}</span>
+                            <blockquote class="pl-4 border-l-4 border-slate-300 leading-relaxed">
+                                ${q.briefing_quote}
+                            </blockquote>
+                        </li>`;
+            }).join('')}</ul>`;
+            questions.push(createAccordionItem(
+            "What has this community said about fresh food needs?",
+            quotesHTML,
+            null, context
+        ));
         }
     }
     
