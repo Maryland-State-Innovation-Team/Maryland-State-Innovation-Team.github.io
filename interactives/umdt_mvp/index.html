@@ -63,6 +63,9 @@
         #side-panel.show {
             transform: translateX(0);
         }
+        #side-panel-content {
+            scrollbar-gutter: stable;
+        }
         
         /* --- Bottom sheet styles for mobile --- */
         @media (max-width: 767px) {
@@ -248,12 +251,15 @@
         /* We need to wrap the content in a div to prevent margin collapse issues */
         .accordion-content > div {
             min-height: 0;
-            padding: 0 1rem; /* Adjust padding here */
+            padding: 0 1rem;
+            transition: padding 0.3s ease-out;
         }
 
         .accordion-item.open .accordion-content > div {
             padding: 1rem;
-            /* You could also transition padding here if you like */
+        }
+        .accordion-item.open .accordion-arrow {
+            transform: rotate(90deg);
         }
         .accordion-arrow {
             transition: transform 0.3s ease;
@@ -376,6 +382,9 @@
         
         <div class="relative flex-grow">
             <div id="map" class="h-full w-full z-0">
+                <div id="initial-prompt" class="absolute bottom-6 left-4 z-[1000] bg-white p-3 rounded-lg shadow-lg text-left text-xs font-semibold text-slate-700 pointer-events-none w-64">
+                    <p>Click a community on the map or <svg xmlns="http://www.w3.org/2000/svg" class="inline h-4 w-4 -mt-0.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg> search for an address to see community details.</p>
+                </div>
                 <div class="absolute top-4 left-4 md:left-1/2 md:-translate-x-1/2 z-[1001] bg-white p-2 rounded-lg shadow-lg flex items-center space-x-4" role="region" aria-label="Map Tools">
                     <div>
                         <label for="map-mode-select" class="block text-xs font-medium text-slate-500">Map Mode</label>
@@ -659,14 +668,22 @@ function highlightFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) layer.bringToFront();
 }
 
-function resetHighlight(e) { geojsonLayer.resetStyle(e.target); }
+function resetHighlight(e) { 
+    if (lastClickedLayer !== e.target) {
+        geojsonLayer.resetStyle(e.target);
+    }
+    // After any mouseout event, ensure the selected layer is brought back to the front.
+    if (lastClickedLayer) {
+        lastClickedLayer.bringToFront();
+    }
+}
 
 function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
         click: (e) => {
-            map.fitBounds(e.target.getBounds());
+            map.fitBounds(e.target.getBounds(), { padding: [150, 150] });
             if (currentMapMode === 'smartResearch') {
                 displaySmartResearchForTract(feature);
             } else {
@@ -680,6 +697,8 @@ function onEachFeature(feature, layer) {
 }
 
 function openSidePanel() {
+    document.getElementById('initial-prompt').classList.add('hidden');
+
     if (window.innerWidth < 768) { // Only add class on mobile
         document.body.classList.add('panel-is-open');
     }
@@ -950,7 +969,7 @@ function createAccordionItem(question, answerHTML, mapAction = null, context = {
     item.innerHTML = `
         <div class="accordion-header bg-slate-50 hover:bg-slate-100 p-4 flex justify-between items-center" tabindex="0">
             <h4 class="font-semibold text-slate-700">${question}</h4>
-            <svg class="accordion-arrow h-5 w-5 text-slate-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+            <svg class="accordion-arrow flex-shrink-0 h-5 w-5 text-slate-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
         </div>
         <div class="accordion-content bg-white border-t border-slate-200">
             <div>${answerHTML}</div>
@@ -1368,8 +1387,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const loadingOverlay = document.getElementById('loading-overlay'); 
 
     map = L.map('map', {
-        center: [39.0458, -76.6413],
-        maxBounds: [[37.72521, -82], [39.90463, -74.60361]],
+        center: [39.05744, -76.79664],
+        maxBounds: [[35.89358, -86.48730], [41.72287, -68.04920]], 
         zoom: 8,
         minZoom: 7,
         zoomControl: false 
@@ -1519,17 +1538,32 @@ function setupTopControls() {
     sectorSelect.value = selectedSector;
 
     modeSelect.addEventListener('change', (e) => {
-        sidePanel.classList.remove('show');
-        document.body.classList.remove('panel-is-open');
-        currentPanelContext = { type: null, data: null };
-        if (lastClickedLayer) geojsonLayer.resetStyle(lastClickedLayer);
-
+        // Update the global map mode variable
         currentMapMode = e.target.value;
+
+        // Check if the panel is already open and has context
+        if (sidePanel.classList.contains('show') && currentPanelContext.data) {
+            // Re-render the panel content based on the new mode and existing context
+            if (currentPanelContext.type === 'tract') {
+                if (currentMapMode === 'smartResearch') {
+                    displaySmartResearchForTract(currentPanelContext.data);
+                } else { // freeExplore
+                    displayFeatureInfo(currentPanelContext.data);
+                }
+            } else if (currentPanelContext.type === 'address') {
+                const { addressName, parcelProps, tractProps, point } = currentPanelContext.data;
+                if (currentMapMode === 'smartResearch') {
+                    displaySmartResearchForAddress(addressName, parcelProps, tractProps, point);
+                } else { // freeExplore
+                    displayAddressInfo(addressName, parcelProps, tractProps, point);
+                }
+            }
+        }
+
+        // Logic for managing the map controls visibility
         if (currentMapMode === 'freeExplore') {
-            // When switching to Free Explore, open the controls panel.
             openControlsPanel();
         } else {
-            // When switching back to Smart Research, minimize the controls.
             controlsContainer.classList.add('minimized');
             if (showControlsControl) {
                 showControlsControl.getContainer().style.display = 'block';
@@ -1648,6 +1682,8 @@ function initializeMap() {
             geojsonLayer.resetStyle(lastClickedLayer);
             lastClickedLayer = null;
         }
+
+        document.getElementById('initial-prompt').classList.remove('hidden');
     });
 
     L.Control.geocoder({
@@ -1679,7 +1715,7 @@ function initializeMap() {
             }
         });
 
-        map.setView(center, 16);
+        map.setView(center, 14);
         if (currentMapMode === 'smartResearch') {
             displaySmartResearchForAddress(name, parcelData, tractFeature?.properties, center);
         } else {
