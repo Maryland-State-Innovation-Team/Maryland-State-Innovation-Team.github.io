@@ -6,6 +6,12 @@
     <title>Explore Communities - Maryland</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/latest/css/mdwds.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Public+Sans:wght@400;500;700&family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -50,8 +56,8 @@
         @media (max-width: 767px) {
             /* When the body has this class, move the bottom controls up */
             body.panel-is-open .leaflet-bottom {
-                /* Move it up by the height of the panel (50vh) plus some extra space (2rem) */
-                transform: translateY(calc(-50vh + 2rem));
+                /* Move it up by the height of the panel (50vh) plus some extra space (5rem) */
+                transform: translateY(calc(-50vh + 5rem));
             }
         }
 
@@ -74,10 +80,6 @@
             }
             #side-panel.show {
                 transform: translateY(0); /* Slide into view */
-            }
-            /* --- On mobile, hide controls when the panel is shown --- */
-            #side-panel.show ~ #map-controls-container {
-                transform: translateX(-120%);
             }
         }
 
@@ -136,26 +138,23 @@
             color: #475569; /* slate-600 */
             text-align: right;
         }
-        
-        #map-controls-container {
-            transition: transform 0.3s ease-in-out;
-        }
-        
-        /* This rule is universal: if it's minimized, it's off-screen. */
-        #map-controls-container.minimized {
-            transform: translateX(-120%);
-        }
 
-        /* On DESKTOP, slide the controls over ONLY IF they are NOT minimized */
-        @media (min-width: 768px) {
-            #side-panel.show ~ #map-controls-container:not(.minimized) {
-                transform: translateX(calc(33.333vw + 1rem));
-            }
+        /* Add these styles for the new layer control panels */
+        #base-layer-options::-webkit-scrollbar, #overlay-options::-webkit-scrollbar {
+            width: 8px;
         }
-        @media (min-width: 1024px) {
-            #side-panel.show ~ #map-controls-container:not(.minimized) {
-                transform: translateX(calc(25vw + 1rem));
-            }
+        #base-layer-options::-webkit-scrollbar-track, #overlay-options::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        #base-layer-options::-webkit-scrollbar-thumb, #overlay-options::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 10px;
+        }
+        #base-layer-options::-webkit-scrollbar-thumb:hover, #overlay-options::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        #base-layer-btn-label {
+            max-width: 150px; /* Prevent long layer names from breaking layout */
         }
     
         /* Custom tooltip for explanations */
@@ -229,21 +228,60 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* --- Sector Modal Styles --- */
+        /* --- Sector Modal Styles ---
+           Limit overlay to area *below* the top banner/header and center the modal within that area.
+           We set --site-header-height dynamically via JS (on load/resize). */
         #sector-modal-overlay {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            left: 0;
+            width: 100%;
+            /* top and height constrained to the area underneath the site header/banner */
+            top: var(--site-header-height, 0px);
+            height: calc(100vh - var(--site-header-height, 0px));
+            background-color: rgba(0, 0, 0, 0.6);
             z-index: 20000;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: opacity 0.3s ease;
+            padding: 1rem;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+        @media (max-width: 767px) {
+            /* Ensure modal content doesn't overflow past the available area on small screens */
+            #sector-modal-content {
+                max-height: calc(100vh - var(--site-header-height, 0px) - 2rem);
+                overflow: auto;
+            }
         }
         #sector-modal-overlay.hidden {
             opacity: 0;
             pointer-events: none;
+        }
+        /* --- Welcome (Tour) Modal Styles --- */
+        #tour-overlay {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            top: var(--site-header-height, 0px);
+            height: calc(100vh - var(--site-header-height, 0px));
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 30000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+            padding: 1rem;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+        #tour-overlay.hidden { opacity: 0; pointer-events: none; }
+        @media (max-width: 767px) {
+            #tour-overlay-content {
+                max-height: calc(100vh - var(--site-header-height, 0px) - 2rem);
+                overflow: auto;
+            }
         }
         
         /* --- Smart Research Accordion --- */
@@ -279,11 +317,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* --- Fix for Mobile Control Overlap --- */
-        #map-controls-container {
-            /* The top-center selectors have z-index 1001. This ensures the panel is on top. */
-            z-index: 1003; 
-        }
         .leaflet-top.leaflet-right {
             /* This container is already position:absolute by default.
             This z-index lifts it and everything inside it (the geocoder)
@@ -320,14 +353,324 @@
             color: #1e293b; /* Tailwind slate-800 */
             font-weight: 600; /* semibold */
         }
+
+        /* Custom styles for logo and minor adjustments */
+        .custom-logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        .custom-logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        .custom-logo .usa-logo__text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.2;
+            color: #1b1b1b;
+            font-style: normal; /* Fix: Remove italics */
+        }
+        .custom-logo .usa-logo__text a,
+        .custom-logo .usa-logo__text a:visited {
+            color: #1b1b1b; /* Fix: Remove visited link color */
+        }
+        
+        .usa-header {
+            padding: 0.5rem 1rem;
+        }
+
+        .usa-nav-container {
+            padding: 0 0.5rem; 
+        }
+
+        @media (min-width: 992px) {
+            .usa-menu-btn {
+                display: none;
+            }
+            .usa-nav-container {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                justify-content: space-between;
+                padding: 0 1.5rem; 
+            }
+            .usa-header {
+                padding: 0.75rem 1.5rem;
+            }
+            .usa-nav-container .usa-navbar {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                flex: 0 0 auto;
+                width: auto;
+            }
+            .usa-nav {
+                order: 2;
+                flex: 0 1 auto; 
+                display: flex;
+                justify-content: flex-end; 
+                background: transparent; 
+                box-shadow: none;
+            }
+            .usa-nav__primary {
+                display: inline-flex;
+                gap: 1.25rem;
+                align-items: center;
+            }
+            .usa-nav__primary-item {
+                display: inline-flex;
+                align-items: center;
+            }
+            header .usa-nav-container .usa-nav {
+                flex: 0 0 auto !important;
+                width: auto !important;
+                max-width: none !important;
+            }
+            header .usa-nav-container .usa-nav__primary {
+                display: inline-flex !important;
+                width: auto !important;
+                justify-content: flex-end !important;
+                margin-left: 0 !important;
+            }
+            header .usa-nav-container > .usa-nav {
+                margin-left: auto !important;
+                max-width: -moz-fit-content !important;
+                max-width: fit-content !important;
+                min-width: 0 !important;
+            }
+            .usa-nav__close {
+                display: none;
+            }
+            .usa-nav-container > .usa-nav {
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .usa-navbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                gap: 1rem;
+            }
+            .usa-logo.custom-logo {
+                order: 1;
+                flex: 0 1 auto;
+            }
+            .usa-menu-btn {
+                order: 2;
+                margin-left: auto;
+                display: inline-flex;
+                align-items: center;
+            }
+            .usa-nav {
+                order: 3;
+            }
+        }
+        
+        .usa-nav__close {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath fill='%231b1b1b' d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 1.5rem;
+        }
+
+        .usa-nav-container {
+            border-bottom: 1px solid #dfe1e2; /* base-lighter */
+        }
+        .usa-nav__primary > .usa-nav__primary-item > a.usa-current {
+            border-bottom: 0.25rem solid #005ea2; /* primary-default */
+            font-weight: 700;
+        }
+        .usa-menu-btn {
+            background-color: #005ea2; /* primary-default */
+            color: white;
+            padding: 0.5rem 1rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            border: none;
+            margin: 0;
+            font-family: 'Public Sans', sans-serif;
+        }
+
+        /* Fix to ensure header appears OVER modals */
+        .usa-banner-container, .usa-header {
+            position: relative;
+            z-index: 35000; /* Higher than tour/sector modals */
+        }
+        .usa-banner-container {
+             background: #f0f0f0; /* base-lightest */
+        }
+        .usa-header {
+            background: #ffffff;
+        }
+
+        /* --- Geocoder Restyling --- */
+        #geocoder-container .leaflet-control-geocoder {
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05), 0 1px 3px 1px rgb(0 0 0 / 0.1);
+            border-radius: 0.25rem;
+            border: 1px solid #a9aeb1; /* base-light */
+        }
+        .leaflet-control-geocoder-form input {
+            background-color: white;
+            color: #1b1b1b; /* base-darkest */
+            
+            /* Add SVG background image for the magnifying glass */
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23565c65' viewBox='0 0 16 16'%3e%3cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: 0.75rem center; /* Position the icon */
+            padding-left: 2.5rem !important;
+            height: 40px;
+            font-size: 1rem;
+            line-height: 1.5;
+            width: 350px !important; 
+            min-width: 350px !important;
+            border: 1px solid #a9aeb1; /* base-light */
+            border-radius: 0.25rem; 
+            outline: none !important;
+            box-shadow: none !important;
+        }
+        .leaflet-control-geocoder-form input::placeholder {
+            color: #565c65; /* base-dark */
+            opacity: 1;
+        }
+        /* Hide the default search icon button */
+        .leaflet-control-geocoder-icon {
+            display: none;
+        }
+        /* Style the suggestions dropdown */
+        .leaflet-control-geocoder-alternatives {
+            width: 100%;
+            background-color: white;
+            border: 1px solid #a9aeb1; /* base-light */
+            border-top: none;
+        }
+        .leaflet-control-geocoder-alternatives a {
+            color: #005ea2; /* primary-default */
+        }
+        .leaflet-control-geocoder-alternatives a:hover {
+            background-color: #d9e8f6; /* primary-lighter */
+            color: #162e51; /* primary-darker */
+        }
+        /* --- Geocoder Restyling --- */
+        #geocoder-container .leaflet-control-geocoder {
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05), 0 1px 3px 1px rgb(0 0 0 / 0.1);
+            border-radius: 0.25rem;
+            border: 1px solid #a9aeb1; /* base-light */
+            /* Add this to prevent the library from adding its own background/border */
+            background: transparent !important;
+            border: none !important;
+        }
+        /* Hide the expand/collapse icon since the bar is always open */
+        .leaflet-control-geocoder-icon {
+            display: none !important;
+        }
+        .leaflet-control-geocoder-form input {
+            background-color: white;
+            color: #1b1b1b; /* base-darkest */
+            padding: 0.5rem 0.75rem;
+            height: 40px;
+            font-size: 1rem;
+            line-height: 1.5;
+            width: 350px !important; /* Force a wider input */
+            min-width: 350px !important;
+            border: 1px solid #a9aeb1; /* base-light */
+            border-radius: 0.25rem; /* Add border-radius here */
+            outline: none !important;
+            box-shadow: none !important;
+        }
+        .leaflet-control-geocoder-form input::placeholder {
+            color: #565c65; /* base-dark */
+            opacity: 1;
+        }
+        /* Style the suggestions dropdown */
+        .leaflet-control-geocoder-alternatives {
+            width: 100%;
+            background-color: white;
+            border: 1px solid #a9aeb1; /* base-light */
+            border-top: none;
+        }
+        .leaflet-control-geocoder-alternatives a {
+            color: #005ea2; /* primary-default */
+        }
+        .leaflet-control-geocoder-alternatives a:hover {
+            background-color: #d9e8f6; /* primary-lighter */
+            color: #162e51; /* primary-darker */
+        }
+
+        /* --- New Responsive & Panel-Aware Styles --- */
+        @media (max-width: 767px) {
+            /* On mobile, make the input width responsive to prevent text wrapping */
+            .leaflet-control-geocoder-form input {
+                width: calc(100vw - 3rem) !important;
+                min-width: 0 !important;
+            }
+        }
+        @media (min-width: 768px) {
+            /* When the side panel is open on desktop, add padding-top to it. */
+            /* This creates a dedicated space for the geocoder to float in. */
+            #side-panel.show {
+                padding-top: 64px; /* 4rem, equals geocoder height + its top offset */
+            }
+        }
+        /* --- New styles for Top Right Controls --- */
+        #sector-select {
+            background-color: #1b1b1b; /* base-darkest */
+        }
+
+        #map-mode-btn-group {
+            /* We moved the border definition here from the HTML for better control */
+            border: 2px solid #005ea2; /* primary-default */
+        }
+        .mode-btn {
+            border: none;
+            cursor: pointer;
+            background-color: #1b1b1b; /* base-darkest */
+            transition: background-color 0.2s ease-in-out;
+        }
+        .mode-btn.active {
+            background-color: #005ea2; /* primary-default */
+        }
+        .mode-btn:focus-visible {
+            outline: 2px solid #ffffff;
+            outline-offset: -2px;
+            z-index: 10;
+        }
+        .info-legend {
+            /* We'll add some internal padding here for better aesthetics */
+            padding: 0.75rem; /* 12px */
+            background: white;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            border-radius: 0.375rem; /* 6px */
+            line-height: 1.2;
+            border: 1px solid #dfe1e2; /* base-lighter */
+        }
+
+        .leaflet-top.leaflet-right .info-legend {
+            float: right;
+            clear: both;
+            margin-top: 4.5rem; /* Pushes legend below top-right controls on desktop */
+        }
+
+        @media (max-width: 767px) {
+            .leaflet-top.leaflet-right {
+                width: calc(100% - 2rem);
+            }
+            .leaflet-top.leaflet-right .info-legend {
+                /* Pushes legend below geocoder AND mode buttons on mobile */
+                margin-top: 8rem; 
+            }
+        }
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800">
-
-    <body class="bg-slate-100 text-slate-800">
-
-    <div id="tour-overlay" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 z-[30000] flex items-center justify-center p-4">
-        <div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full text-center">
+    <select id="choropleth-select" class="hidden w-full p-2 rounded-md border-2 border-slate-300 focus:ring-slate-500 focus:border-slate-500">
+    </select>
+    <div id="tour-overlay" class="hidden fixed left-0 w-full bg-black bg-opacity-70 z-[30000] flex items-center justify-center p-4" role="dialog" aria-modal="true">
+        <div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full text-center" id="tour-overlay-content">
             <h2 class="text-2xl font-bold text-slate-800 mb-3">Welcome! 👋</h2>
             <p class="text-slate-600">
                 We recommend getting started in the currently selected '<strong>Smart Research</strong>' mode. Once you're familiar with the data, check out '<strong>Free Explore</strong>'.
@@ -364,56 +707,154 @@
         </div>
     </div>
     
+
     <div id="app-container" class="relative w-screen flex flex-col">
-        <nav class="bg-white shadow-md z-[1002]">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-16">
-                    <div class="flex items-center">
-                        <a href="./" class="font-bold text-lg text-slate-800">Maryland Community Business Compass</a>
-                    </div>
-                    <div class="hidden md:block">
-                        <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="./" class="bg-slate-100 text-slate-800 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Explore Communities</a>
-                            <a href="incentives/" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 px-3 py-2 rounded-md text-sm font-medium">Find Incentives</a>
+        <div class="usa-banner-container">
+            <section class="usa-banner" aria-label="Official website of the State of Maryland">
+                <div class="usa-accordion">
+                    <header class="usa-banner__header padding-x-2">
+                        <div class="usa-banner__inner padding-1 margin-0">
+                            <div class="grid-col-auto">
+                                <img class="usa-banner__header-flag" aria-hidden="true" src="data:image/svg+xml,%3csvg%20width='18'%20height='13'%20viewBox='0%200%2018%2013'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20x='7'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='5'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='1'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='7'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='3'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='3'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='5'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='11'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2011%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='13'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2013%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='17'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2017%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='11'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2011%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='15'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2015%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='15'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2015%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='13'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2013%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='17'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2017%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='6.5'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='9.25'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='6.5'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='1'%20y='9.25'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2017%206.5)'%20fill='white'/%3e%3crect%20x='13'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2013%203.75)'%20fill='white'/%3e%3crect%20x='13'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2013%206.5)'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2017%203.75)'%20fill='%23B50909'/%3e%3crect%20x='0.75'%20y='0.75'%20width='16.5'%20height='11.5'%20stroke='black'%20stroke-width='0.5'/%3e%3c/svg%3e">
+                            </div>
+                            <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
+                                <p class="usa-banner__header-text">An official website of the State of Maryland</p>
+                                <p class="usa-banner__header-action">Here’s how you know</p>
+                            </div>
+                            <button type="button" class="usa-accordion__button usa-banner__button" aria-controls="gov-banner-default" aria-expanded="false">
+                                <span class="usa-banner__button-text">Here’s how you know</span>
+                            </button>
+                        </div>
+                    </header>
+                    <div class="usa-banner__content usa-accordion__content" id="gov-banner-default" hidden="true">
+                        <div class="grid-row grid-gap-lg">
+                            <div class="usa-banner__guidance tablet:grid-col-6">
+                                <img class="usa-banner__icon usa-media-block__img" role="img" alt="" aria-hidden="true" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3e%3ctitle%3eicon-dot-gov%3c/title%3e%3cpath%20fill='%232378C3'%20fill-rule='evenodd'%20d='m32%200c17.7%200%2032%2014.3%2032%2032s-14.3%2032-32%2032-32-14.3-32-32%2014.3-32%2032-32zm0%201.2c-17%200-30.8%2013.8-30.8%2030.8s13.8%2030.8%2030.8%2030.8%2030.8-13.8%2030.8-30.8-13.8-30.8-30.8-30.8zm11.4%2038.9c.5%200%20.9.4.9.8v1.6h-24.6v-1.6c0-.5.4-.8.9-.8zm-17.1-12.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h.8c.5%200%20.9.4.9.8v.8h-21.4v-.8c0-.5.4-.8.9-.8h.8v-9.8zm5.7-8.2%2012.3%204.9v1.6h-1.6c0%20.5-.4.8-.9.8h-19.6c-.5%200-.9-.4-.9-.8h-1.6v-1.6s12.3-4.9%2012.3-4.9z'/%3e%3c/svg%3e">
+                                <div class="usa-media-block__body">
+                                    <p><strong>Official websites use .gov</strong><br>A <strong>.gov</strong> website belongs to an official government organization in the United States.</p>
+                                </div>
+                            </div>
+                            <div class="usa-banner__guidance tablet:grid-col-6">
+                                <img class="usa-banner__icon usa-media-block__img" role="img" alt="" aria-hidden="true" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3e%3ctitle%3eicon-https%3c/title%3e%3cpath%20fill='%23719F2A'%20fill-rule='evenodd'%20d='M32%200c17.673%200%2032%2014.327%2032%2032%200%2017.673-14.327%2032-32%2032C14.327%2064%200%2049.673%200%2032%200%2014.327%2014.327%200%2032%200zm0%201.208C14.994%201.208%201.208%2014.994%201.208%2032S14.994%2062.792%2032%2062.792%2062.792%2049.006%2062.792%2032%2049.006%201.208%2032%201.208zm0%2018.886a7.245%207.245%200%200%201%207.245%207.245v3.103h.52c.86%200%201.557.698%201.557%201.558v9.322c0%20.86-.697%201.558-1.557%201.558h-15.53c-.86%200-1.557-.697-1.557-1.558V32c0-.86.697-1.558%201.557-1.558h.52V27.34A7.245%207.245%200%200%201%2032%2020.094zm0%203.103a4.142%204.142%200%200%200-4.142%204.142v3.103h8.284V27.34A4.142%204.142%200%200%200%2032%2023.197z'/%3e%3c/svg%3e">
+                                <div class="usa-media-block__body">
+                                    <p><strong>Secure .gov websites use HTTPS</strong><br>A <strong>lock</strong> (<span class="icon-lock"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="64" viewBox="0 0 52 64" class="usa-banner__lock-image" role="img" aria-labelledby="banner-lock-description-default" focusable="false"><title id="banner-lock-title-default">Lock</title><desc id="banner-lock-description-default">Locked padlock icon</desc><path fill="#000000" fill-rule="evenodd" d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"></path></svg></span>) or <strong>https://</strong> means you’ve safely connected to the .gov website. Share sensitive information only on official, secure websites.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="-mr-2 flex md:hidden">
-                        <button id="mobile-menu-button" type="button" class="bg-slate-100 inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-slate-800 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-100 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-                            <span class="sr-only">Open main menu</span>
-                            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
-                            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                        </button>
+                </div>
+            </section>
+        </div>
+
+        <header class="usa-header usa-header--basic">
+            <div class="usa-nav-container">
+                <div class="usa-navbar">
+                    <div class="usa-logo custom-logo" id="basic-logo">
+                        <div class="usa-logo__text">
+                            <a href="./" title="Home" aria-label="Home">
+                                <img src="assets/mdwds_logo_notext.svg" alt="Maryland Business Compass Logo">
+                                <span>Maryland Community<br>Business Compass</span>
+                            </a>
+                        </div>
                     </div>
+                    <button type="button" class="usa-menu-btn">Menu</button>
                 </div>
+                <nav aria-label="Primary navigation" class="usa-nav">
+                    <button type="button" class="usa-nav__close"></button>
+                    <ul class="usa-nav__primary usa-accordion">
+                        <li class="usa-nav__primary-item">
+                            <a href="./" class="usa-nav__link"><span>Home</span></a>
+                        </li>
+                        <li class="usa-nav__primary-item">
+                            <a href="incentives/" class="usa-nav__link"><span>Find Incentives</span></a>
+                        </li>
+                        <li class="usa-nav__primary-item">
+                            <a href="./" class="usa-nav__link usa-current" aria-current="page"><span>See the Opportunity</span></a>
+                        </li>
+                        <li class="usa-nav__primary-item">
+                            <a href="#" class="usa-nav__link"><span>Connect to Resources</span></a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-            <div class="md:hidden hidden" id="mobile-menu">
-                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    <a href="./" class="bg-slate-100 text-slate-800 block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Explore Communities</a>
-                    <a href="incentives/" class="text-slate-600 hover:bg-slate-100 hover:text-slate-800 block px-3 py-2 rounded-md text-base font-medium">Find Incentives</a>
-                </div>
-            </div>
-        </nav>
+        </header>
         
         <div class="relative flex-grow">
             <div id="map" class="h-full w-full z-0">
-                <div id="initial-prompt" class="absolute bottom-6 left-4 z-[1000] bg-white p-3 rounded-lg shadow-lg text-left text-xs font-semibold text-slate-700 pointer-events-none w-64">
-                    <p>Click a community on the map or <svg xmlns="http://www.w3.org/2000/svg" class="inline h-4 w-4 -mt-0.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg> search for an address to see community details.</p>
-                </div>
-                <div class="absolute top-4 left-4 md:left-1/2 md:-translate-x-1/2 z-[1001] bg-white p-2 rounded-lg shadow-lg flex items-center space-x-4" role="region" aria-label="Map Tools">
-                    <div>
-                        <label for="map-mode-select" class="block text-xs font-medium text-slate-500">Map Mode</label>
-                        <select id="map-mode-select" class="p-1 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-sm font-semibold">
-                            <option value="smartResearch" selected>Smart Research</option>
-                            <option value="freeExplore">Free Explore</option>
-                        </select>
+                <div id="top-controls-wrapper" class="absolute top-0 left-0 w-full p-4 z-[1003] flex flex-col md:flex-row md:justify-between md:items-start gap-3 pointer-events-none">
+                    <div id="geocoder-container" class="pointer-events-auto"></div>
+
+                    <div id="top-right-controls" class="flex items-center gap-x-3 pointer-events-auto self-end md:self-auto">
+                        <div class="relative">
+                            <label for="sector-select" class="sr-only">My Sector</label>
+                            <select id="sector-select" class="appearance-none bg-base-darkest text-white font-semibold text-sm rounded-md shadow-lg py-2 pl-3 pr-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-base-darkest focus:ring-white">
+                                <option value="childcare">Childcare</option>
+                                <option value="fresh-food">Fresh Food</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                            </div>
+                        </div>
+                        <div id="map-mode-btn-group" class="flex rounded-md shadow-lg overflow-hidden border-2 border-primary-default">
+                            <button data-mode="smartResearch" class="mode-btn px-4 py-2 font-semibold text-sm text-white flex items-center justify-center gap-x-1.5 active">
+                                <span>Smart Research</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff" class="h-5 w-5"><path d="m176-120-56-56 301-302-181-45 198-123-17-234 179 151 216-88-87 217 151 178-234-16-124 198-45-181-301 301Zm24-520-80-80 80-80 80 80-80 80Zm355 197 48-79 93 7-60-71 35-86-86 35-71-59 7 92-79 49 90 22 23 90Zm165 323-80-80 80-80 80 80-80 80ZM569-570Z"></path></svg>
+                            </button>
+                            <button data-mode="freeExplore" class="mode-btn px-4 py-2 font-semibold text-sm text-white">
+                                Free Explore
+                            </button>
+                        </div>
                     </div>
-                    <div>
-                        <label for="sector-select" class="block text-xs font-medium text-slate-500">My Sector</label>
-                        <select id="sector-select" class="p-1 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-sm font-semibold">
-                            <option value="childcare">Childcare</option>
-                            <option value="fresh-food">Fresh Food</option>
-                            <option value="other">Other / Not Sure</option>
-                        </select>
+                </div>
+                <div id="bottom-left-controls" class="absolute bottom-4 left-4 z-[1000] flex flex-col gap-2 pointer-events-none">
+                    <div id="base-layer-control-wrapper" class="pointer-events-auto relative">
+                        <div id="base-layer-btn" role="button" tabindex="0" class="bg-[#1b1b1b] text-white hover:bg-[#3d4551] flex items-center gap-2 font-semibold px-4 py-2 rounded-lg shadow-lg transition w-full justify-between">
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                                <span id="base-layer-btn-label" class="truncate">Base Layer</span>
+                            </div>
+                            <button id="clear-base-layer-btn" class="hidden self-center ml-2 text-slate-300 hover:text-white text-xl font-bold leading-none">&times;</button>
+                        </div>
+                        <div id="base-layer-panel" class="hidden absolute bottom-full mb-2 bg-[#1b1b1b] border border-slate-700 p-4 rounded-lg shadow-lg w-72">
+                            <h2 class="font-semibold mb-2 text-white text-lg">Base layer</h2>
+                            <div id="base-layer-options" class="space-y-1 text-sm max-h-64 overflow-y-auto pr-2">
+                                </div>
+                        </div>
+                    </div>
+
+                    <div id="overlay-control-wrapper" class="pointer-events-auto relative">
+                        <button id="overlay-btn" class="bg-[#1b1b1b] text-white hover:bg-[#3d4551] flex items-center gap-2 font-semibold px-4 py-2 rounded-lg shadow-lg transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M3 9h18M9 21V9"/></svg>
+                            <span>Overlays</span>
+                            <span id="overlay-count" class="hidden bg-[#005ea2] text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full ml-auto">0</span>
+                        </button>
+                        <div id="overlay-panel" class="hidden absolute bottom-full mb-2 bg-[#1b1b1b] text-white p-4 rounded-lg shadow-lg w-72">
+                            <div id="overlay-options" class="space-y-4 text-sm max-h-64 overflow-y-auto pr-2">
+                                <div class="mt-4">
+                                <h2 class="font-semibold mb-2 text-white text-lg">Overlays</h2>
+                                <h3 class="font-semibold mb-2 text-slate-200">POINTS OF INTEREST</h3>
+                                    <div class="space-y-1 text-sm">
+                                        <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="childcare" data-url="childcare.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Childcare Locations</span></label>
+                                        <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="grocery" data-url="grocery.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Grocery Locations</span></label>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                <h3 class="font-semibold mb-2 text-slate-200">INCENTIVE AREAS</h3>
+                                <div class="space-y-1 text-sm">
+                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enough_grantees" data-url="enough_grantees.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">ENOUGH Act</span></label>
+                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="brni_areas" data-url="brni_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">BRNI Areas</span></label>
+                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enterprise_zone_focus_areas" data-url="enterprise_zone_focus_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Enterprise Zone Focus Areas</span></label>
+                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enterprise_zones" data-url="enterprise_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Enterprise Zones</span></label>
+                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="main_street_areas" data-url="main_street_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Main Street Areas</span></label>
+                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="opportunity_zones" data-url="opportunity_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Opportunity Zones</span></label>
+                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="priority_funding_areas" data-url="priority_funding_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Priority Funding Areas</span></label>
+                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="rise_zones" data-url="rise_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">RISE Zones</span></label>
+                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="sustainable_communities" data-url="sustainable_communities.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Sustainable Communities</span></label>
+                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="transit_oriented_development" data-url="transit_oriented_development.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Transit Oriented Development</span></label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -427,50 +868,6 @@
                 </div>
                 <div id="side-panel-content" class="flex-grow overflow-y-auto p-4 space-y-4"></div>
             </div>
-            
-            <div id="map-controls-container" role="region" aria-labelledby="map-controls-heading" class="absolute top-4 left-4 bg-white p-4 rounded-lg shadow-lg z-10 w-auto max-w-sm flex flex-col max-h-[calc(100vh-8rem)]">
-                <h3 id="map-controls-heading" class="sr-only">Map Controls and Variables</h3>
-                <div class="flex justify-between items-center mb-2">
-                    <label for="choropleth-select" class="font-semibold text-slate-700 block">Map Variable</label>
-                    <button id="minimize-controls-btn" title="Minimize Controls" class="p-1 rounded-full hover:bg-slate-200">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                    </button>
-                </div>
-                <div>
-                    <select id="choropleth-select" class="w-full p-2 rounded-md border-2 border-slate-300 focus:ring-slate-500 focus:border-slate-500">
-                        </select>
-                </div>
-                <div id="map-controls-scroll" class="overflow-y-auto mt-4 pr-2">
-                     <div>
-                        <h3 class="font-semibold mb-2 text-slate-700">Base Layers</h3>
-                         <div class="space-y-1 text-sm">
-                            <label class="flex items-center"><input type="checkbox" id="tract-toggle" onchange="toggleTractLayer(this)" checked class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Community Tracts</span></label>
-                        </div>
-                     </div>
-                     <div class="mt-4">
-                        <h3 class="font-semibold mb-2 text-slate-700">Incentive Areas</h3>
-                        <div class="space-y-1 text-sm">
-                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enough_grantees" data-url="enough_grantees.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">ENOUGH Act</span></label>
-                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="brni_areas" data-url="brni_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">BRNI Areas</span></label>
-                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enterprise_zone_focus_areas" data-url="enterprise_zone_focus_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Enterprise Zone Focus Areas</span></label>
-                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enterprise_zones" data-url="enterprise_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Enterprise Zones</span></label>
-                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="main_street_areas" data-url="main_street_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Main Street Areas</span></label>
-                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="opportunity_zones" data-url="opportunity_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Opportunity Zones</span></label>
-                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="priority_funding_areas" data-url="priority_funding_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Priority Funding Areas</span></label>
-                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="rise_zones" data-url="rise_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">RISE Zones</span></label>
-                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="sustainable_communities" data-url="sustainable_communities.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Sustainable Communities</span></label>
-                            <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="transit_oriented_development" data-url="transit_oriented_development.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Transit Oriented Development</span></label>
-                        </div>
-                    </div>
-                     <div class="mt-4">
-                        <h3 class="font-semibold mb-2 text-slate-700">Points of Interest</h3>
-                        <div class="space-y-1 text-sm">
-                            <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="childcare" data-url="childcare.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Childcare Locations</span></label>
-                            <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="grocery" data-url="grocery.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Grocery Locations</span></label>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -480,13 +877,12 @@ let map;
 let geojsonLayer;
 let legend; 
 let searchMarker;
-let showControlsControl;
 const overlayLayers = {};
 let allIncentives = [];
 let tractData;
 let currentMapMode = 'smartResearch';
 let selectedSector = 'other';
-let choroplethSelect, controlsContainer, sidePanel, panelContent, panelTitle;
+let choroplethSelect, sidePanel, panelContent, panelTitle;
 let currentPanelContext = { type: null, data: null };
 let isFirstTimeUser = false;
 let choroplethBreaks;
@@ -705,7 +1101,12 @@ function style(feature) {
 function updateMap() {
     if (geojsonLayer) geojsonLayer.setStyle(style);
     if (legend && legend._map) legend.remove();
-    if (legend) legend.addTo(map);
+
+    // Check if a valid base layer is selected before adding the legend
+    const selectedLayer = choroplethSelect.value;
+    if (legend && CHOROPLETH_OPTIONS[selectedLayer]) {
+        legend.addTo(map);
+    }
 }
 
 function highlightFeature(e) {
@@ -744,24 +1145,10 @@ function onEachFeature(feature, layer) {
 }
 
 function openSidePanel() {
-    document.getElementById('initial-prompt').classList.add('hidden');
-
     if (window.innerWidth < 768) { // Only add class on mobile
         document.body.classList.add('panel-is-open');
     }
-    if (window.innerWidth < 768 && !controlsContainer.classList.contains('minimized')) {
-        controlsContainer.classList.add('minimized');
-        if (showControlsControl) showControlsControl.getContainer().style.display = 'block';
-    }
     sidePanel.classList.add('show');
-}
-
-function openControlsPanel() {
-    if (window.innerWidth < 768 && sidePanel.classList.contains('show')) {
-        sidePanel.classList.remove('show');
-    }
-    controlsContainer.classList.remove('minimized');
-    if (showControlsControl) showControlsControl.getContainer().style.display = 'none';
 }
 
 function clearProviderLayers() {
@@ -1427,9 +1814,10 @@ function isPointInLayer_Turf(point, layer) {
 // --- DOCUMENT READY & INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', async () => {
     setupModalAndState();
-    setupNavbar();
+    setupMdwdsNavbar();
     setupTopControls();
     setupTour();
+    setupLayerControls();
     
     const loadingOverlay = document.getElementById('loading-overlay'); 
 
@@ -1531,15 +1919,20 @@ function showTour(sector) {
     tourOverlay.classList.remove('hidden');
 }
 
-function setupNavbar() {
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    mobileMenuButton.addEventListener('click', () => {
-        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-        mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-        mobileMenu.classList.toggle('hidden');
-        mobileMenuButton.querySelectorAll('svg').forEach(svg => svg.classList.toggle('hidden'));
-    });
+function setupMdwdsNavbar() {
+    const menuBtn = document.querySelector('.usa-menu-btn');
+    const nav = document.querySelector('.usa-nav');
+    const closeBtn = document.querySelector('.usa-nav__close');
+
+    if (menuBtn && nav && closeBtn) {
+        menuBtn.addEventListener('click', () => {
+            nav.classList.add('is-visible');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            nav.classList.remove('is-visible');
+        });
+    }
 }
 
 function setupModalAndState() {
@@ -1568,7 +1961,8 @@ function handleSectorSelection(sector) {
     localStorage.setItem('selectedSector', sector);
     document.getElementById('sector-modal-overlay').classList.add('hidden');
     document.getElementById('sector-select').value = sector;
-    updateChoroplethOptions(sector);
+    updateBaseLayerFilter(sector);
+    setDefaultBaseLayer(sector);
 
     if (isFirstTimeUser) {
         showTour(sector);
@@ -1577,59 +1971,57 @@ function handleSectorSelection(sector) {
 }
 
 function setupTopControls() {
-    const modeSelect = document.getElementById('map-mode-select');
     const sectorSelect = document.getElementById('sector-select');
-    const mapControlsContainer = document.getElementById('map-controls-container');
+    const modeButtons = document.querySelectorAll('#map-mode-btn-group .mode-btn');
 
-    modeSelect.value = currentMapMode;
+    // --- Initial State Setup ---
     sectorSelect.value = selectedSector;
-
-    modeSelect.addEventListener('change', (e) => {
-        // Update the global map mode variable
-        currentMapMode = e.target.value;
-
-        // Check if the panel is already open and has context
-        if (sidePanel.classList.contains('show') && currentPanelContext.data) {
-            // Re-render the panel content based on the new mode and existing context
-            if (currentPanelContext.type === 'tract') {
-                if (currentMapMode === 'smartResearch') {
-                    displaySmartResearchForTract(currentPanelContext.data);
-                } else { // freeExplore
-                    displayFeatureInfo(currentPanelContext.data);
-                }
-            } else if (currentPanelContext.type === 'address') {
-                const { addressName, parcelProps, tractProps, point } = currentPanelContext.data;
-                if (currentMapMode === 'smartResearch') {
-                    displaySmartResearchForAddress(addressName, parcelProps, tractProps, point);
-                } else { // freeExplore
-                    displayAddressInfo(addressName, parcelProps, tractProps, point);
-                }
-            }
+    // Set the initial active button
+    modeButtons.forEach(button => {
+        if (button.dataset.mode === currentMapMode) {
+            button.classList.add('active');
         }
+    });
 
-        // Logic for managing the map controls visibility
-        if (currentMapMode === 'freeExplore') {
-            // On desktop, always open the controls panel.
-            if (window.innerWidth >= 768) {
-                openControlsPanel();
-            } else {
-                // On mobile, ONLY open the controls panel if the side panel is NOT already open.
-                if (!sidePanel.classList.contains('show')) {
-                    openControlsPanel();
+    // --- Event Listeners ---
+    modeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const newMode = button.dataset.mode;
+            // Do nothing if the clicked mode is already active
+            if (newMode === currentMapMode) return;
+
+            // Update the global state
+            currentMapMode = newMode;
+
+            // Update button styles
+            modeButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // --- Core logic (same as before) ---
+            if (sidePanel.classList.contains('show') && currentPanelContext.data) {
+                if (currentPanelContext.type === 'tract') {
+                    if (currentMapMode === 'smartResearch') {
+                        displaySmartResearchForTract(currentPanelContext.data);
+                    } else {
+                        displayFeatureInfo(currentPanelContext.data);
+                    }
+                } else if (currentPanelContext.type === 'address') {
+                    const { addressName, parcelProps, tractProps, point } = currentPanelContext.data;
+                    if (currentMapMode === 'smartResearch') {
+                        displaySmartResearchForAddress(addressName, parcelProps, tractProps, point);
+                    } else {
+                        displayAddressInfo(addressName, parcelProps, tractProps, point);
+                    }
                 }
             }
-        } else {
-            controlsContainer.classList.add('minimized');
-            if (showControlsControl) {
-                showControlsControl.getContainer().style.display = 'block';
-            }
-        }
+        });
     });
 
     sectorSelect.addEventListener('change', (e) => {
         selectedSector = e.target.value;
         localStorage.setItem('selectedSector', selectedSector);
-        updateChoroplethOptions(selectedSector);
+        updateBaseLayerFilter(selectedSector);
+        setDefaultBaseLayer(selectedSector);
 
         if (sidePanel.classList.contains('show') && currentPanelContext.data) {
             if (currentMapMode === 'smartResearch') {
@@ -1651,47 +2043,20 @@ function setupTopControls() {
     });
 }
 
-function updateChoroplethOptions(sector) {
-    const select = document.getElementById('choropleth-select');
-    if (!select) return; // Guard clause
-    const currentVal = select.value;
-    select.innerHTML = '';
-    
-    let firstOption = null;
-
-    Object.entries(CHOROPLETH_OPTIONS).forEach(([key, option]) => {
-        if (sector === 'other' || option.sector === 'general' || option.sector === sector) {
-            const opt = document.createElement('option');
-            opt.value = key;
-            opt.textContent = option.label;
-            select.appendChild(opt);
-            if (!firstOption) firstOption = key;
-        }
-    });
-    
-    select.value = {
-        'childcare': 'childcare_unmet_demand',
-        'fresh-food': 'grocery_unmet_demand',
-        'other': 'community_momentum_index'
-    }[sector] || firstOption;
-    
-    if (map && geojsonLayer) {
-        updateMap();
-    }
-}
-
 // --- INITIALIZATION FUNCTION ---
 function initializeMap() {
     // Assign global element variables
     choroplethSelect = document.getElementById('choropleth-select');
-    controlsContainer = document.getElementById('map-controls-container');
+    let optionsHTML = '';
+    for (const [key, option] of Object.entries(CHOROPLETH_OPTIONS)) {
+        optionsHTML += `<option value="${key}">${option.label}</option>`;
+    }
+    choroplethSelect.innerHTML = optionsHTML;
     sidePanel = document.getElementById('side-panel');
     panelContent = document.getElementById('side-panel-content');
     panelTitle = document.getElementById('panel-title');
-
-    updateChoroplethOptions(selectedSector);
     
-    legend = L.control({ position: 'bottomright' });
+    legend = L.control({ position: 'topright' });
     legend.onAdd = function (map) {
         const div = L.DomUtil.create('div', 'info-legend');
         div.setAttribute('role', 'region');
@@ -1755,19 +2120,18 @@ function initializeMap() {
     choroplethSelect.addEventListener('change', updateMap);
     document.getElementById('close-panel-btn').addEventListener('click', () => {
         sidePanel.classList.remove('show');
+
         document.body.classList.remove('panel-is-open');
         currentPanelContext = { type: null, data: null };
         if (lastClickedLayer) {
             geojsonLayer.resetStyle(lastClickedLayer);
             lastClickedLayer = null;
         }
-
-        document.getElementById('initial-prompt').classList.remove('hidden');
     });
 
-    L.Control.geocoder({
-        position: 'topright',
-        placeholder: 'Search for an address...',
+    const geocoder = L.Control.geocoder({
+        collapsed: false,
+        placeholder: 'Search for an address',
         defaultMarkGeocode: false,
         geocoder: L.Control.Geocoder.mapbox({ 
             apiKey: MAPBOX_ACCESS_TOKEN,
@@ -1800,40 +2164,17 @@ function initializeMap() {
             displayAddressInfo(name, parcelData, tractFeature?.properties, center);
         }
 
-        // Create a small bounding box around the point to use fitBounds
-        const bounds = L.latLng(center).toBounds(100); // 100-meter radius
-        // Use fitBounds with the dynamic padding and a maxZoom to prevent zooming in too far
+        const bounds = L.latLng(center).toBounds(100); 
         map.fitBounds(bounds, { ...getMapPadding(), maxZoom: 16 });
-    })
-    .addTo(map);
+    });
 
-    const minimizeBtn = document.getElementById('minimize-controls-btn');
-    const ShowControlsControl = L.Control.extend({
-        onAdd: function(map) {
-            const btn = L.DomUtil.create('button', 'leaflet-bar leaflet-control leaflet-control-custom bg-white p-2 rounded-lg shadow-lg');
-            btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`;
-            btn.title = "Show Map Controls";
-            btn.style.display = 'none'; 
-            L.DomEvent.on(btn, 'click', (e) => {
-                L.DomEvent.stop(e);
-                openControlsPanel();
-            });
-            return btn;
-        },
-        onRemove: function(map) {}
-    });
-    showControlsControl = new ShowControlsControl({ position: 'topright' });
-    map.addControl(showControlsControl);
-    minimizeBtn.addEventListener('click', () => {
-        controlsContainer.classList.add('minimized');
-        showControlsControl.getContainer().style.display = 'block';
-    });
-    // Minimize by default
-    controlsContainer.classList.add('minimized');
-    showControlsControl.getContainer().style.display = 'block';
+    // Add the geocoder to our new container div instead of directly to the map
+    geocoder.onAdd(map);
+    document.getElementById('geocoder-container').appendChild(geocoder.getContainer());
 
     geojsonLayer = L.geoJSON(tractData, { style: style, onEachFeature: onEachFeature }).addTo(map);
     updateMap();
+    setDefaultBaseLayer(selectedSector);
 }
 
 // --- OVERLAY LAYER TOGGLE LOGIC ---
@@ -1950,8 +2291,178 @@ function setAppHeight() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', setAppHeight);
-window.addEventListener('resize', setAppHeight);
+function setSiteHeaderHeight() {
+    // Compute combined visible height of the banner and header and set a CSS variable
+    const bannerContainer = document.querySelector('.usa-banner-container');
+    const header = document.querySelector('.usa-header');
+    const bannerHeight = (bannerContainer && bannerContainer.offsetHeight) ? bannerContainer.offsetHeight : 0;
+    const headerHeight = (header && header.offsetHeight) ? header.offsetHeight : 0;
+    const total = Math.ceil(bannerHeight + headerHeight);
+    document.documentElement.style.setProperty('--site-header-height', `${total}px`);
+    // If map exists, trigger resize so Leaflet recalculates controls and sizing
+    if (map) map.invalidateSize();
+}
+
+function registerHeaderHeightObserver() {
+    const bannerContainer = document.querySelector('.usa-banner-container');
+    if (!bannerContainer) return;
+    const obs = new MutationObserver(() => {
+        // Defer slightly to allow the DOM to settle when the banner content toggles
+        setTimeout(setSiteHeaderHeight, 50);
+    });
+    obs.observe(bannerContainer, { attributes: true, childList: true, subtree: true });
+}
+
+function updateBaseLayerFilter(sector) {
+    const allOptions = document.querySelectorAll('#base-layer-options label');
+    allOptions.forEach(label => {
+        const input = label.querySelector('input');
+        if (!input) return;
+
+        const optionValue = input.value;
+        if (optionValue === 'none') {
+            label.style.display = 'flex';
+            return;
+        }
+
+        const optionInfo = CHOROPLETH_OPTIONS[optionValue];
+        if (optionInfo && (optionInfo.sector === 'general' || optionInfo.sector === sector || sector === 'other')) {
+            label.style.display = 'flex'; // Show relevant options
+        } else {
+            label.style.display = 'none'; // Hide irrelevant options
+        }
+    });
+}
+
+function setDefaultBaseLayer(sector) {
+    // Define the default layer for each sector
+    const defaultLayer = {
+        'childcare': 'childcare_unmet_demand',
+        'fresh-food': 'grocery_unmet_demand',
+        'other': 'community_momentum_index'
+    }[sector] || 'none';
+
+    // Find the corresponding radio button
+    const defaultRadio = document.querySelector(`#base-layer-options input[value="${defaultLayer}"]`);
+    
+    if (defaultRadio && !defaultRadio.checked) {
+        defaultRadio.checked = true;
+        // Dispatch a change event to trigger all the update logic (map, legend, button label)
+        defaultRadio.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+}
+
+function setupLayerControls() {
+    const baseLayerBtn = document.getElementById('base-layer-btn');
+    const baseLayerPanel = document.getElementById('base-layer-panel');
+    const baseLayerOptionsContainer = document.getElementById('base-layer-options');
+    const baseLayerBtnLabel = document.getElementById('base-layer-btn-label');
+    const clearBaseLayerBtn = document.getElementById('clear-base-layer-btn');
+
+    const overlayBtn = document.getElementById('overlay-btn');
+    const overlayPanel = document.getElementById('overlay-panel');
+    const overlayCount = document.getElementById('overlay-count');
+    const overlayOptionsContainer = document.getElementById('overlay-options');
+
+    const oldOverlayContainer = document.querySelector('[aria-labelledby="map-controls-heading"] #map-controls-scroll');
+    if (oldOverlayContainer) {
+        overlayOptionsContainer.append(...oldOverlayContainer.children);
+    }
+
+    // --- Base Layer Logic ---
+    baseLayerOptionsContainer.innerHTML = ''; // Clear previous options
+
+    // Add "None" option first
+    const noneLabel = document.createElement('label');
+    noneLabel.className = 'flex items-center text-white';
+    noneLabel.innerHTML = `<input type="radio" name="base-layer" value="none" checked class="h-4 w-4 rounded-sm border-gray-300 text-primary-default focus:ring-primary-default"> <span class="ml-2">None</span>`;
+    baseLayerOptionsContainer.appendChild(noneLabel);
+
+    // Add all other options from our config
+    for (const [key, option] of Object.entries(CHOROPLETH_OPTIONS)) {
+        const label = document.createElement('label');
+        label.className = 'flex items-center text-white';
+        label.innerHTML = `<input type="radio" name="base-layer" value="${key}" class="h-4 w-4 rounded-sm border-gray-300 text-primary-default focus:ring-primary-default"> <span class="ml-2">${option.label}</span>`;
+        baseLayerOptionsContainer.appendChild(label);
+    }
+
+    // Set the initial filter based on the globally selected sector
+    updateBaseLayerFilter(selectedSector);
+
+    baseLayerBtn.addEventListener('click', (e) => {
+        if (clearBaseLayerBtn.contains(e.target)) return;
+        baseLayerPanel.classList.toggle('hidden');
+        overlayPanel.classList.add('hidden');
+    });
+
+    baseLayerOptionsContainer.addEventListener('change', (e) => {
+        const selectedValue = e.target.value;
+        if (selectedValue === 'none') {
+            if (map.hasLayer(geojsonLayer)) map.removeLayer(geojsonLayer);
+            if (legend && legend._map) legend.remove();
+            baseLayerBtnLabel.textContent = 'Base Layer';
+            clearBaseLayerBtn.classList.add('hidden');
+        } else {
+            if (!map.hasLayer(geojsonLayer)) map.addLayer(geojsonLayer);
+            choroplethSelect.value = selectedValue;
+            updateMap();
+            baseLayerBtnLabel.textContent = CHOROPLETH_OPTIONS[selectedValue].label;
+            clearBaseLayerBtn.classList.remove('hidden');
+        }
+        setTimeout(() => baseLayerPanel.classList.add('hidden'), 100);
+    });
+
+    clearBaseLayerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const noneRadio = document.querySelector('input[name="base-layer"][value="none"]');
+        if (noneRadio) {
+            noneRadio.checked = true;
+            noneRadio.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    });
+
+    // --- Overlay Logic ---
+    overlayBtn.addEventListener('click', () => {
+        overlayPanel.classList.toggle('hidden');
+        baseLayerPanel.classList.add('hidden');
+    });
+
+    const updateOverlayCount = () => {
+        const checkedOverlays = overlayOptionsContainer.querySelectorAll('input[type="checkbox"]:checked');
+        const count = checkedOverlays.length;
+        overlayCount.textContent = count;
+        if (count > 0) {
+            overlayCount.classList.remove('hidden');
+        } else {
+            overlayCount.classList.add('hidden');
+        }
+    };
+
+    overlayOptionsContainer.addEventListener('change', updateOverlayCount);
+    updateOverlayCount();
+    L.DomEvent.on(baseLayerPanel, 'wheel', L.DomEvent.stopPropagation);
+    L.DomEvent.on(overlayPanel, 'wheel', L.DomEvent.stopPropagation);
+
+    document.addEventListener('click', (e) => {
+        if (!baseLayerBtn.parentElement.contains(e.target)) {
+            baseLayerPanel.classList.add('hidden');
+        }
+        if (!overlayBtn.parentElement.contains(e.target)) {
+            overlayPanel.classList.add('hidden');
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    setAppHeight();
+    setSiteHeaderHeight();
+    registerHeaderHeightObserver();
+});
+
+window.addEventListener('resize', () => {
+    setAppHeight();
+    setSiteHeaderHeight();
+});
 </script>
 </body>
 </html>
