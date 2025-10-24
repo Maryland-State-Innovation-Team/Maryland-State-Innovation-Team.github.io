@@ -997,10 +997,10 @@ const CHOROPLETH_OPTIONS = {
     'childcare_demand_score': { label: 'Childcare Demand Score', format: (d) => formatNumber(d), sector: 'childcare' },
     'childcare_spending_per_under5': { label: 'Childcare Spending (per child)', format: (d) => formatCurrency(d), sector: 'childcare' },
     // Fresh Food
-    'grocery_unmet_demand': { label: 'Fresh Food Opportunity Score', format: (d) => d.toFixed(0), sector: 'fresh-food' },
+    'grocery_gap_score': { label: 'Fresh Food Intervention Score', format: (d) => d.toFixed(0), sector: 'fresh-food' },
+    'grocery_unmet_market_demand': { label: 'Fresh Food Opportunity Score', format: (d) => d.toFixed(0), sector: 'fresh-food' },
     'grocery_supply_score': { label: 'Fresh Food Access Score', format: (d) => d.toFixed(0), sector: 'fresh-food' },
-    'grocery_demand_score': { label: 'Fresh Food Demand Score', format: (d) => d.toFixed(0), sector: 'fresh-food' },
-    'grocery_latent_demand_score': { label: 'Fresh Food Latent Demand Score', format: (d) => d.toFixed(0), sector: 'fresh-food' },
+    'grocery_market_demand_score': { label: 'Fresh Food Market Demand', format: (d) => d.toFixed(0), sector: 'fresh-food' },
     'grocery_need_score': { label: 'Fresh Food Need', format: (d) => formatPercent(d), sector: 'fresh-food' },
     'per_household_food_at_home': { label: 'Grocery spending (per household)', format: (d) => formatCurrency(d), sector: 'fresh-food' },
     // General
@@ -1403,8 +1403,8 @@ function displayFeatureInfo(tractFeature) {
     const popChange = safeParseFloat(properties.pop_change2530);
     const momentumTooltip = "The Community Momentum Index measures economic vitality by averaging growth rates in business formations, licenses, jobs, and payroll. Positive scores reflect community economic growth.";
     const childcareOppTooltip = "Child care opportunity score is the number of children 5 and under in households where all parents are in the laborforce, minus the licensed capacity of local child care providers. Positive scores reflect unmet community demand.";
-    const latentDemandTooltip = "Estimates how much more people would spend on fresh food if they had good access to high-quality stores, based on local demographics and current access.";
-    const unmetDemandTooltip = "Measures the gap between potential and actual grocery access. Positive scores indicate high latent demand and low current access, signaling a strong market opportunity. Negative scores suggest access meets or exceeds demand.";
+    const unmetDemandTooltip = "Measures the gap between a community's economic potential to support a store (Market Demand) and its current store access (Supply). High positive scores signal a strong market opportunity where potential outstrips supply.";
+    const gapTooltip = "Measures the intersection of fresh food need and low access. This score identifies the most critical \"intervention zones\" where help is needed immediately."
 
     const createInfoIcon = (tooltipText) => `
         <div class="info-tooltip inline-block ml-1" tabindex="0">
@@ -1455,8 +1455,9 @@ function displayFeatureInfo(tractFeature) {
                 <table class="explore-table">
                     <tr><th>Access Score</th><td>${properties.grocery_supply_score.toFixed(2)}</td></tr>
                     <tr><th>Need Score</th><td>${formatPercent(properties.grocery_need_score)}</td></tr>
-                    <tr><th>Latent Demand Score ${createInfoIcon(latentDemandTooltip)}</th><td>${properties.grocery_demand_score.toFixed(2)}</td></tr>
-                    <tr><th>Unmet Demand Score ${createInfoIcon(unmetDemandTooltip)}</th><td>${properties.grocery_unmet_demand.toFixed(2)}</td></tr>
+                    <tr><th>Intervention Score (Gap) ${createInfoIcon(gapTooltip)}</th><td>${properties.grocery_gap_score.toFixed(2)}</td></tr>
+                    <tr><th>Market Demand Score</th><td>${properties.grocery_market_demand_score.toFixed(2)}</td></tr>
+                    <tr><th>Unmet Market Demand ${createInfoIcon(unmetDemandTooltip)}</th><td>${properties.grocery_unmet_market_demand.toFixed(2)}</td></tr>
                     <tr><th>Grocery Spending (per household)</th><td>${formatCurrency(properties.per_household_food_at_home)}</td></tr>
                 </table>
             </div>`;
@@ -1700,18 +1701,18 @@ function displaySmartResearchForTract(tractFeature) {
     }
     
     if (selectedSector === 'fresh-food') {
-         const unmet = p.grocery_unmet_demand;
-         const { label: needLabel, color: needColor } = getTieredLabel(unmet, 'grocery_unmet_demand', {
-            labels: ['LOW OPPORTUNITY', 'MODERATE OPPORTUNITY', 'SIGNIFICANT OPPORTUNITY'],
+        const gapScore = p.grocery_gap_score;
+        const { label: needLabel, color: needColor } = getTieredLabel(gapScore, 'grocery_gap_score', {
+            labels: ['LOW NEED', 'MODERATE NEED', 'HIGH NEED'],
             colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
         });
-         questions.push(createAccordionItem({
+        questions.push(createAccordionItem({
             question: "Is there a need for more fresh food options in this area?",
             teaser: needLabel,
             teaserColor: needColor,
             iconSVG: ICONS.need,
-            answerHTML: `<p>This community has a fresh food opportunity score of <strong>${unmet.toFixed(2)}</strong>, reflecting local latent demand and current store access.</p>`,
-            mapAction: 'showLayer:grocery_unmet_demand', 
+            answerHTML: `<p>This community has a high need for intervention. The <strong>Intervention Score of ${gapScore.toFixed(2)}</strong> reflects the intersection of high food insecurity and low geographic access to fresh food.</p>`,
+            mapAction: 'showLayer:grocery_gap_score', 
             context
         }));
 
@@ -1863,9 +1864,9 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
     }
 
     if (selectedSector === 'fresh-food') {
-        const unmet = tractProps.grocery_unmet_demand;
-        const { label: needLabel, color: needColor } = getTieredLabel(unmet, 'grocery_unmet_demand', {
-            labels: ['LOW OPPORTUNITY', 'MODERATE OPPORTUNITY', 'SIGNIFICANT OPPORTUNITY'],
+        const gapScore = tractProps.grocery_gap_score;
+        const { label: needLabel, color: needColor } = getTieredLabel(gapScore, 'grocery_gap_score', {
+            labels: ['LOW NEED', 'MODERATE NEED', 'HIGH NEED'],
             colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
         });
         questions.push(createAccordionItem({
@@ -1873,8 +1874,8 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
             teaser: needLabel,
             teaserColor: needColor,
             iconSVG: ICONS.need,
-            answerHTML: `<p>This community has a fresh food opportunity score of <strong>${unmet.toFixed(2)}</strong>, reflecting local latent demand and current store access.</p>`,
-            mapAction: 'showLayer:grocery_unmet_demand',
+            answerHTML: `<p>This community has a high need for intervention. The <strong>Intervention Score of ${gapScore.toFixed(2)}</strong> reflects the intersection of high food insecurity and low geographic access to fresh food.</p>`,
+            mapAction: 'showLayer:grocery_gap_score', 
             context
         }));
 
@@ -2108,8 +2109,8 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
 
     const momentumTooltip = "The Community Momentum Index measures economic vitality by averaging growth rates in business formations, licenses, jobs, and payroll. Positive scores reflect community economic growth.";
     const childcareOppTooltip = "Child care opportunity score is the number of children 5 and under in households where all parents are in the laborforce, minus the licensed capacity of local child care providers. Positive scores reflect unmet community demand.";
-    const latentDemandTooltip = "Estimates how much more people would spend on fresh food if they had good access to high-quality stores, based on local demographics and current access.";
-    const unmetDemandTooltip = "Measures the gap between potential and actual grocery access. Positive scores indicate high latent demand and low current access, signaling a strong market opportunity. Negative scores suggest access meets or exceeds demand.";
+    const unmetDemandTooltip = "Measures the gap between a community's economic potential to support a store (Market Demand) and its current store access (Supply). High positive scores signal a strong market opportunity where potential outstrips supply.";
+    const gapTooltip = "Measures the intersection of fresh food need and low access. This score identifies the most critical \"intervention zones\" where help is needed immediately."
 
     const createInfoIcon = (tooltipText) => `
         <div class="info-tooltip inline-block ml-1" tabindex="0">
@@ -2183,8 +2184,9 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
                     <table class="explore-table">
                         <tr><th>Access Score</th><td>${properties.grocery_supply_score.toFixed(2)}</td></tr>
                         <tr><th>Need Score</th><td>${formatPercent(properties.grocery_need_score)}</td></tr>
-                        <tr><th>Latent Demand Score ${createInfoIcon(latentDemandTooltip)}</th><td>${properties.grocery_demand_score.toFixed(2)}</td></tr>
-                        <tr><th>Unmet Demand Score ${createInfoIcon(unmetDemandTooltip)}</th><td>${properties.grocery_unmet_demand.toFixed(2)}</td></tr>
+                        <tr><th>Intervention Score (Gap) ${createInfoIcon(gapTooltip)}</th><td>${properties.grocery_gap_score.toFixed(2)}</td></tr>
+                        <tr><th>Market Demand Score</th><td>${properties.grocery_market_demand_score.toFixed(2)}</td></tr>
+                        <tr><th>Unmet Market Demand ${createInfoIcon(unmetDemandTooltip)}</th><td>${properties.grocery_unmet_market_demand.toFixed(2)}</td></tr>
                         <tr><th>Grocery Spending (per household)</th><td>${formatCurrency(properties.per_household_food_at_home)}</td></tr>
                     </table>
                 </div>`;
@@ -2861,7 +2863,7 @@ function setDefaultBaseLayer(sector) {
     // Define the default layer for each sector
     const defaultLayer = {
         'childcare': 'childcare_unmet_demand',
-        'fresh-food': 'grocery_unmet_demand',
+        'fresh-food': 'grocery_gap_score',
         'other': 'community_momentum_index'
     }[sector] || 'none';
 
