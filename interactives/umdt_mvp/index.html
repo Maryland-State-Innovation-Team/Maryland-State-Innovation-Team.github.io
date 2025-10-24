@@ -549,7 +549,6 @@
             line-height: 1.5;
             border: 1px solid #a9aeb1; /* base-light */
             border-radius: 0.25rem; 
-            outline: none !important;
             box-shadow: none !important;
         }
         .leaflet-control-geocoder-form input::placeholder {
@@ -590,6 +589,10 @@
             background-color: #d9e8f6; /* primary-lighter */
             color: #162e51; /* primary-darker */
         }
+        .leaflet-control-geocoder-form input:focus-visible {
+            outline: 0.25rem solid #2491ff; /* MDWDS focus color */
+            outline-offset: 0;
+        }
 
         /* --- New Responsive & Panel-Aware Styles --- */
         @media (max-width: 767px) {
@@ -624,8 +627,7 @@
             background-color: #005ea2; /* primary-default */
         }
         .mode-btn:focus-visible {
-            outline: 2px solid #ffffff;
-            outline-offset: -2px;
+            box-shadow: inset 0 0 0 0.25rem #2491ff;
             z-index: 10;
         }
         .info-legend {
@@ -736,9 +738,9 @@
 <body class="bg-slate-100 text-slate-800">
     <select id="choropleth-select" class="hidden w-full p-2 rounded-md border-2 border-slate-300 focus:ring-slate-500 focus:border-slate-500">
     </select>
-    <div id="tour-overlay" class="hidden fixed left-0 w-full bg-black bg-opacity-70 z-[30000] flex items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div id="tour-overlay" class="hidden fixed left-0 w-full bg-black bg-opacity-70 z-[30000] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="tour-heading">
         <div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full text-center" id="tour-overlay-content">
-            <h2 class="text-2xl font-bold text-slate-800 mb-3">Welcome! 👋</h2>
+            <h2 id="tour-heading" class="text-2xl font-bold text-slate-800 mb-3">Welcome! 👋</h2>
             <p class="text-slate-600">
                 We recommend getting started in the currently selected '<strong>Insights</strong>' mode. Once you're familiar with the data, check out '<strong>Explore</strong>'.
             </p>
@@ -847,9 +849,9 @@
         </header>
         
         <div class="relative flex-grow">
-            <div id="map" class="h-full w-full z-0">
-                <div id="top-controls-wrapper" class="absolute top-0 left-0 w-full p-4 z-[1005] flex flex-col md:flex-row md:justify-between md:items-start gap-3 pointer-events-none">
-                    <div id="geocoder-container" class="pointer-events-auto"></div>
+            <div id="map" class="h-full w-full z-0" tabindex="-1">
+                <div id="top-controls-wrapper" role="region" aria-label="Map Controls" class="absolute top-0 left-0 w-full p-4 z-[1005] flex flex-col md:flex-row md:justify-between md:items-start gap-3 pointer-events-none">
+                    <div id="geocoder-container" role="search" class="pointer-events-auto"></div>
 
                     <div id="top-right-controls" class="flex items-center gap-x-3 pointer-events-auto self-end md:self-auto">
                         <div class="relative">
@@ -876,12 +878,12 @@
                 </div>
                 <div id="bottom-left-controls" class="absolute bottom-4 left-4 z-[1000] flex flex-col gap-2 pointer-events-none">
                     <div id="base-layer-control-wrapper" class="pointer-events-auto relative">
-                        <div id="base-layer-btn" role="button" tabindex="0" class="bg-[#1b1b1b] text-white hover:bg-[#3d4551] flex items-center gap-2 font-semibold px-4 py-2 rounded-lg shadow-lg transition w-full justify-between">
-                            <div class="flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        <div id="base-layer-btn-container" class="bg-[#1b1b1b] flex items-center justify-between font-semibold px-4 py-2 rounded-lg shadow-lg w-full">
+                            <button id="base-layer-toggle-btn" class="flex-grow flex items-center gap-2 text-white text-left">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                                 <span id="base-layer-btn-label" class="truncate">Base Layer</span>
-                            </div>
-                            <button id="clear-base-layer-btn" class="hidden self-center ml-2 text-slate-300 hover:text-white text-xl font-bold leading-none">&times;</button>
+                            </button>
+                            <button id="clear-base-layer-btn" aria-label="Clear base layer" class="hidden self-center ml-2 text-slate-300 hover:text-white text-xl font-bold leading-none">&times;</button>
                         </div>
                         <div id="base-layer-panel" class="hidden absolute bottom-full mb-2 bg-[#1b1b1b] border border-slate-700 p-4 rounded-lg shadow-lg w-72">
                             <h2 class="font-semibold mb-2 text-white text-lg">Base layer</h2>
@@ -941,6 +943,24 @@
     </div>
 
 <script>
+// --- Global Patch for L.MarkerCluster ---
+
+// Store the original internal method for creating an icon.
+const _oldInitIcon = L.MarkerCluster.prototype._initIcon;
+
+// Override the method with our custom logic.
+L.MarkerCluster.prototype._initIcon = function () {
+    // Run the original method first to let it create the icon element.
+    _oldInitIcon.call(this);
+
+    // Now, access the newly created element (this._icon) and modify it directly.
+    if (this._icon) {
+        this._icon.setAttribute('tabindex', '-1');
+        this._icon.setAttribute('focusable', 'false');
+        // We can also remove the 'role' as it's not meant to be a user-interactive 'button'.
+        this._icon.removeAttribute('role');
+    }
+};
 // --- GLOBAL STATE AND CONFIGURATION ---
 let map;
 let geojsonLayer;
@@ -1179,6 +1199,18 @@ function updateGeocoderWidth() {
 }
 
 // --- ALL MAP LOGIC & HELPER FUNCTIONS (GLOBAL SCOPE) ---
+function disableMapLayerFocus(layerGroup) {
+    if (layerGroup && typeof layerGroup.eachLayer === 'function') {
+        layerGroup.eachLayer(function(layer) {
+            const element = layer.getElement ? layer.getElement() : layer._icon;
+            if (element) {
+                element.setAttribute('tabindex', '-1');
+                element.setAttribute('aria-hidden', 'true');
+            }
+        });
+    }
+}
+
 let lastClickedLayer = null;
 const sequentialColors = ['#eff3ff', '#bdd7e7', '#6baed6', '#3182bd', '#08519c'];
 const divergingColors = ['#e41d3d', '#f89747', '#fee8a0', '#a6d8f0', '#28a0cb', '#005ea2'].reverse();
@@ -2252,6 +2284,7 @@ function isPointInLayer_Turf(point, layer) {
 
 // --- DOCUMENT READY & INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', async () => {
+    setupBannerAccordion();
     setupModalAndState();
     setupMdwdsNavbar();
     setupTopControls();
@@ -2265,8 +2298,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         maxBounds: [[35.89358, -86.48730], [41.72287, -68.04920]], 
         zoom: 8,
         minZoom: 7,
-        zoomControl: false 
+        zoomControl: false
     });
+    map.keyboard.disable();
 
     map.on('movestart', () => {
         if (geojsonLayer) {
@@ -2347,6 +2381,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // --- SETUP FUNCTIONS ---
+function setupBannerAccordion() {
+    const bannerButton = document.querySelector('.usa-banner .usa-accordion__button');
+    const bannerContent = document.querySelector('.usa-banner .usa-accordion__content');
+
+    if (bannerButton && bannerContent) {
+        bannerButton.addEventListener('click', () => {
+            const isExpanded = bannerButton.getAttribute('aria-expanded') === 'true';
+            bannerButton.setAttribute('aria-expanded', !isExpanded);
+            bannerContent.hidden = isExpanded;
+        });
+    }
+}
 function setupTour() {
     const tourOverlay = document.getElementById('tour-overlay');
     const closeTourBtn = document.getElementById('close-tour-btn');
@@ -2399,6 +2445,7 @@ function setupModalAndState() {
     } else {
         isFirstTimeUser = true;
         modalOverlay.classList.remove('hidden');
+        modalOverlay.inert = false;
     }
 
     modalOverlay.addEventListener('click', (e) => {
@@ -2413,7 +2460,9 @@ function setupModalAndState() {
 function handleSectorSelection(sector) {
     selectedSector = sector;
     localStorage.setItem('selectedSector', sector);
-    document.getElementById('sector-modal-overlay').classList.add('hidden');
+    const modalOverlay = document.getElementById('sector-modal-overlay');
+    modalOverlay.classList.add('hidden');
+    modalOverlay.inert = true;
     document.getElementById('sector-select').value = sector;
     updateBaseLayerFilter(sector);
     setDefaultBaseLayer(sector);
@@ -2648,6 +2697,20 @@ function initializeMap() {
     }
 
     geojsonLayer = L.geoJSON(tractData, { style: style, onEachFeature: onEachFeature }).addTo(map);
+    disableMapLayerFocus(geojsonLayer);
+    // --- Forcefully disable focus on the map's SVG vector pane ---
+    // This is necessary because some browsers will focus the SVG container
+    // regardless of the layer's keyboard or tabindex settings.
+    const vectorPane = document.querySelector('#map .leaflet-pane.leaflet-overlay-pane svg');
+    if (vectorPane) {
+        vectorPane.setAttribute('focusable', 'false');
+    }
+
+    // Also ensure the map container itself is not in the tab order
+    const mapContainer = document.getElementById('map');
+    if(mapContainer) {
+        mapContainer.setAttribute('tabindex', '-1');
+    }
     updateMap();
     setDefaultBaseLayer(selectedSector);
 }
@@ -2689,7 +2752,13 @@ async function togglePointLayer(checkbox) {
             const response = await fetch(url);
             if (!response.ok) throw new Error(`Failed to load ${url}`);
             const data = await response.json();
-            const markers = L.markerClusterGroup({ clusterPane: 'clusterTopPane' });
+            const markers = L.markerClusterGroup({
+                clusterPane: 'clusterTopPane' 
+            });
+
+            markers.on('animationend', function () {
+                disableMapLayerFocus(this);
+            });
             const isChildcare = layerName === 'childcare';
             const pointStyle = { radius: 6, fillColor: isChildcare ? "#fca5a5" : "#6ee7b7", color: "#000", weight: 1, opacity: 1, fillOpacity: 0.8 };
 
@@ -2774,8 +2843,15 @@ async function preloadPointLayers() {
             if (!response.ok) throw new Error(`Failed to pre-load ${url}`);
             const data = await response.json();
             
-            // This logic is copied from togglePointLayer to ensure layers are created identically
-            const markers = L.markerClusterGroup({ clusterPane: 'clusterTopPane' });
+            // The global patch handles the icons, so we just need a simple instantiation.
+            const markers = L.markerClusterGroup({
+                clusterPane: 'clusterTopPane' 
+            });
+
+            // This is still useful for handling the individual, un-clustered markers.
+            markers.on('animationend', function () {
+                disableMapLayerFocus(this);
+            });
             const isChildcare = layerName === 'childcare';
             const pointStyle = { radius: 6, fillColor: isChildcare ? "#fca5a5" : "#6ee7b7", color: "#000", weight: 1, opacity: 1, fillOpacity: 0.8 };
 
@@ -2886,7 +2962,6 @@ function setDefaultBaseLayer(sector) {
 }
 
 function setupLayerControls() {
-    const baseLayerBtn = document.getElementById('base-layer-btn');
     const baseLayerPanel = document.getElementById('base-layer-panel');
     const baseLayerOptionsContainer = document.getElementById('base-layer-options');
     const baseLayerBtnLabel = document.getElementById('base-layer-btn-label');
@@ -2917,13 +2992,28 @@ function setupLayerControls() {
     // Set the initial filter based on the globally selected sector
     updateBaseLayerFilter(selectedSector);
 
-    baseLayerBtn.addEventListener('click', (e) => {
-        if (clearBaseLayerBtn.contains(e.target)) return;
-        baseLayerPanel.classList.toggle('hidden');
+    document.getElementById('base-layer-toggle-btn').addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent the click/enter event from propagating
+        const isHidden = baseLayerPanel.classList.toggle('hidden');
         overlayPanel.classList.add('hidden');
+
+        if (!isHidden) { // If the panel was just opened...
+            // Use setTimeout to push the focus command to the end of the event queue.
+            // This prevents the key press that opened the panel from also selecting the radio.
+            setTimeout(() => {
+                // Find the currently checked radio button and focus it.
+                const checkedRadio = baseLayerPanel.querySelector('input[type="radio"]:checked');
+                if (checkedRadio) {
+                    checkedRadio.focus();
+                }
+            }, 0);
+        }
     });
 
-    baseLayerOptionsContainer.addEventListener('change', (e) => {
+    baseLayerOptionsContainer.addEventListener('click', (e) => {
+        // Only proceed if the user clicked on a radio button input
+        if (e.target.type !== 'radio') return;
+
         const selectedValue = e.target.value;
         if (selectedValue === 'none') {
             if (map.hasLayer(geojsonLayer)) map.removeLayer(geojsonLayer);
@@ -2937,7 +3027,6 @@ function setupLayerControls() {
             baseLayerBtnLabel.textContent = CHOROPLETH_OPTIONS[selectedValue].label;
             clearBaseLayerBtn.classList.remove('hidden');
         }
-        setTimeout(() => baseLayerPanel.classList.add('hidden'), 100);
     });
 
     clearBaseLayerBtn.addEventListener('click', (e) => {
@@ -2951,8 +3040,11 @@ function setupLayerControls() {
 
     // --- Overlay Logic ---
     overlayBtn.addEventListener('click', () => {
-        overlayPanel.classList.toggle('hidden');
+        const isHidden = overlayPanel.classList.toggle('hidden');
         baseLayerPanel.classList.add('hidden');
+        if (!isHidden) { // If the panel was just opened
+            overlayPanel.querySelector('input[type="checkbox"]').focus();
+        }
     });
 
     const updateOverlayCount = () => {
@@ -2996,10 +3088,16 @@ function setupLayerControls() {
     L.DomEvent.on(sidePanel, 'touchmove', stopPropagation);
 
     document.addEventListener('click', (e) => {
-        if (!baseLayerBtn.parentElement.contains(e.target)) {
+        const baseLayerWrapper = document.getElementById('base-layer-control-wrapper');
+        const overlayWrapper = document.getElementById('overlay-control-wrapper');
+
+        // If the click is outside the entire base layer control, hide its panel
+        if (baseLayerWrapper && !baseLayerWrapper.contains(e.target)) {
             baseLayerPanel.classList.add('hidden');
         }
-        if (!overlayBtn.parentElement.contains(e.target)) {
+
+        // If the click is outside the entire overlay control, hide its panel
+        if (overlayWrapper && !overlayWrapper.contains(e.target)) {
             overlayPanel.classList.add('hidden');
         }
     });
