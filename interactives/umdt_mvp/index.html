@@ -1216,7 +1216,7 @@ const sequentialColors = ['#eff3ff', '#bdd7e7', '#6baed6', '#3182bd', '#08519c']
 const divergingColors = ['#e41d3d', '#f89747', '#fee8a0', '#a6d8f0', '#28a0cb', '#005ea2'].reverse();
 
 function isDivergingVariable(variable) {
-    const divergingKeywords = ['unmet_demand', 'growth', 'net_business', 'formations', 'index', 'pop_change'];
+    const divergingKeywords = ['unmet_demand', 'unmet_market_demand', 'growth', 'net_business', 'formations', 'index', 'pop_change'];
     return divergingKeywords.some(keyword => variable.includes(keyword));
 }
 
@@ -2576,8 +2576,8 @@ function initializeMap() {
         if (breaks && breaks.length > 0) {
             if (isDiverging) {
                 // --- New In-line Logic for Diverging Scales ---
-                const highLabelText = currentVariable.includes('unmet_demand') ? 'More Demand' : 'High Growth';
-                const lowLabelText = currentVariable.includes('unmet_demand') ? 'More Access' : 'Decline';
+                const highLabelText = currentVariable.includes('unmet_demand') || currentVariable.includes('unmet_market_demand')  ? 'More Demand' : 'High Growth';
+                const lowLabelText = currentVariable.includes('unmet_demand') || currentVariable.includes('unmet_market_demand') ? 'More Access' : 'Decline';
 
                 // Loop through all colors in reverse (to display high values at the top)
                 for (let i = colors.length - 1; i >= 0; i--) {
