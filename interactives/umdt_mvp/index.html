@@ -1252,21 +1252,30 @@ function getColor(d, breaks, colors) {
 function style(feature) {
     let currentVariable = choroplethSelect.value;
     const isDiverging = isDivergingVariable(currentVariable);
-    
     const breaks = choroplethBreaks[currentVariable];
     
+    let baseStyle;
+
     if (!breaks || breaks.length === 0) {
-        // If no breaks are available for this variable, return a default style
-        return { fillColor: '#636363', weight: 0, color: 'white', fillOpacity: 0.7, pane: 'tractPane' };
+        baseStyle = { fillColor: '#636363', weight: 0, color: 'white', fillOpacity: 0.7, pane: 'tractPane' };
+    } else {
+        const colors = isDiverging ? divergingColors : sequentialColors;
+        const value = safeParseFloat(feature.properties[currentVariable]);
+        baseStyle = {
+            fillColor: (value === null) ? '#636363' : getColor(value, breaks, colors),
+            weight: 0, opacity: 1, color: 'white', fillOpacity: 0.7, pane: 'tractPane'
+        };
+    }
+    
+    // Check if this feature is the one that's currently clicked/selected
+    if (lastClickedLayer && feature === lastClickedLayer.feature) {
+        // If it is, override the weight and color to show the highlight
+        baseStyle.weight = 4;
+        baseStyle.color = '#FFFFFF';
+        baseStyle.dashArray = '';
     }
 
-    const colors = isDiverging ? divergingColors : sequentialColors;
-    const value = safeParseFloat(feature.properties[currentVariable]);
-
-    return {
-        fillColor: (value === null) ? '#636363' : getColor(value, breaks, colors),
-        weight: 0, opacity: 1, color: 'white', fillOpacity: 0.7, pane: 'tractPane'
-    };
+    return baseStyle;
 }
 
 function updateMap() {
