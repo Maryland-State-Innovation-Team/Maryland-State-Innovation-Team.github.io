@@ -7,10 +7,10 @@
         300
     ],
     "childcare_supply_score": [
-        30,
         50,
-        80,
-        140
+        100,
+        150,
+        200
     ],
     "childcare_demand_score": [
         90,
@@ -24,12 +24,11 @@
         6000,
         9000
     ],
-    "grocery_unmet_demand": [
-        -60,
-        -30,
-        0,
-        30,
-        60
+    "grocery_unmet_market_demand": [
+        -50,
+        -15,
+        15,
+        50
     ],
     "grocery_supply_score": [
         20,
@@ -37,13 +36,13 @@
         60,
         80
     ],
-    "grocery_demand_score": [
+    "grocery_market_demand_score": [
         20,
         40,
         60,
         80
     ],
-    "grocery_latent_demand_score": [
+    "grocery_gap_score": [
         20,
         40,
         60,
@@ -68,11 +67,11 @@
         6400
     ],
     "pop_change2530": [
-        -1500,
         -750,
+        -500,
         0,
-        2850,
-        5700
+        500,
+        750
     ],
     "avg_household_income": [
         85000,
@@ -93,38 +92,38 @@
         0.08
     ],
     "community_momentum_index": [
-        -0.12,
-        -0.06,
-        0,
-        0.24,
-        0.48
+        -0.10,
+        -0.05,
+        0.00,
+        0.05,
+        0.10
     ],
     "net_business_formations": [
-        -0.1,
+        -0.10,
         -0.05,
-        0,
-        0.1,
-        0.2
+        0.00,
+        0.10,
+        0.20
     ],
     "job_growth_employees": [
         -0.15,
         -0.07,
-        0,
+        0.00,
         0.18,
         0.36
     ],
     "job_growth_payroll": [
         -0.12,
         -0.06,
-        0,
+        0.00,
         0.44,
         0.87
     ],
     "license_growth_rate": [
         -0.67,
         -0.33,
-        0,
-        1,
-        2
+        0.00,
+        1.00,
+        2.00
     ]
 }
