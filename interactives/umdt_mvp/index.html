@@ -997,7 +997,7 @@ const CHOROPLETH_OPTIONS = {
     'childcare_demand_score': { label: 'Childcare Demand Score', format: (d) => formatNumber(d), sector: 'childcare' },
     'childcare_spending_per_under5': { label: 'Childcare Spending (per child)', format: (d) => formatCurrency(d), sector: 'childcare' },
     // Fresh Food
-    'grocery_gap_score': { label: 'Fresh Food Intervention Score', format: (d) => d.toFixed(0), sector: 'fresh-food' },
+    'grocery_gap_score': { label: 'Fresh Food Gap Score', format: (d) => d.toFixed(0), sector: 'fresh-food' },
     'grocery_unmet_market_demand': { label: 'Fresh Food Opportunity Score', format: (d) => d.toFixed(0), sector: 'fresh-food' },
     'grocery_supply_score': { label: 'Fresh Food Access Score', format: (d) => d.toFixed(0), sector: 'fresh-food' },
     'grocery_market_demand_score': { label: 'Fresh Food Market Demand', format: (d) => d.toFixed(0), sector: 'fresh-food' },
@@ -1455,7 +1455,7 @@ function displayFeatureInfo(tractFeature) {
                 <table class="explore-table">
                     <tr><th>Access Score</th><td>${properties.grocery_supply_score.toFixed(2)}</td></tr>
                     <tr><th>Need Score</th><td>${formatPercent(properties.grocery_need_score)}</td></tr>
-                    <tr><th>Intervention Score (Gap) ${createInfoIcon(gapTooltip)}</th><td>${properties.grocery_gap_score.toFixed(2)}</td></tr>
+                    <tr><th>Gap Score ${createInfoIcon(gapTooltip)}</th><td>${properties.grocery_gap_score.toFixed(2)}</td></tr>
                     <tr><th>Market Demand Score</th><td>${properties.grocery_market_demand_score.toFixed(2)}</td></tr>
                     <tr><th>Unmet Market Demand ${createInfoIcon(unmetDemandTooltip)}</th><td>${properties.grocery_unmet_market_demand.toFixed(2)}</td></tr>
                     <tr><th>Grocery Spending (per household)</th><td>${formatCurrency(properties.per_household_food_at_home)}</td></tr>
@@ -1711,7 +1711,7 @@ function displaySmartResearchForTract(tractFeature) {
             teaser: needLabel,
             teaserColor: needColor,
             iconSVG: ICONS.need,
-            answerHTML: `<p>This community has a high need for intervention. The <strong>Intervention Score of ${gapScore.toFixed(2)}</strong> reflects the intersection of high food insecurity and low geographic access to fresh food.</p>`,
+            answerHTML: `<p>This community has a high need for intervention. The <strong>Gap Score of ${gapScore.toFixed(1)}</strong> reflects the intersection of high food insecurity and low geographic access to fresh food.</p>`,
             mapAction: 'showLayer:grocery_gap_score', 
             context
         }));
@@ -1874,7 +1874,7 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
             teaser: needLabel,
             teaserColor: needColor,
             iconSVG: ICONS.need,
-            answerHTML: `<p>This community has a high need for intervention. The <strong>Intervention Score of ${gapScore.toFixed(2)}</strong> reflects the intersection of high food insecurity and low geographic access to fresh food.</p>`,
+            answerHTML: `<p>This community has a high need for intervention. The <strong>Gap Score of ${gapScore.toFixed(1)}</strong> reflects the intersection of high food insecurity and low geographic access to fresh food.</p>`,
             mapAction: 'showLayer:grocery_gap_score', 
             context
         }));
@@ -2184,7 +2184,7 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
                     <table class="explore-table">
                         <tr><th>Access Score</th><td>${properties.grocery_supply_score.toFixed(2)}</td></tr>
                         <tr><th>Need Score</th><td>${formatPercent(properties.grocery_need_score)}</td></tr>
-                        <tr><th>Intervention Score (Gap) ${createInfoIcon(gapTooltip)}</th><td>${properties.grocery_gap_score.toFixed(2)}</td></tr>
+                        <tr><th>Gap Score ${createInfoIcon(gapTooltip)}</th><td>${properties.grocery_gap_score.toFixed(2)}</td></tr>
                         <tr><th>Market Demand Score</th><td>${properties.grocery_market_demand_score.toFixed(2)}</td></tr>
                         <tr><th>Unmet Market Demand ${createInfoIcon(unmetDemandTooltip)}</th><td>${properties.grocery_unmet_market_demand.toFixed(2)}</td></tr>
                         <tr><th>Grocery Spending (per household)</th><td>${formatCurrency(properties.per_household_food_at_home)}</td></tr>
@@ -2266,6 +2266,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         zoom: 8,
         minZoom: 7,
         zoomControl: false 
+    });
+
+    map.on('movestart', () => {
+        if (geojsonLayer) {
+            geojsonLayer.eachLayer(layer => {
+                layer.closeTooltip();
+            });
+        }
     });
     
     map.createPane('countyPane').style.zIndex = 475;
