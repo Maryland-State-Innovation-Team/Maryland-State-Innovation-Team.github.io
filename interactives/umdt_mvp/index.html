@@ -166,7 +166,7 @@
         .info-tooltip .tooltip-text {
             visibility: hidden;
             width: 250px;
-            background-color: #334155;
+            background-color: #3d4551; /* base-darker */
             color: #fff;
             text-align: left;
             border-radius: 6px;
@@ -174,7 +174,8 @@
             position: absolute;
             z-index: 1;
             bottom: 125%;
-            right: 0;
+            left: 50%; /* Change from right: 0 */
+            transform: translateX(-50%); /* Add this to center the tooltip */
             opacity: 0;
             transition: opacity 0.3s;
             font-size: 0.8rem;
@@ -283,38 +284,69 @@
                 overflow: auto;
             }
         }
-        
-        /* --- Smart Research Accordion --- */
-        .accordion-header {
+
+        /* --- MDWDS Accordion Styles (Scoped to Side Panel) --- */
+        #side-panel-content .usa-accordion-item {
+            border-bottom: 1px solid #dfe1e2; /* base-lighter */
+        }
+        #side-panel-content .usa-accordion-item:last-child {
+            border-bottom: none;
+        }
+        #side-panel-content .usa-accordion__heading {
+            margin: 0;
+        }
+        #side-panel-content .usa-accordion__button {
+            display: block;
+            width: 100%;
+            padding: 1rem 3.5rem 1rem 1rem;
+            background-color: #ffffff; /* Use white background */
+            border: none;
+            text-align: left;
+            font-size: 1rem;
+            color: #1b1b1b; /* base-darkest for text */
             cursor: pointer;
+            position: relative;
             transition: background-color 0.2s ease-in-out;
         }
-        .accordion-content {
-            display: grid;
-            grid-template-rows: 0fr; /* Start with the content row having zero height */
-            overflow: hidden;
-            transition: grid-template-rows 0.3s ease-out;
+
+        #side-panel-content .usa-accordion__button:hover {
+            background-color: #f0f0f0; /* base-lightest */
+        }
+        #side-panel-content .usa-accordion__content {
+            padding: 1rem 1.5rem;
+            background-color: #ffffff;
+        }
+        #side-panel-content .usa-accordion__content > div {
+            padding: 0;
         }
 
-        .accordion-item.open .accordion-content {
-            grid-template-rows: 1fr; /* Animate to one fractional unit, which fits the content */
+        /* --- New styles for Free Explore Tables --- */
+        #side-panel-content .explore-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
         }
-
-        /* We need to wrap the content in a div to prevent margin collapse issues */
-        .accordion-content > div {
-            min-height: 0;
-            padding: 0 1rem;
-            transition: padding 0.3s ease-out;
+        #side-panel-content .explore-table th,
+        #side-panel-content .explore-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #dfe1e2; /* base-lighter */
         }
-
-        .accordion-item.open .accordion-content > div {
-            padding: 1rem;
+        #side-panel-content .explore-table th {
+            font-weight: 600;
+            color: #3d4551; /* base-darker */
+            width: 60%;
         }
-        .accordion-item.open .accordion-arrow {
-            transform: rotate(90deg);
+        #side-panel-content .explore-table td {
+            font-weight: 500;
+            color: #1b1b1b; /* base-darkest */
         }
-        .accordion-arrow {
-            transition: transform 0.3s ease;
+        #side-panel-content .explore-table tr:nth-child(even) {
+            background-color: #f8fafc; /* Tailwind slate-50 */
+        }
+        #side-panel-content .info-tooltip {
+            vertical-align: middle; /* Align icon nicely with text */
         }
 
         .leaflet-top.leaflet-right {
@@ -526,8 +558,6 @@
             height: 40px;
             font-size: 1rem;
             line-height: 1.5;
-            width: 350px !important; 
-            min-width: 350px !important;
             border: 1px solid #a9aeb1; /* base-light */
             border-radius: 0.25rem; 
             outline: none !important;
@@ -537,23 +567,13 @@
             color: #565c65; /* base-dark */
             opacity: 1;
         }
-        /* Hide the default search icon button */
-        .leaflet-control-geocoder-icon {
-            display: none;
-        }
-        /* Style the suggestions dropdown */
-        .leaflet-control-geocoder-alternatives {
-            width: 100%;
+        /* Style for the "Nothing found" error message */
+        .leaflet-control-geocoder-error {
             background-color: white;
+            color: #565c65; /* base-dark */
+            padding: 0.5rem 0.75rem;
             border: 1px solid #a9aeb1; /* base-light */
             border-top: none;
-        }
-        .leaflet-control-geocoder-alternatives a {
-            color: #005ea2; /* primary-default */
-        }
-        .leaflet-control-geocoder-alternatives a:hover {
-            background-color: #d9e8f6; /* primary-lighter */
-            color: #162e51; /* primary-darker */
         }
         /* --- Geocoder Restyling --- */
         #geocoder-container .leaflet-control-geocoder {
@@ -567,24 +587,6 @@
         /* Hide the expand/collapse icon since the bar is always open */
         .leaflet-control-geocoder-icon {
             display: none !important;
-        }
-        .leaflet-control-geocoder-form input {
-            background-color: white;
-            color: #1b1b1b; /* base-darkest */
-            padding: 0.5rem 0.75rem;
-            height: 40px;
-            font-size: 1rem;
-            line-height: 1.5;
-            width: 350px !important; /* Force a wider input */
-            min-width: 350px !important;
-            border: 1px solid #a9aeb1; /* base-light */
-            border-radius: 0.25rem; /* Add border-radius here */
-            outline: none !important;
-            box-shadow: none !important;
-        }
-        .leaflet-control-geocoder-form input::placeholder {
-            color: #565c65; /* base-dark */
-            opacity: 1;
         }
         /* Style the suggestions dropdown */
         .leaflet-control-geocoder-alternatives {
@@ -612,7 +614,7 @@
         @media (min-width: 768px) {
             /* When the side panel is open on desktop, add padding-top to it. */
             /* This creates a dedicated space for the geocoder to float in. */
-            #side-panel.show {
+            #side-panel {
                 padding-top: 64px; /* 4rem, equals geocoder height + its top offset */
             }
         }
@@ -664,6 +666,85 @@
                 margin-top: 8rem; 
             }
         }
+        /* --- Side Panel Handle --- */
+        .panel-handle {
+            position: absolute;
+            top: 50%;
+            right: -24px; /* Position it just outside the panel */
+            transform: translateY(-50%);
+            width: 24px;
+            height: 48px;
+            background-color: white;
+            border: 1px solid #e2e8f0; /* slate-200 */
+            border-left: none;
+            border-radius: 0 6px 6px 0;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease-in-out, right 0.3s ease-in-out, background-color 0.2s;
+            z-index: 10; /* Ensure it's on top of map content */
+        }
+        .panel-handle:hover {
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .panel-handle svg {
+            width: 20px;
+            height: 20px;
+            color: #475569; /* slate-600 */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* When the panel is OPEN (body has .show class) */
+        #side-panel.show .panel-handle svg {
+            transform: rotate(0deg); /* Arrow points left */
+        }
+
+        /* When the panel is CLOSED */
+        #side-panel .panel-handle svg {
+            transform: rotate(180deg); /* Arrow points right */
+        }
+
+        /* --- Responsive styles for MOBILE (bottom sheet) --- */
+        @media (max-width: 767px) {
+            .panel-handle {
+                top: -24px; /* Position above the panel */
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+                width: 48px;
+                height: 24px;
+                border: 1px solid #e2e8f0;
+                border-bottom: none;
+                border-radius: 6px 6px 0 0;
+            }
+
+            /* Arrow points down when panel is OPEN */
+            #side-panel.show .panel-handle svg {
+                transform: rotate(-90deg);
+            }
+
+            /* Arrow points up when panel is CLOSED */
+            #side-panel .panel-handle svg {
+                transform: rotate(90deg);
+            }
+        }
+        .custom-map-tooltip {
+            background-color: white;
+            border-left: 3px solid #005ea2; /* primary-default blue */
+            padding: 10px 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            width: 280px;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+
+        /* Leaflet's default arrow is hard to style, so we hide it for our custom tooltips */
+        .custom-map-tooltip .leaflet-tooltip-arrow {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800">
@@ -673,7 +754,7 @@
         <div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full text-center" id="tour-overlay-content">
             <h2 class="text-2xl font-bold text-slate-800 mb-3">Welcome! 👋</h2>
             <p class="text-slate-600">
-                We recommend getting started in the currently selected '<strong>Smart Research</strong>' mode. Once you're familiar with the data, check out '<strong>Free Explore</strong>'.
+                We recommend getting started in the currently selected '<strong>Insights</strong>' mode. Once you're familiar with the data, check out '<strong>Explore</strong>'.
             </p>
             <p class="mt-4 text-slate-600">
                 To get started, <strong>click anywhere in Maryland</strong> to answer your <strong id="tour-sector-name"></strong> business questions, or use the <svg xmlns="http://www.w3.org/2000/svg" class="inline h-5 w-5 -mt-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg> icon in the top right to search for a specific address.
@@ -781,7 +862,7 @@
         
         <div class="relative flex-grow">
             <div id="map" class="h-full w-full z-0">
-                <div id="top-controls-wrapper" class="absolute top-0 left-0 w-full p-4 z-[1003] flex flex-col md:flex-row md:justify-between md:items-start gap-3 pointer-events-none">
+                <div id="top-controls-wrapper" class="absolute top-0 left-0 w-full p-4 z-[1005] flex flex-col md:flex-row md:justify-between md:items-start gap-3 pointer-events-none">
                     <div id="geocoder-container" class="pointer-events-auto"></div>
 
                     <div id="top-right-controls" class="flex items-center gap-x-3 pointer-events-auto self-end md:self-auto">
@@ -798,11 +879,11 @@
                         </div>
                         <div id="map-mode-btn-group" class="flex rounded-md shadow-lg overflow-hidden border-2 border-primary-default">
                             <button data-mode="smartResearch" class="mode-btn px-4 py-2 font-semibold text-sm text-white flex items-center justify-center gap-x-1.5 active">
-                                <span>Smart Research</span>
+                                <span>Insights</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff" class="h-5 w-5"><path d="m176-120-56-56 301-302-181-45 198-123-17-234 179 151 216-88-87 217 151 178-234-16-124 198-45-181-301 301Zm24-520-80-80 80-80 80 80-80 80Zm355 197 48-79 93 7-60-71 35-86-86 35-71-59 7 92-79 49 90 22 23 90Zm165 323-80-80 80-80 80 80-80 80ZM569-570Z"></path></svg>
                             </button>
                             <button data-mode="freeExplore" class="mode-btn px-4 py-2 font-semibold text-sm text-white">
-                                Free Explore
+                                Explore
                             </button>
                         </div>
                     </div>
@@ -859,14 +940,16 @@
                 </div>
             </div>
 
-            <div id="side-panel" class="absolute bottom-0 left-0 w-full h-1/2 max-h-[50vh] bg-white shadow-2xl z-[1001] flex flex-col md:top-0 md:bottom-auto md:w-1/3 md:h-screen md:max-h-full lg:w-1/4">
+            <div id="side-panel" class="absolute bottom-0 left-0 w-full h-1/2 max-h-[50vh] bg-white shadow-2xl z-[1004] flex flex-col md:top-0 md:bottom-auto md:w-1/3 md:h-screen md:max-h-full">
                 <div class="p-4 border-b flex justify-between items-center" role="region" aria-labelledby="panel-title">
-                    <h2 id="panel-title" class="text-xl font-bold text-slate-900">Community Details</h2>
-                    <button id="close-panel-btn" class="p-1 rounded-full hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400" aria-label="Close details panel">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                    </button>
+                    <h2 id="panel-title" class="text-lg font-bold text-slate-900">Click a community or search for an address</h2>
                 </div>
                 <div id="side-panel-content" class="flex-grow overflow-y-auto p-4 space-y-4"></div>
+                <button id="panel-handle" class="panel-handle" aria-label="Toggle details panel" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
@@ -877,6 +960,7 @@ let map;
 let geojsonLayer;
 let legend; 
 let searchMarker;
+let highlightedProviderMarker;
 const overlayLayers = {};
 let allIncentives = [];
 let tractData;
@@ -946,6 +1030,20 @@ const CHOROPLETH_OPTIONS = {
     'license_growth_rate': { label: 'Business License Growth (22-23)', format: (d) => formatPercent(d), sector: 'general' },
 };
 
+const BRAND_COLORS = {
+    success: '#00a91c',
+    error: '#d54309',
+    neutral: '#565c65' 
+};
+
+const ICONS = {
+    need: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M80-40v-80h800v80H80Zm80-120v-240q-33-54-51-114.5T91-638q0-61 15.5-120T143-874q8-21 26-33.5t40-12.5q31 0 53 21t18 50l-11 91q-6 48 8.5 91t43.5 75.5q29 32.5 70 52t89 19.5q60 0 120.5 12.5T706-472q45 23 69.5 58.5T800-326v166H160Zm80-80h480v-86q0-24-12-42.5T674-398q-41-20-95-31t-99-11q-66 0-122.5-27t-96-72.5Q222-585 202-644.5T190-768q-10 30-14.5 64t-4.5 66q0 58 20.5 111.5T240-422v182Zm240-320q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm0-80q33 0 56.5-23.5T560-720q0-33-23.5-56.5T480-800q-33 0-56.5 23.5T400-720q0 33 23.5 56.5T480-640ZM320-160v-37q0-67 46.5-115T480-360h160v80H480q-34 0-57 24.5T400-197v37h-80Zm160-80Zm0-480Z"/></svg>`,
+    providers: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-80q-106 0-173-33.5T240-200q0-24 14.5-44.5T295-280l63 59q-9 4-19.5 9T322-200q13 16 60 28t98 12q51 0 98.5-12t60.5-28q-7-8-18-13t-21-9l62-60q28 16 43 36.5t15 45.5q0 53-67 86.5T480-80Zm1-220q99-73 149-146.5T680-594q0-102-65-154t-135-52q-70 0-135 52t-65 154q0 67 49 139.5T481-300Zm-1 100Q339-304 269.5-402T200-594q0-71 25.5-124.5T291-808q40-36 90-54t99-18q49 0 99 18t90 54q40 36 65.5 89.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg>`,
+    communityVoice: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg>`,
+    growth: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-162v82h560v-350L522-280 360-442 200-282Zm0-114 160-160 158 158 242-272v-90H200v364Zm0-154v-120 272-158 274-160 162-270Zm0 154v-364 362-158 160Zm0 114v-160 162-270 350-82Z"/></svg>`,
+    incentives: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></svg>`
+};
+
 // --- CORE HELPER FUNCTIONS (GLOBAL) ---
 function safeParseFloat(value, defaultValue = null) {
     const parsed = parseFloat(value);
@@ -1008,7 +1106,6 @@ function truncateCommunityList(listString, maxVisible = 2) {
     return `${visibleCommunities.join(', ')} and ${hiddenCount} other ${communityWord}`;
 }
 
-// --- Add this function near your other helper functions ---
 function getMapPadding() {
     const sidePanel = document.getElementById('side-panel');
     const defaultPadding = 50; // A small buffer around the edges of the visible map area
@@ -1037,6 +1134,62 @@ function getMapPadding() {
             paddingBottomRight: [defaultPadding, defaultPadding]
         };
     }
+}
+
+function zoomToPoint(lat, lng) {
+    // If a provider was previously highlighted, remove the marker
+    if (highlightedProviderMarker) {
+        map.removeLayer(highlightedProviderMarker);
+    }
+
+    const latLng = L.latLng(lat, lng);
+    const bounds = latLng.toBounds(100); // Creates a small 100-meter box around the point
+
+    // Use the existing getMapPadding() function to zoom with an offset
+    map.fitBounds(bounds, { ...getMapPadding(), maxZoom: 17 });
+
+    // Add a temporary marker to highlight the selected provider
+    highlightedProviderMarker = L.circleMarker(latLng, {
+        radius: 10,
+        color: '#005ea2',     // A distinct blue color
+        weight: 3,
+        opacity: 1,
+        fillColor: '#ffffff',
+        fillOpacity: 0.7,
+        pane: 'clusterTopPane' // Ensure it's on top
+    }).addTo(map);
+
+    // Remove the highlight after a few seconds
+    setTimeout(() => {
+        if (highlightedProviderMarker) {
+            map.removeLayer(highlightedProviderMarker);
+        }
+    }, 4000);
+}
+
+function updateGeocoderWidth() {
+    const sidePanel = document.getElementById('side-panel');
+    const geocoderInput = document.querySelector('.leaflet-control-geocoder-form input');
+
+    // This logic should only apply on desktop views where the panel is on the side
+    if (window.innerWidth < 768 || !sidePanel || !geocoderInput) {
+        // On mobile, clear any inline styles to let the CSS media query take over
+        if (geocoderInput) {
+            geocoderInput.style.width = '';
+            geocoderInput.style.minWidth = '';
+        }
+        return;
+    }
+
+    const panelWidth = sidePanel.offsetWidth;
+    // The map's top controls have 1rem (16px) of padding on each side.
+    // To align the search bar within this padding, we subtract 2rem (32px).
+    const totalPadding = 32; 
+    const newWidth = panelWidth - totalPadding;
+
+    // Apply the calculated width directly to the input field
+    geocoderInput.style.width = `${newWidth}px`;
+    geocoderInput.style.minWidth = `${newWidth}px`;
 }
 
 // --- ALL MAP LOGIC & HELPER FUNCTIONS (GLOBAL SCOPE) ---
@@ -1111,7 +1264,7 @@ function updateMap() {
 
 function highlightFeature(e) {
     const layer = e.target;
-    layer.setStyle({ weight: 4, color: '#334155', dashArray: '' });
+    layer.setStyle({ weight: 4, color: '#FFFFFF', dashArray: '' });
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) layer.bringToFront();
 }
 
@@ -1126,6 +1279,17 @@ function resetHighlight(e) {
 }
 
 function onEachFeature(feature, layer) {
+    const tooltipContent = `
+        <div class="font-sans">
+            <div class="text-xs uppercase font-semibold text-slate-500 tracking-wider">Click to Research</div>
+            <div class="text-sm font-bold text-slate-900 leading-tight mt-1">${truncateCommunityList(feature.properties.tract_name)}</div>
+            <div class="text-xs text-blue-600 font-semibold">${feature.properties.county_name}</div>
+        </div>
+    `;
+    layer.bindTooltip(tooltipContent, {
+        sticky: true, // Makes the tooltip follow the mouse
+        className: 'custom-map-tooltip' // A custom class for styling
+    });
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
@@ -1138,7 +1302,7 @@ function onEachFeature(feature, layer) {
             map.fitBounds(e.target.getBounds(), getMapPadding());
             
             if (lastClickedLayer) geojsonLayer.resetStyle(lastClickedLayer);
-            e.target.setStyle({ weight: 4, color: '#334155', dashArray: '' });
+            e.target.setStyle({ weight: 4, color: '#FFFFFF', dashArray: '' });
             lastClickedLayer = e.target;
         }
     });
@@ -1223,144 +1387,129 @@ function createIncentiveListHTML(incentives, type, industry, county) {
     }
 
     return `
-        <details class="bg-slate-50 p-3 rounded-lg mt-2" style="margin-top:0.5rem;">
-            <summary class="font-semibold text-slate-600 mb-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">Relevant ${type} Incentives (${incentives.length})</summary>
-            <div class="space-y-3 mt-2">
-                ${incentives.map(inc => {
-                    const params = new URLSearchParams();
-                    // Use the full 'industry' and 'county' for the URL params
-                    params.set('industries', industry); 
-                    params.set('counties', county);
-                    // Filter for-profit
-                    params.set('orgTypes', 'for-profit');
+        <p class="font-semibold text-slate-700 mb-2">Relevant ${type} Incentives (${incentives.length})</p>
+        <div class="space-y-3 mt-2">
+            ${incentives.map(inc => {
+                const params = new URLSearchParams();
+                params.set('industries', industry);
+                params.set('counties', county);
+                params.set('orgTypes', 'for-profit');
+                const queryString = params.toString();
 
-                    const queryString = params.toString();
-
-                    return `
-                        <div class="text-sm border-t pt-2">
-                            <p class="font-bold text-slate-800">
-                                <a href="incentives/?${queryString}#/incentive/${slugify(inc.program_name)}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">${inc.program_name}</a> 
-                                <span class="text-xs font-medium bg-slate-200 text-slate-700 py-0.5 px-1.5 rounded-full ml-1">${inc.source}</span>
-                            </p>
-                            <p class="text-slate-600 mt-1">${inc.program_description}</p>
-                            ${inc.assistance_type ? `<p class="mt-1"><strong class="font-medium text-slate-700">Assistance Type:</strong> ${inc.assistance_type.join(', ')}</p>` : ''}
-                        </div>
-                    `;
-                }).join('')}
-            </div>
-        </details>`;
+                return `
+                    <div class="text-sm border-t pt-2">
+                        <p class="font-bold text-slate-800">
+                            <a href="incentives/?${queryString}#/incentive/${slugify(inc.program_name)}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">${inc.program_name}</a> 
+                            <span class="text-xs font-medium bg-slate-200 text-slate-700 py-0.5 px-1.5 rounded-full ml-1">${inc.source}</span>
+                        </p>
+                        <p class="text-slate-600 mt-1">${inc.program_description}</p>
+                        ${inc.assistance_type ? `<p class="mt-1"><strong class="font-medium text-slate-700">Assistance Type:</strong> ${inc.assistance_type.join(', ')}</p>` : ''}
+                    </div>
+                `;
+            }).join('')}
+        </div>`;
 }
 
 function displayFeatureInfo(tractFeature) {
     const properties = tractFeature.properties;
     panelTitle.textContent = `${truncateCommunityList(properties.tract_name)}, ${properties.county_name}`;
 
-    const createPlanAreas = (items) => {
-         if (!items || items.length === 0) return '';
-         return `
-            <div class="bg-slate-50 p-3 rounded-lg">
-                <h4 class="font-semibold text-slate-600 mb-2">Relevant Plans</h4>
-                ${items.map(p => `
-                    <div class="mt-2 text-sm">
-                        <p class="font-medium text-slate-800">${p.area_name} ${p.plan_year ? '(' + p.plan_year + ')' : ''}</p>
-                        <p class="text-slate-600 italic">"${p.community_vision}"</p>
-                    </div>
-                `).join('')}
-            </div>`;
-    }
-    
-    const location = { type: 'tract', feature: tractFeature };
-    const county = location.feature.properties.county_name.replace(' County', '').trim();
-    const childcareIncentives = filterIncentives('Child Care Services', location);
-    const freshFoodIncentives = filterIncentives('Grocery Stores', location);
-
-    const overlappingAreas = tractFeature.properties.incentive_areas || [];
-
-    let incentiveAreasHTML = '';
-    if (overlappingAreas.length > 0) {
-        incentiveAreasHTML = `
-            <div class="bg-slate-50 p-3 rounded-lg">
-                <h4 class="font-semibold text-slate-600 mb-2">Overlapping Incentive Areas</h4>
-                <ul class="list-disc list-inside space-y-1 text-sm text-slate-700">
-                    ${overlappingAreas.map(area => `<li>${area}</li>`).join('')}
-                </ul>
-            </div>`;
-    }
-
     const popChange = safeParseFloat(properties.pop_change2530);
-    panelContent.innerHTML = `
-        <div>
-            <h3 class="text-lg font-semibold text-slate-800 mb-2">Population</h3>
-            <div class="grid grid-cols-2 gap-2 text-sm">
-                <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Population (2025):</span> ${formatNumber(properties.pop2025)}</div>
-                <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Projected Pop. (2030):</span> ${formatNumber(properties.pop2030)}</div>
-                <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Projected Change (25-30):</span> <span class="${popChange > 0 ? 'text-green-700' : 'text-red-600'}">${formatNumber(popChange)}</span></div>
-                <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">% Under 5:</span> ${formatPercent(properties.pct_under5)}</div>
-            </div>
-        </div>
-        <div>
-            <h3 class="text-lg font-semibold text-slate-800 mb-2">Demographics & Economics</h3>
-            <div class="grid grid-cols-2 gap-2 text-sm">
-                <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Avg. HH Income:</span> ${formatCurrency(properties.avg_household_income)}</div>
-                <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">% Transporation Barriers:</span> ${formatPercent(properties.transportation_barrier_pct)}</div>
-                <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">
-                    Momentum Index (22-23):</span> ${formatPercent(properties.community_momentum_index)}
-                    <div class="info-tooltip inline-block ml-1" tabindex="0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
-                        <span class="tooltip-text">The Community Momentum Index measures economic vitality by averaging growth rates in business formations, licenses, jobs, and payroll. Positive scores reflect community economic growth.</span>
-                    </div>
-                </div>
-                <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Race/Ethnicity:</span><br/> White: ${formatPercent(properties.pct_white)}<br/>Black: ${formatPercent(properties.pct_black)}<br/>Hispanic: ${formatPercent(properties.pct_hispanic)}</div>
-            </div>
-        </div>
-        ${incentiveAreasHTML}
-        <div>
-            <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Needs & Opportunities</h3>
+    const momentumTooltip = "The Community Momentum Index measures economic vitality by averaging growth rates in business formations, licenses, jobs, and payroll. Positive scores reflect community economic growth.";
+    const childcareOppTooltip = "Child care opportunity score is the number of children 5 and under in households where all parents are in the laborforce, minus the licensed capacity of local child care providers. Positive scores reflect unmet community demand.";
+    const latentDemandTooltip = "Estimates how much more people would spend on fresh food if they had good access to high-quality stores, based on local demographics and current access.";
+    const unmetDemandTooltip = "Measures the gap between potential and actual grocery access. Positive scores indicate high latent demand and low current access, signaling a strong market opportunity. Negative scores suggest access meets or exceeds demand.";
 
-            ${(selectedSector === 'childcare' || selectedSector === 'other') ? `
-            <div class="mt-4 p-4 border rounded-lg">
-                <h4 class="text-md font-semibold text-slate-700">Childcare</h4>
-                <div class="grid grid-cols-3 gap-2 text-sm mt-2">
-                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Access:</span> ${formatNumber(properties.childcare_supply_score)} seats</div>
-                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Demand:</span> ${formatNumber(properties.childcare_demand_score)} seats</div>
-                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Opportunity:</span> ${formatNumber(properties.childcare_unmet_demand)} seats 
-                        <div class="info-tooltip inline-block ml-1" tabindex="0">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
-                            <span class="tooltip-text">Child care opportunity score is the number of children 5 and under in households where all parents are in the laborforce, minus the licensed capacity of local child care providers. Positive scores reflect unmet community demand.</span>
-                        </div>
-                    </div>
-                </div>
-                ${createQuotesSection(properties.plan_quotes, 'Child Care', 'Community Voices on Childcare')}
-                ${createIncentiveListHTML(childcareIncentives, 'Childcare', 'Child Care Services', county)}
-            </div>
-            ` : ''}
+    const createInfoIcon = (tooltipText) => `
+        <div class="info-tooltip inline-block ml-1" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+            <span class="tooltip-text">${tooltipText}</span>
+        </div>`;
 
-            ${(selectedSector === 'fresh-food' || selectedSector === 'other') ? `
-            <div class="mt-4 p-4 border rounded-lg">
-                <h4 class="text-md font-semibold text-slate-700">Fresh Food & Groceries</h4>
-                <div class="grid grid-cols-2 gap-2 text-sm mt-2">
-                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Access Score:</span> ${properties.grocery_supply_score.toFixed(2)}</div>
-                    <div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Need Score:</span> ${formatPercent(properties.grocery_need_score)}</div>
-                    <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Latent Demand Score:</span> ${properties.grocery_demand_score.toFixed(2)}
-                        <div class="info-tooltip inline-block ml-1" tabindex="0">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
-                            <span class="tooltip-text">Estimates how much more people would spend on fresh food if they had good access to high-quality stores, based on local demographics and current access.</span>
-                        </div>
-                    </div>
-                    <div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Unmet Demand Score:</span> ${properties.grocery_unmet_demand.toFixed(2)}
-                        <div class="info-tooltip inline-block ml-1" tabindex="0">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
-                            <span class="tooltip-text">Measures the gap between potential and actual grocery access. Positive scores indicate high latent demand and low current access, signaling a strong market opportunity. Negative scores suggest access meets or exceeds demand.</span>
-                        </div>
-                    </div>
-                </div>
-                ${createQuotesSection(properties.plan_quotes, 'Fresh Food', 'Community Voices on Fresh Food')}
-                ${createIncentiveListHTML(freshFoodIncentives, 'Fresh Food', 'Grocery Stores', county)}
-            </div>
-            ` : ''}
+    let contentHTML = `
+        <div>
+            <h3 class="text-lg font-semibold text-slate-800 mb-2">Population & Demographics</h3>
+            <table class="explore-table">
+                <tr><th>Population (2025)</th><td>${formatNumber(properties.pop2025)}</td></tr>
+                <tr><th>Projected Pop. (2030)</th><td>${formatNumber(properties.pop2030)}</td></tr>
+                <tr><th>Projected Change (25-30)</th><td><span class="${popChange > 0 ? 'text-green-700' : 'text-red-600'}">${formatNumber(popChange)}</span></td></tr>
+                <tr><th>% Population Under 5</th><td>${formatPercent(properties.pct_under5)}</td></tr>
+                <tr><th>Avg. Household Income</th><td>${formatCurrency(properties.avg_household_income)}</td></tr>
+                <tr><th>% Transportation Barriers</th><td>${formatPercent(properties.transportation_barrier_pct)}</td></tr>
+            </table>
         </div>
-        ${createPlanAreas(properties.plan_areas)}
-    `;
+        <div>
+            <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Economic Vitality</h3>
+            <table class="explore-table">
+                <tr><th>Momentum Index (22-23) ${createInfoIcon(momentumTooltip)}</th><td>${formatPercent(properties.community_momentum_index)}</td></tr>
+                <tr><th>Net Business Formations</th><td>${formatPercent(properties.net_business_formations)}</td></tr>
+                <tr><th>Job Growth (Employees)</th><td>${formatPercent(properties.job_growth_employees)}</td></tr>
+                <tr><th>Job Growth (Payroll)</th><td>${formatPercent(properties.job_growth_payroll)}</td></tr>
+                <tr><th>Business License Growth</th><td>${formatPercent(properties.license_growth_rate)}</td></tr>
+            </table>
+        </div>`;
+
+    if (selectedSector === 'childcare' || selectedSector === 'other') {
+        contentHTML += `
+            <div>
+                <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Childcare Opportunity</h3>
+                <table class="explore-table">
+                    <tr><th>Access (Existing Seats)</th><td>${formatNumber(properties.childcare_supply_score)}</td></tr>
+                    <tr><th>Demand (Children Needing Care)</th><td>${formatNumber(properties.childcare_demand_score)}</td></tr>
+                    <tr><th>Opportunity (Unmet Demand) ${createInfoIcon(childcareOppTooltip)}</th><td>${formatNumber(properties.childcare_unmet_demand)}</td></tr>
+                    <tr><th>Childcare Spending (per child)</th><td>${formatCurrency(properties.childcare_spending_per_under5)}</td></tr>
+                </table>
+            </div>`;
+    }
+
+    if (selectedSector === 'fresh-food' || selectedSector === 'other') {
+        contentHTML += `
+            <div>
+                <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Fresh Food Opportunity</h3>
+                <table class="explore-table">
+                    <tr><th>Access Score</th><td>${properties.grocery_supply_score.toFixed(2)}</td></tr>
+                    <tr><th>Need Score</th><td>${formatPercent(properties.grocery_need_score)}</td></tr>
+                    <tr><th>Latent Demand Score ${createInfoIcon(latentDemandTooltip)}</th><td>${properties.grocery_demand_score.toFixed(2)}</td></tr>
+                    <tr><th>Unmet Demand Score ${createInfoIcon(unmetDemandTooltip)}</th><td>${properties.grocery_unmet_demand.toFixed(2)}</td></tr>
+                    <tr><th>Grocery Spending (per household)</th><td>${formatCurrency(properties.per_household_food_at_home)}</td></tr>
+                </table>
+            </div>`;
+    }
+
+    if (properties.plan_quotes && properties.plan_quotes.length > 0) {
+        contentHTML += `
+            <div class="mt-4">
+                <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Voice</h3>
+                <div class="space-y-4">
+                    ${properties.plan_quotes.map(quote => {
+                        const categoryText = QUOTE_CATEGORY_MAP[quote.category] || 'Community Voice';
+                        return `
+                            <div class="text-sm">
+                                <span class="quote-category-tag">${categoryText}</span>
+                                <blockquote class="mt-1 pl-4 border-l-4 border-slate-300 text-slate-600 leading-relaxed">
+                                    ${quote.briefing_quote}
+                                </blockquote>
+                            </div>`;
+                    }).join('')}
+                </div>
+            </div>`;
+    }
+
+    const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
+    if (industry) {
+        const location = { type: 'tract', feature: tractFeature };
+        const county = location.feature.properties.county_name.replace(' County', '').trim();
+        const relevantIncentives = filterIncentives(industry, location);
+        if (relevantIncentives.length > 0) {
+            contentHTML += `
+                <div class="mt-4">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Potential Incentives</h3>
+                    ${createIncentiveListHTML(relevantIncentives, selectedSector === 'childcare' ? 'Childcare' : 'Fresh Food', industry, county)}
+                </div>`;
+        }
+    }
+
+    panelContent.innerHTML = contentHTML;
     currentPanelContext = { type: 'tract', data: tractFeature };
     openSidePanel();
 }
@@ -1392,34 +1541,118 @@ function executeMapAction(action, context) {
             }
         });
     } else if (command === 'showNearest') {
-        const [layerName, count] = value.split(',');
-        showNearestPoints(context.location, layerName, parseInt(count, 10), context.container);
+        const [layerName] = value.split(',');
+        showNearestPoints(context.location, layerName, context.container);
     }
 }
 
-function createAccordionItem(question, answerHTML, mapAction = null, context = {}) {
+function createAccordionItem(config) {
+    const { question, answerHTML, mapAction = null, context = {}, teaser, teaserColor, iconSVG } = config;
+    const uniqueId = `acc-${slugify(question)}`;
     const item = document.createElement('div');
-    item.className = 'accordion-item border rounded-lg';
+    item.className = 'usa-accordion-item';
+
     item.innerHTML = `
-        <div class="accordion-header bg-slate-50 hover:bg-slate-100 p-4 flex justify-between items-center" tabindex="0">
-            <h4 class="font-semibold text-slate-700">${question}</h4>
-            <svg class="accordion-arrow flex-shrink-0 h-5 w-5 text-slate-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
-        </div>
-        <div class="accordion-content bg-white border-t border-slate-200">
-            <div>${answerHTML}</div>
+        <h3 class="usa-accordion__heading">
+            <button class="usa-accordion__button" aria-expanded="false" aria-controls="${uniqueId}">
+                <div class="flex items-start w-full gap-x-4">
+                    <div class="flex-shrink-0 text-slate-600 w-7 h-7">
+                        ${iconSVG || ''}
+                    </div>
+                    <div class="flex-grow text-left">
+                        <span class="font-semibold text-slate-800 text-base leading-tight">${question}</span>
+                        ${teaser ? `<div class="text-sm font-semibold mt-1" style="color: ${teaserColor || BRAND_COLORS.neutral};">${teaser}</div>` : ''}
+                    </div>
+                </div>
+            </button>
+        </h3>
+        <div id="${uniqueId}" class="usa-accordion__content usa-prose" hidden>
+            ${answerHTML}
         </div>
     `;
-    const header = item.querySelector('.accordion-header');
-    header.addEventListener('click', () => {
-        clearProviderLayers();
-        const wasOpen = item.classList.contains('open');
-        document.querySelectorAll('#side-panel-content .accordion-item').forEach(el => el.classList.remove('open'));
-        if (!wasOpen) {
-            item.classList.add('open');
-            executeMapAction(mapAction, { ...context, container: item.querySelector('.accordion-content div') });
+
+    const button = item.querySelector('.usa-accordion__button');
+    const content = item.querySelector('.usa-accordion__content');
+
+    button.addEventListener('click', () => {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+        document.querySelectorAll('#side-panel-content .usa-accordion__button').forEach(btn => {
+            if (btn !== button) {
+                btn.setAttribute('aria-expanded', 'false');
+                const otherContent = document.getElementById(btn.getAttribute('aria-controls'));
+                if (otherContent) otherContent.hidden = true;
+            }
+        });
+
+        if (isExpanded) {
+            button.setAttribute('aria-expanded', 'false');
+            content.hidden = true;
+        } else {
+            clearProviderLayers();
+            button.setAttribute('aria-expanded', 'true');
+            content.hidden = false;
+            executeMapAction(mapAction, { ...context, container: content });
         }
     });
+
     return item;
+}
+
+function getProviderCount(location, layerName) {
+    const pointLayer = overlayLayers[layerName];
+    if (!pointLayer || !pointLayer.getLayers) return 0; // Layer not loaded or not a group
+
+    const allPoints = pointLayer.getLayers().map(l => ({
+        feature: l.feature || { properties: l.options.properties, geometry: { coordinates: [l.getLatLng().lng, l.getLatLng().lat] } }
+    }));
+
+    if (location.type === 'tract') {
+        const tractPolygon = location.feature;
+        const pointsInside = allPoints.filter(p => {
+            const turfPoint = turf.point(p.feature.geometry.coordinates);
+            return turf.booleanPointInPolygon(turfPoint, tractPolygon);
+        });
+        return pointsInside.length;
+    } else if (location.type === 'point') {
+        const targetPoint = [location.point.lng, location.point.lat];
+        const nearbyPoints = allPoints.filter(p => {
+            const distance = turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' });
+            return distance <= 3;
+        });
+        return nearbyPoints.length;
+    }
+    return 0;
+}
+
+/**
+ * Takes a value and a variable name, and returns a tiered label and color
+ * based on the pre-calculated breaks for that variable.
+ */
+function getTieredLabel(value, variableName, labelSets) {
+    const { labels, colors } = labelSets;
+    const breaks = choroplethBreaks[variableName];
+
+    if (value === null || !breaks || breaks.length === 0 || !labels || !colors) {
+        return { label: 'N/A', color: BRAND_COLORS.neutral };
+    }
+
+    // Find which bin the value falls into
+    let tierIndex = 0;
+    while (tierIndex < breaks.length && value > breaks[tierIndex]) {
+        tierIndex++;
+    }
+
+    // Scale the bin index to the label index to handle cases where we have
+    // more bins than labels (e.g., 5 data bins, 3 labels)
+    const numBins = breaks.length + 1;
+    const numLabels = labels.length;
+    const labelIndex = Math.min(Math.floor(tierIndex * numLabels / numBins), numLabels - 1);
+
+    return {
+        label: labels[labelIndex],
+        color: colors[labelIndex]
+    };
 }
 
 function displaySmartResearchForTract(tractFeature) {
@@ -1429,23 +1662,39 @@ function displaySmartResearchForTract(tractFeature) {
 
     const questions = [];
     const context = { location: { type: 'tract', feature: tractFeature } };
+    const warningColor = '#e5a000'; // accent-warm-default
 
     if (selectedSector === 'childcare') {
         const unmet = safeParseFloat(p.childcare_unmet_demand, 0);
-        const needText = unmet > 0 ? `<strong>Yes</strong>, this area appears to need more childcare.` : `<strong>No</strong>, this area does not appear to have unmet demand for childcare.`;
-        questions.push(createAccordionItem(
-            "Is there a need for more childcare in this area?",
-            `<p>${needText} We estimate a gap of <strong>${formatNumber(unmet)} seats</strong>, based on a demand for ${formatNumber(p.childcare_demand_score)} seats and an existing supply of ${formatNumber(p.childcare_supply_score)} licensed seats.</p>`,
-            'showLayer:childcare_unmet_demand', context
-        ));
-        questions.push(createAccordionItem(
-            "Who are the other childcare providers in this area?",
-            `<p>Showing nearby licensed childcare providers on the map. The list below shows the closest providers to the center of this community area.</p><div id="nearest-providers-list"></div>`,
-            'showNearest:childcare,5', context
-        ));
+        const { label: needLabel, color: needColor } = getTieredLabel(unmet, 'childcare_unmet_demand', {
+            labels: ['LOW NEED', 'MODERATE NEED', 'HIGH NEED'],
+            colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
+        });
+
+        questions.push(createAccordionItem({
+            question: "Is there a need for more childcare in this area?",
+            teaser: needLabel,
+            teaserColor: needColor,
+            iconSVG: ICONS.need,
+            answerHTML: `<p>This area has an estimated gap of <strong>${formatNumber(unmet)} seats</strong>, based on a demand for ${formatNumber(p.childcare_demand_score)} seats and an existing supply of ${formatNumber(p.childcare_supply_score)} licensed seats.</p>`,
+            mapAction: 'showLayer:childcare_unmet_demand', 
+            context
+        }));
+        
+        const childcareProviderCount = getProviderCount(context.location, 'childcare');
+        const childcareProviderTeaser = `${childcareProviderCount} other provider${childcareProviderCount !== 1 ? 's' : ''} identified`;
+        questions.push(createAccordionItem({
+            question: "Who are the other childcare providers in this area?",
+            teaser: childcareProviderTeaser,
+            iconSVG: ICONS.providers,
+            answerHTML: `<p>The list below includes providers located inside this community. If none are found, the closest is listed instead. Click any provider to zoom to its location.</p><div id="nearest-providers-list"></div>`,
+            mapAction: 'showNearest:childcare', 
+            context
+        }));
+
         const childcareQuotes = p.plan_quotes?.filter(q => q.topic.includes('Child Care')) || [];
         if (childcareQuotes.length > 0) {
-            const quotesHTML = `<ul class="space-y-6 text-slate-600">${childcareQuotes.map(q => {
+             const quotesHTML = `<ul class="space-y-6 text-slate-600">${childcareQuotes.map(q => {
                 const categoryText = QUOTE_CATEGORY_MAP[q.category] || 'Community Voice';
                 return `<li class="space-y-2">
                             <span class="quote-category-tag">${categoryText}</span>
@@ -1454,27 +1703,43 @@ function displaySmartResearchForTract(tractFeature) {
                             </blockquote>
                         </li>`;
             }).join('')}</ul>`;
-            questions.push(createAccordionItem(
-            "What has this community said about childcare needs?",
-            quotesHTML,
-            null, context
-        ));
+            questions.push(createAccordionItem({
+                question: "What has this community said about childcare needs?",
+                teaser: `${childcareQuotes.length} quotes from community plans`,
+                iconSVG: ICONS.communityVoice,
+                answerHTML: quotesHTML,
+                context
+            }));
         }
     }
     
     if (selectedSector === 'fresh-food') {
          const unmet = p.grocery_unmet_demand;
-         const needText = unmet > 0 ? `<strong>Yes</strong>, this area shows a significant opportunity for fresh food retail.` : `<strong>No</strong>, this area's current access appears to meet or exceed local demand.`;
-         questions.push(createAccordionItem(
-            "Is there a need for more fresh food options in this area?",
-            `<p>${needText} The opportunity score is <strong>${unmet.toFixed(2)}</strong>, reflecting a high latent demand and relatively low current access.</p>`,
-            'showLayer:grocery_unmet_demand', context
-        ));
-        questions.push(createAccordionItem(
-            "Who are the other fresh food providers in this area?",
-            `<p>Showing nearby grocery stores on the map. The list below shows the closest providers to the center of this community area.</p><div id="nearest-providers-list"></div>`,
-            'showNearest:grocery,5', context
-        ));
+         const { label: needLabel, color: needColor } = getTieredLabel(unmet, 'grocery_unmet_demand', {
+            labels: ['LOW OPPORTUNITY', 'MODERATE OPPORTUNITY', 'SIGNIFICANT OPPORTUNITY'],
+            colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
+        });
+         questions.push(createAccordionItem({
+            question: "Is there a need for more fresh food options in this area?",
+            teaser: needLabel,
+            teaserColor: needColor,
+            iconSVG: ICONS.need,
+            answerHTML: `<p>This community has a fresh food opportunity score of <strong>${unmet.toFixed(2)}</strong>, reflecting local latent demand and current store access.</p>`,
+            mapAction: 'showLayer:grocery_unmet_demand', 
+            context
+        }));
+
+        const foodProviderCount = getProviderCount(context.location, 'grocery');
+        const foodProviderTeaser = `${foodProviderCount} other provider${foodProviderCount !== 1 ? 's' : ''} identified`;
+        questions.push(createAccordionItem({
+            question: "Who are the other food providers in this area?",
+            teaser: foodProviderTeaser,
+            iconSVG: ICONS.providers,
+            answerHTML: `<p>The list below includes providers located inside this community. Click any provider to zoom to its location.</p><div id="nearest-providers-list"></div>`,
+            mapAction: 'showNearest:grocery', 
+            context
+        }));
+        
         const freshFoodQuotes = p.plan_quotes?.filter(q => q.topic.includes('Fresh Food')) || [];
         if (freshFoodQuotes.length > 0) {
             const quotesHTML = `<ul class="space-y-6 text-slate-600">${freshFoodQuotes.map(q => {
@@ -1486,110 +1751,226 @@ function displaySmartResearchForTract(tractFeature) {
                             </blockquote>
                         </li>`;
             }).join('')}</ul>`;
-            questions.push(createAccordionItem(
-            "What has this community said about fresh food needs?",
-            quotesHTML,
-            null, context
-        ));
+            questions.push(createAccordionItem({
+                question: "What has this community said about fresh food needs?",
+                teaser: `${freshFoodQuotes.length} quotes from community plans`,
+                iconSVG: ICONS.communityVoice,
+                answerHTML: quotesHTML,
+                context
+            }));
         }
     }
     
     const popChange = safeParseFloat(p.pop_change2530, 0);
-    const growthText = popChange > 50 ? `<strong>Yes</strong>, this area is projected to grow.` : popChange < -50 ? `<strong>No</strong>, this area is projected to see a population decline.` : `This area's population is projected to remain <strong>stable</strong>.`;
-    questions.push(createAccordionItem(
-        "Is this community projected to grow?",
-        `<p>${growthText} The population is projected to change by about <strong>${formatNumber(popChange)} people</strong> between 2025 and 2030.</p>`,
-        'showLayer:pop_change2530', context
-    ));
+    let growthLabel, growthColor;
+    if (popChange < -50) {
+        growthLabel = 'POPULATION DECLINE';
+        growthColor = BRAND_COLORS.error;
+    } else if (popChange > 50) {
+        growthLabel = 'POPULATION GROWTH';
+        growthColor = BRAND_COLORS.success;
+    } else {
+        growthLabel = 'STABLE POPULATION';
+        growthColor = BRAND_COLORS.neutral;
+    }
+    questions.push(createAccordionItem({
+        question: "Is this community projected to grow?",
+        teaser: growthLabel,
+        teaserColor: growthColor,
+        iconSVG: ICONS.growth,
+        answerHTML: `<p>The population is projected to change by about <strong>${formatNumber(popChange)} people</strong> between 2025 and 2030.</p>`,
+        mapAction: 'showLayer:pop_change2530', 
+        context
+    }));
 
-    questions.push(createAccordionItem(
-        "What incentives might be available for my business here?",
-        `<p>Based on your selected industry and this location, here are some potentially relevant incentives. The map will highlight the boundaries for any location-based incentives.</p><div id="incentives-content"></div>`,
-        null, context
-    ));
+    const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
+    let incentiveCount = 0;
+    if (industry) {
+        incentiveCount = filterIncentives(industry, context.location).length;
+    }
+    questions.push(createAccordionItem({
+        question: "What incentives might be available for my business here?",
+        teaser: `${incentiveCount} potentially relevant incentives identified`,
+        iconSVG: ICONS.incentives,
+        answerHTML: `<p>Based on your selected industry and this location, here are some potentially relevant incentives.</p><div id="incentives-content"></div>`,
+        context
+    }));
 
     questions.forEach(q => panelContent.appendChild(q));
     
     const incentivesContent = document.getElementById('incentives-content');
-    if (incentivesContent) {
-        const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
+    if (incentivesContent && industry) {
         const county = context.location.feature.properties.county_name.replace(' County', '').trim();
-        if (industry) {
-            const relevantIncentives = filterIncentives(industry, context.location);
-            const displayType = industry === 'Child Care Services' ? 'Childcare' : 'Fresh Food';
-            incentivesContent.innerHTML = createIncentiveListHTML(relevantIncentives, displayType, industry, county);
-        } else {
-             incentivesContent.innerHTML = `<p class="text-sm text-slate-600">Select a 'Childcare' or 'Fresh Food' sector to see relevant incentives.</p>`;
-        }
+        const relevantIncentives = filterIncentives(industry, context.location);
+        const displayType = industry === 'Child Care Services' ? 'Childcare' : 'Fresh Food';
+        incentivesContent.innerHTML = createIncentiveListHTML(relevantIncentives, displayType, industry, county);
+    } else if (incentivesContent) {
+         incentivesContent.innerHTML = `<p class="text-sm text-slate-600">Select a 'Childcare' or 'Fresh Food' sector to see relevant incentives.</p>`;
     }
     currentPanelContext = { type: 'tract', data: tractFeature };
     openSidePanel();
 }
     
 function displaySmartResearchForAddress(addressName, parcelProps, tractProps, point) {
+    if (!parcelProps && tractProps) {
+        const fullTractFeature = findTractForPoint(point);
+        if (fullTractFeature) {
+            displaySmartResearchForTract(fullTractFeature);
+            return;
+        }
+    }
+
     const displayTitle = parcelProps?.ADDRESS ? `${parcelProps.ADDRESS}, ${parcelProps.CITY}` : addressName;
-    panelTitle.textContent = displayTitle; 
+    panelTitle.textContent = displayTitle;
     panelContent.innerHTML = '';
-    
+
     const questions = [];
     const context = { location: { type: 'point', point, tractProps } };
+    const warningColor = '#e5a000'; // accent-warm-default
 
     if (selectedSector === 'childcare') {
         const unmet = safeParseFloat(tractProps.childcare_unmet_demand, 0);
-        const needText = unmet > 0 ? `<strong>Yes</strong>, the community around this location appears to need more childcare.` : `<strong>No</strong>, this community does not appear to have unmet demand.`;
-         questions.push(createAccordionItem(
-            "Is there a need for more childcare near this location?",
-            `<p>${needText} The surrounding area has an estimated gap of <strong>${formatNumber(unmet)} seats</strong>.</p><p class="mt-2 text-sm">For more community details, <button id="view-full-details-btn" class="text-blue-600 underline">explore the full community area</button>.</p>`,
-            'showLayer:childcare_unmet_demand', context
-        ));
-         questions.push(createAccordionItem(
-            "Who are the other childcare providers near this location?",
-            `<p>Showing the closest licensed childcare providers to this address.</p><div id="nearest-providers-list"></div>`,
-            'showNearest:childcare,5', context
-        ));
+        const { label: needLabel, color: needColor } = getTieredLabel(unmet, 'childcare_unmet_demand', {
+            labels: ['LOW NEED', 'MODERATE NEED', 'HIGH NEED'],
+            colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
+        });
+        questions.push(createAccordionItem({
+            question: "Is there a need for more childcare in this area?",
+            teaser: needLabel,
+            teaserColor: needColor,
+            iconSVG: ICONS.need,
+            answerHTML: `<p>This area has an estimated gap of <strong>${formatNumber(unmet)} seats</strong>, based on a demand for ${formatNumber(tractProps.childcare_demand_score)} seats and an existing supply of ${formatNumber(tractProps.childcare_supply_score)} licensed seats.</p>`,
+            mapAction: 'showLayer:childcare_unmet_demand',
+            context
+        }));
+
+        const childcareProviderCount = getProviderCount(context.location, 'childcare');
+        const childcareProviderTeaser = `${childcareProviderCount} other provider${childcareProviderCount !== 1 ? 's' : ''} identified`;
+        questions.push(createAccordionItem({
+            question: "Who are the other childcare providers in this area?",
+            teaser: childcareProviderTeaser,
+            iconSVG: ICONS.providers,
+            answerHTML: `<p>The list below includes providers within a 3-mile radius of this address. Click any provider to zoom to its location.</p><div id="nearest-providers-list"></div>`,
+            mapAction: 'showNearest:childcare',
+            context
+        }));
+
+        const childcareQuotes = tractProps.plan_quotes?.filter(q => q.topic.includes('Child Care')) || [];
+        if (childcareQuotes.length > 0) {
+            const quotesHTML = `<ul class="space-y-6 text-slate-600">${childcareQuotes.map(q => {
+                const categoryText = QUOTE_CATEGORY_MAP[q.category] || 'Community Voice';
+                return `<li class="space-y-2">
+                            <span class="quote-category-tag">${categoryText}</span>
+                            <blockquote class="pl-4 border-l-4 border-slate-300 leading-relaxed">
+                                ${q.briefing_quote}
+                            </blockquote>
+                        </li>`;
+            }).join('')}</ul>`;
+            questions.push(createAccordionItem({
+                question: "What has this community said about childcare needs?",
+                teaser: `${childcareQuotes.length} quotes from community plans`,
+                iconSVG: ICONS.communityVoice,
+                answerHTML: quotesHTML,
+                context
+            }));
+        }
     }
 
     if (selectedSector === 'fresh-food') {
         const unmet = tractProps.grocery_unmet_demand;
-        const needText = unmet > 0 ? `<strong>Yes</strong>, the community around this location shows a significant opportunity for fresh food retail.` : `<strong>No</strong>, this community's current access appears to meet or exceed local demand.`;
-        questions.push(createAccordionItem(
-            "Is there a need for more fresh food options near this location?",
-            `<p>${needText} The surrounding community has an opportunity score of <strong>${unmet.toFixed(2)}</strong>.</p><p class="mt-2 text-sm">For more community details, <button id="view-full-details-btn" class="text-blue-600 underline">explore the full community area</button>.</p>`,
-            'showLayer:grocery_unmet_demand', context
-        ));
-        questions.push(createAccordionItem(
-            "Who are the other fresh food providers near this location?",
-            `<p>Showing the closest grocery stores to this address.</p><div id="nearest-providers-list"></div>`,
-            'showNearest:grocery,5', context
-        ));
+        const { label: needLabel, color: needColor } = getTieredLabel(unmet, 'grocery_unmet_demand', {
+            labels: ['LOW OPPORTUNITY', 'MODERATE OPPORTUNITY', 'SIGNIFICANT OPPORTUNITY'],
+            colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
+        });
+        questions.push(createAccordionItem({
+            question: "Is there a need for more fresh food options in this area?",
+            teaser: needLabel,
+            teaserColor: needColor,
+            iconSVG: ICONS.need,
+            answerHTML: `<p>This community has a fresh food opportunity score of <strong>${unmet.toFixed(2)}</strong>, reflecting local latent demand and current store access.</p>`,
+            mapAction: 'showLayer:grocery_unmet_demand',
+            context
+        }));
+
+        const foodProviderCount = getProviderCount(context.location, 'grocery');
+        const foodProviderTeaser = `${foodProviderCount} other provider${foodProviderCount !== 1 ? 's' : ''} identified`;
+        questions.push(createAccordionItem({
+            question: "Who are the other food providers in this area?",
+            teaser: foodProviderTeaser,
+            iconSVG: ICONS.providers,
+            answerHTML: `<p>The list below includes providers within a 3-mile radius of this address. Click any provider to zoom to its location.</p><div id="nearest-providers-list"></div>`,
+            mapAction: 'showNearest:grocery',
+            context
+        }));
+        
+        const freshFoodQuotes = tractProps.plan_quotes?.filter(q => q.topic.includes('Fresh Food')) || [];
+        if (freshFoodQuotes.length > 0) {
+            const quotesHTML = `<ul class="space-y-6 text-slate-600">${freshFoodQuotes.map(q => {
+                const categoryText = QUOTE_CATEGORY_MAP[q.category] || 'Community Voice';
+                return `<li class="space-y-2">
+                            <span class="quote-category-tag">${categoryText}</span>
+                            <blockquote class="pl-4 border-l-4 border-slate-300 leading-relaxed">
+                                ${q.briefing_quote}
+                            </blockquote>
+                        </li>`;
+            }).join('')}</ul>`;
+            questions.push(createAccordionItem({
+                question: "What has this community said about fresh food needs?",
+                teaser: `${freshFoodQuotes.length} quotes from community plans`,
+                iconSVG: ICONS.communityVoice,
+                answerHTML: quotesHTML,
+                context
+            }));
+        }
     }
+
+    const popChange = safeParseFloat(tractProps.pop_change2530, 0);
+    let growthLabel, growthColor;
+    if (popChange < -50) {
+        growthLabel = 'POPULATION DECLINE';
+        growthColor = BRAND_COLORS.error;
+    } else if (popChange > 50) {
+        growthLabel = 'POPULATION GROWTH';
+        growthColor = BRAND_COLORS.success;
+    } else {
+        growthLabel = 'STABLE POPULATION';
+        growthColor = BRAND_COLORS.neutral;
+    }
+    questions.push(createAccordionItem({
+        question: "Is this community projected to grow?",
+        teaser: growthLabel,
+        teaserColor: growthColor,
+        iconSVG: ICONS.growth,
+        answerHTML: `<p>The population is projected to change by about <strong>${formatNumber(popChange)} people</strong> between 2025 and 2030.</p>`,
+        mapAction: 'showLayer:pop_change2530',
+        context
+    }));
     
     if (parcelProps && parcelProps.ZONING) {
-         questions.push(createAccordionItem(
-            "How is this address zoned?",
-            `<p>The zoning for this parcel is listed as <strong>${parcelProps.ZONING}</strong>. The land use is described as <strong>${parcelProps.DESCCIUSE ? parcelProps.DESCCIUSE.split(' ').slice(1).join(' ') : formatValue(parcelProps.DESCLU)}</strong>.</p><p class="mt-2 text-xs text-slate-500">Note: Always confirm zoning regulations with the local county or municipal authority.</p>`,
-            null, context
-        ));
+         questions.push(createAccordionItem({
+            question: "How is this property zoned?",
+            teaser: `Zoned as ${parcelProps.ZONING}`,
+            iconSVG: ICONS.growth, 
+            answerHTML: `<p>The zoning for this parcel is listed as <strong>${parcelProps.ZONING}</strong>. The land use is described as <strong>${parcelProps.DESCCIUSE ? parcelProps.DESCCIUSE.split(' ').slice(1).join(' ') : formatValue(parcelProps.DESCLU)}</strong>.</p><p class="mt-2 text-xs text-slate-500">Note: Always confirm zoning regulations with the local county or municipal authority.</p>`,
+            context
+        }));
     }
-    
-    questions.push(createAccordionItem(
-        "What incentives might be available at this address?",
-        `<p>Based on your selected industry and this specific location, here are some potentially relevant incentives. The map will highlight the boundaries for any location-based incentives.</p><div id="incentives-content"></div>`,
-        null, context
-    ));
+
+    const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
+    let incentiveCount = 0;
+    if (industry) {
+        incentiveCount = filterIncentives(industry, context.location).length;
+    }
+    questions.push(createAccordionItem({
+        question: "What incentives might be available for my business here?",
+        teaser: `${incentiveCount} potentially relevant incentives identified`,
+        iconSVG: ICONS.incentives,
+        answerHTML: `<p>Based on your selected industry and this specific location, here are some potentially relevant incentives.</p><div id="incentives-content"></div>`,
+        context
+    }));
 
     questions.forEach(q => panelContent.appendChild(q));
 
-    if (tractProps) {
-        const fullTractFeature = findTractForPoint(point);
-        const viewDetailsBtn = document.getElementById('view-full-details-btn');
-        if (viewDetailsBtn && fullTractFeature) {
-            viewDetailsBtn.onclick = () => {
-                // Call the Smart Research function for the full tract
-                displaySmartResearchForTract(fullTractFeature);
-            }
-        }
-    }
     const incentivesContent = document.getElementById('incentives-content');
     if (incentivesContent) {
         const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
@@ -1606,42 +1987,82 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
     openSidePanel();
 }
     
-async function showNearestPoints(location, layerName, count, container) {
-    if (!overlayLayers[layerName]) {
-        const checkbox = document.querySelector(`input[data-name="${layerName}"]`);
-        if (checkbox) {
-            checkbox.checked = true;
-            await togglePointLayer(checkbox);
-        }
+async function showNearestPoints(location, layerName, container) {
+    const checkbox = document.querySelector(`input[data-name="${layerName}"]`);
+
+    if (checkbox && !checkbox.checked) {
+        checkbox.checked = true;
+        await togglePointLayer(checkbox);
     }
+
     const pointLayer = overlayLayers[layerName];
     if (!pointLayer) {
         container.innerHTML = `<p class="text-sm text-red-600">Could not load provider data.</p>`;
         return;
     }
 
-    const targetPoint = location.type === 'tract' ?
-        turf.centroid(location.feature).geometry.coordinates :
-        [location.point.lng, location.point.lat];
-
     const allPoints = pointLayer.getLayers().map(l => ({
         layer: l,
         feature: l.feature || { properties: l.options.properties, geometry: { coordinates: [l.getLatLng().lng, l.getLatLng().lat] } }
     }));
     
-    const pointsWithDistance = allPoints.map(p => ({ ...p, distance: turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' }) }));
-    pointsWithDistance.sort((a, b) => a.distance - b.distance);
-    const nearest = pointsWithDistance.slice(0, count);
+    let relevantProviders = [];
+
+    if (location.type === 'tract') {
+        const tractPolygon = location.feature;
+        
+        const pointsInside = allPoints.filter(p => {
+            const turfPoint = turf.point(p.feature.geometry.coordinates);
+            return turf.booleanPointInPolygon(turfPoint, tractPolygon);
+        });
+
+        const targetPoint = turf.centroid(tractPolygon).geometry.coordinates;
+
+        if (pointsInside.length > 0) {
+            // Original logic: If providers are inside, list them all, sorted by distance.
+            const pointsWithDistance = pointsInside.map(p => ({
+                ...p,
+                distance: turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' })
+            }));
+            pointsWithDistance.sort((a, b) => a.distance - b.distance);
+            relevantProviders = pointsWithDistance;
+        } 
+        else if (allPoints.length > 0) {
+            // Fallback: If NO providers are inside, find the single closest one from the entire dataset.
+            const allPointsWithDistance = allPoints.map(p => ({
+                ...p,
+                distance: turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' })
+            }));
+            allPointsWithDistance.sort((a, b) => a.distance - b.distance);
+            relevantProviders = [allPointsWithDistance[0]]; // Return an array with just the closest provider
+        }
+
+    } else if (location.type === 'point') {
+        const targetPoint = [location.point.lng, location.point.lat];
+        
+        const pointsWithDistance = allPoints.map(p => ({
+            ...p,
+            distance: turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' })
+        }));
+
+        const nearbyPoints = pointsWithDistance.filter(p => p.distance <= 3);
+        
+        nearbyPoints.sort((a, b) => a.distance - b.distance);
+        relevantProviders = nearbyPoints;
+    }
 
     const listContainer = container.querySelector('#nearest-providers-list');
-    if (nearest.length === 0) {
-        listContainer.innerHTML = `<p class="text-sm text-slate-600 mt-2">No providers found in the immediate vicinity.</p>`;
+    if (relevantProviders.length === 0) {
+        const message = location.type === 'tract' 
+            ? "No providers found directly within this community area."
+            : "No providers found within 3 miles of this address.";
+        listContainer.innerHTML = `<p class="text-sm text-slate-600 mt-2">${message}</p>`;
         return;
     }
     
     listContainer.innerHTML = `
         <ul class="space-y-3 mt-2">
-            ${nearest.map(p => {
+            ${relevantProviders.map(p => {
                 const props = p.layer.getPopup().getContent().includes('Capacity') ? {
                     name: p.layer.getPopup()._content.match(/<div class="font-bold text-base">(.*?)<\/div>/)[1],
                     detail: p.layer.getPopup()._content.match(/<div><strong>Capacity \(Under 6\):<\/strong> (.*?)<\/div>/)[1]
@@ -1650,9 +2071,13 @@ async function showNearestPoints(location, layerName, count, container) {
                     detail: p.layer.getPopup()._content.match(/<div><strong>Type:<\/strong> (.*?)<\/div>/)[1]
                 };
                 const latlng = p.layer.getLatLng();
-                return `<li class="text-sm border-t pt-2 cursor-pointer hover:bg-slate-50 p-1 rounded" onclick="map.setView([${latlng.lat}, ${latlng.lng}], 17)">
-                            <p class="font-semibold text-slate-800">${props.name}</p>
-                            <p class="text-slate-600">${p.distance.toFixed(1)} miles away</p>
+                
+                const distanceContext = location.type === 'tract' ? 'from center' : 'away';
+                const distanceText = `<p class="text-slate-600">${p.distance.toFixed(1)} miles ${distanceContext}</p>`;
+
+                return `<li class="text-sm border-t pt-2 cursor-pointer hover:bg-slate-50 p-1 rounded" onclick="zoomToPoint(${latlng.lat}, ${latlng.lng})">
+                            <p class.semibold text-slate-800">${props.name}</p>
+                            ${distanceText}
                        </li>`;
             }).join('')}
         </ul>`;
@@ -1683,111 +2108,137 @@ function findTractForPoint(latlng) {
 }
 
 function displayAddressInfo(addressName, parcelProps, tractProps, point) {
+    if (!parcelProps && tractProps) {
+        const fullTractFeature = findTractForPoint(point);
+        if (fullTractFeature) {
+            displayFeatureInfo(fullTractFeature);
+            return; 
+        }
+    }
+
     const displayTitle = parcelProps?.ADDRESS ? `${parcelProps.ADDRESS}, ${parcelProps.CITY}` : addressName;
-    panelTitle.textContent = displayTitle; 
+    panelTitle.textContent = displayTitle;
     let html = '';
 
-    let parcelDetailsHTML = '';
+    const momentumTooltip = "The Community Momentum Index measures economic vitality by averaging growth rates in business formations, licenses, jobs, and payroll. Positive scores reflect community economic growth.";
+    const childcareOppTooltip = "Child care opportunity score is the number of children 5 and under in households where all parents are in the laborforce, minus the licensed capacity of local child care providers. Positive scores reflect unmet community demand.";
+    const latentDemandTooltip = "Estimates how much more people would spend on fresh food if they had good access to high-quality stores, based on local demographics and current access.";
+    const unmetDemandTooltip = "Measures the gap between potential and actual grocery access. Positive scores indicate high latent demand and low current access, signaling a strong market opportunity. Negative scores suggest access meets or exceeds demand.";
+
+    const createInfoIcon = (tooltipText) => `
+        <div class="info-tooltip inline-block ml-1" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-500 inline" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+            <span class="tooltip-text">${tooltipText}</span>
+        </div>`;
+
     if (parcelProps) {
-        const details = [];
         const useDesc = parcelProps.DESCCIUSE ? parcelProps.DESCCIUSE.split(' ').slice(1).join(' ') : formatValue(parcelProps.DESCLU);
-        if (useDesc && useDesc !== 'N/A') {
-            details.push(`<div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Land Use:</span> ${useDesc}</div>`);
-        }
-        if (parcelProps.ZONING) {
-            details.push(`<div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Zoning:</span> ${formatValue(parcelProps.ZONING)}</div>`);
-        }
-        if (parcelProps.YEARBLT) {
-            details.push(`<div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Year Built:</span> ${formatValue(parcelProps.YEARBLT)}</div>`);
-        }
-        if (parcelProps.ACRES) {
-            details.push(`<div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Acres:</span> ${formatValue(parcelProps.ACRES)}</div>`);
-        }
-        if (parcelProps.SQFTSTRC) {
-            details.push(`<div class="bg-slate-50 p-2 rounded-md"><span class="font-medium text-slate-600">Structure SqFt:</span> ${formatNumber(parcelProps.SQFTSTRC)}</div>`);
-        }
-        
         const salePrice = safeParseFloat(parcelProps.CONSIDR1);
-        if (salePrice > 0) {
-            details.push(`<div class="bg-slate-50 p-2 rounded-md col-span-2"><span class="font-medium text-slate-600">Last Sale:</span> ${formatYmd(parcelProps.TRADATE)} for ${formatCurrency(salePrice)}</div>`);
-        }
-
-        if (details.length > 0) {
-            parcelDetailsHTML = `
-                <div>
-                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Parcel Details</h3>
-                    <div class="grid grid-cols-2 gap-2 text-sm">
-                        ${details.join('')}
-                    </div>
-                </div>`;
-        }
-    }
-
-    if (!parcelDetailsHTML) {
-        parcelDetailsHTML = `<p class="text-sm p-3 bg-blue-50 border-l-4 border-blue-400 text-blue-800 rounded-r-md">This is a general location. No specific parcel data is available. Search for a full address to see more details.</p>`;
-    }
-
-    html += parcelDetailsHTML;
-
-    if (tractProps) {
-        const location = { type: 'point', point: point, tractProps: tractProps };
-        const county = location.tractProps.county_name.replace(' County', '').trim();
-        const childcareIncentives = filterIncentives('Child Care Services', location);
-        const freshFoodIncentives = filterIncentives('Grocery Stores', location);
-
-        const overlappingAreas = [];
-        const incentiveCheckboxes = document.querySelectorAll('input[onchange="togglePolygonLayer(this)"]');
-        incentiveCheckboxes.forEach(checkbox => {
-            const layerName = checkbox.dataset.name;
-            const layer = overlayLayers[layerName];
-            if (layer && isPointInLayer_Turf(point, layer)) {
-                const label = checkbox.nextElementSibling.textContent.trim();
-                overlappingAreas.push(label);
-            }
-        });
-
-        let incentiveAreasHTML = '';
-        if (overlappingAreas.length > 0) {
-            incentiveAreasHTML = `
-                <div class="mt-4">
-                    <h4 class="font-semibold text-slate-700 text-sm mb-2">Overlapping Incentive Areas</h4>
-                    <ul class="list-disc list-inside space-y-1 text-sm text-slate-700 bg-slate-50 p-3 rounded-lg">
-                        ${overlappingAreas.map(area => `<li>${area}</li>`).join('')}
-                    </ul>
-                </div>`;
-        } else {
-             incentiveAreasHTML = `
-                <div class="mt-4">
-                     <p class="text-sm text-slate-600 italic">No currently visible incentive areas overlap this point. Toggle layers on to check for others.</p>
-                </div>`;
-        }
-
+        
         html += `
-            <div class="mt-4">
-                <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Context</h3>
-                <div class="p-3 bg-blue-50 border-l-4 border-blue-400 rounded-r-md">
-                    <p class="text-sm text-slate-700">This address is in <strong class="font-semibold">${truncateCommunityList(tractProps.tract_name)}, ${tractProps.county_name}</strong>.</p>
-                    <button id="view-full-details-btn" class="mt-3 w-full bg-slate-700 text-white py-2 px-4 rounded-lg font-semibold hover:bg-slate-800">Explore Full Community Details</button>
-                </div>
-                ${incentiveAreasHTML}
-                <div class="mt-2">
-                    ${selectedSector === 'childcare'
-                        ? createIncentiveListHTML(childcareIncentives, 'Childcare', 'Child Care Services', county)
-                        : selectedSector === 'fresh-food'
-                            ? createIncentiveListHTML(freshFoodIncentives, 'Fresh Food', 'Grocery Stores', county)
-                            : `<p class="text-sm text-slate-600">Select a 'Childcare' or 'Fresh Food' sector to see relevant incentives.</p>`}
-                </div>
+            <div>
+                <h3 class="text-lg font-semibold text-slate-800 mb-2">Parcel Details</h3>
+                <table class="explore-table">
+                    ${useDesc && useDesc !== 'N/A' ? `<tr><th>Land Use</th><td>${useDesc}</td></tr>` : ''}
+                    ${parcelProps.ZONING ? `<tr><th>Zoning</th><td>${formatValue(parcelProps.ZONING)}</td></tr>` : ''}
+                    ${parcelProps.YEARBLT ? `<tr><th>Year Built</th><td>${formatValue(parcelProps.YEARBLT)}</td></tr>` : ''}
+                    ${parcelProps.ACRES ? `<tr><th>Acres</th><td>${formatValue(parcelProps.ACRES)}</td></tr>` : ''}
+                    ${parcelProps.SQFTSTRC ? `<tr><th>Structure SqFt</th><td>${formatNumber(parcelProps.SQFTSTRC)}</td></tr>` : ''}
+                    ${salePrice > 0 ? `<tr><th>Last Sale</th><td>${formatYmd(parcelProps.TRADATE)} for ${formatCurrency(salePrice)}</td></tr>` : ''}
+                </table>
             </div>`;
     }
 
-    panelContent.innerHTML = html;
-
     if (tractProps) {
-        const fullTractFeature = findTractForPoint(point);
-        if (fullTractFeature) {
-            document.getElementById('view-full-details-btn').onclick = () => displayFeatureInfo(fullTractFeature);
+        const properties = tractProps;
+        const popChange = safeParseFloat(properties.pop_change2530);
+
+        html += `
+            <div>
+                <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Community: Population & Demographics</h3>
+                <p class="text-sm text-slate-600 mb-2">Data for the <strong>${truncateCommunityList(properties.tract_name)}</strong> community area.</p>
+                <table class="explore-table">
+                    <tr><th>Population (2025)</th><td>${formatNumber(properties.pop2025)}</td></tr>
+                    <tr><th>Projected Pop. (2030)</th><td>${formatNumber(properties.pop2030)}</td></tr>
+                    <tr><th>Projected Change (25-30)</th><td><span class="${popChange > 0 ? 'text-green-700' : 'text-red-600'}">${formatNumber(popChange)}</span></td></tr>
+                    <tr><th>% Population Under 5</th><td>${formatPercent(properties.pct_under5)}</td></tr>
+                    <tr><th>Avg. Household Income</th><td>${formatCurrency(properties.avg_household_income)}</td></tr>
+                    <tr><th>% Transportation Barriers</th><td>${formatPercent(properties.transportation_barrier_pct)}</td></tr>
+                </table>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Community: Economic Vitality</h3>
+                <table class="explore-table">
+                    <tr><th>Momentum Index (22-23) ${createInfoIcon(momentumTooltip)}</th><td>${formatPercent(properties.community_momentum_index)}</td></tr>
+                    <tr><th>Net Business Formations</th><td>${formatPercent(properties.net_business_formations)}</td></tr>
+                    <tr><th>Job Growth (Employees)</th><td>${formatPercent(properties.job_growth_employees)}</td></tr>
+                    <tr><th>Job Growth (Payroll)</th><td>${formatPercent(properties.job_growth_payroll)}</td></tr>
+                    <tr><th>Business License Growth</th><td>${formatPercent(properties.license_growth_rate)}</td></tr>
+                </table>
+            </div>`;
+
+        if (selectedSector === 'childcare' || selectedSector === 'other') {
+            html += `
+                <div>
+                    <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Community: Childcare Opportunity</h3>
+                    <table class="explore-table">
+                        <tr><th>Access (Existing Seats)</th><td>${formatNumber(properties.childcare_supply_score)}</td></tr>
+                        <tr><th>Demand (Children Needing Care)</th><td>${formatNumber(properties.childcare_demand_score)}</td></tr>
+                        <tr><th>Opportunity (Unmet Demand) ${createInfoIcon(childcareOppTooltip)}</th><td>${formatNumber(properties.childcare_unmet_demand)}</td></tr>
+                        <tr><th>Childcare Spending (per child)</th><td>${formatCurrency(properties.childcare_spending_per_under5)}</td></tr>
+                    </table>
+                </div>`;
+        }
+
+        if (selectedSector === 'fresh-food' || selectedSector === 'other') {
+            html += `
+                <div>
+                    <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Community: Fresh Food Opportunity</h3>
+                    <table class="explore-table">
+                        <tr><th>Access Score</th><td>${properties.grocery_supply_score.toFixed(2)}</td></tr>
+                        <tr><th>Need Score</th><td>${formatPercent(properties.grocery_need_score)}</td></tr>
+                        <tr><th>Latent Demand Score ${createInfoIcon(latentDemandTooltip)}</th><td>${properties.grocery_demand_score.toFixed(2)}</td></tr>
+                        <tr><th>Unmet Demand Score ${createInfoIcon(unmetDemandTooltip)}</th><td>${properties.grocery_unmet_demand.toFixed(2)}</td></tr>
+                        <tr><th>Grocery Spending (per household)</th><td>${formatCurrency(properties.per_household_food_at_home)}</td></tr>
+                    </table>
+                </div>`;
+        }
+        
+        if (properties.plan_quotes && properties.plan_quotes.length > 0) {
+            html += `
+                <div class="mt-4">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Voice</h3>
+                    <div class="space-y-4">
+                        ${properties.plan_quotes.map(quote => {
+                            const categoryText = QUOTE_CATEGORY_MAP[quote.category] || 'Community Voice';
+                            return `
+                                <div class="text-sm">
+                                    <span class="quote-category-tag">${categoryText}</span>
+                                    <blockquote class="mt-1 pl-4 border-l-4 border-slate-300 text-slate-600 leading-relaxed">
+                                        ${quote.briefing_quote}
+                                    </blockquote>
+                                </div>`;
+                        }).join('')}
+                    </div>
+                </div>`;
+        }
+
+        const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
+        if (industry) {
+            const location = { type: 'point', point, tractProps };
+            const county = properties.county_name.replace(' County', '').trim();
+            const relevantIncentives = filterIncentives(industry, location);
+            if (relevantIncentives.length > 0) {
+                html += `
+                    <div class="mt-4">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-2">Potential Incentives</h3>
+                        ${createIncentiveListHTML(relevantIncentives, selectedSector === 'childcare' ? 'Childcare' : 'Fresh Food', industry, county)}
+                    </div>`;
+            }
         }
     }
+
+    panelContent.innerHTML = html;
     currentPanelContext = { type: 'address', data: { addressName, parcelProps, tractProps, point } };
     openSidePanel();
 }
@@ -1841,6 +2292,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         zoomOffset: -1,
         accessToken: MAPBOX_ACCESS_TOKEN
     }).addTo(map);
+    map.attributionControl.setPrefix('');
     // Ensure the attribution control gets accessible attributes
     (function setAttributionAttributes() {
         const el = document.querySelector('.leaflet-control-attribution');
@@ -1877,12 +2329,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         allIncentives = [...processIncentives(stateIncentives, 'State'), ...processIncentives(localIncentives, 'Local')];
         
         L.geoJSON(countyData, {
-            style: { fillOpacity: 0, color: '#FFFFFF', weight: 2, opacity: 0.8 },
+            style: { fillOpacity: 0, color: '#FFFFFF', weight: 1, opacity: 0.8 },
             interactive: false, pane: 'countyPane'
         }).addTo(map);
 
         initializeMap();
         await preloadPolygonLayers();
+        await preloadPointLayers();
 
     } catch (error) {
         console.error('Failed to load map data:', error);
@@ -1890,6 +2343,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     } finally {
         loadingOverlay.classList.add('hidden');
     }
+
+    setAppHeight();
+    setSiteHeaderHeight();
+    registerHeaderHeightObserver();
+    updateGeocoderWidth();
 });
 
 // --- SETUP FUNCTIONS ---
@@ -1965,7 +2423,7 @@ function handleSectorSelection(sector) {
     setDefaultBaseLayer(sector);
 
     if (isFirstTimeUser) {
-        showTour(sector);
+        //showTour(sector); // TODO: Re-enable tour after demo
         isFirstTimeUser = false; // Prevent tour from showing again this session
     }
 }
@@ -2118,16 +2576,27 @@ function initializeMap() {
     };
     
     choroplethSelect.addEventListener('change', updateMap);
-    document.getElementById('close-panel-btn').addEventListener('click', () => {
-        sidePanel.classList.remove('show');
+    const panelHandle = document.getElementById('panel-handle');
 
-        document.body.classList.remove('panel-is-open');
-        currentPanelContext = { type: null, data: null };
-        if (lastClickedLayer) {
-            geojsonLayer.resetStyle(lastClickedLayer);
-            lastClickedLayer = null;
+    // A single function to open or close the panel
+    const togglePanel = () => {
+        const isOpen = sidePanel.classList.contains('show');
+        
+        if (isOpen) {
+            // --- Logic to CLOSE the panel ---
+            sidePanel.classList.remove('show');
+            document.body.classList.remove('panel-is-open');
+            panelHandle.setAttribute('aria-expanded', 'false');
+
+        } else {
+            // --- Logic to OPEN the panel ---
+            openSidePanel(); // openSidePanel already adds the 'show' class
+            panelHandle.setAttribute('aria-expanded', 'true');
         }
-    });
+    };
+
+    // Attach the toggle function to the handle's click event
+    panelHandle.addEventListener('click', togglePanel);
 
     const geocoder = L.Control.geocoder({
         collapsed: false,
@@ -2165,12 +2634,22 @@ function initializeMap() {
         }
 
         const bounds = L.latLng(center).toBounds(100); 
-        map.fitBounds(bounds, { ...getMapPadding(), maxZoom: 16 });
+        map.fitBounds(bounds, { ...getMapPadding(), maxZoom: 12 });
     });
 
     // Add the geocoder to our new container div instead of directly to the map
     geocoder.onAdd(map);
     document.getElementById('geocoder-container').appendChild(geocoder.getContainer());
+    const geocoderInput = document.querySelector('#geocoder-container .leaflet-control-geocoder-form input');
+    if (geocoderInput) {
+        geocoderInput.addEventListener('input', function() {
+            const errorElement = document.querySelector('#geocoder-container .leaflet-control-geocoder-error');
+            if (errorElement) {
+                // Hide the "Nothing found" message as soon as the user types again.
+                errorElement.style.display = 'none';
+            }
+        });
+    }
 
     geojsonLayer = L.geoJSON(tractData, { style: style, onEachFeature: onEachFeature }).addTo(map);
     updateMap();
@@ -2281,6 +2760,53 @@ async function preloadPolygonLayers() {
     } catch (error) {
         console.error("An error occurred during the pre-loading process.", error);
     }
+}
+
+async function preloadPointLayers() {
+    const pointCheckboxes = document.querySelectorAll('input[onchange="togglePointLayer(this)"]');
+    
+    const loadingPromises = Array.from(pointCheckboxes).map(async (checkbox) => {
+        const layerName = checkbox.dataset.name;
+        const url = checkbox.dataset.url;
+        if (overlayLayers[layerName]) return; // Skip if already loaded
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Failed to pre-load ${url}`);
+            const data = await response.json();
+            
+            // This logic is copied from togglePointLayer to ensure layers are created identically
+            const markers = L.markerClusterGroup({ clusterPane: 'clusterTopPane' });
+            const isChildcare = layerName === 'childcare';
+            const pointStyle = { radius: 6, fillColor: isChildcare ? "#fca5a5" : "#6ee7b7", color: "#000", weight: 1, opacity: 1, fillOpacity: 0.8 };
+
+            if (data.type === 'FeatureCollection' && data.features) {
+                const geojsonLayerForPoints = L.geoJSON(data, {
+                    pointToLayer: function(feature, latlng) {
+                        return L.circleMarker(latlng, {...pointStyle, pane: 'clusterTopPane'});
+                    },
+                    onEachFeature: function(feature, layer) {
+                        const { properties } = feature;
+                         let popupContent = isChildcare ? `
+                                <div class="font-bold text-base">${properties.gen_listing_name_original_text || 'N/A'}</div>
+                                <div><strong>Capacity (Under 6):</strong> ${properties.licensed_capacity_under6 || 'N/A'}</div>
+                            ` : `
+                                <div class="font-bold text-base">${properties.name || 'N/A'}</div>
+                                <div><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
+                                <div><strong>Quality:</strong> ${properties.quality || 'N/A'}</div>
+                            `;
+                        layer.bindPopup(popupContent);
+                    }
+                });
+                markers.addLayer(geojsonLayerForPoints);
+            }
+            overlayLayers[layerName] = markers; // Store the fully created layer
+        } catch (error) {
+            console.error(`Error pre-loading point layer '${layerName}':`, error);
+        }
+    });
+
+    await Promise.all(loadingPromises);
 }
 
 function setAppHeight() {
@@ -2442,6 +2968,8 @@ function setupLayerControls() {
     updateOverlayCount();
     L.DomEvent.on(baseLayerPanel, 'wheel', L.DomEvent.stopPropagation);
     L.DomEvent.on(overlayPanel, 'wheel', L.DomEvent.stopPropagation);
+    const sidePanel = document.getElementById('side-panel');
+    L.DomEvent.on(sidePanel, 'wheel', L.DomEvent.stopPropagation);
 
     document.addEventListener('click', (e) => {
         if (!baseLayerBtn.parentElement.contains(e.target)) {
@@ -2453,15 +2981,10 @@ function setupLayerControls() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    setAppHeight();
-    setSiteHeaderHeight();
-    registerHeaderHeightObserver();
-});
-
 window.addEventListener('resize', () => {
     setAppHeight();
     setSiteHeaderHeight();
+    updateGeocoderWidth();
 });
 </script>
 </body>
