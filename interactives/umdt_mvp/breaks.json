@@ -25,10 +25,11 @@
         9000
     ],
     "grocery_unmet_market_demand": [
-        -50,
+        -60,
         -15,
+        0,
         15,
-        50
+        60
     ],
     "grocery_supply_score": [
         20,
