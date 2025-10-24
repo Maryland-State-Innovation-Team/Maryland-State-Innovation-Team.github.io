@@ -12,8 +12,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Public+Sans:wght@400;500;700&family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
@@ -83,20 +81,30 @@
             }
         }
 
-        /* Custom scrollbar for side panels */
-        #side-panel-content::-webkit-scrollbar, #map-controls-scroll::-webkit-scrollbar {
+        /* Custom scrollbar */
+        /* Custom scrollbar styles */
+        #side-panel-content::-webkit-scrollbar,
+        #base-layer-options::-webkit-scrollbar, 
+        #overlay-options::-webkit-scrollbar {
             width: 8px;
         }
-        #side-panel-content::-webkit-scrollbar-track, #map-controls-scroll::-webkit-scrollbar-track {
+        #side-panel-content::-webkit-scrollbar-track,
+        #base-layer-options::-webkit-scrollbar-track, 
+        #overlay-options::-webkit-scrollbar-track {
             background: #f1f5f9;
         }
-        #side-panel-content::-webkit-scrollbar-thumb, #map-controls-scroll::-webkit-scrollbar-thumb {
+        #side-panel-content::-webkit-scrollbar-thumb,
+        #base-layer-options::-webkit-scrollbar-thumb, 
+        #overlay-options::-webkit-scrollbar-thumb {
             background: #94a3b8;
             border-radius: 10px;
         }
-        #side-panel-content::-webkit-scrollbar-thumb:hover, #map-controls-scroll::-webkit-scrollbar-thumb:hover {
+        #side-panel-content::-webkit-scrollbar-thumb:hover,
+        #base-layer-options::-webkit-scrollbar-thumb:hover, 
+        #overlay-options::-webkit-scrollbar-thumb:hover {
             background: #64748b;
         }
+
 
         .info-legend {
             padding: 8px;
@@ -139,20 +147,6 @@
             text-align: right;
         }
 
-        /* Add these styles for the new layer control panels */
-        #base-layer-options::-webkit-scrollbar, #overlay-options::-webkit-scrollbar {
-            width: 8px;
-        }
-        #base-layer-options::-webkit-scrollbar-track, #overlay-options::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        #base-layer-options::-webkit-scrollbar-thumb, #overlay-options::-webkit-scrollbar-thumb {
-            background: #94a3b8;
-            border-radius: 10px;
-        }
-        #base-layer-options::-webkit-scrollbar-thumb:hover, #overlay-options::-webkit-scrollbar-thumb:hover {
-            background: #64748b;
-        }
         #base-layer-btn-label {
             max-width: 150px; /* Prevent long layer names from breaking layout */
         }
@@ -175,7 +169,7 @@
             z-index: 1;
             bottom: 125%;
             left: 50%; /* Change from right: 0 */
-            transform: translateX(-50%); /* Add this to center the tooltip */
+            transform: translateX(-50%);
             opacity: 0;
             transition: opacity 0.3s;
             font-size: 0.8rem;
@@ -541,11 +535,6 @@
         }
 
         /* --- Geocoder Restyling --- */
-        #geocoder-container .leaflet-control-geocoder {
-            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05), 0 1px 3px 1px rgb(0 0 0 / 0.1);
-            border-radius: 0.25rem;
-            border: 1px solid #a9aeb1; /* base-light */
-        }
         .leaflet-control-geocoder-form input {
             background-color: white;
             color: #1b1b1b; /* base-darkest */
@@ -580,7 +569,6 @@
             box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05), 0 1px 3px 1px rgb(0 0 0 / 0.1);
             border-radius: 0.25rem;
             border: 1px solid #a9aeb1; /* base-light */
-            /* Add this to prevent the library from adding its own background/border */
             background: transparent !important;
             border: none !important;
         }
@@ -624,7 +612,6 @@
         }
 
         #map-mode-btn-group {
-            /* We moved the border definition here from the HTML for better control */
             border: 2px solid #005ea2; /* primary-default */
         }
         .mode-btn {
@@ -642,7 +629,6 @@
             z-index: 10;
         }
         .info-legend {
-            /* We'll add some internal padding here for better aesthetics */
             padding: 0.75rem; /* 12px */
             background: white;
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -2657,11 +2643,6 @@ function initializeMap() {
 }
 
 // --- OVERLAY LAYER TOGGLE LOGIC ---
-function toggleTractLayer(checkbox) {
-    if (checkbox.checked) { if (!map.hasLayer(geojsonLayer)) map.addLayer(geojsonLayer); } 
-    else { if (map.hasLayer(geojsonLayer)) map.removeLayer(geojsonLayer); }
-}
-
 async function togglePolygonLayer(checkbox) {
     const layerName = checkbox.dataset.name;
     const url = checkbox.dataset.url;
@@ -2704,6 +2685,14 @@ async function togglePointLayer(checkbox) {
 
             if (data.type === 'FeatureCollection' && data.features) {
                 const geojsonLayerForPoints = L.geoJSON(data, {
+                    filter: function(feature) {
+                        // For grocery data, only include features where quality is not 1.
+                        if (layerName === 'grocery') {
+                            return feature.properties.quality !== 1;
+                        }
+                        // For all other layers (like childcare), include everything.
+                        return true; 
+                    },
                     pointToLayer: function(feature, latlng) {
                         return L.circleMarker(latlng, {...pointStyle, pane: 'clusterTopPane'});
                     },
@@ -2782,6 +2771,14 @@ async function preloadPointLayers() {
 
             if (data.type === 'FeatureCollection' && data.features) {
                 const geojsonLayerForPoints = L.geoJSON(data, {
+                    filter: function(feature) {
+                        // For grocery data, only include features where quality is not 1.
+                        if (layerName === 'grocery') {
+                            return feature.properties.quality !== 1;
+                        }
+                        // For all other layers (like childcare), include everything.
+                        return true; 
+                    },
                     pointToLayer: function(feature, latlng) {
                         return L.circleMarker(latlng, {...pointStyle, pane: 'clusterTopPane'});
                     },
@@ -2889,11 +2886,6 @@ function setupLayerControls() {
     const overlayPanel = document.getElementById('overlay-panel');
     const overlayCount = document.getElementById('overlay-count');
     const overlayOptionsContainer = document.getElementById('overlay-options');
-
-    const oldOverlayContainer = document.querySelector('[aria-labelledby="map-controls-heading"] #map-controls-scroll');
-    if (oldOverlayContainer) {
-        overlayOptionsContainer.append(...oldOverlayContainer.children);
-    }
 
     // --- Base Layer Logic ---
     baseLayerOptionsContainer.innerHTML = ''; // Clear previous options
