@@ -2958,10 +2958,32 @@ function setupLayerControls() {
 
     overlayOptionsContainer.addEventListener('change', updateOverlayCount);
     updateOverlayCount();
-    L.DomEvent.on(baseLayerPanel, 'wheel', L.DomEvent.stopPropagation);
-    L.DomEvent.on(overlayPanel, 'wheel', L.DomEvent.stopPropagation);
+
+    // Function to stop event propagation
+    function stopPropagation(e) {
+        L.DomEvent.stopPropagation(e);
+    }
+
+    // --- For base layer panel ---
+    // Desktop
+    L.DomEvent.on(baseLayerPanel, 'wheel', stopPropagation);
+    // Mobile
+    L.DomEvent.on(baseLayerPanel, 'touchmove', stopPropagation);
+
+
+    // --- For overlay panel ---
+    // Desktop
+    L.DomEvent.on(overlayPanel, 'wheel', stopPropagation);
+    // Mobile
+    L.DomEvent.on(overlayPanel, 'touchmove', stopPropagation);
+
+
+    // --- For side panel ---
     const sidePanel = document.getElementById('side-panel');
-    L.DomEvent.on(sidePanel, 'wheel', L.DomEvent.stopPropagation);
+    // Desktop
+    L.DomEvent.on(sidePanel, 'wheel', stopPropagation);
+    // Mobile
+    L.DomEvent.on(sidePanel, 'touchmove', stopPropagation);
 
     document.addEventListener('click', (e) => {
         if (!baseLayerBtn.parentElement.contains(e.target)) {
