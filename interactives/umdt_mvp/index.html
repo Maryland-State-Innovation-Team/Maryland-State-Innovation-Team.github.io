@@ -3010,7 +3010,7 @@ function setupLayerControls() {
         }
     });
 
-    baseLayerOptionsContainer.addEventListener('click', (e) => {
+    baseLayerOptionsContainer.addEventListener('change', (e) => {
         // Only proceed if the user clicked on a radio button input
         if (e.target.type !== 'radio') return;
 
