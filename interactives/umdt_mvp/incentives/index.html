@@ -28,11 +28,11 @@
             font-size: 1rem;
             line-height: 1.2;
             color: #1b1b1b;
-            font-style: normal; /* Fix: Remove italics */
+            font-style: normal;
         }
         .custom-logo .usa-logo__text a,
         .custom-logo .usa-logo__text a:visited {
-             color: #1b1b1b; /* Fix: Remove visited link color */
+             color: #1b1b1b;
         }
 
         .sticky-sidebar {
@@ -43,7 +43,7 @@
             max-height: calc(100vh - 12rem);
             overflow-y: auto;
         }
-        /* Fix: Style filter tags to be red */
+
         .md-tag {
             display: inline-flex;
             align-items: center;
@@ -67,7 +67,6 @@
         }
         .md-tag button:hover { color: white; }
 
-        /* --- Begin Fixes --- */
 
         /* Add responsive padding to the header/nav for breathing room */
         .usa-header {
@@ -78,7 +77,6 @@
             padding: 0 0.5rem; /* small horizontal padding by default */
         }
 
-        /* Fix 1: Hide mobile menu button on desktop and make logo + primary nav inline on wider screens */
         @media (min-width: 992px) {
             .usa-menu-btn {
                 display: none;
@@ -196,7 +194,6 @@
             }
         }
         
-        /* Fix 2: Render mobile menu close button icon */
         .usa-nav__close {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath fill='%231b1b1b' d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3e%3c/svg%3e");
             background-repeat: no-repeat;
@@ -236,7 +233,6 @@
             opacity: 0.95 !important;
         }
 
-        /* Fix 4 & 5: Add current page highlight and bottom border to nav */
         .usa-nav-container {
             border-bottom: 1px solid #dfe1e2; /* base-lighter */
         }
@@ -244,7 +240,6 @@
             border-bottom: 0.25rem solid #005ea2; /* primary-default */
         }
         
-        /* Fix 8: Style search input clear button */
         input[type="search"]::-webkit-search-cancel-button {
             -webkit-appearance: none;
             appearance: none;
@@ -263,12 +258,10 @@
             display: none;
         }
 
-        /* Fix 11: Capitalize filter checkbox labels */
         .usa-checkbox__label, #detail-org {
             text-transform: capitalize;
         }
 
-        /* Fix 12: Styles for new incentive detail page header */
         .incentive-detail-header {
             background-color: #1a4480; /* primary-dark */
             color: white;
@@ -281,7 +274,6 @@
         .usa-breadcrumb, .usa-breadcrumb--inverse .usa-breadcrumb__link {
              color: white; /* Make breadcrumb link white on blue bg */
         }
-        /* Fix 12: Style "On This Page" links */
         #detail-contents-nav .usa-sidenav__item a {
             color: #005ea2; /* primary-default */
             text-decoration: none;
@@ -352,12 +344,11 @@
             width: 100%;
         }
 
-        /* 5. Fix breadcrumb background color clash */
         .incentive-detail-header .usa-breadcrumb {
             background-color: transparent;
         }
         .incentive-detail-header .usa-breadcrumb__list::before {
-            background-color: transparent; /* Fix for mobile bar */
+            background-color: transparent;
         }
 
     </style>
@@ -719,14 +710,14 @@
                         </li>
                     `).join('');
                     
-                    const isExpanded = false; // Fix 6: All accordions closed by default
+                    const isExpanded = false;
                     return `
-                        <h3 class="usa-accordion__heading">
+                        <h2 class="usa-accordion__heading">
                             <button class="usa-accordion__button" aria-expanded="${isExpanded}" aria-controls="acc-${filterKey}">
                                 ${config.title}
                                 <span class="filter-count hidden" data-count-for="${filterKey}">0</span>
                             </button>
-                        </h3>
+                        </h2>
                         <div id="acc-${filterKey}" class="usa-accordion__content usa-prose" ${!isExpanded ? 'hidden' : ''}>
                            <ul class="usa-list usa-list--unstyled">${checkboxes}</ul>
                         </div>
@@ -796,7 +787,6 @@
             function renderDetailView(item) {
                 const data = item.structured_extraction;
 
-                // Fix 12: Populate new blue header and breadcrumb
                 document.getElementById('detail-title').textContent = data.program_name;
                 document.getElementById('breadcrumb-current-page').textContent = data.program_name;
 
@@ -880,7 +870,6 @@
                     }
                     return true;
                 });
-                // Fix 9: Update results count text
                 resultsCount.textContent = `Showing ${displayedIncentives.length} of ${allIncentives.length} results`;
                 renderTable(displayedIncentives);
                 renderActiveFilterTags();
@@ -935,7 +924,6 @@
                 document.body.removeChild(link);
             }
             
-            // Fix 13: Add event listener to handle smooth scrolling for in-page links
             const detailContentsNav = document.getElementById('detail-contents-nav');
             detailContentsNav.addEventListener('click', (e) => {
                 const link = e.target.closest('a');
