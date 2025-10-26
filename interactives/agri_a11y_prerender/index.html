@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD Agriculture Practices Chart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+        
+        <header>
+            <h1 class="text-2xl md:text-3xl font-bold text-center mb-6 text-gray-700">
+                Maryland Annual Agricultural Practices (2010-2024)
+            </h1>
+            <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
+                Annual practices (Cover Crops, Conservation Tillage Management, Soil Conservation and Water Quality Plans, Nutrient Management) for 2010 through 2024, by FIPs. WIP goals for progress year 2025.
+            </p>
+        </header>
+
+        <section aria-labelledby="controls-heading">
+            <h2 id="controls-heading" class="sr-only">Chart Controls</h2>
+            <div class="flex flex-col md:flex-row gap-4 mb-6 bg-white p-4 rounded-lg shadow-md">
+                
+                <div class="flex-1">
+                    <label for="practice-select" class="block text-sm font-medium text-gray-700 mb-1">
+                        Agriculture Practice
+                    </label>
+                    <select id="practice-select" name="practice-select" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md shadow-sm">
+                        <option value="">Loading practices...</option>
+                    </select>
+                </div>
+
+                <div class="flex-1">
+                    <label for="fips-select" class="block text-sm font-medium text-gray-700 mb-1">
+                        County
+                    </label>
+                    <select id="fips-select" name="fips-select" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md shadow-sm">
+                        <option value="">Loading counties...</option>
+                    </select>
+                </div>
+
+            </div>
+        </section>
+
+        <section aria-labelledby="chart-heading">
+            <h2 id="chart-heading" class="sr-only">Interactive Data Chart</h2>
+            <div id="chart-container" class="bg-white p-4 rounded-lg shadow-lg min-h-[450px] flex items-center justify-center">
+                <div id="chart"></div>
+                <div id="loading-chart" class="text-gray-500">Loading chart data...</div>
+            </div>
+        </section>
+
+        <section class="mt-8 bg-white p-6 rounded-lg shadow-lg" aria-labelledby="ai-heading">
+            <h2 id="ai-heading" class="text-2xl font-semibold mb-4 text-gray-700">Insights & Common Questions</h2>
+            
+            <div class="mb-4">
+                <label for="ai-question-select" class="block text-sm font-medium text-gray-700 mb-1">
+                    Select a question:
+                </label>
+                <select id="ai-question-select" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md shadow-sm" style="display: none;">
+                </select>
+            </div>
+
+            <div id="ai-answer-box" class="min-h-[100px] p-4 bg-gray-50 border border-gray-200 rounded-lg text-gray-700 space-y-3" aria-live="polite" role="log">
+                <p id="loading-ai">Please select a practice and county to see insights.</p>
+            </div>
+        </section>
+
+        <section class="mt-8 bg-white p-6 rounded-lg shadow-lg" aria-labelledby="data-table-heading">
+            <h2 id="data-table-heading" class="text-2xl font-semibold mb-4 text-gray-700">Chart Data</h2>
+            <div id="data-table-container" class="overflow-x-auto">
+                <p id="loading-table" class="text-gray-500">Please select a practice and county to view data.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- CONFIGURATION & STATE ---
+        // const DATA_URL = 'https://opendata.maryland.gov/resource/9qyj-bhez.json';
+        const DATA_URL = '9qyj-bhez.json';
+        const AI_INSIGHTS_URL = 'aiInsights.json';
+        
+        // Map FIPS codes to Maryland County names for user-friendly dropdowns
+        const FIPS_COUNTY_MAP = {
+            "24001": "Allegany", "24003": "Anne Arundel", "24005": "Baltimore",
+            "24007": "Baltimore City", "24009": "Calvert", "24011": "Caroline",
+            "24013": "Carroll", "24015": "Cecil", "24017": "Charles",
+            "24019": "Dorchester", "24021": "Frederick", "24023": "Garrett",
+            "24025": "Harford", "24027": "Howard", "24029": "Kent",
+            "24031": "Montgomery", "24033": "Prince George's", "24035": "Queen Anne's",
+            "24037": "St. Mary's", "24039": "Somerset", "24041": "Talbot",
+            "24043": "Washington", "24045": "Wicomico", "24047": "Worcester",
+            "24510": "Baltimore City"
+        };
+
+        let allData = []; // To store the fetched data
+        let aiInsightsData = {}; // To store the fetched AI insights
+        
+        // DOM Element References
+        const practiceSelect = document.getElementById('practice-select');
+        const fipsSelect = document.getElementById('fips-select');
+        const chartDiv = document.getElementById('chart');
+        const loadingChart = document.getElementById('loading-chart');
+        const tableContainer = document.getElementById('data-table-container');
+        const loadingTable = document.getElementById('loading-table');
+        const aiSection = document.querySelector('[aria-labelledby="ai-heading"]');
+        const aiQuestionSelect = document.getElementById('ai-question-select');
+        const aiAnswerBox = document.getElementById('ai-answer-box');
+        
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', async () => {
+
+            await Promise.all([fetchData(), fetchAIInsights()]);
+            
+            if (allData.length > 0) {
+                populateDropdowns();
+                updateChartAndInsights();
+            }
+
+            // Add event listeners
+            practiceSelect.addEventListener('change', updateChartAndInsights);
+            fipsSelect.addEventListener('change', updateChartAndInsights);
+
+            aiQuestionSelect.addEventListener('change', (e) => {
+                if (e.target.value) {
+                    aiAnswerBox.innerHTML = `<p>${e.target.value}</p>`;
+                }
+            });
+        });
+
+        // --- DATA FETCHING & PROCESSING ---
+        async function fetchData() {
+            try {
+                const response = await fetch(DATA_URL);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                allData = await response.json();
+                
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                loadingChart.innerText = 'Failed to load chart data. Please check the console.';
+                aiAnswerBox.innerHTML = '<p class="text-gray-500">Failed to load data.</p>';
+                loadingTable.innerText = 'Failed to load data.';
+            }
+        }
+
+        // Function to fetch AI data
+        async function fetchAIInsights() {
+            try {
+                const response = await fetch(AI_INSIGHTS_URL);
+                if (!response.ok) {
+                    // This includes 404 Not Found
+                    throw new Error(`AI insights file not found or failed to load (status: ${response.status})`);
+                }
+                aiInsightsData = await response.json();
+            } catch (error) {
+                console.warn(error.message);
+                // Hide the entire AI section
+                if (aiSection) {
+                    aiSection.style.display = 'none';
+                }
+            }
+        }
+
+        function populateDropdowns() {
+            // 1. Get unique practices
+            const practices = [...new Set(allData.map(item => item.agriculture_practices))].sort();
+            practiceSelect.innerHTML = ''; // Clear loading text
+            practices.forEach(practice => {
+                const option = document.createElement('option');
+                option.value = practice;
+                option.textContent = practice;
+                practiceSelect.appendChild(option);
+            });
+
+            // 2. Get unique FIPS codes and map to names
+            const fipsCodes = [...new Set(allData.map(item => item.fips))].sort();
+            fipsSelect.innerHTML = ''; // Clear loading text
+            fipsCodes.forEach(fips => {
+                const countyName = FIPS_COUNTY_MAP[fips] || `Unknown FIPS (${fips})`;
+                const option = document.createElement('option');
+                option.value = fips;
+                option.textContent = `${countyName} (${fips})`;
+                fipsSelect.appendChild(option);
+            });
+        }
+
+        // --- CHARTING & UI UPDATES ---
+
+        /**
+         * Main function to update chart, table, and AI text box on dropdown change
+         */
+        function updateChartAndInsights() {
+            const selectedPractice = practiceSelect.value;
+            const selectedFips = fipsSelect.value;
+
+            // Hide initial loading messages
+            loadingChart.style.display = 'none';
+            if (loadingTable) {
+                loadingTable.style.display = 'none';
+            }
+            // Clear placeholder text from AI answer box
+            const loadingAi = document.getElementById('loading-ai');
+            if (loadingAi) {
+                loadingAi.style.display = 'none';
+            }
+
+
+            if (selectedPractice && selectedFips) {
+                // Find the specific data row
+                const rowData = allData.find(d => 
+                    d.agriculture_practices === selectedPractice && d.fips === selectedFips
+                );
+
+                if (!rowData) {
+                    // Handle no data for this combination
+                    Plotly.purge(chartDiv);
+                    chartDiv.innerHTML = '<p class="text-center text-gray-500">No data available for this selection.</p>';
+                    tableContainer.innerHTML = '<p class="text-gray-500">No data available for this selection.</p>';
+                    // Only update AI box if section is visible
+                    if (aiSection.style.display !== 'none') {
+                        aiAnswerBox.innerHTML = '<p class="text-gray-500">No insights available for this selection.</p>';
+                        aiQuestionSelect.style.display = 'none';
+                    }
+                    return;
+                }
+                
+                // --- Extract data (used by chart and table) ---
+                const years = [];
+                const progressValues = [];
+                const progressKeys = Object.keys(rowData)
+                    .filter(k => k.startsWith('_') && k.endsWith('_progress'))
+                    .sort();
+
+                progressKeys.forEach(key => {
+                    years.push(key.replace(/_/g, '').replace('progress', ''));
+                    progressValues.push(parseFloat(rowData[key]) || 0);
+                });
+
+                // --- Update UI Components ---
+                drawChart(rowData, years, progressValues, selectedPractice, selectedFips);
+                updateDataTable(rowData, years, progressValues);
+                updateAITextbox(selectedPractice, selectedFips); // This will only run if section is visible
+
+            } else {
+                // Clear chart, table, and AI box if selections are incomplete
+                Plotly.purge(chartDiv);
+                tableContainer.innerHTML = '<p class="text-gray-500">Please select both a practice and a county.</p>';
+                if (aiSection.style.display !== 'none') {
+                    aiAnswerBox.innerHTML = '<p class="text-gray-500">Please select both a practice and a county.</fipss>';
+                    aiQuestionSelect.style.display = 'none';
+                }
+            }
+        }
+
+        /**
+         * Draws the Plotly chart based on selected filters
+         */
+        function drawChart(rowData, years, progressValues, selectedPractice, selectedFips) {
+            // Get goal value and first/last year for the line
+            const goalValue = parseFloat(rowData._2025_goal) || 0;
+            const firstYear = years[0]; // e.g., "2010"
+            const lastProgressYear = years[years.length - 1]; // e.g., "2024"
+
+            // Create the Plotly trace for progress (stops at 2024)
+            const trace = {
+                x: years,
+                y: progressValues,
+                mode: 'lines+markers',
+                name: 'Progress',
+                line: {
+                    color: '#1d4ed8', // A nice blue
+                    width: 3
+                },
+                marker: {
+                    color: '#1d4ed8',
+                    size: 8
+                }
+            };
+            
+            // Horizontal dashed line for the goal
+            const goalLineTrace = {
+                x: [firstYear, lastProgressYear], // Spans from first year to last progress year
+                y: [goalValue, goalValue], // Stays at the same Y value
+                mode: 'lines',
+                name: '2025 Goal',
+                line: {
+                    color: '#ef4444', // A bright red
+                    width: 2,
+                    dash: 'dash'
+                }
+            };
+
+            const countyName = FIPS_COUNTY_MAP[selectedFips] || selectedFips;
+            const layout = {
+                title: {
+                    text: `${selectedPractice}<br>in ${countyName} (${selectedFips})`,
+                    font: { size: 20 },
+                    x: 0.5,
+                    xanchor: 'center'
+                },
+                xaxis: {
+                    title: 'Year',
+                    type: 'category'
+                },
+                yaxis: {
+                    title: rowData.unit || 'Value'
+                },
+                hovermode: 'x unified',
+                margin: { t: 80, b: 40, l: 60, r: 40 },
+                legend: {
+                    orientation: 'h',
+                    y: -0.2,
+                    x: 0.5,
+                    xanchor: 'center'
+                }
+            };
+
+            Plotly.newPlot(chartDiv, [trace, goalLineTrace], layout, { responsive: true });
+        }
+
+        /**
+         * Updates the data table with current data
+         */
+        function updateDataTable(rowData, years, progressValues) {
+            // Clear previous table
+            tableContainer.innerHTML = '';
+            
+            let tableHtml = `
+                <table class="min-w-full divide-y divide-gray-200 border border-gray-200 rounded-lg shadow-sm">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Year</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Progress (${rowData.unit || 'Value'})</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+            `;
+
+            years.forEach((year, index) => {
+                tableHtml += `
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${year}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${progressValues[index].toLocaleString()}</td>
+                    </tr>
+                `;
+            });
+
+            // Add the 2025 Goal row
+            const goalValue = parseFloat(rowData._2025_goal) || 0;
+            tableHtml += `
+                <tr class="bg-gray-50">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-red-600">2025 Goal</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-red-600">${goalValue.toLocaleString()}</td>
+                </tr>
+            `;
+
+            tableHtml += `
+                    </tbody>
+                </table>
+            `;
+            
+            tableContainer.innerHTML = tableHtml;
+        }
+
+
+        /**
+         * Updates the AI insight text box based on selections
+         */
+        function updateAITextbox(selectedPractice, selectedFips) {
+            // If the AI section was hidden during load, do nothing.
+            if (aiSection.style.display === 'none') {
+                return;
+            }
+
+            const key = `${selectedPractice}_${selectedFips}`;
+            const qaArray = aiInsightsData[key]; // Get the array of Q&A objects
+
+            // Clear previous state
+            aiQuestionSelect.innerHTML = '';
+
+            if (!qaArray || qaArray.length === 0) {
+                // Case 1: No data found
+                aiAnswerBox.innerHTML = `<p class="text-gray-500">AI insights for ${selectedPractice} in ${FIPS_COUNTY_MAP[selectedFips]} (${selectedFips}) are being generated and will be available soon.</p>`;
+                aiQuestionSelect.style.display = 'none';
+            } else {
+                // Case 2: Data found, populate dropdown
+                aiQuestionSelect.style.display = 'block';
+                
+                qaArray.forEach(item => {
+                    const option = document.createElement('option');
+                    option.textContent = item.question;
+                    option.value = item.answer; // Store the answer directly in the value
+                    aiQuestionSelect.appendChild(option);
+                });
+                
+                // Set the answer box to the first answer
+                aiAnswerBox.innerHTML = `<p>${qaArray[0].answer}</p>`;
+            }
+        }
+    </script>
+
+</body>
+</html>
