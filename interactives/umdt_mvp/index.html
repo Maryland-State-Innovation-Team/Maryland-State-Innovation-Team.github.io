@@ -1937,14 +1937,14 @@ function displaySmartResearchForTract(tractFeature) {
     if (selectedSector === 'fresh-food') {
         const gapScore = p.grocery_gap_score;
         const { label: needLabel, color: needColor } = getTieredLabel(gapScore, 'grocery_gap_score', {
-            labels: ['LOWEST GAP', 'LOW GAP', 'MODERATE GAP', 'HIGH GAP', 'HIGHEST GAP'],
+            labels: ['VERY LOW GAP', 'LOW GAP', 'MODERATE GAP', 'HIGH GAP', 'VERY HIGH GAP'],
             colors: [BRAND_COLORS.error, BRAND_COLORS.error, warningColor, BRAND_COLORS.success, BRAND_COLORS.success]
         });
         let foodNeedText;
         let foodGapExplanation = ''; // Start with an empty explanation
         switch (needLabel) {
-            case 'HIGHEST GAP':
-                foodNeedText = 'This community is among those with the <strong>highest gaps</strong> between need and access.';
+            case 'VERY HIGH GAP':
+                foodNeedText = 'This community shows a <strong>very high gap</strong> between need and access.';
                 foodGapExplanation = ` The score reflects the intersection of high food insecurity and low geographic access to fresh food.`;
                 break;
             case 'HIGH GAP':
@@ -1958,8 +1958,8 @@ function displaySmartResearchForTract(tractFeature) {
             case 'LOW GAP':
                 foodNeedText = 'This community shows a <strong>low gap</strong> between need and access.';
                 break;
-            case 'LOWEST GAP':
-                foodNeedText = 'This community is among those with the <strong>lowest gap</strong> between need and access.';
+            case 'VERY LOW GAP':
+                foodNeedText = 'This community shows a <strong>very low gap</strong> between need and access.';
                 break;
             default:
                 foodNeedText = 'The gap between need and access in this community is undetermined.';
@@ -2144,14 +2144,14 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
     if (selectedSector === 'fresh-food') {
         const gapScore = tractProps.grocery_gap_score;
         const { label: needLabel, color: needColor } = getTieredLabel(gapScore, 'grocery_gap_score', {
-            labels: ['LOWEST GAP', 'LOW GAP', 'MODERATE GAP', 'HIGH GAP', 'HIGHEST GAP'],
+            labels: ['VERY LOW GAP', 'LOW GAP', 'MODERATE GAP', 'HIGH GAP', 'VERY HIGH GAP'],
             colors: [BRAND_COLORS.error, BRAND_COLORS.error, warningColor, BRAND_COLORS.success, BRAND_COLORS.success]
         });
         let foodNeedText;
         let foodGapExplanation = ''; // Start with an empty explanation
         switch (needLabel) {
-            case 'HIGHEST GAP':
-                foodNeedText = 'This community is among those with the <strong>highest gaps</strong> between need and access.';
+            case 'VERY HIGH GAP':
+                foodNeedText = 'This community shows a <strong>very high gap</strong> between need and access.';
                 foodGapExplanation = ` The score reflects the intersection of high food insecurity and low geographic access to fresh food.`;
                 break;
             case 'HIGH GAP':
@@ -2165,8 +2165,8 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
             case 'LOW GAP':
                 foodNeedText = 'This community shows a <strong>low gap</strong> between need and access.';
                 break;
-            case 'LOWEST GAP':
-                foodNeedText = 'This community is among those with the <strong>lowest gap</strong> between need and access.';
+            case 'VERY LOW GAP':
+                foodNeedText = 'This community shows a <strong>very low gap</strong> between need and access.';
                 break;
             default:
                 foodNeedText = 'The gap between need and access in this community is undetermined.';
@@ -2876,7 +2876,7 @@ function initializeMap() {
                 }
 
             } else if (currentVariable === 'grocery_gap_score') {
-                const qualitativeLabels = ['Lowest', 'Low', 'Moderate', 'High', 'Highest'];
+                const qualitativeLabels = ['Very Low', 'Low', 'Moderate', 'High', 'Very High'];
                 for (let i = 0; i < colors.length; i++) {
                     let label = qualitativeLabels[i];
                     content += `<div class="legend-item"><i style="background:${colors[i]}"></i><span>${label}</span></div>`;
