@@ -835,10 +835,10 @@
                             <a href="./" class="usa-nav__link"><span>Home</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
-                            <a href="incentives/" class="usa-nav__link"><span>Find Incentives</span></a>
+                            <a href="./" class="usa-nav__link usa-current" aria-current="page"><span>See the Opportunity</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
-                            <a href="./" class="usa-nav__link usa-current" aria-current="page"><span>See the Opportunity</span></a>
+                            <a href="incentives/" class="usa-nav__link"><span>Find Incentives</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
                             <a href="#" class="usa-nav__link"><span>Connect to Resources</span></a>
@@ -906,6 +906,7 @@
                                     <div class="space-y-1 text-sm">
                                         <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="childcare" data-url="childcare.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Childcare Locations</span></label>
                                         <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="grocery" data-url="grocery.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Grocery Locations</span></label>
+                                        <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="food_pantry" data-url="food_pantry.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Food Bank Distribution Sites</span></label>
                                     </div>
                                 </div>
                                 <div class="mt-4">
@@ -1008,6 +1009,12 @@ const INCENTIVE_AREA_MAP = {
     'rise_zones': 'RISE Zones',
     'sustainable_communities': 'Sustainable Communities',
     'transit_oriented_development': 'Transit Oriented Development'
+};
+
+const pointLayerConfigs = {
+    childcare: { color: "#fca5a5" },
+    grocery: { color: "#6ee7b7" },
+    food_pantry: { color: "#93c5fd" } // Added config for the new layer
 };
 
 const CHOROPLETH_OPTIONS = {
@@ -1570,10 +1577,24 @@ function executeMapAction(action, context) {
         document.getElementById('choropleth-select').value = value;
         updateMap();
     } else if (command === 'togglePoints') {
-        const checkbox = document.querySelector(`input[data-name="${value}"]`);
-        if (checkbox && !checkbox.checked) {
-            checkbox.checked = true;
-            togglePointLayer(checkbox);
+        const layerToShow = value; // The layer we want to turn ON (e.g., 'childcare')
+
+        // 1. Find all checkboxes that control point layers.
+        const allPointCheckboxes = document.querySelectorAll('input[onchange="togglePointLayer(this)"]');
+
+        // 2. Loop through them and turn OFF any layer that isn't the one we want to show.
+        allPointCheckboxes.forEach(cb => {
+            if (cb.dataset.name !== layerToShow && cb.checked) {
+                cb.checked = false;      // Uncheck the box in the UI.
+                togglePointLayer(cb);    // Call the function to remove the layer from the map.
+            }
+        });
+        
+        // 3. Now, turn ON the desired layer if it's not already on.
+        const checkboxToShow = document.querySelector(`input[data-name="${layerToShow}"]`);
+        if (checkboxToShow && !checkboxToShow.checked) {
+            checkboxToShow.checked = true;
+            togglePointLayer(checkboxToShow);
         }
     } else if (command === 'togglePolygons') {
         const layers = value.split(',');
@@ -2844,6 +2865,7 @@ async function togglePolygonLayer(checkbox) {
 async function togglePointLayer(checkbox) {
     const layerName = checkbox.dataset.name;
     const url = checkbox.dataset.url;
+
     if (checkbox.checked) {
         if (overlayLayers[layerName]) { map.addLayer(overlayLayers[layerName]); return; }
         checkbox.parentElement.classList.add('animate-pulse');
@@ -2858,17 +2880,19 @@ async function togglePointLayer(checkbox) {
             markers.on('animationend', function () {
                 disableMapLayerFocus(this);
             });
-            const isChildcare = layerName === 'childcare';
-            const pointStyle = { radius: 6, fillColor: isChildcare ? "#fca5a5" : "#6ee7b7", color: "#000", weight: 1, opacity: 1, fillOpacity: 0.8 };
+            
+            // Get the specific config for the current layer, with a fallback
+            const config = pointLayerConfigs[layerName] || { color: '#808080' };
+            const pointStyle = { radius: 6, fillColor: config.color, color: "#000", weight: 1, opacity: 1, fillOpacity: 0.8 };
 
             if (data.type === 'FeatureCollection' && data.features) {
                 const geojsonLayerForPoints = L.geoJSON(data, {
                     filter: function(feature) {
-                        // For grocery data, only include features where quality is not 1.
+                        // Specific filter for the grocery layer remains unchanged
                         if (layerName === 'grocery') {
                             return feature.properties.quality !== 1;
                         }
-                        // For all other layers (like childcare), include everything.
+                        // All other layers (childcare, food_pantry) include all features
                         return true; 
                     },
                     pointToLayer: function(feature, latlng) {
@@ -2876,14 +2900,33 @@ async function togglePointLayer(checkbox) {
                     },
                     onEachFeature: function(feature, layer) {
                         const { properties } = feature;
-                         let popupContent = isChildcare ? `
-                                <div class="font-bold text-base">${properties.gen_listing_name_original_text || 'N/A'}</div>
-                                <div><strong>Capacity (Under 6):</strong> ${properties.licensed_capacity_under6 || 'N/A'}</div>
-                            ` : `
-                                <div class="font-bold text-base">${properties.name || 'N/A'}</div>
-                                <div><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
-                                <div><strong>Quality:</strong> ${properties.quality || 'N/A'}</div>
-                            `;
+                        let popupContent = '';
+
+                        // Replaced the ternary with a switch for better scalability
+                        switch (layerName) {
+                            case 'childcare':
+                                popupContent = `
+                                    <div class="font-bold text-base">${properties.gen_listing_name_original_text || 'N/A'}</div>
+                                    <div><strong>Capacity (Under 6):</strong> ${properties.licensed_capacity_under6 || 'N/A'}</div>
+                                `;
+                                break;
+                            case 'grocery':
+                                popupContent = `
+                                    <div class="font-bold text-base">${properties.name || 'N/A'}</div>
+                                    <div><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
+                                    <div><strong>Quality:</strong> ${properties.quality || 'N/A'}</div>
+                                `;
+                                break;
+                            case 'food_pantry': // Corrected popup for food_pantry
+                                popupContent = `
+                                    <div class="font-bold text-base">${properties.name || 'N/A'}</div>
+                                    <div><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
+                                `;
+                                break;
+                            default: // A fallback for any other potential layers
+                                popupContent = `<div class="font-bold text-base">${properties.name || 'N/A'}</div>`;
+                                break;
+                        }
                         layer.bindPopup(popupContent);
                     }
                 });
@@ -2896,7 +2939,7 @@ async function togglePointLayer(checkbox) {
             alert(`Could not load layer: ${layerName}.`);
             checkbox.checked = false;
         } finally {
-             checkbox.parentElement.classList.remove('animate-pulse');
+             checkbox.parentElement.classList.remove('animate-pulse');
         }
     } else {
         if (overlayLayers[layerName]) map.removeLayer(overlayLayers[layerName]);
@@ -2942,17 +2985,25 @@ async function preloadPointLayers() {
             if (!response.ok) throw new Error(`Failed to pre-load ${url}`);
             const data = await response.json();
             
-            // The global patch handles the icons, so we just need a simple instantiation.
             const markers = L.markerClusterGroup({
                 clusterPane: 'clusterTopPane' 
             });
 
-            // This is still useful for handling the individual, un-clustered markers.
             markers.on('animationend', function () {
                 disableMapLayerFocus(this);
             });
-            const isChildcare = layerName === 'childcare';
-            const pointStyle = { radius: 6, fillColor: isChildcare ? "#fca5a5" : "#6ee7b7", color: "#000", weight: 1, opacity: 1, fillOpacity: 0.8 };
+
+            // --- MODIFIED SECTION 1: Point Style ---
+            // Use the global pointLayerConfigs object for styling
+            const config = pointLayerConfigs[layerName] || { color: '#808080' }; // Fallback gray color
+            const pointStyle = { 
+                radius: 6, 
+                fillColor: config.color, 
+                color: "#000", 
+                weight: 1, 
+                opacity: 1, 
+                fillOpacity: 0.8 
+            };
 
             if (data.type === 'FeatureCollection' && data.features) {
                 const geojsonLayerForPoints = L.geoJSON(data, {
@@ -2961,7 +3012,7 @@ async function preloadPointLayers() {
                         if (layerName === 'grocery') {
                             return feature.properties.quality !== 1;
                         }
-                        // For all other layers (like childcare), include everything.
+                        // For all other layers, include everything.
                         return true; 
                     },
                     pointToLayer: function(feature, latlng) {
@@ -2969,14 +3020,34 @@ async function preloadPointLayers() {
                     },
                     onEachFeature: function(feature, layer) {
                         const { properties } = feature;
-                         let popupContent = isChildcare ? `
-                                <div class="font-bold text-base">${properties.gen_listing_name_original_text || 'N/A'}</div>
-                                <div><strong>Capacity (Under 6):</strong> ${properties.licensed_capacity_under6 || 'N/A'}</div>
-                            ` : `
-                                <div class="font-bold text-base">${properties.name || 'N/A'}</div>
-                                <div><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
-                                <div><strong>Quality:</strong> ${properties.quality || 'N/A'}</div>
-                            `;
+
+                        // --- MODIFIED SECTION 2: Popup Content ---
+                        // Replaced the ternary with a switch for better scalability
+                        let popupContent = '';
+                        switch (layerName) {
+                            case 'childcare':
+                                popupContent = `
+                                    <div class="font-bold text-base">${properties.gen_listing_name_original_text || 'N/A'}</div>
+                                    <div><strong>Capacity (Under 6):</strong> ${properties.licensed_capacity_under6 || 'N/A'}</div>
+                                `;
+                                break;
+                            case 'grocery':
+                                popupContent = `
+                                    <div class="font-bold text-base">${properties.name || 'N/A'}</div>
+                                    <div><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
+                                    <div><strong>Quality:</strong> ${properties.quality || 'N/A'}</div>
+                                `;
+                                break;
+                            case 'food_pantry':
+                                popupContent = `
+                                    <div class="font-bold text-base">${properties.name || 'N/A'}</div>
+                                    <div><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
+                                `;
+                                break;
+                            default:
+                                popupContent = `<div class="font-bold text-base">${properties.name || 'N/A'}</div>`;
+                                break;
+                        }
                         layer.bindPopup(popupContent);
                     }
                 });
