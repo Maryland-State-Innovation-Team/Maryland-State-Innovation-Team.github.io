@@ -1321,16 +1321,32 @@ function onEachFeature(feature, layer) {
         mouseover: highlightFeature,
         mouseout: resetHighlight,
         click: (e) => {
+            const clickedLayer = e.target;
+
+            if (lastClickedLayer === clickedLayer) {
+                return;
+            }
+            const previouslyClickedLayer = lastClickedLayer;
+            lastClickedLayer = clickedLayer;
+
+            if (previouslyClickedLayer) {
+                geojsonLayer.resetStyle(previouslyClickedLayer);
+            }
+
+            lastClickedLayer.setStyle({
+                weight: 4,
+                color: '#FFFFFF',
+                dashArray: ''
+            });
+
+            lastClickedLayer.bringToFront();
+
             if (currentMapMode === 'smartResearch') {
                 displaySmartResearchForTract(feature);
             } else {
                 displayFeatureInfo(feature);
             }
-            map.fitBounds(e.target.getBounds(), getMapPadding());
-            
-            if (lastClickedLayer) geojsonLayer.resetStyle(lastClickedLayer);
-            e.target.setStyle({ weight: 4, color: '#FFFFFF', dashArray: '' });
-            lastClickedLayer = e.target;
+            map.fitBounds(clickedLayer.getBounds(), getMapPadding());
         }
     });
 }
