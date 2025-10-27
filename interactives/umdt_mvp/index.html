@@ -733,6 +733,35 @@
         .custom-map-tooltip .leaflet-tooltip-arrow {
             display: none;
         }
+        /* --- Corrected tooltip positioning for the overlay panel --- */
+        #overlay-panel .info-tooltip .tooltip-text {
+            /* Revert to opening upwards */
+            bottom: 125%;
+            top: auto;
+
+            /* --- KEY CHANGE: --- */
+            /* Align the tooltip's RIGHT edge to the icon's RIGHT edge. */
+            /* This forces it to expand left, staying inside the panel. */
+            left: auto;
+            right: 0;
+            transform: none; /* Unset the centering transform */
+
+            /* Give it a slightly smaller width to fit comfortably */
+            width: 240px;
+        }
+
+        /* Adjust the arrow to align with the new positioning */
+        #overlay-panel .info-tooltip .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%; /* Position arrow at the bottom of the tooltip */
+            left: auto;
+            right: 10px; /* Position arrow near the right corner, above the icon */
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #3d4551 transparent transparent transparent; /* Arrow points up */
+        }
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800">
@@ -910,20 +939,110 @@
                                     </div>
                                 </div>
                                 <div class="mt-4">
-                                <h3 class="font-semibold mb-2 text-slate-200">INCENTIVE AREAS</h3>
-                                <div class="space-y-1 text-sm">
-                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enough_grantees" data-url="enough_grantees.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">ENOUGH Act</span></label>
-                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="brni_areas" data-url="brni_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">BRNI Areas</span></label>
-                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enterprise_zone_focus_areas" data-url="enterprise_zone_focus_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Enterprise Zone Focus Areas</span></label>
-                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enterprise_zones" data-url="enterprise_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Enterprise Zones</span></label>
-                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="main_street_areas" data-url="main_street_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Main Street Areas</span></label>
-                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="opportunity_zones" data-url="opportunity_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Opportunity Zones</span></label>
-                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="priority_funding_areas" data-url="priority_funding_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Priority Funding Areas</span></label>
-                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="rise_zones" data-url="rise_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">RISE Zones</span></label>
-                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="sustainable_communities" data-url="sustainable_communities.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Sustainable Communities</span></label>
-                                    <label class="flex items-center"><input type="checkbox" onchange="togglePolygonLayer(this)" data-name="transit_oriented_development" data-url="transit_oriented_development.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Transit Oriented Development</span></label>
+                                    <h3 class="font-semibold mb-2 text-slate-200">INCENTIVE AREAS</h3>
+                                    <div class="space-y-1 text-sm">
+                                        <div class="flex items-center justify-between w-full">
+                                            <label class="flex items-center flex-grow cursor-pointer">
+                                                <input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enough_grantees" data-url="enough_grantees.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="ml-2">ENOUGH Act</span>
+                                            </label>
+                                            <div class="info-tooltip ml-2" tabindex="0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 hover:text-slate-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                                                <span class="tooltip-text">The ENOUGH Act provides grants to community-based organizations in areas with high poverty to address health disparities.</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between w-full">
+                                            <label class="flex items-center flex-grow cursor-pointer">
+                                                <input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enterprise_zones" data-url="enterprise_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="ml-2">Enterprise Zones</span>
+                                            </label>
+                                            <div class="info-tooltip ml-2" tabindex="0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 hover:text-slate-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                                                <span class="tooltip-text">Provides property and income tax credits to businesses that locate or expand in designated zones.</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between w-full">
+                                            <label class="flex items-center flex-grow cursor-pointer">
+                                                <input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enterprise_zone_focus_areas" data-url="enterprise_zone_focus_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="ml-2">Enterprise Zone Focus Areas</span>
+                                            </label>
+                                            <div class="info-tooltip ml-2" tabindex="0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 hover:text-slate-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                                                <span class="tooltip-text">Targeted areas within Enterprise Zones that may offer enhanced tax credits in the most distressed locations.</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between w-full">
+                                            <label class="flex items-center flex-grow cursor-pointer">
+                                                <input type="checkbox" onchange="togglePolygonLayer(this)" data-name="opportunity_zones" data-url="opportunity_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="ml-2">Opportunity Zones</span>
+                                            </label>
+                                            <div class="info-tooltip ml-2" tabindex="0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 hover:text-slate-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                                                <span class="tooltip-text">A federal incentive that provides tax benefits to investors for investing in low-income communities.</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between w-full">
+                                            <label class="flex items-center flex-grow cursor-pointer">
+                                                <input type="checkbox" onchange="togglePolygonLayer(this)" data-name="rise_zones" data-url="rise_zones.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="ml-2">RISE Zones</span>
+                                            </label>
+                                            <div class="info-tooltip ml-2" tabindex="0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 hover:text-slate-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                                                <span class="tooltip-text">The Regional Institution Strategic Enterprise (RISE) program offers tax credits to businesses near qualifying institutions.</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between w-full">
+                                            <label class="flex items-center flex-grow cursor-pointer">
+                                                <input type="checkbox" onchange="togglePolygonLayer(this)" data-name="brni_areas" data-url="brni_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="ml-2">BRNI Areas</span>
+                                            </label>
+                                            <div class="info-tooltip ml-2" tabindex="0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 hover:text-slate-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                                                <span class="tooltip-text">The Baltimore Regional Neighborhood Initiative (BRNI) supports local housing and business development to revitalize communities.</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between w-full">
+                                            <label class="flex items-center flex-grow cursor-pointer">
+                                                <input type="checkbox" onchange="togglePolygonLayer(this)" data-name="main_street_areas" data-url="main_street_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="ml-2">Main Street Areas</span>
+                                            </label>
+                                            <div class="info-tooltip ml-2" tabindex="0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 hover:text-slate-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                                                <span class="tooltip-text">Designated communities are eligible for assistance to support the revitalization of historic downtowns.</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between w-full">
+                                            <label class="flex items-center flex-grow cursor-pointer">
+                                                <input type="checkbox" onchange="togglePolygonLayer(this)" data-name="sustainable_communities" data-url="sustainable_communities.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="ml-2">Sustainable Communities</span>
+                                            </label>
+                                            <div class="info-tooltip ml-2" tabindex="0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 hover:text-slate-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                                                <span class="tooltip-text">A state designation required for eligibility for many state revitalization programs.</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between w-full">
+                                            <label class="flex items-center flex-grow cursor-pointer">
+                                                <input type="checkbox" onchange="togglePolygonLayer(this)" data-name="priority_funding_areas" data-url="priority_funding_areas.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="ml-2">Priority Funding Areas</span>
+                                            </label>
+                                            <div class="info-tooltip ml-2" tabindex="0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 hover:text-slate-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                                                <span class="tooltip-text">State funding for growth is directed to these existing communities and places where local governments want future growth.</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between w-full">
+                                            <label class="flex items-center flex-grow cursor-pointer">
+                                                <input type="checkbox" onchange="togglePolygonLayer(this)" data-name="transit_oriented_development" data-url="transit_oriented_development.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="ml-2">Transit Oriented Development</span>
+                                            </label>
+                                            <div class="info-tooltip ml-2" tabindex="0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 hover:text-slate-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                                                <span class="tooltip-text">State-designated areas that encourage the development of mixed-use, walkable communities around transit stations.</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -977,6 +1096,7 @@ let choroplethSelect, sidePanel, panelContent, panelTitle;
 let currentPanelContext = { type: null, data: null };
 let isFirstTimeUser = false;
 let choroplethBreaks;
+let isPanning = false;
 
 const QUOTE_CATEGORY_MAP = {
     'first-person perspective': 'Individual Voice',
@@ -1320,13 +1440,30 @@ function onEachFeature(feature, layer) {
             <div class="text-xs text-blue-600 font-semibold">${feature.properties.county_name}</div>
         </div>
     `;
+
     layer.bindTooltip(tooltipContent, {
-        sticky: true, // Makes the tooltip follow the mouse
-        className: 'custom-map-tooltip' // A custom class for styling
+        sticky: true,
+        className: 'custom-map-tooltip'
     });
+
+    layer.unbindTooltip();
+
     layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
+        mouseover: function (e) {
+            if (isPanning) {
+                return;
+            }
+            highlightFeature(e);
+            this.bindTooltip(tooltipContent, {
+                sticky: true,
+                className: 'custom-map-tooltip'
+            }).openTooltip();
+        },
+        mouseout: function (e) {
+            resetHighlight(e);
+            this.closeTooltip();
+            this.unbindTooltip();
+        },
         click: (e) => {
             const clickedLayer = e.target;
 
@@ -1800,25 +1937,32 @@ function displaySmartResearchForTract(tractFeature) {
     if (selectedSector === 'fresh-food') {
         const gapScore = p.grocery_gap_score;
         const { label: needLabel, color: needColor } = getTieredLabel(gapScore, 'grocery_gap_score', {
-            labels: ['LOW NEED', 'MODERATE NEED', 'HIGH NEED'],
-            colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
+            labels: ['LOWEST GAP', 'LOW GAP', 'MODERATE GAP', 'HIGH GAP', 'HIGHEST GAP'],
+            colors: [BRAND_COLORS.error, BRAND_COLORS.error, warningColor, BRAND_COLORS.success, BRAND_COLORS.success]
         });
         let foodNeedText;
         let foodGapExplanation = ''; // Start with an empty explanation
         switch (needLabel) {
-            case 'HIGH NEED':
-                foodNeedText = 'This community shows a <strong>high need</strong> for intervention.';
+            case 'HIGHEST GAP':
+                foodNeedText = 'This community is among those with the <strong>highest gaps</strong> between need and access.';
                 foodGapExplanation = ` The score reflects the intersection of high food insecurity and low geographic access to fresh food.`;
                 break;
-            case 'MODERATE NEED':
-                foodNeedText = 'This community shows a <strong>moderate need</strong> for intervention.';
+            case 'HIGH GAP':
+                foodNeedText = 'This community shows a <strong>high gap</strong> between need and access.';
+                foodGapExplanation = ` The score reflects the intersection of high food insecurity and low geographic access to fresh food.`;
+                break;
+            case 'MODERATE GAP':
+                foodNeedText = 'This community shows a <strong>moderate gap</strong> between need and access.';
                 foodGapExplanation = ` The score reflects a combination of food insecurity and low geographic access to fresh food.`;
                 break;
-            case 'LOW NEED':
-                foodNeedText = 'This community shows a <strong>low need</strong> for intervention.';
+            case 'LOW GAP':
+                foodNeedText = 'This community shows a <strong>low gap</strong> between need and access.';
+                break;
+            case 'LOWEST GAP':
+                foodNeedText = 'This community is among those with the <strong>lowest gap</strong> between need and access.';
                 break;
             default:
-                foodNeedText = 'The need for intervention in this community is undetermined.';
+                foodNeedText = 'The gap between need and access in this community is undetermined.';
         }
 
         questions.push(createAccordionItem({
@@ -2000,25 +2144,32 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
     if (selectedSector === 'fresh-food') {
         const gapScore = tractProps.grocery_gap_score;
         const { label: needLabel, color: needColor } = getTieredLabel(gapScore, 'grocery_gap_score', {
-            labels: ['LOW NEED', 'MODERATE NEED', 'HIGH NEED'],
-            colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
+            labels: ['LOWEST GAP', 'LOW GAP', 'MODERATE GAP', 'HIGH GAP', 'HIGHEST GAP'],
+            colors: [BRAND_COLORS.error, BRAND_COLORS.error, warningColor, BRAND_COLORS.success, BRAND_COLORS.success]
         });
         let foodNeedText;
         let foodGapExplanation = ''; // Start with an empty explanation
         switch (needLabel) {
-            case 'HIGH NEED':
-                foodNeedText = 'This community shows a <strong>high need</strong> for intervention.';
+            case 'HIGHEST GAP':
+                foodNeedText = 'This community is among those with the <strong>highest gaps</strong> between need and access.';
                 foodGapExplanation = ` The score reflects the intersection of high food insecurity and low geographic access to fresh food.`;
                 break;
-            case 'MODERATE NEED':
-                foodNeedText = 'This community shows a <strong>moderate need</strong> for intervention.';
+            case 'HIGH GAP':
+                foodNeedText = 'This community shows a <strong>high gap</strong> between need and access.';
+                foodGapExplanation = ` The score reflects the intersection of high food insecurity and low geographic access to fresh food.`;
+                break;
+            case 'MODERATE GAP':
+                foodNeedText = 'This community shows a <strong>moderate gap</strong> between need and access.';
                 foodGapExplanation = ` The score reflects a combination of food insecurity and low geographic access to fresh food.`;
                 break;
-            case 'LOW NEED':
-                foodNeedText = 'This community shows a <strong>low need</strong> for intervention.';
+            case 'LOW GAP':
+                foodNeedText = 'This community shows a <strong>low gap</strong> between need and access.';
+                break;
+            case 'LOWEST GAP':
+                foodNeedText = 'This community is among those with the <strong>lowest gap</strong> between need and access.';
                 break;
             default:
-                foodNeedText = 'The need for intervention in this community is undetermined.';
+                foodNeedText = 'The gap between need and access in this community is undetermined.';
         }
 
         questions.push(createAccordionItem({
@@ -2423,11 +2574,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     map.keyboard.disable();
 
     map.on('movestart', () => {
+        isPanning = true;
         if (geojsonLayer) {
             geojsonLayer.eachLayer(layer => {
                 layer.closeTooltip();
             });
         }
+    });
+
+    map.on('moveend', () => {
+        isPanning = false;
     });
     
     map.createPane('countyPane').style.zIndex = 475;
@@ -2719,6 +2875,12 @@ function initializeMap() {
                     content += `<div class="legend-item"><i style="background:${colors[i]}"></i><span class="legend-label-wrapper"><span>${numericLabel}</span>${contextualLabel}</span></div>`;
                 }
 
+            } else if (currentVariable === 'grocery_gap_score') {
+                const qualitativeLabels = ['Lowest', 'Low', 'Moderate', 'High', 'Highest'];
+                for (let i = 0; i < colors.length; i++) {
+                    let label = qualitativeLabels[i];
+                    content += `<div class="legend-item"><i style="background:${colors[i]}"></i><span>${label}</span></div>`;
+                }
             } else {
                 // --- Original Logic for Sequential Scales ---
                 for (let i = 0; i < colors.length; i++) {

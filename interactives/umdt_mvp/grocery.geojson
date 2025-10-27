@@ -31475,7 +31475,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Unnamed convenience",
+        "name": "Lucky Corner Store",
         "type": "grocery",
         "tag": "convenience",
         "lat": 38.6951399,
@@ -92387,43 +92387,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Unnamed convenience",
-        "type": "grocery",
-        "tag": "convenience",
-        "lat": 38.6983306,
-        "lng": -75.7835054,
-        "index_right": 1070,
-        "OBJECTID": 2671,
-        "STATEFP20": "24",
-        "COUNTYFP20": "011",
-        "TRACTCE20": "955600",
-        "GEOID20": "24011955600",
-        "NAME20": "9556",
-        "NAMELSAD20": "Census Tract",
-        "MTFCC20": "G5020",
-        "FUNCSTAT20": "S",
-        "ALAND20": 88680724,
-        "AWATER20": 429239,
-        "INTPTLAT20": "+38.7068793",
-        "INTPTLON20": "-075.7661753",
-        "ShapeSTAre": 146569781.21484375,
-        "ShapeSTLen": 74110.6750973898,
-        "type_label": "Grocery",
-        "tag_label": "Convenience",
-        "quality": 2
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.7835054,
-          38.6983306
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Unnamed convenience",
+        "name": "Super Soda",
         "type": "grocery",
         "tag": "convenience",
         "lat": 38.6939297,
