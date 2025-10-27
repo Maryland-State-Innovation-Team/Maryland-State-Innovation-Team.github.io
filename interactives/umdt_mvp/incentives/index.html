@@ -743,6 +743,17 @@
             function renderActiveFilterTags() {
                 let tagsHtml = '';
                 let hasFilters = false;
+
+                if (activeFilters.searchTerm) {
+                    hasFilters = true;
+                    tagsHtml += `
+                        <span class="md-tag">
+                            Keyword: ${activeFilters.searchTerm}
+                            <button data-action="clear-search" aria-label="Remove keyword filter">&times;</button>
+                        </span>
+                    `;
+                }
+
                 for (const key in activeFilters) {
                     if (key !== 'searchTerm' && activeFilters[key].size > 0) {
                         hasFilters = true;
@@ -894,10 +905,17 @@
                 const button = e.target.closest('button');
                 if (!button) return;
                 if (button.id === 'clear-all-filters') {
+                    // Clear checkbox filters
                     document.querySelectorAll('#filters-sidebar input[type="checkbox"]').forEach(cb => cb.checked = false);
                     Object.keys(activeFilters).forEach(key => { if (key !== 'searchTerm') activeFilters[key].clear(); });
-                    // Clear all counts
                     updateAllFilterCounts();
+
+                    // Clear textbox
+                    activeFilters.searchTerm = '';
+                    searchInput.value = '';
+                } else if (button.dataset.action === 'clear-search') {
+                    activeFilters.searchTerm = '';
+                    searchInput.value = '';
                 } else {
                     const { filterKey, value } = button.dataset;
                     if (filterKey && value) {
