@@ -1710,17 +1710,36 @@ function displaySmartResearchForTract(tractFeature) {
 
     if (selectedSector === 'childcare') {
         const unmet = safeParseFloat(p.childcare_unmet_demand, 0);
-        const { label: needLabel, color: needColor } = getTieredLabel(unmet, 'childcare_unmet_demand', {
+        let { label: needLabel, color: needColor } = getTieredLabel(unmet, 'childcare_unmet_demand', {
             labels: ['LOW NEED', 'MODERATE NEED', 'HIGH NEED'],
             colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
         });
+
+        if (unmet <= 0) {
+            needLabel = 'LOW NEED';
+            needColor = BRAND_COLORS.error; // Use red for surplus/low need
+        }
+
+        let unmetHTML;
+        let unmetPreamble = "This area has";
+
+        if (unmet > 10) {
+            unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+        } else if (unmet > 0 && unmet <= 10) {
+            unmetPreamble = "This area appears to have a low need for more childcare. We estimate";
+            unmetHTML = `a gap of <strong>${formatNumber(unmet)} seats</strong>`;
+        } else if (unmet < 0) {
+            unmetHTML = `an estimated surplus of <strong>${formatNumber(Math.abs(unmet))} seats</strong>`;
+        } else {
+            unmetHTML = `a balanced supply and demand for childcare`;
+        }
 
         questions.push(createAccordionItem({
             question: "Is there a need for more childcare in this area?",
             teaser: needLabel,
             teaserColor: needColor,
             iconSVG: ICONS.need,
-            answerHTML: `<p>This area has an estimated gap of <strong>${formatNumber(unmet)} seats</strong>, based on a demand for ${formatNumber(p.childcare_demand_score)} seats and an existing supply of ${formatNumber(p.childcare_supply_score)} licensed seats.</p>`,
+            answerHTML: `<p>${unmetPreamble} ${unmetHTML}, based on a demand for ${formatNumber(p.childcare_demand_score)} seats and an existing supply of ${formatNumber(p.childcare_supply_score)} licensed seats.</p>`,
             mapAction: 'showLayer:childcare_unmet_demand', 
             context
         }));
@@ -1763,12 +1782,30 @@ function displaySmartResearchForTract(tractFeature) {
             labels: ['LOW NEED', 'MODERATE NEED', 'HIGH NEED'],
             colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
         });
+        let foodNeedText;
+        let foodGapExplanation = ''; // Start with an empty explanation
+        switch (needLabel) {
+            case 'HIGH NEED':
+                foodNeedText = 'This community shows a <strong>high need</strong> for intervention.';
+                foodGapExplanation = ` The score reflects the intersection of high food insecurity and low geographic access to fresh food.`;
+                break;
+            case 'MODERATE NEED':
+                foodNeedText = 'This community shows a <strong>moderate need</strong> for intervention.';
+                foodGapExplanation = ` The score reflects a combination of food insecurity and low geographic access to fresh food.`;
+                break;
+            case 'LOW NEED':
+                foodNeedText = 'This community shows a <strong>low need</strong> for intervention.';
+                break;
+            default:
+                foodNeedText = 'The need for intervention in this community is undetermined.';
+        }
+
         questions.push(createAccordionItem({
             question: "Is there a need for more fresh food options in this area?",
             teaser: needLabel,
             teaserColor: needColor,
             iconSVG: ICONS.need,
-            answerHTML: `<p>This community has a high need for intervention. The <strong>Gap Score of ${gapScore.toFixed(1)}</strong> reflects the intersection of high food insecurity and low geographic access to fresh food.</p>`,
+            answerHTML: `<p>${foodNeedText} The <strong>Gap Score is ${gapScore.toFixed(1)}</strong>.${foodGapExplanation}</p>`,
             mapAction: 'showLayer:grocery_gap_score', 
             context
         }));
@@ -1822,7 +1859,7 @@ function displaySmartResearchForTract(tractFeature) {
         teaser: growthLabel,
         teaserColor: growthColor,
         iconSVG: ICONS.growth,
-        answerHTML: `<p>The population is projected to change by about <strong>${formatNumber(popChange)} people</strong> between 2025 and 2030.</p>`,
+        answerHTML: `<p>The population is projected to change by about <strong>${(popChange > 0 ? '+' : '') + formatNumber(popChange)} people</strong> between 2025 and 2030.</p>`,
         mapAction: 'showLayer:pop_change2530', 
         context
     }));
@@ -1874,16 +1911,35 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
 
     if (selectedSector === 'childcare') {
         const unmet = safeParseFloat(tractProps.childcare_unmet_demand, 0);
-        const { label: needLabel, color: needColor } = getTieredLabel(unmet, 'childcare_unmet_demand', {
+        let { label: needLabel, color: needColor } = getTieredLabel(unmet, 'childcare_unmet_demand', {
             labels: ['LOW NEED', 'MODERATE NEED', 'HIGH NEED'],
             colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
         });
+        let unmetHTML;
+        let unmetPreamble = "This area has";
+
+        if (unmet > 10) {
+            unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+        } else if (unmet > 0 && unmet <= 10) {
+            unmetPreamble = "This area appears to have a low need for more childcare. We estimate";
+            unmetHTML = `a gap of <strong>${formatNumber(unmet)} seats</strong>`;
+        } else if (unmet < 0) {
+            unmetHTML = `an estimated surplus of <strong>${formatNumber(Math.abs(unmet))} seats</strong>`;
+        } else {
+            unmetHTML = `a balanced supply and demand for childcare`;
+        }
+
+        if (unmet <= 0) {
+            needLabel = 'LOW NEED';
+            needColor = BRAND_COLORS.error; // Use red for surplus/low need
+        }
+        
         questions.push(createAccordionItem({
             question: "Is there a need for more childcare in this area?",
             teaser: needLabel,
             teaserColor: needColor,
             iconSVG: ICONS.need,
-            answerHTML: `<p>This area has an estimated gap of <strong>${formatNumber(unmet)} seats</strong>, based on a demand for ${formatNumber(tractProps.childcare_demand_score)} seats and an existing supply of ${formatNumber(tractProps.childcare_supply_score)} licensed seats.</p>`,
+            answerHTML: `<p>${unmetPreamble} ${unmetHTML}, based on a demand for ${formatNumber(tractProps.childcare_demand_score)} seats and an existing supply of ${formatNumber(tractProps.childcare_supply_score)} licensed seats.</p>`,
             mapAction: 'showLayer:childcare_unmet_demand',
             context
         }));
@@ -1926,12 +1982,30 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
             labels: ['LOW NEED', 'MODERATE NEED', 'HIGH NEED'],
             colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
         });
+        let foodNeedText;
+        let foodGapExplanation = ''; // Start with an empty explanation
+        switch (needLabel) {
+            case 'HIGH NEED':
+                foodNeedText = 'This community shows a <strong>high need</strong> for intervention.';
+                foodGapExplanation = ` The score reflects the intersection of high food insecurity and low geographic access to fresh food.`;
+                break;
+            case 'MODERATE NEED':
+                foodNeedText = 'This community shows a <strong>moderate need</strong> for intervention.';
+                foodGapExplanation = ` The score reflects a combination of food insecurity and low geographic access to fresh food.`;
+                break;
+            case 'LOW NEED':
+                foodNeedText = 'This community shows a <strong>low need</strong> for intervention.';
+                break;
+            default:
+                foodNeedText = 'The need for intervention in this community is undetermined.';
+        }
+
         questions.push(createAccordionItem({
             question: "Is there a need for more fresh food options in this area?",
             teaser: needLabel,
             teaserColor: needColor,
             iconSVG: ICONS.need,
-            answerHTML: `<p>This community has a high need for intervention. The <strong>Gap Score of ${gapScore.toFixed(1)}</strong> reflects the intersection of high food insecurity and low geographic access to fresh food.</p>`,
+            answerHTML: `<p>${foodNeedText} The <strong>Gap Score is ${gapScore.toFixed(1)}</strong>.${foodGapExplanation}</p>`,
             mapAction: 'showLayer:grocery_gap_score', 
             context
         }));
@@ -1985,7 +2059,7 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
         teaser: growthLabel,
         teaserColor: growthColor,
         iconSVG: ICONS.growth,
-        answerHTML: `<p>The population is projected to change by about <strong>${formatNumber(popChange)} people</strong> between 2025 and 2030.</p>`,
+        answerHTML: `<p>The population is projected to change by about <strong>${(popChange > 0 ? '+' : '') + formatNumber(popChange)} people</strong> between 2025 and 2030.</p>`,
         mapAction: 'showLayer:pop_change2530',
         context
     }));
