@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect to Resources - Maryland Community Business Compass</title>
+    
+    <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/latest/css/mdwds.min.css"/>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Public+Sans:wght@400;500;700&family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for footer and card icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <style>
+        /* Base header/logo styles */
+        .custom-logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        .custom-logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        .custom-logo .usa-logo__text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.2;
+            color: #1b1b1b;
+            font-style: normal;
+        }
+        .custom-logo .usa-logo__text a,
+        .custom-logo .usa-logo__text a:visited {
+             color: #1b1b1b;
+        }
+        .usa-header {
+            padding: 0.5rem 1rem;
+        }
+        .usa-nav-container {
+            padding: 0 0.5rem;
+            border-bottom: 1px solid #dfe1e2; /* base-lighter */
+        }
+        .usa-nav__primary > .usa-nav__primary-item > .usa-nav__link.usa-current {
+            border-bottom: 0.25rem solid #005ea2; /* primary-default */
+        }
+        .usa-nav__close {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath fill='%231b1b1b' d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 1.5rem;
+        }
+
+        @media (min-width: 992px) {
+            .usa-menu-btn { display: none; }
+            .usa-nav-container { display: flex; align-items: center; gap: 1rem; justify-content: space-between; padding: 0 1.5rem; }
+            .usa-header { padding: 0.75rem 1.5rem; }
+            .usa-nav-container .usa-navbar { display: flex; align-items: center; gap: 1rem; flex: 0 0 auto; width: auto; }
+            .usa-nav { order: 2; flex: 0 1 auto; display: flex; justify-content: flex-end; background: transparent; box-shadow: none; }
+            .usa-nav__primary { display: inline-flex; gap: 1.25rem; align-items: center; }
+            .usa-nav__primary-item { display: inline-flex; align-items: center; }
+            header .usa-nav-container .usa-nav { flex: 0 0 auto !important; width: auto !important; max-width: none !important; }
+            header .usa-nav-container .usa-nav__primary { display: inline-flex !important; width: auto !important; justify-content: flex-end !important; margin-left: 0 !important; }
+            header .usa-nav-container > .usa-nav { margin-left: auto !important; max-width: -moz-fit-content !important; max-width: fit-content !important; min-width: 0 !important; }
+            .usa-nav__close { display: none; }
+            .usa-nav-container > .usa-nav { margin-top: 0; }
+        }
+        @media (max-width: 991px) {
+            .usa-navbar { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 1rem; }
+            .usa-logo.custom-logo { order: 1; flex: 0 1 auto; }
+            .usa-menu-btn { order: 2; margin-left: auto; display: inline-flex; align-items: center; }
+            .usa-nav { order: 3; }
+        }
+        
+        /* Patched Footer Styles */
+        .site-footer {
+            background-color: #000000;
+            color: #ffffff;
+            padding-top: 2rem;
+        }
+        .site-footer a, .site-footer a:visited {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .site-footer a:hover {
+            text-decoration: none;
+        }
+        .site-footer .usa-footer__primary-link {
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .site-footer .usa-footer__secondary-link a {
+            text-decoration: none;
+        }
+         .site-footer .usa-footer__secondary-link a:hover {
+            text-decoration: underline;
+        }
+        .site-footer .usa-footer__primary-section {
+            background-color: transparent;
+        }
+        .site-footer-contact-info__logo {
+            max-width: 200px;
+            height: auto;
+        }
+        .site-footer-contact-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .site-footer-contact-info address {
+            font-style: normal;
+        }
+        .site-footer-contact-info p { margin: 0; }
+        .site-footer-social-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+        .site-footer-social-links a.footer-text-link {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .site-footer-social-links a.footer-icon-link {
+            font-size: 1.75rem;
+        }
+        .site-footer .explore-header {
+            border-top: 1px solid #565c65;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+        .site-footer-secondary {
+             padding-bottom: 2rem;
+        }
+        .site-footer-copyright {
+            background-color: #000000;
+            border-top: 1px solid #565c65;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+        /* NEW STYLES for Resource Page */
+        
+        /* Sticky sidebar for filters */
+        .sticky-sidebar {
+            position: sticky;
+            top: 1.5rem; 
+        }
+
+        /* Style for the search input with icon */
+        #search-input {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23565c65'%3E%3Cpath d='M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: 0.75rem center;
+            background-size: 1.25rem;
+            padding-left: 2.5rem;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        /* Grid for the contact cards */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Individual contact card styling */
+        .resource-card {
+            background-color: #ffffff;
+            border: 1px solid #dfe1e2; /* base-lighter */
+            border-radius: 0.25rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resource-card h3 {
+            color: #1b1b1b;
+            margin-top: 0;
+        }
+        
+        .resource-card-body {
+             flex-grow: 1;
+        }
+
+        .resource-card-contact {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: #005ea2; /* primary-default */
+            margin-top: 1rem;
+        }
+        .resource-card-contact:hover {
+            text-decoration: underline;
+        }
+        .resource-card-contact .fa-solid {
+            font-size: 1.25rem;
+        }
+
+        /* Filter tags from incentives page */
+        .md-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            background-color: #b21d38; /* secondary-vivid */
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            text-transform: capitalize;
+        }
+        .md-tag button {
+            background: none;
+            border: none;
+            color: #f0f0f0; /* base-lightest */
+            font-size: 1.25rem;
+            line-height: 1;
+            padding: 0;
+            cursor: pointer;
+        }
+        .md-tag button:hover { color: white; }
+
+        /* Filter count badge from incentives page */
+        .filter-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 1.5rem;
+            height: 1.5rem;
+            padding: 0 0.4rem;
+            margin-left: 0.5rem;
+            border-radius: 999px;
+            background-color: #3d4551; /* secondary-vivid */
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+        .filter-count.hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="usa-banner-container">
+        <section class="usa-banner" aria-label="Official website of the State of Maryland">
+            <div class="usa-accordion">
+                <header class="usa-banner__header padding-x-2">
+                    <div class="usa-banner__inner padding-1 margin-0">
+                        <div class="grid-col-auto">
+                            <img class="usa-banner__header-flag" aria-hidden="true" src="data:image/svg+xml,%3csvg%20width='18'%20height='13'%20viewBox='0%200%2018%2013'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20x='7'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='5'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='1'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='7'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='3'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='3'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='5'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='11'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2011%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='13'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2013%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='17'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2017%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='11'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2011%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='15'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2015%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='15'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2015%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='13'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2013%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='17'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2017%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='6.5'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='9.25'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='6.5'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='1'%20y='9.25'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2017%206.5)'%20fill='white'/%3e%3crect%20x='13'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2013%203.75)'%20fill='white'/%3e%3crect%20x='13'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2013%206.5)'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2017%203.75)'%20fill='%23B50909'/%3e%3crect%20x='0.75'%20y='0.75'%20width='16.5'%20height='11.5'%20stroke='black'%20stroke-width='0.5'/%3e%3c/svg%3e">
+                        </div>
+                        <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
+                            <p class="usa-banner__header-text">An official website of the State of Maryland</p>
+                            <p class="usa-banner__header-action">Here’s how you know</p>
+                        </div>
+                        <button type="button" class="usa-accordion__button usa-banner__button" aria-controls="gov-banner-default" aria-expanded="false">
+                            <span class="usa-banner__button-text">Here’s how you know</span>
+                        </button>
+                    </div>
+                </header>
+                <div class="usa-banner__content usa-accordion__content" id="gov-banner-default" hidden="true">
+                    <div class="grid-row grid-gap-lg">
+                        <div class="usa-banner__guidance tablet:grid-col-6">
+                            <img class="usa-banner__icon usa-media-block__img" role="img" alt="" aria-hidden="true" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3e%3ctitle%3eicon-dot-gov%3c/title%3e%3cpath%20fill='%232378C3'%20fill-rule='evenodd'%20d='m32%200c17.7%200%2032%2014.3%2032%2032s-14.3%2032-32%2032-32-14.3-32-32%2014.3-32%2032-32zm0%201.2c-17%200-30.8%2013.8-30.8%2030.8s13.8%2030.8%2030.8%2030.8%2030.8-13.8%2030.8-30.8-13.8-30.8-30.8-30.8zm11.4%2038.9c.5%200%20.9.4.9.8v1.6h-24.6v-1.6c0-.5.4-.8.9-.8zm-17.1-12.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h.8c.5%200%20.9.4.9.8v.8h-21.4v-.8c0-.5.4-.8.9-.8h.8v-9.8zm5.7-8.2%2012.3%204.9v1.6h-1.6c0%20.5-.4.8-.9.8h-19.6c-.5%200-.9-.4-.9-.8h-1.6v-1.6s12.3-4.9%2012.3-4.9z'/%3e%3c/svg%3e">
+                            <div class="usa-media-block__body">
+                                <p><strong>Official websites use .gov</strong><br>A <strong>.gov</strong> website belongs to an official government organization in the United States.</p>
+                            </div>
+                        </div>
+                        <div class="usa-banner__guidance tablet:grid-col-6">
+                            <img class="usa-banner__icon usa-media-block__img" role="img" alt="" aria-hidden="true" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3e%3ctitle%3eicon-https%3c/title%3e%3cpath%20fill='%23719F2A'%20fill-rule='evenodd'%20d='M32%200c17.673%200%2032%2014.327%2032%2032%200%2017.673-14.327%2032-32%2032C14.327%2064%200%2049.673%200%2032%200%2014.327%2014.327%200%2032%200zm0%201.208C14.994%201.208%201.208%2014.994%201.208%2032S14.994%2062.792%2032%2062.792%2062.792%2049.006%2062.792%2032%2De%3c/svg%3e">
+                            <div class="usa-media-block__body">
+                                <p><strong>Secure .gov websites use HTTPS</strong><br>A <strong>lock</strong> (<span class="icon-lock"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="64" viewBox="0 0 52 64" class="usa-banner__lock-image" role="img" aria-labelledby="banner-lock-description-default" focusable="false"><title id="banner-lock-title-default">Lock</title><desc id="banner-lock-description-default">Locked padlock icon</desc><path fill="#000000" fill-rule="evenodd" d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"></path></svg></span>) or <strong>https://</strong> means you’ve safely connected to the .gov website. Share sensitive information only on official, secure websites.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="app">
+        <header class="usa-header usa-header--basic">
+            <div class="usa-nav-container">
+                <div class="usa-navbar">
+                    <div class="usa-logo custom-logo" id="basic-logo">
+                        <div class="usa-logo__text">
+                            <a href="../" title="Home" aria-label="Home">
+                                <img src="../assets/mdwds_logo_notext.svg" alt="Maryland Business Compass Logo">
+                                <span>Maryland Community<br>Business Compass</span>
+                            </a>
+                        </div>
+                    </div>
+                    <button type="button" class="usa-menu-btn">Menu</button>
+                </div>
+                <nav aria-label="Primary navigation" class="usa-nav">
+                    <button type="button" class="usa-nav__close"></button>
+                    <ul class="usa-nav__primary usa-accordion">
+                        <li class="usa-nav__primary-item">
+                            <a href="../" class="usa-nav__link"><span>Home</span></a>
+                        </li>
+                        <li class="usa-nav__primary-item">
+                            <a href="../map/" class="usa-nav__link"><span>See the Opportunity</span></a>
+                        </li>
+                        <li class="usa-nav__primary-item">
+                            <a href="../incentives/" class="usa-nav__link"><span>Find Incentives</span></a>
+                        </li>
+                        <li class="usa-nav__primary-item">
+                            <a href="./" class="usa-nav__link usa-current" aria-current="page"><span>Connect to Resources</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <section class="grid-container usa-section">
+                <!-- Page Title -->
+                <div class="grid-row">
+                    <div class="tablet:grid-col-12">
+                        <h1 class="font-heading-2xl margin-top-0 tablet:margin-bottom-0">Connect to Resources</h1>
+                    </div>
+                </div>
+
+                <!-- Search Bar & Active Filters -->
+                <div class="grid-row grid-gap-4 margin-top-4">
+                    <div class="tablet:grid-col-12">
+                        <div class="usa-form-group">
+                            <label class="usa-label usa-sr-only" for="search-input">Search by keyword, name, or title</label>
+                            <div class="usa-search usa-search--big" role="search">
+                                <input class="usa-input" id="search-input" type="search" name="search" placeholder="Search by keyword, name, or title">
+                            </div>
+                        </div>
+                         <div class="tablet:grid-col-12 margin-top-2">
+                            <div id="active-filters-container" class="display-flex flex-wrap flex-align-center" style="gap: 0.5rem; min-height: 38px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Layout (Filters + Results) -->
+                <div class="grid-row grid-gap-4 margin-top-4">
+                    
+                    <!-- Filters Sidebar -->
+                    <aside id="filters-sidebar" aria-label="Resource Filters" class="tablet:grid-col-4">
+                        <div class="sticky-sidebar">
+                            <h2 class="usa-sr-only">Filter Resources</h2>
+                            <div id="filters-accordion" class="usa-accordion">
+                                <!-- Filters will be dynamically inserted here by JavaScript -->
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Results Area -->
+                    <div class="tablet:grid-col-8">
+                        <p id="results-count" class="font-sans-sm text-base">Loading results...</p>
+                        
+                        <!-- The new resource grid -->
+                        <div id="resource-grid" class="resource-grid margin-top-2">
+                            <!-- Results will be dynamically inserted here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <footer class="usa-footer site-footer">
+        <div class="grid-container">
+            <div class="grid-row grid-gap padding-y-4">
+                <div class="tablet:grid-col-8">
+                    <div class="site-footer-contact-info">
+                        <img src="../assets/innovation-website-logo-light.png" alt="Maryland State Innovation Team Logo" class="site-footer-contact-info__logo">
+                        <div>
+                            <p class="text-bold">Maryland State Innovation Team</p>
+                            <address>
+                                <p>6 Saint Paul Street, Baltimore, MD 21202</p>
+                            </address>
+                        </div>
+                    </div>
+                </div>
+                <div class="tablet:grid-col-4">
+                     <div class="site-footer-social-links">
+                        <a href="mailto:innovation.team@maryland.gov" class="footer-text-link">Contact Us</a>
+                        <a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank" class="footer-text-link">Visit Our Website</a>
+                        <a href="https://www.linkedin.com/company/marylanditeam" target="_blank" title="LinkedIn" class="footer-icon-link">
+                            <i class="fa-brands fa-linkedin"></i>
+                            <span class="usa-sr-only">LinkedIn</span>
+                        </a>
+                        <!--
+                        <a href="#" target="_blank" title="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                            <span class="usa-sr-only">Instagram</span>
+                        </a>
+                        <a href="#" target="_blank" title="Youtube">
+                            <i class="fa-brands fa-square-youtube"></i>
+                            <span class="usa-sr-only">Youtube</span>
+                        </a>
+                        -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="explore-header">Explore Maryland.gov</div>
+
+            <div class="usa-footer__primary-section site-footer-secondary">
+                <div class="grid-row grid-gap">
+                    <div class="mobile-lg:grid-col-6 desktop:grid-col-3">
+                        <h4 class="usa-footer__primary-link">Top Services</h4>
+                        <ul class="usa-list usa-list--unstyled">
+                            <li class="usa-footer__secondary-link"><a href="https://mva.maryland.gov/vehicles">Vehicle Services</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://dhs.maryland.gov/supplemental-nutrition-assistance-program/">Food Assistance / SNAP</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://www.labor.maryland.gov/employment/unemployment.shtml">Unemployment Services</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://www.marylandtaxes.gov/individual/index.php">Taxes</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://elections.maryland.gov/voter_registration/index.html">Register to Vote</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://www.maryland.gov/pages/residents.aspx">Resident Resources</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://www.visitmaryland.org/">Visit Maryland</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://www.maryland.gov/pages/online_services.aspx">More Online Services</a></li>
+                        </ul>
+                    </div>
+                    <div class="mobile-lg:grid-col-6 desktop:grid-col-3">
+                        <h4 class="usa-footer__primary-link">Government</h4>
+                        <ul class="usa-list usa-list--unstyled">
+                            <li class="usa-footer__secondary-link"><a href="https://governor.maryland.gov/">Governor Wes Moore</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://governor.maryland.gov/leadership/cabinet/">Maryland Cabinet Agencies</a></li>
+                            <li class="usa-footer__secondary-link"><a href="http://www.maryland.gov/pages/agency_directory.aspx">All State Agencies</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://www.maryland.gov/pages/state_employees.aspx">For State Employees</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://www.maryland.gov/pages/jobs.aspx">Maryland State Jobs</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://www.ola.state.md.us/fraud/ola-fraud-hotline/">Report State Government Fraud</a></li>
+                        </ul>
+                    </div>
+                    <div class="mobile-lg:grid-col-6 desktop:grid-col-2">
+                        <h4 class="usa-footer__primary-link">Policies</h4>
+                        <ul class="usa-list usa-list--unstyled">
+                            <li class="usa-footer__secondary-link"><a href="https://www.maryland.gov/pages/accessibility.aspx">Accessibility</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://www.maryland.gov/pages/privacy_security.aspx">Privacy & Security</a></li>
+                        </ul>
+                    </div>
+                    <div class="mobile-lg:grid-col-6 desktop:grid-col-2">
+                        <h4 class="usa-footer__primary-link">Connect</h4>
+                        <ul class="usa-list usa-list--unstyled">
+                            <li class="usa-footer__secondary-link"><a href="http://www.doit.state.md.us/phonebook/">State Employee Directory</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://mdrelay.maryland.gov/Pages/default.aspx">Maryland Relay: 7-1-1</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://news.maryland.gov/">Maryland News</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://www.doit.state.md.us/selectsurvey/TakeSurvey.aspx?SurveyID=86M2956">Customer Service Survey</a></li>
+                        </ul>
+                    </div>
+                    <div class="mobile-lg:grid-col-6 desktop:grid-col-2">
+                        <h4 class="usa-footer__primary-link">Alerts</h4>
+                        <ul class="usa-list usa-list--unstyled">
+                            <li class="usa-footer__secondary-link"><a href="https://mdready.maryland.gov/be-informed/Pages/sign-up-for-alerts.aspx">Emergency Alerts</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://chart.maryland.gov/Incidents/GetIncidents">Travel Alerts</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://doit.maryland.gov/cybersecurity/">Cybersecurity</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://goccp.maryland.gov/victim-services/human-trafficking/">Report Human Trafficking</a></li>
+                            <li class="usa-footer__secondary-link"><a href="https://response.maryland.gov/bridge">Key Bridge</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="site-footer-copyright">
+            <p>© 2025 Maryland.gov</p>
+        </div>
+    </footer>
+
+
+    <script>
+        var mdwds = { image_path: "https://cdn.maryland.gov/mdwds/latest/img" };
+    </script>
+    <script src="https://cdn.maryland.gov/mdwds/latest/js/mdwds-core.js"></script>
+    
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            let allResources = [];
+            let displayedResources = [];
+            
+            const activeFilters = {
+                searchTerm: '',
+                categories: new Set(),
+                counties: new Set(),
+                languages: new Set(),
+            };
+
+            // Configuration for filter accordions and data keys
+            const filterConfig = {
+                categories: {
+                    title: 'Business Category',
+                    key: 'categories',
+                    options: []
+                },
+                counties: {
+                    title: 'County',
+                    key: 'counties',
+                    options: [
+                        // "Allegany", "Anne Arundel", "Baltimore", "Baltimore City", 
+                        // "Calvert", "Caroline", "Carroll", "Cecil", "Charles", "Dorchester", 
+                        // "Frederick", "Garrett", "Harford", "Howard", "Kent", "Montgomery", 
+                        // "Prince George's", "Queen Anne's", "St. Mary's", "Somerset", "Talbot", 
+                        // "Washington", "Wicomico", "Worcester"
+                    ]
+                },
+                languages: {
+                    title: 'Language',
+                    key: 'languages',
+                    options: []
+                }
+            };
+
+            // DOM Selectors
+            const searchInput = document.getElementById('search-input');
+            const resultsCount = document.getElementById('results-count');
+            const filtersSidebar = document.getElementById('filters-accordion');
+            const activeFiltersContainer = document.getElementById('active-filters-container');
+            const resourceGrid = document.getElementById('resource-grid');
+
+            const slugify = (text) => text.toString().toLowerCase()
+                .replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
+
+            async function initializeApp() {
+                renderFilterUI();
+                try {
+                    const res = await fetch('resources.json');
+                    if (!res.ok) throw new Error("Network response was not ok.");
+                    
+                    allResources = await res.json();
+                    
+                    // Automatically expand filter options based on loaded data
+                    // This ensures all options from the JSON are in the filter list
+                    updateFilterOptionsFromData();
+                    // Re-render filters with the new comprehensive options
+                    renderFilterUI();
+
+                    applyFilters();
+
+                } catch (error) {
+                    console.error("Failed to load resource data:", error);
+                    resourceGrid.innerHTML = `<p class="text-center padding-4 text-error">Error loading data. Please check if resources.json is in the root folder and try again.</p>`;
+                    resultsCount.textContent = '0 results';
+                }
+            }
+
+            // This function ensures the filter options are dynamically populated from the JSON
+            function updateFilterOptionsFromData() {
+                for (const key in filterConfig) {
+                    const optionsSet = new Set(filterConfig[key].options);
+                    allResources.forEach(item => {
+                        const values = item[filterConfig[key].key];
+                        if (Array.isArray(values)) {
+                            values.forEach(val => optionsSet.add(val));
+                        }
+                    });
+                    filterConfig[key].options = Array.from(optionsSet).sort();
+                    
+                    // Ensure "Statewide" is first in counties list if it exists
+                    if (key === 'counties') {
+                        const statewideIndex = filterConfig[key].options.indexOf("Statewide");
+                        if (statewideIndex > -1) {
+                            filterConfig[key].options.splice(statewideIndex, 1);
+                            filterConfig[key].options.unshift("Statewide");
+                        }
+                    }
+                }
+            }
+
+            function renderFilterUI() {
+                const sidebarContent = Object.entries(filterConfig).map(([filterKey, config]) => {
+                    const checkboxes = config.options.map(option => `
+                        <li class="usa-checkbox">
+                             <input class="usa-checkbox__input" id="${filterKey}-${slugify(option)}" type="checkbox" data-filter-key="${filterKey}" value="${option}">
+                             <label class="usa-checkbox__label" for="${filterKey}-${slugify(option)}">${option}</label>
+                        </li>
+                    `).join('');
+                    
+                    return `
+                        <h2 class="usa-accordion__heading">
+                            <button class="usa-accordion__button" aria-expanded="false" aria-controls="acc-${filterKey}">
+                                ${config.title}
+                                <span class="filter-count hidden" data-count-for="${filterKey}">0</span>
+                            </button>
+                        </h2>
+                        <div id="acc-${filterKey}" class="usa-accordion__content usa-prose" hidden>
+                           <ul class="usa-list usa-list--unstyled">${checkboxes}</ul>
+                        </div>
+                    `;
+                }).join('');
+                filtersSidebar.innerHTML = sidebarContent;
+
+            }
+
+            function updateFilterCount(filterKey) {
+                const count = activeFilters[filterKey].size;
+                const el = document.querySelector(`.filter-count[data-count-for="${filterKey}"]`);
+                if (!el) return;
+                el.textContent = count;
+                if (count > 0) el.classList.remove('hidden'); else el.classList.add('hidden');
+            }
+
+            function updateAllFilterCounts() {
+                for (const key in filterConfig) updateFilterCount(key);
+            }
+
+            function renderActiveFilterTags() {
+                let tagsHtml = '';
+                let hasFilters = false;
+
+                if (activeFilters.searchTerm) {
+                    hasFilters = true;
+                    tagsHtml += `
+                        <span class="md-tag">
+                            Keyword: ${activeFilters.searchTerm}
+                            <button data-action="clear-search" aria-label="Remove keyword filter">&times;</button>
+                        </span>
+                    `;
+                }
+
+                for (const key in activeFilters) {
+                    if (key !== 'searchTerm' && activeFilters[key].size > 0) {
+                        hasFilters = true;
+                        activeFilters[key].forEach(value => {
+                            tagsHtml += `
+                                <span class="md-tag">
+                                    ${value}
+                                    <button data-filter-key="${key}" data-value="${value}" aria-label="Remove ${value} filter">&times;</button>
+                                </span>
+                            `;
+                        });
+                    }
+                }
+
+                if (hasFilters) {
+                     activeFiltersContainer.innerHTML = tagsHtml + `<button id="clear-all-filters" class="usa-button usa-button--unstyled margin-left-1">Clear all</button>`;
+                } else {
+                    activeFiltersContainer.innerHTML = '';
+                }
+            }
+
+            // NEW render function for cards
+            function renderCards(resources) {
+                if (resources.length === 0) {
+                    resourceGrid.innerHTML = `<p>No resources match your criteria.</p>`;
+                    return;
+                }
+                resourceGrid.innerHTML = resources.map(item => `
+                    <div class="resource-card">
+                        <div class="resource-card-body">
+                            <h3 class="font-heading-md">${item.name}</h3>
+                            <p class="text-bold margin-bottom-0">${item.title || ''}</p>
+                            <p class="font-sans-sm margin-top-0">${item.region || ''}</p>
+                            <p class="font-sans-sm margin-top-2">${item.description || ''}</p>
+                        </div>
+                        <a href="mailto:${item.email}" class="resource-card-contact">
+                            <i class="fa-solid fa-envelope"></i> Email Me
+                        </a>
+                    </div>
+                `).join('');
+            }
+            
+            function applyFilters() {
+                const term = activeFilters.searchTerm.toLowerCase();
+                
+                displayedResources = allResources.filter(item => {
+                    // 1. Search Term Filter
+                    if (term) {
+                        const inName = item.name?.toLowerCase().includes(term);
+                        const inTitle = item.title?.toLowerCase().includes(term);
+                        const inDescription = item.description?.toLowerCase().includes(term);
+                        const inRegion = item.region?.toLowerCase().includes(term);
+                        if (!(inName || inTitle || inDescription || inRegion)) {
+                            return false;
+                        }
+                    }
+
+                    // 2. Checkbox Filters
+                    for (const [key, config] of Object.entries(filterConfig)) {
+                         const filterSet = activeFilters[key];
+                         if (filterSet.size > 0) {
+                             const itemValues = item[config.key] || [];
+                             // Replicating incentive logic: check for any intersection, or if item/filter has "Statewide"
+                             const hasMatch = itemValues.some(val => 
+                                filterSet.has(val) || 
+                                (key === 'counties' && (val === 'Statewide' || filterSet.has('Statewide')))
+                             );
+                             if (!hasMatch) return false;
+                         }
+                    }
+                    
+                    return true;
+                });
+                
+                resultsCount.textContent = `Showing ${displayedResources.length} of ${allResources.length} results`;
+                renderCards(displayedResources);
+                renderActiveFilterTags();
+            }
+
+            function handleFilterChange(e) {
+                if (e.target.matches('input[type="checkbox"]')) {
+                    const { filterKey } = e.target.dataset;
+                    if (e.target.checked) {
+                        activeFilters[filterKey].add(e.target.value);
+                    } else {
+                        activeFilters[filterKey].delete(e.target.value);
+                    }
+                    updateFilterCount(filterKey);
+                    applyFilters();
+                }
+            }
+
+            function handleActiveFilterClick(e) {
+                const button = e.target.closest('button');
+                if (!button) return;
+                
+                if (button.id === 'clear-all-filters') {
+                    // Clear checkbox filters
+                    document.querySelectorAll('#filters-sidebar input[type="checkbox"]').forEach(cb => cb.checked = false);
+                    Object.keys(activeFilters).forEach(key => { if (key !== 'searchTerm') activeFilters[key].clear(); });
+                    updateAllFilterCounts();
+                    // Clear textbox
+                    activeFilters.searchTerm = '';
+                    searchInput.value = '';
+                } else if (button.dataset.action === 'clear-search') {
+                    activeFilters.searchTerm = '';
+                    searchInput.value = '';
+                } else {
+                    const { filterKey, value } = button.dataset;
+                    if (filterKey && value) {
+                        activeFilters[filterKey].delete(value);
+                        const checkbox = document.querySelector(`input[data-filter-key="${filterKey}"][value="${value}"]`);
+                        if (checkbox) checkbox.checked = false;
+                        updateFilterCount(filterKey);
+                    }
+                }
+                applyFilters();
+            }
+
+            // Event Listeners
+            searchInput.addEventListener('input', () => { 
+                activeFilters.searchTerm = searchInput.value;
+                applyFilters();
+            });
+
+            filtersSidebar.addEventListener('change', handleFilterChange);
+            activeFiltersContainer.addEventListener('click', handleActiveFilterClick);
+            
+            // Start the application
+            initializeApp();
+        });
+    </script>
+</body>
+</html>
+
