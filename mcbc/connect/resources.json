@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Craig Panos",
+        "title": "Business Consultant",
+        "region": "Baltimore - Baltimore Region",
+        "email": "cpanos@umd.edu",
+        "description": "Craig Panos has been a business consultant with the SBDC since 2007, with specialties in advanced technology commercialization, business finance and international trade.",
+        "categories": [
+            "Business Consulting"
+        ],
+        "counties": [
+            "Baltimore City",
+            "Baltimore County"
+        ],
+        "languages": [
+            "English"
+        ]
+    },
+    {
+        "name": "Aldo Barillas Mora",
+        "title": "Business Consultant",
+        "region": "Baltimore Region",
+        "email": "abarill1@umd.edu",
+        "description": "I'm from Venezuela and have over 15 years of experience in the construction and public services industry, holding roles in workplace safety, human resources, and contract management.",
+        "categories": [
+            "Business Consulting",
+            "Legal & HR"
+        ],
+        "counties": [
+            "Baltimore City",
+            "Baltimore County"
+        ],
+        "languages": [
+            "English",
+            "Spanish"
+        ]
+    }
+]
