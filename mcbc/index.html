@@ -10,8 +10,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Public+Sans:wght@400;500;700&family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 
     <style>
         .usa-menu-btn {
@@ -179,80 +177,6 @@
         }
         /* END: New styles for homepage redesign */
 
-
-        /* Patched Footer Styles */
-        .site-footer {
-            background-color: #000000;
-            color: #ffffff;
-            padding-top: 2rem;
-        }
-        .site-footer a, .site-footer a:visited {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-        .site-footer a:hover {
-            text-decoration: none;
-        }
-        .site-footer .usa-footer__primary-link {
-            color: #ffffff;
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .site-footer .usa-footer__secondary-link a {
-            text-decoration: none;
-        }
-         .site-footer .usa-footer__secondary-link a:hover {
-            text-decoration: underline;
-        }
-        .site-footer-contact-info__logo {
-            max-width: 200px;
-            height: auto;
-        }
-        .site-footer-contact-info {
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-        .site-footer-contact-info address {
-            font-style: normal;
-        }
-        .site-footer-contact-info p { margin: 0; }
-        .site-footer-social-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-            justify-content: flex-end;
-            flex-wrap: wrap;
-        }
-        .site-footer-social-links a.footer-text-link {
-            font-size: 1rem;
-            font-weight: bold;
-        }
-        .site-footer-social-links a.footer-icon-link {
-            font-size: 1.75rem;
-        }
-        .site-footer .explore-header {
-            border-top: 1px solid #565c65;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-            font-weight: bold;
-            font-size: 1.25rem;
-        }
-        .site-footer-secondary {
-             padding-bottom: 2rem;
-        }
-        .site-footer-copyright {
-            background-color: #000000;
-            border-top: 1px solid #565c65;
-            padding: 1.5rem;
-            text-align: center;
-            font-size: 0.875rem;
-        }
-        .site-footer .usa-footer__primary-section {
-            background-color: transparent;
-        }
     </style>
 </head>
 <body>
@@ -372,91 +296,120 @@
         </main>
     </div>
     
-    <footer class="usa-footer site-footer">
-        <div class="grid-container">
-            <div class="grid-row grid-gap padding-y-4">
-                <div class="tablet:grid-col-8">
-                    <div class="site-footer-contact-info">
-                        <img src="assets/innovation-website-logo-light.png" alt="Maryland State Innovation Team Logo" class="site-footer-contact-info__logo">
-                        <div>
-                            <p class="text-bold">Maryland State Innovation Team</p>
-                            <address>
-                                <p>6 Saint Paul Street, Baltimore, MD 21202</p>
-                            </address>
+    <footer class="maryland-footer" aria-labelledby="footer">
+        <h2 id="footer" class="usa-sr-only">Footer</h2>
+        <div class="maryland-footer__container">
+            
+            <section aria-labelledby="agency-footer" class="maryland-footer__section">
+                <div class="maryland-footer__agency">
+                    <img class="maryland-footer__agency-logo" src="./assets/innovation-website-logo-light.png" alt="Maryland State Innovation Team Logo" style="height: 50px; width: auto;">
+                    <h3 class="maryland-footer__agency-name" id="agency-footer">
+                        Maryland State Innovation Team
+                    </h3>
+                    <ul class="maryland-footer__agency-social">
+                        <li>
+                            <a href="https://www.instagram.com/marylandinnovation/" target="_blank" class="maryland-footer__agency-social-link maryland-footer__agency-social-link--instagram">
+                                <span class="usa-sr-only">Connect with Maryland State Innovation Team on instagram.com</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/@MarylandStateInnovationTeam" target="_blank" class="maryland-footer__agency-social-link maryland-footer__agency-social-link--youtube">
+                                <span class="usa-sr-only">Connect with Maryland State Innovation Team on youtube.com</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/company/marylanditeam" target="_blank" class="maryland-footer__agency-social-link maryland-footer__agency-social-link--linkedin">
+                                <span class="usa-sr-only">Connect with Maryland State Innovation Team on linkedin.com</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <hr class="maryland-footer__divider">
+
+                <div class="maryland-footer__agency-menu">
+                    <div class="maryland-footer__agency-contact">
+                        <div class="maryland-footer__link-group">
+                            <h3 class="maryland-footer__link-group-heading">Contact us</h3>
+                            <ul class="maryland-footer__link-group-list">
+                                <li>6 Saint Paul Street, Baltimore, MD 21202</li>
+                                <li><a href="mailto:innovation.team@maryland.gov">innovation.team@maryland.gov</a></li>
+                                <li><a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank">Visit Our Website</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div class="tablet:grid-col-4">
-                     <div class="site-footer-social-links">
-                        <a href="mailto:innovation.team@maryland.gov" class="footer-text-link">Contact Us</a>
-                        <a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank" class="footer-text-link">Visit Our Website</a>
-                        <a href="https://www.linkedin.com/company/marylanditeam" target="_blank" title="LinkedIn" class="footer-icon-link">
-                            <i class="fa-brands fa-linkedin"></i>
-                            <span class="usa-sr-only">LinkedIn</span>
-                        </a>
-                        </div>
-                </div>
-            </div>
+            </section>
 
-            <div class="explore-header">Explore Maryland.gov</div>
+            <hr class="maryland-footer__divider">
 
-            <div class="usa-footer__primary-section site-footer-secondary">
-                <div class="grid-row grid-gap">
-                    <div class="mobile-lg:grid-col-6 desktop:grid-col-3">
-                        <h4 class="usa-footer__primary-link">Top Services</h4>
-                        <ul class="usa-list usa-list--unstyled">
-                            <li class="usa-footer__secondary-link"><a href="https://mva.maryland.gov/vehicles">Vehicle Services</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://dhs.maryland.gov/supplemental-nutrition-assistance-program/">Food Assistance / SNAP</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://www.labor.maryland.gov/employment/unemployment.shtml">Unemployment Services</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://www.marylandtaxes.gov/individual/index.php">Taxes</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://elections.maryland.gov/voter_registration/index.html">Register to Vote</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://www.maryland.gov/pages/residents.aspx">Resident Resources</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://www.visitmaryland.org/">Visit Maryland</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://www.maryland.gov/pages/online_services.aspx">More Online Services</a></li>
+            <section aria-labelledby="global-footer" class="maryland-footer__section">
+                <h3 class="maryland-footer__title" id="global-footer">
+                    Explore Maryland.gov
+                </h3>
+                <div class="maryland-footer__content">
+                    <nav class="maryland-footer__link-group" aria-labelledby="top-services">
+                        <h3 class="maryland-footer__link-group-heading" id="top-services">Top services</h3>
+                        <ul class="maryland-footer__link-group-list">
+                            <li><a href="https://mva.maryland.gov/vehicles">Vehicle services</a></li>
+                            <li><a href="https://dhs.maryland.gov/supplemental-nutrition-assistance-program/">Food assistance / SNAP</a></li>
+                            <li><a href="https://www.labor.maryland.gov/employment/unemployment.shtml">Unemployment services</a></li>
+                            <li><a href="https://www.marylandtaxes.gov/individual/index.php">Taxes</a></li>
+                            <li><a href="https://elections.maryland.gov/voter_registration/index.html">Register to vote</a></li>
+                            <li><a href="https://www.maryland.gov/pages/residents.aspx">Resident resources</a></li>
+                            <li><a href="https://www.visitmaryland.org/">Visit Maryland</a></li>
+                            <li><a href="https://www.maryland.gov/pages/online_services.aspx">More online services</a></li>
                         </ul>
-                    </div>
-                    <div class="mobile-lg:grid-col-6 desktop:grid-col-3">
-                        <h4 class="usa-footer__primary-link">Government</h4>
-                        <ul class="usa-list usa-list--unstyled">
-                            <li class="usa-footer__secondary-link"><a href="https://governor.maryland.gov/">Governor Wes Moore</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://governor.maryland.gov/leadership/cabinet/">Maryland Cabinet Agencies</a></li>
-                            <li class="usa-footer__secondary-link"><a href="http://www.maryland.gov/pages/agency_directory.aspx">All State Agencies</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://www.maryland.gov/pages/state_employees.aspx">For State Employees</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://www.maryland.gov/pages/jobs.aspx">Maryland State Jobs</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://www.ola.state.md.us/fraud/ola-fraud-hotline/">Report State Government Fraud</a></li>
+                    </nav>
+                    <nav class="maryland-footer__link-group" aria-labelledby="government">
+                        <h3 class="maryland-footer__link-group-heading" id="government">Government</h3>
+                        <ul class="maryland-footer__link-group-list">
+                            <li><a href="https://governor.maryland.gov/">Governor Wes Moore</a></li>
+                            <li><a href="https://governor.maryland.gov/leadership/cabinet/">Maryland cabinet agencies</a></li>
+                            <li><a href="http://www.maryland.gov/pages/agency_directory.aspx">All state agencies</a></li>
+                            <li><a href="https://www.maryland.gov/pages/state_employees.aspx">For state employees</a></li>
+                            <li><a href="https://www.maryland.gov/pages/jobs.aspx">Maryland state jobs</a></li>
+                            <li><a href="https://www.ola.state.md.us/fraud/ola-fraud-hotline/">Report state government fraud</a></li>
                         </ul>
-                    </div>
-                    <div class="mobile-lg:grid-col-6 desktop:grid-col-2">
-                        <h4 class="usa-footer__primary-link">Policies</h4>
-                        <ul class="usa-list usa-list--unstyled">
-                            <li class="usa-footer__secondary-link"><a href="https://www.maryland.gov/pages/accessibility.aspx">Accessibility</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://www.maryland.gov/pages/privacy_security.aspx">Privacy & Security</a></li>
+                    </nav>
+                    <nav class="maryland-footer__link-group" aria-labelledby="policies">
+                        <h3 class="maryland-footer__link-group-heading" id="policies">Policies</h3>
+                        <ul class="maryland-footer__link-group-list">
+                            <li><a href="https://www.maryland.gov/pages/accessibility.aspx">Accessibility</a></li>
+                            <li><a href="https://www.maryland.gov/pages/privacy_security.aspx">Privacy &amp; security</a></li>
                         </ul>
-                    </div>
-                    <div class="mobile-lg:grid-col-6 desktop:grid-col-2">
-                        <h4 class="usa-footer__primary-link">Connect</h4>
-                        <ul class="usa-list usa-list--unstyled">
-                            <li class="usa-footer__secondary-link"><a href="http://www.doit.state.md.us/phonebook/">State Employee Directory</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://mdrelay.maryland.gov/Pages/default.aspx">Maryland Relay: 7-1-1</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://news.maryland.gov/">Maryland News</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://www.doit.state.md.us/selectsurvey/TakeSurvey.aspx?SurveyID=86M2956">Customer Service Survey</a></li>
+                    </nav>
+                    <nav class="maryland-footer__link-group" aria-labelledby="connect">
+                        <h3 class="maryland-footer__link-group-heading" id="connect">Connect</h3>
+                        <ul class="maryland-footer__link-group-list">
+                            <li><a href="https://mdrelay.maryland.gov/Pages/default.aspx">Maryland Relay: 7-1-1</a></li>
+                            <li><a href="http://www.doit.state.md.us/phonebook/">State employee directory</a></li>
+                            <li><a href="https://news.maryland.gov/">Maryland news</a></li>
+                            <li><a href="https://www.doit.state.md.us/selectsurvey/TakeSurvey.aspx?SurveyID=86M2956">Customer service survey</a></li>
                         </ul>
-                    </div>
-                    <div class="mobile-lg:grid-col-6 desktop:grid-col-2">
-                        <h4 class="usa-footer__primary-link">Alerts</h4>
-                        <ul class="usa-list usa-list--unstyled">
-                            <li class="usa-footer__secondary-link"><a href="https://mdready.maryland.gov/be-informed/Pages/sign-up-for-alerts.aspx">Emergency Alerts</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://chart.maryland.gov/Incidents/GetIncidents">Travel Alerts</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://doit.maryland.gov/cybersecurity/">Cybersecurity</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://goccp.maryland.gov/victim-services/human-trafficking/">Report Human Trafficking</a></li>
-                            <li class="usa-footer__secondary-link"><a href="https://response.maryland.gov/bridge">Key Bridge</a></li>
+                    </nav>
+                    <nav class="maryland-footer__link-group" aria-labelledby="alerts">
+                        <h3 class="maryland-footer__link-group-heading" id="alerts">Alerts</h3>
+                        <ul class="maryland-footer__link-group-list">
+                            <li><a href="https://mdready.maryland.gov/be-informed/Pages/sign-up-for-alerts.aspx">Emergency alerts</a></li>
+                            <li><a href="https://chart.maryland.gov/Incidents/GetIncidents">Travel alerts</a></li>
+                            <li><a href="https://doit.maryland.gov/cybersecurity/">Cybersecurity</a></li>
+                            <li><a href="https://goccp.maryland.gov/victim-services/human-trafficking/">Report human trafficking</a></li>
+                            <li><a href="https://response.maryland.gov/bridge">Key bridge</a></li>
                         </ul>
+                    </nav>
+                </div>
+                
+                <hr class="maryland-footer__divider">
+                
+                <div class="maryland-footer__branding">
+                    <img class="maryland-footer__logo" alt="Maryland full logo" src="./assets/mdwds_logo_horizontal_inverted.svg" style="height: 40px;">
+                    <div class="maryland-footer__copyright">
+                        © 2025 State of Maryland. All rights reserved.
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="site-footer-copyright">
-            <p>© 2025 Maryland.gov</p>
+            </section>
+            
         </div>
     </footer>
 
