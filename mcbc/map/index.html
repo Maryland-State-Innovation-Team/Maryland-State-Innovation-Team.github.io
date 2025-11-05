@@ -28,16 +28,37 @@
             font-family: 'Inter', sans-serif;
             overflow: hidden; /* Prevent body scroll */
         }
+
+        /* Sliding base layer and overlay buttons */
+        #bottom-left-controls {
+            transition: transform 0.3s ease-in-out;
+            z-index: 1001; /* Ensure it's above the panel shadow */
+        }
         
         /* Custom Leaflet styles */
         .leaflet-control-zoom-in, .leaflet-control-zoom-out {
-            background-color: white !important;
-            color: #334155 !important;
-            border-color: #cbd5e1 !important;
-            border-radius: 0.5rem !important;
+            background-color: #1b1b1b !important; /* Dark background from concept */
+            color: white !important;            /* White '+' and '-' */
+            border: none !important;            /* Remove all borders */
+            /* We remove border-radius here to let the container handle it */
         }
-        .leaflet-touch .leaflet-bar {
+
+        /* This adds the white separator line from the concept */
+        .leaflet-control-zoom-in {
+            border-bottom: 1px solid white !important;
+        }
+        .leaflet-touch .leaflet-bar,
+        .leaflet-bar {
             box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            border-radius: 0.375rem; /* This creates the rounded container (6px) */
+            /* overflow: hidden;  <-- REMOVED */
+            border: none;          /* Ensure no default border */
+        }
+        .leaflet-control-zoom-in {
+            border-radius: 0.375rem 0.375rem 0 0 !important;
+        }
+        .leaflet-control-zoom-out {
+            border-radius: 0 0 0.375rem 0.375rem !important;
         }
 
         .leaflet-control-custom {
@@ -57,6 +78,17 @@
                 /* Move it up by the height of the panel (50vh) plus some extra space (5rem) */
                 transform: translateY(calc(-50vh + 5rem));
             }
+            /* This new rule moves the layer buttons up when the panel is open */
+            body.panel-is-open #bottom-left-controls {
+                /* Move it up by the panel's height (40vh) */
+                transform: translateY(-40vh);
+            }
+        }
+
+        /* This class will be added to the body on desktop when the panel is open */
+        body.desktop-panel-is-open #bottom-left-controls {
+            /* Move it right by the panel's width (33.33vw) + 1rem extra padding */
+            transform: translateX(calc(33.3333vw + 1rem));
         }
 
         /* --- Side panel transitions for desktop and mobile --- */
@@ -158,25 +190,36 @@
             outline: none;
         }
         .info-tooltip .tooltip-text {
+            display: none;
+        }
+
+        .floating-tooltip {
+            /* Use fixed to break out of all containers */
+            position: fixed; 
+            
+            /* Start hidden */
             visibility: hidden;
-            width: 250px;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+            
+            /* Copy styles from your old .tooltip-text */
             background-color: #3d4551; /* base-darker */
             color: #fff;
             text-align: left;
             border-radius: 6px;
             padding: 10px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%; /* Change from right: 0 */
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
+            width: 250px;
             font-size: 0.8rem;
             line-height: 1.4;
+            
+            /* Ensure it's on top of everything */
+            z-index: 50000; 
+
+            /* Prevent the tooltip from capturing mouse events */
+            pointer-events: none;
         }
-        .info-tooltip:hover .tooltip-text,
-        .info-tooltip:focus .tooltip-text {
+
+        .floating-tooltip.show {
             visibility: visible;
             opacity: 1;
         }
@@ -571,7 +614,7 @@
             font-size: 1rem;
             line-height: 1.5;
             border: 1px solid #a9aeb1; /* base-light */
-            border-radius: 0.25rem; 
+            border-radius: 0; 
             box-shadow: none !important;
         }
         .leaflet-control-geocoder-form input::placeholder {
@@ -589,7 +632,7 @@
         /* --- Geocoder Restyling --- */
         #geocoder-container .leaflet-control-geocoder {
             box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05), 0 1px 3px 1px rgb(0 0 0 / 0.1);
-            border-radius: 0.25rem;
+            border-radius: 0;
             border: 1px solid #a9aeb1; /* base-light */
             background: transparent !important;
             border: none !important;
@@ -640,17 +683,23 @@
         #map-mode-btn-group {
             border: 2px solid #005ea2; /* primary-default */
         }
+        #map-mode-btn-group .mode-btn:first-child {
+            border-radius: 0.25rem 0 0 0.25rem;
+        }
+        #map-mode-btn-group .mode-btn:last-child {
+            border-radius: 0 0.25rem 0.25rem 0;
+        }
         .mode-btn {
             border: none;
             cursor: pointer;
             background-color: #1b1b1b; /* base-darkest */
             transition: background-color 0.2s ease-in-out;
+            position: relative;
         }
         .mode-btn.active {
             background-color: #005ea2; /* primary-default */
         }
         .mode-btn:focus-visible {
-            box-shadow: inset 0 0 0 0.25rem #2491ff;
             z-index: 10;
         }
         .info-legend {
@@ -679,6 +728,7 @@
         }
         /* --- Side Panel Handle --- */
         .panel-handle {
+            display: none;
             position: absolute;
             top: 50%;
             right: -24px; /* Position it just outside the panel */
@@ -691,7 +741,6 @@
             border-radius: 0 6px 6px 0;
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
             cursor: pointer;
-            display: flex;
             align-items: center;
             justify-content: center;
             transition: transform 0.3s ease-in-out, right 0.3s ease-in-out, background-color 0.2s;
@@ -756,35 +805,7 @@
         .custom-map-tooltip .leaflet-tooltip-arrow {
             display: none;
         }
-        /* --- Corrected tooltip positioning for the overlay panel --- */
-        #overlay-panel .info-tooltip .tooltip-text {
-            /* Revert to opening upwards */
-            bottom: 125%;
-            top: auto;
-
-            /* --- KEY CHANGE: --- */
-            /* Align the tooltip's RIGHT edge to the icon's RIGHT edge. */
-            /* This forces it to expand left, staying inside the panel. */
-            left: auto;
-            right: 0;
-            transform: none; /* Unset the centering transform */
-
-            /* Give it a slightly smaller width to fit comfortably */
-            width: 240px;
-        }
-
-        /* Adjust the arrow to align with the new positioning */
-        #overlay-panel .info-tooltip .tooltip-text::after {
-            content: "";
-            position: absolute;
-            top: 100%; /* Position arrow at the bottom of the tooltip */
-            left: auto;
-            right: 10px; /* Position arrow near the right corner, above the icon */
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #3d4551 transparent transparent transparent; /* Arrow points up */
-        }
+        
         /* --- Custom Marker Cluster Colors (with Size Gradient) --- */
 
         /* Childcare (Reds: 200/300 -> 300/400 -> 400/500) */
@@ -845,6 +866,13 @@
         }
         .marker-cluster.food_pantry-cluster.marker-cluster-large div {
             background-color: rgba(59, 130, 246, 0.6); /* blue-500 */
+        }
+
+        /* fix map cursor on panels*/
+        #side-panel, 
+        #base-layer-panel, 
+        #overlay-panel {
+            cursor: auto;
         }
     </style>
 </head>
@@ -911,7 +939,7 @@
             <section class="usa-banner" aria-label="Official website of the State of Maryland">
                 <div class="usa-accordion">
                     <header class="usa-banner__header padding-x-2">
-                        <div class="usa-banner__inner padding-0 margin-0">
+                        <div class="usa-banner__inner padding-0">
                             <div class="grid-col-auto">
                                 <img class="usa-banner__header-flag" aria-hidden="true" src="data:image/svg+xml,%3csvg%20width='18'%20height='13'%20viewBox='0%200%2018%2013'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20x='7'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='5'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='1'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='7'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='3'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='3'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='5'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='11'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2011%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='13'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2013%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='17'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2017%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='11'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2011%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='15'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2015%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='15'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2015%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='13'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2013%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='17'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2017%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='6.5'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='9.25'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='6.5'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='1'%20y='9.25'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2017%206.5)'%20fill='white'/%3e%3crect%20x='13'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2013%203.75)'%20fill='white'/%3e%3crect%20x='13'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2013%206.5)'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2017%203.75)'%20fill='%23B50909'/%3e%3crect%20x='0.75'%20y='0.75'%20width='16.5'%20height='11.5'%20stroke='black'%20stroke-width='0.5'/%3e%3c/svg%3e">
                             </div>
@@ -994,7 +1022,7 @@
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
                             </div>
                         </div>
-                        <div id="map-mode-btn-group" class="flex rounded-md shadow-lg overflow-hidden border-2 border-primary-default">
+                        <div id="map-mode-btn-group" class="flex rounded-md shadow-lg border-2 border-primary-default">
                             <button data-mode="smartResearch" class="mode-btn px-4 py-2 font-semibold text-sm text-white flex items-center justify-center gap-x-1.5">
                                 <span>Insights</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff" class="h-5 w-5"><path d="m176-120-56-56 301-302-181-45 198-123-17-234 179 151 216-88-87 217 151 178-234-16-124 198-45-181-301 301Zm24-520-80-80 80-80 80 80-80 80Zm355 197 48-79 93 7-60-71 35-86-86 35-71-59 7 92-79 49 90 22 23 90Zm165 323-80-80 80-80 80 80-80 80ZM569-570Z"></path></svg>
@@ -1009,7 +1037,9 @@
                     <div id="base-layer-control-wrapper" class="pointer-events-auto relative">
                         <div id="base-layer-btn-container" class="bg-[#1b1b1b] flex items-center justify-between font-semibold px-4 py-2 rounded-lg shadow-lg w-full">
                             <button id="base-layer-toggle-btn" class="flex-grow flex items-center gap-2 text-white text-left">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">
+                                    <path d="M480-118 120-398l66-50 294 228 294-228 66 50-360 280Zm0-202L120-600l360-280 360 280-360 280Zm0-280Zm0 178 230-178-230-178-230 178 230 178Z"/>
+                                </svg>
                                 <span id="base-layer-btn-label" class="truncate">Base Layer</span>
                             </button>
                             <button id="clear-base-layer-btn" aria-label="Clear base layer" class="hidden self-center ml-2 text-slate-300 hover:text-white text-xl font-bold leading-none">&times;</button>
@@ -1023,7 +1053,9 @@
 
                     <div id="overlay-control-wrapper" class="pointer-events-auto relative">
                         <button id="overlay-btn" class="bg-[#1b1b1b] text-white hover:bg-[#3d4551] flex items-center gap-2 font-semibold px-4 py-2 rounded-lg shadow-lg transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M3 9h18M9 21V9"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">
+                                <path d="M200-80q-50 0-85-35t-35-85q0-39 22.5-69.5T160-313v-334q-35-13-57.5-43.5T80-760q0-50 35-85t85-35q39 0 69.5 22.5T313-800h334q12-35 42.5-57.5T760-880q50 0 85 35t35 85q0 40-22.5 70.5T800-647v334q35 13 57.5 43.5T880-200q0 50-35 85t-85 35q-39 0-69.5-22.5T647-160H313q-13 35-43.5 57.5T200-80Zm0-640q17 0 28.5-11.5T240-760q0-17-11.5-28.5T200-800q-17 0-28.5 11.5T160-760q0 17 11.5 28.5T200-720Zm560 0q17 0 28.5-11.5T800-760q0-17-11.5-28.5T760-800q-17 0-28.5 11.5T720-760q0 17 11.5 28.5T760-720ZM313-240h334q9-26 28-45t45-28v-334q-26-9-45-28t-28-45H313q-9 26-28 45t-45 28v334q26 9 45 28t28 45Zm447 80q17 0 28.5-11.5T800-200q0-17-11.5-28.5T760-240q-17 0-28.5 11.5T720-200q0 17 11.5 28.5T760-160Zm-560 0q17 0 28.5-11.5T240-200q0-17-11.5-28.5T200-240q-17 0-28.5 11.5T160-200q0 17 11.5 28.5T200-160Zm0-600Zm560 0Zm0 560Zm-560 0Z"/>
+                            </svg>
                             <span>Overlays</span>
                             <span id="overlay-count" class="hidden bg-[#005ea2] text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full ml-auto">0</span>
                         </button>
@@ -1150,7 +1182,7 @@
 
             <div id="side-panel" class="absolute bottom-0 left-0 w-full h-1/2 max-h-[50vh] bg-white shadow-2xl z-[1004] flex flex-col md:top-0 md:bottom-auto md:w-1/3 md:h-screen md:max-h-full">
                 <div class="p-4 border-b flex justify-between items-center" role="region" aria-labelledby="panel-title">
-                    <h2 id="panel-title" class="text-lg font-bold text-slate-900">Click a community or search for an address</h2>
+                    <h2 id="panel-title" class="text-lg font-bold text-slate-900">Click a community or search for a address</h2>
                 </div>
                 <div id="side-panel-content" class="flex-grow overflow-y-auto p-4 space-y-4"></div>
                 <button id="panel-handle" class="panel-handle" aria-label="Toggle details panel" aria-expanded="false">
@@ -1195,8 +1227,11 @@ let selectedSector = 'other';
 let choroplethSelect, sidePanel, panelContent, panelTitle, overlayOptionsContainer, overlayCount;
 let currentPanelContext = { type: null, data: null };
 let isFirstTimeUser = false;
+let hasMadeFirstSelection = false;
 let choroplethBreaks;
 let isPanning = false;
+let floatingTooltip = null;
+let tooltipTrigger = null;
 
 const QUOTE_CATEGORY_MAP = {
     'first-person perspective': 'Individual Voice',
@@ -1232,9 +1267,9 @@ const INCENTIVE_AREA_MAP = {
 };
 
 const pointLayerConfigs = {
-    childcare: { color: "#fca5a5" },
-    grocery: { color: "#6ee7b7" },
-    food_pantry: { color: "#93c5fd" } // Added config for the new layer
+    childcare:   { color: "#fca5a5", borderColor: "#b91c1c" }, // light-red fill, dark-red border
+    grocery:     { color: "#6ee7b7", borderColor: "#065f46" }, // light-green fill, dark-green border
+    food_pantry: { color: "#93c5fd", borderColor: "#1e40af" }  // light-blue fill, dark-blue border
 };
 
 const CHOROPLETH_OPTIONS = {
@@ -1286,6 +1321,118 @@ const formatPercent = (val) => `${(safeParseFloat(val, 0) * 100).toFixed(1)}%`;
 const formatCurrency = (val) => `$${Math.round(safeParseFloat(val, 0)).toLocaleString()}`;
 const formatNumber = (val) => (val != null) ? Math.round(safeParseFloat(val)).toLocaleString() : 'N/A';
 const formatValue = (val) => (val != null) ? val : 'N/A';
+
+/**
+ * Positions the global floating tooltip relative to a trigger element.
+ * This function calculates the best position (top or bottom) and
+ * handles viewport collisions.
+ */
+function positionTooltip() {
+    if (!floatingTooltip || !tooltipTrigger) return;
+
+    const triggerRect = tooltipTrigger.getBoundingClientRect();
+    const tooltipRect = floatingTooltip.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const gap = 8; // 8px gap
+
+    let top, left;
+
+    // --- Vertical Positioning ---
+    // Try to position above the trigger
+    let proposedTop = triggerRect.top - tooltipRect.height - gap;
+
+    if (proposedTop < gap) {
+        // Not enough space above, position below
+        top = triggerRect.bottom + gap;
+    } else {
+        // Enough space above
+        top = proposedTop;
+    }
+
+    // --- Horizontal Positioning ---
+    // Try to center horizontally
+    let proposedLeft = triggerRect.left + (triggerRect.width / 2) - (tooltipRect.width / 2);
+
+    // Check for horizontal viewport collisions
+    if (proposedLeft < gap) {
+        // Clashes with left edge
+        left = gap;
+    } else if (proposedLeft + tooltipRect.width > viewportWidth - gap) {
+        // Clashes with right edge
+        left = viewportWidth - tooltipRect.width - gap;
+    } else {
+        // It fits
+        left = proposedLeft;
+    }
+
+    // Apply the new fixed position
+    floatingTooltip.style.top = `${top}px`;
+    floatingTooltip.style.left = `${left}px`;
+}
+
+/**
+ * Attaches all necessary event listeners to a *single* tooltip trigger element.
+ * This is the core logic we'll re-use.
+ */
+function activateTooltipTrigger(triggerElement) {
+    const tooltipTextElement = triggerElement.querySelector('.tooltip-text');
+    
+    // Check if there's no text or if it's *already* active
+    if (!tooltipTextElement || triggerElement.dataset.tooltipActive === 'true') {
+        return; 
+    }
+
+    // Get the content and link it to the global tooltip
+    const tooltipContent = tooltipTextElement.innerHTML;
+    triggerElement.setAttribute('aria-describedby', 'floating-tooltip-global');
+    
+    // Mark this trigger as "active" to prevent duplicate listeners
+    triggerElement.dataset.tooltipActive = 'true';
+
+    // --- Event Listeners ---
+    const showTooltip = () => {
+        tooltipTrigger = triggerElement; // Set this as the active trigger
+        
+        // Set content, show, and then position
+        floatingTooltip.innerHTML = tooltipContent;
+        floatingTooltip.classList.add('show');
+        positionTooltip(); // Use our existing positioning function
+    };
+
+    const hideTooltip = () => {
+        tooltipTrigger = null;
+        floatingTooltip.classList.remove('show');
+    };
+
+    // Add listeners for both mouse and keyboard
+    triggerElement.addEventListener('mouseenter', showTooltip);
+    triggerElement.addEventListener('focus', showTooltip);
+    triggerElement.addEventListener('mouseleave', hideTooltip);
+    triggerElement.addEventListener('blur', hideTooltip);
+}
+
+/**
+ * Creates the global tooltip element and scans the *entire document*
+ * for any tooltips that exist on page load.
+ */
+function initializeGlobalTooltipSystem() {
+    // 1. Create the shared tooltip element and append it to the body
+    //    (This part only runs once)
+    if (!floatingTooltip) {
+        floatingTooltip = document.createElement('div');
+        floatingTooltip.className = 'floating-tooltip';
+        floatingTooltip.setAttribute('role', 'tooltip');
+        floatingTooltip.id = 'floating-tooltip-global';
+        document.body.appendChild(floatingTooltip);
+        
+        // Add a listener to reposition the tooltip on window resize
+        window.addEventListener('resize', positionTooltip);
+    }
+
+    // 2. Find all tooltip triggers *currently* on the page and activate them
+    document.querySelectorAll('.info-tooltip').forEach(activateTooltipTrigger);
+}
 
 function filterProviderListByQuality(selectElement) {
     const selectedQuality = selectElement.value;
@@ -1486,6 +1633,17 @@ function createCustomClusterIcon(cluster) {
     });
 }
 
+function showPanelHandleForFirstTime() {
+    if (!hasMadeFirstSelection) {
+        const handle = document.getElementById('panel-handle');
+        if (handle) {
+            // Use 'flex' to match its original display style
+            handle.style.display = 'flex';
+        }
+        hasMadeFirstSelection = true;
+    }
+}
+
 // --- ALL MAP LOGIC & HELPER FUNCTIONS (GLOBAL SCOPE) ---
 function disableMapLayerFocus(layerGroup) {
     if (layerGroup && typeof layerGroup.eachLayer === 'function') {
@@ -1594,29 +1752,43 @@ function resetHighlight(e) {
 }
 
 function onEachFeature(feature, layer) {
-    const tooltipContent = `
-        <div class="font-sans">
-            <div class="text-xs uppercase font-semibold text-slate-500 tracking-wider">Click to Research</div>
-            <div class="text-sm font-bold text-slate-900 leading-tight mt-1">${truncateCommunityList(feature.properties.tract_name)}</div>
-            <div class="text-xs text-blue-600 font-semibold">${feature.properties.county_name}</div>
-        </div>
-    `;
-
-    layer.bindTooltip(tooltipContent, {
-        sticky: true,
-        className: 'custom-map-tooltip',
-        pane: 'topTooltipPane'
-    });
-
-    layer.unbindTooltip();
+    // We remove the static tooltipContent and bind/unbind calls from here.
+    // The tooltip will now be generated and bound dynamically on mouseover.
 
     layer.on({
         mouseover: function (e) {
             if (isPanning) {
                 return;
             }
+            
+            const feature = e.target.feature;
+            const currentVariable = choroplethSelect.value;
+            const option = CHOROPLETH_OPTIONS[currentVariable];
+            let dataRow = '';
+
+            // Check if a valid base layer is selected
+            if (option && currentVariable !== 'none') {
+                const rawValue = feature.properties[currentVariable];
+                // Use the formatter from the CHOROPLETH_OPTIONS
+                const formattedValue = (rawValue === null || rawValue === undefined) ? 'N/A' : option.format(rawValue);
+                dataRow = `
+                    <hr class="my-1 border-t border-slate-300">
+                    <div class="text-sm text-slate-800">${option.label}: <strong>${formattedValue}</strong></div>
+                `;
+            }
+            
+            // Generate the dynamic tooltip content
+            const dynamicTooltipContent = `
+                <div class="font-sans">
+                    <div class="text-xs uppercase font-semibold text-slate-500 tracking-wider">Click to Research</div>
+                    <div class="text-lg font-bold text-slate-900 leading-tight mt-1">${truncateCommunityList(feature.properties.tract_name)}</div>
+                    <div class="text-base text-blue-700 font-semibold">${feature.properties.county_name}</div>
+                    ${dataRow}
+                </div>
+            `;
+
             highlightFeature(e);
-            this.bindTooltip(tooltipContent, {
+            this.bindTooltip(dynamicTooltipContent, {
                 sticky: true,
                 className: 'custom-map-tooltip',
                 pane: 'topTooltipPane'
@@ -1629,6 +1801,11 @@ function onEachFeature(feature, layer) {
         },
         click: (e) => {
             const clickedLayer = e.target;
+
+            if (searchMarker) {
+                map.removeLayer(searchMarker);
+                searchMarker = null;
+            }
 
             if (lastClickedLayer === clickedLayer) {
                 return;
@@ -1659,8 +1836,10 @@ function onEachFeature(feature, layer) {
 }
 
 function openSidePanel() {
-    if (window.innerWidth < 768) { // Only add class on mobile
+    if (window.innerWidth < 768) { // Mobile
         document.body.classList.add('panel-is-open');
+    } else { // Desktop
+        document.body.classList.add('desktop-panel-is-open');
     }
     sidePanel.classList.add('show');
 }
@@ -1862,7 +2041,9 @@ function displayFeatureInfo(tractFeature) {
 
     panelContent.innerHTML = contentHTML;
     currentPanelContext = { type: 'tract', data: tractFeature };
+    panelContent.querySelectorAll('.info-tooltip').forEach(activateTooltipTrigger);
     openSidePanel();
+    showPanelHandleForFirstTime();
 }
 
 function executeMapAction(action, context) {
@@ -2218,7 +2399,9 @@ function displaySmartResearchForTract(tractFeature) {
          incentivesContent.innerHTML = `<p class="text-sm text-slate-600">Select a 'Childcare' or 'Fresh Food' sector to see relevant incentives.</p>`;
     }
     currentPanelContext = { type: 'tract', data: tractFeature };
+    panelContent.querySelectorAll('.info-tooltip').forEach(activateTooltipTrigger);
     openSidePanel();
+    showPanelHandleForFirstTime();
 }
     
 function displaySmartResearchForAddress(addressName, parcelProps, tractProps, point) {
@@ -2438,7 +2621,9 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
         }
     }
     currentPanelContext = { type: 'address', data: { addressName, parcelProps, tractProps, point } };
+    panelContent.querySelectorAll('.info-tooltip').forEach(activateTooltipTrigger);
     openSidePanel();
+    showPanelHandleForFirstTime();
 }
     
 async function showNearestPoints(location, layerName, container) {
@@ -2717,7 +2902,9 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
 
     panelContent.innerHTML = html;
     currentPanelContext = { type: 'address', data: { addressName, parcelProps, tractProps, point } };
+    panelContent.querySelectorAll('.info-tooltip').forEach(activateTooltipTrigger);
     openSidePanel();
+    showPanelHandleForFirstTime();
 }
 
 function isPointInLayer_Turf(point, layer) {
@@ -2872,6 +3059,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     setSiteHeaderHeight();
     registerHeaderHeightObserver();
     updateGeocoderWidth();
+    initializeGlobalTooltipSystem();
 });
 
 // --- SETUP FUNCTIONS ---
@@ -3137,7 +3325,8 @@ function initializeMap() {
         if (isOpen) {
             // --- Logic to CLOSE the panel ---
             sidePanel.classList.remove('show');
-            document.body.classList.remove('panel-is-open');
+            document.body.classList.remove('panel-is-open'); // Mobile class
+            document.body.classList.remove('desktop-panel-is-open'); // Desktop class
             panelHandle.setAttribute('aria-expanded', 'false');
 
         } else {
@@ -3152,17 +3341,25 @@ function initializeMap() {
 
     const geocoder = L.Control.geocoder({
         collapsed: false,
-        placeholder: 'Search for an address',
+        placeholder: 'Search for an address or zip code',
         defaultMarkGeocode: false,
         geocoder: L.Control.Geocoder.mapbox({ 
             apiKey: MAPBOX_ACCESS_TOKEN,
-            geocodingQueryParams: { country: 'us', bbox: [-79.93165, 37.72521, -74.60361, 39.90463] }
+            geocodingQueryParams: { country: 'us', bbox: [-79.48765, 37.90683, -75.04761, 39.72304] }
         })
     })
     .on('markgeocode', async function(e) {
         const { center, name } = e.geocode;
+
+        if (lastClickedLayer) {
+            const layerToReset = lastClickedLayer; // 1. Store a temporary reference
+            lastClickedLayer = null;               // 2. Clear the global state *first*
+            geojsonLayer.resetStyle(layerToReset); // 3. Now reset the style
+        }
+
         if (sidePanel.classList.contains('show')) sidePanel.classList.remove('show');
-        document.body.classList.remove('panel-is-open');
+        document.body.classList.remove('panel-is-open'); // Mobile class
+        document.body.classList.remove('desktop-panel-is-open'); // Desktop class
         if (searchMarker) map.removeLayer(searchMarker);
 
         const [parcelData, tractFeature] = await Promise.all([
@@ -3193,7 +3390,10 @@ function initializeMap() {
     geocoder.onAdd(map);
     document.getElementById('geocoder-container').appendChild(geocoder.getContainer());
     const geocoderInput = document.querySelector('#geocoder-container .leaflet-control-geocoder-form input');
+
     if (geocoderInput) {
+        geocoderInput.id = 'geocoder-search-input';
+        geocoderInput.classList.add('font-sans-md');
         geocoderInput.addEventListener('input', function() {
             const errorElement = document.querySelector('#geocoder-container .leaflet-control-geocoder-error');
             if (errorElement) {
@@ -3271,8 +3471,8 @@ async function togglePointLayer(checkbox) {
             });
             
             // Get the specific config for the current layer, with a fallback
-            const config = pointLayerConfigs[layerName] || { color: '#808080' };
-            const pointStyle = { radius: 6, fillColor: config.color, color: "#000", weight: 1, opacity: 1, fillOpacity: 1 };
+            const config = pointLayerConfigs[layerName] || { color: '#808080', borderColor: '#444' };
+            const pointStyle = { radius: 6, fillColor: config.color, color: config.borderColor, weight: 3, opacity: 0.5, fillOpacity: 1 };
 
             if (data.type === 'FeatureCollection' && data.features) {
                 const geojsonLayerForPoints = L.geoJSON(data, {
@@ -3289,31 +3489,33 @@ async function togglePointLayer(checkbox) {
                     },
                     onEachFeature: function(feature, layer) {
                         const { properties } = feature;
-                        let popupContent = '';
 
+                        // --- MODIFIED SECTION 2: Popup Content ---
                         // Replaced the ternary with a switch for better scalability
+                        let popupContent = '';
+                        
                         switch (layerName) {
                             case 'childcare':
                                 popupContent = `
-                                    <div class="font-bold text-base">${properties.gen_listing_name_original_text || 'N/A'}</div>
-                                    <div><strong>Capacity (Under 6):</strong> ${properties.licensed_capacity_under6 || 'N/A'}</div>
+                                    <div class="font-bold text-lg leading-tight">${properties.gen_listing_name_original_text || 'N/A'}</div>
+                                    <div class="text-sm text-slate-600 mt-1"><strong>Capacity (Under 6):</strong> ${properties.licensed_capacity_under6 || 'N/A'} seats</div>
                                 `;
                                 break;
                             case 'grocery':
                                 popupContent = `
-                                    <div class="font-bold text-base">${properties.name || 'N/A'}</div>
-                                    <div><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
-                                    <div><strong>Quality:</strong> ${properties.quality || 'N/A'}</div>
+                                    <div class="font-bold text-lg leading-tight">${properties.name || 'N/A'}</div>
+                                    <div class="text-sm text-slate-600 mt-1"><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
+                                    <div class="text-sm text-slate-600"><strong>Quality:</strong> ${properties.quality || 'N/A'}</div>
                                 `;
                                 break;
-                            case 'food_pantry': // Corrected popup for food_pantry
+                            case 'food_pantry':
                                 popupContent = `
-                                    <div class="font-bold text-base">${properties.name || 'N/A'}</div>
-                                    <div><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
+                                    <div class="font-bold text-lg leading-tight">${properties.name || 'N/A'}</div>
+                                    <div class="text-sm text-slate-600 mt-1"><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
                                 `;
                                 break;
-                            default: // A fallback for any other potential layers
-                                popupContent = `<div class="font-bold text-base">${properties.name || 'N/A'}</div>`;
+                            default:
+                                popupContent = `<div class="font-bold text-lg leading-tight">${properties.name || 'N/A'}</div>`;
                                 break;
                         }
                         layer.bindPopup(popupContent);
@@ -3386,15 +3588,8 @@ async function preloadPointLayers() {
 
             // --- MODIFIED SECTION 1: Point Style ---
             // Use the global pointLayerConfigs object for styling
-            const config = pointLayerConfigs[layerName] || { color: '#808080' }; // Fallback gray color
-            const pointStyle = { 
-                radius: 6, 
-                fillColor: config.color, 
-                color: "#000", 
-                weight: 1, 
-                opacity: 1, 
-                fillOpacity: 1
-            };
+            const config = pointLayerConfigs[layerName] || { color: '#808080', borderColor: '#444' };
+            const pointStyle = { radius: 6, fillColor: config.color, color: config.borderColor, weight: 3, opacity: 0.5, fillOpacity: 1 };
 
             if (data.type === 'FeatureCollection' && data.features) {
                 const geojsonLayerForPoints = L.geoJSON(data, {
@@ -3415,28 +3610,29 @@ async function preloadPointLayers() {
                         // --- MODIFIED SECTION 2: Popup Content ---
                         // Replaced the ternary with a switch for better scalability
                         let popupContent = '';
+                        
                         switch (layerName) {
                             case 'childcare':
                                 popupContent = `
-                                    <div class="font-bold text-base">${properties.gen_listing_name_original_text || 'N/A'}</div>
-                                    <div><strong>Capacity (Under 6):</strong> ${properties.licensed_capacity_under6 || 'N/A'}</div>
+                                    <div class="font-bold text-lg leading-tight">${properties.gen_listing_name_original_text || 'N/A'}</div>
+                                    <div class="text-sm text-slate-600 mt-1"><strong>Capacity (Under 6):</strong> ${properties.licensed_capacity_under6 || 'N/A'} seats</div>
                                 `;
                                 break;
                             case 'grocery':
                                 popupContent = `
-                                    <div class="font-bold text-base">${properties.name || 'N/A'}</div>
-                                    <div><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
-                                    <div><strong>Quality:</strong> ${properties.quality || 'N/A'}</div>
+                                    <div class="font-bold text-lg leading-tight">${properties.name || 'N/A'}</div>
+                                    <div class="text-sm text-slate-600 mt-1"><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
+                                    <div class="text-sm text-slate-600"><strong>Quality:</strong> ${properties.quality || 'N/A'}</div>
                                 `;
                                 break;
                             case 'food_pantry':
                                 popupContent = `
-                                    <div class="font-bold text-base">${properties.name || 'N/A'}</div>
-                                    <div><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
+                                    <div class="font-bold text-lg leading-tight">${properties.name || 'N/A'}</div>
+                                    <div class="text-sm text-slate-600 mt-1"><strong>Type:</strong> ${properties.tag_label || 'N/A'}</div>
                                 `;
                                 break;
                             default:
-                                popupContent = `<div class="font-bold text-base">${properties.name || 'N/A'}</div>`;
+                                popupContent = `<div class="font-bold text-lg leading-tight">${properties.name || 'N/A'}</div>`;
                                 break;
                         }
                         layer.bindPopup(popupContent);
@@ -3612,6 +3808,10 @@ function setupLayerControls() {
     updateOverlayFilter(selectedSector);
 
     document.getElementById('base-layer-toggle-btn').addEventListener('click', (e) => {
+        if (window.innerWidth < 768 && document.body.classList.contains('panel-is-open')) {
+            const panelHandle = document.getElementById('panel-handle');
+            if (panelHandle) panelHandle.click(); // Programmatically click the handle to close the panel
+        }
         e.preventDefault(); // Prevent the click/enter event from propagating
         const isHidden = baseLayerPanel.classList.toggle('hidden');
         overlayPanel.classList.add('hidden');
@@ -3659,6 +3859,10 @@ function setupLayerControls() {
 
     // --- Overlay Logic ---
     overlayBtn.addEventListener('click', () => {
+        if (window.innerWidth < 768 && document.body.classList.contains('panel-is-open')) {
+            const panelHandle = document.getElementById('panel-handle');
+            if (panelHandle) panelHandle.click(); // Programmatically click the handle to close the panel
+        }
         const isHidden = overlayPanel.classList.toggle('hidden');
         baseLayerPanel.classList.add('hidden');
         if (!isHidden) { // If the panel was just opened
@@ -3677,6 +3881,9 @@ function setupLayerControls() {
     // --- For base layer panel ---
     // Desktop
     L.DomEvent.on(baseLayerPanel, 'wheel', stopPropagation);
+    L.DomEvent.on(baseLayerPanel, 'click', stopPropagation);
+    L.DomEvent.on(baseLayerPanel, 'dblclick', stopPropagation);
+    L.DomEvent.on(baseLayerPanel, 'mousedown', stopPropagation);
     // Mobile
     L.DomEvent.on(baseLayerPanel, 'touchmove', stopPropagation);
 
@@ -3684,6 +3891,9 @@ function setupLayerControls() {
     // --- For overlay panel ---
     // Desktop
     L.DomEvent.on(overlayPanel, 'wheel', stopPropagation);
+    L.DomEvent.on(overlayPanel, 'click', stopPropagation);
+    L.DomEvent.on(overlayPanel, 'dblclick', stopPropagation);
+    L.DomEvent.on(overlayPanel, 'mousedown', stopPropagation);
     // Mobile
     L.DomEvent.on(overlayPanel, 'touchmove', stopPropagation);
 
@@ -3692,6 +3902,9 @@ function setupLayerControls() {
     const sidePanel = document.getElementById('side-panel');
     // Desktop
     L.DomEvent.on(sidePanel, 'wheel', stopPropagation);
+    L.DomEvent.on(sidePanel, 'click', stopPropagation);
+    L.DomEvent.on(sidePanel, 'dblclick', stopPropagation);
+    L.DomEvent.on(sidePanel, 'mousedown', stopPropagation);
     // Mobile
     L.DomEvent.on(sidePanel, 'touchmove', stopPropagation);
 
