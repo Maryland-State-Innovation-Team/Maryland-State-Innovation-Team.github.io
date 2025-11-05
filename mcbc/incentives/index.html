@@ -15,8 +15,9 @@
         /* Custom styles for logo and minor adjustments */
         .custom-logo a {
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             text-decoration: none;
+            border-bottom: 1.25rem solid transparent;
         }
         .custom-logo img {
             height: 50px;
@@ -70,14 +71,16 @@
 
         /* Add responsive padding to the header/nav for breathing room */
         .usa-header {
-            padding: 0.5rem 1rem;
+            padding-top: 0.5rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
 
         .usa-nav-container {
             padding: 0 0.5rem; /* small horizontal padding by default */
         }
 
-        @media (min-width: 992px) {
+        @media (min-width: 1024px) {
             .usa-menu-btn {
                 display: none;
             }
@@ -85,7 +88,7 @@
             /* Make the header layout a horizontal flex container so logo and nav sit inline */
             .usa-nav-container {
                 display: flex;
-                align-items: center;
+                align-items: flex-end;
                 gap: 1rem;
                 justify-content: space-between; /* keep logo left and nav to the right */
                 padding: 0 1.5rem; /* larger horizontal padding on desktop */
@@ -93,7 +96,7 @@
 
             /* Slightly larger header padding on desktop */
             .usa-header {
-                padding: 0.75rem 1.5rem;
+                padding-top: 0.75rem; padding-left: 1.5rem; padding-right: 1.5rem;
             }
 
             /* Keep the existing navbar (logo area) sized naturally */
@@ -119,7 +122,7 @@
             .usa-nav__primary {
                 display: inline-flex;
                 gap: 1.25rem;
-                align-items: center;
+                align-items: flex-end;
             }
 
             .usa-nav__primary-item {
@@ -164,7 +167,7 @@
         }
 
         /* Mobile: keep logo and menu button inline and right-align the menu button */
-        @media (max-width: 991px) {
+        @media (max-width: 1023.98px) {
             /* Ensure the navbar uses flex so logo and menu button are inline */
             .usa-navbar {
                 display: flex;
@@ -220,7 +223,7 @@
         }
 
         /* 3. Add bottom padding to the 'On this page' section in the detail view on mobile so content doesn't butt up against the following section */
-        @media (max-width: 991px) {
+        @media (max-width: 1023.98px) {
             #detail-contents-nav-container {
                 padding-bottom: 1.25rem;
             }
@@ -235,6 +238,9 @@
 
         .usa-nav-container {
             border-bottom: 1px solid #dfe1e2; /* base-lighter */
+        }
+        .usa-nav__primary > .usa-nav__primary-item > .usa-nav__link {
+            border-bottom: 0.25rem solid transparent;
         }
         .usa-nav__primary > .usa-nav__primary-item > .usa-nav__link.usa-current {
             border-bottom: 0.25rem solid #005ea2; /* primary-default */
@@ -358,7 +364,7 @@
         <section class="usa-banner" aria-label="Official website of the State of Maryland">
             <div class="usa-accordion">
                 <header class="usa-banner__header padding-x-2">
-                    <div class="usa-banner__inner padding-1 margin-0">
+                    <div class="usa-banner__inner padding-0 margin-0">
                         <div class="grid-col-auto">
                             <img class="usa-banner__header-flag" aria-hidden="true" src="data:image/svg+xml,%3csvg%20width='18'%20height='13'%20viewBox='0%200%2018%2013'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20x='7'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='5'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='1'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='7'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='3'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='3'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='5'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='11'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2011%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='13'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2013%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='17'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2017%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='11'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2011%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='15'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2015%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='15'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2015%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='13'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2013%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='17'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2017%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='6.5'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='9.25'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='6.5'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='1'%20y='9.25'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2017%206.5)'%20fill='white'/%3e%3crect%20x='13'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2013%203.75)'%20fill='white'/%3e%3crect%20x='13'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2013%206.5)'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2017%203.75)'%20fill='%23B50909'/%3e%3crect%20x='0.75'%20y='0.75'%20width='16.5'%20height='11.5'%20stroke='black'%20stroke-width='0.5'/%3e%3c/svg%3e">
                         </div>
