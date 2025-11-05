@@ -121,7 +121,7 @@
             width: 18px;
             height: 18px;
             margin-right: 8px;
-            opacity: 0.9;
+            opacity: 1;
             border-radius: 4px;
             flex-shrink: 0;
         }
@@ -277,6 +277,23 @@
                 max-height: calc(100vh - var(--site-header-height, 0px) - 2rem);
                 overflow: auto;
             }
+        }
+
+        .tour-choice-btn {
+            border-width: 2px;
+            border-color: #e2e8f0; /* slate-200 */
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 1.5rem; /* p-6 */
+            transition: all 0.2s ease-in-out;
+        }
+        .tour-choice-btn:hover {
+            border-color: #94a3b8; /* slate-400 */
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .tour-choice-btn:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 2px #2563eb; /* ring-2 focus:ring-blue-500 */
         }
 
         /* --- MDWDS Accordion Styles (Scoped to Side Panel) --- */
@@ -768,15 +785,31 @@
     <select id="choropleth-select" class="hidden w-full p-2 rounded-md border-2 border-slate-300 focus:ring-slate-500 focus:border-slate-500">
     </select>
     <div id="tour-overlay" class="hidden fixed left-0 w-full bg-black bg-opacity-70 z-[30000] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="tour-heading">
-        <div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full text-center" id="tour-overlay-content">
-            <h2 id="tour-heading" class="text-2xl font-bold text-slate-800 mb-3">Welcome! 👋</h2>
-            <p class="text-slate-600">
-                We recommend getting started in the currently selected '<strong>Insights</strong>' mode. Once you're familiar with the data, check out '<strong>Explore</strong>'.
-            </p>
-            <p class="mt-4 text-slate-600">
-                To get started, <strong>click anywhere in Maryland</strong> to answer your <strong id="tour-sector-name"></strong> business questions, or use the <svg xmlns="http://www.w3.org/2000/svg" class="inline h-5 w-5 -mt-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg> icon in the top right to search for a specific address.
-            </p>
-            <button id="close-tour-btn" class="mt-6 w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition">Got It!</button>
+        <div id="tour-overlay-content" class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-md">
+            <h2 id="tour-heading" class="text-2xl font-bold text-slate-800 text-center">Choose Your View</h2>
+            <p class="mt-2 text-slate-600 text-center">How would you like to see the data?</p>
+            
+            <div class="mt-6 grid grid-cols-1 gap-4">
+                <button data-mode="smartResearch" class="tour-choice-btn group border-2 border-slate-200 hover:border-blue-500 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-6 text-left transition flex items-center gap-4">
+                    <div class="flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-slate-500 group-hover:text-blue-600" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m176-120-56-56 301-302-181-45 198-123-17-234 179 151 216-88-87 217 151 178-234-16-124 198-45-181-301 301Zm24-520-80-80 80-80 80 80-80 80Zm355 197 48-79 93 7-60-71 35-86-86 35-71-59 7 92-79 49 90 22 23 90Zm165 323-80-80 80-80 80 80-80 80ZM569-570Z"></path></svg>
+                    </div>
+                    <div>
+                        <span class="block font-semibold text-slate-700">Insights Mode</span>
+                        <span class="mt-1 block text-sm text-slate-600">Get guided answers to key questions.</span>
+                    </div>
+                </button>
+                
+                <button data-mode="freeExplore" class="tour-choice-btn group border-2 border-slate-200 hover:border-slate-400 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-400 rounded-lg p-6 text-left transition flex items-center gap-4">
+                    <div class="flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-slate-500 group-hover:text-slate-600" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M120-120v-170h170v170H120Zm0-250v-170h170v170H120Zm0-250v-170h170v170H120Zm250 500v-170h170v170H370Zm0-250v-170h170v170H370Zm0-250v-170h170v170H370Zm250 500v-170h170v170H620Zm0-250v-170h170v170H620Zm0-250v-170h170v170H620Z"></path></svg>
+                    </div>
+                    <div>
+                        <span class="block font-semibold text-slate-700">Explore Mode</span>
+                        <span class="mt-1 block text-sm text-slate-600">View all data layers and perform your own analysis.</span>
+                    </div>
+                </button>
+            </div>
         </div>
     </div>
     <div id="loading-overlay" role="status" aria-live="polite">
@@ -895,7 +928,7 @@
                             </div>
                         </div>
                         <div id="map-mode-btn-group" class="flex rounded-md shadow-lg overflow-hidden border-2 border-primary-default">
-                            <button data-mode="smartResearch" class="mode-btn px-4 py-2 font-semibold text-sm text-white flex items-center justify-center gap-x-1.5 active">
+                            <button data-mode="smartResearch" class="mode-btn px-4 py-2 font-semibold text-sm text-white flex items-center justify-center gap-x-1.5">
                                 <span>Insights</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff" class="h-5 w-5"><path d="m176-120-56-56 301-302-181-45 198-123-17-234 179 151 216-88-87 217 151 178-234-16-124 198-45-181-301 301Zm24-520-80-80 80-80 80 80-80 80Zm355 197 48-79 93 7-60-71 35-86-86 35-71-59 7 92-79 49 90 22 23 90Zm165 323-80-80 80-80 80 80-80 80ZM569-570Z"></path></svg>
                             </button>
@@ -931,11 +964,11 @@
                             <div id="overlay-options" class="space-y-4 text-sm max-h-64 overflow-y-auto pr-2">
                                 <div class="mt-4">
                                 <h2 class="font-semibold mb-2 text-white text-lg">Overlays</h2>
-                                <h3 class="font-semibold mb-2 text-slate-200">POINTS OF INTEREST</h3>
+                                <h3 id="poi-header" class="font-semibold mb-2 text-slate-200">POINTS OF INTEREST</h3>
                                     <div class="space-y-1 text-sm">
-                                        <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="childcare" data-url="childcare.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Childcare Locations</span></label>
-                                        <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="grocery" data-url="grocery.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Grocery Locations</span></label>
-                                        <label class="flex items-center"><input type="checkbox" onchange="togglePointLayer(this)" data-name="food_pantry" data-url="food_pantry.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Food Bank Distribution Sites</span></label>
+                                        <label class="flex items-center" data-sector="childcare"><input type="checkbox" onchange="togglePointLayer(this)" data-name="childcare" data-url="childcare.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Childcare Locations</span></label>
+                                        <label class="flex items-center" data-sector="fresh-food"><input type="checkbox" onchange="togglePointLayer(this)" data-name="grocery" data-url="grocery.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Grocery Locations</span></label>
+                                        <label class="flex items-center" data-sector="fresh-food"><input type="checkbox" onchange="togglePointLayer(this)" data-name="food_pantry" data-url="food_pantry.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Food Bank Distribution Sites</span></label>
                                     </div>
                                 </div>
                                 <div class="mt-4">
@@ -1187,6 +1220,25 @@ const formatCurrency = (val) => `$${Math.round(safeParseFloat(val, 0)).toLocaleS
 const formatNumber = (val) => (val != null) ? Math.round(safeParseFloat(val)).toLocaleString() : 'N/A';
 const formatValue = (val) => (val != null) ? val : 'N/A';
 
+function filterProviderListByQuality(selectElement) {
+    const selectedQuality = selectElement.value;
+    const list = selectElement.closest('.providers-container').querySelector('ul');
+    if (!list) return;
+
+    const items = list.querySelectorAll('li');
+    let visibleCount = 0;
+
+    items.forEach(item => {
+        const itemQuality = item.dataset.quality;
+        if (selectedQuality === 'all' || itemQuality === selectedQuality) {
+            item.style.display = 'block';
+            visibleCount++;
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
 function slugify(text) {
   return text.toString().toLowerCase()
     .replace(/\s+/g, '-')           // Replace spaces with -
@@ -1288,7 +1340,7 @@ function zoomToPoint(lat, lng) {
         weight: 3,
         opacity: 1,
         fillColor: '#ffffff',
-        fillOpacity: 0.7,
+        fillOpacity: 1,
         pane: 'clusterTopPane' // Ensure it's on top
     }).addTo(map);
 
@@ -1384,13 +1436,13 @@ function style(feature) {
     let baseStyle;
 
     if (!breaks || breaks.length === 0) {
-        baseStyle = { fillColor: '#636363', weight: 0, color: 'white', fillOpacity: 0.7, pane: 'tractPane' };
+        baseStyle = { fillColor: '#636363', weight: 0, color: 'white', fillOpacity: 1, pane: 'tractPane' };
     } else {
         const colors = isDiverging ? divergingColors : sequentialColors;
         const value = safeParseFloat(feature.properties[currentVariable]);
         baseStyle = {
             fillColor: (value === null) ? '#636363' : getColor(value, breaks, colors),
-            weight: 0, opacity: 1, color: 'white', fillOpacity: 0.7, pane: 'tractPane'
+            weight: 0, opacity: 1, color: 'white', fillOpacity: 1, pane: 'tractPane'
         };
     }
     
@@ -1636,7 +1688,7 @@ function displayFeatureInfo(tractFeature) {
             </table>
         </div>`;
 
-    if (selectedSector === 'childcare' || selectedSector === 'other') {
+    if (selectedSector === 'childcare') {
         contentHTML += `
             <div>
                 <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Childcare Opportunity</h3>
@@ -1649,7 +1701,7 @@ function displayFeatureInfo(tractFeature) {
             </div>`;
     }
 
-    if (selectedSector === 'fresh-food' || selectedSector === 'other') {
+    if (selectedSector === 'fresh-food') {
         contentHTML += `
             <div>
                 <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Fresh Food Opportunity</h3>
@@ -1809,22 +1861,23 @@ function getProviderCount(location, layerName) {
         feature: l.feature || { properties: l.options.properties, geometry: { coordinates: [l.getLatLng().lng, l.getLatLng().lat] } }
     }));
 
+    let targetPoint;
+
     if (location.type === 'tract') {
         const tractPolygon = location.feature;
-        const pointsInside = allPoints.filter(p => {
-            const turfPoint = turf.point(p.feature.geometry.coordinates);
-            return turf.booleanPointInPolygon(turfPoint, tractPolygon);
-        });
-        return pointsInside.length;
+        targetPoint = turf.centroid(tractPolygon).geometry.coordinates;
     } else if (location.type === 'point') {
-        const targetPoint = [location.point.lng, location.point.lat];
-        const nearbyPoints = allPoints.filter(p => {
-            const distance = turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' });
-            return distance <= 3;
-        });
-        return nearbyPoints.length;
+        targetPoint = [location.point.lng, location.point.lat];
+    } else {
+        return 0; // Unknown location type
     }
-    return 0;
+
+    const nearbyPoints = allPoints.filter(p => {
+        const distance = turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' });
+        return distance <= 3;
+    });
+    
+    return nearbyPoints.length;
 }
 
 /**
@@ -1908,7 +1961,7 @@ function displaySmartResearchForTract(tractFeature) {
             question: "Who are the other childcare providers in this area?",
             teaser: childcareProviderTeaser,
             iconSVG: ICONS.providers,
-            answerHTML: `<p>The list below includes providers located inside this community. If none are found, the closest is listed instead. Click any provider to zoom to its location.</p><div id="nearest-providers-list"></div>`,
+            answerHTML: `<p>The list below includes providers within a 3-mile radius of this community's center. Click any provider to zoom to its location.</p><div id="nearest-providers-list"></div>`,
             mapAction: 'showNearest:childcare', 
             context
         }));
@@ -1981,7 +2034,7 @@ function displaySmartResearchForTract(tractFeature) {
             question: "Who are the other food providers in this area?",
             teaser: foodProviderTeaser,
             iconSVG: ICONS.providers,
-            answerHTML: `<p>The list below includes providers located inside this community. Click any provider to zoom to its location.</p><div id="nearest-providers-list"></div>`,
+            answerHTML: `<p>The list below includes providers within a 3-mile radius of this community's center. Click any provider to zoom to its location.</p><div id="nearest-providers-list"></div>`,
             mapAction: 'showNearest:grocery', 
             context
         }));
@@ -2297,38 +2350,26 @@ async function showNearestPoints(location, layerName, container) {
     }));
     
     let relevantProviders = [];
+    let targetPoint;
+    let distanceContext = 'away'; // Default for address points
 
     if (location.type === 'tract') {
         const tractPolygon = location.feature;
+        targetPoint = turf.centroid(tractPolygon).geometry.coordinates;
+        distanceContext = 'from center'; // New context for tracts
+
+        const allPointsWithDistance = allPoints.map(p => ({
+            ...p,
+            distance: turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' })
+        }));
+
+        const nearbyPoints = allPointsWithDistance.filter(p => p.distance <= 3);
         
-        const pointsInside = allPoints.filter(p => {
-            const turfPoint = turf.point(p.feature.geometry.coordinates);
-            return turf.booleanPointInPolygon(turfPoint, tractPolygon);
-        });
-
-        const targetPoint = turf.centroid(tractPolygon).geometry.coordinates;
-
-        if (pointsInside.length > 0) {
-            // Original logic: If providers are inside, list them all, sorted by distance.
-            const pointsWithDistance = pointsInside.map(p => ({
-                ...p,
-                distance: turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' })
-            }));
-            pointsWithDistance.sort((a, b) => a.distance - b.distance);
-            relevantProviders = pointsWithDistance;
-        } 
-        else if (allPoints.length > 0) {
-            // Fallback: If NO providers are inside, find the single closest one from the entire dataset.
-            const allPointsWithDistance = allPoints.map(p => ({
-                ...p,
-                distance: turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' })
-            }));
-            allPointsWithDistance.sort((a, b) => a.distance - b.distance);
-            relevantProviders = [allPointsWithDistance[0]]; // Return an array with just the closest provider
-        }
+        nearbyPoints.sort((a, b) => a.distance - b.distance);
+        relevantProviders = nearbyPoints;
 
     } else if (location.type === 'point') {
-        const targetPoint = [location.point.lng, location.point.lat];
+        targetPoint = [location.point.lng, location.point.lat];
         
         const pointsWithDistance = allPoints.map(p => ({
             ...p,
@@ -2342,35 +2383,69 @@ async function showNearestPoints(location, layerName, container) {
     }
 
     const listContainer = container.querySelector('#nearest-providers-list');
+    
+    // --- "No providers" message ---
     if (relevantProviders.length === 0) {
         const message = location.type === 'tract' 
-            ? "No providers found directly within this community area."
+            ? "No providers found within 3 miles of this community's center."
             : "No providers found within 3 miles of this address.";
         listContainer.innerHTML = `<p class="text-sm text-slate-600 mt-2">${message}</p>`;
         return;
     }
-    
-    listContainer.innerHTML = `
-        <ul class="space-y-3 mt-2">
-            ${relevantProviders.map(p => {
-                const props = p.layer.getPopup().getContent().includes('Capacity') ? {
-                    name: p.layer.getPopup()._content.match(/<div class="font-bold text-base">(.*?)<\/div>/)[1],
-                    detail: p.layer.getPopup()._content.match(/<div><strong>Capacity \(Under 6\):<\/strong> (.*?)<\/div>/)[1]
-                } : {
-                    name: p.layer.getPopup()._content.match(/<div class="font-bold text-base">(.*?)<\/div>/)[1],
-                    detail: p.layer.getPopup()._content.match(/<div><strong>Type:<\/strong> (.*?)<\/div>/)[1]
-                };
-                const latlng = p.layer.getLatLng();
-                
-                const distanceContext = location.type === 'tract' ? 'from center' : 'away';
-                const distanceText = `<p class="text-slate-600">${p.distance.toFixed(1)} miles ${distanceContext}</p>`;
 
-                return `<li class="text-sm border-t pt-2 cursor-pointer hover:bg-slate-50 p-1 rounded" onclick="zoomToPoint(${latlng.lat}, ${latlng.lng})">
-                            <p class.semibold text-slate-800">${props.name}</p>
-                            ${distanceText}
-                       </li>`;
-            }).join('')}
-        </ul>`;
+    // --- Check for quality and build filter ---
+    const hasQuality = relevantProviders.length > 0 && relevantProviders[0].feature.properties.hasOwnProperty('quality');
+    let uniqueQualities = [];
+    if (hasQuality) {
+        uniqueQualities = [...new Set(relevantProviders.map(p => p.feature.properties.quality).filter(q => q != null))].sort();
+    }
+
+    let filterHtml = '';
+    if (uniqueQualities.length > 0) {
+        filterHtml = `
+            <div class="mt-4 mb-2">
+                <label for="provider-quality-filter-${layerName}" class="block text-sm font-medium text-slate-700">Filter by Quality:</label>
+                <select id="provider-quality-filter-${layerName}" onchange="filterProviderListByQuality(this)" class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                    <option value="all">Show All</option>
+                    ${uniqueQualities.map(q => `<option value="${q}">${q}</option>`).join('')}
+                </select>
+            </div>
+        `;
+    }
+
+    // --- Build list items with quality data ---
+    const listHtml = relevantProviders.map(p => {
+        const props = p.layer.getPopup().getContent().includes('Capacity') ? {
+            name: p.layer.getPopup()._content.match(/<div class="font-bold text-base">(.*?)<\/div>/)[1],
+            detail: p.layer.getPopup()._content.match(/<div><strong>Capacity \(Under 6\):<\/strong> (.*?)<\/div>/)[1]
+        } : {
+            name: p.layer.getPopup()._content.match(/<div class="font-bold text-base">(.*?)<\/div>/)[1],
+            detail: p.layer.getPopup()._content.match(/<div><strong>Type:<\/strong> (.*?)<\/div>/)[1]
+        };
+        const latlng = p.layer.getLatLng();
+        
+        const quality = p.feature.properties.quality;
+        const qualityText = (quality != null) ? `<p class="text-sm text-slate-600 mt-0.5"><strong>Quality:</strong> ${quality}</p>` : '';
+        const distanceText = `<p class="text-sm text-slate-600 mt-0.5">${p.distance.toFixed(1)} miles ${distanceContext}</p>`;
+
+        return `<li class="border-t pt-3 pb-2 px-1 cursor-pointer hover:bg-slate-50 rounded" 
+                data-quality="${quality || ''}" 
+                onclick="zoomToPoint(${latlng.lat}, ${latlng.lng})">
+                <p class="font-semibold text-slate-800">${props.name}</p>
+                ${distanceText}
+                ${qualityText}
+        </li>`;
+    }).join('');
+
+    // --- NEW: Combine filter and list into a container ---
+    listContainer.innerHTML = `
+        <div class="providers-container">
+            ${filterHtml}
+            <ul class="mt-2">
+                ${listHtml}
+            </ul>
+        </div>
+    `;
 }
     
 async function queryParcelData(longitude, latitude) {
@@ -2467,7 +2542,7 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
                 </table>
             </div>`;
 
-        if (selectedSector === 'childcare' || selectedSector === 'other') {
+        if (selectedSector === 'childcare') {
             html += `
                 <div>
                     <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Community: Childcare Opportunity</h3>
@@ -2480,7 +2555,7 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
                 </div>`;
         }
 
-        if (selectedSector === 'fresh-food' || selectedSector === 'other') {
+        if (selectedSector === 'fresh-food') {
             html += `
                 <div>
                     <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Community: Fresh Food Opportunity</h3>
@@ -2555,11 +2630,32 @@ function isPointInLayer_Turf(point, layer) {
 
 // --- DOCUMENT READY & INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', async () => {
+    const storedSector = localStorage.getItem('selectedSector');
+    const storedMode = localStorage.getItem('selectedMode');
+
+    if (storedSector) {
+        selectedSector = storedSector;
+    }
+
+    if (storedMode) {
+        currentMapMode = storedMode;
+        isFirstTimeUser = false;
+    } else {
+        // Default to smartResearch, but flag as first time user to show tour
+        currentMapMode = 'smartResearch'; 
+        isFirstTimeUser = true;
+    }
+
     setupBannerAccordion();
     setupModalAndState();
     setupMdwdsNavbar();
     setupTopControls();
     setupTour();
+
+    if (isFirstTimeUser) {
+        showTour();
+    }
+
     setupLayerControls();
     
     const loadingOverlay = document.getElementById('loading-overlay'); 
@@ -2587,11 +2683,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
     
     map.createPane('countyPane').style.zIndex = 475;
+    map.createPane('mapboxCountyPane').style.zIndex = 480;
     map.createPane('incentivePane').style.zIndex = 450;
     map.createPane('tractPane').style.zIndex = 400;
     map.createPane('clusterTopPane').style.zIndex = 650;
 
-    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    L.tileLayer('https://api.mapbox.com/styles/v1/amiller-mdgov/cmhkza9ds006c01s6hdze2vfn/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         tileSize: 512,
         maxZoom: 18,
@@ -2633,10 +2730,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         const processIncentives = (incentives, source) => incentives.map(inc => ({ ...inc.structured_extraction, source: source }));
         allIncentives = [...processIncentives(stateIncentives, 'State'), ...processIncentives(localIncentives, 'Local')];
-        
+
         L.geoJSON(countyData, {
             style: { fillOpacity: 0, color: '#FFFFFF', weight: 1, opacity: 0.8 },
             interactive: false, pane: 'countyPane'
+        }).addTo(map);
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/amiller-mdgov/cmhkzhcxc002701qld6cl3u8v/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            tileSize: 512,
+            maxZoom: 18,
+            zoomOffset: -1,
+            accessToken: MAPBOX_ACCESS_TOKEN,
+            pane: 'mapboxCountyPane'
         }).addTo(map);
 
         initializeMap();
@@ -2671,27 +2776,38 @@ function setupBannerAccordion() {
 }
 function setupTour() {
     const tourOverlay = document.getElementById('tour-overlay');
-    const closeTourBtn = document.getElementById('close-tour-btn');
+    const choiceButtons = document.querySelectorAll('.tour-choice-btn');
 
-    if (tourOverlay && closeTourBtn) {
-        closeTourBtn.addEventListener('click', () => {
-            tourOverlay.classList.add('hidden');
+    if (tourOverlay && choiceButtons.length > 0) {
+        choiceButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const chosenMode = button.dataset.mode;
+                localStorage.setItem('selectedMode', chosenMode); // Save the choice
+                isFirstTimeUser = false; // Mark that they've seen the tour
+                
+                // 1. Set the global mode variable
+                currentMapMode = chosenMode;
+
+                // 2. Update the main mode buttons in the top-right corner to match
+                document.querySelectorAll('#map-mode-btn-group .mode-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                const activeButton = document.querySelector(`.mode-btn[data-mode="${chosenMode}"]`);
+                if (activeButton) {
+                    activeButton.classList.add('active');
+                }
+
+                // 3. Hide the tour overlay
+                tourOverlay.classList.add('hidden');
+            });
         });
     }
 }
 
 function showTour(sector) {
+    // The 'sector' parameter is no longer used here, but left
+    // in case we want to add sector-specific logic back later.
     const tourOverlay = document.getElementById('tour-overlay');
-    const sectorNameSpan = document.getElementById('tour-sector-name');
-
-    let sectorDisplayName = 'business'; // default
-    if (sector === 'childcare') {
-        sectorDisplayName = 'childcare';
-    } else if (sector === 'fresh-food') {
-        sectorDisplayName = 'fresh food';
-    }
-
-    sectorNameSpan.textContent = sectorDisplayName;
     tourOverlay.classList.remove('hidden');
 }
 
@@ -2712,14 +2828,11 @@ function setupMdwdsNavbar() {
 }
 
 function setupModalAndState() {
-    // const storedSector = localStorage.getItem('selectedSector');
-    const storedSector = null; // TODO: Temporary, remove for production;
+    const storedSector = localStorage.getItem('selectedSector');
     const modalOverlay = document.getElementById('sector-modal-overlay');
 
-    if (storedSector) {
-        selectedSector = storedSector;
-    } else {
-        isFirstTimeUser = true;
+    if (!storedSector) {
+        // Only show the sector modal if the sector isn't in storage
         modalOverlay.classList.remove('hidden');
         modalOverlay.inert = false;
     }
@@ -2741,12 +2854,8 @@ function handleSectorSelection(sector) {
     modalOverlay.inert = true;
     document.getElementById('sector-select').value = sector;
     updateBaseLayerFilter(sector);
+    updateOverlayFilter(sector);
     setDefaultBaseLayer(sector);
-
-    if (isFirstTimeUser) {
-        //showTour(sector); // TODO: Re-enable tour after demo
-        isFirstTimeUser = false; // Prevent tour from showing again this session
-    }
 }
 
 function setupTopControls() {
@@ -2771,6 +2880,8 @@ function setupTopControls() {
 
             // Update the global state
             currentMapMode = newMode;
+
+            localStorage.setItem('selectedMode', newMode); // Save the new mode
 
             // Update button styles
             modeButtons.forEach(btn => btn.classList.remove('active'));
@@ -2800,6 +2911,7 @@ function setupTopControls() {
         selectedSector = e.target.value;
         localStorage.setItem('selectedSector', selectedSector);
         updateBaseLayerFilter(selectedSector);
+        updateOverlayFilter(selectedSector);
         setDefaultBaseLayer(selectedSector);
 
         if (sidePanel.classList.contains('show') && currentPanelContext.data) {
@@ -2978,7 +3090,7 @@ function initializeMap() {
         });
     }
 
-    geojsonLayer = L.geoJSON(tractData, { style: style, onEachFeature: onEachFeature }).addTo(map);
+    geojsonLayer = L.geoJSON(tractData, { style: style, onEachFeature: onEachFeature, smoothFactor: 0 }).addTo(map);
     disableMapLayerFocus(geojsonLayer);
     // --- Forcefully disable focus on the map's SVG vector pane ---
     // This is necessary because some browsers will focus the SVG container
@@ -3045,7 +3157,7 @@ async function togglePointLayer(checkbox) {
             
             // Get the specific config for the current layer, with a fallback
             const config = pointLayerConfigs[layerName] || { color: '#808080' };
-            const pointStyle = { radius: 6, fillColor: config.color, color: "#000", weight: 1, opacity: 1, fillOpacity: 0.8 };
+            const pointStyle = { radius: 6, fillColor: config.color, color: "#000", weight: 1, opacity: 1, fillOpacity: 1 };
 
             if (data.type === 'FeatureCollection' && data.features) {
                 const geojsonLayerForPoints = L.geoJSON(data, {
@@ -3164,7 +3276,7 @@ async function preloadPointLayers() {
                 color: "#000", 
                 weight: 1, 
                 opacity: 1, 
-                fillOpacity: 0.8 
+                fillOpacity: 1
             };
 
             if (data.type === 'FeatureCollection' && data.features) {
@@ -3267,12 +3379,56 @@ function updateBaseLayerFilter(sector) {
         }
 
         const optionInfo = CHOROPLETH_OPTIONS[optionValue];
-        if (optionInfo && (optionInfo.sector === 'general' || optionInfo.sector === sector || sector === 'other')) {
-            label.style.display = 'flex'; // Show relevant options
+        const isGeneral = optionInfo.sector === 'general';
+        const isSectorMatch = optionInfo.sector === sector;
+
+        if (sector === 'other') {
+            if (isGeneral) {
+                label.style.display = 'flex'; // Show
+            } else {
+                label.style.display = 'none'; // Hide
+            }
         } else {
-            label.style.display = 'none'; // Hide irrelevant options
+            if (isGeneral || isSectorMatch) {
+                label.style.display = 'flex'; // Show
+            } else {
+                label.style.display = 'none'; // Hide
+            }
         }
     });
+}
+
+function updateOverlayFilter(sector) {
+    const poiLabels = document.querySelectorAll('#overlay-options label[data-sector]');
+    const poiHeader = document.getElementById('poi-header'); // Get the header
+    let anyPoiVisible = false; // Flag to track visibility
+
+    poiLabels.forEach(label => {
+        const input = label.querySelector('input[type="checkbox"]');
+        if (!input) return;
+
+        const labelSector = label.dataset.sector;
+
+        if (labelSector === sector) {
+            label.style.display = 'flex'; // Show relevant POI
+            anyPoiVisible = true; // Mark that we found a visible POI
+        } else {
+            label.style.display = 'none'; // Hide irrelevant POI
+            
+            // If the layer is active (checked), turn it off
+            if (input.checked) {
+                input.checked = false;
+                togglePointLayer(input); // This function will remove the layer from the map
+            }
+        }
+    });
+
+    // After the loop, check the flag and show/hide the header
+    if (anyPoiVisible) {
+        poiHeader.style.display = 'block';
+    } else {
+        poiHeader.style.display = 'none';
+    }
 }
 
 function setDefaultBaseLayer(sector) {
@@ -3323,6 +3479,7 @@ function setupLayerControls() {
 
     // Set the initial filter based on the globally selected sector
     updateBaseLayerFilter(selectedSector);
+    updateOverlayFilter(selectedSector);
 
     document.getElementById('base-layer-toggle-btn').addEventListener('click', (e) => {
         e.preventDefault(); // Prevent the click/enter event from propagating
