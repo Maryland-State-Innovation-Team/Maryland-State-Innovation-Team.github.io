@@ -779,6 +779,67 @@
             border-style: solid;
             border-color: #3d4551 transparent transparent transparent; /* Arrow points up */
         }
+        /* --- Custom Marker Cluster Colors (with Size Gradient) --- */
+
+        /* Childcare (Reds: 200/300 -> 300/400 -> 400/500) */
+        .marker-cluster.childcare-cluster.marker-cluster-small {
+            background-color: rgba(254, 202, 202, 0.6); /* red-200 */
+        }
+        .marker-cluster.childcare-cluster.marker-cluster-small div {
+            background-color: rgba(252, 165, 165, 0.6); /* red-300 */
+        }
+        .marker-cluster.childcare-cluster.marker-cluster-medium {
+            background-color: rgba(252, 165, 165, 0.6); /* red-300 */
+        }
+        .marker-cluster.childcare-cluster.marker-cluster-medium div {
+            background-color: rgba(248, 113, 113, 0.6); /* red-400 */
+        }
+        .marker-cluster.childcare-cluster.marker-cluster-large {
+            background-color: rgba(248, 113, 113, 0.6); /* red-400 */
+        }
+        .marker-cluster.childcare-cluster.marker-cluster-large div {
+            background-color: rgba(239, 68, 68, 0.6); /* red-500 */
+        }
+
+        /* Grocery (Greens: 200/300 -> 300/400 -> 400/500) */
+        .marker-cluster.grocery-cluster.marker-cluster-small {
+            background-color: rgba(167, 243, 208, 0.6); /* emerald-200 */
+        }
+        .marker-cluster.grocery-cluster.marker-cluster-small div {
+            background-color: rgba(110, 231, 183, 0.6); /* emerald-300 */
+        }
+        .marker-cluster.grocery-cluster.marker-cluster-medium {
+            background-color: rgba(110, 231, 183, 0.6); /* emerald-300 */
+        }
+        .marker-cluster.grocery-cluster.marker-cluster-medium div {
+            background-color: rgba(52, 211, 153, 0.6); /* emerald-400 */
+        }
+        .marker-cluster.grocery-cluster.marker-cluster-large {
+            background-color: rgba(52, 211, 153, 0.6); /* emerald-400 */
+        }
+        .marker-cluster.grocery-cluster.marker-cluster-large div {
+            background-color: rgba(16, 185, 129, 0.6); /* emerald-500 */
+        }
+
+        /* Food Pantry (Blues: 200/300 -> 300/400 -> 400/500) */
+        .marker-cluster.food_pantry-cluster.marker-cluster-small {
+            background-color: rgba(191, 219, 254, 0.6); /* blue-200 */
+        }
+        .marker-cluster.food_pantry-cluster.marker-cluster-small div {
+            background-color: rgba(147, 197, 253, 0.6); /* blue-300 */
+        }
+        .marker-cluster.food_pantry-cluster.marker-cluster-medium {
+            background-color: rgba(147, 197, 253, 0.6); /* blue-300 */
+        }
+        .marker-cluster.food_pantry-cluster.marker-cluster-medium div {
+            background-color: rgba(96, 165, 250, 0.6); /* blue-400 */
+        }
+        .marker-cluster.food_pantry-cluster.marker-cluster-large {
+            background-color: rgba(96, 165, 250, 0.6); /* blue-400 */
+        }
+        .marker-cluster.food_pantry-cluster.marker-cluster-large div {
+            background-color: rgba(59, 130, 246, 0.6); /* blue-500 */
+        }
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800">
@@ -1125,7 +1186,7 @@ let allIncentives = [];
 let tractData;
 let currentMapMode = 'smartResearch';
 let selectedSector = 'other';
-let choroplethSelect, sidePanel, panelContent, panelTitle;
+let choroplethSelect, sidePanel, panelContent, panelTitle, overlayOptionsContainer, overlayCount;
 let currentPanelContext = { type: null, data: null };
 let isFirstTimeUser = false;
 let choroplethBreaks;
@@ -1377,6 +1438,48 @@ function updateGeocoderWidth() {
     geocoderInput.style.minWidth = `${newWidth}px`;
 }
 
+function createCustomClusterIcon(cluster) {
+    const markers = cluster.getAllChildMarkers();
+    const count = cluster.getChildCount();
+    
+    // 1. Count the types of markers in this cluster
+    const typeCounts = {};
+    let mostFrequentType = null;
+    let maxCount = 0;
+
+    markers.forEach(marker => {
+        const type = marker.options.markerType; // We will add this 'markerType' option in Step 4
+        if (!type) return;
+        
+        typeCounts[type] = (typeCounts[type] || 0) + 1;
+        
+        if (typeCounts[type] > maxCount) {
+            maxCount = typeCounts[type];
+            mostFrequentType = type;
+        }
+    });
+
+    // 2. Determine the size class (small, medium, large)
+    let sizeClass = ' marker-cluster-';
+    if (count < 10) {
+        sizeClass += 'small';
+    } else if (count < 100) {
+        sizeClass += 'medium';
+    } else {
+        sizeClass += 'large';
+    }
+    
+    // 3. Determine the type class (e.g., 'childcare-cluster')
+    const typeClass = mostFrequentType ? ` ${mostFrequentType}-cluster` : '';
+
+    // 4. Create the DivIcon
+    return new L.DivIcon({
+        html: '<div><span>' + count + '</span></div>',
+        className: 'marker-cluster' + sizeClass + typeClass,
+        iconSize: new L.Point(40, 40)
+    });
+}
+
 // --- ALL MAP LOGIC & HELPER FUNCTIONS (GLOBAL SCOPE) ---
 function disableMapLayerFocus(layerGroup) {
     if (layerGroup && typeof layerGroup.eachLayer === 'function') {
@@ -1495,7 +1598,8 @@ function onEachFeature(feature, layer) {
 
     layer.bindTooltip(tooltipContent, {
         sticky: true,
-        className: 'custom-map-tooltip'
+        className: 'custom-map-tooltip',
+        pane: 'topTooltipPane'
     });
 
     layer.unbindTooltip();
@@ -1508,7 +1612,8 @@ function onEachFeature(feature, layer) {
             highlightFeature(e);
             this.bindTooltip(tooltipContent, {
                 sticky: true,
-                className: 'custom-map-tooltip'
+                className: 'custom-map-tooltip',
+                pane: 'topTooltipPane'
             }).openTooltip();
         },
         mouseout: function (e) {
@@ -2687,6 +2792,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     map.createPane('incentivePane').style.zIndex = 450;
     map.createPane('tractPane').style.zIndex = 400;
     map.createPane('clusterTopPane').style.zIndex = 650;
+    map.createPane('markerPane').style.zIndex = 700;
+    map.createPane('topTooltipPane').style.zIndex = 750;
 
     L.tileLayer('https://api.mapbox.com/styles/v1/amiller-mdgov/cmhkza9ds006c01s6hdze2vfn/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -3057,7 +3164,7 @@ function initializeMap() {
             findTractForPoint(center)
         ]);
 
-        searchMarker = L.marker(center).addTo(map);
+        searchMarker = L.marker(center, {pane: "markerPane"}).addTo(map);
         searchMarker.on('click', () => {
             if (currentMapMode === 'smartResearch') {
                 displaySmartResearchForAddress(name, parcelData, tractFeature?.properties, center);
@@ -3148,7 +3255,9 @@ async function togglePointLayer(checkbox) {
             if (!response.ok) throw new Error(`Failed to load ${url}`);
             const data = await response.json();
             const markers = L.markerClusterGroup({
-                clusterPane: 'clusterTopPane' 
+                clusterPane: 'clusterTopPane',
+                disableClusteringAtZoom: 13,
+                iconCreateFunction: createCustomClusterIcon
             });
 
             markers.on('animationend', function () {
@@ -3170,7 +3279,7 @@ async function togglePointLayer(checkbox) {
                         return true; 
                     },
                     pointToLayer: function(feature, latlng) {
-                        return L.circleMarker(latlng, {...pointStyle, pane: 'clusterTopPane'});
+                        return L.circleMarker(latlng, {...pointStyle, pane: 'clusterTopPane', markerType: layerName });
                     },
                     onEachFeature: function(feature, layer) {
                         const { properties } = feature;
@@ -3260,7 +3369,9 @@ async function preloadPointLayers() {
             const data = await response.json();
             
             const markers = L.markerClusterGroup({
-                clusterPane: 'clusterTopPane' 
+                clusterPane: 'clusterTopPane',
+                disableClusteringAtZoom: 13,
+                iconCreateFunction: createCustomClusterIcon
             });
 
             markers.on('animationend', function () {
@@ -3290,7 +3401,7 @@ async function preloadPointLayers() {
                         return true; 
                     },
                     pointToLayer: function(feature, latlng) {
-                        return L.circleMarker(latlng, {...pointStyle, pane: 'clusterTopPane'});
+                        return L.circleMarker(latlng, {...pointStyle, pane: 'clusterTopPane', markerType: layerName });
                     },
                     onEachFeature: function(feature, layer) {
                         const { properties } = feature;
@@ -3366,6 +3477,17 @@ function registerHeaderHeightObserver() {
     obs.observe(bannerContainer, { attributes: true, childList: true, subtree: true });
 }
 
+const updateOverlayCount = () => {
+    const checkedOverlays = overlayOptionsContainer.querySelectorAll('input[type="checkbox"]:checked');
+    const count = checkedOverlays.length;
+    overlayCount.textContent = count;
+    if (count > 0) {
+        overlayCount.classList.remove('hidden');
+    } else {
+        overlayCount.classList.add('hidden');
+    }
+};
+
 function updateBaseLayerFilter(sector) {
     const allOptions = document.querySelectorAll('#base-layer-options label');
     allOptions.forEach(label => {
@@ -3429,6 +3551,8 @@ function updateOverlayFilter(sector) {
     } else {
         poiHeader.style.display = 'none';
     }
+
+    updateOverlayCount();
 }
 
 function setDefaultBaseLayer(sector) {
@@ -3457,8 +3581,8 @@ function setupLayerControls() {
 
     const overlayBtn = document.getElementById('overlay-btn');
     const overlayPanel = document.getElementById('overlay-panel');
-    const overlayCount = document.getElementById('overlay-count');
-    const overlayOptionsContainer = document.getElementById('overlay-options');
+    overlayCount = document.getElementById('overlay-count');
+    overlayOptionsContainer = document.getElementById('overlay-options');
 
     // --- Base Layer Logic ---
     baseLayerOptionsContainer.innerHTML = ''; // Clear previous options
@@ -3535,17 +3659,6 @@ function setupLayerControls() {
             overlayPanel.querySelector('input[type="checkbox"]').focus();
         }
     });
-
-    const updateOverlayCount = () => {
-        const checkedOverlays = overlayOptionsContainer.querySelectorAll('input[type="checkbox"]:checked');
-        const count = checkedOverlays.length;
-        overlayCount.textContent = count;
-        if (count > 0) {
-            overlayCount.classList.remove('hidden');
-        } else {
-            overlayCount.classList.add('hidden');
-        }
-    };
 
     overlayOptionsContainer.addEventListener('change', updateOverlayCount);
     updateOverlayCount();
