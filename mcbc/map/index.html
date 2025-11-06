@@ -1288,6 +1288,7 @@ const CHOROPLETH_OPTIONS = {
     // General
     'pop2025': { label: 'Population (2025)', format: (d) => formatNumber(d), sector: 'general' },
     'pop_change2530': { label: 'Projected Pop. Change (25-30)', format: (d) => formatNumber(d), sector: 'general' },
+    'pop_change2530_pct_change': { label: 'Projected Pop. Change (%, 25-30)', format: (d) => formatPercent(d), sector: 'general' },
     'avg_household_income': { label: 'Avg. Household Income', format: (d) => formatCurrency(d), sector: 'general' },
     'transportation_barrier_pct': { label: '% Transportation Barriers', format: (d) => formatPercent(d), sector: 'general' },
     'pct_under5': { label: '% Population Under 5', format: (d) => formatPercent(d), sector: 'general' },
@@ -1321,6 +1322,13 @@ const formatPercent = (val) => `${(safeParseFloat(val, 0) * 100).toFixed(1)}%`;
 const formatCurrency = (val) => `$${Math.round(safeParseFloat(val, 0)).toLocaleString()}`;
 const formatNumber = (val) => (val != null) ? Math.round(safeParseFloat(val)).toLocaleString() : 'N/A';
 const formatValue = (val) => (val != null) ? val : 'N/A';
+
+function safeMatch(string, regex, index = 1, fallback = 'N/A') {
+    if (typeof string !== 'string') return fallback; // Extra safety check
+    const match = string.match(regex);
+    // Return the matched group if it exists, otherwise return the fallback
+    return (match && match[index]) ? match[index] : fallback;
+}
 
 /**
  * Positions the global floating tooltip relative to a trigger element.
@@ -1535,19 +1543,31 @@ function getMapPadding() {
     }
 }
 
-function zoomToPoint(lat, lng) {
+function zoomToPoint(lat, lng, layerName) {
     // If a provider was previously highlighted, remove the marker
     if (highlightedProviderMarker) {
         map.removeLayer(highlightedProviderMarker);
     }
 
     const latLng = L.latLng(lat, lng);
-    const bounds = latLng.toBounds(100); // Creates a small 100-meter box around the point
 
-    // Use the existing getMapPadding() function to zoom with an offset
-    map.fitBounds(bounds, { ...getMapPadding(), maxZoom: 17 });
+    // --- New Logic Start ---
 
-    // Add a temporary marker to highlight the selected provider
+    // 1. Find the actual layer to open its popup
+    let targetLayer = null;
+    if (layerName && overlayLayers[layerName]) {
+        const pointLayer = overlayLayers[layerName];
+        // We need to search inside the cluster group for the matching layer
+        pointLayer.eachLayer(layer => {
+            if (targetLayer) return; // Stop searching if found
+            const layerLatLng = layer.getLatLng();
+            if (layerLatLng && layerLatLng.lat === lat && layerLatLng.lng === lng) {
+                targetLayer = layer;
+            }
+        });
+    }
+    
+    // 2. Create the highlight marker
     highlightedProviderMarker = L.circleMarker(latLng, {
         radius: 10,
         color: '#005ea2',     // A distinct blue color
@@ -1556,8 +1576,53 @@ function zoomToPoint(lat, lng) {
         fillColor: '#ffffff',
         fillOpacity: 1,
         pane: 'clusterTopPane' // Ensure it's on top
-    }).addTo(map);
+    });
 
+    // 3. Check if point is in view
+    const mapBounds = map.getBounds();
+    
+    if (mapBounds.contains(latLng)) {
+        // --- 2a. YES, point is in view ---
+        // Just add the marker and open the popup
+        highlightedProviderMarker.addTo(map);
+        if (targetLayer) {
+            // Use a small delay to ensure the popup opens
+            setTimeout(() => targetLayer.openPopup(), 100);
+        }
+    } else {
+        // --- 2b. NO, point is not in view ---
+        
+        // Find the currently selected area
+        let selectedBounds = null;
+        if (lastClickedLayer) {
+            selectedBounds = lastClickedLayer.getBounds();
+        } else if (searchMarker) {
+            selectedBounds = searchMarker.getLatLng().toBounds(1); // Small bounds around the marker
+        }
+
+        let boundsToFit;
+        const targetBounds = latLng.toBounds(1); // Small bounds around the target point
+
+        if (selectedBounds) {
+            // We have a selected area, so fit both
+            boundsToFit = selectedBounds.extend(targetBounds);
+        } else {
+            // No area is selected, just fit the target point
+            boundsToFit = targetBounds;
+        }
+
+        // Zoom/pan to fit the combined bounds
+        map.fitBounds(boundsToFit, { ...getMapPadding(), maxZoom: 17 });
+
+        // Add the marker and open the popup *after* the map moves
+        map.once('moveend', () => {
+            highlightedProviderMarker.addTo(map);
+            if (targetLayer) {
+                targetLayer.openPopup();
+            }
+        });
+    }
+    
     // Remove the highlight after a few seconds
     setTimeout(() => {
         if (highlightedProviderMarker) {
@@ -2711,12 +2776,21 @@ async function showNearestPoints(location, layerName, container) {
 
     // --- Build list items with quality data ---
     const listHtml = relevantProviders.map(p => {
-        const props = p.layer.getPopup().getContent().includes('Capacity') ? {
-            name: p.layer.getPopup()._content.match(/<div class="font-bold text-base">(.*?)<\/div>/)[1],
-            detail: p.layer.getPopup()._content.match(/<div><strong>Capacity \(Under 6\):<\/strong> (.*?)<\/div>/)[1]
+        // Get the popup content just once
+        const popupContent = p.layer.getPopup().getContent();
+
+        // Define the CORRECT regexes that match the HTML from togglePointLayer
+        const nameRegex = /<div class="font-bold text-lg leading-tight">(.*?)<\/div>/;
+        const capacityRegex = /<strong>Capacity \(Under 6\):<\/strong> (.*?) seats/;
+        const typeRegex = /<strong>Type:<\/strong> (.*?)<\/div>/;
+
+        // Use the new safeMatch helper to parse content without crashing
+        const props = popupContent.includes('Capacity') ? {
+            name: safeMatch(popupContent, nameRegex, 1, 'Unnamed Location'),
+            detail: safeMatch(popupContent, capacityRegex, 1, 'N/A')
         } : {
-            name: p.layer.getPopup()._content.match(/<div class="font-bold text-base">(.*?)<\/div>/)[1],
-            detail: p.layer.getPopup()._content.match(/<div><strong>Type:<\/strong> (.*?)<\/div>/)[1]
+            name: safeMatch(popupContent, nameRegex, 1, 'Unnamed Location'),
+            detail: safeMatch(popupContent, typeRegex, 1, 'N/A')
         };
         const latlng = p.layer.getLatLng();
         
@@ -2726,7 +2800,7 @@ async function showNearestPoints(location, layerName, container) {
 
         return `<li class="border-t pt-3 pb-2 px-1 cursor-pointer hover:bg-slate-50 rounded" 
                 data-quality="${quality ?? ''}"
-                onclick="zoomToPoint(${latlng.lat}, ${latlng.lng})">
+                onclick="zoomToPoint(${latlng.lat}, ${latlng.lng}, '${layerName}')">
                 <p class="font-semibold text-slate-800">${props.name}</p>
                 ${distanceText}
                 ${qualityText}
