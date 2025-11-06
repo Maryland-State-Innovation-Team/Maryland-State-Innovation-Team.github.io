@@ -3730,6 +3730,7 @@ async function togglePointLayer(checkbox) {
             const markers = L.markerClusterGroup({
                 clusterPane: 'clusterTopPane',
                 disableClusteringAtZoom: 13,
+                spiderfyOnMaxZoom: false,
                 iconCreateFunction: createCustomClusterIcon
             });
 
@@ -3846,6 +3847,7 @@ async function preloadPointLayers() {
             const markers = L.markerClusterGroup({
                 clusterPane: 'clusterTopPane',
                 disableClusteringAtZoom: 13,
+                spiderfyOnMaxZoom: false,
                 iconCreateFunction: createCustomClusterIcon
             });
 
