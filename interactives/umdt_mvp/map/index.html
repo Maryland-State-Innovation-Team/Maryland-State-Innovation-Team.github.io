@@ -659,6 +659,35 @@
             outline: 0.25rem solid #2491ff; /* MDWDS focus color */
             outline-offset: 0;
         }
+        /* --- Geocoder Clear Button (input[type="search"]) Restyling --- */
+        .leaflet-control-geocoder-form input[type="search"]::-webkit-search-cancel-button {
+            /* 1. REQUIRED: Reset default browser styles to hide the old icon */
+            -webkit-appearance: none;
+            appearance: none;
+            
+            /* 2. Set the new size & shape */
+            display: block; /* Use block to enable sizing */
+            width: 20px;    /* Your desired touch-friendly size */
+            height: 20px;   /* Your desired touch-friendly size */
+            border-radius: 50%; /* Make it circular */
+
+            /* 3. Style the new icon */
+            background-color: #94a3b8; /* slate-400 (matches design) */
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3e%3cpath fill-rule='evenodd' d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z' clip-rule='evenodd' /%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 16px 16px; /* Size of the 'x' inside the circle */
+            
+            /* 4. Add better cursor and a little space */
+            cursor: pointer;
+            margin-right: 2px; /* Adds space from the input's edge */
+            transition: background-color 0.2s;
+        }
+
+        /* 5. Add hover/focus states */
+        .leaflet-control-geocoder-form input[type="search"]::-webkit-search-cancel-button:hover {
+            background-color: #64748b; /* slate-500 */
+        }
 
         /* --- New Responsive & Panel-Aware Styles --- */
         @media (max-width: 767px) {
@@ -1865,6 +1894,12 @@ function onEachFeature(feature, layer) {
             this.unbindTooltip();
         },
         click: (e) => {
+            const geocoderInput = document.querySelector('#geocoder-container .leaflet-control-geocoder-form input');
+            if (geocoderInput) {
+                geocoderInput.value = ''; // Clear any text
+                geocoderInput.placeholder = 'Search for an address or zip code'; // Reset to default
+            }
+
             const clickedLayer = e.target;
 
             if (searchMarker) {
@@ -2289,17 +2324,32 @@ function displaySmartResearchForTract(tractFeature) {
         }
 
         let unmetHTML;
-        let unmetPreamble = "This area has";
+        let unmetPreamble;
 
-        if (unmet > 10) {
-            unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
-        } else if (unmet > 0 && unmet <= 10) {
-            unmetPreamble = "This area appears to have a low need for more childcare. We estimate";
-            unmetHTML = `a gap of <strong>${formatNumber(unmet)} seats</strong>`;
-        } else if (unmet < 0) {
-            unmetHTML = `an estimated surplus of <strong>${formatNumber(Math.abs(unmet))} seats</strong>`;
-        } else {
-            unmetHTML = `a balanced supply and demand for childcare`;
+        // Use the data-driven needLabel to determine the text
+        switch (needLabel) {
+            case 'HIGH NEED':
+                unmetPreamble = "This area has a <strong>high need</strong>, with";
+                unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+                break;
+            case 'MODERATE NEED':
+                unmetPreamble = "This area has a <strong>moderate need</strong>, with";
+                unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+                break;
+            case 'LOW NEED':
+                unmetPreamble = "This area has a <strong>low need</strong>.";
+                // Add specific details for low need
+                if (unmet > 0) {
+                    unmetHTML = `There is an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+                } else if (unmet < 0) {
+                    unmetHTML = `There is an estimated surplus of <strong>${formatNumber(Math.abs(unmet))} seats</strong>`;
+                } else {
+                    unmetHTML = `The supply and demand are balanced`;
+                }
+                break;
+            default: // Fallback
+                unmetPreamble = "This area has";
+                unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
         }
 
         questions.push(createAccordionItem({
@@ -2492,23 +2542,34 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
             labels: ['LOW NEED', 'MODERATE NEED', 'HIGH NEED'],
             colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
         });
+
         let unmetHTML;
-        let unmetPreamble = "This area has";
+        let unmetPreamble;
 
-        if (unmet > 10) {
-            unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
-        } else if (unmet > 0 && unmet <= 10) {
-            unmetPreamble = "This area appears to have a low need for more childcare. We estimate";
-            unmetHTML = `a gap of <strong>${formatNumber(unmet)} seats</strong>`;
-        } else if (unmet < 0) {
-            unmetHTML = `an estimated surplus of <strong>${formatNumber(Math.abs(unmet))} seats</strong>`;
-        } else {
-            unmetHTML = `a balanced supply and demand for childcare`;
-        }
-
-        if (unmet <= 0) {
-            needLabel = 'LOW NEED';
-            needColor = BRAND_COLORS.error; // Use red for surplus/low need
+        // Use the data-driven needLabel to determine the text
+        switch (needLabel) {
+            case 'HIGH NEED':
+                unmetPreamble = "This area has a <strong>high need</strong>, with";
+                unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+                break;
+            case 'MODERATE NEED':
+                unmetPreamble = "This area has a <strong>moderate need</strong>, with";
+                unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+                break;
+            case 'LOW NEED':
+                unmetPreamble = "This area has a <strong>low need</strong>.";
+                // Add specific details for low need
+                if (unmet > 0) {
+                    unmetHTML = `There is an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+                } else if (unmet < 0) {
+                    unmetHTML = `There is an estimated surplus of <strong>${formatNumber(Math.abs(unmet))} seats</strong>`;
+                } else {
+                    unmetHTML = `The supply and demand are balanced`;
+                }
+                break;
+            default: // Fallback
+                unmetPreamble = "This area has";
+                unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
         }
         
         questions.push(createAccordionItem({
@@ -3425,6 +3486,11 @@ function initializeMap() {
     .on('markgeocode', async function(e) {
         const { center, name } = e.geocode;
 
+        if (geocoderInput) {
+            geocoderInput.value = ''; // Clear the typed text
+            geocoderInput.placeholder = name; // Set placeholder to the selected address
+        }
+
         if (lastClickedLayer) {
             const layerToReset = lastClickedLayer; // 1. Store a temporary reference
             lastClickedLayer = null;               // 2. Clear the global state *first*
@@ -3440,6 +3506,34 @@ function initializeMap() {
             queryParcelData(center.lng, center.lat),
             findTractForPoint(center)
         ]);
+        if (!tractFeature) {
+            // Point is outside Maryland, show an informative message
+
+            // Clear any previous marker and add one for the searched location
+            if (searchMarker) map.removeLayer(searchMarker);
+            searchMarker = L.marker(center, {pane: "markerPane"}).addTo(map);
+
+            // Update and open the side panel
+            panelTitle.textContent = "Location Outside Maryland";
+            panelContent.innerHTML = `
+                <div class="space-y-2">
+                    <p class="text-slate-800 font-semibold">
+                        The address you searched for appears to be outside of Maryland.
+                    </p>
+                    <p class="text-slate-600 text-sm">
+                        This tool only provides detailed community and business data for locations within the state of Maryland.
+                    </p>
+                </div>
+            `;
+            openSidePanel();
+            showPanelHandleForFirstTime(); // Ensure panel handle is visible
+
+            // Zoom to the out-of-state location
+            const bounds = L.latLng(center).toBounds(100); 
+            map.fitBounds(bounds, { ...getMapPadding(), maxZoom: 12 });
+
+            return; // Stop execution to prevent the error
+        }
 
         searchMarker = L.marker(center, {pane: "markerPane"}).addTo(map);
         searchMarker.on('click', () => {
@@ -3471,10 +3565,107 @@ function initializeMap() {
         geocoderInput.addEventListener('input', function() {
             const errorElement = document.querySelector('#geocoder-container .leaflet-control-geocoder-error');
             if (errorElement) {
-                // Hide the "Nothing found" message as soon as the user types again.
-                errorElement.style.display = 'none';
+                errorElement.classList.remove('leaflet-control-geocoder-error'); 
+                errorElement.classList.add('leaflet-control-geocoder-form-no-error');
+            }
+
+            const alternativesList = document.querySelector('.leaflet-control-geocoder-alternatives');
+            if (alternativesList) {
+                alternativesList.classList.add('leaflet-control-geocoder-alternatives-minimized');
             }
         });
+        geocoderInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+                
+                const alternativesList = document.querySelector('.leaflet-control-geocoder-alternatives');
+                
+                // Check if the list exists and is visible
+                if (alternativesList && !alternativesList.classList.contains('leaflet-control-geocoder-alternatives-minimized')) {
+                    
+                    // 1. Check if a selection *already* exists (from arrow keys)
+                    const existingSelection = alternativesList.querySelector('li.leaflet-control-geocoder-selected');
+
+                    // 2. If NO selection exists, we take over.
+                    if (!existingSelection) {
+                        
+                        // a. Stop the user's original "Enter" event
+                        e.preventDefault();
+                        e.stopImmediatePropagation();
+
+                        // b. Dispatch a synthetic "ArrowDown" event to
+                        //    force the plugin to select the first item.
+                        this.dispatchEvent(new KeyboardEvent('keydown', {
+                            'key': 'ArrowDown',
+                            'keyCode': 40,
+                            'bubbles': true,
+                            'cancelable': true
+                        }));
+
+                        // c. Dispatch a synthetic "Enter" event to
+                        //    force the plugin to *trigger* the selection.
+                        this.dispatchEvent(new KeyboardEvent('keydown', {
+                            'key': 'Enter',
+                            'keyCode': 13,
+                            'bubbles': true,
+                            'cancelable': true
+                        }));
+                    }
+                    
+                    // 3. If a selection *does* exist, we do nothing.
+                    //    The plugin's original listener will handle it.
+                }
+            }
+        }, { capture: true });
+    }
+
+    // --- Geocoder Error-Handling Logic ---
+
+    // 1. Find the persistent error message element
+    const errorElement = document.querySelector('#geocoder-container .leaflet-control-geocoder-form-no-error');
+
+    // 2. Define the callback function for the observer
+    const observerCallback = (mutationsList, observer) => {
+        for (const mutation of mutationsList) {
+            // Check if the 'class' attribute changed
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                
+                // Check if the error class was ADDED
+                if (errorElement.classList.contains('leaflet-control-geocoder-error')) {
+                    
+                    // Get the current search value
+                    const value = geocoderInput.value.trim();
+                    const isAllDigits = /^\d+$/.test(value);
+
+                    // Case 1: All digits and 3-4 chars long.
+                    // This is likely an incomplete house number (like "6601")
+                    // or an incomplete zip code (like "207").
+                    if (isAllDigits && value.length >= 3 && value.length < 5) {
+                        errorElement.innerHTML = 'Please continue typing the address or zip code.';
+                    } 
+                    
+                    // Case 2: All other errors.
+                    // This includes misspellings ("6601 rhodo"), 
+                    // invalid zips ("1234"), or other non-matches.
+                    else {
+                        errorElement.innerHTML = 'Address not found. Please check the spelling and try again.';
+                    }
+
+                // Check if the error class was REMOVED (e.g., by the 'input' listener)
+                } else {
+                    // Reset the text to the default "Nothing found."
+                    errorElement.innerHTML = 'Nothing found.';
+                }
+            }
+        }
+    };
+
+    // 3. Create and configure the observer
+    const observer = new MutationObserver(observerCallback);
+    const config = { attributes: true, attributeFilter: ['class'] };
+
+    // 4. Start observing the error element, if it was found
+    if (errorElement && geocoderInput) {
+        observer.observe(errorElement, config);
     }
 
     geojsonLayer = L.geoJSON(tractData, { style: style, onEachFeature: onEachFeature, smoothFactor: 0 }).addTo(map);
