@@ -570,7 +570,7 @@
             background-size: 1.5rem;
         }
 
-        .usa-nav-container {
+        .usa-header--basic {
             border-bottom: 1px solid #dfe1e2; /* base-lighter */
         }
         .usa-nav__primary > .usa-nav__primary-item > .usa-nav__link {
@@ -1883,12 +1883,12 @@ function onEachFeature(feature, layer) {
                 </div>
             `;
 
-            highlightFeature(e);
             this.bindTooltip(dynamicTooltipContent, {
                 sticky: true,
                 className: 'custom-map-tooltip',
                 pane: 'topTooltipPane'
             }).openTooltip();
+            highlightFeature(e);
         },
         mouseout: function (e) {
             resetHighlight(e);
