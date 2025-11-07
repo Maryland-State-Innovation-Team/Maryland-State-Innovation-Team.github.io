@@ -905,6 +905,27 @@
         #overlay-panel {
             cursor: auto;
         }
+        #global-map-tooltip {
+            background-color: white;
+            border-left: 3px solid #005ea2;
+            padding: 10px 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            width: 280px;
+            max-height: 250px;
+            overflow: hidden;
+            overflow-wrap: break-word;
+            white-space: normal;
+
+            position: absolute;       /* We will position it with JS */
+            pointer-events: none; /* It must not block mouse events */
+            z-index: 10000;
+            transition: none;       /* No fade, it needs to be instant */
+        }
+
+        #global-map-tooltip.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800">
@@ -1077,7 +1098,7 @@
                         </div>
                         <div id="base-layer-panel" class="hidden absolute bottom-full mb-2 bg-[#1b1b1b] border border-slate-700 p-4 rounded-lg shadow-lg w-72">
                             <h2 class="font-semibold mb-2 text-white text-lg">Base layer</h2>
-                            <div id="base-layer-options" class="space-y-1 text-sm max-h-64 overflow-y-auto pr-2">
+                            <div id="base-layer-options" class="space-y-1 text-sm max-h-64 overflow-y-auto px-2">
                                 </div>
                         </div>
                     </div>
@@ -1091,7 +1112,7 @@
                             <span id="overlay-count" class="hidden bg-[#005ea2] text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full ml-auto">0</span>
                         </button>
                         <div id="overlay-panel" class="hidden absolute bottom-full mb-2 bg-[#1b1b1b] text-white p-4 rounded-lg shadow-lg w-72">
-                            <div id="overlay-options" class="space-y-4 text-sm max-h-64 overflow-y-auto pr-2">
+                            <div id="overlay-options" class="space-y-4 text-sm max-h-64 overflow-y-auto px-2">
                                 <div class="mt-4">
                                 <h2 class="font-semibold mb-2 text-white text-lg">Overlays</h2>
                                 <h3 id="poi-header" class="font-semibold mb-2 text-slate-200">POINTS OF INTEREST</h3>
@@ -1263,6 +1284,7 @@ let choroplethBreaks;
 let isPanning = false;
 let floatingTooltip = null;
 let tooltipTrigger = null;
+let globalTooltipElement = null;
 
 const QUOTE_CATEGORY_MAP = {
     'first-person perspective': 'Individual Voice',
@@ -1834,7 +1856,6 @@ function updateMap() {
 function highlightFeature(e) {
     const layer = e.target;
     layer.setStyle({ weight: 4, color: '#FFFFFF', dashArray: '' });
-    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) layer.bringToFront();
 }
 
 function resetHighlight(e) { 
@@ -1848,32 +1869,31 @@ function resetHighlight(e) {
 }
 
 function onEachFeature(feature, layer) {
-    // We remove the static tooltipContent and bind/unbind calls from here.
-    // The tooltip will now be generated and bound dynamically on mouseover.
-
     layer.on({
         mouseover: function (e) {
             if (isPanning) {
                 return;
             }
-            
+
             const feature = e.target.feature;
             const currentVariable = choroplethSelect.value;
             const option = CHOROPLETH_OPTIONS[currentVariable];
             let dataRow = '';
 
-            // Check if a valid base layer is selected
             if (option && currentVariable !== 'none') {
                 const rawValue = feature.properties[currentVariable];
-                // Use the formatter from the CHOROPLETH_OPTIONS
                 const formattedValue = (rawValue === null || rawValue === undefined) ? 'N/A' : option.format(rawValue);
+                let extraInfo = '';
+                if (currentVariable === 'pop_change2530') {
+                    const pctValue = feature.properties.pop_change2530_pct_change;
+                    const formattedPct = (pctValue === null || pctValue === undefined) ? 'N/A' : formatPercent(pctValue);
+                    extraInfo = `&nbsp;(${formattedPct})`;
+                }
                 dataRow = `
                     <hr class="my-1 border-t border-slate-300">
-                    <div class="text-sm text-slate-800">${option.label}: <strong>${formattedValue}</strong></div>
+                    <div class="text-sm text-slate-800">${option.label}: <strong>${formattedValue}${extraInfo}</strong></div>
                 `;
             }
-            
-            // Generate the dynamic tooltip content
             const dynamicTooltipContent = `
                 <div class="font-sans">
                     <div class="text-xs uppercase font-semibold text-slate-500 tracking-wider">Click to Research</div>
@@ -1882,19 +1902,57 @@ function onEachFeature(feature, layer) {
                     ${dataRow}
                 </div>
             `;
+            
+            globalTooltipElement.innerHTML = dynamicTooltipContent;
+            L.DomUtil.removeClass(globalTooltipElement, 'hidden');
 
-            this.bindTooltip(dynamicTooltipContent, {
-                sticky: true,
-                className: 'custom-map-tooltip',
-                pane: 'topTooltipPane'
-            }).openTooltip();
             highlightFeature(e);
         },
-        mouseout: function (e) {
-            resetHighlight(e);
-            this.closeTooltip();
-            this.unbindTooltip();
+        mousemove: function(e) {
+            const mapSize = map.getSize();
+            
+            // Hardcoded values to prevent reflows
+            const tooltipWidth = 280;  // From your CSS
+            const tooltipHeight = 120; // Our refined hardcoded guess
+            const gap = 15;            // Our cursor buffer
+            
+            const pos = map.mouseEventToContainerPoint(e.originalEvent);
+            let x, y;
+            
+            // --- X POSITION (Horizontal) ---
+            // Default: Right side of cursor
+            let x_right = pos.x + gap;
+            // Check for right-side overflow
+            if (x_right + tooltipWidth > mapSize.x) {
+                // It overflows. Flip to the Left side.
+                x = pos.x - tooltipWidth - gap;
+            } else {
+                // No overflow. Use default Right side.
+                x = x_right;
+            }
+
+            // --- Y POSITION (Vertical) - REVERSED ---
+            // Default: Bottom side of cursor
+            let y_bottom = pos.y + gap;
+            // Check for bottom-side overflow
+            if (y_bottom + tooltipHeight + 40 > mapSize.y) {
+                // It overflows. Flip to the Top side.
+                y = pos.y - tooltipHeight - gap;
+            } else {
+                // No overflow. Use default Bottom side.
+                y = y_bottom;
+            }
+
+            // Set the final position
+            L.DomUtil.setPosition(globalTooltipElement, new L.Point(x, y));
         },
+
+        mouseout: function (e) {
+            // Just hide the single global tooltip.
+            L.DomUtil.addClass(globalTooltipElement, 'hidden');
+            resetHighlight(e);
+        },
+
         click: (e) => {
             const geocoderInput = document.querySelector('#geocoder-container .leaflet-control-geocoder-form input');
             if (geocoderInput) {
@@ -2046,6 +2104,8 @@ function displayFeatureInfo(tractFeature) {
     panelTitle.textContent = `${truncateCommunityList(properties.tract_name)}, ${properties.county_name}`;
 
     const popChange = safeParseFloat(properties.pop_change2530);
+    const popChangePct = properties.pop_change2530_pct_change;
+    const formattedPopChangePct = (popChangePct === null || popChangePct === undefined) ? 'N/A' : formatPercent(popChangePct);
     const momentumTooltip = "The Community Momentum Index measures economic vitality by averaging growth rates in business formations, licenses, jobs, and payroll. Positive scores reflect community economic growth.";
     const childcareOppTooltip = "Child care opportunity score is the number of children 5 and under in households where all parents are in the laborforce, minus the licensed capacity of local child care providers. Positive scores reflect unmet community demand.";
     const unmetDemandTooltip = "Measures the gap between a community's economic potential to support a store (Market Demand) and its current store access (Supply). High positive scores signal a strong market opportunity where potential outstrips supply.";
@@ -2063,7 +2123,7 @@ function displayFeatureInfo(tractFeature) {
             <table class="explore-table">
                 <tr><th>Population (2025)</th><td>${formatNumber(properties.pop2025)}</td></tr>
                 <tr><th>Projected Pop. (2030)</th><td>${formatNumber(properties.pop2030)}</td></tr>
-                <tr><th>Projected Change (25-30)</th><td><span class="${popChange > 0 ? 'text-green-700' : 'text-red-600'}">${formatNumber(popChange)}</span></td></tr>
+                <tr><th>Projected Change (25-30)</th><td><span class="${popChange > 0 ? 'text-green-700' : 'text-red-600'}">${formatNumber(popChange)} (${formattedPopChangePct})</span></td></tr>
                 <tr><th>% Population Under 5</th><td>${formatPercent(properties.pct_under5)}</td></tr>
                 <tr><th>Avg. Household Income</th><td>${formatCurrency(properties.avg_household_income)}</td></tr>
                 <tr><th>% Transportation Barriers</th><td>${formatPercent(properties.transportation_barrier_pct)}</td></tr>
@@ -2480,6 +2540,8 @@ function displaySmartResearchForTract(tractFeature) {
     }
     
     const popChange = safeParseFloat(p.pop_change2530, 0);
+    const popChangePct = p.pop_change2530_pct_change;
+    const formattedPopChangePct = (popChangePct === null || popChangePct === undefined) ? 'N/A' : formatPercent(popChangePct);
     let growthLabel, growthColor;
     if (popChange < -50) {
         growthLabel = 'POPULATION DECLINE';
@@ -2496,8 +2558,7 @@ function displaySmartResearchForTract(tractFeature) {
         teaser: growthLabel,
         teaserColor: growthColor,
         iconSVG: ICONS.growth,
-        answerHTML: `<p>The population is projected to change by about <strong>${(popChange > 0 ? '+' : '') + formatNumber(popChange)} people</strong> between 2025 and 2030.</p>`,
-        mapAction: 'showLayer:pop_change2530', 
+        answerHTML: `<p>The population is projected to change by about <strong>${(popChange > 0 ? '+' : '') + formatNumber(popChange)} people</strong> (<strong>${formattedPopChangePct}</strong>) between 2025 and 2030.</p>`,        mapAction: 'showLayer:pop_change2530', 
         context
     }));
 
@@ -2700,6 +2761,8 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
     }
 
     const popChange = safeParseFloat(tractProps.pop_change2530, 0);
+    const popChangePct = tractProps.pop_change2530_pct_change;
+    const formattedPopChangePct = (popChangePct === null || popChangePct === undefined) ? 'N/A' : formatPercent(popChangePct);
     let growthLabel, growthColor;
     if (popChange < -50) {
         growthLabel = 'POPULATION DECLINE';
@@ -2716,7 +2779,7 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
         teaser: growthLabel,
         teaserColor: growthColor,
         iconSVG: ICONS.growth,
-        answerHTML: `<p>The population is projected to change by about <strong>${(popChange > 0 ? '+' : '') + formatNumber(popChange)} people</strong> between 2025 and 2030.</p>`,
+        answerHTML: `<p>The population is projected to change by about <strong>${(popChange > 0 ? '+' : '') + formatNumber(popChange)} people</strong> (<strong>${formattedPopChangePct}</strong>) between 2025 and 2030.</p>`,
         mapAction: 'showLayer:pop_change2530',
         context
     }));
@@ -2960,6 +3023,8 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
     if (tractProps) {
         const properties = tractProps;
         const popChange = safeParseFloat(properties.pop_change2530);
+        const popChangePct = properties.pop_change2530_pct_change;
+        const formattedPopChangePct = (popChangePct === null || popChangePct === undefined) ? 'N/A' : formatPercent(popChangePct);
 
         html += `
             <div>
@@ -2968,7 +3033,7 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
                 <table class="explore-table">
                     <tr><th>Population (2025)</th><td>${formatNumber(properties.pop2025)}</td></tr>
                     <tr><th>Projected Pop. (2030)</th><td>${formatNumber(properties.pop2030)}</td></tr>
-                    <tr><th>Projected Change (25-30)</th><td><span class="${popChange > 0 ? 'text-green-700' : 'text-red-600'}">${formatNumber(popChange)}</span></td></tr>
+                    <tr><th>Projected Change (25-30)</th><td><span class="${popChange > 0 ? 'text-green-700' : 'text-red-600'}">${formatNumber(popChange)} (${formattedPopChangePct})</span></td></tr>
                     <tr><th>% Population Under 5</th><td>${formatPercent(properties.pct_under5)}</td></tr>
                     <tr><th>Avg. Household Income</th><td>${formatCurrency(properties.avg_household_income)}</td></tr>
                     <tr><th>% Transportation Barriers</th><td>${formatPercent(properties.transportation_barrier_pct)}</td></tr>
@@ -3134,6 +3199,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     map.createPane('clusterTopPane').style.zIndex = 650;
     map.createPane('markerPane').style.zIndex = 700;
     map.createPane('topTooltipPane').style.zIndex = 750;
+
+    // Create the single, global tooltip element and add it to the pane
+    globalTooltipElement = L.DomUtil.create('div', 'hidden', map.getContainer()); 
+    globalTooltipElement.id = 'global-map-tooltip';
 
     L.tileLayer('https://api.mapbox.com/styles/v1/amiller-mdgov/cmhkza9ds006c01s6hdze2vfn/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
