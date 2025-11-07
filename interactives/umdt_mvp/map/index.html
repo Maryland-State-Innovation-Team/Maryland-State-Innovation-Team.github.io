@@ -3087,7 +3087,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupTopControls();
     setupTour();
 
-    if (isFirstTimeUser) {
+    if (isFirstTimeUser && storedSector) {
         showTour();
     }
 
@@ -3294,6 +3294,10 @@ function handleSectorSelection(sector) {
     updateBaseLayerFilter(sector);
     updateOverlayFilter(sector);
     setDefaultBaseLayer(sector);
+
+    if (isFirstTimeUser) {
+        showTour();
+    }
 }
 
 function setupTopControls() {
