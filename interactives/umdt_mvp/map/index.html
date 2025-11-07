@@ -2157,8 +2157,18 @@ function executeMapAction(action, context) {
     });
     
     if (command === 'showLayer') {
-        document.getElementById('choropleth-select').value = value;
-        updateMap();
+        // 1. Find the new radio button control for this layer
+        const radioToSelect = document.querySelector(`#base-layer-options input[name="base-layer"][value="${value}"]`);
+
+        if (radioToSelect) {
+            // 2. Check it
+            radioToSelect.checked = true;
+
+            // 3. Programmatically dispatch the 'change' event
+            // This will trigger the listener in setupLayerControls
+            // which updates the map, legend, and button text.
+            radioToSelect.dispatchEvent(new Event('change', { bubbles: true }));
+        }
     } else if (command === 'togglePoints') {
         const layerToShow = value; // The layer we want to turn ON (e.g., 'childcare')
 
