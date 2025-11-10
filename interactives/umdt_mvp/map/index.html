@@ -1594,6 +1594,15 @@ function updateProviderPage(layerName, page) {
     if (navContainer) {
         navContainer.innerHTML = renderPagination(totalPages, page, `provider-list-container-${layerName}`, layerName);
     }
+
+    const contentWrapper = listContainer.closest('.usa-accordion__content');
+    if (contentWrapper) {
+        // Use setTimeout to wait for the DOM to re-render
+        // before calculating the new scrollHeight
+        setTimeout(() => {
+            contentWrapper.style.maxHeight = contentWrapper.scrollHeight + 'px';
+        }, 0);
+    }
 }
 
 /**
