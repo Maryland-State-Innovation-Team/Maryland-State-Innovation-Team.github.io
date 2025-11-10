@@ -419,13 +419,21 @@
 
         /* Content area styling */
         #side-panel-content .usa-accordion__content {
-            padding: 1rem 1.5rem;
+            padding: 0rem 1.5rem;
             background-color: #F0F0F0; /* Expanded content background */
             /* Add borders to match the expanded button */
             border-left: 1px solid #DFE1E2;
             border-right: 1px solid #DFE1E2;
             border-bottom: 1px solid #DFE1E2;
             border-radius: 0;
+
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        #side-panel-content .usa-accordion__content-inner {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
         }
         /* --- End Accordion Styles --- */
         /* --- Custom Pagination Button Styles --- */
@@ -466,10 +474,6 @@
             height: 1.5rem;
         }
         /* --- End Pagination Styles --- */
-        
-        #side-panel-content .usa-accordion__content > div {
-            padding: 0;
-        }
 
         /* --- New styles for Free Explore Tables --- */
         #side-panel-content .explore-table {
@@ -2557,7 +2561,7 @@ function displayFeatureInfo(tractFeature) {
     showPanelHandleForFirstTime();
 }
 
-function executeMapAction(action, context) {
+async function executeMapAction(action, context) {
     if (!action) return;
     const [command, value] = action.split(':');
     
@@ -2609,7 +2613,7 @@ function executeMapAction(action, context) {
         });
     } else if (command === 'showNearest') {
         const [layerName] = value.split(',');
-        showNearestPoints(context.location, layerName, context.container);
+        await showNearestPoints(context.location, layerName, context.container);
     }
 }
 
@@ -2635,17 +2639,18 @@ function createAccordionItem(config) {
                 </div>
             </button>
         </h3>
-        <div id="${uniqueId}" class="usa-accordion__content usa-prose" hidden>
-            <!-- New Layer Announcement Container -->
-            <div id="layer-announcement-${uniqueId}" class="hidden items-center gap-2 mb-4"></div>
-            ${answerHTML}
+        <div id="${uniqueId}" class="usa-accordion__content usa-prose">
+            <div class="usa-accordion__content-inner">
+                <div id="layer-announcement-${uniqueId}" class="hidden items-center gap-2 mb-4"></div>
+                ${answerHTML}
+            </div>
         </div>
     `;
 
     const button = item.querySelector('.usa-accordion__button');
     const content = item.querySelector('.usa-accordion__content');
 
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
         const announcementDiv = content.querySelector(`#layer-announcement-${uniqueId}`);
 
@@ -2655,8 +2660,7 @@ function createAccordionItem(config) {
                 btn.setAttribute('aria-expanded', 'false');
                 const otherContent = document.getElementById(btn.getAttribute('aria-controls'));
                 if (otherContent) {
-                     otherContent.hidden = true;
-                     // Also hide the announcement div in the accordion being closed
+                     otherContent.style.maxHeight = null; 
                      const otherAnnouncement = otherContent.querySelector(`[id^="layer-announcement-"]`);
                      if (otherAnnouncement) otherAnnouncement.classList.add('hidden');
                 }
@@ -2667,15 +2671,14 @@ function createAccordionItem(config) {
         if (isExpanded) {
             // --- Closing ---
             button.setAttribute('aria-expanded', 'false');
-            content.hidden = true;
-            if (announcementDiv) announcementDiv.classList.add('hidden'); // Hide announcement
+            content.style.maxHeight = null; 
+            if (announcementDiv) announcementDiv.classList.add('hidden');
         } else {
             // --- Opening ---
-            clearProviderLayers(); // Clear old point layers
+            clearProviderLayers(); 
             button.setAttribute('aria-expanded', 'true');
-            content.hidden = false;
             
-            // --- New Layer Announcement Logic ---
+            // --- Layer Announcement Logic (this part is unchanged) ---
             if (announcementDiv && mapAction) {
                 let layerName = null;
                 let iconSVG = null;
@@ -2686,13 +2689,10 @@ function createAccordionItem(config) {
                     const radio = document.querySelector(`#base-layer-options input[value="${layerName}"]`);
                     if (radio) {
                         labelText = radio.nextElementSibling.textContent.trim();
-                        // Get Base Layer Button Icon
                         iconSVG = document.querySelector('#base-layer-toggle-btn svg').outerHTML;
                     }
                 } else if (mapAction.startsWith('showNearest:')) {
-                     // For 'showNearest', we get the icon from the overlay button
                      iconSVG = document.querySelector('#overlay-btn svg').outerHTML;
-                     // We can also find out which layer it is
                      layerName = mapAction.split(':')[1];
                      const checkbox = document.querySelector(`input[data-name="${layerName}"]`);
                      if(checkbox) {
@@ -2703,26 +2703,29 @@ function createAccordionItem(config) {
                     const checkbox = document.querySelector(`input[data-name="${layerName}"]`);
                     if(checkbox) {
                         labelText = checkbox.nextElementSibling.textContent.trim();
-                        // Get Overlay Button Icon
                         iconSVG = document.querySelector('#overlay-btn svg').outerHTML;
                     }
                 }
                 
-                // If we found a layer to announce, build and show the announcement
                 if (labelText && iconSVG) {
                     announcementDiv.innerHTML = `
                         <div class="flex-shrink-0 w-6 h-6">${iconSVG}</div>
                         <span class="font-bold text-base" style="color: #565C65;">Currently viewing: ${labelText}</span>
                     `;
                     announcementDiv.classList.remove('hidden');
-                    announcementDiv.classList.add('flex'); // Make it a flex container
+                    announcementDiv.classList.add('flex'); 
                 } else {
-                    announcementDiv.classList.add('hidden'); // No announcement needed
+                    announcementDiv.classList.add('hidden');
                 }
             }
             
-            // Execute the original map action
-            executeMapAction(mapAction, { ...context, container: content });
+            // This forces the code to wait until the provider list is loaded
+            await executeMapAction(mapAction, { ...context, container: content });
+            
+            // --- SET max-height (this now runs *after* content is loaded) ---
+            setTimeout(() => {
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }, 0);
         }
     });
 
