@@ -343,8 +343,18 @@
         }
 
         /* --- MDWDS Accordion Styles (Scoped to Side Panel) --- */
+        #side-panel-content .usa-prose>ul, #side-panel-content .usa-prose>ol {
+            margin-top: 0px;
+            padding-left: 0px;
+        }
+        #side-panel-content .usa-prose ul {
+            padding-left: 0px;
+        #side-panel-content .usa-prose ul li {
+            padding-left: 0px;
+        }}
         #side-panel-content .usa-accordion-item {
-            border-bottom: 1px solid #dfe1e2; /* base-lighter */
+            /* The border is now on the button and content, not the item */
+            border-bottom: none;
         }
         #side-panel-content .usa-accordion-item:last-child {
             border-bottom: none;
@@ -355,24 +365,111 @@
         #side-panel-content .usa-accordion__button {
             display: block;
             width: 100%;
-            padding: 1rem 3.5rem 1rem 1rem;
-            background-color: #ffffff; /* Use white background */
-            border: none;
+            padding: 1rem 3.5rem 1rem 1rem; /* Keep padding for expand/collapse icon */
+            background-color: #ffffff; /* Default white background */
             text-align: left;
             font-size: 1rem;
             color: #1b1b1b; /* base-darkest for text */
             cursor: pointer;
             position: relative;
             transition: background-color 0.2s ease-in-out;
+            
+            /* New border styles */
+            border: 1px solid #DFE1E2;
+            border-radius: 0; /* Ensure no rounding */
+        }
+        
+        
+        /* When expanded */
+        #side-panel-content .usa-accordion__button[aria-expanded="true"] {
+             background-color: #F0F0F0; /* Expanded background */
         }
 
         #side-panel-content .usa-accordion__button:hover {
-            background-color: #f0f0f0; /* base-lightest */
+            background-color: #F0F0F0; /* base-lightest */
         }
+        
+        /* Icon circle styling */
+        #side-panel-content .usa-accordion__button .accordion-icon-circle {
+            flex-shrink: 0;
+            width: 2.25rem; /* 36px */
+            height: 2.25rem; /* 36px */
+            border-radius: 9999px; /* full circle */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #F0F0F0; /* Default light grey circle */
+            transition: background-color 0.2s ease-in-out;
+        }
+        /* Icon styling */
+        #side-panel-content .usa-accordion__button .accordion-icon-circle svg {
+            width: 1.5rem; /* 24px */
+            height: 1.5rem; /* 24px */
+            fill: #a9aeb1; /* Default dark grey icon */
+            transition: fill 0.2s ease-in-out;
+        }
+        
+        /* Expanded icon styling */
+        #side-panel-content .usa-accordion__button[aria-expanded="true"] .accordion-icon-circle {
+            background-color: #005EA2; /* Blue circle */
+        }
+        #side-panel-content .usa-accordion__button[aria-expanded="true"] .accordion-icon-circle svg {
+            fill: #FFFFFF; /* White icon */
+        }
+
+        /* Content area styling */
         #side-panel-content .usa-accordion__content {
             padding: 1rem 1.5rem;
-            background-color: #ffffff;
+            background-color: #F0F0F0; /* Expanded content background */
+            /* Add borders to match the expanded button */
+            border-left: 1px solid #DFE1E2;
+            border-right: 1px solid #DFE1E2;
+            border-bottom: 1px solid #DFE1E2;
+            border-radius: 0;
         }
+        /* --- End Accordion Styles --- */
+        /* --- Custom Pagination Button Styles --- */
+        .usa-button {
+            background-color: #1B1B1B;
+            color: #FFFFFF;
+            border-radius: 0.25rem;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            padding: 0.5rem 1rem;
+        }
+        .usa-button:disabled {
+            pointer-events: none;
+        }
+        .usa-button.w-10 { width: 2.5rem; /* 40px */ }
+        .usa-button.h-10 { height: 2.5rem; /* 40px */ }
+        .usa-button.p-0 { padding: 0; }
+        
+        .usa-button--outline {
+            background-color: #F0F0F0; /* Match accordion content bg */
+            border: 1px solid #DFE1E2;
+            color: #1b1b1b;
+        }
+        .usa-button--outline:not(:disabled):hover {
+            background-color: #dfe1e2;
+            border-color: #a9aeb1;
+        }
+        .usa-button.underline {
+            text-decoration: underline;
+        }
+        .usa-button--icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .usa-button--icon .usa-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+        /* --- End Pagination Styles --- */
+        
         #side-panel-content .usa-accordion__content > div {
             padding: 0;
         }
@@ -1267,7 +1364,7 @@ let currentMapMode = 'smartResearch';
 let selectedSector = 'other';
 let choroplethSelect, sidePanel, panelContent, panelTitle, overlayOptionsContainer, overlayCount;
 let currentPanelContext = { type: null, data: null };
-let isFirstTimeUser = false;
+let isFirstTimeUser = true;
 let hasMadeFirstSelection = false;
 let choroplethBreaks;
 let isPanning = false;
@@ -1352,7 +1449,9 @@ const ICONS = {
     providers: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-80q-106 0-173-33.5T240-200q0-24 14.5-44.5T295-280l63 59q-9 4-19.5 9T322-200q13 16 60 28t98 12q51 0 98.5-12t60.5-28q-7-8-18-13t-21-9l62-60q28 16 43 36.5t15 45.5q0 53-67 86.5T480-80Zm1-220q99-73 149-146.5T680-594q0-102-65-154t-135-52q-70 0-135 52t-65 154q0 67 49 139.5T481-300Zm-1 100Q339-304 269.5-402T200-594q0-71 25.5-124.5T291-808q40-36 90-54t99-18q49 0 99 18t90 54q40 36 65.5 89.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg>`,
     communityVoice: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg>`,
     growth: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-162v82h560v-350L522-280 360-442 200-282Zm0-114 160-160 158 158 242-272v-90H200v364Zm0-154v-120 272-158 274-160 162-270Zm0 154v-364 362-158 160Zm0 114v-160 162-270 350-82Z"/></svg>`,
-    incentives: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></svg>`
+    incentives: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></svg>`,
+    childcareProvider: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="currentColor" viewBox="0 -960 960 960"><path d="M580-490q-21 0-35.5-14.5T530-540q0-21 14.5-35.5T580-590q21 0 35.5 14.5T630-540q0 21-14.5 35.5T580-490Zm-200 0q-21 0-35.5-14.5T330-540q0-21 14.5-35.5T380-590q21 0 35.5 14.5T430-540q0 21-14.5 35.5T380-490Zm100 210q-60 0-108.5-33T300-400h360q-23 54-71.5 87T480-280Zm0 160q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-480q0-75 28.5-140.5t77-114q48.5-48.5 114-77T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm0-80q116 0 198-82t82-198q0-116-82-198t-198-82h-12q-6 0-12 2-6 6-8 13t-2 15q0 21 14.5 35.5T496-680q9 0 16.5-3t15.5-3q12 0 20 9t8 21q0 23-21.5 29.5T496-620q-45 0-77.5-32.5T386-730v-6q0-3 1-8-83 30-135 101t-52 163q0 116 82 198t198 82Zm0-280Z"/></svg>`,
+    freshFoodProvider: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-700" fill="currentColor" viewBox="0 -960 960 960"><path d="M640-80q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170T640-80Zm0-80q66 0 113-47t47-113q0-66-47-113t-113-47q-66 0-113 47t-47 113q0 66 47 113t113 47Zm-480 0q-33 0-56.5-23.5T80-240v-304q0-8 1.5-16t4.5-16l80-184h-6q-17 0-28.5-11.5T120-800v-40q0-17 11.5-28.5T160-880h280q17 0 28.5 11.5T480-840v40q0 17-11.5 28.5T440-760h-6l66 152q-19 10-36 21t-32 25l-84-198h-96l-92 216v304h170q5 21 13.5 41.5T364-160H160Zm480-440q-42 0-71-29t-29-71q0-42 29-71t71-29v200q0-42 29-71t71-29q42 0 71 29t29 71H640Z"/></svg>`
 };
 
 // --- CORE HELPER FUNCTIONS (GLOBAL) ---
@@ -1370,6 +1469,130 @@ function safeMatch(string, regex, index = 1, fallback = 'N/A') {
     const match = string.match(regex);
     // Return the matched group if it exists, otherwise return the fallback
     return (match && match[index]) ? match[index] : fallback;
+}
+
+// --- PAGINATION HELPER ---
+function renderPagination(totalPages, currentPage, containerId, layerName) {
+    if (totalPages <= 1) return ''; // No pagination needed
+
+    const maxButtons = 5;
+    let pages = [];
+    
+    // Previous button
+    pages.push(`
+        <button 
+            class="usa-button usa-button--outline usa-button--icon w-10 h-10 p-0 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}" 
+            aria-label="Previous page"
+            ${currentPage === 1 ? 'disabled' : ''}
+            onclick="updateProviderPage('${layerName}', ${currentPage - 1})">
+            <svg class="usa-icon" aria-hidden="true" role="img" fill="currentColor" viewBox="0 0 24 24"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg>
+        </button>
+    `);
+
+    let startPage = 1;
+    let endPage = totalPages;
+
+    if (totalPages > maxButtons) {
+        let half = Math.floor(maxButtons / 2);
+        if (currentPage <= half) {
+            startPage = 1;
+            endPage = maxButtons - 1; // 1, 2, 3, 4, 5, ..., {last}
+        } else if (currentPage + half >= totalPages) {
+            startPage = totalPages - (maxButtons - 2); // {1}, ..., {n-4}, {n-3}, {n-2}, {n-1}, {n}
+            endPage = totalPages;
+        } else {
+            startPage = currentPage - (half - 1); // {1}, ..., {c-1}, {c}, {c+1}, ..., {last}
+            endPage = currentPage + (half - 1);
+        }
+    }
+
+    // Add first page if not in range
+    if (startPage > 1) {
+        pages.push(`
+            <button class="usa-button usa-button--outline w-10 h-10 p-2" onclick="updateProviderPage('${layerName}', 1)">
+                1
+            </button>
+        `);
+        if (startPage > 2) {
+             pages.push(`<span class="flex items-center justify-center w-10 h-10 text-slate-700">...</span>`);
+        }
+    }
+
+    // Add numbered pages
+    for (let i = startPage; i <= endPage; i++) {
+        if (i === currentPage) {
+            pages.push(`
+                <button class="usa-button w-10 h-10 p-2 underline" aria-current="page" onclick="updateProviderPage('${layerName}', ${i})">
+                    ${i}
+                </button>
+            `);
+        } else {
+            pages.push(`
+                <button class="usa-button usa-button--outline w-10 h-10 p-2" onclick="updateProviderPage('${layerName}', ${i})">
+                    ${i}
+                </button>
+            `);
+        }
+    }
+
+    // Add last page if not in range
+    if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+            pages.push(`<span class="flex items-center justify-center w-10 h-10 text-slate-700">...</span>`);
+        }
+        pages.push(`
+            <button class="usa-button usa-button--outline w-10 h-10 p-2" onclick="updateProviderPage('${layerName}', ${totalPages})">
+                ${totalPages}
+            </button>
+        `);
+    }
+
+    // Next button
+    pages.push(`
+        <button 
+            class="usa-button usa-button--outline usa-button--icon w-10 h-10 p-0 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}" 
+            aria-label="Next page"
+            ${currentPage === totalPages ? 'disabled' : ''}
+            onclick="updateProviderPage('${layerName}', ${currentPage + 1})">
+            <svg class="usa-icon" aria-hidden="true" role="img" fill="currentColor" viewBox="0 0 24 24"><path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>
+        </button>
+    `);
+
+
+    return `<nav aria-label="Pagination" class="flex justify-center items-center gap-1 mt-4">${pages.join('')}</nav>`;
+}
+
+// --- PAGINATION CLICK HANDLER ---
+function updateProviderPage(layerName, page) {
+    const listContainer = document.getElementById(`provider-list-container-${layerName}`);
+    if (!listContainer) return;
+    
+    // Get all items and hide them
+    const allItems = listContainer.querySelectorAll('li[data-provider-item="true"]');
+    allItems.forEach(item => item.classList.add('hidden'));
+
+    // Calculate new range
+    const itemsPerPage = 10;
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = page * itemsPerPage;
+    const totalItems = allItems.length;
+
+    // Show items for the new page
+    const itemsToShow = Array.from(allItems).slice(startIndex, endIndex);
+    itemsToShow.forEach(item => item.classList.remove('hidden'));
+
+    // Update pagination text
+    const paginationText = listContainer.querySelector('.pagination-text');
+    if (paginationText) {
+        paginationText.textContent = `Showing ${startIndex + 1}-${Math.min(endIndex, totalItems)} of ${totalItems} providers`;
+    }
+
+    // Re-render pagination controls
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const navContainer = listContainer.querySelector('.pagination-nav-container');
+    if (navContainer) {
+        navContainer.innerHTML = renderPagination(totalPages, page, `provider-list-container-${layerName}`, layerName);
+    }
 }
 
 /**
@@ -1596,31 +1819,6 @@ function formatYmd(ymd) {
     const month = ymd.substring(4, 6);
     const day = ymd.substring(6, 8);
     return `${month}/${day}/${year}`;
-}
-
-function createQuotesSection(quotesArray, topic, title) {
-    if (!quotesArray || quotesArray.length === 0) return '';
-
-    const relevantQuotes = quotesArray.filter(q => q.topic && q.topic.includes(topic));
-
-    if (relevantQuotes.length === 0) return '';
-
-    return `
-        <details class="bg-slate-50 p-3 rounded-lg mt-2">
-            <summary class="font-semibold text-slate-600 mb-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">${title}</summary>
-            <ul class="space-y-6 text-sm mt-4">
-                ${relevantQuotes.map(quote => {
-                    const categoryText = QUOTE_CATEGORY_MAP[quote.category] || 'Community Voice';
-                    return `
-                        <li class="space-y-2">
-                            <span class="quote-category-tag">${categoryText}</span>
-                            <blockquote class="pl-4 border-l-4 border-slate-300 text-slate-600 leading-relaxed">
-                                ${quote.briefing_quote}
-                            </blockquote>
-                        </li>`;
-                }).join('')}
-            </ul>
-        </details>`;
 }
 
 function truncateCommunityList(listString, maxVisible = 2) {
@@ -2150,28 +2348,78 @@ function createIncentiveListHTML(incentives, type, industry, county) {
         return `<p class="text-sm text-slate-600 mt-2">No specific ${type.toLowerCase()} incentives found for this area.</p>`;
     }
 
-    return `
-        <p class="font-semibold text-slate-700 mb-2">Relevant ${type} Incentives (${incentives.length})</p>
-        <div class="space-y-3 mt-2">
-            ${incentives.map(inc => {
-                const params = new URLSearchParams();
-                params.set('industries', industry);
-                params.set('counties', county);
-                params.set('orgTypes', 'for-profit');
-                const queryString = params.toString();
+    // --- New Grouping Logic ---
+    const groupedIncentives = {
+        GRANTS: [],
+        LOANS: [],
+        TAX_CREDITS: []
+    };
 
-                return `
-                    <div class="text-sm border-t pt-2">
-                        <p class="font-bold text-slate-800">
-                            <a href="../incentives/?${queryString}#/incentive/${slugify(inc.program_name)}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">${inc.program_name}</a> 
-                            <span class="text-xs font-medium bg-slate-200 text-slate-700 py-0.5 px-1.5 rounded-full ml-1">${inc.source}</span>
-                        </p>
-                        <p class="text-slate-600 mt-1">${inc.program_description}</p>
-                        ${inc.assistance_type ? `<p class="mt-1"><strong class="font-medium text-slate-700">Assistance Type:</strong> ${inc.assistance_type.join(', ')}</p>` : ''}
+    incentives.forEach(inc => {
+        const types = inc.assistance_type || [];
+        // Use .some() to check for partial matches like "loan guarantee"
+        const hasGrant = types.some(t => t.toLowerCase().includes('grant'));
+        const hasLoan = types.some(t => t.toLowerCase().includes('loan'));
+        const hasTaxCredit = types.some(t => t.toLowerCase().includes('tax-credit'));
+
+        // Prioritize: Grant > Loan > Tax Credit
+        if (hasGrant) {
+            groupedIncentives.GRANTS.push(inc);
+        } else if (hasLoan) {
+            groupedIncentives.LOANS.push(inc);
+        } else if (hasTaxCredit) {
+            groupedIncentives.TAX_CREDITS.push(inc);
+        }
+    });
+
+    // --- HTML Generation Logic ---
+    let html = '';
+    const groupOrder = ['GRANTS', 'LOANS', 'TAX_CREDITS'];
+    
+    // Helper function to create the HTML for a single incentive
+    const createIncentiveHTML = (inc) => {
+        const params = new URLSearchParams();
+        params.set('industries', industry);
+        params.set('counties', county);
+        params.set('orgTypes', 'for-profit');
+        const queryString = params.toString();
+
+        // Note: py-3 and border-b create the padded separator effect
+        return `
+            <div class="text-sm py-3 border-b border-[#DFE1E2] last:border-b-0">
+                <p class="font-bold text-slate-800">
+                    <a href="../incentives/?${queryString}#/incentive/${slugify(inc.program_name)}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                        ${inc.program_name}
+                    </a> 
+                </p>
+                <p class="text-slate-600 mt-1">${inc.program_description}</p>
+            </div>
+        `;
+    };
+
+    // Loop through the groups in order and build the HTML
+    groupOrder.forEach(groupName => {
+        const groupItems = groupedIncentives[groupName];
+        if (groupItems.length > 0) {
+            html += `
+                <div class="mt-4">
+                    <h4 class="text-sm font-bold tracking-wider uppercase" style="color: #000000;">
+                        ${groupName.replace('_', '-')}
+                    </h4>
+                    <hr class="border-t-2 mt-1 mb-0" style="border-color: #1B1B1B;" />
+                    <div class="space-y-0">
+                        ${groupItems.map(createIncentiveHTML).join('')}
                     </div>
-                `;
-            }).join('')}
-        </div>`;
+                </div>
+            `;
+        }
+    });
+
+    if (html === '') {
+        return `<p class="text-sm text-slate-600 mt-2">No specific grants, loans, or tax credits found for this area.</p>`;
+    }
+    
+    return html;
 }
 
 function displayFeatureInfo(tractFeature) {
@@ -2244,22 +2492,51 @@ function displayFeatureInfo(tractFeature) {
     }
 
     if (properties.plan_quotes && properties.plan_quotes.length > 0) {
-        contentHTML += `
+        let topicalQuotes = [];
+        switch(selectedSector) {
+            case 'childcare':
+                topicalQuotes = properties.plan_quotes?.filter(q => q.topic.includes('Child Care')) || [];
+                break;
+            case 'fresh-food':
+                topicalQuotes = properties.plan_quotes?.filter(q => q.topic.includes('Fresh Food')) || [];
+                break;
+        };
+
+        
+        if (topicalQuotes && topicalQuotes.length > 0) {
+            contentHTML += `
             <div class="mt-4">
                 <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Voice</h3>
                 <div class="space-y-4">
-                    ${properties.plan_quotes.map(quote => {
-                        const categoryText = QUOTE_CATEGORY_MAP[quote.category] || 'Community Voice';
-                        return `
-                            <div class="text-sm">
-                                <span class="quote-category-tag">${categoryText}</span>
-                                <blockquote class="mt-1 pl-4 border-l-4 border-slate-300 text-slate-600 leading-relaxed">
-                                    ${quote.briefing_quote}
-                                </blockquote>
-                            </div>`;
-                    }).join('')}
+
+                    ${topicalQuotes.map(quote => {
+                            const categoryText = QUOTE_CATEGORY_MAP[quote.category] || 'Community Voice';
+                            let tagBg = '#E1F3F8'; // Default: Community Voice
+                            let tagText = '#28A0CB';
+
+                            if (categoryText === 'Community Fact') {
+                                tagBg = '#FFE396';
+                                tagText = '#936F38';
+                            } else if (categoryText === 'Individual Voice') {
+                                tagBg = '#f2938c';
+                                tagText = '#822133';
+                            }
+
+                            return `
+                                <div class="text-sm space-y-2" style="font-style: normal;">
+                                    <div class="bg-white p-4 rounded-lg text-slate-700 leading-relaxed" style="border-radius: 8px;">
+                                        <div>
+                                            <span class="quote-category-tag" style="background-color: ${tagBg}; color: ${tagText}; padding: 2px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">
+                                                ${categoryText}
+                                            </span>
+                                        </div>
+                                        ${quote.briefing_quote}
+                                    </div>
+                                </div>`;
+                        }).join('')}
                 </div>
             </div>`;
+        }
     }
 
     const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
@@ -2349,17 +2626,21 @@ function createAccordionItem(config) {
         <h3 class="usa-accordion__heading">
             <button class="usa-accordion__button" aria-expanded="false" aria-controls="${uniqueId}">
                 <div class="flex items-start w-full gap-x-4">
-                    <div class="flex-shrink-0 text-slate-600 w-7 h-7">
-                        ${iconSVG || ''}
+                    <!-- New Icon Structure -->
+                    <div class="accordion-icon-circle">
+                         ${iconSVG || ''}
                     </div>
                     <div class="flex-grow text-left">
                         <span class="font-semibold text-slate-800 text-base leading-tight">${question}</span>
+                        <!-- Updated Teaser Color -->
                         ${teaser ? `<div class="text-sm font-semibold mt-1" style="color: ${teaserColor || BRAND_COLORS.neutral};">${teaser}</div>` : ''}
                     </div>
                 </div>
             </button>
         </h3>
         <div id="${uniqueId}" class="usa-accordion__content usa-prose" hidden>
+            <!-- New Layer Announcement Container -->
+            <div id="layer-announcement-${uniqueId}" class="hidden items-center gap-2 mb-4"></div>
             ${answerHTML}
         </div>
     `;
@@ -2369,22 +2650,81 @@ function createAccordionItem(config) {
 
     button.addEventListener('click', () => {
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        const announcementDiv = content.querySelector(`#layer-announcement-${uniqueId}`);
 
+        // --- Close all other accordions ---
         document.querySelectorAll('#side-panel-content .usa-accordion__button').forEach(btn => {
             if (btn !== button) {
                 btn.setAttribute('aria-expanded', 'false');
                 const otherContent = document.getElementById(btn.getAttribute('aria-controls'));
-                if (otherContent) otherContent.hidden = true;
+                if (otherContent) {
+                     otherContent.hidden = true;
+                     // Also hide the announcement div in the accordion being closed
+                     const otherAnnouncement = otherContent.querySelector(`[id^="layer-announcement-"]`);
+                     if (otherAnnouncement) otherAnnouncement.classList.add('hidden');
+                }
             }
         });
 
+        // --- Toggle the current accordion ---
         if (isExpanded) {
+            // --- Closing ---
             button.setAttribute('aria-expanded', 'false');
             content.hidden = true;
+            if (announcementDiv) announcementDiv.classList.add('hidden'); // Hide announcement
         } else {
-            clearProviderLayers();
+            // --- Opening ---
+            clearProviderLayers(); // Clear old point layers
             button.setAttribute('aria-expanded', 'true');
             content.hidden = false;
+            
+            // --- New Layer Announcement Logic ---
+            if (announcementDiv && mapAction) {
+                let layerName = null;
+                let iconSVG = null;
+                let labelText = null;
+
+                if (mapAction.startsWith('showLayer:')) {
+                    layerName = mapAction.split(':')[1];
+                    const radio = document.querySelector(`#base-layer-options input[value="${layerName}"]`);
+                    if (radio) {
+                        labelText = radio.nextElementSibling.textContent.trim();
+                        // Get Base Layer Button Icon
+                        iconSVG = document.querySelector('#base-layer-toggle-btn svg').outerHTML;
+                    }
+                } else if (mapAction.startsWith('showNearest:')) {
+                     // For 'showNearest', we get the icon from the overlay button
+                     iconSVG = document.querySelector('#overlay-btn svg').outerHTML;
+                     // We can also find out which layer it is
+                     layerName = mapAction.split(':')[1];
+                     const checkbox = document.querySelector(`input[data-name="${layerName}"]`);
+                     if(checkbox) {
+                        labelText = checkbox.nextElementSibling.textContent.trim();
+                     }
+                } else if (mapAction.startsWith('togglePoints:')) {
+                    layerName = mapAction.split(':')[1];
+                    const checkbox = document.querySelector(`input[data-name="${layerName}"]`);
+                    if(checkbox) {
+                        labelText = checkbox.nextElementSibling.textContent.trim();
+                        // Get Overlay Button Icon
+                        iconSVG = document.querySelector('#overlay-btn svg').outerHTML;
+                    }
+                }
+                
+                // If we found a layer to announce, build and show the announcement
+                if (labelText && iconSVG) {
+                    announcementDiv.innerHTML = `
+                        <div class="flex-shrink-0 w-6 h-6">${iconSVG}</div>
+                        <span class="font-bold text-base" style="color: #565C65;">Currently viewing: ${labelText}</span>
+                    `;
+                    announcementDiv.classList.remove('hidden');
+                    announcementDiv.classList.add('flex'); // Make it a flex container
+                } else {
+                    announcementDiv.classList.add('hidden'); // No announcement needed
+                }
+            }
+            
+            // Execute the original map action
             executeMapAction(mapAction, { ...context, container: content });
         }
     });
@@ -2515,20 +2855,36 @@ function displaySmartResearchForTract(tractFeature) {
             question: "Who are the other childcare providers in this area?",
             teaser: childcareProviderTeaser,
             iconSVG: ICONS.providers,
-            answerHTML: `<p>The list below includes providers within a 3-mile radius of this community's center. Click any provider to zoom to its location.</p><div id="nearest-providers-list"></div>`,
+            answerHTML: `<div id="nearest-providers-list"></div>`,
             mapAction: 'showNearest:childcare', 
             context
         }));
 
         const childcareQuotes = p.plan_quotes?.filter(q => q.topic.includes('Child Care')) || [];
         if (childcareQuotes.length > 0) {
-             const quotesHTML = `<ul class="space-y-6 text-slate-600">${childcareQuotes.map(q => {
-                const categoryText = QUOTE_CATEGORY_MAP[q.category] || 'Community Voice';
-                return `<li class="space-y-2">
-                            <span class="quote-category-tag">${categoryText}</span>
-                            <blockquote class="pl-4 border-l-4 border-slate-300 leading-relaxed">
+            const quotesHTML = `<ul class="space-y-4 mt-0">${childcareQuotes.map(q => {
+            const categoryText = QUOTE_CATEGORY_MAP[q.category] || 'Community Voice';
+                let tagBg = '#E1F3F8'; // Default: Community Voice
+                let tagText = '#28A0CB';
+
+                if (categoryText === 'Community Fact') {
+                    tagBg = '#FFE396';
+                    tagText = '#936F38';
+                } else if (categoryText === 'Individual Voice') {
+                    tagBg = '#f2938c';
+                    tagText = '#822133';
+                }
+
+                return `<li class="space-y-2" style="font-style: normal;">
+                            <!-- New quote block style -->
+                            <div class="bg-white p-4 rounded-lg text-slate-700 leading-relaxed" style="border-radius: 8px;">
+                                <div>
+                                    <span class="quote-category-tag" style="background-color: ${tagBg}; color: ${tagText}; padding: 2px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">
+                                        ${categoryText}
+                                    </span>
+                                </div>
                                 ${q.briefing_quote}
-                            </blockquote>
+                            </div>
                         </li>`;
             }).join('')}</ul>`;
             questions.push(createAccordionItem({
@@ -2588,20 +2944,36 @@ function displaySmartResearchForTract(tractFeature) {
             question: "Who are the other food providers in this area?",
             teaser: foodProviderTeaser,
             iconSVG: ICONS.providers,
-            answerHTML: `<p>The list below includes providers within a 3-mile radius of this community's center. Click any provider to zoom to its location.</p><div id="nearest-providers-list"></div>`,
+            answerHTML: `<div id="nearest-providers-list"></div>`,
             mapAction: 'showNearest:grocery', 
             context
         }));
         
         const freshFoodQuotes = p.plan_quotes?.filter(q => q.topic.includes('Fresh Food')) || [];
         if (freshFoodQuotes.length > 0) {
-            const quotesHTML = `<ul class="space-y-6 text-slate-600">${freshFoodQuotes.map(q => {
+            const quotesHTML = `<ul class="space-y-4 mt-0">${freshFoodQuotes.map(q => {
                 const categoryText = QUOTE_CATEGORY_MAP[q.category] || 'Community Voice';
-                return `<li class="space-y-2">
-                            <span class="quote-category-tag">${categoryText}</span>
-                            <blockquote class="pl-4 border-l-4 border-slate-300 leading-relaxed">
+                let tagBg = '#E1F3F8'; // Default: Community Voice
+                let tagText = '#28A0CB';
+
+                if (categoryText === 'Community Fact') {
+                    tagBg = '#FFE396';
+                    tagText = '#936F38';
+                } else if (categoryText === 'Individual Voice') {
+                    tagBg = '#f2938c';
+                    tagText = '#822133';
+                }
+
+                return `<li class="space-y-2" style="font-style: normal;">
+                            <!-- New quote block style -->
+                            <div class="bg-white p-4 rounded-lg text-slate-700 leading-relaxed" style="border-radius: 8px;">
+                                <div>
+                                    <span class="quote-category-tag" style="background-color: ${tagBg}; color: ${tagText}; padding: 2px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">
+                                        ${categoryText}
+                                    </span>
+                                </div>
                                 ${q.briefing_quote}
-                            </blockquote>
+                            </div>
                         </li>`;
             }).join('')}</ul>`;
             questions.push(createAccordionItem({
@@ -2736,20 +3108,36 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
             question: "Who are the other childcare providers in this area?",
             teaser: childcareProviderTeaser,
             iconSVG: ICONS.providers,
-            answerHTML: `<p>The list below includes providers within a 3-mile radius of this address. Click any provider to zoom to its location.</p><div id="nearest-providers-list"></div>`,
+            answerHTML: `<div id="nearest-providers-list"></div>`,
             mapAction: 'showNearest:childcare',
             context
         }));
 
         const childcareQuotes = tractProps.plan_quotes?.filter(q => q.topic.includes('Child Care')) || [];
         if (childcareQuotes.length > 0) {
-            const quotesHTML = `<ul class="space-y-6 text-slate-600">${childcareQuotes.map(q => {
+            const quotesHTML = `<ul class="space-y-4 mt-0">${childcareQuotes.map(q => {
                 const categoryText = QUOTE_CATEGORY_MAP[q.category] || 'Community Voice';
-                return `<li class="space-y-2">
-                            <span class="quote-category-tag">${categoryText}</span>
-                            <blockquote class="pl-4 border-l-4 border-slate-300 leading-relaxed">
+                let tagBg = '#E1F3F8'; // Default: Community Voice
+                let tagText = '#28A0CB';
+
+                if (categoryText === 'Community Fact') {
+                    tagBg = '#FFE396';
+                    tagText = '#936F38';
+                } else if (categoryText === 'Individual Voice') {
+                    tagBg = '#f2938c';
+                    tagText = '#822133';
+                }
+
+                return `<li class="space-y-2" style="font-style: normal;">
+                            <!-- New quote block style -->
+                            <div class="bg-white p-4 rounded-lg text-slate-700 leading-relaxed" style="border-radius: 8px;">
+                                <div>
+                                    <span class="quote-category-tag" style="background-color: ${tagBg}; color: ${tagText}; padding: 2px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">
+                                        ${categoryText}
+                                    </span>
+                                </div>
                                 ${q.briefing_quote}
-                            </blockquote>
+                            </div>
                         </li>`;
             }).join('')}</ul>`;
             questions.push(createAccordionItem({
@@ -2809,20 +3197,36 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
             question: "Who are the other food providers in this area?",
             teaser: foodProviderTeaser,
             iconSVG: ICONS.providers,
-            answerHTML: `<p>The list below includes providers within a 3-mile radius of this address. Click any provider to zoom to its location.</p><div id="nearest-providers-list"></div>`,
+            answerHTML: `<div id="nearest-providers-list"></div>`,
             mapAction: 'showNearest:grocery',
             context
         }));
         
         const freshFoodQuotes = tractProps.plan_quotes?.filter(q => q.topic.includes('Fresh Food')) || [];
         if (freshFoodQuotes.length > 0) {
-            const quotesHTML = `<ul class="space-y-6 text-slate-600">${freshFoodQuotes.map(q => {
+            const quotesHTML = `<ul class="space-y-4 mt-0">${freshFoodQuotes.map(q => {
                 const categoryText = QUOTE_CATEGORY_MAP[q.category] || 'Community Voice';
-                return `<li class="space-y-2">
-                            <span class="quote-category-tag">${categoryText}</span>
-                            <blockquote class="pl-4 border-l-4 border-slate-300 leading-relaxed">
+                let tagBg = '#E1F3F8'; // Default: Community Voice
+                let tagText = '#28A0CB';
+
+                if (categoryText === 'Community Fact') {
+                    tagBg = '#FFE396';
+                    tagText = '#936F38';
+                } else if (categoryText === 'Individual Voice') {
+                    tagBg = '#f2938c';
+                    tagText = '#822133';
+                }
+
+                return `<li class="space-y-2" style="font-style: normal;">
+                            <!-- New quote block style -->
+                            <div class="bg-white p-4 rounded-lg text-slate-700 leading-relaxed" style="border-radius: 8px;">
+                                <div>
+                                    <span class="quote-category-tag" style="background-color: ${tagBg}; color: ${tagText}; padding: 2px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">
+                                        ${categoryText}
+                                    </span>
+                                </div>
                                 ${q.briefing_quote}
-                            </blockquote>
+                            </div>
                         </li>`;
             }).join('')}</ul>`;
             questions.push(createAccordionItem({
@@ -2905,17 +3309,18 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
 async function showNearestPoints(location, layerName, container) {
     const checkbox = document.querySelector(`input[data-name="${layerName}"]`);
 
+    // --- 1. Load Layer (same as before) ---
     if (checkbox && !checkbox.checked) {
         checkbox.checked = true;
         await togglePointLayer(checkbox);
     }
-
     const pointLayer = overlayLayers[layerName];
     if (!pointLayer) {
         container.innerHTML = `<p class="text-sm text-red-600">Could not load provider data.</p>`;
         return;
     }
 
+    // --- 2. Find Relevant Providers (same as before) ---
     const allPoints = pointLayer.getLayers().map(l => ({
         layer: l,
         feature: l.feature || { properties: l.options.properties, geometry: { coordinates: [l.getLatLng().lng, l.getLatLng().lat] } }
@@ -2923,108 +3328,99 @@ async function showNearestPoints(location, layerName, container) {
     
     let relevantProviders = [];
     let targetPoint;
-    let distanceContext = 'away'; // Default for address points
+    let locationContext; // "community's center" or "address"
 
     if (location.type === 'tract') {
         const tractPolygon = location.feature;
         targetPoint = turf.centroid(tractPolygon).geometry.coordinates;
-        distanceContext = 'from center'; // New context for tracts
-
-        const allPointsWithDistance = allPoints.map(p => ({
-            ...p,
-            distance: turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' })
-        }));
-
-        const nearbyPoints = allPointsWithDistance.filter(p => p.distance <= 3);
-        
-        nearbyPoints.sort((a, b) => a.distance - b.distance);
-        relevantProviders = nearbyPoints;
-
+        locationContext = "community's center";
     } else if (location.type === 'point') {
         targetPoint = [location.point.lng, location.point.lat];
-        
-        const pointsWithDistance = allPoints.map(p => ({
-            ...p,
-            distance: turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' })
-        }));
-
-        const nearbyPoints = pointsWithDistance.filter(p => p.distance <= 3);
-        
-        nearbyPoints.sort((a, b) => a.distance - b.distance);
-        relevantProviders = nearbyPoints;
-    }
-
-    const listContainer = container.querySelector('#nearest-providers-list');
-    
-    // --- "No providers" message ---
-    if (relevantProviders.length === 0) {
-        const message = location.type === 'tract' 
-            ? "No providers found within 3 miles of this community's center."
-            : "No providers found within 3 miles of this address.";
-        listContainer.innerHTML = `<p class="text-sm text-slate-600 mt-2">${message}</p>`;
+        locationContext = "address";
+    } else {
+        container.innerHTML = `<p class="text-sm text-red-600">Invalid location type.</p>`;
         return;
     }
 
-    // --- Check for quality and build filter ---
-    const hasQuality = relevantProviders.length > 0 && relevantProviders[0].feature.properties.hasOwnProperty('quality');
-    let uniqueQualities = [];
-    if (hasQuality) {
-        uniqueQualities = [...new Set(relevantProviders.map(p => p.feature.properties.quality).filter(q => q != null))].sort();
+    const allPointsWithDistance = allPoints.map(p => ({
+        ...p,
+        distance: turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' })
+    }));
+    const nearbyPoints = allPointsWithDistance.filter(p => p.distance <= 3);
+    nearbyPoints.sort((a, b) => a.distance - b.distance);
+    relevantProviders = nearbyPoints;
+
+    const listContainer = container.querySelector('#nearest-providers-list');
+    const totalProviders = relevantProviders.length;
+    
+    // --- 3. Simplified Intro Text ---
+    let introText = `<p class="text-sm text-ink pb-2">There are <strong>${totalProviders}</strong> providers within a 3-mile radius of this ${locationContext}.</p>`;
+
+    if (totalProviders === 0) {
+        listContainer.innerHTML = introText;
+        return;
     }
 
-    let filterHtml = '';
-    if (uniqueQualities.length > 0) {
-        filterHtml = `
-            <div class="mt-4 mb-2">
-                <label for="provider-quality-filter-${layerName}" class="block text-sm font-medium text-slate-700">Filter by Quality:</label>
-                <select id="provider-quality-filter-${layerName}" onchange="filterProviderListByQuality(this)" class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                    <option value="all">Show All</option>
-                    ${uniqueQualities.map(q => `<option value="${q}">${q}</option>`).join('')}
-                </select>
-            </div>
-        `;
+    // --- 4. Pagination Setup ---
+    const itemsPerPage = 10;
+    const totalPages = Math.ceil(totalProviders / itemsPerPage);
+    const needsPagination = totalProviders > itemsPerPage;
+    let currentPage = 1;
+    let paginationText = '';
+
+    if (needsPagination) {
+        paginationText = `<p class="text-sm text-slate-600 mt-1 pagination-text">Showing 1-${itemsPerPage} of ${totalProviders} providers</p>`;
     }
 
-    // --- Build list items with quality data ---
-    const listHtml = relevantProviders.map(p => {
-        // Get the popup content just once
+    // --- 5. Build List Items (with new formatting) ---
+    const providerIcon = layerName === 'childcare' ? ICONS.childcareProvider : ICONS.freshFoodProvider;
+
+    const listHtml = relevantProviders.map((p, index) => {
         const popupContent = p.layer.getPopup().getContent();
-
-        // Define the CORRECT regexes that match the HTML from togglePointLayer
         const nameRegex = /<div class="font-bold text-lg leading-tight">(.*?)<\/div>/;
-        const capacityRegex = /<strong>Capacity \(Under 6\):<\/strong> (.*?) seats/;
-        const typeRegex = /<strong>Type:<\/strong> (.*?)<\/div>/;
-
-        // Use the new safeMatch helper to parse content without crashing
-        const props = popupContent.includes('Capacity') ? {
-            name: safeMatch(popupContent, nameRegex, 1, 'Unnamed Location'),
-            detail: safeMatch(popupContent, capacityRegex, 1, 'N/A')
-        } : {
-            name: safeMatch(popupContent, nameRegex, 1, 'Unnamed Location'),
-            detail: safeMatch(popupContent, typeRegex, 1, 'N/A')
-        };
+        const name = safeMatch(popupContent, nameRegex, 1, 'Unnamed Location');
         const latlng = p.layer.getLatLng();
         
         const quality = p.feature.properties.quality;
-        const qualityText = (quality != null) ? `<p class="text-sm text-slate-600 mt-0.5"><strong>Quality:</strong> ${quality}</p>` : '';
-        const distanceText = `<p class="text-sm text-slate-600 mt-0.5">${p.distance.toFixed(1)} miles ${distanceContext}</p>`;
+        const qualityText = (quality != null) ? `Quality: ${quality}` : '';
+        const distanceText = `${p.distance.toFixed(1)} miles`;
 
-        return `<li class="border-t pt-3 pb-2 px-1 cursor-pointer hover:bg-slate-50 rounded" 
-                data-quality="${quality ?? ''}"
-                onclick="zoomToPoint(${latlng.lat}, ${latlng.lng}, '${layerName}')">
-                <p class="font-semibold text-slate-800">${props.name}</p>
-                ${distanceText}
-                ${qualityText}
-        </li>`;
+        // Combine quality and distance with a bullet if both exist
+        let detailsText = '';
+        if (distanceText && qualityText) {
+            detailsText = `${distanceText} &bull; ${qualityText}`;
+        } else {
+            detailsText = distanceText || qualityText; // Show whichever one exists
+        }
+
+        // Hide items beyond the first page if pagination is active
+        const isHidden = (needsPagination && index >= itemsPerPage) ? 'hidden' : '';
+
+        return `
+            <li data-provider-item="true" class="flex items-start gap-3 py-3 ${isHidden}" data-quality="${quality ?? ''}">
+                <div class="flex-shrink-0 pt-0.5">${providerIcon}</div>
+                <div class="flex-grow">
+                    <a href="javascript:void(0);" 
+                       onclick="zoomToPoint(${latlng.lat}, ${latlng.lng}, '${layerName}')"
+                       class="font-semibold text-slate-800 hover:underline focus:underline focus:outline-none">
+                        ${name}
+                    </a>
+                    <p class="text-sm text-slate-700 mt-0.5">${detailsText}</p>
+                </div>
+            </li>`;
     }).join('');
 
-    // --- NEW: Combine filter and list into a container ---
+    // --- 6. Render Final HTML (Intro + Pagination Text + List + Pagination Nav) ---
     listContainer.innerHTML = `
-        <div class="providers-container">
-            ${filterHtml}
-            <ul class="mt-2">
+        <div class="providers-container" id="provider-list-container-${layerName}">
+            ${introText}
+            ${paginationText}
+            <ul class="mt-2 -my-3 divide-y divide-[#DFE1E2]">
                 ${listHtml}
             </ul>
+            <div class="pagination-nav-container mt-4">
+                ${needsPagination ? renderPagination(totalPages, currentPage, `provider-list-container-${layerName}`, layerName) : ''}
+            </div>
         </div>
     `;
 }
@@ -3154,22 +3550,49 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
         }
         
         if (properties.plan_quotes && properties.plan_quotes.length > 0) {
-            html += `
+            let topicalQuotes = [];
+            switch(selectedSector) {
+                case 'childcare':
+                    topicalQuotes = properties.plan_quotes?.filter(q => q.topic.includes('Child Care')) || [];
+                    break;
+                case 'fresh-food':
+                    topicalQuotes = properties.plan_quotes?.filter(q => q.topic.includes('Fresh Food')) || [];
+                    break;
+            };
+            if (topicalQuotes && topicalQuotes.length > 0) {
+                html += `
                 <div class="mt-4">
                     <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Voice</h3>
                     <div class="space-y-4">
-                        ${properties.plan_quotes.map(quote => {
-                            const categoryText = QUOTE_CATEGORY_MAP[quote.category] || 'Community Voice';
-                            return `
-                                <div class="text-sm">
-                                    <span class="quote-category-tag">${categoryText}</span>
-                                    <blockquote class="mt-1 pl-4 border-l-4 border-slate-300 text-slate-600 leading-relaxed">
-                                        ${quote.briefing_quote}
-                                    </blockquote>
-                                </div>`;
-                        }).join('')}
+
+                        ${topicalQuotes.map(quote => {
+                                const categoryText = QUOTE_CATEGORY_MAP[quote.category] || 'Community Voice';
+                                let tagBg = '#E1F3F8'; // Default: Community Voice
+                                let tagText = '#28A0CB';
+
+                                if (categoryText === 'Community Fact') {
+                                    tagBg = '#FFE396';
+                                    tagText = '#936F38';
+                                } else if (categoryText === 'Individual Voice') {
+                                    tagBg = '#f2938c';
+                                    tagText = '#822133';
+                                }
+
+                                return `
+                                    <div class="text-sm space-y-2" style="font-style: normal;">
+                                        <div class="bg-white p-4 rounded-lg text-slate-700 leading-relaxed" style="border-radius: 8px;">
+                                            <div>
+                                                <span class="quote-category-tag" style="background-color: ${tagBg}; color: ${tagText}; padding: 2px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">
+                                                    ${categoryText}
+                                                </span>
+                                            </div>
+                                            ${quote.briefing_quote}
+                                        </div>
+                                    </div>`;
+                            }).join('')}
                     </div>
                 </div>`;
+            }
         }
 
         const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
@@ -3215,8 +3638,10 @@ function isPointInLayer_Turf(point, layer) {
 
 // --- DOCUMENT READY & INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', async () => {
-    const storedSector = localStorage.getItem('selectedSector');
-    const storedMode = localStorage.getItem('selectedMode');
+    // const storedSector = localStorage.getItem('selectedSector');
+    // const storedMode = localStorage.getItem('selectedMode');
+    const storedSector = null; // Show selector every time
+    const storedMode = null; // Show selector every time
 
     if (storedSector) {
         selectedSector = storedSector;
@@ -3420,7 +3845,8 @@ function setupMdwdsNavbar() {
 }
 
 function setupModalAndState() {
-    const storedSector = localStorage.getItem('selectedSector');
+    // const storedSector = localStorage.getItem('selectedSector'); // Show selector every time
+    const storedSector = null;
     const modalOverlay = document.getElementById('sector-modal-overlay');
 
     if (!storedSector) {
@@ -3721,7 +4147,7 @@ function initializeMap() {
         }
 
         const bounds = L.latLng(center).toBounds(100); 
-        map.fitBounds(bounds, { ...getMapPadding(), maxZoom: 12 });
+        map.fitBounds(bounds, { ...getMapPadding(), maxZoom: 14 });
     });
 
     // Add the geocoder to our new container div instead of directly to the map
