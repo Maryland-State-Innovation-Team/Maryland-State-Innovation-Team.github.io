@@ -1250,7 +1250,7 @@
             </div>
         </header>
         
-        <div class="relative flex-grow">
+        <div id="main-content" class="relative flex-grow" inert>
             <div id="map" class="h-full w-full z-0" tabindex="-1">
                 <div id="top-controls-wrapper" role="region" aria-label="Map Controls" class="absolute top-0 left-0 w-full p-4 z-[1005] flex flex-col md:flex-row md:justify-between md:items-start gap-3 pointer-events-none">
                     <div id="geocoder-wrapper" class="relative pointer-events-auto">
@@ -3971,12 +3971,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         isPanning = false;
     });
     
-    map.createPane('countyPane').style.zIndex = 475;
-    map.createPane('mapboxCountyPane').style.zIndex = 480;
-    map.createPane('incentivePane').style.zIndex = 450;
     map.createPane('tractPane').style.zIndex = 400;
+    map.createPane('incentivePane').style.zIndex = 450;
+    map.createPane('countyPane').style.zIndex = 475;
+    map.createPane('mapboxCountyPane').style.zIndex = 649;
     map.createPane('clusterTopPane').style.zIndex = 650;
-    map.createPane('markerPane').style.zIndex = 700;
+    map.createPane('markerPane').style.zIndex = 675;
     map.createPane('topTooltipPane').style.zIndex = 750;
 
     // Create the single, global tooltip element and add it to the pane
@@ -4048,6 +4048,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('Could not load community or county data. The map may not function correctly.');
     } finally {
         loadingOverlay.classList.add('hidden');
+        loadingOverlay.inert = true; 
+
+        // Check if other modals are active. If not, make the main content active.
+        const sectorModal = document.getElementById('sector-modal-overlay');
+        const tourModal = document.getElementById('tour-overlay');
+        
+        if (sectorModal.classList.contains('hidden') && tourModal.classList.contains('hidden')) {
+            document.getElementById('main-content').inert = false;
+        }
     }
 
     setAppHeight();
@@ -4095,6 +4104,11 @@ function setupTour() {
 
                 // 3. Hide the tour overlay
                 tourOverlay.classList.add('hidden');
+                tourOverlay.inert = true;
+                // Only make the content active if the sector modal is also hidden
+                if (document.getElementById('sector-modal-overlay').classList.contains('hidden')) {
+                    document.getElementById('main-content').inert = false;
+                }
             });
         });
     }
@@ -4105,6 +4119,18 @@ function showTour(sector) {
     // in case we want to add sector-specific logic back later.
     const tourOverlay = document.getElementById('tour-overlay');
     tourOverlay.classList.remove('hidden');
+    tourOverlay.inert = false;
+    document.getElementById('main-content').inert = true;
+
+    // Use setTimeout to ensure the element is visible and focusable
+    // before we try to focus it.
+    setTimeout(() => {
+        // Find the first focusable button within the tour modal
+        const firstChoiceButton = tourOverlay.querySelector('.tour-choice-btn');
+        if (firstChoiceButton) {
+            firstChoiceButton.focus();
+        }
+    }, 0);
 }
 
 function setupMdwdsNavbar() {
@@ -4132,6 +4158,7 @@ function setupModalAndState() {
         // Only show the sector modal if the sector isn't in storage
         modalOverlay.classList.remove('hidden');
         modalOverlay.inert = false;
+        document.getElementById('main-content').inert = true;
     }
 
     modalOverlay.addEventListener('click', (e) => {
@@ -4149,6 +4176,9 @@ function handleSectorSelection(sector) {
     const modalOverlay = document.getElementById('sector-modal-overlay');
     modalOverlay.classList.add('hidden');
     modalOverlay.inert = true;
+    if (document.getElementById('tour-overlay').classList.contains('hidden')) {
+        document.getElementById('main-content').inert = false;
+    }
     document.getElementById('sector-select').value = sector;
     updateBaseLayerFilter(sector);
     updateOverlayFilter(sector);
@@ -4820,7 +4850,7 @@ async function togglePointLayer(checkbox) {
             alert(`Could not load layer: ${layerName}.`);
             checkbox.checked = false;
         } finally {
-             checkbox.parentElement.classList.remove('animate-pulse');
+            checkbox.parentElement.classList.remove('animate-pulse');
         }
     } else {
         if (overlayLayers[layerName]) map.removeLayer(overlayLayers[layerName]);
