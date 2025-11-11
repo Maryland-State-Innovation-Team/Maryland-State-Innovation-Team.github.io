@@ -30,16 +30,24 @@
             border-bottom: 1.25rem solid transparent;
         }
         .custom-logo img {
-            height: 50px;
+            height: 40px;
             margin-right: 10px;
         }
         .custom-logo .usa-logo__text {
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.70rem;
             line-height: 1.2;
             color: #1b1b1b;
             font-style: normal;
+        }
+        @media (min-width: 1024px) {
+            .custom-logo .usa-logo__text {
+                font-size: 1rem;
+            }
+            .custom-logo img {
+                height: 50px;
+            }
         }
         .custom-logo .usa-logo__text a,
         .custom-logo .usa-logo__text a:visited {
@@ -102,7 +110,13 @@
             margin-right: 0;
         }
         .home-hero p {
-            display: none; /* Hide original paragraph */
+            display: block; /* Ensures the paragraph is visible */
+            font-size: 1.25rem;
+            font-weight: bold;
+            line-height: 1.6;
+            color: #71767a;
+            margin-top: 1rem;
+            max-width: 60ch; /* Improves readability by limiting line length */
         }
         .home-hero .usa-button-group {
             display: none; /* Hide original button group */
@@ -113,9 +127,14 @@
             text-align: center;
         }
         .hero-image {
-            max-width: 80%;
+            max-width: 100%;
             height: auto;
             border-radius: 8px; /* Optional: adds rounded corners to image */
+        }
+        @media (min-width: 1024px) {
+            .hero-image {
+                max-width: 80%;
+            }
         }
 
         .feature-cards-section {
@@ -247,13 +266,13 @@
                             <a href="./" class="usa-nav__link usa-current" aria-current="page"><span>Home</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
-                            <a href="./map/" class="usa-nav__link"><span>See the Opportunity</span></a>
+                            <a href="./map/" class="usa-nav__link"><span>Locate the Opportunity</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
-                            <a href="./incentives/" class="usa-nav__link"><span>Find Incentives</span></a>
+                            <a href="./incentives/" class="usa-nav__link"><span>Find Government Funding</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
-                            <a href="./connect/" class="usa-nav__link"><span>Connect to Resources</span></a>
+                            <a href="./connect/" class="usa-nav__link"><span>Get Support from Experts</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -265,11 +284,12 @@
                 <div class="grid-container">
                     <div class="grid-row grid-gap-lg align-items-center">
                         <div class="tablet:grid-col-6">
-                            <h1 class="mobile-lg:font-sans-2xl desktop:font-serif-3xl margin-top-0 tablet:margin-bottom-0">Explore Opportunities to Make a Difference in Your Neighborhood</h1>
+                            <h1 class="font-serif-xl tablet:font-serif-2xl desktop:font-serif-3xl margin-top-0 tablet:margin-bottom-0">Provide What Your Community Needs</h1>
+                            <p class="font-serif-md">Discover resources to help you launch child care, fresh food, and other community services</p>
                         </div>
                         <div class="tablet:grid-col-6">
                              <div class="hero-image-container">
-                                <img src="assets/18117553754_eea65fc932_b.jpg" alt="A photo of a Maryland main street." class="hero-image">
+                                <img src="assets/53526971119_9c0fa20a13_k.jpg" alt="Governor Wes Moore, wearing a collared shirt and tie, holds a young child while visiting the Cambridge Child Care Center in Cambridge, Maryland. He is pointing at colorful lettered words on the wall that read 'Live, Laugh, Learn Together' with emoji faces scattered around them. The child, wearing a light brown shirt and patterned pants, looks towards where the governor is pointing. In the foreground, there are baby cribs filled with blankets and pillows." class="hero-image">
                             </div>
                         </div>
                     </div>
@@ -280,21 +300,21 @@
                 <div class="grid-row grid-gap">
                     <div class="tablet:grid-col-4">
                         <div class="feature-card feature-card--opportunity">
-                            <h2 class="font-serif-lg">See the Opportunity</h2>
+                            <h2 class="font-serif-lg">Locate the Opportunity</h2>
                             <p>Explore business-relevant data for locations across Maryland to help you decide where to build your business.</p>
                             <a href="./map/" class="usa-button">Explore data</a>
                         </div>
                     </div>
                     <div class="tablet:grid-col-4">
                         <div class="feature-card feature-card--incentives">
-                            <h2 class="font-serif-lg">Find Incentives</h2>
+                            <h2 class="font-serif-lg">Find Government Funding</h2>
                             <p>Discover state incentive programs and learn how to apply, all in one place. Explore government grants, loans, tax-credits, and more all through our centralized database.</p>
                             <a href="./incentives/" class="usa-button">View all incentives</a>
                         </div>
                     </div>
                     <div class="tablet:grid-col-4">
                         <div class="feature-card feature-card--resources">
-                            <h2 class="font-serif-lg">Connect to Resources</h2>
+                            <h2 class="font-serif-lg">Get Support from Experts</h2>
                             <p>Get connected with people and organizations who can guide you through the process of starting and running a small business.</p>
                              <a href="./connect/" class="usa-button">Get help</a>
                         </div>

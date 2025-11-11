@@ -152,7 +152,7 @@
         }
 
         .info-legend-title {
-            font-size: 1.125rem; /* text-lg */
+            font-size: 1rem;
             font-weight: 700;
             margin: 0;
         }
@@ -399,23 +399,23 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* --- Sector Modal Styles ---
-           Limit overlay to area *below* the top banner/header and center the modal within that area.
-           We set --site-header-height dynamically via JS (on load/resize). */
+        /* --- Sector Modal Styles --- */
         #sector-modal-overlay {
             position: fixed;
             left: 0;
             width: 100%;
-            /* top and height constrained to the area underneath the site header/banner */
-            top: var(--site-header-height, 0px);
-            height: calc(100vh - var(--site-header-height, 0px));
+            top: 0;
+            height: 100vh;
             background-color: rgba(0, 0, 0, 0.6);
             z-index: 20000;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: opacity 0.3s ease;
-            padding: 1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-bottom: 1rem;
+            padding-top: calc(var(--site-header-height, 0px) + 1rem);
             box-sizing: border-box;
             overflow: auto;
         }
@@ -435,15 +435,18 @@
             position: fixed;
             left: 0;
             width: 100%;
-            top: var(--site-header-height, 0px);
-            height: calc(100vh - var(--site-header-height, 0px));
+            top: 0;
+            height: 100vh;
             background-color: rgba(0, 0, 0, 0.6);
             z-index: 30000;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: opacity 0.3s ease;
-            padding: 1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-bottom: 1rem;
+            padding-top: calc(var(--site-header-height, 0px) + 1rem);
             box-sizing: border-box;
             overflow: auto;
         }
@@ -685,7 +688,7 @@
         .custom-logo .usa-logo__text {
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            font-size: 0.75rem;
+            font-size: 0.70rem;
             line-height: 1.2;
             color: #1b1b1b;
             font-style: normal; /* Fix: Remove italics */
@@ -1237,13 +1240,13 @@
                             <a href="../" class="usa-nav__link"><span>Home</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
-                            <a href="./" class="usa-nav__link usa-current" aria-current="page"><span>See the Opportunity</span></a>
+                            <a href="./" class="usa-nav__link usa-current" aria-current="page"><span>Locate the Opportunity</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
-                            <a href="../incentives/" class="usa-nav__link"><span>Find Incentives</span></a>
+                            <a href="../incentives/" class="usa-nav__link"><span>Find Government Funding</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
-                            <a href="../connect/" class="usa-nav__link"><span>Connect to Resources</span></a>
+                            <a href="../connect/" class="usa-nav__link"><span>Get Support from Experts</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -1593,6 +1596,13 @@ const CHOROPLETH_OPTIONS = {
         legend_format: (d) => formatPercentInteger(d),
         sector: 'fresh-food', 
         unit: 'Food insecurity (%)', 
+        legendLabels: { low: 'LOW', high: 'HIGH' } 
+    },
+    'grocery_philanthropy_score': { 
+        label: 'Fresh Food Philanthropy Score', 
+        format: (d) => d.toFixed(0), 
+        sector: 'fresh-food', 
+        unit: 'High food gap & low market demand', 
         legendLabels: { low: 'LOW', high: 'HIGH' } 
     },
     'per_household_food_at_home': { 
@@ -1950,6 +1960,22 @@ function resetGeocoderUI() {
     const alternativesList = document.querySelector('.leaflet-control-geocoder-alternatives');
     if (alternativesList) {
         alternativesList.classList.add('leaflet-control-geocoder-alternatives-minimized');
+    }
+}
+
+/**
+ * Forces all map tooltips (hover-tooltips and popups) to close.
+ * Call this when a UI panel is opened to prevent overlap.
+ */
+function forceCloseAllTooltips() {
+    // Hide the custom "on-hover" global tooltip
+    if (globalTooltipElement) {
+        L.DomUtil.addClass(globalTooltipElement, 'hidden');
+    }
+    
+    // Close any active Leaflet popup (e.g., from a marker)
+    if (map) {
+        map.closePopup();
     }
 }
 
@@ -2549,6 +2575,7 @@ function onEachFeature(feature, layer) {
 }
 
 function openSidePanel() {
+    forceCloseAllTooltips();
     if (window.innerWidth < 768) { // Mobile
         document.body.classList.add('panel-is-open');
     } else { // Desktop
@@ -3019,21 +3046,36 @@ function getProviderCount(location, layerName) {
         feature: l.feature || { properties: l.options.properties, geometry: { coordinates: [l.getLatLng().lng, l.getLatLng().lat] } }
     }));
 
-    let targetPoint;
+    let nearbyPoints;
 
     if (location.type === 'tract') {
         const tractPolygon = location.feature;
-        targetPoint = turf.centroid(tractPolygon).geometry.coordinates;
+        // Cache the line version of the polygon for efficiency
+        const tractLine = turf.polygonToLine(tractPolygon); 
+        
+        nearbyPoints = allPoints.filter(p => {
+            const pointCoords = p.feature.geometry.coordinates;
+            
+            // Check 1: Is the point inside the polygon?
+            const isInside = turf.booleanPointInPolygon(pointCoords, tractPolygon);
+            if (isInside) return true;
+
+            // Check 2: If not inside, is it within 1 mile of the polygon's edge?
+            const distanceToEdge = turf.pointToLineDistance(pointCoords, tractLine, { units: 'miles' });
+            return distanceToEdge <= 1;
+        });
+
     } else if (location.type === 'point') {
-        targetPoint = [location.point.lng, location.point.lat];
+        const targetPoint = [location.point.lng, location.point.lat];
+        
+        nearbyPoints = allPoints.filter(p => {
+            const distance = turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' });
+            // New logic: 1-mile radius for points
+            return distance <= 1; 
+        });
     } else {
         return 0; // Unknown location type
     }
-
-    const nearbyPoints = allPoints.filter(p => {
-        const distance = turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' });
-        return distance <= 3;
-    });
     
     return nearbyPoints.length;
 }
@@ -3599,7 +3641,7 @@ async function showNearestPoints(location, layerName, container) {
         return;
     }
 
-    // --- 2. Find Relevant Providers (same as before) ---
+    // --- 2. Find Relevant Providers (NEW LOGIC) ---
     const allPoints = pointLayer.getLayers().map(l => ({
         layer: l,
         feature: l.feature || { properties: l.options.properties, geometry: { coordinates: [l.getLatLng().lng, l.getLatLng().lat] } }
@@ -3607,40 +3649,70 @@ async function showNearestPoints(location, layerName, container) {
     
     let relevantProviders = [];
     let targetPoint;
-    let locationContext; // "community's center" or "address"
+    let locationContext; // This text is new
+    let allPointsWithDistance;
 
     if (location.type === 'tract') {
         const tractPolygon = location.feature;
-        targetPoint = turf.centroid(tractPolygon).geometry.coordinates;
-        locationContext = "community's center";
+        targetPoint = turf.centroid(tractPolygon).geometry.coordinates; // For sorting
+        locationContext = "within 1 mile of this community"; // New text
+        
+        // Calculate distance from centroid for sorting (as requested)
+        allPointsWithDistance = allPoints.map(p => ({
+            ...p,
+            distance: turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' })
+        }));
+
+        // Cache the line version of the polygon for efficiency
+        const tractLine = turf.polygonToLine(tractPolygon);
+
+        // Filter by new logic: inside polygon OR within 1 mile of edge
+        relevantProviders = allPointsWithDistance.filter(p => {
+            const pointCoords = p.feature.geometry.coordinates;
+            
+            // Check 1: Is the point inside the polygon?
+            const isInside = turf.booleanPointInPolygon(pointCoords, tractPolygon);
+            if (isInside) return true;
+
+            // Check 2: If not inside, is it within 1 mile of the polygon's edge?
+            const distanceToEdge = turf.pointToLineDistance(pointCoords, tractLine, { units: 'miles' });
+            return distanceToEdge <= 1;
+        });
+
     } else if (location.type === 'point') {
-        targetPoint = [location.point.lng, location.point.lat];
-        locationContext = "address";
+        targetPoint = [location.point.lng, location.point.lat]; // For sorting and filtering
+        locationContext = "within 1 mile of this address"; // New text
+        
+        // Calculate distance from the point
+        allPointsWithDistance = allPoints.map(p => ({
+            ...p,
+            distance: turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' })
+        }));
+
+        // Filter by new logic: 1-mile radius
+        relevantProviders = allPointsWithDistance.filter(p => p.distance <= 1);
+        
     } else {
         container.innerHTML = `<p class="text-sm text-red-600">Invalid location type.</p>`;
         return;
     }
 
-    const allPointsWithDistance = allPoints.map(p => ({
-        ...p,
-        distance: turf.distance(targetPoint, p.feature.geometry.coordinates, { units: 'miles' })
-    }));
-    const nearbyPoints = allPointsWithDistance.filter(p => p.distance <= 3);
-    nearbyPoints.sort((a, b) => a.distance - b.distance);
-    relevantProviders = nearbyPoints;
+    // Sort by distance (from centroid for tract, from point for address)
+    relevantProviders.sort((a, b) => a.distance - b.distance);
 
     const listContainer = container.querySelector('#nearest-providers-list');
     const totalProviders = relevantProviders.length;
     
-    // --- 3. Simplified Intro Text ---
-    let introText = `<p class="text-sm text-ink pb-2">There are <strong>${totalProviders}</strong> providers within a 3-mile radius of this ${locationContext}.</p>`;
+    // --- 3. Updated Intro Text ---
+    // Uses the new locationContext variable
+    let introText = `<p class="text-sm text-ink pb-2">There are <strong>${totalProviders}</strong> providers found ${locationContext}.</p>`;
 
     if (totalProviders === 0) {
         listContainer.innerHTML = introText;
         return;
     }
 
-    // --- 4. Pagination Setup ---
+    // --- 4. Pagination Setup (Unchanged) ---
     const itemsPerPage = 10;
     const totalPages = Math.ceil(totalProviders / itemsPerPage);
     const needsPagination = totalProviders > itemsPerPage;
@@ -3648,10 +3720,10 @@ async function showNearestPoints(location, layerName, container) {
     let paginationText = '';
 
     if (needsPagination) {
-        paginationText = `<p class="text-sm text-slate-600 mt-1 pagination-text">Showing 1-${itemsPerPage} of ${totalProviders} providers</p>`;
+        paginationText = `<p class="text-sm text-slate-600 mt-1 pagination-text">Showing 1-${Math.min(itemsPerPage, totalProviders)} of ${totalProviders} providers</p>`;
     }
 
-    // --- 5. Build List Items (with new formatting) ---
+    // --- 5. Build List Items (Unchanged logic, just uses new list) ---
     const providerIcon = layerName === 'childcare' ? ICONS.childcareProvider : ICONS.freshFoodProvider;
 
     const listHtml = relevantProviders.map((p, index) => {
@@ -3662,17 +3734,16 @@ async function showNearestPoints(location, layerName, container) {
         
         const quality = p.feature.properties.quality;
         const qualityText = (quality != null) ? `Quality: ${quality}` : '';
-        const distanceText = `${p.distance.toFixed(1)} miles`;
+        // This distance is from the centroid (for tracts) or point (for address)
+        const distanceText = `${p.distance.toFixed(1)} miles`; 
 
-        // Combine quality and distance with a bullet if both exist
         let detailsText = '';
         if (distanceText && qualityText) {
             detailsText = `${distanceText} &bull; ${qualityText}`;
         } else {
-            detailsText = distanceText || qualityText; // Show whichever one exists
+            detailsText = distanceText || qualityText; 
         }
 
-        // Hide items beyond the first page if pagination is active
         const isHidden = (needsPagination && index >= itemsPerPage) ? 'hidden' : '';
 
         return `
@@ -3689,7 +3760,7 @@ async function showNearestPoints(location, layerName, container) {
             </li>`;
     }).join('');
 
-    // --- 6. Render Final HTML (Intro + Pagination Text + List + Pagination Nav) ---
+    // --- 6. Render Final HTML ---
     listContainer.innerHTML = `
         <div class="providers-container" id="provider-list-container-${layerName}">
             ${introText}
@@ -3935,6 +4006,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         isFirstTimeUser = true;
     }
 
+    setSiteHeaderHeight();
+    registerHeaderHeightObserver();
+
     setupBannerAccordion();
     setupModalAndState();
     setupMdwdsNavbar();
@@ -4060,8 +4134,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     setAppHeight();
-    setSiteHeaderHeight();
-    registerHeaderHeightObserver();
     updateGeocoderWidth();
     initializeGlobalTooltipSystem();
 });
@@ -4500,6 +4572,37 @@ function initializeMap() {
 
     // Attach the toggle function to the handle's click event
     panelHandle.addEventListener('click', togglePanel);
+    // --- Swipe Logic for Mobile Panel Handle ---
+    let touchStartY = 0;
+    
+    panelHandle.addEventListener('touchstart', (e) => {
+        // Only track for mobile (where the handle is on the top)
+        if (window.innerWidth >= 768) return;
+        touchStartY = e.touches[0].clientY;
+    });
+
+    panelHandle.addEventListener('touchend', (e) => {
+        // Only track for mobile
+        if (window.innerWidth >= 768) return;
+
+        const touchEndY = e.changedTouches[0].clientY;
+        const deltaY = touchStartY - touchEndY; // Positive delta means swipe UP
+        const swipeThreshold = 50; // Min 50px swipe to trigger
+        const isOpen = sidePanel.classList.contains('show');
+
+        // Check for a significant SWIPE UP (to OPEN)
+        if (deltaY > swipeThreshold && !isOpen) {
+            e.preventDefault(); // Prevent the 'click' event from firing
+            togglePanel(); // Open the panel
+        } 
+        // Check for a significant SWIPE DOWN (to CLOSE)
+        else if (-deltaY > swipeThreshold && isOpen) {
+             e.preventDefault(); // Prevent the 'click' event from firing
+            togglePanel(); // Close the panel
+        }
+
+        touchStartY = 0; // Reset
+    });
 
     const geocoder = L.Control.geocoder({
         collapsed: false,
@@ -5138,6 +5241,7 @@ function setupLayerControls() {
         overlayPanel.classList.add('hidden');
 
         if (!isHidden) { // If the panel was just opened...
+            forceCloseAllTooltips();
             // Use setTimeout to push the focus command to the end of the event queue.
             // This prevents the key press that opened the panel from also selecting the radio.
             setTimeout(() => {
@@ -5187,6 +5291,7 @@ function setupLayerControls() {
         const isHidden = overlayPanel.classList.toggle('hidden');
         baseLayerPanel.classList.add('hidden');
         if (!isHidden) { // If the panel was just opened
+            forceCloseAllTooltips();
             overlayPanel.querySelector('input[type="checkbox"]').focus();
         }
     });
@@ -5228,6 +5333,17 @@ function setupLayerControls() {
     L.DomEvent.on(sidePanel, 'mousedown', stopPropagation);
     // Mobile
     L.DomEvent.on(sidePanel, 'touchmove', stopPropagation);
+
+    const panelHandle = document.getElementById('panel-handle');
+    if (panelHandle) {
+        // Desktop
+        L.DomEvent.on(panelHandle, 'wheel', stopPropagation);
+        L.DomEvent.on(panelHandle, 'click', stopPropagation);
+        L.DomEvent.on(panelHandle, 'dblclick', stopPropagation);
+        L.DomEvent.on(panelHandle, 'mousedown', stopPropagation);
+        // Mobile
+        L.DomEvent.on(panelHandle, 'touchmove', stopPropagation);
+    }
 
     document.addEventListener('click', (e) => {
         const baseLayerWrapper = document.getElementById('base-layer-control-wrapper');
