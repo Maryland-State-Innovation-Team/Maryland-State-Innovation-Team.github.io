@@ -1490,6 +1490,7 @@ let isPanning = false;
 let floatingTooltip = null;
 let tooltipTrigger = null;
 let globalTooltipElement = null;
+let lastTouchTime = 0;
 
 const QUOTE_CATEGORY_MAP = {
     'first-person perspective': 'Individual Voice',
@@ -2340,7 +2341,7 @@ function disableMapLayerFocus(layerGroup) {
             const element = layer.getElement ? layer.getElement() : layer._icon;
             if (element) {
                 element.setAttribute('tabindex', '-1');
-                element.setAttribute('aria-hidden', 'true');
+                element.setAttribute('inert', 'true');
             }
         });
     }
@@ -2442,6 +2443,13 @@ function resetHighlight(e) {
 function onEachFeature(feature, layer) {
     layer.on({
         mouseover: function (e) {
+            // Check if a 'touchstart' event fired within the last 500ms.
+            // If it did, this 'mouseover' is an emulated event from a tap,
+            // not a real hover. We ignore it.
+            const now = new Date().getTime();
+            if ((now - lastTouchTime) < 500) {
+                return;
+            }
             if (isPanning) {
                 return;
             }
@@ -3049,21 +3057,13 @@ function getProviderCount(location, layerName) {
     let nearbyPoints;
 
     if (location.type === 'tract') {
-        const tractPolygon = location.feature;
-        // Cache the line version of the polygon for efficiency
-        const tractLine = turf.polygonToLine(tractPolygon); 
-        
-        nearbyPoints = allPoints.filter(p => {
-            const pointCoords = p.feature.geometry.coordinates;
-            
-            // Check 1: Is the point inside the polygon?
-            const isInside = turf.booleanPointInPolygon(pointCoords, tractPolygon);
-            if (isInside) return true;
-
-            // Check 2: If not inside, is it within 1 mile of the polygon's edge?
-            const distanceToEdge = turf.pointToLineDistance(pointCoords, tractLine, { units: 'miles' });
-            return distanceToEdge <= 1;
-        });
+        if (layerName === 'grocery'){
+            return location.feature.properties.grocery_provider_count ? location.feature.properties.grocery_provider_count : 0;
+        }
+        if (layerName === 'childcare'){
+            return location.feature.properties.childcare_provider_count ? location.feature.properties.childcare_provider_count : 0;
+        }
+        return 0;
 
     } else if (location.type === 'point') {
         const targetPoint = [location.point.lng, location.point.lat];
@@ -4032,6 +4032,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
     map.keyboard.disable();
 
+    map.on('touchstart', () => {
+        // Record the time of the actual tap
+        lastTouchTime = new Date().getTime();
+    });
     map.on('movestart', () => {
         isPanning = true;
         if (geojsonLayer) {
