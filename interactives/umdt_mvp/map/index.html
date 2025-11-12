@@ -8,9 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/latest/css/mdwds.min.css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
+   
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
@@ -24,12 +22,12 @@
 
     <style>
         body {
-            font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+            font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
             overflow: hidden; /* Prevent body scroll */
         }
         /* Override Leaflet's default font */
         .leaflet-container {
-            font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+            font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
         }
 
         /* Sliding base layer and overlay buttons */
@@ -74,7 +72,7 @@
             z-index: 1002 !important;
         }
 
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             /* When the body has this class, move the bottom controls up */
             body.panel-is-open .leaflet-bottom {
                 /* Move it up by the height of the panel (50vh) plus some extra space (5rem) */
@@ -106,7 +104,7 @@
         }
         
         /* --- Bottom sheet styles for mobile --- */
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             #side-panel {
                 transform: translateY(100%); /* Start off-screen at the bottom */
             }
@@ -274,19 +272,21 @@
         .leaflet-top.leaflet-right .info-legend {
             float: right;
             clear: both;
-            margin-top: 4.5rem; /* Pushes legend below top-right controls on desktop */
+            margin-top: 8rem;
         }
 
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             .leaflet-top.leaflet-right {
                 width: calc(100% - 2rem);
             }
-            .leaflet-top.leaflet-right .info-legend {
-                /* Pushes legend below geocoder AND mode buttons on mobile */
-                margin-top: 8rem; 
-            }
+            /* We removed the margin-top from here */
             .info-legend {
                 width: 200px;
+            }
+        }
+        @media (min-width: 768px) {
+            .leaflet-top.leaflet-right .info-legend {
+                margin-top: 4.5rem;
             }
         }
         /* ---  Legend Toggle Styles --- */
@@ -419,7 +419,7 @@
             box-sizing: border-box;
             overflow: auto;
         }
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             /* Ensure modal content doesn't overflow past the available area on small screens */
             #sector-modal-content {
                 max-height: calc(100vh - var(--site-header-height, 0px) - 2rem);
@@ -451,7 +451,7 @@
             overflow: auto;
         }
         #tour-overlay.hidden { opacity: 0; pointer-events: none; }
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             #tour-overlay-content {
                 max-height: calc(100vh - var(--site-header-height, 0px) - 2rem);
                 overflow: auto;
@@ -686,16 +686,16 @@
             margin-right: 10px;
         }
         .custom-logo .usa-logo__text {
-            font-family: 'Montserrat', sans-serif;
+            font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
             font-weight: 600;
-            font-size: 0.70rem;
+            font-size: 0.8rem;
             line-height: 1.2;
             color: #1b1b1b;
-            font-style: normal; /* Fix: Remove italics */
+            font-style: normal;
         }
         @media (min-width: 1024px) {
             .custom-logo .usa-logo__text {
-                font-size: 1rem;
+                font-size: 1.13rem;
             }
             .custom-logo img {
                 height: 50px;
@@ -905,7 +905,7 @@
         }
 
         /* --- New Responsive & Panel-Aware Styles --- */
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             /* On mobile, make the input width responsive to prevent text wrapping */
             .leaflet-control-geocoder-form input {
                 width: calc(100vw - 2rem) !important;
@@ -994,7 +994,7 @@
         }
 
         /* --- Responsive styles for MOBILE (bottom sheet) --- */
-        @media (max-width: 767px) {
+        @media (max-width: 767.98px) {
             .panel-handle {
                 top: -24px; /* Position above the panel */
                 left: 50%;
@@ -1121,6 +1121,9 @@
 
         #global-map-tooltip.hidden {
             display: none;
+        }
+        .usa-prose {
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -1533,84 +1536,32 @@ const pointLayerConfigs = {
 const CHOROPLETH_OPTIONS = {
     // Childcare
     'childcare_unmet_demand': { 
-        label: 'Childcare Opportunity Score', 
+        label: 'Unmet Child Care Demand Score', 
         format: (d) => formatNumber(d), 
         sector: 'childcare', 
-        unit: 'Number of children needing care beyond licensed capacity', 
+        unit: 'Number of children needing care beyond available capacity', 
         legendLabels: { low: 'LOW', high: 'HIGH' }
     },
-    'childcare_supply_score': { 
-        label: 'Childcare Access Score', 
-        format: (d) => formatNumber(d), 
-        sector: 'childcare', 
-        unit: 'Licensed seats per tract', 
-        legendLabels: { low: 'LOW', high: 'HIGH' } 
-    },
-    'childcare_demand_score': { 
-        label: 'Childcare Demand Score', 
-        format: (d) => formatNumber(d), 
-        sector: 'childcare', 
-        unit: 'Children needing care', 
-        legendLabels: { low: 'LOW', high: 'HIGH' } 
-    },
-    'childcare_spending_per_under5': { 
-        label: 'Childcare Spending (per child)', 
-        format: (d) => formatCurrency(d), 
-        legend_format: (d) => formatK(d),
-        sector: 'childcare', 
-        unit: 'Est. spending per child ($)', 
-        legendLabels: { low: 'LOW', high: 'HIGH' } 
-    },
     // Fresh Food
-    'grocery_gap_score': { 
-        label: 'Fresh Food Gap Score', 
-        format: (d) => d.toFixed(0), 
-        sector: 'fresh-food', 
-        unit: 'High food need & low food access', 
-        legendLabels: { low: 'LOW', high: 'HIGH' } 
-    },
     'grocery_unmet_market_demand': { 
-        label: 'Fresh Food Opportunity Score', 
+        label: 'Unmet Fresh Food Demand Score', 
         format: (d) => d.toFixed(0), 
         sector: 'fresh-food', 
-        unit: 'High market demand & low food access', 
+        unit: 'Score from 0-100 showing areas with high demand and low supply', 
         legendLabels: { low: 'LOW', high: 'HIGH' } 
     },
-    'grocery_supply_score': { 
-        label: 'Fresh Food Access Score', 
+    'grocery_gap_score': { 
+        label: 'Unmet Community Need Score', 
         format: (d) => d.toFixed(0), 
         sector: 'fresh-food', 
-        unit: 'Geographic access to fresh food', 
-        legendLabels: { low: 'LOW', high: 'HIGH' } 
-    },
-    'grocery_market_demand_score': { 
-        label: 'Fresh Food Market Demand', 
-        format: (d) => d.toFixed(0), 
-        sector: 'fresh-food', 
-        unit: 'Market demand for fresh food', 
-        legendLabels: { low: 'LOW', high: 'HIGH' } 
-    },
-    'grocery_need_score': { 
-        label: 'Fresh Food Need', 
-        format: (d) => formatPercent(d), 
-        legend_format: (d) => formatPercentInteger(d),
-        sector: 'fresh-food', 
-        unit: 'Food insecurity (%)', 
+        unit: 'Score from 0-100 showing areas where low supply may contribute to food insecurity', 
         legendLabels: { low: 'LOW', high: 'HIGH' } 
     },
     'grocery_philanthropy_score': { 
-        label: 'Fresh Food Philanthropy Score', 
+        label: 'Social Investment Need Score', 
         format: (d) => d.toFixed(0), 
         sector: 'fresh-food', 
-        unit: 'High food gap & low market demand', 
-        legendLabels: { low: 'LOW', high: 'HIGH' } 
-    },
-    'per_household_food_at_home': { 
-        label: 'Grocery spending (per household)', 
-        format: (d) => formatCurrency(d), 
-        legend_format: (d) => formatK(d),
-        sector: 'fresh-food', 
-        unit: 'Est. spending per household ($)', 
+        unit: 'Score from 0-100 showing where needs exist but market viability is lower', 
         legendLabels: { low: 'LOW', high: 'HIGH' } 
     },
     // General
@@ -1619,89 +1570,37 @@ const CHOROPLETH_OPTIONS = {
         format: (d) => formatNumber(d),
         legend_format: (d) => formatK(d),
         sector: 'general', 
-        unit: 'People per tract', 
-        legendLabels: { low: 'LOW', high: 'HIGH' } 
+        unit: 'People per tract'
     },
     'pop_change2530': { 
-        label: 'Projected Pop. Change (25-30)', 
+        label: 'Population Change (2025-2030)', 
         format: (d) => formatNumber(d), 
         legend_format: (d) => formatK(d),
         sector: 'general', 
-        unit: 'People', 
-        legendLabels: { low: 'DECLINE', high: 'GROWTH' } 
+        unit: 'People per tract' 
     },
-    'pop_change2530_pct_change': { 
-        label: 'Projected Pop. Change (%, 25-30)', 
+    'pct_under5': { 
+        label: 'Population Under 5', 
         format: (d) => formatPercent(d), 
         legend_format: (d) => formatPercentInteger(d),
         sector: 'general', 
-        unit: 'Percent change', 
-        legendLabels: { low: 'DECLINE', high: 'GROWTH' } 
+        unit: 'Percent of population' 
     },
     'avg_household_income': { 
-        label: 'Avg. Household Income', 
+        label: 'Average Household Income', 
         format: (d) => formatCurrency(d), 
         legend_format: (d) => formatK(d),
         sector: 'general', 
-        unit: 'Dollars per household', 
-        legendLabels: { low: 'LOW', high: 'HIGH' } 
-    },
-    'transportation_barrier_pct': { 
-        label: '% Transportation Barriers', 
-        format: (d) => formatPercent(d), 
-        legend_format: (d) => formatPercentInteger(d),
-        sector: 'general', 
-        unit: 'Percent of households', 
-        legendLabels: { low: 'LOW', high: 'HIGH' } 
-    },
-    'pct_under5': { 
-        label: '% Population Under 5', 
-        format: (d) => formatPercent(d), 
-        legend_format: (d) => formatPercentInteger(d),
-        sector: 'general', 
-        unit: 'Percent of population', 
-        legendLabels: { low: 'LOW', high: 'HIGH' } 
+        unit: 'USD per household'
     },
     'community_momentum_index': { 
-        label: 'Community Momentum Index', 
+        label: 'Economic Growth Index (2022-2023)', 
         format: (d) => formatPercent(d), 
         legend_format: (d) => formatPercentInteger(d),
         sector: 'general', 
-        unit: 'Index score', 
-        legendLabels: { low: 'DECLINE', high: 'GROWTH' } 
-    },
-    'net_business_formations': { 
-        label: 'Net Business Formations (22-23)', 
-        format: (d) => formatPercent(d), 
-        legend_format: (d) => formatPercentInteger(d),
-        sector: 'general', 
-        unit: 'Percent change', 
-        legendLabels: { low: 'DECLINE', high: 'GROWTH' } 
-    },
-    'job_growth_employees': { 
-        label: 'Job Growth (Employees, 22-23)', 
-        format: (d) => formatPercent(d), 
-        legend_format: (d) => formatPercentInteger(d),
-        sector: 'general', 
-        unit: 'Percent change', 
-        legendLabels: { low: 'DECLINE', high: 'GROWTH' } 
-    },
-    'job_growth_payroll': { 
-        label: 'Job Growth (Payroll, 22-23)', 
-        format: (d) => formatPercent(d), 
-        legend_format: (d) => formatPercentInteger(d),
-        sector: 'general', 
-        unit: 'Percent change', 
-        legendLabels: { low: 'DECLINE', high: 'GROWTH' } 
-    },
-    'license_growth_rate': { 
-        label: 'Business License Growth (22-23)', 
-        format: (d) => formatPercent(d), 
-        legend_format: (d) => formatPercentInteger(d),
-        sector: 'general', 
-        unit: 'Percent change', 
-        legendLabels: { low: 'DECLINE', high: 'GROWTH' } 
-    },
+        unit: 'Index from 0-100, based on business formations, job growth, etc.', 
+        legendLabels: { low: 'LOW', high: 'HIGH' } 
+    }
 };
 
 const BRAND_COLORS = {
@@ -1711,6 +1610,7 @@ const BRAND_COLORS = {
 };
 
 const ICONS = {
+    unmet: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg>`,
     need: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M80-40v-80h800v80H80Zm80-120v-240q-33-54-51-114.5T91-638q0-61 15.5-120T143-874q8-21 26-33.5t40-12.5q31 0 53 21t18 50l-11 91q-6 48 8.5 91t43.5 75.5q29 32.5 70 52t89 19.5q60 0 120.5 12.5T706-472q45 23 69.5 58.5T800-326v166H160Zm80-80h480v-86q0-24-12-42.5T674-398q-41-20-95-31t-99-11q-66 0-122.5-27t-96-72.5Q222-585 202-644.5T190-768q-10 30-14.5 64t-4.5 66q0 58 20.5 111.5T240-422v182Zm240-320q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm0-80q33 0 56.5-23.5T560-720q0-33-23.5-56.5T480-800q-33 0-56.5 23.5T400-720q0 33 23.5 56.5T480-640ZM320-160v-37q0-67 46.5-115T480-360h160v80H480q-34 0-57 24.5T400-197v37h-80Zm160-80Zm0-480Z"/></svg>`,
     providers: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-80q-106 0-173-33.5T240-200q0-24 14.5-44.5T295-280l63 59q-9 4-19.5 9T322-200q13 16 60 28t98 12q51 0 98.5-12t60.5-28q-7-8-18-13t-21-9l62-60q28 16 43 36.5t15 45.5q0 53-67 86.5T480-80Zm1-220q99-73 149-146.5T680-594q0-102-65-154t-135-52q-70 0-135 52t-65 154q0 67 49 139.5T481-300Zm-1 100Q339-304 269.5-402T200-594q0-71 25.5-124.5T291-808q40-36 90-54t99-18q49 0 99 18t90 54q40 36 65.5 89.5T760-594q0 94-69.5 192T480-200Zm0-320q33 0 56.5-23.5T560-600q0-33-23.5-56.5T480-680q-33 0-56.5 23.5T400-600q0 33 23.5 56.5T480-520Zm0-80Z"/></svg>`,
     communityVoice: `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg>`,
@@ -2739,9 +2639,9 @@ function displayFeatureInfo(tractFeature) {
     const popChange = safeParseFloat(properties.pop_change2530);
     const popChangePct = properties.pop_change2530_pct_change;
     const formattedPopChangePct = (popChangePct === null || popChangePct === undefined) ? 'N/A' : formatPercent(popChangePct);
-    const momentumTooltip = "The Community Momentum Index measures economic vitality by averaging growth rates in business formations, licenses, jobs, and payroll. Positive scores reflect community economic growth.";
-    const childcareOppTooltip = "Child care opportunity score is the number of children 5 and under in households where all parents are in the laborforce, minus the licensed capacity of local child care providers. Positive scores reflect unmet community demand.";
-    const unmetDemandTooltip = "Measures the gap between a community's economic potential to support a store (Market Demand) and its current store access (Supply). High positive scores signal a strong market opportunity where potential outstrips supply.";
+    const momentumTooltip = "Measures economic vitality by averaging growth rates in business formations, licenses, jobs, and payroll. Positive scores reflect community economic growth.";
+    const childcareOppTooltip = "Measures the number of children 5 and under in households where all parents are in the laborforce, minus the licensed capacity of local child care providers. Positive scores reflect unmet community demand.";
+    const unmetDemandTooltip = "Measures the gap between a community's economic potential to support a store (Market Demand) and its current store access (Supply). High positive scores signal a strong market opportunity where potential demand outstrips supply.";
     const gapTooltip = "Measures the intersection of fresh food need and low access. This score identifies the most critical \"intervention zones\" where help is needed immediately."
 
     const createInfoIcon = (tooltipText) => `
@@ -2755,17 +2655,16 @@ function displayFeatureInfo(tractFeature) {
             <h3 class="text-lg font-semibold text-slate-800 mb-2">Population & Demographics</h3>
             <table class="explore-table">
                 <tr><th>Population (2025)</th><td>${formatNumber(properties.pop2025)}</td></tr>
-                <tr><th>Projected Pop. (2030)</th><td>${formatNumber(properties.pop2030)}</td></tr>
-                <tr><th>Projected Change (25-30)</th><td><span class="${popChange > 0 ? 'text-green-700' : 'text-red-600'}">${formatNumber(popChange)} (${formattedPopChangePct})</span></td></tr>
-                <tr><th>% Population Under 5</th><td>${formatPercent(properties.pct_under5)}</td></tr>
-                <tr><th>Avg. Household Income</th><td>${formatCurrency(properties.avg_household_income)}</td></tr>
-                <tr><th>% Transportation Barriers</th><td>${formatPercent(properties.transportation_barrier_pct)}</td></tr>
+                <tr><th>Projected Population (2030)</th><td>${formatNumber(properties.pop2030)}</td></tr>
+                <tr><th>Projected Population Change (2025-2030)</th><td><span class="${popChange > 0 ? 'text-green-700' : 'text-red-600'}">${formatNumber(popChange)} (${formattedPopChangePct})</span></td></tr>
+                <tr><th>Population Under 5</th><td>${formatPercent(properties.pct_under5)}</td></tr>
+                <tr><th>Average Household Income</th><td>${formatCurrency(properties.avg_household_income)}</td></tr>
             </table>
         </div>
         <div>
             <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Economic Vitality</h3>
             <table class="explore-table">
-                <tr><th>Momentum Index (22-23) ${createInfoIcon(momentumTooltip)}</th><td>${formatPercent(properties.community_momentum_index)}</td></tr>
+                <tr><th>Economic Growth Index (2022-2023) ${createInfoIcon(momentumTooltip)}</th><td>${formatPercent(properties.community_momentum_index)}</td></tr>
                 <tr><th>Net Business Formations</th><td>${formatPercent(properties.net_business_formations)}</td></tr>
                 <tr><th>Job Growth (Employees)</th><td>${formatPercent(properties.job_growth_employees)}</td></tr>
                 <tr><th>Job Growth (Payroll)</th><td>${formatPercent(properties.job_growth_payroll)}</td></tr>
@@ -2778,10 +2677,10 @@ function displayFeatureInfo(tractFeature) {
             <div>
                 <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Childcare Opportunity</h3>
                 <table class="explore-table">
-                    <tr><th>Access (Existing Seats)</th><td>${formatNumber(properties.childcare_supply_score)}</td></tr>
-                    <tr><th>Demand (Children Needing Care)</th><td>${formatNumber(properties.childcare_demand_score)}</td></tr>
-                    <tr><th>Opportunity (Unmet Demand) ${createInfoIcon(childcareOppTooltip)}</th><td>${formatNumber(properties.childcare_unmet_demand)}</td></tr>
-                    <tr><th>Childcare Spending (per child)</th><td>${formatCurrency(properties.childcare_spending_per_under5)}</td></tr>
+                    <tr><th>Unmet Demand ${createInfoIcon(childcareOppTooltip)}</th><td>${formatNumber(properties.childcare_unmet_demand)}</td></tr>
+                    <tr><th>Estimated Supply</th><td>${formatNumber(properties.childcare_supply_score)}</td></tr>
+                    <tr><th>Estimated Demand</th><td>${formatNumber(properties.childcare_demand_score)}</td></tr>
+                    <tr><th>Average Childcare Spending Per Child</th><td>${formatCurrency(properties.childcare_spending_per_under5)}</td></tr>
                 </table>
             </div>`;
     }
@@ -2791,11 +2690,11 @@ function displayFeatureInfo(tractFeature) {
             <div>
                 <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Fresh Food Opportunity</h3>
                 <table class="explore-table">
-                    <tr><th>Access Score</th><td>${properties.grocery_supply_score.toFixed(2)}</td></tr>
-                    <tr><th>Need Score</th><td>${formatPercent(properties.grocery_need_score)}</td></tr>
-                    <tr><th>Gap Score ${createInfoIcon(gapTooltip)}</th><td>${properties.grocery_gap_score.toFixed(2)}</td></tr>
-                    <tr><th>Market Demand Score</th><td>${properties.grocery_market_demand_score.toFixed(2)}</td></tr>
-                    <tr><th>Unmet Market Demand ${createInfoIcon(unmetDemandTooltip)}</th><td>${properties.grocery_unmet_market_demand.toFixed(2)}</td></tr>
+                    <tr><th>Unmet Demand ${createInfoIcon(unmetDemandTooltip)}</th><td>${properties.grocery_unmet_market_demand.toFixed(2)}</td></tr>
+                    <tr><th>Estimated Supply Score</th><td>${properties.grocery_supply_score.toFixed(2)}</td></tr>
+                    <tr><th>Estimated Demand Score</th><td>${properties.grocery_market_demand_score.toFixed(2)}</td></tr>
+                    <tr><th>Unmet Community Need Score ${createInfoIcon(gapTooltip)}</th><td>${properties.grocery_gap_score.toFixed(2)}</td></tr>
+                    <tr><th>Food Insecurity Rate</th><td>${formatPercent(properties.grocery_need_score)}</td></tr>
                     <tr><th>Grocery Spending (per household)</th><td>${formatCurrency(properties.per_household_food_at_home)}</td></tr>
                 </table>
             </div>`;
@@ -3133,17 +3032,17 @@ function displaySmartResearchForTract(tractFeature) {
         switch (needLabel) {
             case 'HIGH NEED':
                 unmetPreamble = "This area has a <strong>high need</strong>, with";
-                unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+                unmetHTML = `an estimated unmet demand of <strong>${formatNumber(unmet)} seats</strong>`;
                 break;
             case 'MODERATE NEED':
                 unmetPreamble = "This area has a <strong>moderate need</strong>, with";
-                unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+                unmetHTML = `an estimated unmet demand of <strong>${formatNumber(unmet)} seats</strong>`;
                 break;
             case 'LOW NEED':
                 unmetPreamble = "This area has a <strong>low need</strong>.";
                 // Add specific details for low need
                 if (unmet > 0) {
-                    unmetHTML = `There is an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+                    unmetHTML = `There is an estimated unmet demand of <strong>${formatNumber(unmet)} seats</strong>`;
                 } else if (unmet < 0) {
                     unmetHTML = `There is an estimated surplus of <strong>${formatNumber(Math.abs(unmet))} seats</strong>`;
                 } else {
@@ -3152,7 +3051,7 @@ function displaySmartResearchForTract(tractFeature) {
                 break;
             default: // Fallback
                 unmetPreamble = "This area has";
-                unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+                unmetHTML = `an estimated unmet demand of <strong>${formatNumber(unmet)} seats</strong>`;
         }
 
         questions.push(createAccordionItem({
@@ -3214,34 +3113,60 @@ function displaySmartResearchForTract(tractFeature) {
     }
     
     if (selectedSector === 'fresh-food') {
+        const unmetDemand = p.grocery_unmet_market_demand;
+        const { label: unmetDemandLabel, color: unmetDemandColor } = getTieredLabel(unmetDemand, 'grocery_unmet_market_demand', {
+            labels: ['LOW UNMET DEMAND', 'MODERATE UNMET DEMAND', 'HIGH UNMET DEMAND'],
+            colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
+        });
+        let foodUnmetText;
+        let foodUnmetExplanation = ''; // Start with an empty explanation
+        switch (unmetDemandLabel) {
+            case 'HIGH UNMET DEMAND':
+                foodUnmetText = 'This community shows <strong>high</strong> unmet demand.';
+                foodUnmetExplanation = ` The score reflects the intersection of high market demand and low geographic access to fresh food.`;
+                break;
+            case 'MODERATE UNMET DEMAND':
+                foodUnmetText = 'This community shows <strong>moderate</strong> unmet demand.';
+                foodUnmetExplanation = ` The score reflects a combination of existing market demand and moderate geographic access to fresh food.`;
+                break;
+            case 'LOW UNMET DEMAND':
+                foodUnmetText = 'This community shows <strong>low</strong> unmet demand.';
+                break;
+            default:
+                foodUnmetText = 'The unmet demand is undetermined.';
+        }
+
+        questions.push(createAccordionItem({
+            question: "Is there unmet demand for more fresh food options in this area?",
+            teaser: unmetDemandLabel,
+            teaserColor: unmetDemandColor,
+            iconSVG: ICONS.unmet,
+            answerHTML: `<p>${foodUnmetText} The <strong>Unmet Demand Score is ${unmetDemand.toFixed(1)}</strong>.${foodUnmetExplanation}</p>`,
+            mapAction: 'showLayer:grocery_unmet_market_demand', 
+            context
+        }));
+
         const gapScore = p.grocery_gap_score;
         const { label: needLabel, color: needColor } = getTieredLabel(gapScore, 'grocery_gap_score', {
-            labels: ['VERY LOW GAP', 'LOW GAP', 'MODERATE GAP', 'HIGH GAP', 'VERY HIGH GAP'],
-            colors: [BRAND_COLORS.error, BRAND_COLORS.error, warningColor, BRAND_COLORS.success, BRAND_COLORS.success]
+            labels: ['LOW NEED', 'MODERATE NEED', 'HIGH NEED'],
+            colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
         });
         let foodNeedText;
         let foodGapExplanation = ''; // Start with an empty explanation
         switch (needLabel) {
-            case 'VERY HIGH GAP':
-                foodNeedText = 'This community shows a <strong>very high gap</strong> between need and access.';
+            case 'HIGH NEED':
+                foodNeedText = 'This community shows <strong>high</strong> unmet community need.';
                 foodGapExplanation = ` The score reflects the intersection of high food insecurity and low geographic access to fresh food.`;
                 break;
-            case 'HIGH GAP':
-                foodNeedText = 'This community shows a <strong>high gap</strong> between need and access.';
-                foodGapExplanation = ` The score reflects the intersection of high food insecurity and low geographic access to fresh food.`;
+            case 'MODERATE NEED':
+                foodNeedText = 'This community shows <strong>moderate</strong> unmet community need.';
+                foodGapExplanation = ` The score reflects a combination of food insecurity and moderate geographic access to fresh food.`;
                 break;
-            case 'MODERATE GAP':
-                foodNeedText = 'This community shows a <strong>moderate gap</strong> between need and access.';
-                foodGapExplanation = ` The score reflects a combination of food insecurity and low geographic access to fresh food.`;
-                break;
-            case 'LOW GAP':
-                foodNeedText = 'This community shows a <strong>low gap</strong> between need and access.';
-                break;
-            case 'VERY LOW GAP':
-                foodNeedText = 'This community shows a <strong>very low gap</strong> between need and access.';
+            case 'LOW NEED':
+                foodNeedText = 'This community shows <strong>low</strong> unmet community need.';
                 break;
             default:
-                foodNeedText = 'The gap between need and access in this community is undetermined.';
+                foodNeedText = 'The unmet community need is undetermined.';
         }
 
         questions.push(createAccordionItem({
@@ -3249,7 +3174,7 @@ function displaySmartResearchForTract(tractFeature) {
             teaser: needLabel,
             teaserColor: needColor,
             iconSVG: ICONS.need,
-            answerHTML: `<p>${foodNeedText} The <strong>Gap Score is ${gapScore.toFixed(1)}</strong>.${foodGapExplanation}</p>`,
+            answerHTML: `<p>${foodNeedText} The <strong>Unmet Community Need Score is ${gapScore.toFixed(1)}</strong>.${foodGapExplanation}</p>`,
             mapAction: 'showLayer:grocery_gap_score', 
             context
         }));
@@ -3386,17 +3311,17 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
         switch (needLabel) {
             case 'HIGH NEED':
                 unmetPreamble = "This area has a <strong>high need</strong>, with";
-                unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+                unmetHTML = `an estimated unmet demand of <strong>${formatNumber(unmet)} seats</strong>`;
                 break;
             case 'MODERATE NEED':
                 unmetPreamble = "This area has a <strong>moderate need</strong>, with";
-                unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+                unmetHTML = `an estimated unmet demand of <strong>${formatNumber(unmet)} seats</strong>`;
                 break;
             case 'LOW NEED':
                 unmetPreamble = "This area has a <strong>low need</strong>.";
                 // Add specific details for low need
                 if (unmet > 0) {
-                    unmetHTML = `There is an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+                    unmetHTML = `There is an estimated unmet demand of <strong>${formatNumber(unmet)} seats</strong>`;
                 } else if (unmet < 0) {
                     unmetHTML = `There is an estimated surplus of <strong>${formatNumber(Math.abs(unmet))} seats</strong>`;
                 } else {
@@ -3405,7 +3330,7 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
                 break;
             default: // Fallback
                 unmetPreamble = "This area has";
-                unmetHTML = `an estimated gap of <strong>${formatNumber(unmet)} seats</strong>`;
+                unmetHTML = `an estimated unmet demand of <strong>${formatNumber(unmet)} seats</strong>`;
         }
         
         questions.push(createAccordionItem({
@@ -3467,34 +3392,60 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
     }
 
     if (selectedSector === 'fresh-food') {
+        const unmetDemand = tractProps.grocery_unmet_market_demand;
+        const { label: unmetDemandLabel, color: unmetDemandColor } = getTieredLabel(unmetDemand, 'grocery_unmet_market_demand', {
+            labels: ['LOW UNMET DEMAND', 'MODERATE UNMET DEMAND', 'HIGH UNMET DEMAND'],
+            colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
+        });
+        let foodUnmetText;
+        let foodUnmetExplanation = ''; // Start with an empty explanation
+        switch (unmetDemandLabel) {
+            case 'HIGH UNMET DEMAND':
+                foodUnmetText = 'This community shows <strong>high</strong> unmet demand.';
+                foodUnmetExplanation = ` The score reflects the intersection of high market demand and low geographic access to fresh food.`;
+                break;
+            case 'MODERATE UNMET DEMAND':
+                foodUnmetText = 'This community shows <strong>moderate</strong> unmet demand.';
+                foodUnmetExplanation = ` The score reflects a combination of existing market demand and moderate geographic access to fresh food.`;
+                break;
+            case 'LOW UNMET DEMAND':
+                foodUnmetText = 'This community shows <strong>low</strong> unmet demand.';
+                break;
+            default:
+                foodUnmetText = 'The unmet demand is undetermined.';
+        }
+
+        questions.push(createAccordionItem({
+            question: "Is there unmet demand for more fresh food options in this area?",
+            teaser: unmetDemandLabel,
+            teaserColor: unmetDemandColor,
+            iconSVG: ICONS.unmet,
+            answerHTML: `<p>${foodUnmetText} The <strong>Unmet Demand Score is ${unmetDemand.toFixed(1)}</strong>.${foodUnmetExplanation}</p>`,
+            mapAction: 'showLayer:grocery_unmet_market_demand', 
+            context
+        }));
+
         const gapScore = tractProps.grocery_gap_score;
         const { label: needLabel, color: needColor } = getTieredLabel(gapScore, 'grocery_gap_score', {
-            labels: ['VERY LOW GAP', 'LOW GAP', 'MODERATE GAP', 'HIGH GAP', 'VERY HIGH GAP'],
-            colors: [BRAND_COLORS.error, BRAND_COLORS.error, warningColor, BRAND_COLORS.success, BRAND_COLORS.success]
+            labels: ['LOW NEED', 'MODERATE NEED', 'HIGH NEED'],
+            colors: [BRAND_COLORS.error, warningColor, BRAND_COLORS.success]
         });
         let foodNeedText;
         let foodGapExplanation = ''; // Start with an empty explanation
         switch (needLabel) {
-            case 'VERY HIGH GAP':
-                foodNeedText = 'This community shows a <strong>very high gap</strong> between need and access.';
+            case 'HIGH NEED':
+                foodNeedText = 'This community shows <strong>high</strong> unmet community need.';
                 foodGapExplanation = ` The score reflects the intersection of high food insecurity and low geographic access to fresh food.`;
                 break;
-            case 'HIGH GAP':
-                foodNeedText = 'This community shows a <strong>high gap</strong> between need and access.';
-                foodGapExplanation = ` The score reflects the intersection of high food insecurity and low geographic access to fresh food.`;
+            case 'MODERATE NEED':
+                foodNeedText = 'This community shows <strong>moderate</strong> unmet community need.';
+                foodGapExplanation = ` The score reflects a combination of food insecurity and moderate geographic access to fresh food.`;
                 break;
-            case 'MODERATE GAP':
-                foodNeedText = 'This community shows a <strong>moderate gap</strong> between need and access.';
-                foodGapExplanation = ` The score reflects a combination of food insecurity and low geographic access to fresh food.`;
-                break;
-            case 'LOW GAP':
-                foodNeedText = 'This community shows a <strong>low gap</strong> between need and access.';
-                break;
-            case 'VERY LOW GAP':
-                foodNeedText = 'This community shows a <strong>very low gap</strong> between need and access.';
+            case 'LOW NEED':
+                foodNeedText = 'This community shows <strong>low</strong> unmet community need.';
                 break;
             default:
-                foodNeedText = 'The gap between need and access in this community is undetermined.';
+                foodNeedText = 'The unmet community need is undetermined.';
         }
 
         questions.push(createAccordionItem({
@@ -3502,7 +3453,7 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
             teaser: needLabel,
             teaserColor: needColor,
             iconSVG: ICONS.need,
-            answerHTML: `<p>${foodNeedText} The <strong>Gap Score is ${gapScore.toFixed(1)}</strong>.${foodGapExplanation}</p>`,
+            answerHTML: `<p>${foodNeedText} The <strong>Unmet Community Need Score is ${gapScore.toFixed(1)}</strong>.${foodGapExplanation}</p>`,
             mapAction: 'showLayer:grocery_gap_score', 
             context
         }));
@@ -3807,9 +3758,9 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
     panelTitle.textContent = displayTitle;
     let html = '';
 
-    const momentumTooltip = "The Community Momentum Index measures economic vitality by averaging growth rates in business formations, licenses, jobs, and payroll. Positive scores reflect community economic growth.";
-    const childcareOppTooltip = "Child care opportunity score is the number of children 5 and under in households where all parents are in the laborforce, minus the licensed capacity of local child care providers. Positive scores reflect unmet community demand.";
-    const unmetDemandTooltip = "Measures the gap between a community's economic potential to support a store (Market Demand) and its current store access (Supply). High positive scores signal a strong market opportunity where potential outstrips supply.";
+    const momentumTooltip = "Measures economic vitality by averaging growth rates in business formations, licenses, jobs, and payroll. Positive scores reflect community economic growth.";
+    const childcareOppTooltip = "Measures the number of children 5 and under in households where all parents are in the laborforce, minus the licensed capacity of local child care providers. Positive scores reflect unmet community demand.";
+    const unmetDemandTooltip = "Measures the gap between a community's economic potential to support a store (Market Demand) and its current store access (Supply). High positive scores signal a strong market opportunity where potential demand outstrips supply.";
     const gapTooltip = "Measures the intersection of fresh food need and low access. This score identifies the most critical \"intervention zones\" where help is needed immediately."
 
     const createInfoIcon = (tooltipText) => `
@@ -3848,17 +3799,16 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
                 <p class="text-sm text-slate-600 mb-2">Data for the <strong>${truncateCommunityList(properties.tract_name)}</strong> community area.</p>
                 <table class="explore-table">
                     <tr><th>Population (2025)</th><td>${formatNumber(properties.pop2025)}</td></tr>
-                    <tr><th>Projected Pop. (2030)</th><td>${formatNumber(properties.pop2030)}</td></tr>
-                    <tr><th>Projected Change (25-30)</th><td><span class="${popChange > 0 ? 'text-green-700' : 'text-red-600'}">${formatNumber(popChange)} (${formattedPopChangePct})</span></td></tr>
-                    <tr><th>% Population Under 5</th><td>${formatPercent(properties.pct_under5)}</td></tr>
-                    <tr><th>Avg. Household Income</th><td>${formatCurrency(properties.avg_household_income)}</td></tr>
-                    <tr><th>% Transportation Barriers</th><td>${formatPercent(properties.transportation_barrier_pct)}</td></tr>
+                    <tr><th>Projected Population (2030)</th><td>${formatNumber(properties.pop2030)}</td></tr>
+                    <tr><th>Projected Population Change (2025-2030)</th><td><span class="${popChange > 0 ? 'text-green-700' : 'text-red-600'}">${formatNumber(popChange)} (${formattedPopChangePct})</span></td></tr>
+                    <tr><th>Population Under 5</th><td>${formatPercent(properties.pct_under5)}</td></tr>
+                    <tr><th>Average Household Income</th><td>${formatCurrency(properties.avg_household_income)}</td></tr>
                 </table>
             </div>
             <div>
-                <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Community: Economic Vitality</h3>
+                <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Economic Vitality</h3>
                 <table class="explore-table">
-                    <tr><th>Momentum Index (22-23) ${createInfoIcon(momentumTooltip)}</th><td>${formatPercent(properties.community_momentum_index)}</td></tr>
+                    <tr><th>Economic Growth Index (2022-2023) ${createInfoIcon(momentumTooltip)}</th><td>${formatPercent(properties.community_momentum_index)}</td></tr>
                     <tr><th>Net Business Formations</th><td>${formatPercent(properties.net_business_formations)}</td></tr>
                     <tr><th>Job Growth (Employees)</th><td>${formatPercent(properties.job_growth_employees)}</td></tr>
                     <tr><th>Job Growth (Payroll)</th><td>${formatPercent(properties.job_growth_payroll)}</td></tr>
@@ -3869,12 +3819,12 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
         if (selectedSector === 'childcare') {
             html += `
                 <div>
-                    <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Community: Childcare Opportunity</h3>
+                    <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Childcare Opportunity</h3>
                     <table class="explore-table">
-                        <tr><th>Access (Existing Seats)</th><td>${formatNumber(properties.childcare_supply_score)}</td></tr>
-                        <tr><th>Demand (Children Needing Care)</th><td>${formatNumber(properties.childcare_demand_score)}</td></tr>
-                        <tr><th>Opportunity (Unmet Demand) ${createInfoIcon(childcareOppTooltip)}</th><td>${formatNumber(properties.childcare_unmet_demand)}</td></tr>
-                        <tr><th>Childcare Spending (per child)</th><td>${formatCurrency(properties.childcare_spending_per_under5)}</td></tr>
+                        <tr><th>Unmet Demand ${createInfoIcon(childcareOppTooltip)}</th><td>${formatNumber(properties.childcare_unmet_demand)}</td></tr>
+                        <tr><th>Estimated Supply</th><td>${formatNumber(properties.childcare_supply_score)}</td></tr>
+                        <tr><th>Estimated Demand</th><td>${formatNumber(properties.childcare_demand_score)}</td></tr>
+                        <tr><th>Average Childcare Spending Per Child</th><td>${formatCurrency(properties.childcare_spending_per_under5)}</td></tr>
                     </table>
                 </div>`;
         }
@@ -3882,13 +3832,13 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
         if (selectedSector === 'fresh-food') {
             html += `
                 <div>
-                    <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Community: Fresh Food Opportunity</h3>
+                    <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Fresh Food Opportunity</h3>
                     <table class="explore-table">
-                        <tr><th>Access Score</th><td>${properties.grocery_supply_score.toFixed(2)}</td></tr>
-                        <tr><th>Need Score</th><td>${formatPercent(properties.grocery_need_score)}</td></tr>
-                        <tr><th>Gap Score ${createInfoIcon(gapTooltip)}</th><td>${properties.grocery_gap_score.toFixed(2)}</td></tr>
-                        <tr><th>Market Demand Score</th><td>${properties.grocery_market_demand_score.toFixed(2)}</td></tr>
-                        <tr><th>Unmet Market Demand ${createInfoIcon(unmetDemandTooltip)}</th><td>${properties.grocery_unmet_market_demand.toFixed(2)}</td></tr>
+                        <tr><th>Unmet Demand ${createInfoIcon(unmetDemandTooltip)}</th><td>${properties.grocery_unmet_market_demand.toFixed(2)}</td></tr>
+                        <tr><th>Estimated Supply Score</th><td>${properties.grocery_supply_score.toFixed(2)}</td></tr>
+                        <tr><th>Estimated Demand Score</th><td>${properties.grocery_market_demand_score.toFixed(2)}</td></tr>
+                        <tr><th>Unmet Community Need Score ${createInfoIcon(gapTooltip)}</th><td>${properties.grocery_gap_score.toFixed(2)}</td></tr>
+                        <tr><th>Food Insecurity Rate</th><td>${formatPercent(properties.grocery_need_score)}</td></tr>
                         <tr><th>Grocery Spending (per household)</th><td>${formatCurrency(properties.per_household_food_at_home)}</td></tr>
                     </table>
                 </div>`;
@@ -4489,10 +4439,12 @@ function initializeMap() {
             <div class="legend-content-wrapper">
                 <div class="info-legend-unit">${optionConfig.unit || ''}</div>
                 
-            <div class="info-legend-labels">
-                <span>${optionConfig.legendLabels.low || 'LOW'}</span>
-                <span>${optionConfig.legendLabels.high || 'HIGH'}</span>
-            </div>
+            ${optionConfig.legendLabels ? `
+                        <div class="info-legend-labels">
+                            <span>${optionConfig.legendLabels.low || ''}</span>
+                            <span>${optionConfig.legendLabels.high || ''}</span>
+                        </div>
+            ` : ''}
             
             <div class="info-legend-bar">
                 ${colorBarHTML}
@@ -5180,7 +5132,7 @@ function setDefaultBaseLayer(sector) {
     // Define the default layer for each sector
     const defaultLayer = {
         'childcare': 'childcare_unmet_demand',
-        'fresh-food': 'grocery_gap_score',
+        'fresh-food': 'grocery_unmet_market_demand',
         'other': 'community_momentum_index'
     }[sector] || 'none';
 
