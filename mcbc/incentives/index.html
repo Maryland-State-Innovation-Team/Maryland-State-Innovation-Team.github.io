@@ -43,10 +43,6 @@
              color: #1b1b1b;
         }
 
-        .sticky-sidebar {
-            position: sticky;
-            top: 1.5rem; 
-        }
         .scrollable-filters {
             max-height: calc(100vh - 12rem);
             overflow-y: auto;
@@ -275,11 +271,6 @@
             text-transform: capitalize;
         }
 
-        .incentive-detail-header {
-            background-color: #1a4480; /* primary-dark */
-            color: white;
-            padding: 2rem 0;
-        }
         .incentive-detail-header h1 {
             color: white;
             margin-top: 1rem;
@@ -361,6 +352,88 @@
         }
         .incentive-detail-header .usa-breadcrumb__list::before {
             background-color: transparent;
+        }
+
+        .incentive-detail-header {
+            background-image: url('../assets/bg.png');
+            background-color: #19355d; /* Lighter fallback color */
+            background-blend-mode: normal;
+            background-size: cover;
+            background-position: center center;
+            padding: 2rem 0;
+        }
+
+        /* Style the tag moved into the hero */
+        .incentive-detail-header .usa-tag {
+            background-color: #E1F3F8; /* New background */
+            color: #07648D;           /* New font color */
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: capitalize;
+            border-radius: 999px;      /* Pill shape */
+            padding: 0.25rem 0.75rem;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        /* Style the deadline text moved into the hero */
+        .incentive-detail-header #detail-deadline {
+            color: white;
+            font-size: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* Style the new 'Contact' button */
+        #detail-contact-link {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        /* Ensure the sticky sidebar applies in the new location */
+        #incentive-detail-view .sticky-sidebar {
+            position: sticky;
+            top: 1.5rem;
+        }
+
+        /* New grey pill tag for the info box */
+        .info-box-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            line-height: 1.5;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 999px; /* pill shape */
+            background-color: #DFE1E2;
+            color: #3D4551;
+            margin: 0.125rem;
+            text-transform: capitalize;
+        }
+
+        /* New white <hr> for the hero */
+        .incentive-detail-header .white-divider {
+            border: 0;
+            height: 1px;
+            background-color: #ffffff;
+            opacity: 0.7;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* New grey <hr> for the info box */
+        .info-box .info-box-divider {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background-color: #DFE1E2;
+        }
+
+        .usa-button--outline--inverse{
+            color: white;
+            box-shadow: inset 0 0 0 2px white;
         }
     </style>
 </head>
@@ -497,17 +570,52 @@
             <div id="incentive-detail-view" style="display: none;">
                 <section class="incentive-detail-header">
                     <div class="grid-container">
-                        <nav aria-label="Breadcrumbs">
-                            <ol class="usa-breadcrumb usa-breadcrumb--inverse">
-                                <li class="usa-breadcrumb__list-item">
-                                    <a href="#" id="breadcrumb-back-to-search" class="usa-breadcrumb__link"><span>Find Incentives</span></a>
-                                </li>
-                                <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
-                                    <span id="breadcrumb-current-page"></span>
-                                </li>
-                            </ol>
-                        </nav>
-                        <h1 id="detail-title" class="font-sans-2xl"></h1>
+                        <div class="grid-row grid-gap-6">
+                            
+                            <div class="tablet-lg:grid-col-8">
+                                <nav aria-label="Breadcrumbs">
+                                    <ol class="usa-breadcrumb usa-breadcrumb--inverse">
+                                        <li class="usa-breadcrumb__list-item">
+                                            <a href="#" id="breadcrumb-back-to-search" class="usa-breadcrumb__link"><span>Find Incentives</span></a>
+                                        </li>
+                                        <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
+                                            <span id="breadcrumb-current-page"></span>
+                                        </li>
+                                    </ol>
+                                </nav>
+                                
+                                <h1 id="detail-title" class="font-serif-2xl"></h1>
+                                
+                                <div id="detail-tags" class="display-flex flex-wrap" style="gap: 0.5rem;"></div>
+                                
+                                <p id="detail-deadline" class="font-sans-md"></p>
+                                
+                                <hr class="white-divider">
+
+                                <div id="detail-button-container" class="display-flex flex-wrap" style="gap: 1rem;">
+                                    </div>
+                                
+                                </div>
+
+                            <div class="margin-top-4 tablet-lg:margin-top-0 tablet-lg:grid-col-4">
+                                <div class="bg-white padding-3 border border-base-lighter radius-lg info-box">
+                                    <div id="detail-geo-box">
+                                        <h2 class="font-sans-md text-base">Geographic Area</h2>
+                                        <p id="detail-geo" class="margin-top-1"></p>
+                                    </div>
+                                    <hr class="info-box-divider">
+                                    <div id="detail-org-box">
+                                        <h2 class="font-sans-md text-base">Eligible Organization Type</h2>
+                                        <p id="detail-org" class="margin-top-1"></p>
+                                    </div>
+                                    <hr class="info-box-divider">
+                                    <div id="detail-agency-box">
+                                        <h2 class="font-sans-md text-base">Grantor Agency</h2>
+                                        <p id="detail-agency" class="font-sans-md text-bold"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 
@@ -524,32 +632,6 @@
                                 </div>
                             </aside>
                             <div class="tablet:grid-col-9">
-                                <div class="grid-row grid-gap">
-                                    <div class="tablet:grid-col-8">
-                                        <div id="detail-tags" class="display-flex flex-wrap" style="gap: 0.5rem;"></div>
-                                        <p id="detail-deadline" class="font-sans-md margin-top-2 text-base"></p>
-                                        <div id="detail-button-container" class="margin-top-4"></div>
-                                    </div>
-                                    <div class="tablet:grid-col-4">
-                                        <div class="bg-white padding-3 border border-base-lighter radius-md">
-                                            <div id="detail-agency-box">
-                                                <h2 class="font-sans-sm text-base">Agency</h2>
-                                                <p id="detail-agency" class="font-sans-lg text-bold"></p>
-                                            </div>
-                                            <hr class="margin-y-2">
-                                            <div id="detail-geo-box">
-                                                <h2 class="font-sans-sm text-base">Geographic Area</h2>
-                                                <p id="detail-geo" class="font-sans-lg text-bold"></p>
-                                            </div>
-                                            <hr class="margin-y-2">
-                                            <div id="detail-org-box">
-                                                <h2 class="font-sans-sm text-base">Eligible Organization Type</h2>
-                                                <p id="detail-org" class="font-sans-lg text-bold"></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr class="usa-divider margin-y-6">
                                 <div id="detail-main-content" class="usa-prose">
                                     </div>
                            </div>
@@ -684,6 +766,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            let detailScrollObserver = null;
+            let isUserClickScrolling = false;
+            let scrollTimeout = null;
             let allIncentives = [];
             let displayedIncentives = [];
             const activeFilters = {
@@ -936,15 +1021,50 @@
                 ).join('') || '';
 
                 const buttonContainer = document.getElementById('detail-button-container');
+                buttonContainer.innerHTML = ''; // Clear it out first
+
+                // 1. Learn More & Apply Button
                 if (data.URL) {
-                    buttonContainer.innerHTML = `<a href="${data.URL}" target="_blank" rel="noopener noreferrer" class="usa-button">Learn More & Apply</a>`;
+                    buttonContainer.innerHTML += `<a href="${data.URL}" target="_blank" rel="noopener noreferrer" class="usa-button">Learn More & Apply</a>`;
                 } else {
-                    buttonContainer.innerHTML = `<button class="usa-button" disabled>Application Link Not Available</button>`;
+                    buttonContainer.innerHTML += `<button class="usa-button" disabled>Application Link Not Available</button>`;
                 }
 
+                // 2. Contact Button
+                let contactHref = '';
+                if (data.contact_email) {
+                    contactHref = `mailto:${data.contact_email}`;
+                } else if (data.contact_phone) {
+                    contactHref = `tel:${data.contact_phone}`;
+                }
+
+                // If a contact method exists, create the button
+                if (contactHref) {
+                    buttonContainer.innerHTML += `<a href="${contactHref}" class="usa-button usa-button--outline usa-button--outline--inverse">Contact Agency</a>`;
+                }
+
+                // Agency (still bold text)
                 document.getElementById('detail-agency').textContent = data.agency || 'Not Specified';
-                document.getElementById('detail-geo').textContent = data.list_of_eligible_counties?.join(', ') || 'Varies';
-                document.getElementById('detail-org').textContent = data.eligible_organization_types?.join(', ') || 'Varies';
+
+                // Geographic Area (as pills)
+                const geoEl = document.getElementById('detail-geo');
+                const geoData = data.list_of_eligible_counties || [];
+                if (geoData.length > 0) {
+                    // Use 'All' if it's the only item, otherwise filter it out if mixed
+                    const filteredGeo = geoData.length > 1 ? geoData.filter(g => g !== 'All') : geoData;
+                    geoEl.innerHTML = filteredGeo.map(item => `<span class="info-box-tag">${item}</span>`).join(' ');
+                } else {
+                    geoEl.innerHTML = `<span class="info-box-tag">All</span>`;
+                }
+                
+                // Organization Type (as pills)
+                const orgEl = document.getElementById('detail-org');
+                const orgData = data.eligible_organization_types || [];
+                if (orgData.length > 0) {
+                    orgEl.innerHTML = orgData.map(item => `<span class="info-box-tag">${item}</span>`).join(' ');
+                } else {
+                    orgEl.innerHTML = `<span class="info-box-tag">Varies</span>`;
+                }
 
                 const mainContent = document.getElementById('detail-main-content');
                 const contentsNav = document.getElementById('detail-contents-nav');
@@ -964,7 +1084,7 @@
 
                     const sectionId = slugify(title);
                     let sectionHtml = `<div id="${sectionId}" class="scroll-margin-top-8">`;
-                    sectionHtml += `<h2 class="font-sans-lg">${title}</h2>`;
+                    sectionHtml += `<h2 class="font-serif-lg">${title}</h2>`;
                     
                     if (typeof content === 'object' && !Array.isArray(content)) {
                         let subContentHtml = '';
@@ -988,8 +1108,62 @@
                     mainContent.innerHTML += (mainContent.innerHTML ? '<hr class="usa-divider margin-y-6">' : '') + sectionHtml;
                     contentsNav.innerHTML += `<li class="usa-sidenav__item"><a href="#${sectionId}" class="usa-nav__link">${title}</a></li>`;
                 });
-                
+                // Set the first link as 'usa-current' by default
+                const firstLink = contentsNav.querySelector('a');
+                if (firstLink) {
+                    firstLink.classList.add('usa-current');
+                }
                 document.getElementById('detail-contents-nav-container').style.display = contentsNav.innerHTML ? 'block' : 'none';
+
+                // 1. Disconnect any old observer
+                if (detailScrollObserver) {
+                    detailScrollObserver.disconnect();
+                }
+
+                const sectionsToObserve = [];
+                const observedLinks = contentsNav.querySelectorAll('a');
+                
+                // 2. Find all the sections we need to watch
+                if (observedLinks.length > 0) {
+                    observedLinks.forEach(link => {
+                        const targetId = link.getAttribute('href').substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            sectionsToObserve.push(targetElement);
+                        }
+                    });
+
+                    // 3. Define what to do when a section is "active"
+                    const observerCallback = (entries) => {
+                        if (isUserClickScrolling) return;
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const id = entry.target.id;
+                                const correspondingLink = contentsNav.querySelector(`a[href="#${id}"]`);
+                                
+                                // Remove 'usa-current' from all links
+                                contentsNav.querySelectorAll('a').forEach(a => a.classList.remove('usa-current'));
+                                
+                                // Add 'usa-current' to the one in view
+                                if (correspondingLink) {
+                                    correspondingLink.classList.add('usa-current');
+                                }
+                            }
+                        });
+                    };
+
+                    // 4. Create the observer
+                    // This makes a section "active" when it's in the top 30% of the screen
+                    const observerOptions = {
+                        rootMargin: '0px 0px -70% 0px',
+                        threshold: 0
+                    };
+                    
+                    detailScrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+                    
+                    // 5. Tell the observer to watch our sections
+                    sectionsToObserve.forEach(section => detailScrollObserver.observe(section));
+                }
             }
 
             function applyFilters() {
@@ -1075,12 +1249,27 @@
                 const link = e.target.closest('a');
                 if (link && link.getAttribute('href').startsWith('#')) {
                     e.preventDefault();
+                    isUserClickScrolling = true; // Tell the observer to pause
+
+                    // Set active link immediately
+                    detailContentsNav.querySelectorAll('a').forEach(a => a.classList.remove('usa-current'));
+                    link.classList.add('usa-current');
+
                     const targetId = link.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
+                    
                     if (targetElement) {
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        // Update hash without triggering a full re-route
-                        history.replaceState(null, null, window.location.pathname + window.location.search + targetId);
+
+                        // Clear any old timer and set a new one
+                        clearTimeout(scrollTimeout);
+                        scrollTimeout = setTimeout(() => {
+                            isUserClickScrolling = false; // Re-enable observer logic
+                        }, 1000); // 1-second delay (plenty of time for scroll)
+
+                    } else {
+                        // Fallback in case target is missing
+                        isUserClickScrolling = false;
                     }
                 }
             });
