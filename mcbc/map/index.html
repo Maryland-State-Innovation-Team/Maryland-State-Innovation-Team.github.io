@@ -1547,21 +1547,21 @@ const CHOROPLETH_OPTIONS = {
         label: 'Unmet Fresh Food Demand Score', 
         format: (d) => d.toFixed(0), 
         sector: 'fresh-food', 
-        unit: 'Score from 0-100 showing areas with high demand and low supply', 
+        unit: 'Score from -100 to 100 showing areas with high demand and low supply', 
         legendLabels: { low: 'LOW', high: 'HIGH' } 
     },
-    'grocery_gap_score': { 
+    'grocery_gap_score': {
         label: 'Fresh Food Gap Score', 
         format: (d) => d.toFixed(0), 
         sector: 'fresh-food', 
-        unit: 'Score from 0-100 showing areas where low supply may contribute to food insecurity', 
+        unit: 'Score from 0 to 100 showing areas where low supply may contribute to food insecurity', 
         legendLabels: { low: 'LOW', high: 'HIGH' } 
     },
     'grocery_philanthropy_score': { 
         label: 'Social Investment Need Score', 
         format: (d) => d.toFixed(0), 
         sector: 'fresh-food', 
-        unit: 'Score from 0-100 showing where needs exist but market viability is lower', 
+        unit: 'Score from 0 to 100 showing where needs exist but market viability is lower', 
         legendLabels: { low: 'LOW', high: 'HIGH' } 
     },
     // General
@@ -1598,7 +1598,7 @@ const CHOROPLETH_OPTIONS = {
         format: (d) => formatPercent(d), 
         legend_format: (d) => formatPercentInteger(d),
         sector: 'general', 
-        unit: 'Index from 0-100, based on business formations, job growth, etc.', 
+        unit: 'Index from 0 to 100, based on business formations, job growth, etc.', 
         legendLabels: { low: 'LOW', high: 'HIGH' } 
     }
 };
