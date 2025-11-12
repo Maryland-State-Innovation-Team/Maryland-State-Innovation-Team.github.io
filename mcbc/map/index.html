@@ -2442,6 +2442,15 @@ function resetHighlight(e) {
 
 function onEachFeature(feature, layer) {
     layer.on({
+        touchstart: function (e) {
+            // Record the time of the tap
+            lastTouchTime = new Date().getTime();
+            
+            // This is important: it stops the tap from
+            // bubbling up to the map and firing other
+            // events (like a map click).
+            L.DomEvent.stopPropagation(e);
+        },
         mouseover: function (e) {
             // Check if a 'touchstart' event fired within the last 500ms.
             // If it did, this 'mouseover' is an emulated event from a tap,
@@ -4032,10 +4041,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
     map.keyboard.disable();
 
-    map.on('touchstart', () => {
-        // Record the time of the actual tap
-        lastTouchTime = new Date().getTime();
-    });
     map.on('movestart', () => {
         isPanning = true;
         if (geojsonLayer) {
