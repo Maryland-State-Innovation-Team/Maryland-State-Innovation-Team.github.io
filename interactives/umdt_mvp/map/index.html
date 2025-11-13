@@ -1864,6 +1864,42 @@ function resetGeocoderUI() {
 }
 
 /**
+ * Positions the global map tooltip based on a mouse event.
+ */
+function positionGlobalMapTooltip(e) {
+    // This is the exact logic from your 'mousemove' handler
+    const mapSize = map.getSize();
+    
+    // Hardcoded values to prevent reflows
+    const tooltipWidth = 280;  // From your CSS
+    const tooltipHeight = 120; // An approximation of the tooltip's height
+    const gap = 15;            // Your cursor buffer
+    
+    const pos = map.mouseEventToContainerPoint(e.originalEvent);
+    let x, y;
+    
+    // --- X POSITION (Horizontal) ---
+    let x_right = pos.x + gap;
+    if (x_right + tooltipWidth > mapSize.x) {
+        x = pos.x - tooltipWidth - gap;
+    } else {
+        x = x_right;
+    }
+
+    // --- Y POSITION (Vertical) ---
+    let y_bottom = pos.y + gap;
+    if (y_bottom + tooltipHeight + 40 > mapSize.y) { // Using your 40px buffer
+        y = pos.y - tooltipHeight - gap;
+    } else {
+        y = y_bottom;
+    }
+
+    // Set the final position
+    L.DomUtil.setPosition(globalTooltipElement, new L.Point(x, y));
+}
+
+
+/**
  * Forces all map tooltips (hover-tooltips and popups) to close.
  * Call this when a UI panel is opened to prevent overlap.
  */
@@ -2380,45 +2416,12 @@ function onEachFeature(feature, layer) {
             globalTooltipElement.innerHTML = dynamicTooltipContent;
             L.DomUtil.removeClass(globalTooltipElement, 'hidden');
 
+            positionGlobalMapTooltip(e);
+
             highlightFeature(e);
         },
         mousemove: function(e) {
-            const mapSize = map.getSize();
-            
-            // Hardcoded values to prevent reflows
-            const tooltipWidth = 280;  // From your CSS
-            const tooltipHeight = 120; // Our refined hardcoded guess
-            const gap = 15;            // Our cursor buffer
-            
-            const pos = map.mouseEventToContainerPoint(e.originalEvent);
-            let x, y;
-            
-            // --- X POSITION (Horizontal) ---
-            // Default: Right side of cursor
-            let x_right = pos.x + gap;
-            // Check for right-side overflow
-            if (x_right + tooltipWidth > mapSize.x) {
-                // It overflows. Flip to the Left side.
-                x = pos.x - tooltipWidth - gap;
-            } else {
-                // No overflow. Use default Right side.
-                x = x_right;
-            }
-
-            // --- Y POSITION (Vertical) - REVERSED ---
-            // Default: Bottom side of cursor
-            let y_bottom = pos.y + gap;
-            // Check for bottom-side overflow
-            if (y_bottom + tooltipHeight + 40 > mapSize.y) {
-                // It overflows. Flip to the Top side.
-                y = pos.y - tooltipHeight - gap;
-            } else {
-                // No overflow. Use default Bottom side.
-                y = y_bottom;
-            }
-
-            // Set the final position
-            L.DomUtil.setPosition(globalTooltipElement, new L.Point(x, y));
+            positionGlobalMapTooltip(e);
         },
 
         mouseout: function (e) {
