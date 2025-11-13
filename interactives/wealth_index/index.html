@@ -615,7 +615,7 @@
             legend.onAdd = function (map) {
                 const div = L.DomUtil.create('div', 'info leaflet-legend');
                 // ENOUGH Act legend item (always on top)
-                div.innerHTML += `<div class="legend-item"><i style="background:transparent;border:2px solid #d100d1;width:18px;height:18px;"></i> <span style="color:#a000a0;font-weight:bold;">ENOUGH Act eligible</span></div>`;
+                div.innerHTML += `<div class="legend-item"><i style="background:transparent;border:2px solid #d100d1;width:18px;height:18px;"></i> <span style="color:#a000a0;font-weight:bold;">ENOUGH Act eligible (2024)</span></div>`;
                 if (currentIndicator.type === "gap") {
                     div.innerHTML += '<h4>Wealth gap</h4>';
                     const legendItemsHTML = [];
@@ -703,12 +703,12 @@
             {
                 element: '#enoughToggle',
                 title: 'ENOUGH Act Toggle',
-                text: 'Use this checkbox to show or hide the ENOUGH Act eligible tracts overlay. When checked, eligible communities are highlighted in purple.'
+                text: 'Use this checkbox to show or hide the ENOUGH Act eligible (2024) tracts overlay. When checked, eligible communities are highlighted in purple.'
             },
             {
                 element: '.leaflet-legend',
                 title: 'Legend',
-                text: 'When the legend shows a wealth index, the values run from <b style="color:' + colors[0] + ';">Least wealth</b> to <b style="color:' + colors[6] + ';">Most wealth</b>. Higher values indicate greater access to wealth-related resources. ENOUGH Act eligible communities are highlighted in <b style="color:#d100d1;">purple</b>.'
+                text: 'When the legend shows a wealth index, the values run from <b style="color:' + colors[0] + ';">Least wealth</b> to <b style="color:' + colors[6] + ';">Most wealth</b>. Higher values indicate greater access to wealth-related resources. ENOUGH Act eligible (2024) communities are highlighted in <b style="color:#d100d1;">purple</b>.'
             },
             {
                 element: '.leaflet-legend',
