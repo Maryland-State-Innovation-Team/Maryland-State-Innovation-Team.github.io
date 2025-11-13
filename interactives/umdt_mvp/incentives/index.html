@@ -435,6 +435,11 @@
             color: white;
             box-shadow: inset 0 0 0 2px white;
         }
+        /* Utility to hide focus ring on non-interactive targets */
+        .focus-outline-none:focus {
+            outline: none !important;
+            box-shadow: none !important; 
+        }
     </style>
 </head>
 <body>
@@ -511,11 +516,11 @@
         </header>
 
         <main id="main-content">
-            <div id="incentive-list-view">
+            <div id="incentive-list-view" style="display: none;" role="region" aria-label="Incentive Search View" aria-hidden="true">
                 <section class="grid-container usa-section">
                     <div class="grid-row grid-gap">
                         <div class="tablet:grid-col-12">
-                            <h1 class="font-serif-xl tablet:font-serif-2xl desktop:font-serif-3xl margin-top-0 tablet:margin-bottom-0">Find Government Funding For Your Business</h1>
+                            <h1 id="list-view-title" class="font-serif-xl tablet:font-serif-2xl desktop:font-serif-3xl margin-top-0 tablet:margin-bottom-0 focus-outline-none" tabindex="-1">Find Government Funding For Your Business</h1>
                         </div>
                     </div>
                     
@@ -567,7 +572,7 @@
                 </section>
             </div>
 
-            <div id="incentive-detail-view" style="display: none;">
+            <div id="incentive-detail-view" style="display: none;" role="region" aria-label="Incentive Detail View" aria-hidden="true">
                 <section class="incentive-detail-header">
                     <div class="grid-container">
                         <div class="grid-row grid-gap-6">
@@ -584,7 +589,7 @@
                                     </ol>
                                 </nav>
                                 
-                                <h1 id="detail-title" class="font-serif-2xl"></h1>
+                                <h1 id="detail-title" class="font-serif-2xl focus-outline-none" tabindex="-1"></h1>
                                 
                                 <div id="detail-tags" class="display-flex flex-wrap" style="gap: 0.5rem;"></div>
                                 
@@ -901,17 +906,34 @@
 
             function showListView() {
                 listView.style.display = 'block';
+                listView.setAttribute('aria-hidden', 'false');
                 detailView.style.display = 'none';
+                detailView.setAttribute('aria-hidden', 'true');
+
                 if (window.location.hash.startsWith('#/incentive/')) {
-                     history.pushState("", document.title, window.location.pathname + window.location.search);
+                    history.pushState("", document.title, window.location.pathname + window.location.search);
                 }
                 applyFilters();
+
+                // Add focus management
+                const listHeading = document.getElementById('list-view-title');
+                if (listHeading) {
+                    listHeading.focus();
+                }
             }
 
             function showDetailView() {
                 listView.style.display = 'none';
+                listView.setAttribute('aria-hidden', 'true');
                 detailView.style.display = 'block';
+                detailView.setAttribute('aria-hidden', 'false');
                 window.scrollTo(0, 0);
+
+                // Add focus management
+                const detailHeading = document.getElementById('detail-title');
+                if (detailHeading) {
+                    detailHeading.focus();
+                }
             }
             
             function renderFilterUI() {
