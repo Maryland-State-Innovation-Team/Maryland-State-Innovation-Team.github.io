@@ -446,6 +446,20 @@
             outline: none !important;
             box-shadow: none !important; 
         }
+        .list-pill-tag {
+            display: inline-block;
+            background-color: #E1F3F8; /* accent-cool-lighter */
+            color: #07648D;           /* accent-cool-darker */
+            font-size: 0.875rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;     /* Pill shape */
+            text-transform: capitalize;
+            margin-bottom: 0.25rem;
+            margin-right: 0.25rem;
+            white-space: nowrap;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -545,12 +559,13 @@
                     </div>
 
                     <div class="grid-row grid-gap-4 margin-top-2">
-                        <aside id="filters-sidebar" aria-label="Incentive Filters" class="tablet:grid-col-4">
+                        <aside id="filters-sidebar" aria-label="Incentive Filters" class="tablet-lg:grid-col-4 desktop:grid-col-3">
                             <div class="sticky-sidebar">
-                                </div>
+                                <h3 class="font-sans-lg text-bold margin-top-0 margin-bottom-2">Filter by</h3>
+                            </div>
                         </aside>
 
-                        <div class="tablet:grid-col-8">
+                        <div class="tablet-lg:grid-col-8 desktop:grid-col-9">
                             <div id="results-container" class="display-flex flex-justify-between flex-align-center margin-bottom-1">
                                 <p id="results-count" class="font-sans-sm text-base">Loading results...</p>
                                 <button id="download-csv-btn" class="usa-button usa-button--outline">Download list as .CSV</button>
@@ -562,8 +577,8 @@
                                     <thead>
                                         <tr>
                                             <th scope="col" data-sortable>Program Name</th>
-                                            <th scope="col" data-sortable>Agency</th>
-                                            <th scope="col">Assistance Type</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col" data-sortable>Assistance Type</th>
                                             <th scope="col" data-sortable>Deadline</th>
                                         </tr>
                                     </thead>
@@ -1021,16 +1036,57 @@
                     tableBody.innerHTML = `<tr><td colspan="4" class="text-center padding-4">No incentives match your criteria.</td></tr>`;
                     return;
                 }
+
+                const truncate = (str, maxLength) => {
+                    if (!str) return '';
+                    if (str.length <= maxLength) return str;
+                    return str.substr(0, str.lastIndexOf(' ', maxLength)) + ' ...';
+                };
+
+                const formatDate = (dateStr) => {
+                    if (!dateStr) return 'N/A';
+                    if (dateStr.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                        const [year, month, day] = dateStr.split('-').map(Number);
+                        const date = new Date(year, month - 1, day);
+                        return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                    }
+                    return dateStr;
+                };
+
                 tableBody.innerHTML = incentives.map(item => {
                     const data = item.structured_extraction;
+                    
+                    const rawDesc = item.summary || data.program_description || '';
+                    const truncatedDesc = truncate(rawDesc, 120);
+
+                    const types = data.assistance_type || [];
+                    const tagsHtml = types.length > 0 
+                        ? types.map(t => `<span class="list-pill-tag">${t}</span>`).join(' ') 
+                        : 'N/A';
+                    
+                    const typeSortValue = types.join(' ');
+
+                    const rawDeadline = data.application_deadline_date || '';
+                    const displayDeadline = formatDate(rawDeadline);
+                    
+                    // If deadline is missing, treat it as the year 9999.
+                    // This ensures it stays at the bottom when sorting Ascending (Upcoming deadlines).
+                    const deadlineSortValue = rawDeadline || '9999-12-31'; 
+
                     return `
                         <tr>
-                            <td data-label="Program Name">
+                            <td data-label="Program Name" class="font-sans-md text-bold">
                                 <a href="#/incentive/${item.slug}" class="usa-link">${data.program_name}</a>
                             </td>
-                            <td data-label="Agency">${data.agency || 'N/A'}</td>
-                            <td data-label="Assistance Type" class="text-capitalize">${data.assistance_type?.join(', ') || 'N/A'}</td>
-                            <td data-label="Deadline">${data.application_deadline_date || 'N/A'}</td>
+                            <td data-label="Description" style="max-width: 450px; min-width: 200px;">
+                                <span class="text-base-dark">${truncatedDesc}</span>
+                            </td>
+                            <td data-label="Assistance Type" data-sort-value="${typeSortValue}">
+                                ${tagsHtml}
+                            </td>
+                            <td data-label="Deadline" data-sort-value="${deadlineSortValue}" style="white-space: nowrap;">
+                                ${displayDeadline}
+                            </td>
                         </tr>
                     `;
                 }).join('');
