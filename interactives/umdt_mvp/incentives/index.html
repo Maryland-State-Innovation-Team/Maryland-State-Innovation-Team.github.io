@@ -55,7 +55,6 @@
             background-color: #b21d38; /* secondary-vivid */
             color: white;
             font-size: 0.875rem;
-            font-weight: 700;
             padding: 0.25rem 0.75rem;
             border-radius: 0.25rem;
             text-transform: capitalize;
@@ -390,8 +389,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Ensure the sticky sidebar applies in the new location */
-        #incentive-detail-view .sticky-sidebar {
+        .sticky-sidebar {
             position: sticky;
             top: 1.5rem;
         }
@@ -446,6 +444,7 @@
             outline: none !important;
             box-shadow: none !important; 
         }
+
         .list-pill-tag {
             display: inline-block;
             background-color: #E1F3F8; /* accent-cool-lighter */
@@ -459,6 +458,36 @@
             margin-right: 0.25rem;
             white-space: nowrap;
             text-decoration: none;
+        }
+
+        /* Scrollable Table Container */
+        .table-scroll-container {
+            max-height: 70vh; 
+            overflow-y: auto;
+            border: 1px solid #dfe1e2; 
+            position: relative;
+        }
+
+        /* Sticky Header Logic */
+        .table-scroll-container thead th,
+        .table-scroll-container thead th[data-sortable] {
+            position: sticky !important; 
+            top: 0;
+            background-color: #ffffff; 
+            z-index: 10;
+            
+            /* 1. Remove the default border so it doesn't get left behind */
+            border-top: none !important;
+            border-bottom: none !important;  
+            
+            /* 2. Create a fake 1px border on ALL sides using an inset shadow */
+            box-shadow: inset 0 0 0 1px #1b1b1b !important;
+        }
+
+        /* Remove default top margin from table so it sits flush against the sticky header */
+        .table-scroll-container .usa-table {
+            margin-top: 0;
+            width: 100%;
         }
     </style>
 </head>
@@ -551,17 +580,23 @@
                                 <div class="usa-search usa-search--big" role="search">
                                     <input class="usa-input" id="search-input" type="search" name="search" placeholder="Search by keyword, program name, or agency">
                                 </div>
-                                <div class="tablet:grid-col-12 margin-top-2">
-                                    <div id="active-filters-container" class="display-flex flex-wrap flex-align-center" style="gap: 0.5rem; min-height: 38px;"></div>
-                                </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-row grid-gap-4 margin-top-2">
+                        <div class="tablet-lg:grid-col-4 desktop:grid-col-3 display-flex flex-align-end">
+                            <h3 class="font-sans-lg text-bold margin-y-0">Filter by</h3>
+                        </div>
+                        
+                        <div class="tablet-lg:grid-col-8 desktop:grid-col-9">
+                            <div id="active-filters-container" class="display-flex flex-wrap flex-align-center" style="gap: 0.5rem; min-height: 38px;"></div>
                         </div>
                     </div>
 
                     <div class="grid-row grid-gap-4 margin-top-2">
                         <aside id="filters-sidebar" aria-label="Incentive Filters" class="tablet-lg:grid-col-4 desktop:grid-col-3">
                             <div class="sticky-sidebar">
-                                <h3 class="font-sans-lg text-bold margin-top-0 margin-bottom-2">Filter by</h3>
                             </div>
                         </aside>
 
@@ -571,7 +606,7 @@
                                 <button id="download-csv-btn" class="usa-button usa-button--outline">Download list as .CSV</button>
                             </div>
 
-                            <div tabindex="0">
+                            <div tabindex="0" class="table-scroll-container">
                                 <table class="usa-table usa-table--striped width-full">
                                     <caption class="usa-sr-only">Incentives search results table</caption>
                                     <thead>
