@@ -2067,7 +2067,7 @@ function renderGroupedPlanQuotes(planData, sector) {
             htmlOutput += `
                 <div class="mt-6 first:mt-2">
                     <h4 class="text-sm font-bold tracking-wider uppercase" style="color: #000000;">
-                        ${plan.area_name} <span class="font-normal text-slate-600">${plan.plan_year ? '(' + plan.plan_year + ')' : ''}</span>
+                        ${plan.area_name} <span class="font-normal text-slate-600">${plan.plan_year ? '(' + plan.plan_year + ' plan)' : ''}</span>
                     </h4>
                     <hr class="border-t-2 mt-1 mb-3" style="border-color: #1B1B1B;" />
                     <div class="space-y-4">
@@ -2233,7 +2233,7 @@ function zoomToPoint(lat, lng, layerName) {
         }
 
         // Zoom/pan to fit the combined bounds
-        map.fitBounds(boundsToFit, { ...getMapPadding(), maxZoom: 17 });
+        map.fitBounds(boundsToFit, { ...getMapPadding(), maxZoom: 14 });
 
         // Add the marker and open the popup *after* the map moves
         map.once('moveend', () => {
@@ -2345,7 +2345,14 @@ function disableMapLayerFocus(layerGroup) {
 
 let lastClickedLayer = null;
 const sequentialColors = ['#eff3ff', '#bdd7e7', '#6baed6', '#3182bd', '#08519c'];
-const divergingColors = ['#b2182b','#ef8a62','#fddbc7','#d1e5f0','#67a9cf','#2166ac'];
+const divergingColors = [
+    '#8c510a',
+    '#d8b365',
+    '#f6e8c3',
+    '#c7eae5',
+    '#5ab4ac',
+    '#01665e'
+];
 
 function isDivergingVariable(variable) {
     const divergingKeywords = ['unmet_demand', 'unmet_market_demand', 'growth', 'net_business', 'formations', 'index', 'pop_change'];
@@ -2467,7 +2474,7 @@ function onEachFeature(feature, layer) {
             }
             const dynamicTooltipContent = `
                 <div class="font-sans">
-                    <div class="text-xs uppercase font-semibold text-slate-500 tracking-wider">Click to Research</div>
+                    <div class="text-xs uppercase font-semibold text-slate-500 tracking-wider">Click map to Research</div>
                     <div class="text-lg font-bold text-slate-900 leading-tight mt-1">${truncateCommunityList(feature.properties.tract_name)}</div>
                     <div class="text-base text-blue-700 font-semibold">${feature.properties.county_name}</div>
                     ${dataRow}
@@ -2536,7 +2543,7 @@ function onEachFeature(feature, layer) {
             } else {
                 displayFeatureInfo(feature);
             }
-            map.fitBounds(clickedLayer.getBounds(), getMapPadding());
+            map.fitBounds(clickedLayer.getBounds(), { ...getMapPadding(), maxZoom: 14 });
         }
     });
 }
@@ -3613,13 +3620,38 @@ async function showNearestPoints(location, layerName, container) {
         const latlng = p.layer.getLatLng();
         
         const quality = p.feature.properties.quality;
-        const qualityText = (quality != null) ? `Quality: ${quality}` : '';
+        const q = (quality != null) ? Number(quality) : null;
+        let qualityText = '';
+
+        if (layerName === 'childcare') {
+            if (q === null || isNaN(q)) {
+                qualityText = '';
+            } else {
+                qualityText = (q === 0) ? 'Not rated' : `Quality: ${q}`;
+            }
+        } else if (layerName === 'grocery') {
+            const groceryLabels = {
+                2: 'Convenience',
+                3: 'Specialty foods',
+                4: 'Specialty foods',
+                5: 'Fresh produce'
+            };
+            if (q === null || isNaN(q)) {
+                qualityText = '';
+            } else if (groceryLabels[q]) {
+                qualityText = groceryLabels[q];
+            } else {
+                qualityText = `Quality: ${q}`;
+            }
+        } else {
+            qualityText = (quality != null) ? `Quality: ${quality}` : '';
+        }
         // This distance is from the centroid (for tracts) or point (for address)
         const distanceText = `${p.distance.toFixed(1)} miles`; 
 
         let detailsText = '';
         if (distanceText && qualityText) {
-            detailsText = `${distanceText} &bull; ${qualityText}`;
+            detailsText = `${distanceText} &nbsp;&bull;&nbsp; ${qualityText}`;
         } else {
             detailsText = distanceText || qualityText; 
         }
@@ -4518,7 +4550,7 @@ function initializeMap() {
 
             // Zoom to the out-of-state location
             const bounds = L.latLng(center).toBounds(100); 
-            map.fitBounds(bounds, { ...getMapPadding(), maxZoom: 12 });
+            map.fitBounds(bounds, { ...getMapPadding(), maxZoom: 14 });
 
             return; // Stop execution to prevent the error
         }
@@ -4732,7 +4764,7 @@ async function togglePointLayer(checkbox) {
             const data = await response.json();
             const markers = L.markerClusterGroup({
                 clusterPane: 'clusterTopPane',
-                disableClusteringAtZoom: 13,
+                disableClusteringAtZoom: 10,
                 spiderfyOnMaxZoom: false,
                 iconCreateFunction: createCustomClusterIcon
             });
@@ -4849,7 +4881,7 @@ async function preloadPointLayers() {
             
             const markers = L.markerClusterGroup({
                 clusterPane: 'clusterTopPane',
-                disableClusteringAtZoom: 13,
+                disableClusteringAtZoom: 10,
                 spiderfyOnMaxZoom: false,
                 iconCreateFunction: createCustomClusterIcon
             });

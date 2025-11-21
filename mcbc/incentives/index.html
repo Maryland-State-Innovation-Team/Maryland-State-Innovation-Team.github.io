@@ -55,7 +55,6 @@
             background-color: #b21d38; /* secondary-vivid */
             color: white;
             font-size: 0.875rem;
-            font-weight: 700;
             padding: 0.25rem 0.75rem;
             border-radius: 0.25rem;
             text-transform: capitalize;
@@ -317,8 +316,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-width: 1.5rem;
-            height: 1.5rem;
+            min-width: 1.2rem;
+            height: 1.2rem;
             padding: 0 0.4rem;
             margin-left: 0.5rem;
             border-radius: 999px;
@@ -390,8 +389,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Ensure the sticky sidebar applies in the new location */
-        #incentive-detail-view .sticky-sidebar {
+        .sticky-sidebar {
             position: sticky;
             top: 1.5rem;
         }
@@ -445,6 +443,112 @@
         .focus-outline-none:focus {
             outline: none !important;
             box-shadow: none !important; 
+        }
+
+        .list-pill-tag {
+            display: inline-block;
+            background-color: #E1F3F8; /* accent-cool-lighter */
+            color: #07648D;           /* accent-cool-darker */
+            font-size: 0.875rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;     /* Pill shape */
+            text-transform: capitalize;
+            margin-bottom: 0.25rem;
+            margin-right: 0.25rem;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        /* Scrollable Table Container */
+        .table-scroll-container {
+            max-height: 70vh; 
+            overflow-y: auto;
+            border: 1px solid #dfe1e2; 
+            position: relative;
+        }
+
+        /* Sticky Header Logic */
+        .table-scroll-container thead th,
+        .table-scroll-container thead th[data-sortable] {
+            position: sticky !important; 
+            top: 0;
+            background-color: #ffffff; 
+            z-index: 10;
+            
+            /* 1. Remove the default border so it doesn't get left behind */
+            border-top: none !important;
+            border-bottom: none !important;  
+            
+            /* 2. Create a fake 1px border on ALL sides using an inset shadow */
+            box-shadow: inset 0 0 0 1px #1b1b1b !important;
+        }
+
+        /* Remove default top margin from table so it sits flush against the sticky header */
+        .table-scroll-container .usa-table {
+            margin-top: 0;
+            width: 100%;
+        }
+        /* Parent wrapper: keeps the input locked to this specific list item */
+        .usa-checkbox {
+            position: relative; 
+        }
+
+        /* The Input: Locked to top-left, but clipped so it takes up effectively 0 space */
+        .usa-checkbox__input {
+            position: absolute !important;
+            left: 0 !important;
+            top: 0 !important;
+            width: 1px !important;
+            height: 1px !important;
+            z-index: -1;
+            opacity: 0 !important;
+            
+            /* Accessibility Safeguards: Ensures no visual leakage */
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px); /* Standard "sr-only" clip pattern */
+            white-space: nowrap; /* Prevents line breaks */
+        }
+        /* Ensure the focused item pops above its neighbors so the ring isn't cut off */
+        .usa-checkbox:focus-within {
+            z-index: 1;
+        }
+        /* 1. Apply the pointer cursor to the row so the user knows it's clickable */
+        .clickable-row {
+            cursor: pointer;
+        }
+
+        /* 2. High-Specificity Hover State 
+        We target the 'td' inside the hovered row to override the 
+        striped background color. */
+        table.usa-table tr.clickable-row:hover td {
+            background-color: #dfe1e2 !important; /* 'base-lighter' token from USWDS */
+            color: #1b1b1b; /* Ensure text stays legible */
+        }
+
+        /* 3. Optional: Active state (when clicking down) */
+        table.usa-table tr.clickable-row:active td {
+            background-color: #cfd2d4 !important; /* Slightly darker */
+        }
+
+        .program-name {
+            max-width: 300px;
+        }
+        /* CSS Truncation: Line Clamp */
+        .description-truncate {
+            display: -webkit-box;
+            line-clamp: 3;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 300px;
+        }
+        .usa-table td {
+            vertical-align: top;
+        }
+        .usa-prose>ul li, .usa-prose>ol li {
+            padding-left: 0px;
         }
     </style>
 </head>
@@ -537,33 +641,40 @@
                                 <div class="usa-search usa-search--big" role="search">
                                     <input class="usa-input" id="search-input" type="search" name="search" placeholder="Search by keyword, program name, or agency">
                                 </div>
-                                <div class="tablet:grid-col-12 margin-top-2">
-                                    <div id="active-filters-container" class="display-flex flex-wrap flex-align-center" style="gap: 0.5rem; min-height: 38px;"></div>
-                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="grid-row grid-gap-4 margin-top-2">
-                        <aside id="filters-sidebar" aria-label="Incentive Filters" class="tablet:grid-col-4">
+                        <div class="tablet-lg:grid-col-4 desktop:grid-col-3 display-flex flex-align-end">
+                            <h3 class="font-sans-lg text-bold margin-y-0">Filter by</h3>
+                        </div>
+                        
+                        <div class="tablet-lg:grid-col-8 desktop:grid-col-9">
+                            <div id="active-filters-container" class="display-flex flex-wrap flex-align-center" style="gap: 0.5rem; min-height: 38px;"></div>
+                        </div>
+                    </div>
+
+                    <div class="grid-row grid-gap-4 margin-top-2">
+                        <aside id="filters-sidebar" aria-label="Incentive Filters" class="tablet-lg:grid-col-4 desktop:grid-col-3">
                             <div class="sticky-sidebar">
-                                </div>
+                            </div>
                         </aside>
 
-                        <div class="tablet:grid-col-8">
+                        <div class="tablet-lg:grid-col-8 desktop:grid-col-9">
                             <div id="results-container" class="display-flex flex-justify-between flex-align-center margin-bottom-1">
                                 <p id="results-count" class="font-sans-sm text-base">Loading results...</p>
                                 <button id="download-csv-btn" class="usa-button usa-button--outline">Download list as .CSV</button>
                             </div>
 
-                            <div tabindex="0">
+                            <div tabindex="0" class="table-scroll-container">
                                 <table class="usa-table usa-table--striped width-full">
                                     <caption class="usa-sr-only">Incentives search results table</caption>
                                     <thead>
                                         <tr>
-                                            <th scope="col" data-sortable>Program Name</th>
-                                            <th scope="col" data-sortable>Agency</th>
-                                            <th scope="col">Assistance Type</th>
+                                            <th scope="col" data-sortable>Program&nbsp;Name</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col" data-sortable>Assistance&nbsp;Type</th>
                                             <th scope="col" data-sortable>Deadline</th>
                                         </tr>
                                     </thead>
@@ -794,12 +905,12 @@
                 industries: {
                     title: 'Business Category',
                     key: 'list_of_eligible_industries',
-                    options: ["Child Care Services", "Grocery Stores", "Non-profit", "Agriculture, Forestry, Fishing and Hunting", "Mining, Quarrying, and Oil and Gas Extraction", "Utilities", "Construction", "Manufacturing", "Wholesale Trade", "Retail Trade", "Transportation and Warehousing", "Information", "Finance and Insurance", "Real Estate and Rental and Leasing", "Professional, Scientific, and Technical Services", "Management of Companies and Enterprises", "Administrative and Support and Waste Management and Remediation Services", "Educational Services", "Health Care and Social Assistance", "Arts, Entertainment, and Recreation", "Accommodation and Food Services", "Other Services (except Public Administration)", "Public Administration"]
+                    options: ["Child Care Services", "Grocery Stores", "Agriculture, Forestry, Fishing and Hunting", "Mining, Quarrying, and Oil and Gas Extraction", "Utilities", "Construction", "Manufacturing", "Wholesale Trade", "Retail Trade", "Transportation and Warehousing", "Information", "Finance and Insurance", "Real Estate and Rental and Leasing", "Professional, Scientific, and Technical Services", "Management of Companies and Enterprises", "Administrative and Support and Waste Management and Remediation Services", "Educational Services", "Health Care and Social Assistance", "Arts, Entertainment, and Recreation", "Accommodation and Food Services", "Other Services (except Public Administration)", "Public Administration"]
                 },
                 assistanceTypes: {
                     title: 'Assistance Type',
                     key: 'assistance_type',
-                    options: ["loan", "grant", "tax-credit", "support"]
+                    options: ["loan", "grant", "tax-credit"]
                 },
                 orgTypes: {
                     title: 'Organization Type',
@@ -813,8 +924,9 @@
                 },
                 incentiveAreas: {
                     title: 'Incentive Area',
+                    description_html: '<div class="padding-bottom-1"><a href="#">What are incentive areas?</a></div>',
                     key: 'list_of_incentive_areas',
-                    options: ["BRNI Areas", "Enterprise Zone Focus Areas", "Enterprise Zones", "Main Street Areas", "Opportunity Zones", "Priority Funding Areas", "RISE Zones", "Sustainable Communities", "Transit Oriented Development", "ENOUGH Act"]
+                    options: ["BRNI Areas", "Enterprise Zone Focus Areas", "Enterprise Zones", "Main Street Areas", "Opportunity Zones", "Priority Funding Areas", "RISE Zones", "Sustainable Communities", "Just Communities", "Transit Oriented Development", "ENOUGH Act Grantees"]
                 }
             };
 
@@ -960,6 +1072,7 @@
                             </button>
                         </h2>
                         <div id="acc-${filterKey}" class="usa-accordion__content usa-prose" ${!isExpanded ? 'hidden' : ''}>
+                            ${config.description_html ? config.description_html : ''}
                            <ul class="usa-list usa-list--unstyled">${checkboxes}</ul>
                         </div>
                     `;
@@ -1021,20 +1134,78 @@
                     tableBody.innerHTML = `<tr><td colspan="4" class="text-center padding-4">No incentives match your criteria.</td></tr>`;
                     return;
                 }
+
+                const formatDate = (dateStr) => {
+                    if (!dateStr) return 'N/A';
+                    if (dateStr.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                        const [year, month, day] = dateStr.split('-').map(Number);
+                        const date = new Date(year, month - 1, day);
+                        return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                    }
+                    return dateStr;
+                };
+
                 tableBody.innerHTML = incentives.map(item => {
                     const data = item.structured_extraction;
+                    
+                    const rawDesc = item.summary || data.program_description || '';
+
+                    const types = data.assistance_type || [];
+                    const tagsHtml = types.length > 0 
+                        ? types.map(t => `<span class="list-pill-tag">${t}</span>`).join(' ') 
+                        : 'N/A';
+                    
+                    const typeSortValue = types.join(' ');
+
+                    const rawDeadline = data.application_deadline_date || '';
+                    const displayDeadline = formatDate(rawDeadline);
+                    
+                    // If deadline is missing, treat it as the year 9999.
+                    // This ensures it stays at the bottom when sorting Ascending (Upcoming deadlines).
+                    const deadlineSortValue = rawDeadline || '9999-12-31'; 
+
                     return `
-                        <tr>
-                            <td data-label="Program Name">
-                                <a href="#/incentive/${item.slug}" class="usa-link">${data.program_name}</a>
+                        <tr class="clickable-row" data-href="#/incentive/${item.slug}">
+                            <td data-label="Program Name" class="program-name font-sans-md text-bold">
+                                <a href="#/incentive/${item.slug}" class="usa-link row-link">${data.program_name}</a>
                             </td>
-                            <td data-label="Agency">${data.agency || 'N/A'}</td>
-                            <td data-label="Assistance Type" class="text-capitalize">${data.assistance_type?.join(', ') || 'N/A'}</td>
-                            <td data-label="Deadline">${data.application_deadline_date || 'N/A'}</td>
+                            <td data-label="Description" style="min-width: 200px;">
+                                <div class="description-truncate text-base-dark" title="${rawDesc.replace(/"/g, '&quot;')}">
+                                    ${rawDesc}
+                                </div>
+                            </td>
+                            <td data-label="Assistance Type" class="assistance-type" data-sort-value="${typeSortValue}">
+                                ${tagsHtml}
+                            </td>
+                            <td data-label="Deadline" data-sort-value="${deadlineSortValue}" style="white-space: nowrap;">
+                                ${displayDeadline}
+                            </td>
                         </tr>
                     `;
                 }).join('');
             }
+
+            // Add interaction to the table body
+            tableBody.addEventListener('click', (e) => {
+                // 1. Find the closest table row to the click
+                const row = e.target.closest('.clickable-row');
+                
+                // 2. Safety checks:
+                // - Did we actually click a row?
+                // - Did the user click a specific button inside the row? (e.g. if you had a "Download" button, we don't want to trigger the row click)
+                // - Did the user select text? (window.getSelection)
+                if (row && !e.target.closest('a') && !e.target.closest('button') && window.getSelection().toString().length === 0) {
+                    
+                    // 3. Find the primary link in this row
+                    const link = row.querySelector('a.row-link');
+                    
+                    if (link) {
+                        // 4. Programmatically click the link. 
+                        // This ensures standard router behavior (SPA routing) is preserved.
+                        link.click(); 
+                    }
+                }
+            });
             
             function renderDetailView(item) {
                 const data = item.structured_extraction;
@@ -1211,7 +1382,7 @@
                     }
                     return true;
                 });
-                resultsCount.textContent = `Showing ${displayedIncentives.length} of ${allIncentives.length} results`;
+                resultsCount.textContent = `Showing ${displayedIncentives.length} results`;
                 renderTable(displayedIncentives);
                 renderActiveFilterTags();
                 updateUrlWithFilters();

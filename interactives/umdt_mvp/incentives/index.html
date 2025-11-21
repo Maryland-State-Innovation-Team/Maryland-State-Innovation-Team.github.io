@@ -316,8 +316,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-width: 1.5rem;
-            height: 1.5rem;
+            min-width: 1.2rem;
+            height: 1.2rem;
             padding: 0 0.4rem;
             margin-left: 0.5rem;
             border-radius: 999px;
@@ -513,6 +513,43 @@
         .usa-checkbox:focus-within {
             z-index: 1;
         }
+        /* 1. Apply the pointer cursor to the row so the user knows it's clickable */
+        .clickable-row {
+            cursor: pointer;
+        }
+
+        /* 2. High-Specificity Hover State 
+        We target the 'td' inside the hovered row to override the 
+        striped background color. */
+        table.usa-table tr.clickable-row:hover td {
+            background-color: #dfe1e2 !important; /* 'base-lighter' token from USWDS */
+            color: #1b1b1b; /* Ensure text stays legible */
+        }
+
+        /* 3. Optional: Active state (when clicking down) */
+        table.usa-table tr.clickable-row:active td {
+            background-color: #cfd2d4 !important; /* Slightly darker */
+        }
+
+        .program-name {
+            max-width: 300px;
+        }
+        /* CSS Truncation: Line Clamp */
+        .description-truncate {
+            display: -webkit-box;
+            line-clamp: 3;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 300px;
+        }
+        .usa-table td {
+            vertical-align: top;
+        }
+        .usa-prose>ul li, .usa-prose>ol li {
+            padding-left: 0px;
+        }
     </style>
 </head>
 <body>
@@ -635,9 +672,9 @@
                                     <caption class="usa-sr-only">Incentives search results table</caption>
                                     <thead>
                                         <tr>
-                                            <th scope="col" data-sortable>Program Name</th>
+                                            <th scope="col" data-sortable>Program&nbsp;Name</th>
                                             <th scope="col">Description</th>
-                                            <th scope="col" data-sortable>Assistance Type</th>
+                                            <th scope="col" data-sortable>Assistance&nbsp;Type</th>
                                             <th scope="col" data-sortable>Deadline</th>
                                         </tr>
                                     </thead>
@@ -887,8 +924,9 @@
                 },
                 incentiveAreas: {
                     title: 'Incentive Area',
+                    description_html: '<div class="padding-bottom-1"><a href="#">What are incentive areas?</a></div>',
                     key: 'list_of_incentive_areas',
-                    options: ["BRNI Areas", "Enterprise Zone Focus Areas", "Enterprise Zones", "Main Street Areas", "Opportunity Zones", "Priority Funding Areas", "RISE Zones", "Sustainable Communities", "Transit Oriented Development", "ENOUGH Act"]
+                    options: ["BRNI Areas", "Enterprise Zone Focus Areas", "Enterprise Zones", "Main Street Areas", "Opportunity Zones", "Priority Funding Areas", "RISE Zones", "Sustainable Communities", "Just Communities", "Transit Oriented Development", "ENOUGH Act Grantees"]
                 }
             };
 
@@ -1034,6 +1072,7 @@
                             </button>
                         </h2>
                         <div id="acc-${filterKey}" class="usa-accordion__content usa-prose" ${!isExpanded ? 'hidden' : ''}>
+                            ${config.description_html ? config.description_html : ''}
                            <ul class="usa-list usa-list--unstyled">${checkboxes}</ul>
                         </div>
                     `;
@@ -1096,12 +1135,6 @@
                     return;
                 }
 
-                const truncate = (str, maxLength) => {
-                    if (!str) return '';
-                    if (str.length <= maxLength) return str;
-                    return str.substr(0, str.lastIndexOf(' ', maxLength)) + ' ...';
-                };
-
                 const formatDate = (dateStr) => {
                     if (!dateStr) return 'N/A';
                     if (dateStr.match(/^\d{4}-\d{2}-\d{2}$/)) {
@@ -1116,7 +1149,6 @@
                     const data = item.structured_extraction;
                     
                     const rawDesc = item.summary || data.program_description || '';
-                    const truncatedDesc = truncate(rawDesc, 120);
 
                     const types = data.assistance_type || [];
                     const tagsHtml = types.length > 0 
@@ -1133,14 +1165,16 @@
                     const deadlineSortValue = rawDeadline || '9999-12-31'; 
 
                     return `
-                        <tr>
-                            <td data-label="Program Name" class="font-sans-md text-bold">
-                                <a href="#/incentive/${item.slug}" class="usa-link">${data.program_name}</a>
+                        <tr class="clickable-row" data-href="#/incentive/${item.slug}">
+                            <td data-label="Program Name" class="program-name font-sans-md text-bold">
+                                <a href="#/incentive/${item.slug}" class="usa-link row-link">${data.program_name}</a>
                             </td>
-                            <td data-label="Description" style="max-width: 450px; min-width: 200px;">
-                                <span class="text-base-dark">${truncatedDesc}</span>
+                            <td data-label="Description" style="min-width: 200px;">
+                                <div class="description-truncate text-base-dark" title="${rawDesc.replace(/"/g, '&quot;')}">
+                                    ${rawDesc}
+                                </div>
                             </td>
-                            <td data-label="Assistance Type" data-sort-value="${typeSortValue}">
+                            <td data-label="Assistance Type" class="assistance-type" data-sort-value="${typeSortValue}">
                                 ${tagsHtml}
                             </td>
                             <td data-label="Deadline" data-sort-value="${deadlineSortValue}" style="white-space: nowrap;">
@@ -1150,6 +1184,28 @@
                     `;
                 }).join('');
             }
+
+            // Add interaction to the table body
+            tableBody.addEventListener('click', (e) => {
+                // 1. Find the closest table row to the click
+                const row = e.target.closest('.clickable-row');
+                
+                // 2. Safety checks:
+                // - Did we actually click a row?
+                // - Did the user click a specific button inside the row? (e.g. if you had a "Download" button, we don't want to trigger the row click)
+                // - Did the user select text? (window.getSelection)
+                if (row && !e.target.closest('a') && !e.target.closest('button') && window.getSelection().toString().length === 0) {
+                    
+                    // 3. Find the primary link in this row
+                    const link = row.querySelector('a.row-link');
+                    
+                    if (link) {
+                        // 4. Programmatically click the link. 
+                        // This ensures standard router behavior (SPA routing) is preserved.
+                        link.click(); 
+                    }
+                }
+            });
             
             function renderDetailView(item) {
                 const data = item.structured_extraction;
@@ -1326,7 +1382,7 @@
                     }
                     return true;
                 });
-                resultsCount.textContent = `Showing ${displayedIncentives.length} of ${allIncentives.length} results`;
+                resultsCount.textContent = `Showing ${displayedIncentives.length} results`;
                 renderTable(displayedIncentives);
                 renderActiveFilterTags();
                 updateUrlWithFilters();
