@@ -70,7 +70,7 @@
         "ShapeSTLen": 13111.979353050556,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 1
       },
       "geometry": {
         "type": "Point",
@@ -358,7 +358,7 @@
         "ShapeSTLen": 3979.0786608190315,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 1
       },
       "geometry": {
         "type": "Point",
@@ -371,7 +371,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "ALDI",
+        "name": "Aldi",
         "type": "grocery",
         "tag": "supermarket",
         "lat": 39.0099092,
@@ -934,7 +934,7 @@
         "ShapeSTLen": 10115.831629206452,
         "type_label": "Grocery",
         "tag_label": "Pastry",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -1006,7 +1006,7 @@
         "ShapeSTLen": 11108.052928428368,
         "type_label": "Grocery",
         "tag_label": "Deli",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -1121,42 +1121,6 @@
         "coordinates": [
           -76.6154856,
           39.1524089
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Harris Teeter",
-        "type": "grocery",
-        "tag": "supermarket",
-        "lat": 39.0495732,
-        "lng": -77.1091078,
-        "index_right": 1457,
-        "OBJECTID": 3058,
-        "STATEFP20": "24",
-        "COUNTYFP20": "031",
-        "TRACTCE20": "701216",
-        "GEOID20": "24031701216",
-        "NAME20": "7012.16",
-        "NAMELSAD20": "Census Tract",
-        "MTFCC20": "G5020",
-        "FUNCSTAT20": "S",
-        "ALAND20": 1358375,
-        "AWATER20": 505,
-        "INTPTLAT20": "+39.0478603",
-        "INTPTLON20": "-077.1158425",
-        "ShapeSTAre": 2256234.7734375,
-        "ShapeSTLen": 6949.658297586313,
-        "type_label": "Grocery",
-        "tag_label": "Supermarket",
-        "quality": 5
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -77.1091078,
-          39.0495732
         ]
       }
     },
@@ -2711,7 +2675,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "ALDI",
+        "name": "Aldi",
         "type": "grocery",
         "tag": "supermarket",
         "lat": 39.1276501,
@@ -3418,7 +3382,7 @@
         "ShapeSTLen": 10115.831629206452,
         "type_label": "Grocery",
         "tag_label": "Health Food",
-        "quality": 4
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -3526,7 +3490,7 @@
         "ShapeSTLen": 14971.450712670272,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -3958,7 +3922,7 @@
         "ShapeSTLen": 11163.820268339387,
         "type_label": "Grocery",
         "tag_label": "Marketplace",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -4678,7 +4642,7 @@
         "ShapeSTLen": 11801.415400897988,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -4763,7 +4727,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Wheelhouse Farm Market",
+        "name": "Rosie's Delicatessen",
         "type": "grocery",
         "tag": "greengrocer",
         "lat": 39.3029112,
@@ -5002,7 +4966,7 @@
         "ShapeSTLen": 20518.380014593542,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -5182,7 +5146,7 @@
         "ShapeSTLen": 13265.250490835611,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -5542,7 +5506,7 @@
         "ShapeSTLen": 11893.126999864993,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -5938,7 +5902,7 @@
         "ShapeSTLen": 15081.420862998104,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -6262,7 +6226,7 @@
         "ShapeSTLen": 5570.6212133956415,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -6298,7 +6262,7 @@
         "ShapeSTLen": 8441.101756427972,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -6370,7 +6334,7 @@
         "ShapeSTLen": 11045.90996946473,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -6550,7 +6514,7 @@
         "ShapeSTLen": 5341.325259174336,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -7175,7 +7139,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Price Rite",
+        "name": "Jumbo Fresh",
         "type": "grocery",
         "tag": "supermarket",
         "lat": 39.284449,
@@ -7306,7 +7270,7 @@
         "ShapeSTLen": 6897.438165251782,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -7522,7 +7486,7 @@
         "ShapeSTLen": 29003.597184025937,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -8782,7 +8746,7 @@
         "ShapeSTLen": 2276.8034662070804,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 3
+        "quality": 2
       },
       "geometry": {
         "type": "Point",
@@ -9178,7 +9142,7 @@
         "ShapeSTLen": 12301.650862567067,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 4
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -9358,7 +9322,7 @@
         "ShapeSTLen": 13980.141967799325,
         "type_label": "Grocery",
         "tag_label": "Health Food",
-        "quality": 1
+        "quality": 0
       },
       "geometry": {
         "type": "Point",
@@ -9538,7 +9502,7 @@
         "ShapeSTLen": 8196.885553428814,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -9610,7 +9574,7 @@
         "ShapeSTLen": 11103.683438205759,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -9682,7 +9646,7 @@
         "ShapeSTLen": 13293.310477773213,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -9934,7 +9898,7 @@
         "ShapeSTLen": 11869.036309225796,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -9970,7 +9934,7 @@
         "ShapeSTLen": 7898.625769074908,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 1
       },
       "geometry": {
         "type": "Point",
@@ -10006,7 +9970,7 @@
         "ShapeSTLen": 6909.711031984214,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -10049,6 +10013,42 @@
         "coordinates": [
           -76.5768424,
           39.3834157
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Enchanted Cakes and Treats",
+        "type": "grocery",
+        "tag": "bakery",
+        "lat": 39.3744948,
+        "lng": -76.5424483,
+        "index_right": 63,
+        "OBJECTID": 1664,
+        "STATEFP20": "24",
+        "COUNTYFP20": "005",
+        "TRACTCE20": "492101",
+        "GEOID20": "24005492101",
+        "NAME20": "4921.01",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 1432402,
+        "AWATER20": 0,
+        "INTPTLAT20": "+39.3844519",
+        "INTPTLON20": "-076.5395780",
+        "ShapeSTAre": 2400959.859375,
+        "ShapeSTLen": 7263.5950071239795,
+        "type_label": "Grocery",
+        "tag_label": "Bakery",
+        "quality": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.5424483,
+          39.3744948
         ]
       }
     },
@@ -10150,7 +10150,7 @@
         "ShapeSTLen": 7263.5950071239795,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -10510,7 +10510,7 @@
         "ShapeSTLen": 8620.540460255625,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -10955,42 +10955,6 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "7-Eleven",
-        "type": "grocery",
-        "tag": "convenience",
-        "lat": 39.3662928,
-        "lng": -76.5170414,
-        "index_right": 1279,
-        "OBJECTID": 2880,
-        "STATEFP20": "24",
-        "COUNTYFP20": "005",
-        "TRACTCE20": "440500",
-        "GEOID20": "24005440500",
-        "NAME20": "4405",
-        "NAMELSAD20": "Census Tract",
-        "MTFCC20": "G5020",
-        "FUNCSTAT20": "S",
-        "ALAND20": 2979405,
-        "AWATER20": 0,
-        "INTPTLAT20": "+39.3563999",
-        "INTPTLON20": "-076.5101481",
-        "ShapeSTAre": 4990026.37890625,
-        "ShapeSTLen": 11412.889781786707,
-        "type_label": "Grocery",
-        "tag_label": "Convenience",
-        "quality": 2
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.5170414,
-          39.3662928
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "Cake & Wedding Cottage",
         "type": "grocery",
         "tag": "pastry",
@@ -11194,7 +11158,7 @@
         "ShapeSTLen": 15792.992401395608,
         "type_label": "Grocery",
         "tag_label": "Pastry",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -11230,7 +11194,7 @@
         "ShapeSTLen": 7290.341605367999,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 1
       },
       "geometry": {
         "type": "Point",
@@ -11662,7 +11626,7 @@
         "ShapeSTLen": 7294.880911916342,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -11770,7 +11734,7 @@
         "ShapeSTLen": 28385.63403872884,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 3
+        "quality": 2
       },
       "geometry": {
         "type": "Point",
@@ -12166,7 +12130,7 @@
         "ShapeSTLen": 8374.28492076256,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -12706,7 +12670,7 @@
         "ShapeSTLen": 5836.1009183645365,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 4
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -12886,7 +12850,7 @@
         "ShapeSTLen": 5881.013915727617,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -12994,7 +12958,7 @@
         "ShapeSTLen": 22911.809974284715,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 1
       },
       "geometry": {
         "type": "Point",
@@ -13030,7 +12994,7 @@
         "ShapeSTLen": 9672.261392102086,
         "type_label": "Grocery",
         "tag_label": "Deli",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -13138,7 +13102,7 @@
         "ShapeSTLen": 10804.283801330199,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -14290,7 +14254,7 @@
         "ShapeSTLen": 6662.973742575989,
         "type_label": "Grocery",
         "tag_label": "Marketplace",
-        "quality": 1
+        "quality": 0
       },
       "geometry": {
         "type": "Point",
@@ -14686,7 +14650,7 @@
         "ShapeSTLen": 12770.007769250007,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -14866,7 +14830,7 @@
         "ShapeSTLen": 20124.677001422267,
         "type_label": "Grocery",
         "tag_label": "Wholesale",
-        "quality": 1
+        "quality": 0
       },
       "geometry": {
         "type": "Point",
@@ -14902,7 +14866,7 @@
         "ShapeSTLen": 16995.575006376188,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -15226,7 +15190,7 @@
         "ShapeSTLen": 61438.60381643563,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -15442,7 +15406,7 @@
         "ShapeSTLen": 7834.695898285051,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -15998,8 +15962,8 @@
         "name": "Homestead Farm",
         "type": "grocery",
         "tag": "farm",
-        "lat": 39.1117725,
-        "lng": -77.3545265,
+        "lat": 39.1118243,
+        "lng": -77.3542615,
         "index_right": 502,
         "OBJECTID": 2103,
         "STATEFP20": "24",
@@ -16023,44 +15987,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -77.3545265,
-          39.1117725
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Unnamed farm",
-        "type": "grocery",
-        "tag": "farm",
-        "lat": 39.1133793,
-        "lng": -77.3614776,
-        "index_right": 502,
-        "OBJECTID": 2103,
-        "STATEFP20": "24",
-        "COUNTYFP20": "031",
-        "TRACTCE20": "700500",
-        "GEOID20": "24031700500",
-        "NAME20": "7005",
-        "NAMELSAD20": "Census Tract",
-        "MTFCC20": "G5020",
-        "FUNCSTAT20": "S",
-        "ALAND20": 168899005,
-        "AWATER20": 12636821,
-        "INTPTLAT20": "+39.1234371",
-        "INTPTLON20": "-077.4397368",
-        "ShapeSTAre": 302124159.39453125,
-        "ShapeSTLen": 79611.5563829946,
-        "type_label": "Grocery",
-        "tag_label": "Farm",
-        "quality": 5
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -77.3614776,
-          39.1133793
+          -77.3542615,
+          39.1118243
         ]
       }
     },
@@ -16319,7 +16247,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Lavande Patisserie",
+        "name": "La Baguette Antojitos",
         "type": "grocery",
         "tag": "bakery",
         "lat": 39.0882495,
@@ -16342,7 +16270,7 @@
         "ShapeSTLen": 9921.06114700472,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -16378,7 +16306,7 @@
         "ShapeSTLen": 13499.985697543796,
         "type_label": "Grocery",
         "tag_label": "Pastry",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -16414,7 +16342,7 @@
         "ShapeSTLen": 6103.361427734131,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -17854,7 +17782,7 @@
         "ShapeSTLen": 11873.331743047547,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 4
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -18934,7 +18862,7 @@
         "ShapeSTLen": 5025.22881567763,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 4
+        "quality": 5
       },
       "geometry": {
         "type": "Point",
@@ -19402,7 +19330,7 @@
         "ShapeSTLen": 6242.677336469687,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 4
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -20014,7 +19942,7 @@
         "ShapeSTLen": 10663.405717232608,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -20122,7 +20050,7 @@
         "ShapeSTLen": 6685.255463763669,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -20158,7 +20086,7 @@
         "ShapeSTLen": 10332.800845166408,
         "type_label": "Grocery",
         "tag_label": "Health Food",
-        "quality": 3
+        "quality": 0
       },
       "geometry": {
         "type": "Point",
@@ -20230,7 +20158,7 @@
         "ShapeSTLen": 5848.201782793673,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -20410,7 +20338,7 @@
         "ShapeSTLen": 5442.185177330839,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -20590,7 +20518,7 @@
         "ShapeSTLen": 7243.306937489212,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 1
       },
       "geometry": {
         "type": "Point",
@@ -20626,7 +20554,7 @@
         "ShapeSTLen": 7243.306937489212,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 4
+        "quality": 5
       },
       "geometry": {
         "type": "Point",
@@ -20698,7 +20626,7 @@
         "ShapeSTLen": 9716.11637472146,
         "type_label": "Grocery",
         "tag_label": "Wholesale",
-        "quality": 1
+        "quality": 0
       },
       "geometry": {
         "type": "Point",
@@ -21569,42 +21497,6 @@
         "coordinates": [
           -75.61797,
           38.3269312
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "The Bottle Shop",
-        "type": "grocery",
-        "tag": "supermarket",
-        "lat": 39.0619265,
-        "lng": -77.1584228,
-        "index_right": 918,
-        "OBJECTID": 2519,
-        "STATEFP20": "24",
-        "COUNTYFP20": "031",
-        "TRACTCE20": "701002",
-        "GEOID20": "24031701002",
-        "NAME20": "7010.02",
-        "NAMELSAD20": "Census Tract",
-        "MTFCC20": "G5020",
-        "FUNCSTAT20": "S",
-        "ALAND20": 2721137,
-        "AWATER20": 0,
-        "INTPTLAT20": "+39.0630609",
-        "INTPTLON20": "-077.1661876",
-        "ShapeSTAre": 4519867.92578125,
-        "ShapeSTLen": 8911.150298845394,
-        "type_label": "Grocery",
-        "tag_label": "Supermarket",
-        "quality": 5
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -77.1584228,
-          39.0619265
         ]
       }
     },
@@ -22498,7 +22390,7 @@
         "ShapeSTLen": 9574.517231571715,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -22606,7 +22498,7 @@
         "ShapeSTLen": 20088.25267214931,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -22822,7 +22714,7 @@
         "ShapeSTLen": 35309.48126013249,
         "type_label": "Grocery",
         "tag_label": "Marketplace",
-        "quality": 4
+        "quality": 2
       },
       "geometry": {
         "type": "Point",
@@ -22858,7 +22750,7 @@
         "ShapeSTLen": 35309.48126013249,
         "type_label": "Grocery",
         "tag_label": "Marketplace",
-        "quality": 4
+        "quality": 5
       },
       "geometry": {
         "type": "Point",
@@ -23470,7 +23362,7 @@
         "ShapeSTLen": 15779.923035354099,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 4
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -23542,7 +23434,7 @@
         "ShapeSTLen": 8784.293540329398,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -23650,7 +23542,7 @@
         "ShapeSTLen": 8003.19832477817,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -24046,7 +23938,7 @@
         "ShapeSTLen": 6261.833022183095,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -24154,7 +24046,7 @@
         "ShapeSTLen": 11103.683438205759,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 5
       },
       "geometry": {
         "type": "Point",
@@ -24334,7 +24226,7 @@
         "ShapeSTLen": 9019.037464755402,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -24766,7 +24658,7 @@
         "ShapeSTLen": 8032.972520920056,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -24874,7 +24766,7 @@
         "ShapeSTLen": 7234.518701984934,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -26939,7 +26831,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "ALDI",
+        "name": "Aldi",
         "type": "grocery",
         "tag": "supermarket",
         "lat": 39.1715404,
@@ -27286,7 +27178,7 @@
         "ShapeSTLen": 12721.86521743842,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 1
+        "quality": 0
       },
       "geometry": {
         "type": "Point",
@@ -27466,7 +27358,7 @@
         "ShapeSTLen": 7826.396934974385,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -27934,7 +27826,7 @@
         "ShapeSTLen": 29025.306530055925,
         "type_label": "Grocery",
         "tag_label": "Marketplace",
-        "quality": 3
+        "quality": 1
       },
       "geometry": {
         "type": "Point",
@@ -28042,7 +27934,7 @@
         "ShapeSTLen": 15563.054657209337,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -28906,7 +28798,7 @@
         "ShapeSTLen": 3158.001268769166,
         "type_label": "Grocery",
         "tag_label": "Wholesale",
-        "quality": 1
+        "quality": 0
       },
       "geometry": {
         "type": "Point",
@@ -28942,7 +28834,7 @@
         "ShapeSTLen": 5836.1009183645365,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 4
+        "quality": 5
       },
       "geometry": {
         "type": "Point",
@@ -29302,7 +29194,7 @@
         "ShapeSTLen": 3217.2862076125343,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -29842,7 +29734,7 @@
         "ShapeSTLen": 7148.809995700099,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 4
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -29950,7 +29842,7 @@
         "ShapeSTLen": 7234.518701984934,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -30094,7 +29986,7 @@
         "ShapeSTLen": 5897.905053444854,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -30130,7 +30022,7 @@
         "ShapeSTLen": 5897.905053444854,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -30310,7 +30202,7 @@
         "ShapeSTLen": 3979.0786608190315,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -31642,7 +31534,7 @@
         "ShapeSTLen": 10164.62348270781,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -31678,7 +31570,7 @@
         "ShapeSTLen": 6702.991655706464,
         "type_label": "Grocery",
         "tag_label": "Pastry",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -31714,7 +31606,7 @@
         "ShapeSTLen": 5881.013915727617,
         "type_label": "Grocery",
         "tag_label": "Health Food",
-        "quality": 4
+        "quality": 5
       },
       "geometry": {
         "type": "Point",
@@ -32002,7 +31894,7 @@
         "ShapeSTLen": 5341.325259174336,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -32326,7 +32218,7 @@
         "ShapeSTLen": 45994.30655553521,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -32614,7 +32506,7 @@
         "ShapeSTLen": 7373.278181273347,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -32902,7 +32794,7 @@
         "ShapeSTLen": 3425.695103471075,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -33766,7 +33658,7 @@
         "ShapeSTLen": 3716.614028044546,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -34715,11 +34607,11 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Unnamed convenience",
+        "name": "Easton Super Soda Deli Lottery",
         "type": "grocery",
         "tag": "convenience",
-        "lat": 38.7738523,
-        "lng": -76.0703315,
+        "lat": 38.77389,
+        "lng": -76.0703337,
         "index_right": 1426,
         "OBJECTID": 3027,
         "STATEFP20": "24",
@@ -34738,13 +34630,13 @@
         "ShapeSTLen": 21785.194265120328,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -76.0703315,
-          38.7738523
+          -76.0703337,
+          38.77389
         ]
       }
     },
@@ -34810,7 +34702,7 @@
         "ShapeSTLen": 150384.83924008152,
         "type_label": "Grocery",
         "tag_label": "Wholesale",
-        "quality": 5
+        "quality": 1
       },
       "geometry": {
         "type": "Point",
@@ -34990,7 +34882,7 @@
         "ShapeSTLen": 6949.658297586313,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -35134,7 +35026,7 @@
         "ShapeSTLen": 6949.658297586313,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 4
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -35566,7 +35458,7 @@
         "ShapeSTLen": 16211.065559522942,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 4
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -35674,7 +35566,7 @@
         "ShapeSTLen": 8152.656081440619,
         "type_label": "Grocery",
         "tag_label": "Supermarket",
-        "quality": 1
+        "quality": 0
       },
       "geometry": {
         "type": "Point",
@@ -36070,7 +35962,7 @@
         "ShapeSTLen": 9429.562501607037,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -36515,7 +36407,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "ALDI",
+        "name": "Aldi",
         "type": "grocery",
         "tag": "supermarket",
         "lat": 38.7444502,
@@ -37006,7 +36898,7 @@
         "ShapeSTLen": 13499.985697543796,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -37402,7 +37294,7 @@
         "ShapeSTLen": 3743.12728571529,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 1
       },
       "geometry": {
         "type": "Point",
@@ -37870,7 +37762,7 @@
         "ShapeSTLen": 7461.732435063221,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -38518,7 +38410,7 @@
         "ShapeSTLen": 16834.57850847945,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -39130,7 +39022,7 @@
         "ShapeSTLen": 16688.213041957904,
         "type_label": "Grocery",
         "tag_label": "Deli",
-        "quality": 4
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -39886,7 +39778,7 @@
         "ShapeSTLen": 11612.020298866928,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 4
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -39922,7 +39814,7 @@
         "ShapeSTLen": 40973.68428418036,
         "type_label": "Grocery",
         "tag_label": "Farm",
-        "quality": 5
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -40210,7 +40102,7 @@
         "ShapeSTLen": 29445.484414784638,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -40282,7 +40174,7 @@
         "ShapeSTLen": 29445.484414784638,
         "type_label": "Grocery",
         "tag_label": "Greengrocer",
-        "quality": 4
+        "quality": 5
       },
       "geometry": {
         "type": "Point",
@@ -40354,7 +40246,7 @@
         "ShapeSTLen": 29445.484414784638,
         "type_label": "Grocery",
         "tag_label": "Deli",
-        "quality": 1
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -40642,7 +40534,7 @@
         "ShapeSTLen": 4169.555356622861,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 4
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -40678,7 +40570,7 @@
         "ShapeSTLen": 4169.555356622861,
         "type_label": "Grocery",
         "tag_label": "Health Food",
-        "quality": 4
+        "quality": 5
       },
       "geometry": {
         "type": "Point",
@@ -40894,7 +40786,7 @@
         "ShapeSTLen": 9672.261392102086,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 4
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -41362,7 +41254,7 @@
         "ShapeSTLen": 4884.213233317814,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -41830,7 +41722,7 @@
         "ShapeSTLen": 22911.809974284715,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -42046,7 +41938,7 @@
         "ShapeSTLen": 45166.508466004394,
         "type_label": "Grocery",
         "tag_label": "Farm",
-        "quality": 4
+        "quality": 5
       },
       "geometry": {
         "type": "Point",
@@ -42838,7 +42730,7 @@
         "ShapeSTLen": 4319.314169593727,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -43270,7 +43162,7 @@
         "ShapeSTLen": 7417.833717723189,
         "type_label": "Grocery",
         "tag_label": "Wholesale",
-        "quality": 1
+        "quality": 0
       },
       "geometry": {
         "type": "Point",
@@ -43558,7 +43450,7 @@
         "ShapeSTLen": 7894.287523058329,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -44206,7 +44098,7 @@
         "ShapeSTLen": 27675.391376913543,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 1
       },
       "geometry": {
         "type": "Point",
@@ -44350,7 +44242,7 @@
         "ShapeSTLen": 9259.542702556955,
         "type_label": "Grocery",
         "tag_label": "Marketplace",
-        "quality": 5
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -44681,6 +44573,510 @@
         "coordinates": [
           -77.4082396,
           39.4110541
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Scitinni’s",
+        "type": "grocery",
+        "tag": "deli",
+        "lat": 39.3838692,
+        "lng": -76.6570445,
+        "index_right": 1036,
+        "OBJECTID": 2637,
+        "STATEFP20": "24",
+        "COUNTYFP20": "005",
+        "TRACTCE20": "490400",
+        "GEOID20": "24005490400",
+        "NAME20": "4904",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 5799183,
+        "AWATER20": 247270,
+        "INTPTLAT20": "+39.3974859",
+        "INTPTLON20": "-076.6532267",
+        "ShapeSTAre": 10138728.00390625,
+        "ShapeSTLen": 15856.576422546197,
+        "type_label": "Grocery",
+        "tag_label": "Deli",
+        "quality": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.6570445,
+          39.3838692
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "AC&T",
+        "type": "grocery",
+        "tag": "convenience",
+        "lat": 39.631018,
+        "lng": -77.7843997,
+        "index_right": 466,
+        "OBJECTID": 2067,
+        "STATEFP20": "24",
+        "COUNTYFP20": "043",
+        "TRACTCE20": "010402",
+        "GEOID20": "24043010402",
+        "NAME20": "104.02",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 51466369,
+        "AWATER20": 407422,
+        "INTPTLAT20": "+39.6863304",
+        "INTPTLON20": "-077.7769444",
+        "ShapeSTAre": 87690343.85546875,
+        "ShapeSTLen": 56968.614617015824,
+        "type_label": "Grocery",
+        "tag_label": "Convenience",
+        "quality": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.7843997,
+          39.631018
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Salem Bottom Provisions",
+        "type": "grocery",
+        "tag": "farm",
+        "lat": 39.4687869,
+        "lng": -77.0400751,
+        "index_right": 1022,
+        "OBJECTID": 2623,
+        "STATEFP20": "24",
+        "COUNTYFP20": "013",
+        "TRACTCE20": "509001",
+        "GEOID20": "24013509001",
+        "NAME20": "5090.01",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 43803340,
+        "AWATER20": 54370,
+        "INTPTLAT20": "+39.4703900",
+        "INTPTLON20": "-077.0648802",
+        "ShapeSTAre": 73708154.62890625,
+        "ShapeSTLen": 40092.48564238896,
+        "type_label": "Grocery",
+        "tag_label": "Farm",
+        "quality": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0400751,
+          39.4687869
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Farm Fresh Produce",
+        "type": "grocery",
+        "tag": "farm",
+        "lat": 39.4565588,
+        "lng": -77.0538854,
+        "index_right": 1022,
+        "OBJECTID": 2623,
+        "STATEFP20": "24",
+        "COUNTYFP20": "013",
+        "TRACTCE20": "509001",
+        "GEOID20": "24013509001",
+        "NAME20": "5090.01",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 43803340,
+        "AWATER20": 54370,
+        "INTPTLAT20": "+39.4703900",
+        "INTPTLON20": "-077.0648802",
+        "ShapeSTAre": 73708154.62890625,
+        "ShapeSTLen": 40092.48564238896,
+        "type_label": "Grocery",
+        "tag_label": "Farm",
+        "quality": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0538854,
+          39.4565588
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Unnamed supermarket",
+        "type": "grocery",
+        "tag": "supermarket",
+        "lat": 39.0432205,
+        "lng": -77.1131195,
+        "index_right": 342,
+        "OBJECTID": 1943,
+        "STATEFP20": "24",
+        "COUNTYFP20": "031",
+        "TRACTCE20": "701222",
+        "GEOID20": "24031701222",
+        "NAME20": "7012.22",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 1179645,
+        "AWATER20": 0,
+        "INTPTLAT20": "+39.0393872",
+        "INTPTLON20": "-077.1168941",
+        "ShapeSTAre": 1958115.81640625,
+        "ShapeSTLen": 5885.18063509,
+        "type_label": "Grocery",
+        "tag_label": "Supermarket",
+        "quality": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.1131195,
+          39.0432205
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gaver Farms",
+        "type": "grocery",
+        "tag": "farm",
+        "lat": 39.3839417,
+        "lng": -77.2410055,
+        "index_right": 180,
+        "OBJECTID": 1781,
+        "STATEFP20": "24",
+        "COUNTYFP20": "021",
+        "TRACTCE20": "751802",
+        "GEOID20": "24021751802",
+        "NAME20": "7518.02",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 65261083,
+        "AWATER20": 101702,
+        "INTPTLAT20": "+39.4201331",
+        "INTPTLON20": "-077.1883485",
+        "ShapeSTAre": 109675988.30078125,
+        "ShapeSTLen": 53660.27553293798,
+        "type_label": "Grocery",
+        "tag_label": "Farm",
+        "quality": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.2410055,
+          39.3839417
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Unnamed greengrocer",
+        "type": "grocery",
+        "tag": "greengrocer",
+        "lat": 38.7739682,
+        "lng": -76.0707874,
+        "index_right": 1426,
+        "OBJECTID": 3027,
+        "STATEFP20": "24",
+        "COUNTYFP20": "041",
+        "TRACTCE20": "960400",
+        "GEOID20": "24041960400",
+        "NAME20": "9604",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 5539466,
+        "AWATER20": 0,
+        "INTPTLAT20": "+38.7725445",
+        "INTPTLON20": "-076.0668991",
+        "ShapeSTAre": 9126732.08984375,
+        "ShapeSTLen": 21785.194265120328,
+        "type_label": "Grocery",
+        "tag_label": "Greengrocer",
+        "quality": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.0707874,
+          38.7739682
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Wegmans",
+        "type": "grocery",
+        "tag": "supermarket",
+        "lat": 39.0626282,
+        "lng": -77.1241646,
+        "index_right": 916,
+        "OBJECTID": 2517,
+        "STATEFP20": "24",
+        "COUNTYFP20": "031",
+        "TRACTCE20": "700904",
+        "GEOID20": "24031700904",
+        "NAME20": "7009.04",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 1132114,
+        "AWATER20": 1173,
+        "INTPTLAT20": "+39.0656133",
+        "INTPTLON20": "-077.1290436",
+        "ShapeSTAre": 1882617.734375,
+        "ShapeSTLen": 10670.647841187969,
+        "type_label": "Grocery",
+        "tag_label": "Supermarket",
+        "quality": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.1241646,
+          39.0626282
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "O'Donnell's Market",
+        "type": "grocery",
+        "tag": "food",
+        "lat": 39.0617335,
+        "lng": -77.1601434,
+        "index_right": 918,
+        "OBJECTID": 2519,
+        "STATEFP20": "24",
+        "COUNTYFP20": "031",
+        "TRACTCE20": "701002",
+        "GEOID20": "24031701002",
+        "NAME20": "7010.02",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 2721137,
+        "AWATER20": 0,
+        "INTPTLAT20": "+39.0630609",
+        "INTPTLON20": "-077.1661876",
+        "ShapeSTAre": 4519867.92578125,
+        "ShapeSTLen": 8911.150298845394,
+        "type_label": "Grocery",
+        "tag_label": "Food",
+        "quality": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.1601434,
+          39.0617335
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tiffanee & Co. Bakery",
+        "type": "grocery",
+        "tag": "bakery",
+        "lat": 39.5548122,
+        "lng": -76.2816448,
+        "index_right": 325,
+        "OBJECTID": 1926,
+        "STATEFP20": "24",
+        "COUNTYFP20": "025",
+        "TRACTCE20": "303700",
+        "GEOID20": "24025303700",
+        "NAME20": "3037",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 33946884,
+        "AWATER20": 158368,
+        "INTPTLAT20": "+39.5367480",
+        "INTPTLON20": "-076.2524477",
+        "ShapeSTAre": 57415460.90625,
+        "ShapeSTLen": 35977.68433316416,
+        "type_label": "Grocery",
+        "tag_label": "Bakery",
+        "quality": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.2816448,
+          39.5548122
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Montpelier Farms Farm Shop",
+        "type": "grocery",
+        "tag": "farm",
+        "lat": 38.8636262,
+        "lng": -76.7195676,
+        "index_right": 884,
+        "OBJECTID": 2485,
+        "STATEFP20": "24",
+        "COUNTYFP20": "033",
+        "TRACTCE20": "800609",
+        "GEOID20": "24033800609",
+        "NAME20": "8006.09",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 15788737,
+        "AWATER20": 214224,
+        "INTPTLAT20": "+38.8418527",
+        "INTPTLON20": "-076.7119581",
+        "ShapeSTAre": 26413915.546875,
+        "ShapeSTLen": 23287.160188744147,
+        "type_label": "Grocery",
+        "tag_label": "Farm",
+        "quality": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.7195676,
+          38.8636262
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Raja Family Farm",
+        "type": "grocery",
+        "tag": "butcher",
+        "lat": 39.323623,
+        "lng": -76.8065402,
+        "index_right": 1181,
+        "OBJECTID": 2782,
+        "STATEFP20": "24",
+        "COUNTYFP20": "005",
+        "TRACTCE20": "402202",
+        "GEOID20": "24005402202",
+        "NAME20": "4022.02",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 20636669,
+        "AWATER20": 252189,
+        "INTPTLAT20": "+39.3270886",
+        "INTPTLON20": "-076.8184311",
+        "ShapeSTAre": 34959955.6875,
+        "ShapeSTLen": 30641.44016046985,
+        "type_label": "Grocery",
+        "tag_label": "Butcher",
+        "quality": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.8065402,
+          39.323623
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OK Natural Food Store",
+        "type": "grocery",
+        "tag": "greengrocer",
+        "lat": 39.3042762,
+        "lng": -76.616984,
+        "index_right": 1295,
+        "OBJECTID": 2896,
+        "STATEFP20": "24",
+        "COUNTYFP20": "510",
+        "TRACTCE20": "110200",
+        "GEOID20": "24510110200",
+        "NAME20": "1102",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 720072,
+        "AWATER20": 0,
+        "INTPTLAT20": "+39.3014588",
+        "INTPTLON20": "-076.6175056",
+        "ShapeSTAre": 1204134.828125,
+        "ShapeSTLen": 5025.22881567763,
+        "type_label": "Grocery",
+        "tag_label": "Greengrocer",
+        "quality": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.616984,
+          39.3042762
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "La Flor de Mayo Bakery",
+        "type": "grocery",
+        "tag": "bakery",
+        "lat": 38.9419523,
+        "lng": -76.9051888,
+        "index_right": 416,
+        "OBJECTID": 2017,
+        "STATEFP20": "24",
+        "COUNTYFP20": "033",
+        "TRACTCE20": "803801",
+        "GEOID20": "24033803801",
+        "NAME20": "8038.01",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 1249305,
+        "AWATER20": 0,
+        "INTPTLAT20": "+38.9457530",
+        "INTPTLON20": "-076.9052779",
+        "ShapeSTAre": 2068311.44921875,
+        "ShapeSTLen": 7196.780163391399,
+        "type_label": "Grocery",
+        "tag_label": "Bakery",
+        "quality": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.9051888,
+          38.9419523
         ]
       }
     },
@@ -48029,6 +48425,42 @@
         "coordinates": [
           -76.7935882,
           39.1292256
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Wawa",
+        "type": "grocery",
+        "tag": "convenience",
+        "lat": 39.1365818,
+        "lng": -77.1915277,
+        "index_right": 369,
+        "OBJECTID": 1970,
+        "STATEFP20": "24",
+        "COUNTYFP20": "031",
+        "TRACTCE20": "700727",
+        "GEOID20": "24031700727",
+        "NAME20": "7007.27",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 755799,
+        "AWATER20": 0,
+        "INTPTLAT20": "+39.1376131",
+        "INTPTLON20": "-077.1877298",
+        "ShapeSTAre": 1258034.796875,
+        "ShapeSTLen": 4603.802622218725,
+        "type_label": "Grocery",
+        "tag_label": "Convenience",
+        "quality": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.1915277,
+          39.1365818
         ]
       }
     },
@@ -53170,7 +53602,7 @@
         "ShapeSTLen": 18539.081529402054,
         "type_label": "Grocery",
         "tag_label": "Wholesale",
-        "quality": 1
+        "quality": 0
       },
       "geometry": {
         "type": "Point",
@@ -54842,8 +55274,8 @@
         "name": "Walmart Supercenter",
         "type": "grocery",
         "tag": "supermarket",
-        "lat": 39.1987171,
-        "lng": -77.2524552,
+        "lat": 39.1987551,
+        "lng": -77.2523991,
         "index_right": 363,
         "OBJECTID": 1964,
         "STATEFP20": "24",
@@ -54867,8 +55299,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -77.2524552,
-          39.1987171
+          -77.2523991,
+          39.1987551
         ]
       }
     },
@@ -54914,8 +55346,8 @@
         "name": "ALDI",
         "type": "grocery",
         "tag": "supermarket",
-        "lat": 39.1986174,
-        "lng": -77.2472133,
+        "lat": 39.1986301,
+        "lng": -77.247239,
         "index_right": 363,
         "OBJECTID": 1964,
         "STATEFP20": "24",
@@ -54939,8 +55371,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -77.2472133,
-          39.1986174
+          -77.247239,
+          39.1986301
         ]
       }
     },
@@ -55726,7 +56158,7 @@
         "ShapeSTLen": 7900.539636165091,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -57418,7 +57850,7 @@
         "ShapeSTLen": 7157.555056602711,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -58763,42 +59195,6 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "High's",
-        "type": "grocery",
-        "tag": "convenience",
-        "lat": 38.9731149,
-        "lng": -76.2648783,
-        "index_right": 634,
-        "OBJECTID": 2235,
-        "STATEFP20": "24",
-        "COUNTYFP20": "035",
-        "TRACTCE20": "811000",
-        "GEOID20": "24035811000",
-        "NAME20": "8110",
-        "NAMELSAD20": "Census Tract",
-        "MTFCC20": "G5020",
-        "FUNCSTAT20": "S",
-        "ALAND20": 20815173,
-        "AWATER20": 22182138,
-        "INTPTLAT20": "+38.9424469",
-        "INTPTLON20": "-076.2657424",
-        "ShapeSTAre": 71168421.8515625,
-        "ShapeSTLen": 48893.4961949319,
-        "type_label": "Grocery",
-        "tag_label": "Convenience",
-        "quality": 2
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -76.2648783,
-          38.9731149
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "name": "Wawa",
         "type": "grocery",
         "tag": "convenience",
@@ -59146,7 +59542,7 @@
         "ShapeSTLen": 142991.07216045228,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -60707,7 +61103,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "ALDI",
+        "name": "Aldi",
         "type": "grocery",
         "tag": "supermarket",
         "lat": 39.2846983,
@@ -61823,6 +62219,42 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "Walmart Supercenter",
+        "type": "grocery",
+        "tag": "supermarket",
+        "lat": 38.7724086,
+        "lng": -76.8895421,
+        "index_right": 99,
+        "OBJECTID": 1700,
+        "STATEFP20": "24",
+        "COUNTYFP20": "033",
+        "TRACTCE20": "801217",
+        "GEOID20": "24033801217",
+        "NAME20": "8012.17",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 4048877,
+        "AWATER20": 6648,
+        "INTPTLAT20": "+38.7651558",
+        "INTPTLON20": "-076.8903620",
+        "ShapeSTAre": 6680359.04296875,
+        "ShapeSTLen": 14348.234293442889,
+        "type_label": "Grocery",
+        "tag_label": "Supermarket",
+        "quality": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.8895421,
+          38.7724086
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "7-Eleven",
         "type": "grocery",
         "tag": "convenience",
@@ -62039,7 +62471,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "ALDI",
+        "name": "Aldi",
         "type": "grocery",
         "tag": "supermarket",
         "lat": 38.853537,
@@ -62543,7 +62975,7 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "ALDI",
+        "name": "Aldi",
         "type": "grocery",
         "tag": "supermarket",
         "lat": 38.9556099,
@@ -64310,8 +64742,8 @@
         "name": "Wegmans",
         "type": "grocery",
         "tag": "supermarket",
-        "lat": 39.1995358,
-        "lng": -77.2565675,
+        "lat": 39.1994945,
+        "lng": -77.2565781,
         "index_right": 363,
         "OBJECTID": 1964,
         "STATEFP20": "24",
@@ -64335,8 +64767,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -77.2565675,
-          39.1995358
+          -77.2565781,
+          39.1994945
         ]
       }
     },
@@ -65885,6 +66317,42 @@
         "coordinates": [
           -76.5249784,
           39.5555627
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Grand Mart International Food",
+        "type": "grocery",
+        "tag": "supermarket",
+        "lat": 38.9422004,
+        "lng": -76.905281,
+        "index_right": 416,
+        "OBJECTID": 2017,
+        "STATEFP20": "24",
+        "COUNTYFP20": "033",
+        "TRACTCE20": "803801",
+        "GEOID20": "24033803801",
+        "NAME20": "8038.01",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 1249305,
+        "AWATER20": 0,
+        "INTPTLAT20": "+38.9457530",
+        "INTPTLON20": "-076.9052779",
+        "ShapeSTAre": 2068311.44921875,
+        "ShapeSTLen": 7196.780163391399,
+        "type_label": "Grocery",
+        "tag_label": "Supermarket",
+        "quality": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.905281,
+          38.9422004
         ]
       }
     },
@@ -68254,7 +68722,7 @@
         "ShapeSTLen": 59635.91877973983,
         "type_label": "Grocery",
         "tag_label": "Marketplace",
-        "quality": 4
+        "quality": 5
       },
       "geometry": {
         "type": "Point",
@@ -69586,7 +70054,7 @@
         "ShapeSTLen": 16501.20030773644,
         "type_label": "Grocery",
         "tag_label": "Farm",
-        "quality": 4
+        "quality": 5
       },
       "geometry": {
         "type": "Point",
@@ -69737,6 +70205,42 @@
         "coordinates": [
           -76.5955026,
           39.3732624
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Speedy Mart",
+        "type": "grocery",
+        "tag": "convenience",
+        "lat": 39.3720909,
+        "lng": -76.558785,
+        "index_right": 1371,
+        "OBJECTID": 2972,
+        "STATEFP20": "24",
+        "COUNTYFP20": "510",
+        "TRACTCE20": "270703",
+        "GEOID20": "24510270703",
+        "NAME20": "2707.03",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 993947,
+        "AWATER20": 0,
+        "INTPTLAT20": "+39.3686909",
+        "INTPTLON20": "-076.5542537",
+        "ShapeSTAre": 1665289.01953125,
+        "ShapeSTLen": 5557.995303607888,
+        "type_label": "Grocery",
+        "tag_label": "Convenience",
+        "quality": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.558785,
+          39.3720909
         ]
       }
     },
@@ -70126,7 +70630,7 @@
         "ShapeSTLen": 10469.183242520765,
         "type_label": "Grocery",
         "tag_label": "Farm",
-        "quality": 4
+        "quality": 5
       },
       "geometry": {
         "type": "Point",
@@ -70810,7 +71314,7 @@
         "ShapeSTLen": 20225.117562718548,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -73978,7 +74482,7 @@
         "ShapeSTLen": 15389.574397184819,
         "type_label": "Grocery",
         "tag_label": "Wholesale",
-        "quality": 1
+        "quality": 0
       },
       "geometry": {
         "type": "Point",
@@ -74410,7 +74914,7 @@
         "ShapeSTLen": 4027.9374161730725,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -74662,7 +75166,7 @@
         "ShapeSTLen": 4812.533386803035,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -75395,6 +75899,42 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "Ann's Grocery",
+        "type": "grocery",
+        "tag": "convenience",
+        "lat": 39.2894217,
+        "lng": -76.5918732,
+        "index_right": 539,
+        "OBJECTID": 2140,
+        "STATEFP20": "24",
+        "COUNTYFP20": "510",
+        "TRACTCE20": "020200",
+        "GEOID20": "24510020200",
+        "NAME20": "202",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 197559,
+        "AWATER20": 0,
+        "INTPTLAT20": "+39.2886357",
+        "INTPTLON20": "-076.5920299",
+        "ShapeSTAre": 330245.9296875,
+        "ShapeSTLen": 2486.401029654948,
+        "type_label": "Grocery",
+        "tag_label": "Convenience",
+        "quality": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.5918732,
+          39.2894217
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "Unnamed convenience",
         "type": "grocery",
         "tag": "convenience",
@@ -75454,7 +75994,7 @@
         "ShapeSTLen": 11965.074035850224,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -75814,7 +76354,7 @@
         "ShapeSTLen": 4896.196255649273,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -76246,7 +76786,7 @@
         "ShapeSTLen": 4745.53279098284,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -76642,7 +77182,7 @@
         "ShapeSTLen": 3415.458602408162,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -77686,7 +78226,7 @@
         "ShapeSTLen": 10358.503850950121,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -77938,7 +78478,7 @@
         "ShapeSTLen": 3565.6797452350343,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -78154,7 +78694,7 @@
         "ShapeSTLen": 5212.049098716022,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 1
       },
       "geometry": {
         "type": "Point",
@@ -78334,7 +78874,7 @@
         "ShapeSTLen": 6321.49983880828,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -78694,7 +79234,7 @@
         "ShapeSTLen": 5771.133446757513,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 3
+        "quality": 5
       },
       "geometry": {
         "type": "Point",
@@ -80723,6 +81263,42 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "W Express Washingtonian",
+        "type": "grocery",
+        "tag": "convenience",
+        "lat": 38.9645667,
+        "lng": -77.1026486,
+        "index_right": 156,
+        "OBJECTID": 1757,
+        "STATEFP20": "24",
+        "COUNTYFP20": "031",
+        "TRACTCE20": "705502",
+        "GEOID20": "24031705502",
+        "NAME20": "7055.02",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 2648848,
+        "AWATER20": 0,
+        "INTPTLAT20": "+38.9703808",
+        "INTPTLON20": "-077.1018740",
+        "ShapeSTAre": 4388366.05859375,
+        "ShapeSTLen": 10996.49367489509,
+        "type_label": "Grocery",
+        "tag_label": "Convenience",
+        "quality": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.1026486,
+          38.9645667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "Giant Eagle",
         "type": "grocery",
         "tag": "supermarket",
@@ -82726,7 +83302,7 @@
         "ShapeSTLen": 14013.265491447422,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -83237,6 +83813,42 @@
         "coordinates": [
           -76.6364238,
           39.3098916
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Oasis Fresh Foods Market",
+        "type": "grocery",
+        "tag": "supermarket",
+        "lat": 38.599346,
+        "lng": -77.1653036,
+        "index_right": 1459,
+        "OBJECTID": 3060,
+        "STATEFP20": "24",
+        "COUNTYFP20": "017",
+        "TRACTCE20": "850202",
+        "GEOID20": "24017850202",
+        "NAME20": "8502.02",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 5762006,
+        "AWATER20": 1762263,
+        "INTPTLAT20": "+38.6004992",
+        "INTPTLON20": "-077.1451872",
+        "ShapeSTAre": 12337781.16015625,
+        "ShapeSTLen": 20178.511061098594,
+        "type_label": "Grocery",
+        "tag_label": "Supermarket",
+        "quality": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.1653036,
+          38.599346
         ]
       }
     },
@@ -84146,8 +84758,8 @@
         "name": "Unnamed convenience",
         "type": "grocery",
         "tag": "convenience",
-        "lat": 39.424099,
-        "lng": -76.9961445,
+        "lat": 39.4240767,
+        "lng": -76.9961772,
         "index_right": 1227,
         "OBJECTID": 2828,
         "STATEFP20": "24",
@@ -84171,8 +84783,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -76.9961445,
-          39.424099
+          -76.9961772,
+          39.4240767
         ]
       }
     },
@@ -84209,6 +84821,42 @@
         "coordinates": [
           -75.8149492,
           38.849782
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Dash In",
+        "type": "grocery",
+        "tag": "convenience",
+        "lat": 38.9462904,
+        "lng": -76.7189247,
+        "index_right": 1289,
+        "OBJECTID": 2890,
+        "STATEFP20": "24",
+        "COUNTYFP20": "033",
+        "TRACTCE20": "800516",
+        "GEOID20": "24033800516",
+        "NAME20": "8005.16",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 2609549,
+        "AWATER20": 39107,
+        "INTPTLAT20": "+38.9454867",
+        "INTPTLON20": "-076.7288343",
+        "ShapeSTAre": 4385011.28515625,
+        "ShapeSTLen": 13220.669288939727,
+        "type_label": "Grocery",
+        "tag_label": "Convenience",
+        "quality": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.7189247,
+          38.9462904
         ]
       }
     },
@@ -85174,7 +85822,7 @@
         "ShapeSTLen": 39242.946751197,
         "type_label": "Grocery",
         "tag_label": "Dairy",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -86650,7 +87298,7 @@
         "ShapeSTLen": 42873.95704837146,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -88702,7 +89350,7 @@
         "ShapeSTLen": 42054.19241839004,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 1
       },
       "geometry": {
         "type": "Point",
@@ -90322,7 +90970,7 @@
         "ShapeSTLen": 75439.08331830287,
         "type_label": "Grocery",
         "tag_label": "Marketplace",
-        "quality": 1
+        "quality": 0
       },
       "geometry": {
         "type": "Point",
@@ -92050,7 +92698,7 @@
         "ShapeSTLen": 62484.59252744685,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 1
       },
       "geometry": {
         "type": "Point",
@@ -92093,6 +92741,42 @@
         "coordinates": [
           -76.6269008,
           39.174649
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Grocery Outlet",
+        "type": "grocery",
+        "tag": "supermarket",
+        "lat": 39.3674513,
+        "lng": -76.5196761,
+        "index_right": 1255,
+        "OBJECTID": 2856,
+        "STATEFP20": "24",
+        "COUNTYFP20": "005",
+        "TRACTCE20": "440200",
+        "GEOID20": "24005440200",
+        "NAME20": "4402",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 1878495,
+        "AWATER20": 0,
+        "INTPTLAT20": "+39.3685732",
+        "INTPTLON20": "-076.5234279",
+        "ShapeSTAre": 3147272.22265625,
+        "ShapeSTLen": 8808.146578237436,
+        "type_label": "Grocery",
+        "tag_label": "Supermarket",
+        "quality": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.5196761,
+          39.3674513
         ]
       }
     },
@@ -92302,7 +92986,7 @@
         "ShapeSTLen": 56034.42635399568,
         "type_label": "Grocery",
         "tag_label": "Marketplace",
-        "quality": 5
+        "quality": 2
       },
       "geometry": {
         "type": "Point",
@@ -92387,6 +93071,42 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "Wetcher Whistle Liquor",
+        "type": "grocery",
+        "tag": "convenience",
+        "lat": 38.6983306,
+        "lng": -75.7835054,
+        "index_right": 1070,
+        "OBJECTID": 2671,
+        "STATEFP20": "24",
+        "COUNTYFP20": "011",
+        "TRACTCE20": "955600",
+        "GEOID20": "24011955600",
+        "NAME20": "9556",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 88680724,
+        "AWATER20": 429239,
+        "INTPTLAT20": "+38.7068793",
+        "INTPTLON20": "-075.7661753",
+        "ShapeSTAre": 146569781.21484375,
+        "ShapeSTLen": 74110.6750973898,
+        "type_label": "Grocery",
+        "tag_label": "Convenience",
+        "quality": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.7835054,
+          38.6983306
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "Super Soda",
         "type": "grocery",
         "tag": "convenience",
@@ -92446,7 +93166,7 @@
         "ShapeSTLen": 116413.47429318468,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -92770,7 +93490,7 @@
         "ShapeSTLen": 15779.923035354099,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -93418,7 +94138,7 @@
         "ShapeSTLen": 29177.914860929053,
         "type_label": "Grocery",
         "tag_label": "Pastry",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -94966,7 +95686,7 @@
         "ShapeSTLen": 47677.37574385263,
         "type_label": "Grocery",
         "tag_label": "General",
-        "quality": 1
+        "quality": 2
       },
       "geometry": {
         "type": "Point",
@@ -96730,7 +97450,7 @@
         "ShapeSTLen": 80573.2223279668,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 1
       },
       "geometry": {
         "type": "Point",
@@ -97342,7 +98062,7 @@
         "ShapeSTLen": 45421.06469622513,
         "type_label": "Grocery",
         "tag_label": "General",
-        "quality": 1
+        "quality": 0
       },
       "geometry": {
         "type": "Point",
@@ -97709,6 +98429,42 @@
         "coordinates": [
           -76.0740989,
           39.0364543
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Royal Farms",
+        "type": "grocery",
+        "tag": "convenience",
+        "lat": 38.9395062,
+        "lng": -76.9100818,
+        "index_right": 416,
+        "OBJECTID": 2017,
+        "STATEFP20": "24",
+        "COUNTYFP20": "033",
+        "TRACTCE20": "803801",
+        "GEOID20": "24033803801",
+        "NAME20": "8038.01",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 1249305,
+        "AWATER20": 0,
+        "INTPTLAT20": "+38.9457530",
+        "INTPTLON20": "-076.9052779",
+        "ShapeSTAre": 2068311.44921875,
+        "ShapeSTLen": 7196.780163391399,
+        "type_label": "Grocery",
+        "tag_label": "Convenience",
+        "quality": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.9100818,
+          38.9395062
         ]
       }
     },
@@ -98510,8 +99266,8 @@
         "name": "Royal Farms",
         "type": "grocery",
         "tag": "convenience",
-        "lat": 39.285641,
-        "lng": -76.7589539,
+        "lat": 39.2856483,
+        "lng": -76.7589599,
         "index_right": 807,
         "OBJECTID": 2408,
         "STATEFP20": "24",
@@ -98535,8 +99291,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -76.7589539,
-          39.285641
+          -76.7589599,
+          39.2856483
         ]
       }
     },
@@ -99214,7 +99970,7 @@
         "ShapeSTLen": 14660.106961021147,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 4
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -99610,7 +100366,7 @@
         "ShapeSTLen": 39917.780207780095,
         "type_label": "Grocery",
         "tag_label": "Farm",
-        "quality": 1
+        "quality": 0
       },
       "geometry": {
         "type": "Point",
@@ -100487,6 +101243,42 @@
     {
       "type": "Feature",
       "properties": {
+        "name": "7-Eleven",
+        "type": "grocery",
+        "tag": "convenience",
+        "lat": 39.1061676,
+        "lng": -77.1526664,
+        "index_right": 501,
+        "OBJECTID": 2102,
+        "STATEFP20": "24",
+        "COUNTYFP20": "031",
+        "TRACTCE20": "701211",
+        "GEOID20": "24031701211",
+        "NAME20": "7012.11",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 6559163,
+        "AWATER20": 11619,
+        "INTPTLAT20": "+39.1090766",
+        "INTPTLON20": "-077.1540952",
+        "ShapeSTAre": 10928097.09765625,
+        "ShapeSTLen": 19288.18189105979,
+        "type_label": "Grocery",
+        "tag_label": "Convenience",
+        "quality": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.1526664,
+          39.1061676
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "name": "Lidl",
         "type": "grocery",
         "tag": "supermarket",
@@ -100906,7 +101698,7 @@
         "ShapeSTLen": 7575.185503987463,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -100949,42 +101741,6 @@
         "coordinates": [
           -77.198287,
           39.1164705
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Cinnaholic",
-        "type": "grocery",
-        "tag": "bakery",
-        "lat": 39.114447,
-        "lng": -77.2048242,
-        "index_right": 357,
-        "OBJECTID": 1958,
-        "STATEFP20": "24",
-        "COUNTYFP20": "031",
-        "TRACTCE20": "700839",
-        "GEOID20": "24031700839",
-        "NAME20": "7008.39",
-        "NAMELSAD20": "Census Tract",
-        "MTFCC20": "G5020",
-        "FUNCSTAT20": "S",
-        "ALAND20": 1678044,
-        "AWATER20": 2069,
-        "INTPTLAT20": "+39.1151984",
-        "INTPTLON20": "-077.1998813",
-        "ShapeSTAre": 2794707.44921875,
-        "ShapeSTLen": 7575.185503987463,
-        "type_label": "Grocery",
-        "tag_label": "Bakery",
-        "quality": 4
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -77.2048242,
-          39.114447
         ]
       }
     },
@@ -101050,7 +101806,7 @@
         "ShapeSTLen": 8053.084101615077,
         "type_label": "Grocery",
         "tag_label": "Bakery",
-        "quality": 3
+        "quality": 4
       },
       "geometry": {
         "type": "Point",
@@ -102310,7 +103066,7 @@
         "ShapeSTLen": 43537.909434091904,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 3
       },
       "geometry": {
         "type": "Point",
@@ -102569,6 +103325,42 @@
         "coordinates": [
           -77.7023257,
           39.6622189
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Unnamed supermarket",
+        "type": "grocery",
+        "tag": "supermarket",
+        "lat": 37.9960079,
+        "lng": -76.0315825,
+        "index_right": 1185,
+        "OBJECTID": 2786,
+        "STATEFP20": "24",
+        "COUNTYFP20": "039",
+        "TRACTCE20": "930200",
+        "GEOID20": "24039930200",
+        "NAME20": "9302",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 125869064,
+        "AWATER20": 215456685,
+        "INTPTLAT20": "+38.1761228",
+        "INTPTLON20": "-075.8620554",
+        "ShapeSTAre": 552106173.7695312,
+        "ShapeSTLen": 222623.58917258494,
+        "type_label": "Grocery",
+        "tag_label": "Supermarket",
+        "quality": 5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.0315825,
+          37.9960079
         ]
       }
     },
@@ -102994,7 +103786,7 @@
         "ShapeSTLen": 57583.97288003036,
         "type_label": "Grocery",
         "tag_label": "Farm",
-        "quality": 4
+        "quality": 5
       },
       "geometry": {
         "type": "Point",
@@ -103102,7 +103894,7 @@
         "ShapeSTLen": 46135.37431489762,
         "type_label": "Grocery",
         "tag_label": "Convenience",
-        "quality": 2
+        "quality": 1
       },
       "geometry": {
         "type": "Point",
@@ -103289,42 +104081,6 @@
         "coordinates": [
           -76.5242291,
           39.2949872
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Wegmans",
-        "type": "grocery",
-        "tag": "supermarket",
-        "lat": 39.0627995,
-        "lng": -77.1239053,
-        "index_right": 916,
-        "OBJECTID": 2517,
-        "STATEFP20": "24",
-        "COUNTYFP20": "031",
-        "TRACTCE20": "700904",
-        "GEOID20": "24031700904",
-        "NAME20": "7009.04",
-        "NAMELSAD20": "Census Tract",
-        "MTFCC20": "G5020",
-        "FUNCSTAT20": "S",
-        "ALAND20": 1132114,
-        "AWATER20": 1173,
-        "INTPTLAT20": "+39.0656133",
-        "INTPTLON20": "-077.1290436",
-        "ShapeSTAre": 1882617.734375,
-        "ShapeSTLen": 10670.647841187969,
-        "type_label": "Grocery",
-        "tag_label": "Supermarket",
-        "quality": 5
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -77.1239053,
-          39.0627995
         ]
       }
     },
@@ -103714,7 +104470,7 @@
         "ShapeSTLen": 89677.79832136181,
         "type_label": "Grocery",
         "tag_label": "Farm",
-        "quality": 4
+        "quality": 5
       },
       "geometry": {
         "type": "Point",
@@ -104189,6 +104945,78 @@
         "coordinates": [
           -77.7382257,
           39.6510331
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Assateague Market",
+        "type": "grocery",
+        "tag": "convenience",
+        "lat": 38.2638505,
+        "lng": -75.1602036,
+        "index_right": 1210,
+        "OBJECTID": 2811,
+        "STATEFP20": "24",
+        "COUNTYFP20": "047",
+        "TRACTCE20": "951700",
+        "GEOID20": "24047951700",
+        "NAME20": "9517",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 39317455,
+        "AWATER20": 20280892,
+        "INTPTLAT20": "+38.2754270",
+        "INTPTLON20": "-075.1518692",
+        "ShapeSTAre": 96853180.37109375,
+        "ShapeSTLen": 60799.59390911023,
+        "type_label": "Grocery",
+        "tag_label": "Convenience",
+        "quality": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.1602036,
+          38.2638505
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gg's Pastry Shop",
+        "type": "grocery",
+        "tag": "pastry",
+        "lat": 39.3750533,
+        "lng": -77.155082,
+        "index_right": 118,
+        "OBJECTID": 1719,
+        "STATEFP20": "24",
+        "COUNTYFP20": "013",
+        "TRACTCE20": "513001",
+        "GEOID20": "24013513001",
+        "NAME20": "5130.01",
+        "NAMELSAD20": "Census Tract",
+        "MTFCC20": "G5020",
+        "FUNCSTAT20": "S",
+        "ALAND20": 10899714,
+        "AWATER20": 45618,
+        "INTPTLAT20": "+39.3996850",
+        "INTPTLON20": "-077.1400790",
+        "ShapeSTAre": 18354614.96484375,
+        "ShapeSTLen": 26249.714551645604,
+        "type_label": "Grocery",
+        "tag_label": "Pastry",
+        "quality": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.155082,
+          39.3750533
         ]
       }
     },
