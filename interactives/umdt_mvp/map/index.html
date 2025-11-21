@@ -1171,7 +1171,7 @@
             <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <button data-sector="childcare" class="sector-choice-btn group border-2 border-slate-200 hover:border-blue-500 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-6 text-center transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-slate-500 group-hover:text-blue-600" fill="currentColor" viewBox="0 -960 960 960"><path d="M580-490q-21 0-35.5-14.5T530-540q0-21 14.5-35.5T580-590q21 0 35.5 14.5T630-540q0 21-14.5 35.5T580-490Zm-200 0q-21 0-35.5-14.5T330-540q0-21 14.5-35.5T380-590q21 0 35.5 14.5T430-540q0 21-14.5 35.5T380-490Zm100 210q-60 0-108.5-33T300-400h360q-23 54-71.5 87T480-280Zm0 160q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-480q0-75 28.5-140.5t77-114q48.5-48.5 114-77T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm0-80q116 0 198-82t82-198q0-116-82-198t-198-82h-12q-6 0-12 2-6 6-8 13t-2 15q0 21 14.5 35.5T496-680q9 0 16.5-3t15.5-3q12 0 20 9t8 21q0 23-21.5 29.5T496-620q-45 0-77.5-32.5T386-730v-6q0-3 1-8-83 30-135 101t-52 163q0 116 82 198t198 82Zm0-280Z"/></svg>
-                    <span class="mt-2 block font-semibold text-slate-700">Childcare</span>
+                    <span class="mt-2 block font-semibold text-slate-700">Child Care</span>
                 </button>
                 <button data-sector="fresh-food" class="sector-choice-btn group border-2 border-slate-200 hover:border-green-500 hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-lg p-6 text-center transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-slate-500 group-hover:text-green-600" fill="currentColor" viewBox="0 -960 960 960"><path d="M640-80q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170T640-80Zm0-80q66 0 113-47t47-113q0-66-47-113t-113-47q-66 0-113 47t-47 113q0 66 47 113t113 47Zm-480 0q-33 0-56.5-23.5T80-240v-304q0-8 1.5-16t4.5-16l80-184h-6q-17 0-28.5-11.5T120-800v-40q0-17 11.5-28.5T160-880h280q17 0 28.5 11.5T480-840v40q0 17-11.5 28.5T440-760h-6l66 152q-19 10-36 21t-32 25l-84-198h-96l-92 216v304h170q5 21 13.5 41.5T364-160H160Zm480-440q-42 0-71-29t-29-71q0-42 29-71t71-29v200q0-42 29-71t71-29q42 0 71 29t29 71H640Z"/></svg>
@@ -1274,7 +1274,7 @@
                         <div class="relative">
                             <label for="sector-select" class="sr-only">My Sector</label>
                             <select id="sector-select" class="appearance-none bg-base-darkest text-white font-semibold text-sm rounded-md shadow-lg py-2 pl-3 pr-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-base-darkest focus:ring-white">
-                                <option value="childcare">Childcare</option>
+                                <option value="childcare">Child Care</option>
                                 <option value="fresh-food">Fresh Food</option>
                                 <option value="other">Other</option>
                             </select>
@@ -1325,8 +1325,8 @@
                                 <h2 class="font-semibold mb-2 text-white text-lg">Overlays</h2>
                                 <h3 id="poi-header" class="font-semibold mb-2 text-slate-200">POINTS OF INTEREST</h3>
                                     <div class="space-y-1 text-sm">
-                                        <label class="flex items-center" data-sector="childcare"><input type="checkbox" onchange="togglePointLayer(this)" data-name="childcare" data-url="childcare.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Childcare Locations</span></label>
-                                        <label class="flex items-center" data-sector="fresh-food"><input type="checkbox" onchange="togglePointLayer(this)" data-name="grocery" data-url="grocery.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Grocery Locations</span></label>
+                                        <label class="flex items-center" data-sector="childcare"><input type="checkbox" onchange="togglePointLayer(this)" data-name="childcare" data-url="childcare.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Child Care Locations</span></label>
+                                        <label class="flex items-center" data-sector="fresh-food"><input type="checkbox" onchange="togglePointLayer(this)" data-name="grocery" data-url="grocery.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Food Retail Locations</span></label>
                                         <label class="flex items-center" data-sector="fresh-food"><input type="checkbox" onchange="togglePointLayer(this)" data-name="food_pantry" data-url="food_pantry.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"> <span class="ml-2">Food Bank Distribution Sites</span></label>
                                     </div>
                                 </div>
@@ -1777,7 +1777,7 @@ function updateProviderPage(layerName, page) {
     // Update pagination text
     const paginationText = listContainer.querySelector('.pagination-text');
     if (paginationText) {
-        paginationText.textContent = `Showing ${startIndex + 1}-${Math.min(endIndex, totalItems)} of ${totalItems} providers`;
+        paginationText.textContent = `Showing ${startIndex + 1}-${Math.min(endIndex, totalItems)} of ${totalItems} locations`;
     }
 
     // Re-render pagination controls
@@ -2746,12 +2746,12 @@ function displayFeatureInfo(tractFeature) {
     if (selectedSector === 'childcare') {
         contentHTML += `
             <div>
-                <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Childcare Opportunity</h3>
+                <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Child Care Opportunity</h3>
                 <table class="explore-table">
                     <tr><th>Unmet Demand ${createInfoIcon(childcareOppTooltip)}</th><td>${formatNumber(properties.childcare_unmet_demand)}</td></tr>
                     <tr><th>Estimated Supply</th><td>${formatNumber(properties.childcare_supply_score)}</td></tr>
                     <tr><th>Estimated Demand</th><td>${formatNumber(properties.childcare_demand_score)}</td></tr>
-                    <tr><th>Average Childcare Spending Per Child</th><td>${formatCurrency(properties.childcare_spending_per_under5)}</td></tr>
+                    <tr><th>Average Child Care Spending Per Child</th><td>${formatCurrency(properties.childcare_spending_per_under5)}</td></tr>
                 </table>
             </div>`;
     }
@@ -2785,7 +2785,7 @@ function displayFeatureInfo(tractFeature) {
         }
     }
 
-    const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
+    const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores and Fresh Food Retailers' : null;
     if (industry) {
         const location = { type: 'tract', feature: tractFeature };
         const county = location.feature.properties.county_name.replace(' County', '').trim();
@@ -2794,7 +2794,7 @@ function displayFeatureInfo(tractFeature) {
             contentHTML += `
                 <div class="mt-4">
                     <h3 class="text-lg font-semibold text-slate-800 mb-2">Potential Incentives</h3>
-                    ${createIncentiveListHTML(relevantIncentives, selectedSector === 'childcare' ? 'Childcare' : 'Fresh Food', industry, county)}
+                    ${createIncentiveListHTML(relevantIncentives, selectedSector === 'childcare' ? 'Child Care' : 'Fresh Food', industry, county)}
                 </div>`;
         }
     }
@@ -3092,7 +3092,7 @@ function displaySmartResearchForTract(tractFeature) {
         }
 
         questions.push(createAccordionItem({
-            question: "Is there a need for more childcare in this area?",
+            question: "Is there a need for more child care in this area?",
             teaser: needLabel,
             teaserColor: needColor,
             iconSVG: ICONS.unmet,
@@ -3102,9 +3102,9 @@ function displaySmartResearchForTract(tractFeature) {
         }));
         
         const childcareProviderCount = getProviderCount(context.location, 'childcare');
-        const childcareProviderTeaser = `${childcareProviderCount} other provider${childcareProviderCount !== 1 ? 's' : ''} identified`;
+        const childcareProviderTeaser = `${childcareProviderCount} location${childcareProviderCount !== 1 ? 's' : ''} identified`;
         questions.push(createAccordionItem({
-            question: "Who are the other childcare providers in this area?",
+            question: "Who are the child care providers in this area?",
             teaser: childcareProviderTeaser,
             iconSVG: ICONS.providers,
             answerHTML: `<div id="nearest-providers-list"></div>`,
@@ -3116,7 +3116,7 @@ function displaySmartResearchForTract(tractFeature) {
 
         if (quoteResult.count > 0) {
             questions.push(createAccordionItem({
-                question: "What has this community said about childcare needs?",
+                question: "What has this community said about child care needs?",
                 teaser: `${quoteResult.count} quotes from community plans`,
                 iconSVG: ICONS.communityVoice,
                 answerHTML: quoteResult.html,
@@ -3193,9 +3193,9 @@ function displaySmartResearchForTract(tractFeature) {
         }));
 
         const foodProviderCount = getProviderCount(context.location, 'grocery');
-        const foodProviderTeaser = `${foodProviderCount} other provider${foodProviderCount !== 1 ? 's' : ''} identified`;
+        const foodProviderTeaser = `${foodProviderCount} location${foodProviderCount !== 1 ? 's' : ''} identified`;
         questions.push(createAccordionItem({
-            question: "Who are the other food providers in this area?",
+            question: "Who are the food retailers in this area?",
             teaser: foodProviderTeaser,
             iconSVG: ICONS.providers,
             answerHTML: `<div id="nearest-providers-list"></div>`,
@@ -3239,7 +3239,7 @@ function displaySmartResearchForTract(tractFeature) {
         context
     }));
 
-    const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
+    const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores and Fresh Food Retailersrocery Stores' : null;
     let incentiveCount = 0;
     if (industry) {
         incentiveCount = filterIncentives(industry, context.location).length;
@@ -3258,10 +3258,10 @@ function displaySmartResearchForTract(tractFeature) {
     if (incentivesContent && industry) {
         const county = context.location.feature.properties.county_name.replace(' County', '').trim();
         const relevantIncentives = filterIncentives(industry, context.location);
-        const displayType = industry === 'Child Care Services' ? 'Childcare' : 'Fresh Food';
+        const displayType = industry === 'Child Care Services' ? 'Child Care' : 'Fresh Food';
         incentivesContent.innerHTML = createIncentiveListHTML(relevantIncentives, displayType, industry, county);
     } else if (incentivesContent) {
-         incentivesContent.innerHTML = `<p class="text-sm text-slate-600">Select a 'Childcare' or 'Fresh Food' sector to see relevant incentives.</p>`;
+         incentivesContent.innerHTML = `<p class="text-sm text-slate-600">Select 'Child Care' or 'Fresh Food' sector to see relevant incentives.</p>`;
     }
     currentPanelContext = { type: 'tract', data: tractFeature };
     panelContent.querySelectorAll('.info-tooltip').forEach(activateTooltipTrigger);
@@ -3323,7 +3323,7 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
         }
         
         questions.push(createAccordionItem({
-            question: "Is there a need for more childcare in this area?",
+            question: "Is there a need for more child care in this area?",
             teaser: needLabel,
             teaserColor: needColor,
             iconSVG: ICONS.unmet,
@@ -3333,9 +3333,9 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
         }));
 
         const childcareProviderCount = getProviderCount(context.location, 'childcare');
-        const childcareProviderTeaser = `${childcareProviderCount} other provider${childcareProviderCount !== 1 ? 's' : ''} identified`;
+        const childcareProviderTeaser = `${childcareProviderCount} location${childcareProviderCount !== 1 ? 's' : ''} identified`;
         questions.push(createAccordionItem({
-            question: "Who are the other childcare providers in this area?",
+            question: "Who are the child care providers in this area?",
             teaser: childcareProviderTeaser,
             iconSVG: ICONS.providers,
             answerHTML: `<div id="nearest-providers-list"></div>`,
@@ -3347,7 +3347,7 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
 
         if (quoteResult.count > 0) {
             questions.push(createAccordionItem({
-                question: "What has this community said about childcare needs?",
+                question: "What has this community said about child care needs?",
                 teaser: `${quoteResult.count} quotes from community plans`,
                 iconSVG: ICONS.communityVoice,
                 answerHTML: quoteResult.html,
@@ -3424,9 +3424,9 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
         }));
 
         const foodProviderCount = getProviderCount(context.location, 'grocery');
-        const foodProviderTeaser = `${foodProviderCount} other provider${foodProviderCount !== 1 ? 's' : ''} identified`;
+        const foodProviderTeaser = `${foodProviderCount} location${foodProviderCount !== 1 ? 's' : ''} identified`;
         questions.push(createAccordionItem({
-            question: "Who are the other food providers in this area?",
+            question: "Who are the food retailers in this area?",
             teaser: foodProviderTeaser,
             iconSVG: ICONS.providers,
             answerHTML: `<div id="nearest-providers-list"></div>`,
@@ -3481,7 +3481,7 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
         }));
     }
 
-    const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
+    const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores and Fresh Food Retailers' : null;
     let incentiveCount = 0;
     if (industry) {
         incentiveCount = filterIncentives(industry, context.location).length;
@@ -3498,14 +3498,14 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
 
     const incentivesContent = document.getElementById('incentives-content');
     if (incentivesContent) {
-        const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
+        const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores and Fresh Food Retailers' : null;
         const county = context.location.tractProps.county_name.replace(' County', '').trim();
         if (industry) {
             const relevantIncentives = filterIncentives(industry, context.location);
-            const displayType = industry === 'Child Care Services' ? 'Childcare' : 'Fresh Food';
+            const displayType = industry === 'Child Care Services' ? 'Child Care' : 'Fresh Food';
             incentivesContent.innerHTML = createIncentiveListHTML(relevantIncentives, displayType, industry, county);
         } else {
-            incentivesContent.innerHTML = `<p class="text-sm text-slate-600">Select a 'Childcare' or 'Fresh Food' sector to see relevant incentives.</p>`;
+            incentivesContent.innerHTML = `<p class="text-sm text-slate-600">Select 'Child Care' or 'Fresh Food' sector to see relevant incentives.</p>`;
         }
     }
     currentPanelContext = { type: 'address', data: { addressName, parcelProps, tractProps, point } };
@@ -3524,7 +3524,7 @@ async function showNearestPoints(location, layerName, container) {
     }
     const pointLayer = overlayLayers[layerName];
     if (!pointLayer) {
-        container.innerHTML = `<p class="text-sm text-red-600">Could not load provider data.</p>`;
+        container.innerHTML = `<p class="text-sm text-red-600">Could not load location data.</p>`;
         return;
     }
 
@@ -3592,7 +3592,7 @@ async function showNearestPoints(location, layerName, container) {
     
     // --- 3. Updated Intro Text ---
     // Uses the new locationContext variable
-    let introText = `<p class="text-sm text-ink pb-2">There are <strong>${totalProviders}</strong> providers found ${locationContext}.</p>`;
+    let introText = `<p class="text-sm text-ink pb-2">There are <strong>${totalProviders}</strong> locations found ${locationContext}.</p>`;
 
     if (totalProviders === 0) {
         listContainer.innerHTML = introText;
@@ -3607,7 +3607,7 @@ async function showNearestPoints(location, layerName, container) {
     let paginationText = '';
 
     if (needsPagination) {
-        paginationText = `<p class="text-sm text-slate-600 mt-1 pagination-text">Showing 1-${Math.min(itemsPerPage, totalProviders)} of ${totalProviders} providers</p>`;
+        paginationText = `<p class="text-sm text-slate-600 mt-1 pagination-text">Showing 1-${Math.min(itemsPerPage, totalProviders)} of ${totalProviders} locations</p>`;
     }
 
     // --- 5. Build List Items (Unchanged logic, just uses new list) ---
@@ -3785,12 +3785,12 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
         if (selectedSector === 'childcare') {
             html += `
                 <div>
-                    <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Childcare Opportunity</h3>
+                    <h3 class="text-lg font-semibold text-slate-800 mt-4 mb-2">Child Care Opportunity</h3>
                     <table class="explore-table">
                         <tr><th>Unmet Demand ${createInfoIcon(childcareOppTooltip)}</th><td>${formatNumber(properties.childcare_unmet_demand)}</td></tr>
                         <tr><th>Estimated Supply</th><td>${formatNumber(properties.childcare_supply_score)}</td></tr>
                         <tr><th>Estimated Demand</th><td>${formatNumber(properties.childcare_demand_score)}</td></tr>
-                        <tr><th>Average Childcare Spending Per Child</th><td>${formatCurrency(properties.childcare_spending_per_under5)}</td></tr>
+                        <tr><th>Average Child Care Spending Per Child</th><td>${formatCurrency(properties.childcare_spending_per_under5)}</td></tr>
                     </table>
                 </div>`;
         }
@@ -3823,7 +3823,7 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
             }
         }
 
-        const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores' : null;
+        const industry = selectedSector === 'childcare' ? 'Child Care Services' : selectedSector === 'fresh-food' ? 'Grocery Stores and Fresh Food Retailers' : null;
         if (industry) {
             const location = { type: 'point', point, tractProps };
             const county = properties.county_name.replace(' County', '').trim();
@@ -3832,7 +3832,7 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
                 html += `
                     <div class="mt-4">
                         <h3 class="text-lg font-semibold text-slate-800 mb-2">Potential Incentives</h3>
-                        ${createIncentiveListHTML(relevantIncentives, selectedSector === 'childcare' ? 'Childcare' : 'Fresh Food', industry, county)}
+                        ${createIncentiveListHTML(relevantIncentives, selectedSector === 'childcare' ? 'Child Care' : 'Fresh Food', industry, county)}
                     </div>`;
             }
         }
