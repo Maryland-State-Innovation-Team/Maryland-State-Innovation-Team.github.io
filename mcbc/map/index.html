@@ -1335,8 +1335,18 @@
                                     <div class="space-y-1 text-sm">
                                         <div class="flex items-center justify-between w-full">
                                             <label class="flex items-center flex-grow cursor-pointer">
+                                                <input type="checkbox" onchange="togglePolygonLayer(this)" data-name="just_communities" data-url="just_communities.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <span class="ml-2">Just Communities</span>
+                                            </label>
+                                            <div class="info-tooltip ml-2" tabindex="0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 hover:text-slate-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                                                <span class="tooltip-text">DHCD's Division of Just Communities identifies neighborhoods harmed by past policy decisions and guides targeted reinvestment.</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between w-full">
+                                            <label class="flex items-center flex-grow cursor-pointer">
                                                 <input type="checkbox" onchange="togglePolygonLayer(this)" data-name="enough_grantees" data-url="enough_grantees.geojson" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                                                <span class="ml-2">ENOUGH Act</span>
+                                                <span class="ml-2">ENOUGH Act Grantees</span>
                                             </label>
                                             <div class="info-tooltip ml-2" tabindex="0">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 hover:text-slate-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
@@ -1495,7 +1505,7 @@ let tooltipTrigger = null;
 let globalTooltipElement = null;
 
 const QUOTE_CATEGORY_MAP = {
-    'first-person perspective': 'Individual Voice',
+    'individual perspective': 'Individual Voice',
     'summarized community perspective': 'Community Voice',
     'relevant fact/statistic': 'Community Fact'
 };
@@ -1504,6 +1514,7 @@ const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiYW1pbGxlci1tZGdvdiIsImEiOiJjbWc1ZW1hcm8w
 const TILESET_ID = 'amiller-mdgov.parcels-tileset';
 
 const incentiveStyles = {
+    'just_communities': { color: '#005ea2', weight: 2, fillOpacity: 0.15, dashArray: '4,4' },
     'enough_grantees': { color: '#66c2a5', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' },
     'brni_areas': { color: '#e41a1c', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' },
     'enterprise_zone_focus_areas': { color: '#377eb8', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' },
@@ -1516,7 +1527,8 @@ const incentiveStyles = {
     'transit_oriented_development': { color: '#999999', weight: 2, fillOpacity: 0.3, dashArray: '5, 5' }
 };
 const INCENTIVE_AREA_MAP = {
-    'enough_grantees': 'ENOUGH Act',
+    'just_communities': 'Just Communities',
+    'enough_grantees': 'ENOUGH Act Grantees',
     'enterprise_zone_focus_areas': 'Enterprise Zone Focus Areas',
     'enterprise_zones': 'Enterprise Zones',
     'main_street_areas': 'Main Street Areas',
@@ -2027,23 +2039,72 @@ function initializeGlobalTooltipSystem() {
     document.querySelectorAll('.info-tooltip').forEach(activateTooltipTrigger);
 }
 
-function filterProviderListByQuality(selectElement) {
-    const selectedQuality = selectElement.value;
-    const list = selectElement.closest('.providers-container').querySelector('ul');
-    if (!list) return;
+function renderGroupedPlanQuotes(planData, sector) {
+    if (!planData || !Array.isArray(planData) || planData.length === 0) return '';
 
-    const items = list.querySelectorAll('li');
-    let visibleCount = 0;
+    // 1. Determine the topic string to filter by
+    let topicString = '';
+    if (sector === 'childcare') topicString = 'Child Care';
+    else if (sector === 'fresh-food') topicString = 'Fresh Food';
+    else return '';
 
-    items.forEach(item => {
-        const itemQuality = item.dataset.quality;
-        if (selectedQuality === 'all' || itemQuality === selectedQuality) {
-            item.style.display = 'block';
-            visibleCount++;
-        } else {
-            item.style.display = 'none';
+    let htmlOutput = '';
+    let totalQuotesFound = 0;
+
+    // 2. Iterate through each Plan Area
+    planData.forEach(plan => {
+        // Safe check for quotes array
+        const quotes = Array.isArray(plan.quotes) ? plan.quotes : [];
+        
+        // 3. Filter quotes within this plan for the specific topic
+        const relevantQuotes = quotes.filter(q => q.topic && q.topic.includes(topicString));
+
+        if (relevantQuotes.length > 0) {
+            totalQuotesFound += relevantQuotes.length;
+
+            // 4. Create the Header (Area Name + Year)
+            // Matches the style of the Incentives headers (uppercase, bold, border)
+            htmlOutput += `
+                <div class="mt-6 first:mt-2">
+                    <h4 class="text-sm font-bold tracking-wider uppercase" style="color: #000000;">
+                        ${plan.area_name} <span class="font-normal text-slate-600">${plan.plan_year ? '(' + plan.plan_year + ' plan)' : ''}</span>
+                    </h4>
+                    <hr class="border-t-2 mt-1 mb-3" style="border-color: #1B1B1B;" />
+                    <div class="space-y-4">
+            `;
+
+            // 5. Render the quotes
+            relevantQuotes.forEach(quote => {
+                const categoryText = QUOTE_CATEGORY_MAP[quote.category] || 'Community Voice';
+                let tagBg = '#E1F3F8'; // Default: Community Voice
+                let tagText = '#28A0CB';
+
+                if (categoryText === 'Community Fact') {
+                    tagBg = '#FFE396';
+                    tagText = '#936F38';
+                } else if (categoryText === 'Individual Voice') {
+                    tagBg = '#f2938c';
+                    tagText = '#822133';
+                }
+
+                htmlOutput += `
+                    <div class="text-sm space-y-2" style="font-style: normal;">
+                        <div class="bg-white p-4 rounded-lg text-slate-700 leading-relaxed" style="border-radius: 8px; border: 1px solid #e2e8f0;">
+                            <div class="mb-2">
+                                <span class="quote-category-tag" style="background-color: ${tagBg}; color: ${tagText}; padding: 2px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">
+                                    ${categoryText}
+                                </span>
+                            </div>
+                            ${quote.briefing_quote}
+                        </div>
+                    </div>`;
+            });
+
+            htmlOutput += `</div></div>`; // Close space-y-4 and wrapper div
         }
     });
+
+    return { html: htmlOutput, count: totalQuotesFound };
 }
 
 function slugify(text) {
@@ -2172,7 +2233,7 @@ function zoomToPoint(lat, lng, layerName) {
         }
 
         // Zoom/pan to fit the combined bounds
-        map.fitBounds(boundsToFit, { ...getMapPadding(), maxZoom: 17 });
+        map.fitBounds(boundsToFit, { ...getMapPadding(), maxZoom: 14 });
 
         // Add the marker and open the popup *after* the map moves
         map.once('moveend', () => {
@@ -2284,7 +2345,14 @@ function disableMapLayerFocus(layerGroup) {
 
 let lastClickedLayer = null;
 const sequentialColors = ['#eff3ff', '#bdd7e7', '#6baed6', '#3182bd', '#08519c'];
-const divergingColors = ['#b2182b','#ef8a62','#fddbc7','#d1e5f0','#67a9cf','#2166ac'];
+const divergingColors = [
+    '#8c510a',
+    '#d8b365',
+    '#f6e8c3',
+    '#c7eae5',
+    '#5ab4ac',
+    '#01665e'
+];
 
 function isDivergingVariable(variable) {
     const divergingKeywords = ['unmet_demand', 'unmet_market_demand', 'growth', 'net_business', 'formations', 'index', 'pop_change'];
@@ -2406,7 +2474,7 @@ function onEachFeature(feature, layer) {
             }
             const dynamicTooltipContent = `
                 <div class="font-sans">
-                    <div class="text-xs uppercase font-semibold text-slate-500 tracking-wider">Click to Research</div>
+                    <div class="text-xs uppercase font-semibold text-slate-500 tracking-wider">Click map to Research</div>
                     <div class="text-lg font-bold text-slate-900 leading-tight mt-1">${truncateCommunityList(feature.properties.tract_name)}</div>
                     <div class="text-base text-blue-700 font-semibold">${feature.properties.county_name}</div>
                     ${dataRow}
@@ -2475,7 +2543,7 @@ function onEachFeature(feature, layer) {
             } else {
                 displayFeatureInfo(feature);
             }
-            map.fitBounds(clickedLayer.getBounds(), getMapPadding());
+            map.fitBounds(clickedLayer.getBounds(), { ...getMapPadding(), maxZoom: 14 });
         }
     });
 }
@@ -2704,49 +2772,15 @@ function displayFeatureInfo(tractFeature) {
     }
 
     if (properties.plan_quotes && properties.plan_quotes.length > 0) {
-        let topicalQuotes = [];
-        switch(selectedSector) {
-            case 'childcare':
-                topicalQuotes = properties.plan_quotes?.filter(q => q.topic.includes('Child Care')) || [];
-                break;
-            case 'fresh-food':
-                topicalQuotes = properties.plan_quotes?.filter(q => q.topic.includes('Fresh Food')) || [];
-                break;
-        };
-
+        // Generate the grouped HTML using our helper
+        const quoteResult = renderGroupedPlanQuotes(properties.plan_quotes, selectedSector);
         
-        if (topicalQuotes && topicalQuotes.length > 0) {
+        if (quoteResult.count > 0) {
             contentHTML += `
-            <div class="mt-4">
+            <div class="mt-6">
                 <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Voice</h3>
-                <div class="space-y-4">
-
-                    ${topicalQuotes.map(quote => {
-                            const categoryText = QUOTE_CATEGORY_MAP[quote.category] || 'Community Voice';
-                            let tagBg = '#E1F3F8'; // Default: Community Voice
-                            let tagText = '#28A0CB';
-
-                            if (categoryText === 'Community Fact') {
-                                tagBg = '#FFE396';
-                                tagText = '#936F38';
-                            } else if (categoryText === 'Individual Voice') {
-                                tagBg = '#f2938c';
-                                tagText = '#822133';
-                            }
-
-                            return `
-                                <div class="text-sm space-y-2" style="font-style: normal;">
-                                    <div class="bg-white p-4 rounded-lg text-slate-700 leading-relaxed" style="border-radius: 8px;">
-                                        <div>
-                                            <span class="quote-category-tag" style="background-color: ${tagBg}; color: ${tagText}; padding: 2px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">
-                                                ${categoryText}
-                                            </span>
-                                        </div>
-                                        ${quote.briefing_quote}
-                                    </div>
-                                </div>`;
-                        }).join('')}
-                </div>
+                <p class="text-sm text-slate-600 mb-2">Insights from ${quoteResult.count} relevant quotes in local plans.</p>
+                ${quoteResult.html}
             </div>`;
         }
     }
@@ -3078,38 +3112,14 @@ function displaySmartResearchForTract(tractFeature) {
             context
         }));
 
-        const childcareQuotes = p.plan_quotes?.filter(q => q.topic.includes('Child Care')) || [];
-        if (childcareQuotes.length > 0) {
-            const quotesHTML = `<ul class="space-y-4 mt-0">${childcareQuotes.map(q => {
-            const categoryText = QUOTE_CATEGORY_MAP[q.category] || 'Community Voice';
-                let tagBg = '#E1F3F8'; // Default: Community Voice
-                let tagText = '#28A0CB';
+        const quoteResult = renderGroupedPlanQuotes(p.plan_quotes, 'childcare');
 
-                if (categoryText === 'Community Fact') {
-                    tagBg = '#FFE396';
-                    tagText = '#936F38';
-                } else if (categoryText === 'Individual Voice') {
-                    tagBg = '#f2938c';
-                    tagText = '#822133';
-                }
-
-                return `<li class="space-y-2" style="font-style: normal;">
-                            <!-- New quote block style -->
-                            <div class="bg-white p-4 rounded-lg text-slate-700 leading-relaxed" style="border-radius: 8px;">
-                                <div>
-                                    <span class="quote-category-tag" style="background-color: ${tagBg}; color: ${tagText}; padding: 2px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">
-                                        ${categoryText}
-                                    </span>
-                                </div>
-                                ${q.briefing_quote}
-                            </div>
-                        </li>`;
-            }).join('')}</ul>`;
+        if (quoteResult.count > 0) {
             questions.push(createAccordionItem({
                 question: "What has this community said about childcare needs?",
-                teaser: `${childcareQuotes.length} quotes from community plans`,
+                teaser: `${quoteResult.count} quotes from community plans`,
                 iconSVG: ICONS.communityVoice,
-                answerHTML: quotesHTML,
+                answerHTML: quoteResult.html,
                 context
             }));
         }
@@ -3193,38 +3203,14 @@ function displaySmartResearchForTract(tractFeature) {
             context
         }));
         
-        const freshFoodQuotes = p.plan_quotes?.filter(q => q.topic.includes('Fresh Food')) || [];
-        if (freshFoodQuotes.length > 0) {
-            const quotesHTML = `<ul class="space-y-4 mt-0">${freshFoodQuotes.map(q => {
-                const categoryText = QUOTE_CATEGORY_MAP[q.category] || 'Community Voice';
-                let tagBg = '#E1F3F8'; // Default: Community Voice
-                let tagText = '#28A0CB';
+        const quoteResult = renderGroupedPlanQuotes(p.plan_quotes, 'fresh-food');
 
-                if (categoryText === 'Community Fact') {
-                    tagBg = '#FFE396';
-                    tagText = '#936F38';
-                } else if (categoryText === 'Individual Voice') {
-                    tagBg = '#f2938c';
-                    tagText = '#822133';
-                }
-
-                return `<li class="space-y-2" style="font-style: normal;">
-                            <!-- New quote block style -->
-                            <div class="bg-white p-4 rounded-lg text-slate-700 leading-relaxed" style="border-radius: 8px;">
-                                <div>
-                                    <span class="quote-category-tag" style="background-color: ${tagBg}; color: ${tagText}; padding: 2px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">
-                                        ${categoryText}
-                                    </span>
-                                </div>
-                                ${q.briefing_quote}
-                            </div>
-                        </li>`;
-            }).join('')}</ul>`;
+        if (quoteResult.count > 0) {
             questions.push(createAccordionItem({
                 question: "What has this community said about fresh food needs?",
-                teaser: `${freshFoodQuotes.length} quotes from community plans`,
+                teaser: `${quoteResult.count} quotes from community plans`,
                 iconSVG: ICONS.communityVoice,
-                answerHTML: quotesHTML,
+                answerHTML: quoteResult.html,
                 context
             }));
         }
@@ -3357,38 +3343,14 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
             context
         }));
 
-        const childcareQuotes = tractProps.plan_quotes?.filter(q => q.topic.includes('Child Care')) || [];
-        if (childcareQuotes.length > 0) {
-            const quotesHTML = `<ul class="space-y-4 mt-0">${childcareQuotes.map(q => {
-                const categoryText = QUOTE_CATEGORY_MAP[q.category] || 'Community Voice';
-                let tagBg = '#E1F3F8'; // Default: Community Voice
-                let tagText = '#28A0CB';
+        const quoteResult = renderGroupedPlanQuotes(tractProps.plan_quotes, 'childcare');
 
-                if (categoryText === 'Community Fact') {
-                    tagBg = '#FFE396';
-                    tagText = '#936F38';
-                } else if (categoryText === 'Individual Voice') {
-                    tagBg = '#f2938c';
-                    tagText = '#822133';
-                }
-
-                return `<li class="space-y-2" style="font-style: normal;">
-                            <!-- New quote block style -->
-                            <div class="bg-white p-4 rounded-lg text-slate-700 leading-relaxed" style="border-radius: 8px;">
-                                <div>
-                                    <span class="quote-category-tag" style="background-color: ${tagBg}; color: ${tagText}; padding: 2px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">
-                                        ${categoryText}
-                                    </span>
-                                </div>
-                                ${q.briefing_quote}
-                            </div>
-                        </li>`;
-            }).join('')}</ul>`;
+        if (quoteResult.count > 0) {
             questions.push(createAccordionItem({
                 question: "What has this community said about childcare needs?",
-                teaser: `${childcareQuotes.length} quotes from community plans`,
+                teaser: `${quoteResult.count} quotes from community plans`,
                 iconSVG: ICONS.communityVoice,
-                answerHTML: quotesHTML,
+                answerHTML: quoteResult.html,
                 context
             }));
         }
@@ -3472,38 +3434,14 @@ function displaySmartResearchForAddress(addressName, parcelProps, tractProps, po
             context
         }));
         
-        const freshFoodQuotes = tractProps.plan_quotes?.filter(q => q.topic.includes('Fresh Food')) || [];
-        if (freshFoodQuotes.length > 0) {
-            const quotesHTML = `<ul class="space-y-4 mt-0">${freshFoodQuotes.map(q => {
-                const categoryText = QUOTE_CATEGORY_MAP[q.category] || 'Community Voice';
-                let tagBg = '#E1F3F8'; // Default: Community Voice
-                let tagText = '#28A0CB';
+        const quoteResult = renderGroupedPlanQuotes(tractProps.plan_quotes, 'fresh-food');
 
-                if (categoryText === 'Community Fact') {
-                    tagBg = '#FFE396';
-                    tagText = '#936F38';
-                } else if (categoryText === 'Individual Voice') {
-                    tagBg = '#f2938c';
-                    tagText = '#822133';
-                }
-
-                return `<li class="space-y-2" style="font-style: normal;">
-                            <!-- New quote block style -->
-                            <div class="bg-white p-4 rounded-lg text-slate-700 leading-relaxed" style="border-radius: 8px;">
-                                <div>
-                                    <span class="quote-category-tag" style="background-color: ${tagBg}; color: ${tagText}; padding: 2px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">
-                                        ${categoryText}
-                                    </span>
-                                </div>
-                                ${q.briefing_quote}
-                            </div>
-                        </li>`;
-            }).join('')}</ul>`;
+        if (quoteResult.count > 0) {
             questions.push(createAccordionItem({
                 question: "What has this community said about fresh food needs?",
-                teaser: `${freshFoodQuotes.length} quotes from community plans`,
+                teaser: `${quoteResult.count} quotes from community plans`,
                 iconSVG: ICONS.communityVoice,
-                answerHTML: quotesHTML,
+                answerHTML: quoteResult.html,
                 context
             }));
         }
@@ -3682,13 +3620,38 @@ async function showNearestPoints(location, layerName, container) {
         const latlng = p.layer.getLatLng();
         
         const quality = p.feature.properties.quality;
-        const qualityText = (quality != null) ? `Quality: ${quality}` : '';
+        const q = (quality != null) ? Number(quality) : null;
+        let qualityText = '';
+
+        if (layerName === 'childcare') {
+            if (q === null || isNaN(q)) {
+                qualityText = '';
+            } else {
+                qualityText = (q === 0) ? 'Not rated' : `Quality: ${q}`;
+            }
+        } else if (layerName === 'grocery') {
+            const groceryLabels = {
+                2: 'Convenience',
+                3: 'Specialty foods',
+                4: 'Specialty foods',
+                5: 'Fresh produce'
+            };
+            if (q === null || isNaN(q)) {
+                qualityText = '';
+            } else if (groceryLabels[q]) {
+                qualityText = groceryLabels[q];
+            } else {
+                qualityText = `Quality: ${q}`;
+            }
+        } else {
+            qualityText = (quality != null) ? `Quality: ${quality}` : '';
+        }
         // This distance is from the centroid (for tracts) or point (for address)
         const distanceText = `${p.distance.toFixed(1)} miles`; 
 
         let detailsText = '';
         if (distanceText && qualityText) {
-            detailsText = `${distanceText} &bull; ${qualityText}`;
+            detailsText = `${distanceText} &nbsp;&bull;&nbsp; ${qualityText}`;
         } else {
             detailsText = distanceText || qualityText; 
         }
@@ -3848,47 +3811,14 @@ function displayAddressInfo(addressName, parcelProps, tractProps, point) {
         }
         
         if (properties.plan_quotes && properties.plan_quotes.length > 0) {
-            let topicalQuotes = [];
-            switch(selectedSector) {
-                case 'childcare':
-                    topicalQuotes = properties.plan_quotes?.filter(q => q.topic.includes('Child Care')) || [];
-                    break;
-                case 'fresh-food':
-                    topicalQuotes = properties.plan_quotes?.filter(q => q.topic.includes('Fresh Food')) || [];
-                    break;
-            };
-            if (topicalQuotes && topicalQuotes.length > 0) {
+            const quoteResult = renderGroupedPlanQuotes(properties.plan_quotes, selectedSector);
+            
+            if (quoteResult.count > 0) {
                 html += `
-                <div class="mt-4">
+                <div class="mt-6">
                     <h3 class="text-lg font-semibold text-slate-800 mb-2">Community Voice</h3>
-                    <div class="space-y-4">
-
-                        ${topicalQuotes.map(quote => {
-                                const categoryText = QUOTE_CATEGORY_MAP[quote.category] || 'Community Voice';
-                                let tagBg = '#E1F3F8'; // Default: Community Voice
-                                let tagText = '#28A0CB';
-
-                                if (categoryText === 'Community Fact') {
-                                    tagBg = '#FFE396';
-                                    tagText = '#936F38';
-                                } else if (categoryText === 'Individual Voice') {
-                                    tagBg = '#f2938c';
-                                    tagText = '#822133';
-                                }
-
-                                return `
-                                    <div class="text-sm space-y-2" style="font-style: normal;">
-                                        <div class="bg-white p-4 rounded-lg text-slate-700 leading-relaxed" style="border-radius: 8px;">
-                                            <div>
-                                                <span class="quote-category-tag" style="background-color: ${tagBg}; color: ${tagText}; padding: 2px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">
-                                                    ${categoryText}
-                                                </span>
-                                            </div>
-                                            ${quote.briefing_quote}
-                                        </div>
-                                    </div>`;
-                            }).join('')}
-                    </div>
+                    <p class="text-sm text-slate-600 mb-2">Insights from ${quoteResult.count} relevant quotes in local plans.</p>
+                    ${quoteResult.html}
                 </div>`;
             }
         }
@@ -4620,7 +4550,7 @@ function initializeMap() {
 
             // Zoom to the out-of-state location
             const bounds = L.latLng(center).toBounds(100); 
-            map.fitBounds(bounds, { ...getMapPadding(), maxZoom: 12 });
+            map.fitBounds(bounds, { ...getMapPadding(), maxZoom: 14 });
 
             return; // Stop execution to prevent the error
         }
@@ -4834,7 +4764,7 @@ async function togglePointLayer(checkbox) {
             const data = await response.json();
             const markers = L.markerClusterGroup({
                 clusterPane: 'clusterTopPane',
-                disableClusteringAtZoom: 13,
+                disableClusteringAtZoom: 10,
                 spiderfyOnMaxZoom: false,
                 iconCreateFunction: createCustomClusterIcon
             });
@@ -4852,7 +4782,7 @@ async function togglePointLayer(checkbox) {
                     filter: function(feature) {
                         // Specific filter for the grocery layer remains unchanged
                         if (layerName === 'grocery') {
-                            return feature.properties.quality !== 1;
+                            return feature.properties.quality !== 0;
                         }
                         // All other layers (childcare, food_pantry) include all features
                         return true; 
@@ -4951,7 +4881,7 @@ async function preloadPointLayers() {
             
             const markers = L.markerClusterGroup({
                 clusterPane: 'clusterTopPane',
-                disableClusteringAtZoom: 13,
+                disableClusteringAtZoom: 10,
                 spiderfyOnMaxZoom: false,
                 iconCreateFunction: createCustomClusterIcon
             });
@@ -4968,9 +4898,9 @@ async function preloadPointLayers() {
             if (data.type === 'FeatureCollection' && data.features) {
                 const geojsonLayerForPoints = L.geoJSON(data, {
                     filter: function(feature) {
-                        // For grocery data, only include features where quality is not 1.
+                        // For grocery data, only include features where quality is not 0 or 1.
                         if (layerName === 'grocery') {
-                            return feature.properties.quality !== 1;
+                            return feature.properties.quality > 1;
                         }
                         // For all other layers, include everything.
                         return true; 
