@@ -4866,9 +4866,9 @@ async function preloadPointLayers() {
             if (data.type === 'FeatureCollection' && data.features) {
                 const geojsonLayerForPoints = L.geoJSON(data, {
                     filter: function(feature) {
-                        // For grocery data, only include features where quality is not 1.
+                        // For grocery data, only include features where quality is not 0 or 1.
                         if (layerName === 'grocery') {
-                            return feature.properties.quality !== 1;
+                            return feature.properties.quality > 1;
                         }
                         // For all other layers, include everything.
                         return true; 
