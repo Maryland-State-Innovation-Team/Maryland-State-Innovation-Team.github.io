@@ -3290,7 +3290,7 @@ function getCommonExploreHTML(properties) {
                 <tbody>
                      <tr><th class="font-semibold text-slate-600">Average Household Income</th><td class="text-right font-medium">${formatCurrency(properties.avg_household_income)}</td></tr>
                      ${selectedSector === 'childcare' ? `<tr><th class="font-semibold text-slate-600">Average Child Care Spending (per child)</th><td class="text-right font-medium">${formatCurrency(properties.childcare_spending_per_under5)}</td></tr>` : ''}
-                     ${selectedSector === 'fresh-food' ? `<tr><th class="font-semibold text-slate-600">Average Yearly Grocery Spending (per household)</th><td class="text-right font-medium">${formatCurrency(properties.grocery_spending)}</td></tr>` : ''}
+                     ${selectedSector === 'fresh-food' ? `<tr><th class="font-semibold text-slate-600">Average Yearly Grocery Spending (per household)</th><td class="text-right font-medium">${formatCurrency(properties.per_household_food_at_home)}</td></tr>` : ''}
                 </tbody>
             </table>
         </div>
