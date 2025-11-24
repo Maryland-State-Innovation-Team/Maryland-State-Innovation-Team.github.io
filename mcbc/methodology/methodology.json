@@ -74,11 +74,11 @@
   {
     "id": "social-investment-need",
     "title": "Social Investment Need Score",
-    "description": "Identifies areas where physical access exists but the local market strength is too weak to sustain it without support.",
-    "dataSource": "Calculated Supply Scores and Market Demand Scores.",
-    "whatItMeans": "This highlights neighborhoods where stores might exist but are at risk of closure due to low spending power, or where existing options are likely unaffordable for the community.",
-    "techTitle": "Technical Deep Dive: Market Weakness Multiplier",
-    "techContent": "<p>We calculate a \"Market Weakness\" index by inverting the normalized Market Demand Score. The final metric is the product of the Supply Score and Market Weakness. This mathematically isolates areas that possess physical infrastructure (high supply) but lack the economic base to sustain it, pinpointing targets for subsidy.</p>"
+    "description": "Identifies neighborhoods where critical food access gaps exist, but the local market strength is too weak to attract or sustain private-sector solutions without intervention.",
+    "dataSource": "Calculated Gap Scores and Market Demand Scores.",
+    "whatItMeans": "This score answers: \"Where is the market failing to meet basic needs?\" It highlights areas where high food insecurity and low access overlap with low community spending power. These are neighborhoods where a standard grocery store model may not be viable, signaling a need for philanthropic grants, public subsidies, or non-profit operating models.",
+    "techTitle": "Technical Deep Dive: Modeling Market Failure",
+    "techContent": "<p>We calculate a \"Market Strength Index\" by normalizing the total estimated grocery spending potential of every neighborhood on a 0–1 scale. We then invert this to derive a \"Market Weakness Multiplier\" (where 1.0 represents the lowest purchasing power).</p><p>The final score is the product of the <b>Fresh Food Gap Score</b> and the <b>Market Weakness Multiplier</b>. This multiplicative approach isolates the intersection of high physiological need and low economic viability, filtering out wealthy areas that lack stores simply by choice while highlighting areas dependent on social investment.</p>"
   },
   {
     "id": "child-care-unmet-demand",
