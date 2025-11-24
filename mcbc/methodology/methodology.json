@@ -83,8 +83,8 @@
   {
     "id": "child-care-unmet-demand",
     "title": "Unmet Child Care Demand Score",
-    "description": "The gap between the number of children under 5 with working parents and the available licensed child-care slots.",
-    "dataSource": "Census ACS (Working Parents, Population < 5) and Calculated Supply Levels.",
+    "description": "The gap between the number of children under 6 with working parents and the available licensed child-care slots.",
+    "dataSource": "Census ACS (Population under 6 with Working Parents/Guardians) and Calculated Supply Levels.",
     "whatItMeans": "This measures the absolute deficit of care. A high score means there are significantly more children requiring care than there are licensed seats available to serve them.",
     "techTitle": "Technical Deep Dive: Supply/Demand Delta",
     "techContent": "<p>We calculate a \"Demand Score\" by aggregating demographic data for children in households where all parents are in the labor force. The final Unmet Need score is derived by subtracting the spatially allocated Supply Score from this demographic Demand Score to quantify the absolute deficit.</p>"
