@@ -6,9 +6,6 @@
     <title>Connect to Resources - Maryland Community Business Compass</title>
     
     <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
-    <!-- Font Awesome for footer and card icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 
     <style>
         body {
@@ -156,8 +153,10 @@
         .resource-card-contact:hover {
             text-decoration: underline;
         }
-        .resource-card-contact .fa-solid {
-            font-size: 1.25rem;
+        .resource-card-contact svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            fill: currentColor; /* Inherits the blue text color */
         }
 
         /* Filter tags from incentives page */
@@ -630,7 +629,10 @@
                             <p class="font-sans-sm margin-top-2">${item.description || ''}</p>
                         </div>
                         <a href="mailto:${item.email}" class="resource-card-contact">
-                            <i class="fa-solid fa-envelope"></i> Email Me
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
+                                <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/>
+                            </svg> 
+                            Email Me
                         </a>
                     </div>
                 `).join('');

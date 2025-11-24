@@ -57,6 +57,10 @@
             font-size: 0.875rem;
             padding: 0.25rem 0.75rem;
             border-radius: 0.25rem;
+            /* Removed global capitalization to respect source casing (e.g. BRNI vs Brni) */
+        }
+        /* Specific capitalization for lowercase source data (Assistance Types) */
+        .md-tag[data-filter-key="assistanceTypes"] {
             text-transform: capitalize;
         }
         .md-tag button {
@@ -266,7 +270,12 @@
             display: none;
         }
 
-        .usa-checkbox__label, #detail-org {
+        #detail-org {
+            text-transform: capitalize;
+        }
+
+        /* Only capitalize filters where source data is lowercase (Assistance Types) */
+        label[for^="assistanceTypes-"] {
             text-transform: capitalize;
         }
 
@@ -618,7 +627,7 @@
                             <a href="../incentives/" class="usa-nav__link usa-current" aria-current="page"><span>Find Government Funding</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
-                            <a href="../connect/" class="usa-nav__link"><span>Get Support from Experts</span></a>
+                            <a href="../resources/" class="usa-nav__link"><span>Get Support from Experts</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -892,6 +901,7 @@
             let isUserClickScrolling = false;
             let scrollTimeout = null;
             let allIncentives = [];
+            let lastListScrollPosition = 0;
             let displayedIncentives = [];
             const activeFilters = {
                 searchTerm: '',
@@ -1036,11 +1046,22 @@
                 // Add focus management
                 const listHeading = document.getElementById('list-view-title');
                 if (listHeading) {
-                    listHeading.focus();
+                    // preventScroll ensures the browser doesn't jump to top before we restore position
+                    listHeading.focus({ preventScroll: true });
+                }
+
+                // Restore previous scroll position
+                if (lastListScrollPosition > 0) {
+                    window.scrollTo(0, lastListScrollPosition);
                 }
             }
 
             function showDetailView() {
+                // Only save scroll position if we are navigating AWAY from the list view
+                if (listView.style.display !== 'none') {
+                    lastListScrollPosition = window.scrollY;
+                }
+
                 listView.style.display = 'none';
                 listView.setAttribute('aria-hidden', 'true');
                 detailView.style.display = 'block';
@@ -1112,8 +1133,9 @@
                     if (key !== 'searchTerm' && activeFilters[key].size > 0) {
                         hasFilters = true;
                         activeFilters[key].forEach(value => {
+                            // Added data-filter-key="${key}" to the parent span to allow CSS targeting
                             tagsHtml += `
-                                <span class="md-tag">
+                                <span class="md-tag" data-filter-key="${key}">
                                     ${value}
                                     <button data-filter-key="${key}" data-value="${value}" aria-label="Remove ${value} filter">&times;</button>
                                 </span>
