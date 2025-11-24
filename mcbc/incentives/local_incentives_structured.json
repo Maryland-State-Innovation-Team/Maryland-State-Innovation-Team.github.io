@@ -1030,10 +1030,10 @@
     "program_name": "Caroline Manufacturing Tax Credit",
     "locality_name": "Caroline County",
     "agency": "",
-    "more_details_url": "https://www.carolinebusiness.com/wp-content/uploads/2024/04/Caroline-County-Manufacturing-Tax-Credit-Article-II.pdf",
+    "more_details_url": "https://www.carolinebusiness.com/incentives-tax-credits/#cmtc",
     "structured_extraction": {
       "program_name": "Caroline Manufacturing Tax Credit",
-      "program_description": "This program offers a real property tax credit to manufacturers in Caroline County. It helps manufacturers expand their facilities or build new ones to support the local economy.",
+      "program_description": "This program provides a tax credit to manufacturers. It encourages business expansion and development to improve the local economy.",
       "agency": "Caroline County Commissioners",
       "list_of_eligible_counties": [
         "Caroline"
@@ -1054,24 +1054,25 @@
       "assistance_type": [
         "tax-credit"
       ],
-      "assistance_description": "The program provides a 100% tax credit on the increased value of real property from new construction or expansion. This credit lasts for five consecutive years. The business must recertify each year to continue receiving the credit.",
-      "URL": "https://www.carolinebusiness.com/wp-content/uploads/2024/04/Caroline-County-Manufacturing-Tax-Credit-Article-II.pdf",
-      "application_deadline_string": "Rolling. Applications must be filed within one year of the new or expanded facility being placed on the county tax roll.",
+      "assistance_description": "The program offers a 100% tax credit on the increased property value from new construction or facility expansions. The credit lasts for five consecutive years. The business must recertify its eligibility each year.",
+      "URL": "https://www.carolinebusiness.com/incentives-tax-credits/#cmtc",
+      "application_deadline_string": "Rolling, must be filed within one year of the expanded or newly constructed facility's placement on the tax roll.",
       "application_deadline_date": null,
       "contact_name": null,
       "contact_email": null,
       "contact_phone": null,
-      "program_audience": "Manufacturers expanding or building new facilities in Caroline County.",
-      "use_of_funds": null,
-      "geographic_eligibility": "The credit applies to manufacturing, fabricating, and assembling facilities located in Caroline County.",
+      "program_audience": "Manufacturers, fabricators, and assemblers in Caroline County.",
+      "use_of_funds": "The tax credit applies to the increased property value resulting from new construction or facility expansion.",
+      "geographic_eligibility": "The tax credit applies only to Caroline County real property taxes, not municipal taxes.",
       "requirements_list": [
-        "The assessed value of the expansion or new construction must be greater than $50,000.",
-        "The business must create at least 15 additional full-time jobs at the facility.",
-        "The 15 new employees must each earn at least the current federal minimum wage.",
-        "The employer must provide a basic employee benefit plan for all full-time employees, including medical insurance, leave, and a pension.",
-        "The business must certify in writing each year between May 1 and October 1 that it still meets the requirements."
+        "The expansion or new construction must increase the property's assessed value by more than $50,000.",
+        "The business must create at least 15 new full-time jobs.",
+        "New employees must receive at least the federal minimum wage.",
+        "The employer must provide a basic employee benefit plan that includes medical insurance, leave, and a pension.",
+        "The business must annually certify that it continues to meet the program requirements.",
+        "Applicants must not be in default on any Caroline County or Maryland state taxes."
       ],
-      "application_process_overview": "The property owner or their representative must file an application with the County Commissioners. You must use the official form provided by the county. The application must include a sworn statement that the business will continue to meet all requirements. The Commissioners review the application and will approve or deny it.",
+      "application_process_overview": "An owner or their representative must file an application with the County Commissioners. The application must be filed within one year of the new or expanded facility being added to the county tax roll. Applicants use a form provided by the County Commissioners. The Commissioners then approve or deny the application.",
       "is_out_of_date": false,
       "is_full_text_irrelevant": false,
       "url_status_code": 200,

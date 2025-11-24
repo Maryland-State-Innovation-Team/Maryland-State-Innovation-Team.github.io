@@ -1,0 +1,101 @@
+[
+  {
+    "id": "community-voice",
+    "title": "Community Voice",
+    "description": "We digitize and analyze thousands of pages of PDF comprehensive plans to extract the community's own voice regarding their needs and vision.",
+    "dataSource": "County and Municipal Comprehensive Plans (PDFs).",
+    "whatItMeans": "When you click a neighborhood, you don't just see numbers; you see quotes from residents and planners specifically highlighting needs for Child Care and Fresh Food.",
+    "techTitle": "Technical Deep Dive: RAG-style Extraction",
+    "techContent": "<p>Our pipeline performs Optical Character Recognition (OCR) on PDF documents, logically chunks the text, and processes it through an LLM. We extract structured insights classified as \"Individual Perspective,\" \"Summarized Community Perspective,\" or \"Relevant Fact/Statistic,\" which are then spatially joined to relevant Census tracts. Every extracted quote is manually verified to be accurately grounded in the source text before publishing.</p>"
+  },
+  {
+    "id": "economic-growth-index",
+    "title": "Economic Growth Index",
+    "description": "A composite score that identifies neighborhoods experiencing rapid commercial turnover, job creation, and business formation.",
+    "dataSource": "Census County Business Patterns (CBP) and Maryland Business Licenses Online.",
+    "whatItMeans": "This score answers: \"Is this neighborhood gaining or losing business momentum?\" It tracks the rate of new business licenses, payroll growth, and net establishment formations.",
+    "techTitle": "Technical Deep Dive: Spatial Data Fusion",
+    "techContent": "<p>We utilize a weighted areal interpolation algorithm to map ZIP-level business data to Census tracts based on land area. This is fused with geocoded business license filings. The final index represents a mean of growth across four vectors: Net Business Formations, Job Growth, Payroll Expansion, and License Issuance.</p>"
+  },
+  {
+    "id": "child-care-supply",
+    "title": "Estimated Child Care Supply",
+    "description": "A capacity-aware measure of available child care slots within a mobility-adjusted radius (1–10 miles) of the neighborhood.",
+    "dataSource": "Maryland State Department of Education (Maryland EXCELS).",
+    "whatItMeans": "Unlike standard maps that treat all providers equally, we count the actual number of licensed seats for young children. Crucially, we adjust the search radius based on local vehicle ownership rates to model realistic access.",
+    "techTitle": "Technical Deep Dive: Excludable Capacity & Variable Radii",
+    "techContent": "<p><b>Excludable vs. Non-Excludable Services:</b> Unlike a grocery store where anyone can enter (non-excludable), child care is \"excludable\"—access is strictly limited by the number of licensed seats. We therefore model supply as a finite inventory problem.</p><p>We calculate the total licensed capacity for children under 6 within a dynamic buffer. The radius of this buffer is determined by local Vehicle Ownership rates—ranging from 1 mile in high-ownership areas to ~10 miles in low-ownership areas—to simulate the \"catchment area\" a parent can realistically traverse to secure a limited slot.</p>"
+  },
+  {
+    "id": "fresh-food-demand",
+    "title": "Estimated Fresh Food Demand Score",
+    "description": "An econometric estimate of a neighborhood's total potential spending power for groceries, assuming ideal access existed.",
+    "dataSource": "Census ACS (Income, Household Size, Education) and Consumer Spending Data.",
+    "whatItMeans": "This score answers: \"If a high-quality grocer opened here, would the community have the economic capacity to support it?\" It separates economic viability from physical presence.",
+    "techTitle": "Technical Deep Dive: OLS Regression Modeling",
+    "techContent": "<p>We train an Ordinary Least Squares (OLS) regression model to predict the \"Spend-per-Income\" ratio based on household demographics such as size, education, and presence of children. This model is applied to tract-level income data to estimate total theoretical market demand in dollars, independent of current supply.</p>"
+  },
+  {
+    "id": "fresh-food-supply",
+    "title": "Estimated Fresh Food Supply Score",
+    "description": "A measure of physical access to high-quality grocery stores, adjusted for transportation mobility.",
+    "dataSource": "OpenStreetMap (Overpass API), Census ACS (Vehicle Ownership), and AI Quality Grading.",
+    "whatItMeans": "We measure \"effective access\" to full-service supermarkets and fresh produce retailers. We filter specifically for high-quality fresh food retailers (excluding convenience stores) and lower access scores in neighborhoods with barriers to transportation.",
+    "techTitle": "Technical Deep Dive: AI Classification & Gravity Models",
+    "techContent": "<p><b>AI-Driven Quality Filtering:</b> We use a Large Language Model (LLM) to semantically analyze business names and categories, rating them 0–5 on their likelihood of selling fresh proteins and produce. This distinguishes a \"Convenience Store\" (Quality 1: Shelf-stable only) from a \"Green Grocer\" (Quality 5: Primary Source). </p><p>We filter strictly for Quality 5 locations and apply a spatial Gravity Model. The score is derived by summing provider capacity divided by the squared \"Effective Distance,\" which is dynamically penalized based on the neighborhood's vehicle ownership rate.</p>"
+  },
+  {
+    "id": "fresh-food-gap",
+    "title": "Fresh Food Gap Score",
+    "description": "The intersection of high food insecurity and low physical access. This score highlights areas where the need is critical and unaddressed.",
+    "dataSource": "CDC PLACES (Food Insecurity) and Calculated Supply Scores.",
+    "whatItMeans": "A high Gap Score indicates a neighborhood that is both physically isolated from food sources and demographicially vulnerable to food insecurity.",
+    "techTitle": "Technical Deep Dive: Multi-Factor Interaction",
+    "techContent": "<p>This score represents the intersection of high need and low supply. We utilize modeled Food Insecurity prevalence as the \"Need\" coefficient and invert our Gravity-based \"Supply Score\" to represent lack of access. This multiplicative approach ensures priority is given only where both physiological need and physical isolation overlap.</p>"
+  },
+  {
+    "id": "incentive-areas",
+    "title": "Incentive Area Designations",
+    "description": "Areas representing specific state and federal geographic designations that provide eligibility for financial incentives.",
+    "dataSource": "Maryland Department of Housing and Community Development (DHCD), Maryland Department of Transportation (MDOT), and Governor's Office for Children.",
+    "whatItMeans": "State and federal programs often target specific geographic areas to encourage growth or revitalization. Instead of requiring you to manually check multiple government maps, we automatically cross-reference your selected location against official state boundaries to instantly identify potential eligibility for tax credits, grants, and other location-based benefits.",
+    "techTitle": "Technical Deep Dive: Designation Sources & Definitions",
+    "techContent": "<p>Our system integrates vector data from multiple agencies to determine precise eligibility using geospatial intersection logic. The specific designations tracked include:</p><ul class=\"list-disc pl-5 space-y-1 mt-2\"><li><strong><a href=\"https://dhcd.maryland.gov/Just-Communities/Pages/default.aspx\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">Just Communities</a>:</strong> Neighborhoods identified for targeted reinvestment due to historic policy harms.</li><li><strong><a href=\"https://goc.maryland.gov/Pages/enough-initiative.aspx\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">ENOUGH Act Grantees</a>:</strong> Areas with high poverty eligible for health and community grants.</li><li><strong><a href=\"https://commerce.maryland.gov/fund/programs-for-businesses/enterprise-zone-tax-credit\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">Enterprise Zones</a>:</strong> Areas offering property and income tax credits to businesses.</li><li><strong><a href=\"https://dhcd.maryland.gov/pages/oz/opportunityzones.aspx\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">Opportunity Zones</a>:</strong> Federal tax benefits for investing in low-income communities.</li><li><strong><a href=\"https://dhcd.maryland.gov/Communities/pages/dn/default.aspx\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">Sustainable Communities</a>:</strong> A designation required for eligibility for many state revitalization programs.</li><li><strong><a href=\"https://planning.maryland.gov/pages/OurWork/GDA/pfamap.aspx\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">Priority Funding Areas</a>:</strong> Existing communities where state funding for growth is directed.</li><li><strong><a href=\"https://www.mdot.maryland.gov/tso/pages/Index.aspx?PageId=37\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">TOD Areas</a>:</strong> Zones encouraging mixed-use, walkable development around transit stations.</li><li><strong><a href=\"https://commerce.maryland.gov/fund/programs-for-businesses/rise-zone-program\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">RISE Zones</a>:</strong> Tax credits for businesses located near qualifying institutions.</li></ul>"
+  },
+  {
+    "id": "incentive-ai",
+    "title": "Incentive Extraction",
+    "description": "We aggregate complex incentive data from disparate state and county websites, transforming unstructured web pages into a standardized, searchable database using advanced Artificial Intelligence.",
+    "dataSource": "Maryland Department of Planning, Department of Commerce, DHCD, and other state and county portals.",
+    "whatItMeans": "Instead of reading through hundreds of dense government web pages, you get structured, consistent details on eligibility, deadlines, and benefits for every program.",
+    "techTitle": "Technical Deep Dive: LLM Structured Extraction",
+    "techContent": "<p>We employ a dynamic web scraping pipeline to ingest raw HTML from client-side rendered portals, followed by a Large Language Model (LLM) extraction layer. We utilize strict schema enforcement to normalize unstructured text into typed fields, ensuring consistent formatting for deadlines (ISO-8601) and categorical industry lists.</p>"
+  },
+  {
+    "id": "social-investment-need",
+    "title": "Social Investment Need Score",
+    "description": "Identifies areas where physical access exists but the local market strength is too weak to sustain it without support.",
+    "dataSource": "Calculated Supply Scores and Market Demand Scores.",
+    "whatItMeans": "This highlights neighborhoods where stores might exist but are at risk of closure due to low spending power, or where existing options are likely unaffordable for the community.",
+    "techTitle": "Technical Deep Dive: Market Weakness Multiplier",
+    "techContent": "<p>We calculate a \"Market Weakness\" index by inverting the normalized Market Demand Score. The final metric is the product of the Supply Score and Market Weakness. This mathematically isolates areas that possess physical infrastructure (high supply) but lack the economic base to sustain it, pinpointing targets for subsidy.</p>"
+  },
+  {
+    "id": "child-care-unmet-demand",
+    "title": "Unmet Child Care Demand Score",
+    "description": "The gap between the number of children under 5 with working parents and the available licensed child-care slots.",
+    "dataSource": "Census ACS (Working Parents, Population < 5) and Calculated Supply Levels.",
+    "whatItMeans": "This measures the absolute deficit of care. A high score means there are significantly more children requiring care than there are licensed seats available to serve them.",
+    "techTitle": "Technical Deep Dive: Supply/Demand Delta",
+    "techContent": "<p>We calculate a \"Demand Score\" by aggregating demographic data for children in households where all parents are in the labor force. The final Unmet Need score is derived by subtracting the spatially allocated Supply Score from this demographic Demand Score to quantify the absolute deficit.</p>"
+  },
+  {
+    "id": "fresh-food-unmet-demand",
+    "title": "Unmet Fresh Food Demand Score",
+    "description": "A differential metric that quantifies the gap between a neighborhood's economic potential to support a grocery store and the actual physical supply currently available.",
+    "dataSource": "Census ACS (Income, Demographics) and Calculated Supply Scores.",
+    "whatItMeans": "This score answers: \"Is this neighborhood under-served relative to its spending power?\" A high score indicates a strong market that is currently leaking retail spending elsewhere due to a lack of local options.",
+    "techTitle": "Technical Deep Dive: Supply/Demand Delta Modeling",
+    "techContent": "<p>We first model the \"Total Potential Market Demand\" by applying an Ordinary Least Squares (OLS) regression to estimate household grocery spending under ideal access conditions (simulating the 95th percentile of supply). We then rank both this Potential Demand and the actual Supply Score on a standardized 0–100 scale.</p><p>The final Unmet Demand score is the arithmetic difference between the two: <b>Market Demand Score − Supply Score</b>. This isolates areas where economic capacity significantly exceeds physical infrastructure, filtering out areas that lack supply simply due to low population density or spending power.</p>"
+  }
+]
