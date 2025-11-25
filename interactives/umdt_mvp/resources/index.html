@@ -656,6 +656,12 @@
             top: 100%;
             margin-top: 4px;
         }
+        /* Accessibility: Remove focus ring from programmatically focused headers */
+        h1[tabindex="-1"]:focus,
+        h2[tabindex="-1"]:focus {
+            outline: none !important; /* Override MDWDS default focus ring */
+            box-shadow: none !important;
+        }
     </style>
 </head>
 <body>
@@ -1098,39 +1104,102 @@
                     Array.from(topics).sort().forEach(topic => {
                         const div = document.createElement('div');
                         div.className = 'multiselect-option';
+                        // A11y Attributes
+                        div.setAttribute('role', 'option');
+                        div.setAttribute('aria-selected', 'false');
+                        div.setAttribute('tabindex', '0'); // Make focusable via keyboard
+                        div.setAttribute('data-value', topic); // Store value for easier access
+
                         div.innerHTML = `
-                            <input type="checkbox" class="ms-checkbox" value="${topic}" tabindex="-1">
+                            <input type="checkbox" class="ms-checkbox" value="${topic}" tabindex="-1" aria-hidden="true">
                             <span>${topic}</span>
                         `;
+
+                        // Handle Click
                         div.addEventListener('click', (e) => {
-                            const cb = div.querySelector('input');
-                            cb.checked = !cb.checked;
-                            
-                            // Sync state
-                            if (cb.checked) state.topics.add(topic);
-                            else state.topics.delete(topic);
-                            
-                            // Update UI across BOTH views
-                            syncMultiselects();
-                            
-                            // Clear errors if valid
-                            if (state.topics.size > 0) clearErrors();
+                            // Prevent bubbling if clicking the checkbox directly to avoid double toggle
+                            if (e.target.type === 'checkbox') return;
+                            toggleOptionState(div, topic);
                         });
+
+                        // Handle Keyboard on Option (Space/Enter to select)
+                        div.addEventListener('keydown', (e) => {
+                            if (e.key === ' ' || e.key === 'Enter') {
+                                e.preventDefault();
+                                toggleOptionState(div, topic);
+                            } else {
+                                handleMultiselectNav(e, view);
+                            }
+                        });
+
                         inputs[view].msOptions.appendChild(div);
                     });
                 });
             }
 
+            // Helper: Toggles state and syncs UI
+            function toggleOptionState(element, topic) {
+                const cb = element.querySelector('input');
+                const isChecked = !cb.checked; // Toggle current state
+                
+                // Update Checkbox
+                cb.checked = isChecked;
+                
+                // Update State Set
+                if (isChecked) state.topics.add(topic);
+                else state.topics.delete(topic);
+
+                // Clear errors if valid
+                if (state.topics.size > 0) clearErrors();
+
+                // Sync UI
+                syncMultiselects();
+            }
+
+            // Helper: Handles Arrow Key Navigation within the dropdown
+            function handleMultiselectNav(e, view) {
+                const current = document.activeElement;
+                const options = Array.from(inputs[view].msOptions.querySelectorAll('.multiselect-option'));
+                const currentIndex = options.indexOf(current);
+
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const next = options[currentIndex + 1];
+                    if (next) next.focus();
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const prev = options[currentIndex - 1];
+                    if (prev) prev.focus();
+                    else inputs[view].msTrigger.focus(); // Return to trigger if up at top
+                } else if (e.key === 'Escape') {
+                    e.preventDefault();
+                    toggleMultiselect(view); // Close
+                    inputs[view].msTrigger.focus(); // Return focus to trigger
+                } else if (e.key === 'Tab') {
+                    // Allow natural Tab flow, but close the menu
+                    toggleMultiselect(view); 
+                }
+            }
+
             // Syncs the Visual State of Multiselects across both forms
             function syncMultiselects() {
                 ['initial', 'results'].forEach(view => {
-                    // Update checkboxes
+                    // Update checkboxes and ARIA states
                     inputs[view].msOptions.querySelectorAll('.multiselect-option').forEach(opt => {
-                        const val = opt.querySelector('input').value;
+                        const val = opt.getAttribute('data-value');
                         const checked = state.topics.has(val);
+                        
+                        // Sync Checkbox
                         opt.querySelector('input').checked = checked;
-                        if (checked) opt.classList.add('selected');
-                        else opt.classList.remove('selected');
+                        
+                        // Sync Visuals & ARIA
+                        if (checked) {
+                            opt.classList.add('selected');
+                            opt.setAttribute('aria-selected', 'true');
+                        } else {
+                            opt.classList.remove('selected');
+                            opt.setAttribute('aria-selected', 'false');
+                        }
                     });
                     
                     // Update Label (Singular/Plural logic)
@@ -1202,6 +1271,16 @@
                     views.initial.classList.add('view-hidden');
                     views.results.classList.remove('view-hidden');
                     window.scrollTo(0, 0);
+                    
+                    // Accessibility: Move focus to the top of the new view (Results Header)
+                    setTimeout(() => {
+                        const resultHeader = document.querySelector('#view-results h2');
+                        if (resultHeader) {
+                            // This attribute matches our new CSS selector
+                            resultHeader.setAttribute('tabindex', '-1'); 
+                            resultHeader.focus();
+                        }
+                    }, 50);
                 }
 
                 // Filter Logic
@@ -1242,6 +1321,13 @@
                 views.results.classList.add('view-hidden');
                 views.initial.classList.remove('view-hidden');
                 resourceList.innerHTML = ''; // Clear list
+                
+                // Accessibility: Move focus back to the main Hero Heading
+                const mainHeading = document.querySelector('#view-initial h1');
+                if (mainHeading) {
+                    mainHeading.setAttribute('tabindex', '-1');
+                    mainHeading.focus();
+                }
             }
 
             function renderResources(resources) {
@@ -1283,11 +1369,19 @@
                         `).join('');
 
                         // Added table-scroll-wrapper div for mobile accessibility
+                        // Added scope="col" to th elements for screen readers
                         contactsTableHtml = `
                             <h4 class="font-sans-xs text-uppercase text-base margin-bottom-1 margin-top-2">Organization Contacts</h4>
                             <div class="table-scroll-wrapper" tabindex="0">
                                 <table class="contact-table">
-                                    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Phone</th>
+                                            <th scope="col">Email</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>${rows}</tbody>
                                 </table>
                             </div>
@@ -1335,18 +1429,39 @@
 
             // --- 4. Event Binding ---
             
+            function setupTriggerEvents(view) {
+                const trigger = inputs[view].msTrigger;
+                
+                // Click interaction
+                trigger.addEventListener('click', () => toggleMultiselect(view));
+                
+                // Keyboard interaction on Trigger
+                trigger.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        // Open if not open
+                        if (trigger.getAttribute('aria-expanded') !== 'true') {
+                            toggleMultiselect(view);
+                        }
+                        // Move focus to first option
+                        const firstOpt = inputs[view].msOptions.querySelector('.multiselect-option');
+                        if (firstOpt) firstOpt.focus();
+                    }
+                });
+            }
+
             // Initial View Events
-            inputs.initial.msTrigger.addEventListener('click', () => toggleMultiselect('initial'));
+            setupTriggerEvents('initial');
             document.getElementById('search-initial').addEventListener('click', () => performSearch('initial'));
             document.getElementById('reset-initial').addEventListener('click', resetFilters);
 
             // Results View Events
-            inputs.results.msTrigger.addEventListener('click', () => toggleMultiselect('results'));
+            setupTriggerEvents('results');
             document.getElementById('search-results').addEventListener('click', () => performSearch('results'));
             document.getElementById('reset-results').addEventListener('click', resetFilters);
             document.getElementById('reset-results-mobile').addEventListener('click', resetFilters);
 
-            // Close multiselects on click outside
+            // Close multiselects on click outside (and Escape handled in navigation)
             document.addEventListener('click', (e) => {
                 if (!inputs.initial.msContainer.contains(e.target) && !inputs.results.msContainer.contains(e.target)) {
                     document.querySelectorAll('.multiselect-options').forEach(el => el.classList.remove('show'));
