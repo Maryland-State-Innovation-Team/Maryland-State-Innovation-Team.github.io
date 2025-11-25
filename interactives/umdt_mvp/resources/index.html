@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect to Resources - Maryland Community Business Compass</title>
+    <title>Get Support from Experts - Maryland Community Business Compass</title>
     
     <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
 
-    <style>
+<style>
         body {
             font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
         }
@@ -199,6 +199,463 @@
             font-size: 0.875rem;
         }
         .filter-count.hidden { display: none; }
+
+        /* --- NEW DESIGN REF: HERO & SEARCH --- */
+        
+        .hero-section {
+            position: relative;
+            background-color: #4a0404; /* Deep Red fallback */
+            /* Overlay the red checkerboard pattern on top of the dark red */
+            background-image: url('../assets/bg-red.svg'); 
+            background-size: cover;
+            background-position: left center;
+            overflow: hidden;
+        }
+
+        .hero-split-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Ensure the hero-left container vertically centers content but allows the card to flow */
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Mobile fix: Add padding to compensate for inner container's padding-x-0 */
+            padding: 3rem 1.5rem;
+        }
+
+        .hero-right {
+            /* Mobile fix: Hide decorative image to save space */
+            display: none;
+            flex: 1;
+            position: relative;
+            min-height: 400px;
+        }
+        .hero-right img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-right {
+                display: block; /* Restore image on Desktop */
+            }
+            .hero-split-container {
+                flex-direction: row;
+                min-height: 480px;
+            }
+            .hero-left {
+                flex: 1;
+                padding: 4rem 2rem 8rem 2rem; /* Extra bottom padding for overlap */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                position: relative;
+                z-index: 1;
+            }
+        }
+
+        /* Updated Search Card styling for the nested layout */
+        .search-card-container {
+            width: 100%;
+            position: relative;
+            z-index: 10;
+            margin-top: 2rem;
+            padding: 0; /* Remove horizontal padding, let max-width handle it */
+        }
+        
+        @media (min-width: 1024px) {
+            .search-card-container {
+                /* Center the card horizontally */
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+                
+                /* Optional: Pull it down slightly to overlap bottom edge if desired, 
+                   otherwise just keep it centered in the red area. */
+                margin-bottom: -6rem; 
+            }
+        }
+
+        .search-card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            /* Mobile fix: Sync padding with compact view (0.75rem) */
+            padding: 0.75rem;
+        }
+        @media (min-width: 768px) {
+            .search-card {
+                padding: 2rem;
+            }
+        }
+
+        /* Custom Form Layout for the Search Card */
+        .search-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .search-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .search-grid-full {
+                grid-column: 1 / -1;
+            }
+        }
+
+        .search-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1b1b1b;
+        }
+        
+        .search-select {
+            width: 100%;
+            height: 3rem;
+            border: 1px solid #565c65;
+            border-radius: 0.25rem;
+            padding: 0.5rem;
+            font-size: 1rem;
+            color: #1b1b1b;
+            background-color: white;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3csvg%20xmlns%3d%27http%3a%2f%2fwww.w3.org%2f2000%2fsvg%27%20width%3d%2724%27%20height%3d%2724%27%20viewBox%3d%270%200%2024%2024%27%20fill%3d%27none%27%20stroke%3d%27%23333%27%20stroke-width%3d%272%27%20stroke-linecap%3d%27round%27%20stroke-linejoin%3d%27round%27%3e%3cpolyline%20points%3d%276%209%2012%2015%2018%209%27%2f%3e%3c%2fsvg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1rem;
+        }
+
+        /* Custom Multi-select for Help Topic */
+        .custom-multiselect {
+            position: relative;
+            width: 100%;
+        }
+        .multiselect-trigger {
+            width: 100%;
+            height: 3rem;
+            border: 1px solid #565c65;
+            border-radius: 0.25rem;
+            padding: 0.5rem;
+            text-align: left;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .multiselect-trigger::after {
+            content: '';
+            width: 1rem;
+            height: 1rem;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3csvg%20xmlns%3d%27http%3a%2f%2fwww.w3.org%2f2000%2fsvg%27%20width%3d%2724%27%20height%3d%2724%27%20viewBox%3d%270%200%2024%2024%27%20fill%3d%27none%27%20stroke%3d%27%23333%27%20stroke-width%3d%272%27%20stroke-linecap%3d%27round%27%20stroke-linejoin%3d%27round%27%3e%3cpolyline%20points%3d%276%209%2012%2015%2018%209%27%2f%3e%3c%2fsvg%3e");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .multiselect-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #565c65;
+            border-top: none;
+            z-index: 20;
+            max-height: 300px;
+            overflow-y: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .multiselect-options.show {
+            display: block;
+        }
+        .multiselect-option {
+            padding: 0.75rem;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .multiselect-option:hover {
+            background-color: #f0f0f0;
+        }
+        .multiselect-option.selected {
+            background-color: #e6f3ff;
+        }
+        .ms-checkbox {
+            pointer-events: none; /* Let the row handle click */
+        }
+        .error-text {
+            color: #b50909;
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            visibility: hidden;
+            min-height: 1.5em; /* Ensures the height is reserved even if empty */
+        }
+
+        /* Ensure Reset/Search are spaced correctly in the Initial Card */
+        .card-footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #dfe1e2;
+            /* Mobile fix: Add gap to prevent button overlap */
+            gap: 1rem;
+        }
+
+        /* --- RESOURCE LIST ITEM DESIGN --- */
+        .resource-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding-bottom: 4rem;
+        }
+        
+        .resource-item {
+            background: white;
+            border: 1px solid #dfe1e2;
+            border-radius: 0.5rem;
+            /* Mobile fix: Reduced padding */
+            padding: 1.25rem;
+            display: grid;
+            gap: 1.5rem;
+            /* Mobile fix: Prevent grid blowout */
+            max-width: 100%;
+        }
+
+        @media (min-width: 1024px) {
+            .resource-item {
+                grid-template-columns: 100px 1fr 280px; /* Logo | Main Info | Sidebar */
+                padding: 2rem;
+                gap: 2rem;
+            }
+        }
+
+        .resource-logo img {
+            width: 100px;
+            height: auto;
+            max-height: 100px;
+            object-fit: contain;
+            border: 1px solid #eee;
+            padding: 0.25rem;
+            border-radius: 4px;
+        }
+
+        /* Mobile fix: Allow container to shrink below content size */
+        .resource-main {
+            min-width: 0;
+        }
+
+        .resource-main h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #1b1b1b;
+            /* Mobile fix: Force long words/titles to wrap */
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+        }
+        .resource-desc {
+            color: #1b1b1b;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            overflow-wrap: break-word;
+        }
+        
+        /* Organization Contacts Table inside Card */
+        /* Mobile fix: Wrapper for horizontal scrolling */
+        .table-scroll-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 1rem;
+            border: 1px solid #eee;
+        }
+        
+        .contact-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+            /* Ensure table is wide enough to be readable, forcing scroll on small screens */
+            min-width: 500px; 
+        }
+        .contact-table th {
+            text-align: left;
+            background-color: #f0f0f0;
+            padding: 0.5rem;
+            font-weight: 700;
+        }
+        .contact-table td {
+            padding: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Resource Sidebar (Right side) */
+        .resource-sidebar {
+            border-top: 1px solid #dfe1e2;
+            padding-top: 1rem;
+        }
+        @media (min-width: 1024px) {
+            .resource-sidebar {
+                border-top: none;
+                border-left: 1px solid #dfe1e2;
+                padding-top: 0;
+                padding-left: 1.5rem;
+            }
+        }
+        
+        .pill-tag {
+            display: inline-block;
+            background-color: #fce8ec; /* Light red/pinkish */
+            color: #8b0000;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            margin-bottom: 0.5rem;
+            margin-right: 0.25rem;
+        }
+
+        .sidebar-section {
+            margin-bottom: 1.5rem;
+        }
+        .sidebar-label {
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+        .sidebar-link {
+            color: #005ea2;
+            text-decoration: underline;
+            word-break: break-word;
+        }
+
+        /* --- VIEW TOGGLING & VALIDATION --- */
+        
+        /* Utility to hide views */
+        .view-hidden {
+            display: none !important;
+        }
+
+        /* Error States */
+        .error-border {
+            border: 2px solid #b50909 !important;
+        }
+        .error-text-visible {
+            visibility: visible !important;
+        }
+
+        /* FIX: Responsive Error Text Positioning */
+        #view-results .form-col-topics {
+            position: relative; 
+        }
+
+        #view-results .error-text {
+            /* Mobile Default: Flow naturally in the document */
+            position: static;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            width: 100%;
+            white-space: normal;
+        }
+
+        /* Desktop: Absolute position to save vertical space */
+        @media (min-width: 1024px) {
+            #view-results .error-text {
+                position: absolute;
+                bottom: -1.75rem;
+                left: 0;
+                margin: 0;
+                white-space: nowrap;
+            }
+        }
+
+        /* Adjust breathing room based on error positioning strategy */
+        #view-results .compact-search-container {
+            padding-bottom: 1rem;
+        }
+        @media (min-width: 1024px) {
+            #view-results .compact-search-container {
+                padding-bottom: 2.5rem;
+            }
+        }
+
+        /* --- RESULTS VIEW (Compact Bar) --- */
+        
+        .results-header-bg {
+            background-color: #8b0000; /* Dark Red background for the sticky bar area */
+            padding: 1.5rem 0;
+            background-image: url('../assets/bg-red.svg');
+            background-size: cover;
+        }
+
+        /* Container for the single-row form */
+        .compact-search-container {
+            background: white;
+            border-radius: 4px;
+            padding: 0.75rem;
+        }
+
+        /* Flex layout for the single row */
+        .compact-search-row {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .compact-search-row .form-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            justify-content: space-between; /* Mobile: spread buttons apart */
+            width: 100%;
+            padding-top: 0.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .compact-search-row {
+                flex-direction: row;
+                align-items: flex-end; /* Align inputs and buttons at bottom */
+            }
+            
+            .compact-search-row .usa-form-group {
+                margin-top: 0;
+                flex: 1; /* Inputs take available space */
+            }
+            
+            /* Specific width adjustments for compact row */
+            .compact-search-row .form-col-industry { flex: 1; }
+            .compact-search-row .form-col-location { flex: 1; }
+            .compact-search-row .form-col-topics { flex: 2; } /* Topics needs more space */
+            
+            .compact-search-row .form-actions {
+                width: auto;
+                justify-content: flex-start;
+                padding-top: 0;
+                padding-bottom: 0.25rem; /* Align with input fields */
+            }
+        }
+
+        /* Adjustments for the custom multiselect in compact view */
+        .compact-search-row .multiselect-options {
+            top: 100%;
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -275,53 +732,147 @@
         </header>
 
         <main id="main-content">
-            <section class="grid-container usa-section">
-                <!-- Page Title -->
-                <div class="grid-row">
-                    <div class="tablet:grid-col-12">
-                        <h1 class="font-serif-xl tablet:font-serif-2xl desktop:font-serif-3xl margin-top-0 tablet:margin-bottom-0">Get Support from Experts</h1>
-                    </div>
-                </div>
-
-                <!-- Search Bar & Active Filters -->
-                <div class="grid-row grid-gap-4 margin-top-4">
-                    <div class="tablet:grid-col-12">
-                        <div class="usa-form-group">
-                            <label class="usa-label usa-sr-only" for="search-input">Search by keyword, name, or title</label>
-                            <div class="usa-search usa-search--big" role="search">
-                                <input class="usa-input" id="search-input" type="search" name="search" placeholder="Search by keyword, name, or title">
+            
+            <div id="view-initial">
+                <section class="hero-section">
+                    <div class="hero-split-container">
+                        <div class="hero-left">
+                            
+                            <div class="grid-container padding-x-0 width-full">
+                                <h1 class="font-serif-2xl tablet:font-serif-3xl text-white margin-top-0 margin-bottom-2">
+                                    Get Support from Experts
+                                </h1>
+                                <p class="font-sans-lg text-white margin-bottom-4" style="max-width: 600px;">
+                                    Find people, organizations, and information that can help drive your business forward
+                                </p>
                             </div>
-                        </div>
-                         <div class="tablet:grid-col-12 margin-top-2">
-                            <div id="active-filters-container" class="display-flex flex-wrap flex-align-center" style="gap: 0.5rem; min-height: 38px;"></div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Main Content Layout (Filters + Results) -->
-                <div class="grid-row grid-gap-4 margin-top-4">
-                    
-                    <!-- Filters Sidebar -->
-                    <aside id="filters-sidebar" aria-label="Resource Filters" class="tablet:grid-col-4">
-                        <div class="sticky-sidebar">
-                            <h2 class="usa-sr-only">Filter Resources</h2>
-                            <div id="filters-accordion" class="usa-accordion">
-                                <!-- Filters will be dynamically inserted here by JavaScript -->
+                            <div class="search-card-container">
+                                <div class="search-card">
+                                    <form id="form-initial" onsubmit="event.preventDefault();">
+                                        <div class="search-grid">
+                                            <div class="usa-form-group margin-top-0">
+                                                <label class="search-label" for="initial-industry">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg>
+                                                    Industry
+                                                </label>
+                                                <select class="search-select" id="initial-industry">
+                                                    <option value="">Select your industry</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="usa-form-group margin-top-0">
+                                                <label class="search-label" for="initial-location">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
+                                                    Location
+                                                </label>
+                                                <select class="search-select" id="initial-location">
+                                                    <option value="">Select your location</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="usa-form-group margin-top-0 search-grid-full">
+                                                <label class="search-label">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b"><path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+                                                    Help Topic
+                                                </label>
+                                                
+                                                <div class="custom-multiselect" id="ms-container-initial">
+                                                    <button type="button" class="multiselect-trigger" id="ms-trigger-initial" aria-haspopup="listbox" aria-expanded="false">
+                                                        Select your topic(s)
+                                                    </button>
+                                                    <div class="multiselect-options" id="ms-options-initial" role="listbox">
+                                                        </div>
+                                                </div>
+                                                <div id="error-initial" class="error-text">Please select at least one topic</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="card-footer-row">
+                                            <button type="button" id="reset-initial" class="usa-button usa-button--unstyled text-bold text-primary">Reset</button>
+                                            <button type="submit" id="search-initial" class="usa-button display-flex flex-align-center">
+                                                <svg class="margin-right-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" height="18px" width="18px"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                                                Search
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                    </aside>
 
-                    <!-- Results Area -->
-                    <div class="tablet:grid-col-8">
-                        <p id="results-count" class="font-sans-sm text-base">Loading results...</p>
-                        
-                        <!-- The new resource grid -->
-                        <div id="resource-grid" class="resource-grid margin-top-2">
-                            <!-- Results will be dynamically inserted here by JavaScript -->
+                        </div>
+                        <div class="hero-right">
+                             <img src="../assets/stock_square.png" alt="A business owner and a support advisor sitting at a desk, smiling while reviewing paperwork together." onerror="this.style.display='none';">
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="view-results" class="view-hidden">
+                <div class="results-header-bg margin-bottom-4">
+                    <div class="grid-container">
+                        <div class="compact-search-container">
+                            <form id="form-results" onsubmit="event.preventDefault();">
+                                <div class="compact-search-row">
+                                    <div class="usa-form-group form-col-industry">
+                                        <label class="search-label" for="results-industry">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg>
+                                            Industry
+                                        </label>
+                                        <select class="search-select" id="results-industry">
+                                            <option value="">Select your industry</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="usa-form-group form-col-location">
+                                        <label class="search-label" for="results-location">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
+                                            Location
+                                        </label>
+                                        <select class="search-select" id="results-location">
+                                            <option value="">Select your location</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="usa-form-group form-col-topics">
+                                        <label class="search-label">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b"><path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+                                            Help Topic
+                                        </label>
+                                        <div class="custom-multiselect" id="ms-container-results">
+                                            <button type="button" class="multiselect-trigger" id="ms-trigger-results" aria-haspopup="listbox" aria-expanded="false">
+                                                Select your topic(s)
+                                            </button>
+                                            <div class="multiselect-options" id="ms-options-results" role="listbox">
+                                                </div>
+                                        </div>
+                                        <div id="error-results" class="error-text">Please select at least one topic</div>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="button" id="reset-results" class="usa-button usa-button--unstyled text-bold text-primary display-none tablet:display-inline-block margin-right-2">Reset</button>
+                                        <button type="submit" id="search-results" class="usa-button display-flex flex-align-center margin-right-0">
+                                             <svg class="margin-right-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" height="18px" width="18px"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                                             Search
+                                        </button>
+                                        <button type="button" id="reset-results-mobile" class="usa-button usa-button--unstyled text-bold text-primary tablet:display-none margin-top-1">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </section>
+
+                <div class="grid-container margin-bottom-6">
+                    <div class="grid-row">
+                        <div class="tablet:grid-col-12">
+                            <h2 class="font-serif-xl margin-bottom-3">Relevant Resources</h2>
+                            <div id="results-status" class="font-sans-sm margin-bottom-2 text-base"></div>
+                            <div id="resource-list" class="resource-list">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
     
@@ -461,282 +1012,348 @@
     <script src="https://cdn.maryland.gov/mdwds/0.12.0/js/mdwds-core.js"></script>
     
     <script>
-
         document.addEventListener('DOMContentLoaded', () => {
             let allResources = [];
-            let displayedResources = [];
             
-            const activeFilters = {
-                searchTerm: '',
-                categories: new Set(),
-                counties: new Set(),
-                languages: new Set(),
+            // State
+            const state = {
+                industry: '',
+                location: '',
+                topics: new Set(),
+                hasSearched: false
             };
 
-            // Configuration for filter accordions and data keys
-            const filterConfig = {
-                categories: {
-                    title: 'Business Category',
-                    key: 'categories',
-                    options: []
+            // --- Elements (grouped by view) ---
+            const views = {
+                initial: document.getElementById('view-initial'),
+                results: document.getElementById('view-results')
+            };
+
+            const inputs = {
+                initial: {
+                    industry: document.getElementById('initial-industry'),
+                    location: document.getElementById('initial-location'),
+                    msContainer: document.getElementById('ms-container-initial'),
+                    msTrigger: document.getElementById('ms-trigger-initial'),
+                    msOptions: document.getElementById('ms-options-initial'),
+                    errorMsg: document.getElementById('error-initial')
                 },
-                counties: {
-                    title: 'County',
-                    key: 'counties',
-                    options: [
-                        // "Allegany", "Anne Arundel", "Baltimore", "Baltimore City", 
-                        // "Calvert", "Caroline", "Carroll", "Cecil", "Charles", "Dorchester", 
-                        // "Frederick", "Garrett", "Harford", "Howard", "Kent", "Montgomery", 
-                        // "Prince George's", "Queen Anne's", "St. Mary's", "Somerset", "Talbot", 
-                        // "Washington", "Wicomico", "Worcester"
-                    ]
-                },
-                languages: {
-                    title: 'Language',
-                    key: 'languages',
-                    options: []
+                results: {
+                    industry: document.getElementById('results-industry'),
+                    location: document.getElementById('results-location'),
+                    msContainer: document.getElementById('ms-container-results'),
+                    msTrigger: document.getElementById('ms-trigger-results'),
+                    msOptions: document.getElementById('ms-options-results'),
+                    errorMsg: document.getElementById('error-results')
                 }
             };
 
-            // DOM Selectors
-            const searchInput = document.getElementById('search-input');
-            const resultsCount = document.getElementById('results-count');
-            const filtersSidebar = document.getElementById('filters-accordion');
-            const activeFiltersContainer = document.getElementById('active-filters-container');
-            const resourceGrid = document.getElementById('resource-grid');
+            const resourceList = document.getElementById('resource-list');
+            const statusEl = document.getElementById('results-status');
 
-            const slugify = (text) => text.toString().toLowerCase()
-                .replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
-
+            // --- 1. Initialization ---
             async function initializeApp() {
-                renderFilterUI();
                 try {
                     const res = await fetch('resources.json');
                     if (!res.ok) throw new Error("Network response was not ok.");
-                    
                     allResources = await res.json();
                     
-                    // Automatically expand filter options based on loaded data
-                    // This ensures all options from the JSON are in the filter list
-                    updateFilterOptionsFromData();
-                    // Re-render filters with the new comprehensive options
-                    renderFilterUI();
-
-                    applyFilters();
-
+                    populateFilters(allResources);
+                    // Do not render resources initially
+                    
                 } catch (error) {
                     console.error("Failed to load resource data:", error);
-                    resourceGrid.innerHTML = `<p class="text-center padding-4 text-error">Error loading data. Please check if resources.json is in the root folder and try again.</p>`;
-                    resultsCount.textContent = '0 results';
                 }
             }
 
-            // This function ensures the filter options are dynamically populated from the JSON
-            function updateFilterOptionsFromData() {
-                for (const key in filterConfig) {
-                    const optionsSet = new Set(filterConfig[key].options);
-                    allResources.forEach(item => {
-                        const values = item[filterConfig[key].key];
-                        if (Array.isArray(values)) {
-                            values.forEach(val => optionsSet.add(val));
-                        }
+            // --- 2. Filter Population & Sync ---
+            function populateFilters(data) {
+                const industries = new Set();
+                const locations = new Set();
+                const topics = new Set();
+
+                data.forEach(item => {
+                    if (item.business_category && item.business_category !== 'All') industries.add(item.business_category);
+                    const locs = Array.isArray(item.area) ? item.area : [item.address_city];
+                    locs.filter(Boolean).forEach(l => locations.add(l));
+                    if (Array.isArray(item.question_tags)) item.question_tags.forEach(tag => topics.add(tag));
+                });
+
+                // Helper to fill select
+                const fillSelect = (select, set) => {
+                    Array.from(set).sort().forEach(val => {
+                        const opt = document.createElement('option');
+                        opt.value = val;
+                        opt.textContent = val;
+                        select.appendChild(opt);
                     });
-                    filterConfig[key].options = Array.from(optionsSet).sort();
+                };
+
+                // Populate both views
+                ['initial', 'results'].forEach(view => {
+                    fillSelect(inputs[view].industry, industries);
+                    fillSelect(inputs[view].location, locations);
                     
-                    // Ensure "Statewide" is first in counties list if it exists
-                    if (key === 'counties') {
-                        const statewideIndex = filterConfig[key].options.indexOf("Statewide");
-                        if (statewideIndex > -1) {
-                            filterConfig[key].options.splice(statewideIndex, 1);
-                            filterConfig[key].options.unshift("Statewide");
-                        }
-                    }
-                }
-            }
-
-            function renderFilterUI() {
-                const sidebarContent = Object.entries(filterConfig).map(([filterKey, config]) => {
-                    const checkboxes = config.options.map(option => `
-                        <li class="usa-checkbox">
-                             <input class="usa-checkbox__input" id="${filterKey}-${slugify(option)}" type="checkbox" data-filter-key="${filterKey}" value="${option}">
-                             <label class="usa-checkbox__label" for="${filterKey}-${slugify(option)}">${option}</label>
-                        </li>
-                    `).join('');
-                    
-                    return `
-                        <h2 class="usa-accordion__heading">
-                            <button class="usa-accordion__button" aria-expanded="false" aria-controls="acc-${filterKey}">
-                                ${config.title}
-                                <span class="filter-count hidden" data-count-for="${filterKey}">0</span>
-                            </button>
-                        </h2>
-                        <div id="acc-${filterKey}" class="usa-accordion__content usa-prose" hidden>
-                           <ul class="usa-list usa-list--unstyled">${checkboxes}</ul>
-                        </div>
-                    `;
-                }).join('');
-                filtersSidebar.innerHTML = sidebarContent;
-
-            }
-
-            function updateFilterCount(filterKey) {
-                const count = activeFilters[filterKey].size;
-                const el = document.querySelector(`.filter-count[data-count-for="${filterKey}"]`);
-                if (!el) return;
-                el.textContent = count;
-                if (count > 0) el.classList.remove('hidden'); else el.classList.add('hidden');
-            }
-
-            function updateAllFilterCounts() {
-                for (const key in filterConfig) updateFilterCount(key);
-            }
-
-            function renderActiveFilterTags() {
-                let tagsHtml = '';
-                let hasFilters = false;
-
-                if (activeFilters.searchTerm) {
-                    hasFilters = true;
-                    tagsHtml += `
-                        <span class="md-tag">
-                            Keyword: ${activeFilters.searchTerm}
-                            <button data-action="clear-search" aria-label="Remove keyword filter">&times;</button>
-                        </span>
-                    `;
-                }
-
-                for (const key in activeFilters) {
-                    if (key !== 'searchTerm' && activeFilters[key].size > 0) {
-                        hasFilters = true;
-                        activeFilters[key].forEach(value => {
-                            tagsHtml += `
-                                <span class="md-tag">
-                                    ${value}
-                                    <button data-filter-key="${key}" data-value="${value}" aria-label="Remove ${value} filter">&times;</button>
-                                </span>
-                            `;
+                    // Custom Multiselect
+                    Array.from(topics).sort().forEach(topic => {
+                        const div = document.createElement('div');
+                        div.className = 'multiselect-option';
+                        div.innerHTML = `
+                            <input type="checkbox" class="ms-checkbox" value="${topic}" tabindex="-1">
+                            <span>${topic}</span>
+                        `;
+                        div.addEventListener('click', (e) => {
+                            const cb = div.querySelector('input');
+                            cb.checked = !cb.checked;
+                            
+                            // Sync state
+                            if (cb.checked) state.topics.add(topic);
+                            else state.topics.delete(topic);
+                            
+                            // Update UI across BOTH views
+                            syncMultiselects();
+                            
+                            // Clear errors if valid
+                            if (state.topics.size > 0) clearErrors();
                         });
-                    }
-                }
-
-                if (hasFilters) {
-                     activeFiltersContainer.innerHTML = tagsHtml + `<button id="clear-all-filters" class="usa-button usa-button--unstyled margin-left-1">Clear all</button>`;
-                } else {
-                    activeFiltersContainer.innerHTML = '';
-                }
+                        inputs[view].msOptions.appendChild(div);
+                    });
+                });
             }
 
-            // NEW render function for cards
-            function renderCards(resources) {
-                if (resources.length === 0) {
-                    resourceGrid.innerHTML = `<p>No resources match your criteria.</p>`;
-                    return;
-                }
-                resourceGrid.innerHTML = resources.map(item => `
-                    <div class="resource-card">
-                        <div class="resource-card-body">
-                            <h3 class="font-sans-md">${item.name}</h3>
-                            <p class="text-bold margin-bottom-0">${item.title || ''}</p>
-                            <p class="font-sans-sm margin-top-0">${item.region || ''}</p>
-                            <p class="font-sans-sm margin-top-2">${item.description || ''}</p>
-                        </div>
-                        <a href="mailto:${item.email}" class="resource-card-contact">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
-                                <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/>
-                            </svg> 
-                            Email Me
-                        </a>
-                    </div>
-                `).join('');
+            // Syncs the Visual State of Multiselects across both forms
+            function syncMultiselects() {
+                ['initial', 'results'].forEach(view => {
+                    // Update checkboxes
+                    inputs[view].msOptions.querySelectorAll('.multiselect-option').forEach(opt => {
+                        const val = opt.querySelector('input').value;
+                        const checked = state.topics.has(val);
+                        opt.querySelector('input').checked = checked;
+                        if (checked) opt.classList.add('selected');
+                        else opt.classList.remove('selected');
+                    });
+                    
+                    // Update Label (Singular/Plural logic)
+                    const count = state.topics.size;
+                    let label = 'Select your topic(s)';
+                    if (count === 1) label = '1 help topic selected';
+                    else if (count > 1) label = `${count} help topics selected`;
+                    
+                    inputs[view].msTrigger.textContent = label;
+                });
             }
-            
-            function applyFilters() {
-                const term = activeFilters.searchTerm.toLowerCase();
+
+            // Syncs standard Select inputs
+            function syncSelects(sourceView) {
+                const targetView = sourceView === 'initial' ? 'results' : 'initial';
                 
-                displayedResources = allResources.filter(item => {
-                    // 1. Search Term Filter
-                    if (term) {
-                        const inName = item.name?.toLowerCase().includes(term);
-                        const inTitle = item.title?.toLowerCase().includes(term);
-                        const inDescription = item.description?.toLowerCase().includes(term);
-                        const inRegion = item.region?.toLowerCase().includes(term);
-                        if (!(inName || inTitle || inDescription || inRegion)) {
-                            return false;
-                        }
-                    }
+                // Update State
+                state.industry = inputs[sourceView].industry.value;
+                state.location = inputs[sourceView].location.value;
+                
+                // Update Target UI
+                inputs[targetView].industry.value = state.industry;
+                inputs[targetView].location.value = state.location;
+            }
 
-                    // 2. Checkbox Filters
-                    for (const [key, config] of Object.entries(filterConfig)) {
-                         const filterSet = activeFilters[key];
-                         if (filterSet.size > 0) {
-                             const itemValues = item[config.key] || [];
-                             // Replicating incentive logic: check for any intersection, or if item/filter has "Statewide"
-                             const hasMatch = itemValues.some(val => 
-                                filterSet.has(val) || 
-                                (key === 'counties' && (val === 'Statewide' || filterSet.has('Statewide')))
-                             );
-                             if (!hasMatch) return false;
-                         }
+            // --- 3. Interaction & Validation ---
+            function toggleMultiselect(view) {
+                const trigger = inputs[view].msTrigger;
+                const options = inputs[view].msOptions;
+                const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+                
+                // Close others
+                document.querySelectorAll('.multiselect-options').forEach(el => el.classList.remove('show'));
+                document.querySelectorAll('.multiselect-trigger').forEach(el => el.setAttribute('aria-expanded', 'false'));
+
+                if (!isExpanded) {
+                    options.classList.add('show');
+                    trigger.setAttribute('aria-expanded', 'true');
+                }
+            }
+
+            function clearErrors() {
+                ['initial', 'results'].forEach(view => {
+                    inputs[view].msTrigger.classList.remove('error-border');
+                    inputs[view].errorMsg.classList.remove('error-text-visible');
+                });
+            }
+
+            function validate() {
+                if (state.topics.size === 0) {
+                    ['initial', 'results'].forEach(view => {
+                        inputs[view].msTrigger.classList.add('error-border');
+                        inputs[view].errorMsg.classList.add('error-text-visible');
+                    });
+                    return false;
+                }
+                clearErrors();
+                return true;
+            }
+
+            function performSearch(sourceView) {
+                syncSelects(sourceView);
+                
+                if (!validate()) return; // Stop if invalid
+
+                // If valid, switch view and render
+                if (!state.hasSearched) {
+                    state.hasSearched = true;
+                    views.initial.classList.add('view-hidden');
+                    views.results.classList.remove('view-hidden');
+                    window.scrollTo(0, 0);
+                }
+
+                // Filter Logic
+                const filtered = allResources.filter(item => {
+                    if (state.industry && item.business_category !== 'All' && item.business_category !== state.industry) return false;
+                    
+                    if (state.location) {
+                        const itemLocs = Array.isArray(item.area) ? item.area : [item.address_city];
+                        if (!itemLocs.includes(state.location)) return false;
                     }
                     
+                    if (state.topics.size > 0) {
+                        const itemTags = item.question_tags || [];
+                        if (!itemTags.some(tag => state.topics.has(tag))) return false;
+                    }
                     return true;
                 });
-                
-                resultsCount.textContent = `Showing ${displayedResources.length} of ${allResources.length} results`;
-                renderCards(displayedResources);
-                renderActiveFilterTags();
+
+                renderResources(filtered);
+                statusEl.textContent = `Found ${filtered.length} relevant resources`;
             }
 
-            function handleFilterChange(e) {
-                if (e.target.matches('input[type="checkbox"]')) {
-                    const { filterKey } = e.target.dataset;
-                    if (e.target.checked) {
-                        activeFilters[filterKey].add(e.target.value);
-                    } else {
-                        activeFilters[filterKey].delete(e.target.value);
-                    }
-                    updateFilterCount(filterKey);
-                    applyFilters();
+            function resetFilters() {
+                state.industry = '';
+                state.location = '';
+                state.topics.clear();
+                state.hasSearched = false;
+
+                // Reset UI
+                ['initial', 'results'].forEach(view => {
+                    inputs[view].industry.value = '';
+                    inputs[view].location.value = '';
+                });
+                syncMultiselects();
+                clearErrors();
+
+                // Switch back to Initial View
+                views.results.classList.add('view-hidden');
+                views.initial.classList.remove('view-hidden');
+                resourceList.innerHTML = ''; // Clear list
+            }
+
+            function renderResources(resources) {
+                if (resources.length === 0) {
+                    resourceList.innerHTML = `<div class="usa-alert usa-alert--info"><div class="usa-alert__body"><p class="usa-alert__text">No results found.</p></div></div>`;
+                    return;
                 }
-            }
-
-            function handleActiveFilterClick(e) {
-                const button = e.target.closest('button');
-                if (!button) return;
                 
-                if (button.id === 'clear-all-filters') {
-                    // Clear checkbox filters
-                    document.querySelectorAll('#filters-sidebar input[type="checkbox"]').forEach(cb => cb.checked = false);
-                    Object.keys(activeFilters).forEach(key => { if (key !== 'searchTerm') activeFilters[key].clear(); });
-                    updateAllFilterCounts();
-                    // Clear textbox
-                    activeFilters.searchTerm = '';
-                    searchInput.value = '';
-                } else if (button.dataset.action === 'clear-search') {
-                    activeFilters.searchTerm = '';
-                    searchInput.value = '';
-                } else {
-                    const { filterKey, value } = button.dataset;
-                    if (filterKey && value) {
-                        activeFilters[filterKey].delete(value);
-                        const checkbox = document.querySelector(`input[data-filter-key="${filterKey}"][value="${value}"]`);
-                        if (checkbox) checkbox.checked = false;
-                        updateFilterCount(filterKey);
+                resourceList.innerHTML = resources.map(item => {
+                    // 1. Geography Formatting (Oxford Comma)
+                    const areaStr = Array.isArray(item.area) 
+                        ? new Intl.ListFormat('en', { style: 'long', type: 'conjunction' }).format(item.area) 
+                        : (item.area || 'Maryland');
+
+                    // 2. Determine Primary Contact Info (Org level -> Fallback to First Contact)
+                    const contacts = Array.isArray(item.contacts) ? item.contacts : [];
+                    const firstContact = contacts.length > 0 ? contacts[0] : null;
+
+                    // Phone: Org > First Contact > null
+                    const displayPhone = item.phone || (firstContact ? firstContact.phone : null);
+                    
+                    // 3. Construct Description
+                    const contactPersonStr = firstContact 
+                        ? `${firstContact.name}, ${firstContact.title}` 
+                        : 'the agency directly';
+                        
+                    const description = `${item.organization} connects businesses in ${areaStr} with vital resources. Contact ${contactPersonStr}, for assistance.`;
+
+                    // 4. Construct Contacts Table (Conditional)
+                    let contactsTableHtml = '';
+                    if (contacts.length > 0) {
+                        const rows = contacts.map(c => `
+                            <tr>
+                                <td>${c.name || '-'}</td>
+                                <td>${c.title || '-'}</td>
+                                <td>${c.phone ? `<a href="tel:${c.phone}">${c.phone}</a>` : '-'}</td>
+                                <td>${c.email ? `<a href="mailto:${c.email}">${c.email}</a>` : '-'}</td>
+                            </tr>
+                        `).join('');
+
+                        // Added table-scroll-wrapper div for mobile accessibility
+                        contactsTableHtml = `
+                            <h4 class="font-sans-xs text-uppercase text-base margin-bottom-1 margin-top-2">Organization Contacts</h4>
+                            <div class="table-scroll-wrapper" tabindex="0">
+                                <table class="contact-table">
+                                    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+                                    <tbody>${rows}</tbody>
+                                </table>
+                            </div>
+                        `;
                     }
-                }
-                applyFilters();
+
+                    // 5. Render Tags
+                    const logoPath = `./logos/${item.id}.jpg`;
+                    const tagsHtml = (item.question_tags || []).map(tag => `<span class="pill-tag">${tag}</span>`).join('');
+                    
+                    return `
+                        <article class="resource-item">
+                            <div class="resource-logo">
+                                <img src="${logoPath}" alt="${item.organization} Logo" onerror="this.src='https://placehold.co/100x100?text=Logo'">
+                            </div>
+                            <div class="resource-main">
+                                <h3>${item.organization}</h3>
+                                <div class="resource-desc">${description}</div>
+                                ${contactsTableHtml}
+                            </div>
+                            <div class="resource-sidebar">
+                                <div class="sidebar-section">
+                                    <span class="sidebar-label">Help Topics</span>
+                                    <div>${tagsHtml || 'General Support'}</div>
+                                </div>
+                                
+                                ${displayPhone ? `
+                                <div class="sidebar-section">
+                                    <span class="sidebar-label">Phone</span>
+                                    <a href="tel:${displayPhone}" class="sidebar-link">
+                                        ${displayPhone}
+                                    </a>
+                                </div>` : ''}
+
+                                ${item.url ? `
+                                <div class="sidebar-section">
+                                    <span class="sidebar-label">Website</span>
+                                    <a href="${item.url.startsWith('http') ? item.url : 'https://' + item.url}" target="_blank" rel="noopener" class="sidebar-link">Visit website</a>
+                                </div>` : ''}
+                            </div>
+                        </article>
+                    `;
+                }).join('');
             }
 
-            // Event Listeners
-            searchInput.addEventListener('input', () => { 
-                activeFilters.searchTerm = searchInput.value;
-                applyFilters();
+            // --- 4. Event Binding ---
+            
+            // Initial View Events
+            inputs.initial.msTrigger.addEventListener('click', () => toggleMultiselect('initial'));
+            document.getElementById('search-initial').addEventListener('click', () => performSearch('initial'));
+            document.getElementById('reset-initial').addEventListener('click', resetFilters);
+
+            // Results View Events
+            inputs.results.msTrigger.addEventListener('click', () => toggleMultiselect('results'));
+            document.getElementById('search-results').addEventListener('click', () => performSearch('results'));
+            document.getElementById('reset-results').addEventListener('click', resetFilters);
+            document.getElementById('reset-results-mobile').addEventListener('click', resetFilters);
+
+            // Close multiselects on click outside
+            document.addEventListener('click', (e) => {
+                if (!inputs.initial.msContainer.contains(e.target) && !inputs.results.msContainer.contains(e.target)) {
+                    document.querySelectorAll('.multiselect-options').forEach(el => el.classList.remove('show'));
+                    document.querySelectorAll('.multiselect-trigger').forEach(el => el.setAttribute('aria-expanded', 'false'));
+                }
             });
 
-            filtersSidebar.addEventListener('change', handleFilterChange);
-            activeFiltersContainer.addEventListener('click', handleActiveFilterClick);
-            
-            // Start the application
             initializeApp();
         });
     </script>
