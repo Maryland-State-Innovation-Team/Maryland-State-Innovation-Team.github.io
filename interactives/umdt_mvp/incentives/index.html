@@ -560,6 +560,38 @@
             padding-left: 0px;
         }
     </style>
+    <script>
+        // 1. Initialize dataLayer and gtag immediately (Safe Shim)
+        // This ensures window.gtag exists for other scripts, preventing ReferenceErrors
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+
+        // 2. Fetch environment config
+        fetch('../env.json')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(config) {
+                if (config.environment === 'production') {
+                    var gaId = 'G-W4R4JXSE3R';
+                    
+                    // 3. Load the Google Tag Manager script asynchronously
+                    var script = document.createElement('script');
+                    script.async = true;
+                    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+                    document.head.appendChild(script);
+
+                    // 4. Configure GA (Processing the queue)
+                    gtag('js', new Date());
+                    gtag('config', gaId);                    
+                } else {
+                    console.log('Google Analytics suppressed (' + config.environment + ').');
+                }
+            })
+            .catch(function(error) {
+                console.warn('Could not load env.json, GA suppressed.', error);
+            });
+    </script>
 </head>
 <body>
 
@@ -909,6 +941,38 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- ANALYTICS SETUP ---
+            let mapContext = {};
+            try {
+                const storedTract = localStorage.getItem('md_business_compass_last_tract');
+                if (storedTract) {
+                    const parsed = JSON.parse(storedTract);
+                    // Store context for all subsequent events
+                    mapContext = {
+                        user_tract_geoid: parsed.geoid,
+                        user_tract_name: parsed.tract_name,
+                        user_county: parsed.county_name
+                    };
+                    
+                    // Track that the user arrived with map context
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'map_referral_session', {
+                            ...mapContext,
+                            referral_timestamp: parsed.timestamp
+                        });
+                    }
+                }
+            } catch (e) {
+                console.warn('Error reading map context', e);
+            }
+
+            const trackEvent = (eventName, params = {}) => {
+                if (typeof gtag === 'function') {
+                    // Merge map context with specific event parameters
+                    gtag('event', eventName, { ...mapContext, ...params });
+                }
+            };
+            // -----------------------
             let detailScrollObserver = null;
             let isUserClickScrolling = false;
             let scrollTimeout = null;
@@ -1242,6 +1306,13 @@
             });
             
             function renderDetailView(item) {
+                // GA4: Track Detail View
+                trackEvent('view_incentive', {
+                    program_name: item.structured_extraction.program_name,
+                    agency: item.structured_extraction.agency,
+                    slug: item.slug
+                });
+
                 const data = item.structured_extraction;
 
                 document.getElementById('detail-title').textContent = data.program_name;
@@ -1425,10 +1496,17 @@
             function handleFilterChange(e) {
                 if (e.target.matches('input[type="checkbox"]')) {
                     const { filterKey } = e.target.dataset;
+                    const val = e.target.value;
+                    
                     if (e.target.checked) {
-                        activeFilters[filterKey].add(e.target.value);
+                        activeFilters[filterKey].add(val);
+                        // GA4: Track Filter Application
+                        trackEvent('filter_add', {
+                            filter_category: filterKey,
+                            filter_value: val
+                        });
                     } else {
-                        activeFilters[filterKey].delete(e.target.value);
+                        activeFilters[filterKey].delete(val);
                     }
                     // Update the badge for this category immediately and re-apply filters
                     updateFilterCount(filterKey);
@@ -1465,6 +1543,13 @@
 
             function downloadCSV() {
                 if (displayedIncentives.length === 0) { alert("No results to download."); return; }
+                
+                // GA4: Track Download
+                trackEvent('download_csv', {
+                    result_count: displayedIncentives.length,
+                    active_filters: Object.keys(activeFilters).filter(k => activeFilters[k].size > 0).join(',')
+                });
+
                 const headers = ["Program Name", "Agency", "URL", "Eligible Counties", "Assistance Type", "Eligible Organization Types", "Eligible Industries", "Application Deadline", "Summary"];
                 const rows = displayedIncentives.map(item => { const d = item.structured_extraction; return [d.program_name, d.agency, d.URL, d.list_of_eligible_counties?.join('; '), d.assistance_type?.join('; '), d.eligible_organization_types?.join('; '), d.list_of_eligible_industries?.join('; '), d.application_deadline_string, item.summary || d.program_description]; });
                 const escapeCSV = (s) => (s === null || s === undefined) ? '' : `"${String(s).replace(/"/g, '""')}"`;
@@ -1519,6 +1604,22 @@
             activeFiltersContainer.addEventListener('click', handleActiveFilterClick);
             downloadBtn.addEventListener('click', downloadCSV);
             
+            // GA4: Event Delegation for Dynamic Detail Buttons
+            const detailBtnContainer = document.getElementById('detail-button-container');
+            detailBtnContainer.addEventListener('click', (e) => {
+                const link = e.target.closest('a');
+                if (!link) return;
+
+                const url = link.href;
+                const isContact = url.startsWith('mailto:') || url.startsWith('tel:');
+                const programName = document.getElementById('detail-title').innerText;
+
+                trackEvent('click_incentive_action', {
+                    program_name: programName,
+                    action_type: isContact ? 'contact_agency' : 'learn_more_apply',
+                    destination_url: url
+                });
+            });
             initializeApp();
         });
     </script>

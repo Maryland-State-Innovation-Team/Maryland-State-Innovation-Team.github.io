@@ -663,6 +663,38 @@
             box-shadow: none !important;
         }
     </style>
+    <script>
+        // 1. Initialize dataLayer and gtag immediately (Safe Shim)
+        // This ensures window.gtag exists for other scripts, preventing ReferenceErrors
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+
+        // 2. Fetch environment config
+        fetch('../env.json')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(config) {
+                if (config.environment === 'production') {
+                    var gaId = 'G-W4R4JXSE3R';
+                    
+                    // 3. Load the Google Tag Manager script asynchronously
+                    var script = document.createElement('script');
+                    script.async = true;
+                    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+                    document.head.appendChild(script);
+
+                    // 4. Configure GA (Processing the queue)
+                    gtag('js', new Date());
+                    gtag('config', gaId);                    
+                } else {
+                    console.log('Google Analytics suppressed (' + config.environment + ').');
+                }
+            })
+            .catch(function(error) {
+                console.warn('Could not load env.json, GA suppressed.', error);
+            });
+    </script>
 </head>
 <body>
 
@@ -1029,6 +1061,15 @@
                 hasSearched: false
             };
 
+            // --- ANALYTICS HELPER ---
+            function trackEvent(eventName, params = {}) {
+                if (typeof window.gtag === 'function') {
+                    window.gtag('event', eventName, params);
+                } else {
+                    console.warn('GA4 not initialized, skipping event:', eventName, params);
+                }
+            }
+
             // --- Elements (grouped by view) ---
             const views = {
                 initial: document.getElementById('view-initial'),
@@ -1299,6 +1340,14 @@
                     return true;
                 });
 
+                // GA4: Track Search Criteria and Result Count
+                trackEvent('resource_search', {
+                    industry: state.industry || 'all',
+                    location: state.location || 'all',
+                    topics: Array.from(state.topics).join(','),
+                    result_count: filtered.length
+                });
+
                 renderResources(filtered);
                 statusEl.textContent = `Found ${filtered.length} relevant resources`;
             }
@@ -1457,6 +1506,29 @@
 
             // Results View Events
             setupTriggerEvents('results');
+            // GA4: Event Delegation for Resource Links (CTR)
+            const listContainer = document.getElementById('resource-list');
+            listContainer.addEventListener('click', (e) => {
+                const link = e.target.closest('a');
+                // Only track if a link was clicked and it is NOT an internal anchor
+                if (!link || link.getAttribute('href').startsWith('#')) return;
+
+                // Find the parent article to identify the organization
+                const article = link.closest('.resource-item');
+                const orgName = article ? article.querySelector('h3').innerText : 'Unknown Organization';
+                const href = link.href;
+
+                // Determine interaction type
+                let type = 'website';
+                if (href.startsWith('mailto:')) type = 'email';
+                else if (href.startsWith('tel:')) type = 'phone';
+
+                trackEvent('resource_interaction', {
+                    organization_name: orgName,
+                    interaction_type: type,
+                    destination_link: href
+                });
+            });
             document.getElementById('search-results').addEventListener('click', () => performSearch('results'));
             document.getElementById('reset-results').addEventListener('click', resetFilters);
             document.getElementById('reset-results-mobile').addEventListener('click', resetFilters);
