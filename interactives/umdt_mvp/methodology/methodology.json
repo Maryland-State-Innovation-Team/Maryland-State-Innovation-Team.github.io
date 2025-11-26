@@ -28,7 +28,7 @@
   },
   {
     "id": "fresh-food-demand",
-    "title": "Estimated Fresh Food Demand Score",
+    "title": "Estimated Fresh Food Spending Capacity Score",
     "description": "An econometric estimate of a neighborhood's total potential spending power for groceries, assuming ideal access existed.",
     "dataSource": "Census ACS (Income, Household Size, Education) and Consumer Spending Data.",
     "whatItMeans": "This score answers: \"If a high-quality grocer opened here, would the community have the economic capacity to support it?\" It separates economic viability from physical presence.",
@@ -37,7 +37,7 @@
   },
   {
     "id": "fresh-food-supply",
-    "title": "Estimated Fresh Food Supply Score",
+    "title": "Estimated Fresh Food Access Score",
     "description": "A measure of physical access to high-quality grocery stores, adjusted for transportation mobility.",
     "dataSource": "OpenStreetMap (Overpass API), Census ACS (Vehicle Ownership), and AI Quality Grading.",
     "whatItMeans": "We measure \"effective access\" to full-service supermarkets and fresh produce retailers. We filter specifically for high-quality fresh food retailers (excluding convenience stores) and lower access scores in neighborhoods with barriers to transportation.",
@@ -52,6 +52,15 @@
     "whatItMeans": "A high Gap Score indicates a neighborhood that is both physically isolated from food sources and demographicially vulnerable to food insecurity.",
     "techTitle": "Technical Deep Dive: Multi-Factor Interaction",
     "techContent": "<p>This score represents the intersection of high need and low supply. We utilize modeled Food Insecurity prevalence as the \"Need\" coefficient and invert our Gravity-based \"Supply Score\" to represent lack of access. This multiplicative approach ensures priority is given only where both physiological need and physical isolation overlap.</p>"
+  },
+  {
+    "id": "fresh-food-market-opportunity",
+    "title": "Fresh Food Market Opportunity Score",
+    "description": "A differential metric that quantifies the gap between a neighborhood's economic potential to support a grocery store and the actual physical supply currently available.",
+    "dataSource": "Census ACS (Income, Demographics) and Calculated Supply Scores.",
+    "whatItMeans": "This score answers: \"Is this neighborhood under-served relative to its spending power?\" A high score indicates a strong market that is currently leaking retail spending elsewhere due to a lack of local options.",
+    "techTitle": "Technical Deep Dive: Supply/Demand Delta Modeling",
+    "techContent": "<p>We first model the \"Total Potential Market Demand\" by applying an Ordinary Least Squares (OLS) regression to estimate household grocery spending under ideal access conditions (simulating the 95th percentile of supply). We then rank both this Potential Demand and the actual Supply Score on a standardized 0–100 scale.</p><p>The final score is the arithmetic difference between the two: <b>Market Demand Score − Supply Score</b>. This isolates areas where economic capacity significantly exceeds physical infrastructure, filtering out areas that lack supply simply due to low population density or spending power.</p>"
   },
   {
     "id": "incentive-areas",
@@ -82,20 +91,11 @@
   },
   {
     "id": "child-care-unmet-demand",
-    "title": "Unmet Child Care Demand Score",
+    "title": "Unmet Demand for Child Care",
     "description": "The gap between the number of children under 6 with working parents and the available licensed child-care slots.",
     "dataSource": "Census ACS (Population under 6 with Working Parents/Guardians) and Calculated Supply Levels.",
     "whatItMeans": "This measures the absolute deficit of care. A high score means there are significantly more children requiring care than there are licensed seats available to serve them.",
     "techTitle": "Technical Deep Dive: Supply/Demand Delta",
     "techContent": "<p>We calculate a \"Demand Score\" by aggregating demographic data for children in households where all parents are in the labor force. The final Unmet Need score is derived by subtracting the spatially allocated Supply Score from this demographic Demand Score to quantify the absolute deficit.</p>"
-  },
-  {
-    "id": "fresh-food-unmet-demand",
-    "title": "Unmet Fresh Food Demand Score",
-    "description": "A differential metric that quantifies the gap between a neighborhood's economic potential to support a grocery store and the actual physical supply currently available.",
-    "dataSource": "Census ACS (Income, Demographics) and Calculated Supply Scores.",
-    "whatItMeans": "This score answers: \"Is this neighborhood under-served relative to its spending power?\" A high score indicates a strong market that is currently leaking retail spending elsewhere due to a lack of local options.",
-    "techTitle": "Technical Deep Dive: Supply/Demand Delta Modeling",
-    "techContent": "<p>We first model the \"Total Potential Market Demand\" by applying an Ordinary Least Squares (OLS) regression to estimate household grocery spending under ideal access conditions (simulating the 95th percentile of supply). We then rank both this Potential Demand and the actual Supply Score on a standardized 0–100 scale.</p><p>The final Unmet Demand score is the arithmetic difference between the two: <b>Market Demand Score − Supply Score</b>. This isolates areas where economic capacity significantly exceeds physical infrastructure, filtering out areas that lack supply simply due to low population density or spending power.</p>"
   }
 ]
