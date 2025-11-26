@@ -252,7 +252,7 @@
             }
             .hero-left {
                 flex: 1;
-                padding: 4rem 2rem 8rem 2rem; /* Extra bottom padding for overlap */
+                padding: 4rem 3rem 8rem 3rem; /* Extra bottom padding for overlap */
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -271,12 +271,7 @@
         }
         
         @media (min-width: 1024px) {
-            .search-card-container {
-                /* Center the card horizontally */
-                max-width: 600px;
-                margin-left: auto;
-                margin-right: auto;
-                
+            .search-card-container {                
                 /* Optional: Pull it down slightly to overlap bottom edge if desired, 
                    otherwise just keep it centered in the red area. */
                 margin-bottom: -6rem; 
@@ -324,7 +319,7 @@
             width: 100%;
             height: 3rem;
             border: 1px solid #565c65;
-            border-radius: 0.25rem;
+            border-radius: 0;
             padding: 0.5rem;
             font-size: 1rem;
             color: #1b1b1b;
@@ -345,7 +340,7 @@
             width: 100%;
             height: 3rem;
             border: 1px solid #565c65;
-            border-radius: 0.25rem;
+            border-radius: 0;
             padding: 0.5rem;
             text-align: left;
             background: white;
@@ -358,9 +353,12 @@
             content: '';
             width: 1rem;
             height: 1rem;
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3csvg%20xmlns%3d%27http%3a%2f%2fwww.w3.org%2f2000%2fsvg%27%20width%3d%2724%27%20height%3d%2724%27%20viewBox%3d%270%200%2024%2024%27%20fill%3d%27none%27%20stroke%3d%27%23333%27%20stroke-width%3d%272%27%20stroke-linecap%3d%27round%27%20stroke-linejoin%3d%27round%27%3e%3cpolyline%20points%3d%276%209%2012%2015%2018%209%27%2f%3e%3c%2fsvg%3e");
+            /* Updated SVG: Color #2C2C2C, Size increased */
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3csvg%20xmlns%3d%27http%3a%2f%2fwww.w3.org%2f2000%2fsvg%27%20width%3d%2724%27%20height%3d%2724%27%20viewBox%3d%270%200%2024%2024%27%20fill%3d%27none%27%20stroke%3d%27%232C2C2C%27%20stroke-width%3d%271.5%27%20stroke-linecap%3d%27round%27%20stroke-linejoin%3d%27round%27%3e%3cpolyline%20points%3d%276%209%2012%2015%2018%209%27%2f%3e%3c%2fsvg%3e");
             background-repeat: no-repeat;
             background-position: center;
+            background-size: 1rem;
+            margin-right: 0.15rem;
         }
         .multiselect-options {
             position: absolute;
@@ -591,7 +589,7 @@
         }
         @media (min-width: 1024px) {
             #view-results .compact-search-container {
-                padding-bottom: 2.5rem;
+                padding: 1.5rem 2rem 2rem 2rem;
             }
         }
 
@@ -607,7 +605,7 @@
         /* Container for the single-row form */
         .compact-search-container {
             background: white;
-            border-radius: 4px;
+            border-radius: 0.5rem;
             padding: 0.75rem;
         }
 
@@ -661,6 +659,21 @@
         h2[tabindex="-1"]:focus {
             outline: none !important; /* Override MDWDS default focus ring */
             box-shadow: none !important;
+        }
+        /* compact view padding */
+        .compact-search-grid-container{
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        @media (min-width: 1024px){
+            .compact-search-grid-container{
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+                padding-left: 0;
+                padding-right: 0;
+            }
         }
     </style>
     <script>
@@ -780,7 +793,7 @@
                                 <h1 class="font-serif-2xl tablet:font-serif-3xl text-white margin-top-0 margin-bottom-2">
                                     Get Support from Experts
                                 </h1>
-                                <p class="font-sans-lg text-white margin-bottom-4" style="max-width: 600px;">
+                                <p class="font-sans-lg text-white margin-bottom-4" style="line-height: 1.3">
                                     Find people, organizations, and information that can help drive your business forward
                                 </p>
                             </div>
@@ -828,8 +841,8 @@
                                         
                                         <div class="card-footer-row">
                                             <button type="button" id="reset-initial" class="usa-button usa-button--unstyled text-bold text-primary">Reset</button>
-                                            <button type="submit" id="search-initial" class="usa-button display-flex flex-align-center">
-                                                <svg class="margin-right-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" height="18px" width="18px"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                                            <button style="padding-left:15px" type="submit" id="search-initial" class="usa-button display-flex flex-align-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" height="18px" width="18px"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
                                                 Search
                                             </button>
                                         </div>
@@ -847,7 +860,7 @@
 
             <div id="view-results" class="view-hidden">
                 <div class="results-header-bg margin-bottom-4">
-                    <div class="grid-container">
+                    <div class="grid-container compact-search-grid-container">
                         <div class="compact-search-container">
                             <form id="form-results" onsubmit="event.preventDefault();">
                                 <div class="compact-search-row">
@@ -887,12 +900,12 @@
                                     </div>
                                     
                                     <div class="form-actions">
-                                        <button type="button" id="reset-results" class="usa-button usa-button--unstyled text-bold text-primary display-none tablet:display-inline-block margin-right-2">Reset</button>
-                                        <button type="submit" id="search-results" class="usa-button display-flex flex-align-center margin-right-0">
-                                             <svg class="margin-right-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" height="18px" width="18px"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                                        <button type="button" id="reset-results-mobile" class="usa-button usa-button--unstyled text-bold text-primary tablet:display-none margin-top-1">Reset</button>
+                                        <button type="button" id="reset-results" class="usa-button usa-button--unstyled text-bold text-primary display-none tablet:display-inline-block margin-x-2">Reset</button>
+                                        <button style="padding-left: 15px;" type="submit" id="search-results" class="usa-button display-flex flex-align-center margin-right-0">
+                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" height="18px" width="18px"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
                                              Search
                                         </button>
-                                        <button type="button" id="reset-results-mobile" class="usa-button usa-button--unstyled text-bold text-primary tablet:display-none margin-top-1">Reset</button>
                                     </div>
                                 </div>
                             </form>
@@ -900,7 +913,7 @@
                     </div>
                 </div>
 
-                <div class="grid-container margin-bottom-6">
+                <div class="grid-container margin-bottom-6 padding-0">
                     <div class="grid-row">
                         <div class="tablet:grid-col-12">
                             <h2 class="font-serif-xl margin-bottom-3">Relevant Resources</h2>
@@ -1403,7 +1416,7 @@
                         ? `${firstContact.name}, ${firstContact.title}` 
                         : 'the agency directly';
                         
-                    const description = `${item.organization} connects businesses in ${areaStr} with vital resources. Contact ${contactPersonStr}, for assistance.`;
+                    const description = `${item.organization} connects businesses in ${areaStr} with vital resources.`;
 
                     // 4. Construct Contacts Table (Conditional)
                     let contactsTableHtml = '';
@@ -1454,7 +1467,7 @@
                             <div class="resource-sidebar">
                                 <div class="sidebar-section">
                                     <span class="sidebar-label">Help Topics</span>
-                                    <div>${tagsHtml || 'General Support'}</div>
+                                    <div style="padding-top:4px;">${tagsHtml || 'General Support'}</div>
                                 </div>
                                 
                                 ${displayPhone ? `

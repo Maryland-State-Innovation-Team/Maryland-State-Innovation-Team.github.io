@@ -96,7 +96,6 @@
             .usa-nav { order: 3; }
         }
         
-        /* START: New styles for homepage redesign */
         .home-hero {
             background-color: #ffffff; /* Use a white background */
             padding: 4rem 0;
@@ -109,9 +108,7 @@
         }
         .home-hero p {
             display: block; /* Ensures the paragraph is visible */
-            font-size: 1.25rem;
-            font-weight: bold;
-            line-height: 1.6;
+            line-height: 1.3;
             color: #71767a;
             margin-top: 1rem;
             max-width: 60ch; /* Improves readability by limiting line length */
@@ -122,17 +119,12 @@
 
         .hero-image-container {
             position: relative;
-            text-align: center;
+            text-align: right;
         }
         .hero-image {
             max-width: 100%;
             height: auto;
             border-radius: 8px; /* Optional: adds rounded corners to image */
-        }
-        @media (min-width: 1024px) {
-            .hero-image {
-                max-width: 80%;
-            }
         }
 
         .feature-cards-section {
@@ -147,9 +139,15 @@
             flex-direction: column;
         }
 
+        /* Add spacing between the grid columns on mobile */
+        .feature-cards-section .grid-row > div {
+            margin-bottom: 1.5rem;
+        }
+
         .feature-card p {
             flex-grow: 1; /* Pushes the button to the bottom */
             margin-bottom: 2rem;
+            line-height: 1.3;
         }
         
         .feature-card .usa-button {
@@ -199,8 +197,11 @@
             .grid-row.align-items-center {
                 align-items: center;
             }
+            /* Remove the vertical margin on larger screens */
+            .feature-cards-section .grid-row > div {
+                margin-bottom: 0;
+            }
         }
-        /* END: New styles for homepage redesign */
 
     </style>
     <script>
@@ -315,7 +316,7 @@
                     <div class="grid-row grid-gap-lg align-items-center">
                         <div class="tablet:grid-col-6">
                             <h1 class="font-serif-xl tablet:font-serif-2xl desktop:font-serif-3xl margin-top-0 tablet:margin-bottom-0">Provide What Your Community Needs</h1>
-                            <p class="font-serif-md">Discover resources to help you launch child care, fresh food, and other community services</p>
+                            <p class="font-serif-xl">Discover resources to help you launch child care, fresh food, and other community services</p>
                         </div>
                         <div class="tablet:grid-col-6">
                              <div class="hero-image-container">
@@ -331,21 +332,21 @@
                     <div class="tablet:grid-col-4">
                         <div class="feature-card feature-card--opportunity">
                             <h2 class="font-serif-lg">Locate the Opportunity</h2>
-                            <p>Explore business-relevant data for locations across Maryland to help you decide where to build your business.</p>
+                            <p class="font-sans-md">Explore business-relevant data for locations across Maryland to help you decide where to build your business.</p>
                             <a href="./map/" class="usa-button">Explore data</a>
                         </div>
                     </div>
                     <div class="tablet:grid-col-4">
                         <div class="feature-card feature-card--incentives">
                             <h2 class="font-serif-lg">Find Government Funding</h2>
-                            <p>Discover state incentive programs and learn how to apply, all in one place. Explore government grants, loans, tax-credits, and more all through our centralized database.</p>
+                            <p class="font-sans-md">Discover state incentive programs and learn how to apply, all in one place. Explore government grants, loans, tax-credits, and more all through our centralized database.</p>
                             <a href="./incentives/" class="usa-button">View all incentives</a>
                         </div>
                     </div>
                     <div class="tablet:grid-col-4">
                         <div class="feature-card feature-card--resources">
                             <h2 class="font-serif-lg">Get Support from Experts</h2>
-                            <p>Get connected with people and organizations who can guide you through the process of starting and running a small business.</p>
+                            <p class="font-sans-md">Get connected with people and organizations who can guide you through the process of starting and running a small business.</p>
                              <a href="./resources/" class="usa-button">Get help</a>
                         </div>
                     </div>
