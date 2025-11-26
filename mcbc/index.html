@@ -203,6 +203,38 @@
         /* END: New styles for homepage redesign */
 
     </style>
+    <script>
+        // 1. Initialize dataLayer and gtag immediately (Safe Shim)
+        // This ensures window.gtag exists for other scripts, preventing ReferenceErrors
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+
+        // 2. Fetch environment config
+        fetch('./env.json')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(config) {
+                if (config.environment === 'production') {
+                    var gaId = 'G-W4R4JXSE3R';
+                    
+                    // 3. Load the Google Tag Manager script asynchronously
+                    var script = document.createElement('script');
+                    script.async = true;
+                    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+                    document.head.appendChild(script);
+
+                    // 4. Configure GA (Processing the queue)
+                    gtag('js', new Date());
+                    gtag('config', gaId);                    
+                } else {
+                    console.log('Google Analytics suppressed (' + config.environment + ').');
+                }
+            })
+            .catch(function(error) {
+                console.warn('Could not load env.json, GA suppressed.', error);
+            });
+    </script>
 </head>
 <body>
 
