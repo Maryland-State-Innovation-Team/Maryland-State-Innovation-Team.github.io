@@ -18,6 +18,15 @@
     "techContent": "<p>We utilize a weighted areal interpolation algorithm to map ZIP-level business data to Census tracts based on land area. This is fused with geocoded business license filings. The final index represents a mean of growth across four vectors: Net Business Formations, Job Growth, Payroll Expansion, and License Issuance.</p>"
   },
   {
+    "id": "child-care-demand",
+    "title": "Estimated Child Care Demand",
+    "description": "A demographic estimate of the total number of children under age 6 who likely require non-parental care because all available parents are in the labor force.",
+    "dataSource": "Census ACS (Population under 6 by Family Type and Employment Status).",
+    "whatItMeans": "This score answers: \"How many children in this neighborhood actually need care?\" It filters out families with a stay-at-home parent, focusing exclusively on households where all guardians are working.",
+    "techTitle": "Technical Deep Dive: Labor Force Filtering",
+    "techContent": "<p>We utilize specific Census tables (B23008) to aggregate children under 6 living in families where all parents are in the labor force. This includes single-parent households where the parent works, and two-parent households where both work. This effectively proxies the \"need for care\" rather than just counting the total population of children.</p>"
+  },
+  {
     "id": "child-care-supply",
     "title": "Estimated Child Care Supply",
     "description": "A capacity-aware measure of available child care slots within a mobility-adjusted radius (1–10 miles) of the neighborhood.",
@@ -43,6 +52,24 @@
     "whatItMeans": "We measure \"effective access\" to full-service supermarkets and fresh produce retailers. We filter specifically for high-quality fresh food retailers (excluding convenience stores) and lower access scores in neighborhoods with barriers to transportation.",
     "techTitle": "Technical Deep Dive: AI Classification & Gravity Models",
     "techContent": "<p><b>AI-Driven Quality Filtering:</b> We use a Large Language Model (LLM) to semantically analyze business names and categories, rating them 0–5 on their likelihood of selling fresh proteins and produce. This distinguishes a \"Convenience Store\" (Quality 1: Shelf-stable only) from a \"Green Grocer\" (Quality 5: Primary Source). </p><p>We filter strictly for Quality 5 locations and apply a spatial Gravity Model. The score is derived by summing provider capacity divided by the squared \"Effective Distance,\" which is dynamically penalized based on the neighborhood's vehicle ownership rate.</p>"
+  },
+  {
+    "id": "population-forecast",
+    "title": "Estimated Population Change (2025–2030)",
+    "description": "A projection of future population growth or decline based on high-resolution raster modeling of settlement patterns.",
+    "dataSource": "WorldPop (Global Project Population Data) and Census Tract Boundaries.",
+    "whatItMeans": "This score answers: \"Is this neighborhood growing or shrinking?\" By projecting five years into the future, we identify emerging hot spots of residential density that may justify new infrastructure or retail investment.",
+    "techTitle": "Technical Deep Dive: Areal-Weighted Raster Interpolation",
+    "techContent": "<p>We utilize 100-meter resolution predictive raster data from WorldPop to model future population distributions. We employ an areal-weighted interpolation algorithm to aggregate these pixel-level counts into Census tract polygons for the years 2025 and 2030. The final metric represents the absolute and percentage change between these two time periods.</p>"
+  },
+  {
+    "id": "food-insecurity-rate",
+    "title": "Food Insecurity Rate",
+    "description": "The estimated percentage of adults who reported that the food they bought didn't last and they didn't have money to get more.",
+    "dataSource": "CDC PLACES (Model-based Estimates) and BRFSS.",
+    "whatItMeans": "This metric highlights the prevalence of economic hunger within a community. It identifies neighborhoods where residents struggle to afford adequate nutrition, regardless of physical proximity to grocery stores.",
+    "techTitle": "Technical Deep Dive: Multi-Level Regression",
+    "techContent": "<p>We source tract-level prevalence estimates from the CDC PLACES dataset (measure ID: FOODINSECU). The CDC derives these using a multi-level regression and post-stratification approach applied to Behavioral Risk Factor Surveillance System (BRFSS) and ACS data. This probabilistic model estimates the likelihood of adults reporting that their food \"did not last\" over the past 12 months, providing a localized view of economic food hardship.</p>"
   },
   {
     "id": "fresh-food-gap",
@@ -83,11 +110,11 @@
   {
     "id": "social-investment-need",
     "title": "Social Investment Need Score",
-    "description": "Identifies neighborhoods where critical food access gaps exist, but the local market strength is too weak to attract or sustain private-sector solutions without intervention.",
+    "description": "Identifies neighborhoods where critical food access gaps exist, but the local market strength may not be able to attract or sustain private-sector solutions without intervention.",
     "dataSource": "Calculated Gap Scores and Market Demand Scores.",
     "whatItMeans": "This score answers: \"Where is the market failing to meet basic needs?\" It highlights areas where high food insecurity and low access overlap with low community spending power. These are neighborhoods where a standard grocery store model may not be viable, signaling a need for philanthropic grants, public subsidies, or non-profit operating models.",
     "techTitle": "Technical Deep Dive: Modeling Market Failure",
-    "techContent": "<p>We calculate a \"Market Strength Index\" by normalizing the total estimated grocery spending potential of every neighborhood on a 0–1 scale. We then invert this to derive a \"Market Weakness Multiplier\" (where 1.0 represents the lowest purchasing power).</p><p>The final score is the product of the <b>Fresh Food Gap Score</b> and the <b>Market Weakness Multiplier</b>. This multiplicative approach isolates the intersection of high physiological need and low economic viability, filtering out wealthy areas that lack stores simply by choice while highlighting areas dependent on social investment.</p>"
+    "techContent": "<p>We calculate a \"Market Strength Index\" by normalizing the total estimated grocery spending potential of every neighborhood on a 0–1 scale. We then invert this to derive a \"Market Multiplier\" (where 1.0 represents the lowest purchasing power).</p><p>The final score is the product of the <b>Fresh Food Gap Score</b> and the <b>Market Multiplier</b>. This multiplicative approach isolates the intersection of high physiological need and low economic viability, filtering out wealthy areas that lack stores simply by choice while highlighting areas dependent on social investment.</p>"
   },
   {
     "id": "child-care-unmet-demand",
