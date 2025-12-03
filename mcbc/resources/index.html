@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Support from Experts - Maryland Community Business Compass</title>
+    <title>Connect with Experts - Maryland Community Business Compass</title>
     
     <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
 
@@ -245,14 +245,19 @@
         @media (min-width: 1024px) {
             .hero-right {
                 display: block; /* Restore image on Desktop */
+                /* Force 50% width and stop it from growing/shrinking */
+                flex: 0 0 50%;
+                width: 50%;
             }
             .hero-split-container {
                 flex-direction: row;
                 min-height: 480px;
             }
             .hero-left {
-                flex: 1;
-                padding: 4rem 3rem 8rem 3rem; /* Extra bottom padding for overlap */
+                /* Force 50% width and stop it from growing/shrinking */
+                flex: 0 0 50%;
+                width: 50%;
+                padding: 4rem 3rem 4rem 6rem; 
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -681,6 +686,17 @@
             text-decoration: underline;
             word-break: break-word;
         }
+
+        #results-container {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+        @media (min-width: 1400px){
+            #results-container {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
     </style>
     <script>
         // 1. Initialize dataLayer and gtag immediately (Safe Shim)
@@ -721,8 +737,8 @@
         <section class="usa-banner" aria-label="Official website of the State of Maryland">
             <div class="usa-accordion">
                 <header class="usa-banner__header padding-x-2">
-                    <div class="usa-banner__inner padding-0">
-                        <div class="grid-col-auto">
+                    <div class="usa-banner__inner padding-0 display-flex flex-align-center">
+                        <div class="grid-col-auto display-flex flex-align-center">
                             <img class="usa-banner__header-flag" aria-hidden="true" src="data:image/svg+xml,%3csvg%20width='18'%20height='13'%20viewBox='0%200%2018%2013'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20x='7'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='5'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='1'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='7'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='3'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='3'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='5'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='11'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2011%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='13'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2013%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='17'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2017%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='11'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2011%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='15'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2015%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='15'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2015%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='13'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2013%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='17'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2017%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='6.5'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='9.25'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='6.5'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='1'%20y='9.25'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2017%206.5)'%20fill='white'/%3e%3crect%20x='13'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2013%203.75)'%20fill='white'/%3e%3crect%20x='13'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2013%206.5)'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2017%203.75)'%20fill='%23B50909'/%3e%3crect%20x='0.75'%20y='0.75'%20width='16.5'%20height='11.5'%20stroke='black'%20stroke-width='0.5'/%3e%3c/svg%3e">
                         </div>
                         <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
@@ -781,7 +797,7 @@
                             <a href="../incentives/" class="usa-nav__link"><span>Find Government Funding</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
-                            <a href="./" class="usa-nav__link usa-current" aria-current="page"><span>Get Support from Experts</span></a>
+                            <a href="./" class="usa-nav__link usa-current" aria-current="page"><span>Connect with Experts</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -797,7 +813,7 @@
                             
                             <div class="grid-container padding-x-0 width-full">
                                 <h1 class="font-serif-2xl tablet:font-serif-3xl text-white margin-top-0 margin-bottom-2">
-                                    Get Support from Experts
+                                    Connect with Experts
                                 </h1>
                                 <p class="font-sans-lg text-white margin-bottom-4" style="line-height: 1.3">
                                     Find people, organizations, and information that can help drive your business forward
@@ -865,7 +881,7 @@
             </div>
 
             <div id="view-results" class="view-hidden">
-                <div class="results-header-bg margin-bottom-4">
+                <div class="results-header-bg margin-bottom-0 desktop:margin-bottom-4">
                     <div class="grid-container compact-search-grid-container">
                         <div class="compact-search-container">
                             <form id="form-results" onsubmit="event.preventDefault();">
@@ -921,7 +937,7 @@
 
                 <div class="grid-container margin-bottom-6 padding-0">
                     <div class="grid-row">
-                        <div class="tablet:grid-col-12">
+                        <div class="tablet:grid-col-12" id="results-container">
                             <h2 class="font-serif-xl margin-bottom-3">Relevant Resources</h2>
                             <div id="results-status" class="font-sans-sm margin-bottom-2 text-base"></div>
                             <div id="resource-list" class="resource-list">

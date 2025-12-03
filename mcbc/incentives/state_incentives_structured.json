@@ -1470,6 +1470,80 @@
     }
   },
   {
+    "program_name": "Nourish MD Grant Program",
+    "agency": "Maryland Department of Housing and Community Development (DHCD)",
+    "summary": "Nourish MD is a strategic investment by the Maryland Department of Housing and Community Development (DHCD) that offers grants and loans to develop, stabilize, and expand healthy food retail outlets in under-resourced Maryland communities.",
+    "application_due": "Not Specified",
+    "more_details_url": "https://dhcd.maryland.gov/Business/Pages/NBW.aspx",
+    "contact_name": null,
+    "contact_email": null,
+    "contact_phone": null,
+    "eligibility": "For-Profit, Non-Profit",
+    "assistance_financial": "Grant, Direct Loan",
+    "assistance_nonfinancial": "",
+    "structured_extraction": {
+      "featured": true,
+      "featured_img": "../assets/nourish_square.png",
+      "featured_description": "Grants of up to $150,000 to support capital-related needs for grocery stores and markets in areas with limited healthy food access.",
+      "program_name": "Nourish MD Grant Program",
+      "program_description": "Nourish MD is a pilot program designed to address the lack of healthy food options in low- to moderate-income communities. It supports the development, stabilization, and expansion of grocery stores and markets. Grant funding is disbursed in two tranches: 50% upfront and 50% upon documentation review.",
+      "agency": "Maryland Department of Housing and Community Development (DHCD)",
+      "list_of_eligible_counties": [
+        "All"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [
+        "Sustainable Communities"
+      ],
+      "eligible_organization_types": [
+        "for-profit",
+        "non-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Grocery Stores and Fresh Food Retailers",
+        "Agriculture, Forestry, Fishing and Hunting",
+        "Retail Trade"
+      ],
+      "list_of_prioritized_industries": [
+        "Grocery Stores and Fresh Food Retailers"
+      ],
+      "assistance_type": [
+        "grant",
+        "loan"
+      ],
+      "assistance_description": "Eligible projects may receive grants ranging from $25,000 to $150,000. Up to $1 million total is available for the pilot. Applicants may also request supplemental loan funding through DHCD’s Neighborhood Business Works (NBW) division.",
+      "URL": "https://dhcd.maryland.gov/Business/Pages/NBW.aspx",
+      "application_deadline_string": "Not Specified",
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": null,
+      "program_audience": "New and existing food-related entities including grocery stores, on-farm markets, farmers markets, food co-ops, and small retail stores.",
+      "use_of_funds": "Funds must be used for capital-related needs including furniture/fixtures/equipment, renovation/build-out, facility upgrades, inventory expansion (non-prepared foods), and SNAP/EBT infrastructure.",
+      "geographic_eligibility": "Businesses must be located in a Sustainable Community in Maryland.",
+      "requirements_list": [
+        "Must be located in a Sustainable Community.",
+        "Must be a for-profit or nonprofit entity engaged in retail activity.",
+        "Must operate year-round, at least 5 days a week.",
+        "Must contribute at least 10% of the total project cost through private funding or equity.",
+        "Must have a minimum of two (2) W-2 employees.",
+        "Maximum of 500 employees and two existing retail locations in Maryland.",
+        "At least 50% of retail inventory or floor space must be dedicated to healthy food items.",
+        "Businesses primarily selling prepared foods (restaurants, cafés) are not eligible.",
+        "Must be registered and in good standing with SDAT and in good financial/legal standing.",
+        "Requests over $100,000 require a credit check."
+      ],
+      "application_process_overview": "Grant funds are provided in two tranches (50% upfront, 50% later). Applicants must provide documentation, photos, or a store layout to confirm healthy food compliance. Loan requests undergo a financial review to assess debt management capacity.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
     "program_name": "Child Care Capital Support Revolving Loan Fund",
     "agency": "Maryland Department of Commerce",
     "summary": "The Child Care Capital Support Revolving Loan Fund is a financing resource to provide no-interest loans for capital expenses to child care providers who participate in the State Department of Education's Child Care Scholarship Program.",
@@ -1482,6 +1556,9 @@
     "assistance_financial": "Direct Loan, Loan",
     "assistance_nonfinancial": "",
     "structured_extraction": {
+      "featured": true,
+      "featured_img": "../assets/cc_square.png",
+      "featured_description": "No-interest loans for capital expenses to child care providers who participate in the Child Care Scholarship Program.",
       "program_name": "Child Care Capital Support Revolving Loan Fund",
       "program_description": "The Maryland Department of Commerce provides no-interest loans to child care providers. These loans help providers pay for capital expenses. To be eligible, providers must participate in the State Department of Education's Child Care Scholarship Program.",
       "agency": "Maryland Department of Commerce",

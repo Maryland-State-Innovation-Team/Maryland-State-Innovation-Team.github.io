@@ -471,7 +471,7 @@
 
         /* Scrollable Table Container */
         .table-scroll-container {
-            max-height: 70vh; 
+            max-height: 85vh; 
             overflow-y: auto;
             border: 1px solid #dfe1e2; 
             position: relative;
@@ -484,7 +484,11 @@
             top: 0;
             background-color: #ffffff; 
             z-index: 10;
-            border: .5px solid #1b1b1b;
+            /* Redefine borders to create a single 1px grid */
+            border: 0 solid #1b1b1b;
+            border-top-width: 1px;
+            border-bottom-width: 1px;
+            border-right-width: 1px;
         }
 
         /* Remove default top margin from table so it sits flush against the sticky header */
@@ -493,6 +497,8 @@
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
+            /* Add a Left border to the table to close the grid on the left side */
+            border-left: 1px solid #1b1b1b; 
         }
         /* Parent wrapper: keeps the input locked to this specific list item */
         .usa-checkbox {
@@ -555,6 +561,222 @@
         .usa-prose>ul li, .usa-prose>ol li {
             padding-left: 0px;
         }
+
+        .usa-table th, .usa-table td {
+            /* Apply borders only to the Bottom and Right to prevent double-thickness */
+            border: 0 solid #1b1b1b;
+            border-bottom-width: 1px;
+            border-right-width: 1px;
+        }
+
+        /* Mobile Filter Toggle Styles */
+        .mobile-filter-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Default Mobile State: Filters are hidden unless the wrapper has the 'active' class (handled by JS) or we use the [hidden] attribute */
+        #filters-wrapper[hidden] {
+            display: none;
+        }
+
+        /* Desktop Overrides (min-width: 1024px to match your existing 'tablet-lg' breakpoint) */
+        @media (min-width: 1024px) {
+            /* Hide the toggle button on large screens */
+            .mobile-filter-toggle {
+                display: none;
+            }
+
+            /* Force the wrapper to always be visible on large screens, overriding the [hidden] attribute */
+            #filters-wrapper[hidden] {
+                display: block !important;
+            }
+            
+            /* Ensure the sticky sidebar behavior works */
+            #filters-wrapper {
+                display: block;
+                position: sticky;
+                top: 1.5rem;
+            }
+        }
+
+        /* --- Mobile Filter Drawer Styles --- */
+
+        /* Styles for the drawer elements (Hidden by default on Desktop) */
+        .mobile-filter-header,
+        .mobile-filter-footer {
+            display: none;
+        }
+
+        /* Mobile/Tablet Drawer Logic (Max-width 1023.98px matches your existing breakpoint) */
+        @media (max-width: 1023.98px) {
+            /* The Wrapper becomes a fixed modal/drawer */
+            #filters-wrapper {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%; /* Full viewport height */
+                z-index: 9999;
+                background-color: #ffffff;
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* When hidden, actually hide it (The [hidden] attribute does this, but we ensure display behavior matches) */
+            #filters-wrapper[hidden] {
+                display: none;
+            }
+
+            /* Show Header and Footer on Mobile */
+            .mobile-filter-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1rem;
+                border-bottom: 1px solid #dfe1e2;
+                background: #f0f0f0;
+                flex: 0 0 auto; /* Don't shrink */
+            }
+
+            .mobile-filter-footer {
+                display: block;
+                padding: 1rem;
+                border-top: 1px solid #dfe1e2;
+                background: #ffffff;
+                flex: 0 0 auto; /* Don't shrink */
+            }
+
+            /* The accordion container needs to grow to fill the middle space and scroll independently */
+            .scrollable-filters {
+                flex: 1 1 auto;
+                overflow-y: auto;
+                max-height: none; /* Reset the desktop max-height */
+                padding: 1rem;
+            }
+        }
+        
+        /* --- Shared Hero Styling --- */
+        .hero-header-bg {
+            background-image: url('../assets/bg.svg');
+            background-color: #19355d; 
+            background-blend-mode: normal;
+            background-size: cover;
+            background-position: center center;
+            padding: 3rem 0 4rem 0; /* More padding at bottom for breathing room */
+            color: white;
+        }
+
+
+        /* --- Featured Incentive Cards --- */
+        .featured-card {
+            background-color: white;
+            color: #1b1b1b;
+            display: flex;
+            flex-direction: row; /* Always use row layout (Image Left) */
+            align-items: stretch;
+            border-radius: 0; 
+            overflow: hidden;
+            height: 100%;
+            box-shadow: none;
+            transition: transform 0.2s ease;
+            text-decoration: none;
+            border-left: 0.5rem solid #00bde3; 
+        }
+
+        .featured-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            text-decoration: none;
+        }
+
+        .featured-card-image {
+            width: 30%; /* Fixed width on all screens */
+            min-width: 120px; /* Ensure image doesn't get too small on mobile */
+            height: auto; 
+            min-height: 140px; 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #f0f0f0;
+            flex-shrink: 0; /* Prevent image from shrinking */
+        }
+
+        .featured-card-content {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            width: 70%; /* Occupy remaining space */
+            justify-content: center;
+        }
+
+        .featured-eyebrow {
+            color: #00bde3;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem; /* Tighter spacing */
+            display: block;
+        }
+
+        .featured-title {
+            font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+            font-size: 1.15rem; /* Slightly smaller for compactness */
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            color: #1b1b1b;
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: text-decoration-color 0.2s;
+        }
+
+        .featured-card:hover .featured-title {
+            text-decoration-color: #005ea2;
+        }
+
+        .featured-description {
+            font-size: 0.95rem; /* Slightly smaller text */
+            line-height: 1.4;
+            color: #565c65;
+            display: -webkit-box;
+            line-clamp: 2;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* 1. Float the Download CSV button to the right in its container */
+        #results-container #download-csv-btn {
+            margin-left: auto;
+            order: 2; /* keep it after the results count in flex order */
+            padding-left: 1rem;
+            padding-right: 1rem;
+            width: auto;
+            display: flex;       /* Enables flexbox for icon alignment */
+            align-items: center; /* Vertically centers the text and icon */
+        }
+
+        /* Hide the text "Download" on screens smaller than 640px (mobile) */
+        @media (max-width: 639.98px) {
+            #results-container #download-csv-btn .download-text {
+                display: none;
+            }
+            
+            /* Remove the margin from the icon since it's now alone */
+            #results-container #download-csv-btn .usa-icon {
+                margin-left: 0;
+            }
+
+            /* Optional: Adjust padding to make the square button look better */
+            #results-container #download-csv-btn {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+        }
     </style>
     <script>
         // 1. Initialize dataLayer and gtag immediately (Safe Shim)
@@ -595,8 +817,8 @@
         <section class="usa-banner" aria-label="Official website of the State of Maryland">
             <div class="usa-accordion">
                 <header class="usa-banner__header padding-x-2">
-                    <div class="usa-banner__inner padding-0">
-                        <div class="grid-col-auto">
+                    <div class="usa-banner__inner padding-0 display-flex flex-align-center">
+                        <div class="grid-col-auto display-flex flex-align-center">
                             <img class="usa-banner__header-flag" aria-hidden="true" src="data:image/svg+xml,%3csvg%20width='18'%20height='13'%20viewBox='0%200%2018%2013'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20x='7'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='5'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='1'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='7'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='3'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='3'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='5'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='11'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2011%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='13'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2013%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='17'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2017%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='11'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2011%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='15'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2015%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='15'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2015%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='13'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2013%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='17'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2017%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='6.5'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='9.25'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='6.5'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='1'%20y='9.25'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2017%206.5)'%20fill='white'/%3e%3crect%20x='13'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2013%203.75)'%20fill='white'/%3e%3crect%20x='13'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2013%206.5)'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2017%203.75)'%20fill='%23B50909'/%3e%3crect%20x='0.75'%20y='0.75'%20width='16.5'%20height='11.5'%20stroke='black'%20stroke-width='0.5'/%3e%3c/svg%3e">
                         </div>
                         <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
@@ -655,7 +877,7 @@
                             <a href="../incentives/" class="usa-nav__link usa-current" aria-current="page"><span>Find Government Funding</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
-                            <a href="../resources/" class="usa-nav__link"><span>Get Support from Experts</span></a>
+                            <a href="../resources/" class="usa-nav__link"><span>Connect with Experts</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -664,14 +886,23 @@
 
         <main id="main-content">
             <div id="incentive-list-view" style="display: none;" role="region" aria-label="Incentive Search View" aria-hidden="true">
-                <section class="grid-container usa-section">
-                    <div class="grid-row grid-gap">
-                        <div class="tablet:grid-col-12">
-                            <h1 id="list-view-title" class="font-serif-xl tablet:font-serif-2xl desktop:font-serif-3xl margin-top-0 tablet:margin-bottom-0 focus-outline-none" tabindex="-1">Find Government Funding For Your Business</h1>
+                
+                <div class="hero-header-bg">
+                    <div class="grid-container">
+                        <div class="grid-row grid-gap">
+                            <div class="tablet:grid-col-12">
+                                <h1 id="list-view-title" class="font-serif-xl tablet:font-serif-2xl desktop:font-serif-3xl margin-top-0 tablet:margin-bottom-0 focus-outline-none text-white" tabindex="-1">Find Government Funding For Your Business</h1>
+                            </div>
                         </div>
+
+                        <div id="featured-incentives-container" class="grid-row grid-gap margin-top-4">
+                            </div>
                     </div>
+                </div>
+
+                <section class="grid-container usa-section padding-top-4">
                     
-                    <div class="grid-row grid-gap-4 margin-top-4">
+                    <div class="grid-row grid-gap-4">
                         <div class="tablet:grid-col-12 search-row">
                             <div class="usa-form-group">
                                 <label class="usa-label usa-sr-only" for="search-input">Search by keyword</label>
@@ -682,26 +913,64 @@
                         </div>
                     </div>
 
-                    <div class="grid-row grid-gap-4 margin-top-2">
-                        <div class="tablet-lg:grid-col-4 desktop:grid-col-3 display-flex flex-align-end">
-                            <h3 class="font-sans-lg text-bold margin-y-0">Filter by</h3>
+                    <div class="grid-row grid-gap-4 margin-top-2 display-none desktop:display-flex">
+                        <div class="desktop:grid-col-3 display-flex flex-align-end">
+                            <h3 class="font-sans-lg text-bold margin-y-0">Filters</h3>
                         </div>
                         
-                        <div class="tablet-lg:grid-col-8 desktop:grid-col-9">
+                        <div class="desktop:grid-col-9">
                             <div id="active-filters-container" class="display-flex flex-wrap flex-align-center" style="gap: 0.5rem; min-height: 38px;"></div>
                         </div>
                     </div>
 
                     <div class="grid-row grid-gap-4 margin-top-2">
-                        <aside id="filters-sidebar" aria-label="Incentive Filters" class="tablet-lg:grid-col-4 desktop:grid-col-3">
-                            <div class="sticky-sidebar">
+                        <aside id="filters-sidebar" aria-label="Incentive Filters" class="desktop:grid-col-3">
+                            <button type="button" 
+                                    class="usa-button width-full margin-bottom-2 mobile-filter-toggle"
+                                    aria-expanded="false" 
+                                    aria-controls="filters-wrapper">
+                                Filters
+                                <svg class="usa-icon margin-left-1" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor" aria-hidden="true">
+                                    <path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z"/>
+                                </svg>
+                            </button>
+
+                            <div id="mobile-active-filters-container" class="margin-bottom-2 display-block desktop:display-none" style="display: flex; flex-wrap: wrap; gap: 0.5rem;"></div>
+
+                            <div id="filters-wrapper" class="sticky-sidebar" hidden>
+                                <div class="mobile-filter-header">
+                                    <h2 class="font-sans-lg margin-0">Filters</h2>
+                                    
+                                    <div class="display-flex flex-align-center">
+                                        <button id="drawer-clear-filters" class="usa-button usa-button--unstyled text-primary margin-right-2 font-sans-sm" style="text-decoration: underline;">
+                                            Clear filters
+                                        </button>
+
+                                        <button id="close-filters-btn" class="usa-button usa-button--unstyled text-base-darker" aria-label="Close filters">
+                                            <svg class="usa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div id="filters-inner-content"></div>
+
+                                <div class="mobile-filter-footer">
+                                    <button id="view-results-btn" class="usa-button width-full">View Results</button>
+                                </div>
                             </div>
                         </aside>
 
-                        <div class="tablet-lg:grid-col-8 desktop:grid-col-9">
+                        <div class="desktop:grid-col-9">
                             <div id="results-container" class="display-flex flex-justify-between flex-align-center margin-bottom-1">
                                 <p id="results-count" class="font-sans-sm text-base">Loading results...</p>
-                                <button id="download-csv-btn" class="usa-button usa-button--outline">Download list as .CSV</button>
+                                <button id="download-csv-btn" class="usa-button usa-button--outline" aria-label="Download List">
+                                    <span class="download-text">Download</span>
+                                    <svg class="usa-icon margin-left-05" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">
+                                        <path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/>
+                                    </svg>
+                                </button>
                             </div>
 
                             <div tabindex="0" class="table-scroll-container">
@@ -1047,6 +1316,8 @@
                         })
                         .map(item => ({ ...item, slug: slugify(item.structured_extraction.program_name) }));
                     
+                    renderFeaturedIncentives(allIncentives);
+
                     handleRouting();
                 } catch (error) {
                     console.error("Failed to load incentive data:", error);
@@ -1170,7 +1441,9 @@
                         </div>
                     `;
                 }).join('');
-                filtersSidebar.insertAdjacentHTML('beforeend', `<div class="usa-accordion scrollable-filters">${sidebarContent}</div>`);
+                // Render into the inner content div so we don't overwrite the mobile header/footer
+                const container = document.getElementById('filters-inner-content') || document.getElementById('filters-wrapper');
+                container.innerHTML = `<div class="usa-accordion scrollable-filters">${sidebarContent}</div>`;
                 // After rendering, update counts to reflect any initial state
                 updateAllFilterCounts();
             }
@@ -1191,6 +1464,7 @@
                 let tagsHtml = '';
                 let hasFilters = false;
 
+                // 1. Generate the HTML for the tags
                 if (activeFilters.searchTerm) {
                     hasFilters = true;
                     tagsHtml += `
@@ -1205,7 +1479,6 @@
                     if (key !== 'searchTerm' && activeFilters[key].size > 0) {
                         hasFilters = true;
                         activeFilters[key].forEach(value => {
-                            // Added data-filter-key="${key}" to the parent span to allow CSS targeting
                             tagsHtml += `
                                 <span class="md-tag" data-filter-key="${key}">
                                     ${value}
@@ -1216,10 +1489,25 @@
                     }
                 }
 
-                if (hasFilters) {
-                     activeFiltersContainer.innerHTML = tagsHtml + `<button id="clear-all-filters" class="usa-button usa-button--unstyled margin-left-1">Clear all</button>`;
-                } else {
-                    activeFiltersContainer.innerHTML = '';
+                // 2. Define the "Clear All" button HTML
+                const clearAllHtml = `<button id="clear-all-filters" class="usa-button usa-button--unstyled margin-left-1" style="font-size: 0.875rem;">Clear all</button>`;
+
+                // 3. Render to Desktop Container
+                const desktopContainer = document.getElementById('active-filters-container');
+                if (desktopContainer) {
+                    if (hasFilters) {
+                        desktopContainer.innerHTML = tagsHtml + clearAllHtml;
+                    } else {
+                        desktopContainer.innerHTML = '';
+                    }
+                }
+
+                // 4. Render to Mobile Container
+                // Note: We do NOT include the "Clear all" button here, because mobile has "Clear filters" in the drawer header.
+                // However, users might want to remove individual tags without opening the drawer.
+                const mobileContainer = document.getElementById('mobile-active-filters-container');
+                if (mobileContainer) {
+                    mobileContainer.innerHTML = hasFilters ? tagsHtml : '';
                 }
             }
 
@@ -1598,6 +1886,31 @@
 
             filtersSidebar.addEventListener('change', handleFilterChange);
             activeFiltersContainer.addEventListener('click', handleActiveFilterClick);
+            // Bind click event to the new mobile active filters container so 'x' buttons work there too
+            const mobileFiltersContainer = document.getElementById('mobile-active-filters-container');
+            if (mobileFiltersContainer) {
+                mobileFiltersContainer.addEventListener('click', handleActiveFilterClick);
+            }
+
+            // Bind click event to the new "Clear filters" button in the drawer header
+            const drawerClearBtn = document.getElementById('drawer-clear-filters');
+            if (drawerClearBtn) {
+                drawerClearBtn.addEventListener('click', () => {
+                    // Reuse the existing clear-all logic by simulating a click on the main clear-all button
+                    // OR strictly resetting state directly (safer):
+                    
+                    // Clear checkboxes
+                    document.querySelectorAll('#filters-sidebar input[type="checkbox"]').forEach(cb => cb.checked = false);
+                    // Clear state
+                    Object.keys(activeFilters).forEach(key => { if (key !== 'searchTerm') activeFilters[key].clear(); });
+                    // Clear search term
+                    activeFilters.searchTerm = '';
+                    searchInput.value = '';
+                    
+                    updateAllFilterCounts();
+                    applyFilters();
+                });
+            }
             downloadBtn.addEventListener('click', downloadCSV);
             
             // GA4: Event Delegation for Dynamic Detail Buttons
@@ -1616,7 +1929,89 @@
                     destination_url: url
                 });
             });
+
+            function renderFeaturedIncentives(allData) {
+                const container = document.getElementById('featured-incentives-container');
+                if (!container) return;
+
+                const featuredItems = allData.filter(item => 
+                    item.structured_extraction && item.structured_extraction.featured === true
+                );
+
+                if (featuredItems.length === 0) {
+                    container.innerHTML = '';
+                    return;
+                }
+
+                const html = featuredItems.map(item => {
+                    const data = item.structured_extraction;
+                    const imgUrl = data.featured_img || '../assets/mdwds_logo_notext.svg';
+
+                    const description = data.featured_description || item.summary || data.program_description || '';
+
+                    return `
+                        <div class="desktop:grid-col-6 margin-bottom-2 desktop:margin-bottom-0">
+                            <a href="#/incentive/${item.slug}" class="featured-card" aria-label="Featured Opportunity: ${data.program_name}">
+                                <div class="featured-card-image" style="background-image: url('${imgUrl}');" role="img" aria-label=""></div>
+                                <div class="featured-card-content">
+                                    <span class="featured-eyebrow">Featured Funding Opportunity</span>
+                                    <div class="featured-title">${data.program_name}</div>
+                                    <p class="featured-description">${description}</p>
+                                </div>
+                            </a>
+                        </div>
+                    `;
+                }).join('');
+
+                container.innerHTML = html;
+            }
+
             initializeApp();
+
+            // --- Mobile Filter Drawer Logic ---
+            const mobileFilterToggle = document.querySelector('.mobile-filter-toggle');
+            const filtersWrapper = document.getElementById('filters-wrapper');
+            const closeFiltersBtn = document.getElementById('close-filters-btn');
+            const viewResultsBtn = document.getElementById('view-results-btn');
+
+            // Function to open filters
+            function openFilters() {
+                if (filtersWrapper) {
+                    filtersWrapper.removeAttribute('hidden');
+                    mobileFilterToggle.setAttribute('aria-expanded', 'true');
+                    // Prevent background scrolling on body when modal is open
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            // Function to close filters
+            function closeFilters() {
+                if (filtersWrapper) {
+                    filtersWrapper.setAttribute('hidden', '');
+                    mobileFilterToggle.setAttribute('aria-expanded', 'false');
+                    // Restore background scrolling
+                    document.body.style.overflow = '';
+                }
+            }
+
+            if (mobileFilterToggle) {
+                mobileFilterToggle.addEventListener('click', openFilters);
+            }
+
+            if (closeFiltersBtn) {
+                closeFiltersBtn.addEventListener('click', closeFilters);
+            }
+
+            if (viewResultsBtn) {
+                viewResultsBtn.addEventListener('click', closeFilters);
+            }
+
+            // Check screen resize to reset overflow if user switches to desktop while drawer is open
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 1024) {
+                    document.body.style.overflow = '';
+                }
+            });
         });
     </script>
 </body>
