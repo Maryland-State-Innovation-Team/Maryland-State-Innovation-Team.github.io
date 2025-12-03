@@ -87,7 +87,7 @@
     "dataSource": "Census ACS (Income, Demographics) and Calculated Supply Scores.",
     "whatItMeans": "This score answers: \"Is this neighborhood under-served relative to its spending power?\" A high score indicates a strong market that is currently leaking retail spending elsewhere due to a lack of local options.",
     "techTitle": "Technical Deep Dive: Supply/Demand Delta Modeling",
-    "techContent": "<p>We first model the \"Total Potential Market Demand\" by applying an Ordinary Least Squares (OLS) regression to estimate household grocery spending under ideal access conditions (simulating the 95th percentile of supply). We then rank both this Potential Demand and the actual Supply Score on a standardized 0–100 scale.</p><p>The final score is the arithmetic difference between the two: <b>Market Demand Score − Supply Score</b>. This isolates areas where economic capacity significantly exceeds physical infrastructure, filtering out areas that lack supply simply due to low population density or spending power.</p>"
+    "techContent": "<p>We first model the \"Total Potential Market Demand\" by applying an Ordinary Least Squares (OLS) regression to estimate household grocery spending under ideal access conditions (simulating the 95th percentile of supply). We then rank both this Potential Demand and the actual Supply Score on a standardized 0–100 scale.</p><p>The final score is the arithmetic difference between the two: <b>Market Demand Score − Supply Score</b>, rescaled on a 0 to 100 range. This isolates areas where economic capacity significantly exceeds physical infrastructure, filtering out areas that lack supply simply due to low population density or spending power.</p>"
   },
   {
     "id": "incentive-areas",
