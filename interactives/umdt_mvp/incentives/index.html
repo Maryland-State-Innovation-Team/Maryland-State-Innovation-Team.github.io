@@ -935,7 +935,7 @@
                                 </svg>
                             </button>
 
-                            <div id="mobile-active-filters-container" class="margin-bottom-2 display-block desktop:display-none" style="display: flex; flex-wrap: wrap; gap: 0.5rem;"></div>
+                            <div id="mobile-active-filters-container" class="margin-bottom-2 display-flex flex-wrap desktop:display-none" style="gap: 0.5rem;"></div>
 
                             <div id="filters-wrapper" class="sticky-sidebar" hidden>
                                 <div class="mobile-filter-header">
@@ -1286,7 +1286,7 @@
             const searchInput = document.getElementById('search-input');
             const resultsCount = document.getElementById('results-count');
             const tableBody = document.getElementById('results-table-body');
-            const filtersSidebar = document.getElementById('filters-sidebar').querySelector('div');
+            const filtersSidebar = document.getElementById('filters-sidebar');
             const activeFiltersContainer = document.getElementById('active-filters-container');
             const downloadBtn = document.getElementById('download-csv-btn');
             const breadcrumbBackBtn = document.getElementById('breadcrumb-back-to-search');
