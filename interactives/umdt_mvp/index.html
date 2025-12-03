@@ -96,101 +96,180 @@
             .usa-nav { order: 3; }
         }
         
-        .home-hero {
-            background-color: #ffffff; /* Use a white background */
-            padding: 4rem 0;
-            text-align: left; /* Align text left per design */
-        }
-        .home-hero h1 {
-            max-width: none;
-            margin-left: 0;
-            margin-right: 0;
-        }
-        .home-hero p {
-            display: block; /* Ensures the paragraph is visible */
-            line-height: 1.3;
-            color: #71767a;
-            margin-top: 1rem;
-            max-width: 60ch; /* Improves readability by limiting line length */
-        }
-        .home-hero .usa-button-group {
-            display: none; /* Hide original button group */
-        }
-
-        .hero-image-container {
+        /* --- NEW HERO SECTION --- */
+        .hero-section {
             position: relative;
-            text-align: right;
-        }
-        .hero-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px; /* Optional: adds rounded corners to image */
-        }
-
-        .feature-cards-section {
-            padding-top: 0; /* Adjust spacing between hero and cards */
+            background-color: #19355d;
+            background-image: url('assets/bg.svg'); 
+            background-size: cover;
+            background-position: left center;
+            overflow: visible;
         }
 
-        .feature-card {
-            padding: 2rem;
-            border-top: 5px solid;
-            height: 100%;
+        .hero-split-container {
             display: flex;
             flex-direction: column;
         }
 
-        /* Add spacing between the grid columns on mobile */
-        .feature-cards-section .grid-row > div {
-            margin-bottom: 1.5rem;
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Mobile: Add padding to compensate for lack of container */
+            padding: 3rem 1.5rem;
+        }
+        
+        /* Typography overrides for the dark hero background */
+        .hero-left h1, 
+        .hero-left p {
+            color: #ffffff;
+            max-width: 60ch;
+        }
+
+        .hero-right {
+            /* Mobile: Hide decorative image to save space */
+            display: none;
+            flex: 1;
+            position: relative;
+            min-height: 400px;
+        }
+
+        .hero-right img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-right {
+                display: block; /* Restore image on Desktop */
+                flex: 0 0 50%;
+                width: 50%;
+            }
+            .hero-split-container {
+                flex-direction: row;
+                min-height: 480px;
+            }
+            .hero-left {
+                flex: 0 0 50%;
+                width: 50%;
+                padding: 4rem 3rem 4rem 6rem; 
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                position: relative;
+                z-index: 1;
+            }
+        }
+
+        /* --- NEW FEATURE CARDS --- */
+        .feature-cards-section {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            border-top: 8px solid; /* Thick top border per design */
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .feature-card p {
-            flex-grow: 1; /* Pushes the button to the bottom */
-            margin-bottom: 2rem;
-            line-height: 1.3;
+            flex-grow: 1;
+            line-height: 1.4;
+            margin: 0 0 2rem 0;
         }
         
         .feature-card .usa-button {
             width: fit-content;
+            margin-top: auto;
+            border: none;
+            font-weight: 700;
         }
 
-        /* Card 1: See the Opportunity */
+        /* Icon Wrapper Circle */
+        .feature-card__icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+        }
+        
+        /* Shared grid spacing adjustments */
+        .feature-cards-section .grid-row > div {
+            margin-bottom: 1.5rem;
+        }
+        @media (min-width: 640px) {
+            .feature-cards-section .grid-row > div {
+                margin-bottom: 0;
+            }
+        }
+
+        /* --- CARD VARIANTS --- */
+        
+        /* 1. Opportunity (Yellow) */
         .feature-card--opportunity {
-            background-color: #FFF7E6; /* Light peach derived from accent-warm palette */
-            border-color: #e5a000;
+            background-color: #FFF7E1; /* Light yellow */
+            border-color: #E5A000;      /* Dark yellow */
+        }
+        .feature-card--opportunity .feature-card__icon-wrapper {
+            background-color: #E5A000;
+        }
+        .feature-card--opportunity .feature-card__icon-wrapper svg {
+            fill: #1b1b1b; /* Dark icon for contrast on yellow */
         }
         .feature-card--opportunity .usa-button {
-            background-color: #e5a000;
+            background-color: #E5A000;
             color: #1b1b1b;
         }
         .feature-card--opportunity .usa-button:hover {
             background-color: #c48a00;
         }
 
-        /* Card 2: Find Incentives */
+        /* 2. Incentives (Blue) */
         .feature-card--incentives {
-            background-color: #e1f3f8;
-            border-color: #00bde3;
+            background-color: #E1F3F8; /* Light blue */
+            border-color: #07648D;      /* Dark blue */
+        }
+        .feature-card--incentives .feature-card__icon-wrapper {
+            background-color: #07648D;
+        }
+        .feature-card--incentives .feature-card__icon-wrapper svg {
+            fill: #ffffff; /* White icon */
         }
         .feature-card--incentives .usa-button {
-            background-color: #00bde3;
-            color: #1b1b1b;
+            background-color: #07648D;
+            color: #ffffff;
         }
         .feature-card--incentives .usa-button:hover {
-            background-color: #009cb9;
+            background-color: #054a69;
         }
 
-        /* Card 3: Connect to Resources */
+        /* 3. Resources (Red) */
         .feature-card--resources {
-            background-color: #f8dfe2;
-            border-color: #e41d3d;
+            background-color: #F8DFE2; /* Light red */
+            border-color: #822133;      /* Dark red */
+        }
+        .feature-card--resources .feature-card__icon-wrapper {
+            background-color: #822133;
+        }
+        .feature-card--resources .feature-card__icon-wrapper svg {
+            fill: #ffffff; /* White icon */
         }
         .feature-card--resources .usa-button {
-            background-color: #e41d3d;
+            background-color: #822133;
             color: #ffffff;
         }
         .feature-card--resources .usa-button:hover {
-            background-color: #b21d38;
+            background-color: #631926;
         }
 
         @media (min-width: 640px) {
@@ -243,8 +322,8 @@
         <section class="usa-banner" aria-label="Official website of the State of Maryland">
             <div class="usa-accordion">
                 <header class="usa-banner__header padding-x-2">
-                    <div class="usa-banner__inner padding-0">
-                        <div class="grid-col-auto">
+                    <div class="usa-banner__inner padding-0 display-flex flex-align-center">
+                        <div class="grid-col-auto display-flex flex-align-center">
                             <img class="usa-banner__header-flag" aria-hidden="true" src="data:image/svg+xml,%3csvg%20width='18'%20height='13'%20viewBox='0%200%2018%2013'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20x='7'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='5'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='1'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='7'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='3'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='3'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='5'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='11'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2011%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='13'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2013%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='17'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2017%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='11'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2011%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='15'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2015%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='15'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2015%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='13'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2013%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='17'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2017%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='6.5'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='9.25'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='6.5'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='1'%20y='9.25'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2017%206.5)'%20fill='white'/%3e%3crect%20x='13'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2013%203.75)'%20fill='white'/%3e%3crect%20x='13'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2013%206.5)'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2017%203.75)'%20fill='%23B50909'/%3e%3crect%20x='0.75'%20y='0.75'%20width='16.5'%20height='11.5'%20stroke='black'%20stroke-width='0.5'/%3e%3c/svg%3e">
                         </div>
                         <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
@@ -303,7 +382,7 @@
                             <a href="./incentives/" class="usa-nav__link"><span>Find Government Funding</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
-                            <a href="./resources/" class="usa-nav__link"><span>Get Support from Experts</span></a>
+                            <a href="./resources/" class="usa-nav__link"><span>Connect with Experts</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -311,18 +390,14 @@
         </header>
 
         <main id="main-content">
-            <section class="home-hero">
-                <div class="grid-container">
-                    <div class="grid-row grid-gap-lg align-items-center">
-                        <div class="tablet:grid-col-6">
-                            <h1 class="font-serif-xl tablet:font-serif-2xl desktop:font-serif-3xl margin-top-0 tablet:margin-bottom-0">Provide What Your Community Needs</h1>
-                            <p class="font-serif-xl">Discover resources to help you launch child care, fresh food, and other community services</p>
-                        </div>
-                        <div class="tablet:grid-col-6">
-                             <div class="hero-image-container">
-                                <img src="assets/53526971119_9c0fa20a13_k.jpg" alt="Governor Wes Moore, wearing a collared shirt and tie, holds a young child while visiting the Cambridge Child Care Center in Cambridge, Maryland. He is pointing at colorful lettered words on the wall that read 'Live, Laugh, Learn Together' with emoji faces scattered around them. The child, wearing a light brown shirt and patterned pants, looks towards where the governor is pointing. In the foreground, there are baby cribs filled with blankets and pillows." class="hero-image">
-                            </div>
-                        </div>
+            <section class="hero-section">
+                <div class="hero-split-container">
+                    <div class="hero-left">
+                        <h1 class="font-serif-xl tablet:font-serif-2xl desktop:font-serif-3xl margin-top-0 margin-bottom-2">Discover Opportunities in Your Community</h1>
+                        <p class="font-serif-xl margin-top-0">Get the help you need to provide child care, fresh food, and other essential services</p>
+                    </div>
+                    <div class="hero-right">
+                        <img src="assets/53525754812_16be886cd0_k.jpg" alt="Governor Wes Moore kneels to high-five a toddler inside a colorful child care center.">
                     </div>
                 </div>
             </section>
@@ -331,23 +406,34 @@
                 <div class="grid-row grid-gap">
                     <div class="tablet:grid-col-4">
                         <div class="feature-card feature-card--opportunity">
+                            <div class="feature-card__icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px"><path d="M640-560v-126 126ZM174-132q-20 8-37-4.5T120-170v-560q0-13 7.5-23t20.5-15l212-72 240 84 186-72q20-8 37 4.5t17 33.5v337q-15-23-35.5-42T760-528v-204l-120 46v126q-21 0-41 3.5T560-546v-140l-160-56v523l-226 87Zm26-96 120-46v-468l-120 40v474Zm440-12q34 0 56.5-20t23.5-60q1-34-22.5-57T640-400q-34 0-57 23t-23 57q0 34 23 57t57 23Zm0 80q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 43.5T778-238l102 102-56 56-102-102q-18 11-38.5 16.5T640-160ZM320-742v468-468Z"/></svg>
+                            </div>
                             <h2 class="font-serif-lg">Locate the Opportunity</h2>
-                            <p class="font-sans-md">Explore business-relevant data for locations across Maryland to help you decide where to build your business.</p>
-                            <a href="./map/" class="usa-button">Explore data</a>
+                            <p class="font-sans-sm">Explore business-relevant data for locations across Maryland to help you decide where to build your business.</p>
+                            <a href="./map/" class="usa-button">Explore Data</a>
                         </div>
                     </div>
+
                     <div class="tablet:grid-col-4">
                         <div class="feature-card feature-card--incentives">
+                            <div class="feature-card__icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></svg>
+                            </div>
                             <h2 class="font-serif-lg">Find Government Funding</h2>
-                            <p class="font-sans-md">Discover state incentive programs and learn how to apply, all in one place. Explore government grants, loans, tax-credits, and more all through our centralized database.</p>
-                            <a href="./incentives/" class="usa-button">View all incentives</a>
+                            <p class="font-sans-sm">Discover state and local incentive programs and learn how to apply, all in one place. Explore government grants, loans, tax-credits, and more.</p>
+                            <a href="./incentives/" class="usa-button">View Funding</a>
                         </div>
                     </div>
+
                     <div class="tablet:grid-col-4">
                         <div class="feature-card feature-card--resources">
-                            <h2 class="font-serif-lg">Get Support from Experts</h2>
-                            <p class="font-sans-md">Get connected with people and organizations who can guide you through the process of starting and running a small business.</p>
-                             <a href="./resources/" class="usa-button">Get help</a>
+                            <div class="feature-card__icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px"><path d="m480-80-10-120h-10q-142 0-241-99t-99-241q0-142 99-241t241-99q71 0 132.5 26.5t108 73q46.5 46.5 73 108T800-540q0 75-24.5 144t-67 128q-42.5 59-101 107T480-80Zm80-146q71-60 115.5-140.5T720-540q0-109-75.5-184.5T460-800q-109 0-184.5 75.5T200-540q0 109 75.5 184.5T460-280h100v54Zm-101-95q17 0 29-12t12-29q0-17-12-29t-29-12q-17 0-29 12t-12 29q0 17 12 29t29 12Zm-29-127h60q0-30 6-42t38-44q18-18 30-39t12-45q0-51-34.5-76.5T460-720q-44 0-74 24.5T344-636l56 22q5-17 19-33.5t41-16.5q27 0 40.5 15t13.5 33q0 17-10 30.5T480-558q-35 30-42.5 47.5T430-448Zm30-65Z"/></svg>
+                            </div>
+                            <h2 class="font-serif-lg">Connect with Experts</h2>
+                            <p class="font-sans-sm">Get connected with people and organizations who can guide you through the process of starting and running a small business.</p>
+                             <a href="./resources/" class="usa-button">Find Support</a>
                         </div>
                     </div>
                 </div>
