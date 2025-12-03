@@ -713,7 +713,7 @@
         }
 
         .featured-eyebrow {
-            color: #00bde3;
+            color: #07648d;
             font-size: 0.75rem;
             font-weight: 700;
             letter-spacing: 1px;
@@ -915,7 +915,7 @@
 
                     <div class="grid-row grid-gap-4 margin-top-2 display-none desktop:display-flex">
                         <div class="desktop:grid-col-3 display-flex flex-align-end">
-                            <h3 class="font-sans-lg text-bold margin-y-0">Filters</h3>
+                            <h2 class="font-sans-lg text-bold margin-y-0">Filters</h2>
                         </div>
                         
                         <div class="desktop:grid-col-9">
@@ -924,7 +924,7 @@
                     </div>
 
                     <div class="grid-row grid-gap-4 margin-top-2">
-                        <aside id="filters-sidebar" aria-label="Incentive Filters" class="desktop:grid-col-3">
+                        <div id="filters-sidebar" aria-label="Incentive Filters" class="desktop:grid-col-3">
                             <button type="button" 
                                     class="usa-button width-full margin-bottom-2 mobile-filter-toggle"
                                     aria-expanded="false" 
@@ -960,7 +960,7 @@
                                     <button id="view-results-btn" class="usa-button width-full">View Results</button>
                                 </div>
                             </div>
-                        </aside>
+                        </div>
 
                         <div class="desktop:grid-col-9">
                             <div id="results-container" class="display-flex flex-justify-between flex-align-center margin-bottom-1">
@@ -1946,13 +1946,15 @@
                 const html = featuredItems.map(item => {
                     const data = item.structured_extraction;
                     const imgUrl = data.featured_img || '../assets/mdwds_logo_notext.svg';
+                    // Use the alt text from JSON, or fallback to a descriptive default
+                    const imgAlt = data.featured_img_alt || `Image for ${data.program_name}`;
 
                     const description = data.featured_description || item.summary || data.program_description || '';
 
                     return `
                         <div class="desktop:grid-col-6 margin-bottom-2 desktop:margin-bottom-0">
                             <a href="#/incentive/${item.slug}" class="featured-card" aria-label="Featured Opportunity: ${data.program_name}">
-                                <div class="featured-card-image" style="background-image: url('${imgUrl}');" role="img" aria-label=""></div>
+                                <div class="featured-card-image" style="background-image: url('${imgUrl}');" role="img" aria-label="${imgAlt}"></div>
                                 <div class="featured-card-content">
                                     <span class="featured-eyebrow">Featured Funding Opportunity</span>
                                     <div class="featured-title">${data.program_name}</div>
