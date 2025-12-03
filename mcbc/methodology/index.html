@@ -515,7 +515,7 @@
                     document.getElementById('methodology-content-container').innerHTML = 
                         `<div class="usa-alert usa-alert--error">
                             <div class="usa-alert__body">
-                                <h4 class="usa-alert__heading">Error Loading Data</h4>
+                                <h3 class="usa-alert__heading">Error Loading Data</h3>
                                 <p class="usa-alert__text">Unable to load methodology content.</p>
                             </div>
                         </div>`;
@@ -566,11 +566,11 @@
                 if (item.techTitle && item.techContent) {
                     accordionHtml = `
                         <div class="usa-accordion usa-accordion--bordered margin-top-3">
-                            <h4 class="usa-accordion__heading">
+                            <h3 class="usa-accordion__heading">
                                 <button type="button" class="usa-accordion__button" aria-expanded="false" aria-controls="tech-${item.id}">
                                     ${item.techTitle}
                                 </button>
-                            </h4>
+                            </h3>
                             <div id="tech-${item.id}" class="usa-accordion__content usa-prose" hidden>
                                 ${item.techContent}
                             </div>

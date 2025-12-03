@@ -1484,6 +1484,7 @@
     "structured_extraction": {
       "featured": true,
       "featured_img": "../assets/nourish_square.png",
+      "featured_img_alt": "A smiling woman in a denim jacket holds a shopping basket filled with fresh vegetables and berries at a market.",
       "featured_description": "Grants of up to $150,000 to support capital-related needs for grocery stores and markets in areas with limited healthy food access.",
       "program_name": "Nourish MD Grant Program",
       "program_description": "Nourish MD is a pilot program designed to address the lack of healthy food options in low- to moderate-income communities. It supports the development, stabilization, and expansion of grocery stores and markets. Grant funding is disbursed in two tranches: 50% upfront and 50% upon documentation review.",
@@ -1558,6 +1559,7 @@
     "structured_extraction": {
       "featured": true,
       "featured_img": "../assets/cc_square.png",
+      "featured_img_alt": "A smiling woman and three young children sit at a round table in a bright classroom, playing with wooden blocks and colorful shape puzzles together.",
       "featured_description": "No-interest loans for capital expenses to child care providers who participate in the Child Care Scholarship Program.",
       "program_name": "Child Care Capital Support Revolving Loan Fund",
       "program_description": "The Maryland Department of Commerce provides no-interest loans to child care providers. These loans help providers pay for capital expenses. To be eligible, providers must participate in the State Department of Education's Child Care Scholarship Program.",
