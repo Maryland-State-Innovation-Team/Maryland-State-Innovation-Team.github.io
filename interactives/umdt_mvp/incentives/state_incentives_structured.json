@@ -1470,9 +1470,9 @@
     }
   },
   {
-    "program_name": "Nourish MD Grant Program",
+    "program_name": "NourishMD Grant Program",
     "agency": "Maryland Department of Housing and Community Development (DHCD)",
-    "summary": "Nourish MD is a strategic investment by the Maryland Department of Housing and Community Development (DHCD) that offers grants and loans to develop, stabilize, and expand healthy food retail outlets in under-resourced Maryland communities.",
+    "summary": "NourishMD is a strategic investment by the Maryland Department of Housing and Community Development (DHCD) that offers grants and loans to develop, stabilize, and expand healthy food retail outlets in under-resourced Maryland communities.",
     "application_due": "Not Specified",
     "more_details_url": "https://dhcd.maryland.gov/Business/Pages/NBW.aspx",
     "contact_name": null,
@@ -1486,8 +1486,8 @@
       "featured_img": "../assets/nourish_square.png",
       "featured_img_alt": "A smiling woman in a denim jacket holds a shopping basket filled with fresh vegetables and berries at a market.",
       "featured_description": "Grants of up to $150,000 to support capital-related needs for grocery stores and markets in areas with limited healthy food access.",
-      "program_name": "Nourish MD Grant Program",
-      "program_description": "Nourish MD is a pilot program designed to address the lack of healthy food options in low- to moderate-income communities. It supports the development, stabilization, and expansion of grocery stores and markets. Grant funding is disbursed in two tranches: 50% upfront and 50% upon documentation review.",
+      "program_name": "NourishMD Grant Program",
+      "program_description": "NourishMD is a pilot program designed to address the lack of healthy food options in low- to moderate-income communities. It supports the development, stabilization, and expansion of grocery stores and markets. Grant funding is disbursed in two tranches: 50% upfront and 50% upon documentation review.",
       "agency": "Maryland Department of Housing and Community Development (DHCD)",
       "list_of_eligible_counties": [
         "All"
