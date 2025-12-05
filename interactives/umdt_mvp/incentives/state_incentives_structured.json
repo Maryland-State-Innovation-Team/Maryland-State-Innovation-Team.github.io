@@ -1496,7 +1496,7 @@
         "All"
       ],
       "list_of_incentive_areas": [
-        "Sustainable Communities",
+        "NourishMD Eligibility Zone",
         "ENOUGH Act Grantees",
         "Just Communities"
       ],
@@ -1525,9 +1525,9 @@
       "contact_phone": null,
       "program_audience": "Grocery stores, corner stores, farm stands, farmers markets, food co-ops, and delivery retailers.",
       "use_of_funds": "Funds cover furniture, equipment, renovations, initial inventory (excluding prepared foods), working capital for expansion, and SNAP/EBT technology.",
-      "geographic_eligibility": "Projects must be located in a Sustainable Community.",
+      "geographic_eligibility": "Projects must be located in a NourishMD Eligibility Zone (Fresh Food Gap Score of 60+).",
       "requirements_list": [
-        "Must be located in a Sustainable Community.",
+        "Must be located in a NourishMD Eligibility Zone (Fresh Food Gap Score of 60+).",
         "Must be a for-profit or nonprofit retail business.",
         "Must operate year-round, at least five days a week (exceptions for farmers markets and farm stands).",
         "Must have fewer than 500 employees.",
