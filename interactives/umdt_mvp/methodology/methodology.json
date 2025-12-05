@@ -90,6 +90,15 @@
     "techContent": "<p>We first model the \"Total Potential Market Demand\" by applying an Ordinary Least Squares (OLS) regression to estimate household grocery spending under ideal access conditions (simulating the 95th percentile of supply). We then rank both this Potential Demand and the actual Supply Score on a standardized 0–100 scale.</p><p>The final score is the arithmetic difference between the two: <b>Market Demand Score − Supply Score</b>, rescaled on a 0 to 100 range. This isolates areas where economic capacity significantly exceeds physical infrastructure, filtering out areas that lack supply simply due to low population density or spending power.</p>"
   },
   {
+    "id": "tract-naming",
+    "title": "Human-Readable Tract Naming",
+    "description": "A geospatial naming engine that translates obscure numeric Census GEOIDs into natural language descriptions based on local landmarks and communities.",
+    "dataSource": "OpenStreetMap (Overpass API) and Census TIGER/Line Shapefiles.",
+    "whatItMeans": "Census data is usually labeled with 11-digit identification numbers (e.g., \"24033800102\") which are meaningless to most residents. We automatically generate descriptive names like \"The neighborhood of Woodmore\" to make the data relatable. <br/><a style=\"color: #005ea2;text-decoration: underline;\" href=\"./md_geoid_names.csv\" download>Download the GEOID to Name Crosswalk (CSV)</a>.",
+    "techTitle": "Technical Deep Dive: Point-in-Polygon & Proximity Logic",
+    "techContent": "<p><b>Geospatial Assignment:</b> We utilize the Overpass API to ingest OpenStreetMap place nodes (villages, suburbs, neighborhoods). We first perform a point-in-polygon operation; if a recognized place node lies within a tract, that name is adopted.</p><p><b>Proximity Fallback & Formatting:</b> For tracts containing no named places, we calculate the geodesic distance and cardinal direction from the tract's centroid to the nearest named settlement (e.g., \"1.5 miles North of...\"). Finally, we apply linguistic post-processing to handle lists (Oxford commas), pluralization, and de-duplication by appending County names where overlaps occur.</p>"
+  },
+  {
     "id": "incentive-areas",
     "title": "Incentive Area Designations",
     "description": "Areas representing specific state and federal geographic designations that provide eligibility for financial incentives.",
