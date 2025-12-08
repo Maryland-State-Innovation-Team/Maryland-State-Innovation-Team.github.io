@@ -114,18 +114,18 @@
            ------------------------------------------------------------------ */
         
         /* Hero Section */
-        .methodology-header {
+        .legal-header {
             background-image: url('../assets/bg.svg');
             background-color: #19355d;
             background-size: cover;
             background-position: center center;
             padding: 4rem 0; /* Taller padding for Hero feel */
         }
-        .methodology-header h1 {
+        .legal-header h1 {
             color: white;
             margin-top: 0;
         }
-        .methodology-header p {
+        .legal-header p {
             color: white;
             font-size: 1.3rem;
             max-width: 65ch;
@@ -153,7 +153,7 @@
         }
 
         /* Section Layouts */
-        .methodology-section {
+        .legal-section {
             padding-top: 6rem; /* Offset for scroll anchor */
             margin-top: -6rem; 
             margin-bottom: 4rem;
@@ -177,14 +177,14 @@
         }
         
         /* Accordion Customization */
-        .methodology-section .usa-accordion__button {
+        .legal-section .usa-accordion__button {
             background-color: #ffffff;
             border: 1px solid #dfe1e2;
         }
-        .methodology-section .usa-accordion__button:hover {
+        .legal-section .usa-accordion__button:hover {
             background-color: #f0f0f0;
         }
-        .methodology-section .usa-accordion__content {
+        .legal-section .usa-accordion__content {
             background-color: #f8f9fa;
             border: 1px solid #dfe1e2;
             border-top: 0;
@@ -197,6 +197,12 @@
             min-height: 0;
             padding-top: 0.25rem;
             padding-bottom: 0.25rem;
+        }
+
+        #legal-content-container a {
+            color: #005ea2;
+            text-decoration: underline;
+            word-break: break-word;
         }
     </style>
     <script>
@@ -306,7 +312,7 @@
 
     <main id="main-content">
         
-        <section class="methodology-header">
+        <section class="legal-header">
             <div class="grid-container">
                 <div class="grid-row grid-gap-6">
                     <div class="tablet-lg:grid-col-8">
@@ -327,7 +333,7 @@
                         <div class="sticky-sidebar">
                             <h2 class="font-sans-lg text-bold">On this page</h2>
                             <nav class="margin-top-2" aria-label="Terms Sections">
-                                <ul id="methodology-sidenav" class="usa-sidenav">
+                                <ul id="legal-sidenav" class="usa-sidenav">
                                     <li class="usa-sidenav__item">
                                         <a href="#introduction" class="usa-nav__link">Introduction</a>
                                     </li>
@@ -358,16 +364,16 @@
                     </aside>
 
                     <div class="tablet:grid-col-9">
-                        <div id="methodology-content-container" class="usa-prose">
+                        <div id="legal-content-container" class="usa-prose">
                             
-                            <div id="introduction" class="methodology-section">
+                            <div id="introduction" class="legal-section">
                                 <p class="usa-intro">
                                     By using this website, you acknowledge that you have read and understand <a href="#how-it-works">How This Site Works</a>, as well as these Terms and Conditions and agree to be bound by the terms, conditions, and notices set forth herein (collectively, the “Agreement”).
                                 </p>
                                 <hr class="usa-divider margin-y-4">
                             </div>
 
-                            <div id="disclaimers" class="methodology-section">
+                            <div id="disclaimers" class="legal-section">
                                 <h2 class="font-serif-xl text-primary-darker">Disclaimers and Limitation of Liability</h2>
                                 <p>Please read this section carefully. The information provided through this website is for general informational purposes only and does not constitute legal advice or professional guidance.</p>
                                 <p>This website is provided “as is” and “as available” and to the extent permitted by law without warranties of any kind. The State of Maryland makes no representations or warranties, express or implied, about the completeness, accuracy, or reliability of the information or its suitability for or applicability to your circumstances. Information may become outdated and laws and regulations vary by jurisdiction.</p>
@@ -376,7 +382,7 @@
                                 <hr class="usa-divider margin-y-4">
                             </div>
 
-                            <div id="third-party" class="methodology-section">
+                            <div id="third-party" class="legal-section">
                                 <h2 class="font-serif-xl text-primary-darker">Third-Party Sites and Services</h2>
                                 <p>This site may contain hyperlinks to websites operated by parties other than the State of Maryland. Such hyperlinks are provided for your reference only. The State does not control such websites and is not responsible for their contents or the privacy or other practices of such websites.</p>
                                 <p>Further, it is up to you to take precautions to ensure that whatever links you select or software you download (whether from this or any other website) is free of such items as viruses, defects and other items of a destructive nature. The State’s inclusion of hyperlinks to such websites does not imply any endorsement or recommendation of the material on such third-party websites or apps or any association with their operators.</p>
@@ -384,20 +390,20 @@
                                 <hr class="usa-divider margin-y-4">
                             </div>
 
-                            <div id="modifications" class="methodology-section">
+                            <div id="modifications" class="legal-section">
                                 <h2 class="font-serif-xl text-primary-darker">Modifications to this Agreement</h2>
                                 <p>The State may change, add or delete these terms and conditions of this Agreement or any portion thereof from time to time in its sole discretion where we deem it necessary for legal, general regulatory and technical purposes, or due to changes in the services provided or nature or layout of services. Thereafter, you expressly agree to be bound by the terms and conditions of this Agreement as amended.</p>
                                 <hr class="usa-divider margin-y-4">
                             </div>
 
-                            <div id="jurisdiction" class="methodology-section">
+                            <div id="jurisdiction" class="legal-section">
                                 <h2 class="font-serif-xl text-primary-darker">Jurisdiction and Governing Law</h2>
                                 <p>This website is owned and controlled by the State of Maryland. This Agreement and any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with it or its subject matter or formation shall be governed by and construed in accordance with the laws of Maryland.</p>
                                 <p>You hereby consent to the exclusive jurisdiction and venue of courts in Maryland and stipulate to the fairness and convenience of proceedings in such courts for all disputes, both contractual and non-contractual, arising out of or relating to the use of the services by you or any third party. You agree that all claims you may have against the State arising from or relating to the services must be heard and resolved in a court of competent subject matter jurisdiction located in Maryland.</p>
                                 <hr class="usa-divider margin-y-4">
                             </div>
 
-                            <div id="ai-features" class="methodology-section">
+                            <div id="ai-features" class="legal-section">
                                 <h2 class="font-serif-xl text-primary-darker">AI Features</h2>
                                 <p>This website includes AI-enabled features (“AI Features”) that use inputs like text, images, files, documents, and data (“Inputs”) to generate content and responses based on those Inputs (“Outputs”).</p>
                                 <p>While we integrate certain safeguards into AI Features, Outputs may not be reviewed in advance and may be inaccurate, incomplete, misleading, offensive, objectionable, inappropriate, infringing, unsuitable, unlawful, unfit for particular purposes, or the same or similar to content generated for other users of the Services.</p>
@@ -413,7 +419,7 @@
                                 <hr class="usa-divider margin-y-4">
                             </div>
 
-                            <div id="general" class="methodology-section">
+                            <div id="general" class="legal-section">
                                 <h2 class="font-serif-xl text-primary-darker">General Provisions</h2>
                                 <p>You agree that no joint venture, agency, partnership or employment relationship exists between you and the State of Maryland as a result of this Agreement or use of this website.</p>
                                 <p>More than one counterpart of this Agreement may be executed by the Parties hereto, and each fully executed counterpart shall be deemed an original.</p>
@@ -422,7 +428,7 @@
                                 <hr class="usa-divider margin-y-4">
                             </div>
 
-                            <div id="how-it-works" class="methodology-section">
+                            <div id="how-it-works" class="legal-section">
                                 <h2 class="font-serif-xl text-primary-darker">How This Site Works</h2>
                                 
                                 <h3 class="font-serif-lg text-bold margin-top-3">No endorsement of any listed businesses/experts</h3>
@@ -617,7 +623,7 @@
         });
 
         function initScrollSpy() {
-            const sidenav = document.getElementById('methodology-sidenav');
+            const sidenav = document.getElementById('legal-sidenav');
             const links = sidenav.querySelectorAll('a');
             const sections = [];
             let isUserScrolling = false;
