@@ -170,6 +170,16 @@
         .feature-cards-section {
             padding-top: 2.5rem;
             padding-bottom: 4rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        /* Desktop: Increase padding to match .hero-left alignment */
+        @media (min-width: 1024px) {
+            .feature-cards-section {
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
         }
 
         .feature-card {
@@ -409,7 +419,7 @@
                 </div>
             </section>
             
-            <section class="grid-container usa-section feature-cards-section">
+            <section class="usa-section feature-cards-section">
                 <div class="grid-row grid-gap">
                     <div class="tablet:grid-col-4">
                         <div class="feature-card feature-card--opportunity">
