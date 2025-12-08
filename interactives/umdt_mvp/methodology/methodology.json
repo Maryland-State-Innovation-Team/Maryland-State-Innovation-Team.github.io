@@ -49,9 +49,9 @@
     "title": "Estimated Fresh Food Access Score",
     "description": "A measure of physical access to high-quality grocery stores, adjusted for transportation mobility.",
     "dataSource": "OpenStreetMap (Overpass API), Census ACS (Vehicle Ownership), and AI Quality Grading.",
-    "whatItMeans": "We measure \"effective access\" to full-service supermarkets and fresh produce retailers. We filter specifically for high-quality fresh food retailers (excluding convenience stores) and lower access scores in neighborhoods with barriers to transportation.",
+    "whatItMeans": "We measure \"effective access\" to full-service supermarkets and fresh produce retailers. We strictly filter for high-quality fresh food retailers. Specialty shops (like bakeries) and convenience stores do not count toward this score.",
     "techTitle": "Technical Deep Dive: AI Classification & Gravity Models",
-    "techContent": "<p><b>AI-Driven Quality Filtering:</b> We use a Large Language Model (LLM) to semantically analyze business names and categories, rating them 0–5 on their likelihood of selling fresh proteins and produce. This distinguishes a \"Convenience Store\" (Quality 1: Shelf-stable only) from a \"Green Grocer\" (Quality 5: Primary Source). </p><p>We filter strictly for Quality 5 locations and apply a spatial Gravity Model. The score is derived by summing provider capacity divided by the squared \"Effective Distance,\" which is dynamically penalized based on the neighborhood's vehicle ownership rate.</p>"
+    "techContent": "<p><b>AI-Driven Quality Filtering:</b> We use a Large Language Model (LLM) to semantically analyze business names and categories, rating them on their likelihood of selling fresh proteins and produce. </p><p>Crucially, this distinguishes \"Specialty Foods\" (e.g., Bakeries, Pie Shops) and \"Convenience Stores\" from fresh produce retailers. While convenience stores and specialty stores appear on the map for reference, <b>they are excluded from the Access Score calculation.</b> We filter strictly for locations that are primary sources of fresh food to calculate the final access score.</p>"
   },
   {
     "id": "population-forecast",
@@ -85,10 +85,10 @@
     "title": "Fresh Food Market Opportunity Score",
     "description": "A differential metric that quantifies the gap between a neighborhood's economic potential to support a grocery store and the actual physical supply currently available.",
     "dataSource": "Census ACS (Income, Demographics) and Calculated Supply Scores.",
-    "whatItMeans": "This score answers: \"Is this neighborhood under-served relative to its spending power?\" A high score indicates a strong market that is currently leaking retail spending elsewhere due to a lack of local options.",
-    "techTitle": "Technical Deep Dive: Supply/Demand Delta Modeling",
-    "techContent": "<p>We first model the \"Total Potential Market Demand\" by applying an Ordinary Least Squares (OLS) regression to estimate household grocery spending under ideal access conditions (simulating the 95th percentile of supply). We then rank both this Potential Demand and the actual Supply Score on a standardized 0–100 scale.</p><p>The final score is the arithmetic difference between the two: <b>Market Demand Score − Supply Score</b>, rescaled on a 0 to 100 range. This isolates areas where economic capacity significantly exceeds physical infrastructure, filtering out areas that lack supply simply due to low population density or spending power.</p>"
-  },
+    "whatItMeans": "This score answers: \"Is this neighborhood under-served relative to its spending power?\" A high score indicates a strong market leaking retail spending. A low score implies \"saturation,\" where current retail options already exceed the community's estimated spending capacity.",
+    "techTitle": "Technical Deep Dive: Supply/Demand Delta & Normalization",
+    "techContent": "<p>We first model the \"Total Potential Market Demand\" (estimated grocery spending) and compare it to the actual Supply Score. We calculate the net difference: <b>Market Demand − Supply</b>.</p><p>To ensure readability, we normalize this delta onto a 0–100 scale using the formula: <code>((Demand - Supply) + 100) / 2</code>. This effectively compresses the variance; a score of 50 represents equilibrium, while scores below 50 indicate that supply exceeds demand. Because the range is compressed, even small point differences (e.g., 10 points) can represent significant gaps in economic opportunity.</p>"
+  }
   {
     "id": "tract-naming",
     "title": "Human-Readable Tract Naming",
@@ -130,8 +130,8 @@
     "title": "Unmet Demand for Child Care",
     "description": "The gap between the number of children under 6 with working parents and the available licensed child-care slots.",
     "dataSource": "Census ACS (Population under 6 with Working Parents/Guardians) and Calculated Supply Levels.",
-    "whatItMeans": "This measures the absolute deficit of care. A high score means there are significantly more children requiring care than there are licensed seats available to serve them.",
-    "techTitle": "Technical Deep Dive: Supply/Demand Delta",
-    "techContent": "<p>We calculate a \"Demand Score\" by aggregating demographic data for children in households where all parents are in the labor force. The final Unmet Need score is derived by subtracting the spatially allocated Supply Score from this demographic Demand Score to quantify the absolute deficit.</p>"
+    "whatItMeans": "This measures the absolute deficit of care. A high score means there are significantly more children requiring care locally than there are licensed seats available within a reasonable distance.",
+    "techTitle": "Technical Deep Dive: Local Demand vs. Regional Supply",
+    "techContent": "<p>We calculate a \"Demand Score\" by aggregating demographic data for children in households where all parents are in the labor force; <b>this is measured strictly within the Census tract boundaries</b>.</p><p>We contrast this against the \"Supply Score,\" which aggregates licensed slots from the broader, mobility-adjusted area (from 1 to 10 miles depending on the area's transit access). The final Unmet Demand score is derived by subtracting this regional supply from the local tract-level demand to quantify the deficit.</p>"
   }
 ]
