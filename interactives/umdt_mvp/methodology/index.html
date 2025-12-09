@@ -168,6 +168,23 @@
             word-wrap: break-word;    /* Legacy support for breaking long words */
             overflow-wrap: anywhere;  /* Modern support to break long URLs anywhere */
         }
+
+        /* Data Source / Indicator Box Styling */
+        .data-source-box {
+            background-color: #f0f0f0; /* base-lightest */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #005ea2;
+        }
+        .data-source-title {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            color: #565c65;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
         
         /* Accordion Customization */
         .methodology-section .usa-accordion__button {
@@ -330,13 +347,13 @@
                         <div id="data-sources" class="methodology-section">
                             <h2 class="font-serif-xl text-primary-darker">Data Sources</h2>
                             <p class="font-sans-lg text-light">
-                                This table provides a comprehensive list of all data indicators, map layers, and points of interest used throughout the Maryland Community Business Compass.
+                                This table provides a comprehensive list of data sources for all data indicators, map layers, and points of interest used throughout the Maryland Community Business Compass.
                             </p>
 
                             <div class="usa-accordion usa-accordion--bordered margin-top-3">
                                 <h3 class="usa-accordion__heading">
                                     <button type="button" class="usa-accordion__button" aria-expanded="false" aria-controls="data-sources-content">
-                                        View Data Sources Table
+                                        Data Sources Table
                                     </button>
                                 </h3>
                                 <div id="data-sources-content" class="usa-accordion__content" hidden>
@@ -610,9 +627,17 @@
                         </div>`;
                 }
 
+                // Check for units and format them
+                const unitHtml = item.unit 
+                    ? `<br/><strong class="text-base-darker">Units: ${item.unit}</strong>` 
+                    : '';
+
                 section.innerHTML = `
                     <h2 class="font-serif-xl text-primary-darker">${item.title}</h2>
-                    <p class="font-sans-lg text-light">${item.description}</p>
+                    <p class="font-sans-lg text-light">
+                        ${item.description}
+                        ${unitHtml}
+                    </p>
                     ${boxesHtml}
                     ${accordionHtml}
                     <hr class="usa-divider margin-y-4">
