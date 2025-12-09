@@ -1090,6 +1090,60 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- CONSTANTS ---
+            // Logical order for business owners
+            const TOPIC_ORDER = [
+                "Getting Started",
+                "Business Operations and Planning",
+                "Find Funding",
+                "Find a Site/Location",
+                "Permits and Licensing",
+                "Networking"
+            ];
+
+            // Helper to determine rank (lower is better/earlier)
+            const getTopicRank = (tag) => {
+                const idx = TOPIC_ORDER.indexOf(tag);
+                // If tag is not in our list, place it at the end (999)
+                return idx === -1 ? 999 : idx;
+            };
+
+            // Helper: Sorts resources by relevance (Specific > Generic > Logical Topic > Alpha)
+            function sortResources(resources, searchState) {
+                return resources.sort((a, b) => {
+                    // 1. Industry Specificity: Exact Match gets priority over "All"
+                    // If user didn't select an industry, this comparison is neutral (0 vs 0)
+                    const industryA = (searchState.industry && a.business_category === searchState.industry) ? 1 : 0;
+                    const industryB = (searchState.industry && b.business_category === searchState.industry) ? 1 : 0;
+                    if (industryA !== industryB) return industryB - industryA; // Descending (1 before 0)
+
+                    // 2. Location Specificity: Exact City/County gets priority over "Maryland" (Statewide)
+                    const isLocMatch = (item) => {
+                         const locs = Array.isArray(item.area) ? item.area : [item.address_city];
+                         return locs.includes(searchState.location);
+                    };
+                    const locA = (searchState.location && isLocMatch(a)) ? 1 : 0;
+                    const locB = (searchState.location && isLocMatch(b)) ? 1 : 0;
+                    if (locA !== locB) return locB - locA; // Descending
+
+                    // 3. Topic Logical Order
+                    // We find the "best" (lowest rank) tag each resource has. 
+                    // This floats "Getting Started" resources to top if they match.
+                    const getBestTagRank = (item) => {
+                        const tags = item.question_tags || [];
+                        if (tags.length === 0) return 999;
+                        return Math.min(...tags.map(getTopicRank));
+                    };
+
+                    const rankA = getBestTagRank(a);
+                    const rankB = getBestTagRank(b);
+                    if (rankA !== rankB) return rankA - rankB; // Ascending (Lower rank is better)
+
+                    // 4. Alphabetical Fallback
+                    return (a.organization || "").localeCompare(b.organization || "");
+                });
+            }
+
             let allResources = [];
             
             // State
@@ -1186,7 +1240,13 @@
                     fillSelect(inputs[view].location, locations);
                     
                     // Custom Multiselect
-                    Array.from(topics).sort().forEach(topic => {
+                    // Sort topics by our custom logical order, then alphabetical for any extras
+                    Array.from(topics).sort((a, b) => {
+                        const rankA = getTopicRank(a);
+                        const rankB = getTopicRank(b);
+                        if (rankA !== rankB) return rankA - rankB;
+                        return a.localeCompare(b);
+                    }).forEach(topic => {
                         const div = document.createElement('div');
                         div.className = 'multiselect-option';
                         // A11y Attributes
@@ -1393,8 +1453,11 @@
                     result_count: filtered.length
                 });
 
-                renderResources(filtered);
-                statusEl.textContent = `Found ${filtered.length} relevant resources`;
+                // Sort results based on weighted relevance
+                const sortedResults = sortResources(filtered, state);
+
+                renderResources(sortedResults);
+                statusEl.textContent = `Found ${sortedResults.length} relevant resources`;
             }
 
             function resetFilters() {
