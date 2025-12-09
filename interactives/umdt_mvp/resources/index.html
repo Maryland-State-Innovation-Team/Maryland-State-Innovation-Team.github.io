@@ -1160,8 +1160,13 @@
 
                 data.forEach(item => {
                     if (item.business_category && item.business_category !== 'All') industries.add(item.business_category);
+
                     const locs = Array.isArray(item.area) ? item.area : [item.address_city];
-                    locs.filter(Boolean).forEach(l => locations.add(l));
+                    locs.filter(Boolean).forEach(l => {
+                        // Exclude 'Maryland' from the specific location dropdown options
+                        if (l !== 'Maryland') locations.add(l);
+                    });
+
                     if (Array.isArray(item.question_tags)) item.question_tags.forEach(tag => topics.add(tag));
                 });
 
@@ -1366,12 +1371,13 @@
                 // Filter Logic
                 const filtered = allResources.filter(item => {
                     if (state.industry && item.business_category !== 'All' && item.business_category !== state.industry) return false;
-                    
+
                     if (state.location) {
                         const itemLocs = Array.isArray(item.area) ? item.area : [item.address_city];
-                        if (!itemLocs.includes(state.location)) return false;
+                        // Match if specific location matches OR if resource is statewide ('Maryland')
+                        if (!itemLocs.includes(state.location) && !itemLocs.includes('Maryland')) return false;
                     }
-                    
+
                     if (state.topics.size > 0) {
                         const itemTags = item.question_tags || [];
                         if (!itemTags.some(tag => state.topics.has(tag))) return false;
@@ -1423,7 +1429,7 @@
                     resourceList.innerHTML = `<div class="usa-alert usa-alert--info"><div class="usa-alert__body"><p class="usa-alert__text">No results found.</p></div></div>`;
                     return;
                 }
-                
+
                 resourceList.innerHTML = resources.map(item => {
                     // 1. Geography Formatting (Oxford Comma)
                     const areaStr = Array.isArray(item.area) 
@@ -1436,13 +1442,10 @@
 
                     // Phone: Org > First Contact > null
                     const displayPhone = item.phone || (firstContact ? firstContact.phone : null);
-                    
+
                     // 3. Construct Description
-                    const contactPersonStr = firstContact 
-                        ? `${firstContact.name}, ${firstContact.title}` 
-                        : 'the agency directly';
-                        
-                    const description = `${item.organization} connects businesses in ${areaStr} with vital resources.`;
+                    // Use the explicit description from data
+                    const description = item.description || `${item.organization} connects businesses in ${areaStr} with vital resources.`;
 
                     // 4. Construct Contacts Table (Conditional)
                     let contactsTableHtml = '';
@@ -1476,10 +1479,11 @@
                         `;
                     }
 
-                    // 5. Render Tags
-                    const logoPath = `./logos/${item.id}.jpg`;
+                    // 5. Render Tags and Logo
+                    // Use explicit logo_file if available, otherwise fallback
+                    const logoPath = item.logo_file || `./logos/${item.id}.jpg`;
                     const tagsHtml = (item.question_tags || []).map(tag => `<span class="pill-tag">${tag}</span>`).join('');
-                    
+
                     return `
                         <article class="resource-item">
                             <div class="resource-logo">
@@ -1495,7 +1499,7 @@
                                     <span class="sidebar-label">Help Topics</span>
                                     <div style="padding-top:4px;">${tagsHtml || 'General Support'}</div>
                                 </div>
-                                
+
                                 ${displayPhone ? `
                                 <div class="sidebar-section">
                                     <span class="sidebar-label">Phone</span>
