@@ -157,22 +157,16 @@
             scroll-margin-top: 6rem; 
             margin-bottom: 4rem;
         }
-        
-        /* Data Source / Indicator Box Styling */
-        .data-source-box {
-            background-color: #f0f0f0; /* base-lightest */
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            margin: 1.5rem 0;
-            border-left: 4px solid #005ea2;
+
+        /* Table Text Wrapping */
+        #data-sources-table {
+            table-layout: fixed; /* Strictly respects the 40%/60% column widths */
         }
-        .data-source-title {
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.05em;
-            color: #565c65;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
+        #data-sources-table td, 
+        #data-sources-table th {
+            white-space: normal;      /* Allows text to wrap */
+            word-wrap: break-word;    /* Legacy support for breaking long words */
+            overflow-wrap: anywhere;  /* Modern support to break long URLs anywhere */
         }
         
         /* Accordion Customization */
@@ -318,33 +312,6 @@
             </div>
         </section>
 
-        <section class="usa-section padding-y-4 bg-base-lightest">
-            <div class="grid-container">
-                <div class="usa-accordion usa-accordion--bordered">
-                    <h2 class="usa-accordion__heading">
-                        <button type="button" class="usa-accordion__button" aria-expanded="false" aria-controls="data-sources-content">
-                            Data Sources
-                        </button>
-                    </h2>
-                    <div id="data-sources-content" class="usa-accordion__content usa-prose">
-                        <p>
-                            This table provides a comprehensive list of all data indicators, map layers, and points of interest used throughout the Maryland Community Business Compass, along with their primary data sources.
-                        </p>
-                        <table class="usa-table usa-table--borderless width-full" id="data-sources-table">
-                            <thead>
-                                <tr>
-                                    <th scope="col" style="width: 40%;">Indicator / Layer Name</th>
-                                    <th scope="col" style="width: 60%;">Data Source(s)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="usa-section padding-top-2">
             <div class="grid-container">
                 <div class="grid-row grid-gap-6">
@@ -360,6 +327,35 @@
                     </aside>
 
                     <div class="tablet:grid-col-9">
+                        <div id="data-sources" class="methodology-section">
+                            <h2 class="font-serif-xl text-primary-darker">Data Sources</h2>
+                            <p class="font-sans-lg text-light">
+                                This table provides a comprehensive list of all data indicators, map layers, and points of interest used throughout the Maryland Community Business Compass.
+                            </p>
+
+                            <div class="usa-accordion usa-accordion--bordered margin-top-3">
+                                <h3 class="usa-accordion__heading">
+                                    <button type="button" class="usa-accordion__button" aria-expanded="false" aria-controls="data-sources-content">
+                                        View Data Sources Table
+                                    </button>
+                                </h3>
+                                <div id="data-sources-content" class="usa-accordion__content" hidden>
+                                    <div class="usa-table-container--scrollable" tabindex="0">
+                                        <table class="usa-table usa-table--borderless width-full" id="data-sources-table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" style="width: 40%;">Indicator / Layer Name</th>
+                                                    <th scope="col" style="width: 60%;">Data Source(s)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="usa-divider margin-y-4">
+                        </div>
                         <div id="methodology-content-container" class="usa-prose">
                         </div>
                     </div>
@@ -559,6 +555,12 @@
             
             navContainer.innerHTML = '';
             contentContainer.innerHTML = '';
+
+            // Manually add Data Sources link to sidebar
+            const dsLi = document.createElement('li');
+            dsLi.className = 'usa-sidenav__item';
+            dsLi.innerHTML = `<a href="#data-sources" class="usa-nav__link">Data Sources</a>`;
+            navContainer.appendChild(dsLi);
 
             data.forEach(item => {
                 // Generate Sidebar Link
