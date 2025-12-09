@@ -154,8 +154,7 @@
 
         /* Section Layouts */
         .methodology-section {
-            padding-top: 6rem; /* Offset for scroll anchor */
-            margin-top: -6rem; 
+            scroll-margin-top: 6rem; 
             margin-bottom: 4rem;
         }
         
@@ -312,14 +311,41 @@
                     <div class="tablet-lg:grid-col-8">
                         <h1 class="font-serif-2xl tablet:font-serif-3xl text-bold">Methodology & Data Sources</h1>
                         <p class="font-sans-lg">
-                            We believe in transparency. This page details how we calculate indicators, where our data comes from, and the technical decisions behind the Maryland Community Business Compass.
+                            This page details how we calculate indicators, where our data comes from, and the technical decisions behind the Maryland Community Business Compass.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="usa-section">
+        <section class="usa-section padding-y-4 bg-base-lightest">
+            <div class="grid-container">
+                <div class="usa-accordion usa-accordion--bordered">
+                    <h2 class="usa-accordion__heading">
+                        <button type="button" class="usa-accordion__button" aria-expanded="false" aria-controls="data-sources-content">
+                            Data Sources
+                        </button>
+                    </h2>
+                    <div id="data-sources-content" class="usa-accordion__content usa-prose">
+                        <p>
+                            This table provides a comprehensive list of all data indicators, map layers, and points of interest used throughout the Maryland Community Business Compass, along with their primary data sources.
+                        </p>
+                        <table class="usa-table usa-table--borderless width-full" id="data-sources-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 40%;">Indicator / Layer Name</th>
+                                    <th scope="col" style="width: 60%;">Data Source(s)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="usa-section padding-top-2">
             <div class="grid-container">
                 <div class="grid-row grid-gap-6">
                     
@@ -482,6 +508,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // 1. Fetch Methodology Content
             fetch('methodology.json')
                 .then(response => {
                     if (!response.ok) {
@@ -490,45 +517,40 @@
                     return response.json();
                 })
                 .then(data => {
-                    // 1. Render the HTML
                     renderMethodology(data);
-                    
-                    // 2. Initialize Scroll Spy
                     initScrollSpy();
 
-                    // 3. Handle Deep Linking (Robust Method)
+                    // Deep Linking Logic
                     if (window.location.hash) {
                         const targetId = window.location.hash.substring(1);
                         const targetSection = document.getElementById(targetId);
                         
                         if (targetSection) {
-                            // requestAnimationFrame ensures the DOM elements are painted 
-                            // and have calculated heights before we try to scroll.
                             requestAnimationFrame(() => {
                                 targetSection.scrollIntoView({ 
-                                    behavior: 'auto', // Instant jump is more reliable on load than smooth
+                                    behavior: 'auto', 
                                     block: 'start' 
                                 });
-                                
-                                // Optional: Re-trigger for safety if images cause layout shift
-                                // setTimeout(() => {
-                                //     targetSection.scrollIntoView({ behavior: 'auto', block: 'start' });
-                                // }, 300);
                             });
                         }
                     }
-
                 })
                 .catch(error => {
                     console.error('Unable to fetch methodology data:', error);
-                    document.getElementById('methodology-content-container').innerHTML = 
-                        `<div class="usa-alert usa-alert--error">
-                            <div class="usa-alert__body">
-                                <h3 class="usa-alert__heading">Error Loading Data</h3>
-                                <p class="usa-alert__text">Unable to load methodology content.</p>
-                            </div>
-                        </div>`;
+                    const container = document.getElementById('methodology-content-container');
+                    if (container) {
+                        container.innerHTML = 
+                            `<div class="usa-alert usa-alert--error">
+                                <div class="usa-alert__body">
+                                    <h3 class="usa-alert__heading">Error Loading Data</h3>
+                                    <p class="usa-alert__text">Unable to load methodology content.</p>
+                                </div>
+                            </div>`;
+                    }
                 });
+
+            // 2. Fetch and Render Data Sources Table
+            renderDataSources();
         });
 
         function renderMethodology(data) {
@@ -596,6 +618,33 @@
 
                 contentContainer.appendChild(section);
             });
+        }
+
+        function renderDataSources() {
+            fetch('sources.json')
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to load sources.json');
+                    return response.json();
+                })
+                .then(data => {
+                    // Sort alphabetically by indicator name
+                    data.sort((a, b) => a.indicator.localeCompare(b.indicator));
+
+                    const tbody = document.querySelector('#data-sources-table tbody');
+                    if (!tbody) return;
+
+                    tbody.innerHTML = '';
+
+                    data.forEach(item => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <th scope="row" class="font-sans-xs text-bold text-top">${item.indicator}</th>
+                            <td class="font-sans-xs text-top">${item.source || '<span class="text-base-light italic">Source to be added</span>'}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                })
+                .catch(err => console.error('Error rendering data sources:', err));
         }
 
         function initScrollSpy() {
