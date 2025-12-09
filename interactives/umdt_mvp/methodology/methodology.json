@@ -88,7 +88,7 @@
     "whatItMeans": "This score answers: \"Is this neighborhood under-served relative to its spending power?\" A high score indicates a strong market leaking retail spending. A low score implies \"saturation,\" where current retail options already exceed the community's estimated spending capacity.",
     "techTitle": "Technical Deep Dive: Supply/Demand Delta & Normalization",
     "techContent": "<p>We first model the \"Total Potential Market Demand\" (estimated grocery spending) and compare it to the actual Supply Score. We calculate the net difference: <b>Market Demand − Supply</b>.</p><p>To ensure readability, we normalize this delta onto a 0–100 scale using the formula: <code>((Demand - Supply) + 100) / 2</code>. This effectively compresses the variance; a score of 50 represents equilibrium, while scores below 50 indicate that supply exceeds demand. Because the range is compressed, even small point differences (e.g., 10 points) can represent significant gaps in economic opportunity.</p>"
-  }
+  },
   {
     "id": "tract-naming",
     "title": "Human-Readable Tract Naming",
