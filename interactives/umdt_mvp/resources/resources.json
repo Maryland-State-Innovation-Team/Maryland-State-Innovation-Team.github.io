@@ -5062,5 +5062,33 @@
                 "email": "info@marylandfamilynetwork.org"
             }
         ]
+    },
+    {
+        "id": 287,
+        "organization": "Maryland Women's Business Center",
+        "description": "The Maryland Women's Business Center offers free one-on-one business counseling, training workshops, and connections to funding sources to help you start, grow, or strengthen your business.",
+        "type": "County",
+        "area": [
+            "Montgomery County",
+            "Prince George's County"
+        ],
+        "address": "51 Monroe Street, PE-20",
+        "address_city": "Rockville",
+        "address_state": "Maryland",
+        "address_zip": "20850",
+        "url": "https://marylandwbc.org/",
+        "logo_link": "https://marylandwbc.org/wp-content/uploads/2020/10/MWBC_logo.svg",
+        "logo_file": "logos/287.jpg",
+        "question_tags": [
+            "Find Funding",
+            "Networking",
+            "Getting Started",
+            "Business Operations and Planning"
+        ],
+        "business_category": "All",
+        "phone": "301-315-8091",
+        "fax": null,
+        "email": null,
+        "contacts": []
     }
 ]
