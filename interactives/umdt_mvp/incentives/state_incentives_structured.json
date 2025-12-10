@@ -1472,14 +1472,14 @@
   {
     "program_name": "NourishMD Grant Program",
     "agency": "Maryland Department of Housing and Community Development (DHCD)",
-    "summary": "The NourishMD Grant Program provides flexible grants and loans to help food retailers open, renovate, or expand in Maryland neighborhoods that lack fresh food options.",
-    "application_due": "February 2026",
-    "more_details_url": "https://dhcd.maryland.gov/Business/Pages/NBW.aspx",
+    "summary": "The NourishMD Grant Program expands access to healthy and fresh foods in Maryland communities experiencing food insecurity by providing direct grants to eligible retailers.",
+    "application_due": "February 20 @ 5:00 p.m. EST",
+    "more_details_url": "https://dhcd.maryland.gov/business",
     "contact_name": null,
-    "contact_email": null,
-    "contact_phone": null,
+    "contact_email": "nourishmd@manyland.gov",
+    "contact_phone": "1-800-756-0119",
     "eligibility": "For-Profit, Non-Profit",
-    "assistance_financial": "Grant, Direct Loan",
+    "assistance_financial": "Grant",
     "assistance_nonfinancial": "",
     "structured_extraction": {
       "featured": true,
@@ -1487,7 +1487,7 @@
       "featured_img_alt": "A smiling woman in a denim jacket holds a shopping basket filled with fresh vegetables and berries at a market.",
       "featured_description": "Grants of up to $150,000 to support capital-related needs for grocery stores and markets in areas with limited healthy food access.",
       "program_name": "NourishMD Grant Program",
-      "program_description": "NourishMD addresses the lack of fresh food in Maryland communities. It funds the development and expansion of grocery stores, corner stores, and markets. The program prioritizes businesses that accept SNAP benefits, source food locally, and operate in targeted investment zones.",
+      "program_description": "The NourishMD Grant Program expands access to fresh foods in food-insecure communities. It provides grants to eligible food retailers to support operations and improvements.",
       "agency": "Maryland Department of Housing and Community Development (DHCD)",
       "list_of_eligible_counties": [
         "All"
@@ -1496,10 +1496,7 @@
         "All"
       ],
       "list_of_incentive_areas": [
-        "NourishMD Eligibility Zone",
-        "ENOUGH Act Grantees",
-        "Just Communities",
-        "Sustainable Communities"
+        "NourishMD Eligibility Zone"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -1514,31 +1511,26 @@
         "Grocery Stores and Fresh Food Retailers"
       ],
       "assistance_type": [
-        "grant",
-        "loan"
+        "grant"
       ],
-      "assistance_description": "The program offers grants from $25,000 to $150,000. A total of $2 million is available. Applicants can also apply for loans through Neighborhood BusinessWorks.",
-      "URL": "https://dhcd.maryland.gov/Business/Pages/NBW.aspx",
-      "application_deadline_string": "February 2026",
-      "application_deadline_date": "2026-02-01",
+      "assistance_description": "The program awards grants between $25,000 and $150,000. A total of up to $2 million is available for funding.",
+      "URL": "https://dhcd.maryland.gov/business",
+      "application_deadline_string": "February 20 @ 5:00 p.m. EST",
+      "application_deadline_date": "2026-02-20",
       "contact_name": null,
-      "contact_email": null,
-      "contact_phone": null,
-      "program_audience": "Grocery stores, corner stores, farm stands, farmers markets, food co-ops, and delivery retailers.",
-      "use_of_funds": "Funds cover furniture, equipment, renovations, initial inventory (excluding prepared foods), working capital for expansion, and SNAP/EBT technology.",
-      "geographic_eligibility": "Projects must be located in a NourishMD Eligibility Zone (Fresh Food Gap Score of 60 or higher).",
+      "contact_email": "nourishmd@manyland.gov",
+      "contact_phone": "1-800-756-0119",
+      "program_audience": "Eligible applicants include grocery stores, corner stores, co-ops, farm stands, farmers' markets, delivery retailers, and small food-focused stores.",
+      "use_of_funds": "Recipients use funds for equipment like refrigeration and shelving, facility upgrades, inventory expansion capital, working capital, and SNAP/EBT technology.",
+      "geographic_eligibility": "Businesses must serve a community with a Maryland Community Business Compass (MCBC) Fresh Food Gap Score of 60% or higher.",
       "requirements_list": [
-        "Must be located in a NourishMD Eligibility Zone (Fresh Food Gap Score of 60 or higher).",
-        "Must be a for-profit or nonprofit retail business.",
-        "Must operate year-round, at least five days a week (exceptions for farmers markets and farm stands).",
-        "Must have fewer than 500 employees.",
-        "Must verify good standing with the State of Maryland.",
-        "At least 20% of inventory or floor space must be dedicated to healthy food.",
-        "Small retail stores must earn no more than 25% of gross sales from alcohol and tobacco.",
-        "Requests over $100,000 require a credit check.",
-        "Must obtain formal approval or a letter of support from the local jurisdiction."
+        "Must operate at least 5 days per week, year-round (farmers markets and on-farm markets are exempt).",
+        "Must currently offer or plan to offer fresh, frozen, or minimally processed healthy foods.",
+        "Must dedicate at least 20% of inventory or food-sales space to healthy food items.",
+        "Must meet SNAP eligibility or plan to adopt SNAP functionality.",
+        "A $250 processing fee is sourced from the award amount."
       ],
-      "application_process_overview": "The application portal opens in January and closes in February. Staff review applications in February and March. Awards are announced in May. Applicants must submit local government approval before review.",
+      "application_process_overview": "Applicants submit a complete application through the DHCD portal between January 20 and February 20. The agency reviews applications in February and March and finalizes recommendations in April. Award notifications occur in May, followed by disbursements in June.",
       "is_out_of_date": false,
       "is_full_text_irrelevant": false,
       "url_status_code": 200,
