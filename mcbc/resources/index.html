@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connect with Experts - Maryland Community Business Compass</title>
-    
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
     <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
 
 <style>
@@ -95,8 +95,6 @@
             .usa-menu-btn { order: 2; margin-left: auto; display: inline-flex; align-items: center; }
             .usa-nav { order: 3; }
         }
-
-        /* NEW STYLES for Resource Page */
         
         /* Sticky sidebar for filters */
         .sticky-sidebar {
@@ -200,7 +198,7 @@
         }
         .filter-count.hidden { display: none; }
 
-        /* --- NEW DESIGN REF: HERO & SEARCH --- */
+        /* --- HERO & SEARCH --- */
         
         .hero-section {
             position: relative;
@@ -209,7 +207,7 @@
             background-image: url('../assets/bg-red.svg'); 
             background-size: cover;
             background-position: left center;
-            overflow: visible; /* UPDATED: Changed from 'hidden' to 'visible' to prevent clipping */
+            overflow: visible;
         }
 
         .hero-split-container {
@@ -222,12 +220,10 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            /* Mobile fix: Add padding to compensate for inner container's padding-x-0 */
             padding: 3rem 1.5rem;
         }
 
         .hero-right {
-            /* Mobile fix: Hide decorative image to save space */
             display: none;
             flex: 1;
             position: relative;
@@ -244,7 +240,7 @@
 
         @media (min-width: 1024px) {
             .hero-right {
-                display: block; /* Restore image on Desktop */
+                display: block;
             }
             .hero-split-container {
                 flex-direction: row;
@@ -261,19 +257,17 @@
             }
         }
 
-        /* Updated Search Card styling for the nested layout */
+        /* Search Card styling for the nested layout */
         .search-card-container {
             width: 100%;
             position: relative;
             z-index: 50;
             margin-top: 2rem;
-            padding: 0; /* Remove horizontal padding, let max-width handle it */
+            padding: 0;
         }
         
         @media (min-width: 1024px) {
-            .search-card-container {                
-                /* Optional: Pull it down slightly to overlap bottom edge if desired, 
-                   otherwise just keep it centered in the red area. */
+            .search-card-container {
                 margin-bottom: -6rem; 
             }
         }
@@ -282,7 +276,6 @@
             background: white;
             border-radius: 0.5rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            /* Mobile fix: Sync padding with compact view (0.75rem) */
             padding: 0.75rem;
         }
         @media (min-width: 768px) {
@@ -353,7 +346,6 @@
             content: '';
             width: 1rem;
             height: 1rem;
-            /* Updated SVG: Color #2C2C2C, Size increased */
             background-image: url("data:image/svg+xml;charset=US-ASCII,%3csvg%20xmlns%3d%27http%3a%2f%2fwww.w3.org%2f2000%2fsvg%27%20width%3d%2724%27%20height%3d%2724%27%20viewBox%3d%270%200%2024%2024%27%20fill%3d%27none%27%20stroke%3d%27%232C2C2C%27%20stroke-width%3d%271.5%27%20stroke-linecap%3d%27round%27%20stroke-linejoin%3d%27round%27%3e%3cpolyline%20points%3d%276%209%2012%2015%2018%209%27%2f%3e%3c%2fsvg%3e");
             background-repeat: no-repeat;
             background-position: center;
@@ -411,7 +403,6 @@
             margin-top: 2rem;
             padding-top: 1rem;
             border-top: 1px solid #dfe1e2;
-            /* Mobile fix: Add gap to prevent button overlap */
             gap: 1rem;
         }
 
@@ -427,11 +418,9 @@
             background: white;
             border: 1px solid #dfe1e2;
             border-radius: 0.5rem;
-            /* Mobile fix: Reduced padding */
             padding: 1.25rem;
             display: grid;
             gap: 1.5rem;
-            /* Mobile fix: Prevent grid blowout */
             max-width: 100%;
         }
 
@@ -453,7 +442,6 @@
             border-radius: 4px;
         }
 
-        /* Mobile fix: Allow container to shrink below content size */
         .resource-main {
             min-width: 0;
         }
@@ -462,7 +450,6 @@
             margin-top: 0;
             font-size: 1.5rem;
             color: #1b1b1b;
-            /* Mobile fix: Force long words/titles to wrap */
             overflow-wrap: break-word;
             word-wrap: break-word;
             hyphens: auto;
@@ -475,7 +462,6 @@
         }
         
         /* Organization Contacts Table inside Card */
-        /* Mobile fix: Wrapper for horizontal scrolling */
         .table-scroll-wrapper {
             width: 100%;
             overflow-x: auto;
@@ -558,7 +544,7 @@
             visibility: visible !important;
         }
 
-        /* FIX: Responsive Error Text Positioning */
+        /* Responsive Error Text Positioning */
         #view-results .form-col-topics {
             position: relative; 
         }
@@ -817,7 +803,7 @@
                                     Connect with Experts
                                 </h1>
                                 <p class="font-sans-lg text-white margin-bottom-4" style="line-height: 1.3">
-                                    Find people, organizations, and information that can help drive your business forward
+                                    Get personalized guidance from government agencies and support organizations to answer your questions and help your business grow
                                 </p>
                             </div>
 
@@ -1001,6 +987,9 @@
                                 <li>
                                     <a href="../methodology/">Methodology</a>
                                 </li>
+                                <li>
+                                    <a href="../legal/">Terms & Conditions</a>
+                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -1087,6 +1076,60 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- CONSTANTS ---
+            // Logical order for business owners
+            const TOPIC_ORDER = [
+                "Getting Started",
+                "Business Operations and Planning",
+                "Find Funding",
+                "Find a Site/Location",
+                "Permits and Licensing",
+                "Networking"
+            ];
+
+            // Helper to determine rank (lower is better/earlier)
+            const getTopicRank = (tag) => {
+                const idx = TOPIC_ORDER.indexOf(tag);
+                // If tag is not in our list, place it at the end (999)
+                return idx === -1 ? 999 : idx;
+            };
+
+            // Helper: Sorts resources by relevance (Specific > Generic > Logical Topic > Alpha)
+            function sortResources(resources, searchState) {
+                return resources.sort((a, b) => {
+                    // 1. Industry Specificity: Exact Match gets priority over "All"
+                    // If user didn't select an industry, this comparison is neutral (0 vs 0)
+                    const industryA = (searchState.industry && a.business_category === searchState.industry) ? 1 : 0;
+                    const industryB = (searchState.industry && b.business_category === searchState.industry) ? 1 : 0;
+                    if (industryA !== industryB) return industryB - industryA; // Descending (1 before 0)
+
+                    // 2. Location Specificity: Exact City/County gets priority over "Maryland" (Statewide)
+                    const isLocMatch = (item) => {
+                         const locs = Array.isArray(item.area) ? item.area : [item.address_city];
+                         return locs.includes(searchState.location);
+                    };
+                    const locA = (searchState.location && isLocMatch(a)) ? 1 : 0;
+                    const locB = (searchState.location && isLocMatch(b)) ? 1 : 0;
+                    if (locA !== locB) return locB - locA; // Descending
+
+                    // 3. Topic Logical Order
+                    // We find the "best" (lowest rank) tag each resource has. 
+                    // This floats "Getting Started" resources to top if they match.
+                    const getBestTagRank = (item) => {
+                        const tags = item.question_tags || [];
+                        if (tags.length === 0) return 999;
+                        return Math.min(...tags.map(getTopicRank));
+                    };
+
+                    const rankA = getBestTagRank(a);
+                    const rankB = getBestTagRank(b);
+                    if (rankA !== rankB) return rankA - rankB; // Ascending (Lower rank is better)
+
+                    // 4. Alphabetical Fallback
+                    return (a.organization || "").localeCompare(b.organization || "");
+                });
+            }
+
             let allResources = [];
             
             // State
@@ -1157,8 +1200,13 @@
 
                 data.forEach(item => {
                     if (item.business_category && item.business_category !== 'All') industries.add(item.business_category);
+
                     const locs = Array.isArray(item.area) ? item.area : [item.address_city];
-                    locs.filter(Boolean).forEach(l => locations.add(l));
+                    locs.filter(Boolean).forEach(l => {
+                        // Exclude 'Maryland' from the dropdown so users only select specific counties/cities
+                        if (l !== 'Maryland') locations.add(l);
+                    });
+
                     if (Array.isArray(item.question_tags)) item.question_tags.forEach(tag => topics.add(tag));
                 });
 
@@ -1178,7 +1226,13 @@
                     fillSelect(inputs[view].location, locations);
                     
                     // Custom Multiselect
-                    Array.from(topics).sort().forEach(topic => {
+                    // Sort topics by our custom logical order, then alphabetical for any extras
+                    Array.from(topics).sort((a, b) => {
+                        const rankA = getTopicRank(a);
+                        const rankB = getTopicRank(b);
+                        if (rankA !== rankB) return rankA - rankB;
+                        return a.localeCompare(b);
+                    }).forEach(topic => {
                         const div = document.createElement('div');
                         div.className = 'multiselect-option';
                         // A11y Attributes
@@ -1363,12 +1417,13 @@
                 // Filter Logic
                 const filtered = allResources.filter(item => {
                     if (state.industry && item.business_category !== 'All' && item.business_category !== state.industry) return false;
-                    
+
                     if (state.location) {
                         const itemLocs = Array.isArray(item.area) ? item.area : [item.address_city];
-                        if (!itemLocs.includes(state.location)) return false;
+                        // Match if the specific location is found OR if the resource is statewide ('Maryland')
+                        if (!itemLocs.includes(state.location) && !itemLocs.includes('Maryland')) return false;
                     }
-                    
+
                     if (state.topics.size > 0) {
                         const itemTags = item.question_tags || [];
                         if (!itemTags.some(tag => state.topics.has(tag))) return false;
@@ -1384,8 +1439,11 @@
                     result_count: filtered.length
                 });
 
-                renderResources(filtered);
-                statusEl.textContent = `Found ${filtered.length} relevant resources`;
+                // Sort results based on weighted relevance
+                const sortedResults = sortResources(filtered, state);
+
+                renderResources(sortedResults);
+                statusEl.textContent = `Found ${sortedResults.length} relevant resources`;
             }
 
             function resetFilters() {
@@ -1420,7 +1478,7 @@
                     resourceList.innerHTML = `<div class="usa-alert usa-alert--info"><div class="usa-alert__body"><p class="usa-alert__text">No results found.</p></div></div>`;
                     return;
                 }
-                
+
                 resourceList.innerHTML = resources.map(item => {
                     // 1. Geography Formatting (Oxford Comma)
                     const areaStr = Array.isArray(item.area) 
@@ -1433,13 +1491,10 @@
 
                     // Phone: Org > First Contact > null
                     const displayPhone = item.phone || (firstContact ? firstContact.phone : null);
-                    
+
                     // 3. Construct Description
-                    const contactPersonStr = firstContact 
-                        ? `${firstContact.name}, ${firstContact.title}` 
-                        : 'the agency directly';
-                        
-                    const description = `${item.organization} connects businesses in ${areaStr} with vital resources.`;
+                    // Use explicit description from data, falling back to constructed string only if missing
+                    const description = item.description || `${item.organization} connects businesses in ${areaStr} with vital resources.`;
 
                     // 4. Construct Contacts Table (Conditional)
                     let contactsTableHtml = '';
@@ -1453,8 +1508,6 @@
                             </tr>
                         `).join('');
 
-                        // Added table-scroll-wrapper div for mobile accessibility
-                        // Added scope="col" to th elements for screen readers
                         contactsTableHtml = `
                             <h4 class="font-sans-xs text-uppercase text-base margin-bottom-1 margin-top-2">Organization Contacts</h4>
                             <div class="table-scroll-wrapper" tabindex="0">
@@ -1473,14 +1526,18 @@
                         `;
                     }
 
-                    // 5. Render Tags
-                    const logoPath = `./logos/${item.id}.jpg`;
+                    // 5. Render Tags and Logo
+                    // Logic: If logo_file exists, create IMG. If it breaks (404), hide it.
+                    const logoHtml = item.logo_file 
+                        ? `<img src="${item.logo_file}" alt="${item.organization} Logo" onerror="this.style.display='none'">` 
+                        : '';
+
                     const tagsHtml = (item.question_tags || []).map(tag => `<span class="pill-tag">${tag}</span>`).join('');
-                    
+
                     return `
                         <article class="resource-item">
                             <div class="resource-logo">
-                                <img src="${logoPath}" alt="${item.organization} Logo" onerror="this.src='https://placehold.co/100x100?text=Logo'">
+                                ${logoHtml}
                             </div>
                             <div class="resource-main">
                                 <h3>${item.organization}</h3>
@@ -1492,7 +1549,7 @@
                                     <span class="sidebar-label">Help Topics</span>
                                     <div style="padding-top:4px;">${tagsHtml || 'General Support'}</div>
                                 </div>
-                                
+
                                 ${displayPhone ? `
                                 <div class="sidebar-section">
                                     <span class="sidebar-label">Phone</span>
@@ -1579,6 +1636,173 @@
 
             initializeApp();
         });
+    </script>
+    <script>
+        /**
+         * Injects a dismissible Terms & Conditions footer banner.
+         * Features:
+         * - LocalStorage persistence
+         * - Accessibility: Focus management
+         * - Accessibility: Screen reader support for external links
+         */
+        (function() {
+            'use strict';
+
+            // 1. Configuration
+            const STORAGE_KEY = 'md_business_compass_tc_accepted';
+            const BANNER_ID = 'tc-banner';
+            
+            // 2. Check if already accepted
+            if (localStorage.getItem(STORAGE_KEY) === 'true') {
+                return; // Exit immediately if already accepted
+            }
+
+            // 3. Define CSS Styles
+            const styles = `
+                .tc-notification-banner {
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    background-color: #1b1b1b;
+                    color: #ffffff;
+                    z-index: 40000;
+                    padding: 1rem 0;
+                    box-shadow: 0 -4px 10px rgba(0,0,0,0.25);
+                    border-top: 4px solid #e5a000;
+                    font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+                }
+                .tc-notification-banner__inner {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 2rem;
+                    max-width: 90rem;
+                    margin-left: auto;
+                    margin-right: auto;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                }
+                .tc-notification-banner p {
+                    margin: 0;
+                    font-size: 0.9rem;
+                    line-height: 1.4;
+                }
+                .tc-notification-banner a {
+                    color: #ffffff;
+                    text-decoration: underline;
+                    font-weight: bold;
+                }
+                .tc-notification-banner a:hover {
+                    color: #e5a000;
+                }
+                .tc-notification-banner button {
+                    cursor: pointer;
+                    background-color: #ffffff;
+                    color: #1b1b1b;
+                    border: none;
+                    padding: 0.75rem 1.25rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 0.93rem;
+                    line-height: 0.9;
+                    border-radius: 0.25rem;
+                    flex-shrink: 0;
+                }
+                .tc-notification-banner button:hover {
+                    background-color: #f0f0f0;
+                    color: #005ea2;
+                }
+                /* Utility for screen readers */
+                .tc-sr-only {
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    padding: 0;
+                    margin: -1px;
+                    overflow: hidden;
+                    clip: rect(0, 0, 0, 0);
+                    white-space: nowrap;
+                    border: 0;
+                }
+                @media (max-width: 768px) {
+                    .tc-notification-banner {
+                        padding: 1rem;
+                    }
+                    .tc-notification-banner__inner {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: 1rem;
+                    }
+                    .tc-notification-banner button {
+                        width: 100%;
+                    }
+                }
+            `;
+
+            // 4. Define HTML Structure
+            const htmlContent = `
+                <div class="tc-notification-banner__inner">
+                    <p>
+                        Welcome to the Maryland Community Business Compass. By using this website, you acknowledge that you have read and understand 
+                        <a href="../legal/#how-it-works" target="_blank" rel="noopener noreferrer">How This Site Works<span class="tc-sr-only"> (opens in new tab)</span></a>, as well as these 
+                        <a href="../legal/" target="_blank" rel="noopener noreferrer">Terms and Conditions<span class="tc-sr-only"> (opens in new tab)</span></a> and agree to be bound by the terms, conditions, and notices therein.
+                    </p>
+                    <button type="button" id="tc-accept-btn">Accept</button>
+                </div>
+            `;
+
+            // 5. Injection Logic
+            function injectBanner() {
+                // Inject Styles
+                const styleSheet = document.createElement("style");
+                styleSheet.textContent = styles;
+                document.head.appendChild(styleSheet);
+
+                // Inject HTML
+                const bannerDiv = document.createElement("div");
+                bannerDiv.id = BANNER_ID;
+                bannerDiv.className = "tc-notification-banner";
+                // role="alertdialog" effectively communicates this is a blocking interaction 
+                // requiring user acknowledgment, which justifies the auto-focus.
+                bannerDiv.setAttribute("role", "alertdialog"); 
+                bannerDiv.setAttribute("aria-label", "Terms and Conditions Agreement");
+                bannerDiv.innerHTML = htmlContent;
+                
+                document.body.appendChild(bannerDiv);
+
+                // Bind Event Listener
+                const btn = document.getElementById('tc-accept-btn');
+                if (btn) {
+                    // Focus Management: Auto-focus the button on mount
+                    // We use a slight timeout to ensure the browser has rendered the element
+                    setTimeout(() => {
+                        btn.focus();
+                    }, 100);
+
+                    btn.addEventListener('click', function() {
+                        try {
+                            localStorage.setItem(STORAGE_KEY, 'true');
+                            
+                            // Remove banner
+                            bannerDiv.remove();
+                        } catch (e) {
+                            console.error('T&C Banner: Could not save to localStorage', e);
+                        }
+                    });
+                }
+            }
+
+            // 6. Run on Load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', injectBanner);
+            } else {
+                injectBanner();
+            }
+
+        })();
     </script>
 </body>
 </html>

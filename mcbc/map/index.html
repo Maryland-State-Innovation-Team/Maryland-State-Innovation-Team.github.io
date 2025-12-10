@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Locate the Opportunity - Maryland Community Business Compass</title>
-    
+    <link rel="icon" type="image/x-icon" href="./assets/favicon-CxEqIT3B.ico">
     <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
     <script>
         // 1. Initialize dataLayer and gtag immediately (Safe Shim)
@@ -38,8 +38,8 @@
                 console.warn('Could not load env.json, GA suppressed.', error);
             });
     </script>
-  <script type="module" crossorigin src="./assets/index-CW1kbhlK.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DCcqp_s_.css">
+  <script type="module" crossorigin src="./assets/index-CA_KRXn_.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-D5SlitWS.css">
 </head>
 <body class="bg-slate-100 text-slate-800">
     <select id="choropleth-select" class="hidden w-full p-2 rounded-md border-2 border-slate-300 focus:ring-slate-500 focus:border-slate-500">
@@ -54,9 +54,9 @@
             <p class="mt-2 text-slate-600 text-center">How would you like to see the data?</p>
 
             <div class="mt-6 grid grid-cols-1 gap-4">
-                <button data-mode="smartResearch" class="tour-choice-btn group border-2 border-slate-200 hover:border-blue-500 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-6 text-left transition flex items-center gap-4">
+                <button data-mode="smartResearch" class="tour-choice-btn group border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-6 text-left transition flex items-center gap-4">
                     <div class="flex-shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-slate-500 group-hover:text-blue-600" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m176-120-56-56 301-302-181-45 198-123-17-234 179 151 216-88-87 217 151 178-234-16-124 198-45-181-301 301Zm24-520-80-80 80-80 80 80-80 80Zm355 197 48-79 93 7-60-71 35-86-86 35-71-59 7 92-79 49 90 22 23 90Zm165 323-80-80 80-80 80 80-80 80ZM569-570Z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-slate-500 group-hover:text-[#005ea2]" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m176-120-56-56 301-302-181-45 198-123-17-234 179 151 216-88-87 217 151 178-234-16-124 198-45-181-301 301Zm24-520-80-80 80-80 80 80-80 80Zm355 197 48-79 93 7-60-71 35-86-86 35-71-59 7 92-79 49 90 22 23 90Zm165 323-80-80 80-80 80 80-80 80ZM569-570Z"></path></svg>
                     </div>
                     <div>
                         <span class="block font-semibold text-slate-700">Insights Mode</span>
@@ -64,13 +64,13 @@
                     </div>
                 </button>
 
-                <button data-mode="freeExplore" class="tour-choice-btn group border-2 border-slate-200 hover:border-slate-400 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-400 rounded-lg p-6 text-left transition flex items-center gap-4">
+                <button data-mode="freeExplore" class="tour-choice-btn group border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-slate-400 rounded-lg p-6 text-left transition flex items-center gap-4">
                     <div class="flex-shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-slate-500 group-hover:text-slate-600" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M120-120v-170h170v170H120Zm0-250v-170h170v170H120Zm0-250v-170h170v170H120Zm250 500v-170h170v170H370Zm0-250v-170h170v170H370Zm0-250v-170h170v170H370Zm250 500v-170h170v170H620Zm0-250v-170h170v170H620Zm0-250v-170h170v170H620Z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-slate-500 group-hover:text-[#005ea2]" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M120-120v-170h170v170H120Zm0-250v-170h170v170H120Zm0-250v-170h170v170H120Zm250 500v-170h170v170H370Zm0-250v-170h170v170H370Zm0-250v-170h170v170H370Zm250 500v-170h170v170H620Zm0-250v-170h170v170H620Zm0-250v-170h170v170H620Z"></path></svg>
                     </div>
                     <div>
                         <span class="block font-semibold text-slate-700">Explore Mode</span>
-                        <span class="mt-1 block text-sm text-slate-600">View all data layers and perform your own analysis.</span>
+                        <span class="mt-1 block text-sm text-slate-600">See all data at once and perform your own analysis.</span>
                     </div>
                 </button>
             </div>
@@ -82,23 +82,19 @@
             <button id="explore-back-btn" class="absolute top-4 left-4 text-slate-400 hover:text-slate-600 focus:outline-none" aria-label="Go back">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
             </button>
-            <h2 id="explore-heading" class="text-2xl font-bold text-slate-800 text-center mt-2">Explore Communities</h2>
+            <h2 id="explore-heading" class="text-2xl font-bold text-slate-800 text-center mt-2">Select a Location to Get Started</h2>
             <div class="mt-4 text-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 primary-blue mx-auto mb-4" viewBox="0 -960 960 960" fill="currentColor"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
                 <p class="text-slate-600 leading-relaxed">
-                    Search for an address or click on any community in Maryland to see detailed data, provider lists, and opportunities.
+                    Search for an address or click the map to view local insights and opportunities.
                 </p>
             </div>
-            <!-- <div class="mt-8 flex justify-between gap-4">
-                <button id="explore-skip-btn" class="do-not-show-button px-4 py-2 text-sm font-semibold text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition">
-                    Do not show this again
-                </button>
+            <div class="mt-8 flex items-center justify-between gap-4">
+                <label class="flex items-center gap-2 cursor-pointer p-1 -ml-1 rounded">
+                    <input type="checkbox" id="explore-dont-show-checkbox" class="h-5 w-5 text-blue-600 rounded border-gray-300">
+                    <span class="text-sm text-slate-600 select-none">Do not show this again</span>
+                </label>
                 <button id="explore-okay-btn" class="px-6 py-2 font-bold primary-blue-button rounded-lg shadow transition">
-                    Got it!
-                </button>
-            </div> -->
-            <div class="mt-8 flex justify-between gap-4">
-                <button id="explore-okay-btn" class="w-full px-6 py-2 font-bold primary-blue-button rounded-lg shadow transition">
                     Got it!
                 </button>
             </div>
@@ -114,26 +110,26 @@
     <div id="sector-modal-overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="modal-heading" aria-describedby="modal-description">
         <div id="sector-modal-content" class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-md text-center">
             <h2 id="modal-heading" class="text-2xl font-bold text-slate-800">Choose your Industry</h2>
-            <p id="modal-description" class="mt-2 text-slate-600">Select to see data relevant to your business type. Stay tuned for more industries in the future.</p>
+            <p id="modal-description" class="mt-2 text-slate-600">Select your business type to view tailored insights and data. Additional industries coming soon.</p>
             
             <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
                 
-                <button data-sector="childcare" class="sector-choice-btn group w-full border-2 border-slate-200 hover:border-[#b91c1c] hover:bg-[#f8dfe2] focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-4 md:p-6 text-center transition flex flex-row md:flex-col items-center justify-center gap-4 md:gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 h-10 w-10 md:h-12 md:w-12 text-slate-500 group-hover:text-[#b91c1c] md:mx-auto" fill="currentColor" viewBox="0 -960 960 960">
+                <button data-sector="childcare" class="sector-choice-btn group w-full border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-4 md:p-6 text-center transition flex flex-row md:flex-col items-center justify-center gap-4 md:gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 h-10 w-10 md:h-12 md:w-12 text-slate-500 group-hover:text-[#005ea2] md:mx-auto" fill="currentColor" viewBox="0 -960 960 960">
                         <path d="M580-490q-21 0-35.5-14.5T530-540q0-21 14.5-35.5T580-590q21 0 35.5 14.5T630-540q0 21-14.5 35.5T580-490Zm-200 0q-21 0-35.5-14.5T330-540q0-21 14.5-35.5T380-590q21 0 35.5 14.5T430-540q0 21-14.5 35.5T380-490Zm100 210q-60 0-108.5-33T300-400h360q-23 54-71.5 87T480-280Zm0 160q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-480q0-75 28.5-140.5t77-114q48.5-48.5 114-77T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm0-80q116 0 198-82t82-198q0-116-82-198t-198-82h-12q-6 0-12 2-6 6-8 13t-2 15q0 21 14.5 35.5T496-680q9 0 16.5-3t15.5-3q12 0 20 9t8 21q0 23-21.5 29.5T496-620q-45 0-77.5-32.5T386-730v-6q0-3 1-8-83 30-135 101t-52 163q0 116 82 198t198 82Zm0-280Z"/>
                     </svg>
                     <span class="block font-semibold text-slate-700">Child Care</span>
                 </button>
 
-                <button data-sector="fresh-food" class="sector-choice-btn group w-full border-2 border-slate-200 hover:border-green-500 hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-lg p-4 md:p-6 text-center transition flex flex-row md:flex-col items-center justify-center gap-4 md:gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 h-10 w-10 md:h-12 md:w-12 text-slate-500 group-hover:text-green-600 md:mx-auto" fill="currentColor" viewBox="0 -960 960 960">
+                <button data-sector="fresh-food" class="sector-choice-btn group w-full border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-green-500 rounded-lg p-4 md:p-6 text-center transition flex flex-row md:flex-col items-center justify-center gap-4 md:gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 h-10 w-10 md:h-12 md:w-12 text-slate-500 group-hover:text-[#005ea2] md:mx-auto" fill="currentColor" viewBox="0 -960 960 960">
                         <path d="M640-80q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170T640-80Zm0-80q66 0 113-47t47-113q0-66-47-113t-113-47q-66 0-113 47t-47 113q0 66 47 113t113 47Zm-480 0q-33 0-56.5-23.5T80-240v-304q0-8 1.5-16t4.5-16l80-184h-6q-17 0-28.5-11.5T120-800v-40q0-17 11.5-28.5T160-880h280q17 0 28.5 11.5T480-840v40q0 17-11.5 28.5T440-760h-6l66 152q-19 10-36 21t-32 25l-84-198h-96l-92 216v304h170q5 21 13.5 41.5T364-160H160Zm480-440q-42 0-71-29t-29-71q0-42 29-71t71-29v200q0-42 29-71t71-29q42 0 71 29t29 71H640Z"/>
                     </svg>
                     <span class="block font-semibold text-slate-700">Fresh Food</span>
                 </button>
             </div>
 
-            <button data-sector="other" class="sector-choice-btn group mt-4 w-full border-2 border-slate-200 hover:border-slate-400 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-400 rounded-lg p-4 text-center transition flex justify-center items-center">
+            <button data-sector="other" class="sector-choice-btn group mt-4 w-full border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-slate-400 rounded-lg p-4 text-center transition flex justify-center items-center">
                 <span class="font-semibold text-slate-700">Other / Not Sure</span>
             </button>
         </div>
@@ -257,6 +253,9 @@
                 <div id="top-right-controls" class="pointer-events-auto self-end md:self-auto">
                 </div>
             </div>
+            <button id="reset-onboarding-btn" class="absolute bottom-8 left-4 z-[900] bg-[#1b1b1b] text-white rounded-md p-1.5 shadow-md border-none hover:bg-[#4a4a4a] focus:outline-none focus:ring-2 focus:ring-white transition-colors" aria-label="Reset and view onboarding tour">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-27 25-47.5t55-20.5q32 0 48.5 17.5t16.5 42.5q0 19-14 35.5T512-532q-29 26-38.5 49t-9.5 53Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+            </button>
             <div id="map" class="h-full w-full z-0" tabindex="-1">
             </div>
 
@@ -294,5 +293,172 @@
             </button>
         </div>
     </div>
+    <script>
+        /**
+         * Injects a dismissible Terms & Conditions footer banner.
+         * Features:
+         * - LocalStorage persistence
+         * - Accessibility: Focus management
+         * - Accessibility: Screen reader support for external links
+         */
+        (function() {
+            'use strict';
+
+            // 1. Configuration
+            const STORAGE_KEY = 'md_business_compass_tc_accepted';
+            const BANNER_ID = 'tc-banner';
+            
+            // 2. Check if already accepted
+            if (localStorage.getItem(STORAGE_KEY) === 'true') {
+                return; // Exit immediately if already accepted
+            }
+
+            // 3. Define CSS Styles
+            const styles = `
+                .tc-notification-banner {
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    background-color: #1b1b1b;
+                    color: #ffffff;
+                    z-index: 40000;
+                    padding: 1rem 0;
+                    box-shadow: 0 -4px 10px rgba(0,0,0,0.25);
+                    border-top: 4px solid #e5a000;
+                    font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+                }
+                .tc-notification-banner__inner {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 2rem;
+                    max-width: 90rem;
+                    margin-left: auto;
+                    margin-right: auto;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                }
+                .tc-notification-banner p {
+                    margin: 0;
+                    font-size: 0.9rem;
+                    line-height: 1.4;
+                }
+                .tc-notification-banner a {
+                    color: #ffffff;
+                    text-decoration: underline;
+                    font-weight: bold;
+                }
+                .tc-notification-banner a:hover {
+                    color: #e5a000;
+                }
+                .tc-notification-banner button {
+                    cursor: pointer;
+                    background-color: #ffffff;
+                    color: #1b1b1b;
+                    border: none;
+                    padding: 0.75rem 1.25rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 0.93rem;
+                    line-height: 0.9;
+                    border-radius: 0.25rem;
+                    flex-shrink: 0;
+                }
+                .tc-notification-banner button:hover {
+                    background-color: #f0f0f0;
+                    color: #005ea2;
+                }
+                /* Utility for screen readers */
+                .tc-sr-only {
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    padding: 0;
+                    margin: -1px;
+                    overflow: hidden;
+                    clip: rect(0, 0, 0, 0);
+                    white-space: nowrap;
+                    border: 0;
+                }
+                @media (max-width: 768px) {
+                    .tc-notification-banner {
+                        padding: 1rem;
+                    }
+                    .tc-notification-banner__inner {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: 1rem;
+                    }
+                    .tc-notification-banner button {
+                        width: 100%;
+                    }
+                }
+            `;
+
+            // 4. Define HTML Structure
+            const htmlContent = `
+                <div class="tc-notification-banner__inner">
+                    <p>
+                        Welcome to the Maryland Community Business Compass. By using this website, you acknowledge that you have read and understand 
+                        <a href="../legal/#how-it-works" target="_blank" rel="noopener noreferrer">How This Site Works<span class="tc-sr-only"> (opens in new tab)</span></a>, as well as these 
+                        <a href="../legal/" target="_blank" rel="noopener noreferrer">Terms and Conditions<span class="tc-sr-only"> (opens in new tab)</span></a> and agree to be bound by the terms, conditions, and notices therein.
+                    </p>
+                    <button type="button" id="tc-accept-btn">Accept</button>
+                </div>
+            `;
+
+            // 5. Injection Logic
+            function injectBanner() {
+                // Inject Styles
+                const styleSheet = document.createElement("style");
+                styleSheet.textContent = styles;
+                document.head.appendChild(styleSheet);
+
+                // Inject HTML
+                const bannerDiv = document.createElement("div");
+                bannerDiv.id = BANNER_ID;
+                bannerDiv.className = "tc-notification-banner";
+                // role="alertdialog" effectively communicates this is a blocking interaction 
+                // requiring user acknowledgment, which justifies the auto-focus.
+                bannerDiv.setAttribute("role", "alertdialog"); 
+                bannerDiv.setAttribute("aria-label", "Terms and Conditions Agreement");
+                bannerDiv.innerHTML = htmlContent;
+                
+                document.body.appendChild(bannerDiv);
+
+                // Bind Event Listener
+                const btn = document.getElementById('tc-accept-btn');
+                if (btn) {
+                    // Focus Management: Auto-focus the button on mount
+                    // We use a slight timeout to ensure the browser has rendered the element
+                    setTimeout(() => {
+                        btn.focus();
+                    }, 100);
+
+                    btn.addEventListener('click', function() {
+                        try {
+                            localStorage.setItem(STORAGE_KEY, 'true');
+                            
+                            // Remove banner
+                            bannerDiv.remove();
+                        } catch (e) {
+                            console.error('T&C Banner: Could not save to localStorage', e);
+                        }
+                    });
+                }
+            }
+
+            // 6. Run on Load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', injectBanner);
+            } else {
+                injectBanner();
+            }
+
+        })();
+    </script>
 </body>
 </html>

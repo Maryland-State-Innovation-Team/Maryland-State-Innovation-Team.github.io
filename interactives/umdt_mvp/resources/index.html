@@ -95,8 +95,6 @@
             .usa-menu-btn { order: 2; margin-left: auto; display: inline-flex; align-items: center; }
             .usa-nav { order: 3; }
         }
-
-        /* NEW STYLES for Resource Page */
         
         /* Sticky sidebar for filters */
         .sticky-sidebar {
@@ -200,7 +198,7 @@
         }
         .filter-count.hidden { display: none; }
 
-        /* --- NEW DESIGN REF: HERO & SEARCH --- */
+        /* --- HERO & SEARCH --- */
         
         .hero-section {
             position: relative;
@@ -209,7 +207,7 @@
             background-image: url('../assets/bg-red.svg'); 
             background-size: cover;
             background-position: left center;
-            overflow: visible; /* UPDATED: Changed from 'hidden' to 'visible' to prevent clipping */
+            overflow: visible;
         }
 
         .hero-split-container {
@@ -222,12 +220,10 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            /* Mobile fix: Add padding to compensate for inner container's padding-x-0 */
             padding: 3rem 1.5rem;
         }
 
         .hero-right {
-            /* Mobile fix: Hide decorative image to save space */
             display: none;
             flex: 1;
             position: relative;
@@ -244,7 +240,7 @@
 
         @media (min-width: 1024px) {
             .hero-right {
-                display: block; /* Restore image on Desktop */
+                display: block;
             }
             .hero-split-container {
                 flex-direction: row;
@@ -261,19 +257,17 @@
             }
         }
 
-        /* Updated Search Card styling for the nested layout */
+        /* Search Card styling for the nested layout */
         .search-card-container {
             width: 100%;
             position: relative;
             z-index: 50;
             margin-top: 2rem;
-            padding: 0; /* Remove horizontal padding, let max-width handle it */
+            padding: 0;
         }
         
         @media (min-width: 1024px) {
-            .search-card-container {                
-                /* Optional: Pull it down slightly to overlap bottom edge if desired, 
-                   otherwise just keep it centered in the red area. */
+            .search-card-container {
                 margin-bottom: -6rem; 
             }
         }
@@ -282,7 +276,6 @@
             background: white;
             border-radius: 0.5rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            /* Mobile fix: Sync padding with compact view (0.75rem) */
             padding: 0.75rem;
         }
         @media (min-width: 768px) {
@@ -353,7 +346,6 @@
             content: '';
             width: 1rem;
             height: 1rem;
-            /* Updated SVG: Color #2C2C2C, Size increased */
             background-image: url("data:image/svg+xml;charset=US-ASCII,%3csvg%20xmlns%3d%27http%3a%2f%2fwww.w3.org%2f2000%2fsvg%27%20width%3d%2724%27%20height%3d%2724%27%20viewBox%3d%270%200%2024%2024%27%20fill%3d%27none%27%20stroke%3d%27%232C2C2C%27%20stroke-width%3d%271.5%27%20stroke-linecap%3d%27round%27%20stroke-linejoin%3d%27round%27%3e%3cpolyline%20points%3d%276%209%2012%2015%2018%209%27%2f%3e%3c%2fsvg%3e");
             background-repeat: no-repeat;
             background-position: center;
@@ -411,7 +403,6 @@
             margin-top: 2rem;
             padding-top: 1rem;
             border-top: 1px solid #dfe1e2;
-            /* Mobile fix: Add gap to prevent button overlap */
             gap: 1rem;
         }
 
@@ -427,11 +418,9 @@
             background: white;
             border: 1px solid #dfe1e2;
             border-radius: 0.5rem;
-            /* Mobile fix: Reduced padding */
             padding: 1.25rem;
             display: grid;
             gap: 1.5rem;
-            /* Mobile fix: Prevent grid blowout */
             max-width: 100%;
         }
 
@@ -453,7 +442,6 @@
             border-radius: 4px;
         }
 
-        /* Mobile fix: Allow container to shrink below content size */
         .resource-main {
             min-width: 0;
         }
@@ -462,7 +450,6 @@
             margin-top: 0;
             font-size: 1.5rem;
             color: #1b1b1b;
-            /* Mobile fix: Force long words/titles to wrap */
             overflow-wrap: break-word;
             word-wrap: break-word;
             hyphens: auto;
@@ -475,7 +462,6 @@
         }
         
         /* Organization Contacts Table inside Card */
-        /* Mobile fix: Wrapper for horizontal scrolling */
         .table-scroll-wrapper {
             width: 100%;
             overflow-x: auto;
@@ -558,7 +544,7 @@
             visibility: visible !important;
         }
 
-        /* FIX: Responsive Error Text Positioning */
+        /* Responsive Error Text Positioning */
         #view-results .form-col-topics {
             position: relative; 
         }

@@ -2,6 +2,7 @@
     {
         "id": 1,
         "organization": "Allegany County Economic Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Allegany County"
@@ -12,13 +13,14 @@
         "address_zip": "21502",
         "url": "www.alleganyworks.org",
         "logo_link": "https://alleganyworks-production.s3.amazonaws.com/e48064c4-2eeb-4408-9463-4d4bfd568676/Allegany_County_ECD_Logo_Color.png",
+        "logo_file": "logos/1.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -37,6 +39,7 @@
     {
         "id": 2,
         "organization": "Anne Arundel Economic Development Corp",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Anne Arundel County"
@@ -47,13 +50,14 @@
         "address_zip": "21401",
         "url": "www.aaedc.org",
         "logo_link": "https://www.aaedc.org/wp-content/themes/AAEDC/img/AAEDC-Stacked-Logo-2017.png",
+        "logo_file": "logos/2.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -72,6 +76,7 @@
     {
         "id": 3,
         "organization": "Baltimore Development Corporation (BDC)",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Baltimore City"
@@ -82,13 +87,14 @@
         "address_zip": "21201",
         "url": "https://www.baltimoredevelopment.com/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbloWqiJ7AGiJ9Z25BUTvDxmYYvR7qOPkQpQ&s",
+        "logo_file": "logos/3.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -107,6 +113,7 @@
     {
         "id": 4,
         "organization": "Baltimore County Department of Economic Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Baltimore County"
@@ -117,13 +124,14 @@
         "address_zip": "21204",
         "url": "www.baltimorecountymd.gov/business",
         "logo_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Seal_of_Baltimore_County%2C_Maryland.svg/1200px-Seal_of_Baltimore_County%2C_Maryland.svg.png",
+        "logo_file": "logos/4.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -142,6 +150,7 @@
     {
         "id": 5,
         "organization": "Calvert County Department of Econonomic Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Calvert County"
@@ -152,13 +161,14 @@
         "address_zip": "20678",
         "url": "www.choosecalvert.com",
         "logo_link": "https://www.calvertcountymd.gov/ImageRepository/Document?documentID=44250",
+        "logo_file": "logos/5.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -177,6 +187,7 @@
     {
         "id": 6,
         "organization": "Caroline County Economic Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Caroline County"
@@ -187,13 +198,14 @@
         "address_zip": "21629",
         "url": "http://www.carolinebusiness.com/",
         "logo_link": "https://apps.esrgc.org/img/logos/You%20Belong%20Here%20-%20Economic%20Development.jpg",
+        "logo_file": "logos/6.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -212,6 +224,7 @@
     {
         "id": 7,
         "organization": "Carroll County Department of Economic Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Carroll County"
@@ -222,13 +235,14 @@
         "address_zip": "21157",
         "url": "https://carrollbiz.org/",
         "logo_link": "https://www.carrollcountymd.gov/media/zqwjzkr0/2024-economic-dev_horizontal.png?rmode=max&width=500",
+        "logo_file": "logos/7.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -247,6 +261,7 @@
     {
         "id": 8,
         "organization": "Cecil County Office of Economic Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Cecil County"
@@ -257,13 +272,14 @@
         "address_zip": "21921",
         "url": "https://www.ccgov.org/government/economic-development",
         "logo_link": "https://www.cecil.edu/wp-content/uploads/ccmed-logo.png",
+        "logo_file": "logos/8.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -282,6 +298,7 @@
     {
         "id": 9,
         "organization": "Charles County Economic Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Charles County"
@@ -292,13 +309,14 @@
         "address_zip": "20695",
         "url": "www.meetcharlescounty.com",
         "logo_link": "https://images.zoomprospector.com/client/assets/CHARLESCOUNTY/logoProperties.png",
+        "logo_file": "logos/9.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -317,6 +335,7 @@
     {
         "id": 10,
         "organization": "Dorchester County Economic Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Dorchester County"
@@ -327,13 +346,14 @@
         "address_zip": "21613",
         "url": "www.choosedorchester.org",
         "logo_link": "https://choosedorchester.org/wp-content/uploads/2023/03/Logo-1200_675-4.png",
+        "logo_file": "logos/10.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -352,6 +372,7 @@
     {
         "id": 11,
         "organization": "City of Frederick Office of Economic Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "City",
         "area": [
             "Frederick County"
@@ -362,13 +383,14 @@
         "address_zip": "21701",
         "url": "https://www.businessinfrederick.com/",
         "logo_link": "https://www.cityoffrederickmd.gov/ImageRepository/Document?documentID=21291",
+        "logo_file": "logos/11.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -387,6 +409,7 @@
     {
         "id": 12,
         "organization": "Frederick County Office of Economic Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Frederick County"
@@ -397,13 +420,14 @@
         "address_zip": "21701",
         "url": "www.discoverfrederickmd.com",
         "logo_link": "https://www.discoverfrederickmd.com/ImageRepository/Document?documentID=70",
+        "logo_file": "logos/12.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -422,6 +446,7 @@
     {
         "id": 13,
         "organization": "Garrett County Department of Business Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Garrett County"
@@ -432,13 +457,14 @@
         "address_zip": "21550",
         "url": "https://business.garrettcounty.org",
         "logo_link": "https://w7.pngwing.com/pngs/127/254/png-transparent-garrett-county-government-garrett-county-health-department-maryland-department-of-labor-licensing-and-regulation-others-logo-appalachian-regional-commission-organism.png",
+        "logo_file": "logos/13.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -457,6 +483,7 @@
     {
         "id": 14,
         "organization": "Harford County Office of Community & Economic Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Harford County"
@@ -467,13 +494,14 @@
         "address_zip": "21078",
         "url": "https://www.harfordcountymd.gov/2474/Community-Economic-Development",
         "logo_link": "https://chambermaster.blob.core.windows.net/images/members/2776/518/MemLogo_Untitled%20design%20(7).png",
+        "logo_file": "logos/14.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -492,6 +520,7 @@
     {
         "id": 15,
         "organization": "Howard County Economic Development Authority",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Howard County"
@@ -502,13 +531,14 @@
         "address_zip": "21046",
         "url": "https://howardcountyeda.org/",
         "logo_link": "https://siteselectorsguild.com/wp-content/uploads/2022/02/Howard-County-ED-logo-e1674057973449.png",
+        "logo_file": "logos/15.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -527,6 +557,7 @@
     {
         "id": 16,
         "organization": "Kent County Economic & Tourism Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Kent County"
@@ -537,13 +568,14 @@
         "address_zip": "21620",
         "url": "kentcounty.com/business",
         "logo_link": "https://usrcmd.org/wp-content/uploads/2020/12/logo-kent-economic-development-1.png",
+        "logo_file": "logos/16.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -562,6 +594,7 @@
     {
         "id": 17,
         "organization": "Montgomery County Economic Development Corporation",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Montgomery County"
@@ -572,13 +605,14 @@
         "address_zip": "20852",
         "url": "https://thinkmoco.com/",
         "logo_link": "https://www.montgomerycancode.com/wp-content/uploads/2025/04/MontgomeryCountyEconomicDevelopmentCorporationMarylandLOGO-768x212-1.png",
+        "logo_file": "logos/17.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": "240-641-6700",
@@ -588,7 +622,8 @@
     },
     {
         "id": 18,
-        "organization": "City of Greenbelt",
+        "organization": "City of Greenbelt Economic Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "City",
         "area": [
             "Prince George's County"
@@ -599,13 +634,14 @@
         "address_zip": "20770",
         "url": "https://www.greenbeltmd.gov/government/departments/economic-development",
         "logo_link": "https://content.govdelivery.com/attachments/fancy_images/MDGREENBELT/2018/07/2054636/logo_original.png",
+        "logo_file": "logos/18.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -624,6 +660,7 @@
     {
         "id": 19,
         "organization": "Prince George's County Economic Development Corporation",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Prince George's County"
@@ -634,13 +671,14 @@
         "address_zip": "20774",
         "url": "www.pgcedc.com",
         "logo_link": "https://images.squarespace-cdn.com/content/v1/5fff39db8c48c31f0c404641/1628869711644-M422DQH6IXF2UTSRMP83/Prince+George%27s+County+Economic+Development+Corporation+%281%29.png",
+        "logo_file": "logos/19.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -659,6 +697,7 @@
     {
         "id": 20,
         "organization": "Queen Anne's County Department of Economic Development and Tourism",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Queen Anne's County"
@@ -669,13 +708,14 @@
         "address_zip": "21619",
         "url": "choosequeenannes.com",
         "logo_link": "https://6915554.fs1.hubspotusercontent-na1.net/hubfs/6915554/QAC-EDandTourism-DraftSet_QAC-EDT-logo-wide-color-3.png",
+        "logo_file": "logos/20.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -694,6 +734,7 @@
     {
         "id": 21,
         "organization": "Somerset County Economic Development Commission",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Somerset County"
@@ -704,13 +745,14 @@
         "address_zip": "21853",
         "url": "https://somersetcountyedc.org/",
         "logo_link": "https://somersetcountyedc.org/images/logo.png",
+        "logo_file": "logos/21.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -729,6 +771,7 @@
     {
         "id": 22,
         "organization": "St. Mary's County Department of Economic Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "St. Mary's County"
@@ -739,13 +782,14 @@
         "address_zip": "20650",
         "url": "https://www.yesstmarysmd.com/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo4TVq7VUI-jZGTYpUoDi2ToPp5syXyp4UAg&s",
+        "logo_file": "logos/22.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": "301-475-4200 x1400",
@@ -756,6 +800,7 @@
     {
         "id": 23,
         "organization": "Talbot County Office of Economic Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Talbot County"
@@ -766,13 +811,14 @@
         "address_zip": "21601",
         "url": "https://talbotworks.org/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6fpsEhdff5LEDW13v7P2aVHblnMl6ft9vcg&s",
+        "logo_file": "logos/23.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -791,6 +837,7 @@
     {
         "id": 24,
         "organization": "Washington County Department of Business Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Washington County"
@@ -801,13 +848,14 @@
         "address_zip": "21740",
         "url": "https://www.washco-md.net/business-development/",
         "logo_link": "https://www.washco-md.net/wp-content/uploads/elementor/thumbs/DBED-q5n7vdywehmnnjtvofw4gwcxkrpingz5dsejlskxgw.webp",
+        "logo_file": "logos/24.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -826,6 +874,7 @@
     {
         "id": 25,
         "organization": "Salisbury-Wicomico Economic Development Inc",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Wicomico County"
@@ -836,13 +885,14 @@
         "address_zip": "21803",
         "url": "www.swed.org",
         "logo_link": "https://lirp.cdn-website.com/e8f99108/dms3rep/multi/opt/SWED-Logo-H-640w.png",
+        "logo_file": "logos/25.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -861,6 +911,7 @@
     {
         "id": 26,
         "organization": "Worcester County Economic Development",
+        "description": "Economic development offices can provide free guidance to help you start or grow your business by connecting you with funding opportunities, training, planning assistance, and local resources.",
         "type": "County",
         "area": [
             "Worcester County"
@@ -871,13 +922,14 @@
         "address_zip": "21863",
         "url": "https://choosemarylandscoast.org/",
         "logo_link": "https://caresapp.chooseworcester.org/images/logo-worcester-county.png",
+        "logo_file": "logos/26.jpg",
         "question_tags": [
-            "Networking",
-            "Guidance and Support",
-            "Find a Site/Location",
-            "Find Funding",
             "Permits and Licensing",
-            "Create a Business Plan"
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
         ],
         "business_category": "All",
         "phone": null,
@@ -896,6 +948,7 @@
     {
         "id": 27,
         "organization": "Maryland Department of Commerce",
+        "description": "The Maryland Department of Commerce provides funding programs and business resources to help entrepreneurs start and grow a business in Maryland.",
         "type": "State",
         "area": [
             "Maryland"
@@ -906,6 +959,7 @@
         "address_zip": "21202",
         "url": "commerce.maryland.gov",
         "logo_link": "https://medco-corp.com/wp-content/uploads/2024/02/Untitled-design-5-e1707232914750-aspect-ratio-137-137.png",
+        "logo_file": "logos/27.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -926,6 +980,7 @@
     {
         "id": 28,
         "organization": "Maryland Office of Child Care",
+        "description": "The Maryland Office of Child Care oversees licensing, quality standards, and financial assistance for child care across Maryland.",
         "type": "State",
         "area": [
             "Maryland"
@@ -936,6 +991,7 @@
         "address_zip": null,
         "url": "https://marylandchild.org/contact-us/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
+        "logo_file": "logos/28.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -948,16 +1004,18 @@
     {
         "id": 29,
         "organization": "Office of Child Care Region 1 (Anne Arundel County)",
+        "description": "Regional licensing offices for the Maryland Office of Child Care can help you navigate the licensing process, connect you with required training, and provide guidance on meeting state health and safety standards for your child care program.",
         "type": "County",
         "area": [
             "Anne Arundel County"
         ],
-        "address": "49 Old Solomons Island Road, Suite 206\r\n\r\n",
+        "address": "49 Old Solomons Island Road, Suite 206\n\n",
         "address_city": "Annapolis",
         "address_state": "Maryland",
         "address_zip": "21401",
         "url": "https://earlychildhood.marylandpublicschools.org/region-1-anne-arundel-county",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
+        "logo_file": "logos/28.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1055,6 +1113,7 @@
     {
         "id": 42,
         "organization": "Office of Child Care Region 2 (Baltimore City)",
+        "description": "Regional licensing offices for the Maryland Office of Child Care can help you navigate the licensing process, connect you with required training, and provide guidance on meeting state health and safety standards for your child care program.",
         "type": "City",
         "area": [
             "Baltimore City"
@@ -1065,6 +1124,7 @@
         "address_zip": "21215",
         "url": "https://earlychildhood.marylandpublicschools.org/region-2-baltimore-city",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
+        "logo_file": "logos/28.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1077,6 +1137,7 @@
     {
         "id": 43,
         "organization": "Office of Child Care Region 3 (Baltimore County Office)",
+        "description": "Regional licensing offices for the Maryland Office of Child Care can help you navigate the licensing process, connect you with required training, and provide guidance on meeting state health and safety standards for your child care program.",
         "type": "County",
         "area": [
             "Baltimore County"
@@ -1087,6 +1148,7 @@
         "address_zip": "21204",
         "url": "https://earlychildhood.marylandpublicschools.org/region-3-baltimore-county",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
+        "logo_file": "logos/28.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1219,6 +1281,7 @@
     {
         "id": 61,
         "organization": "Office of Child Care Region 4 (Prince George's County)",
+        "description": "Regional licensing offices for the Maryland Office of Child Care can help you navigate the licensing process, connect you with required training, and provide guidance on meeting state health and safety standards for your child care program.",
         "type": "County",
         "area": [
             "Prince George's County"
@@ -1229,6 +1292,7 @@
         "address_zip": "20785",
         "url": "https://earlychildhood.marylandpublicschools.org/region-4-prince-georges-county",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
+        "logo_file": "logos/28.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1360,7 +1424,8 @@
     },
     {
         "id": 79,
-        "organization": "Office of Child Care Region 5 (Montgomery County)\r\n",
+        "organization": "Office of Child Care Region 5 (Montgomery County)\n",
+        "description": "Regional licensing offices for the Maryland Office of Child Care can help you navigate the licensing process, connect you with required training, and provide guidance on meeting state health and safety standards for your child care program.",
         "type": "County",
         "area": [
             "Montgomery County"
@@ -1371,6 +1436,7 @@
         "address_zip": "20850",
         "url": "https://earlychildhood.marylandpublicschools.org/region-5-montgomery-county",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
+        "logo_file": "logos/28.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1517,6 +1583,7 @@
     {
         "id": 99,
         "organization": "Office of Child Care Region 6 (Howard County)",
+        "description": "Regional licensing offices for the Maryland Office of Child Care can help you navigate the licensing process, connect you with required training, and provide guidance on meeting state health and safety standards for your child care program.",
         "type": "County",
         "area": [
             "Howard County"
@@ -1527,6 +1594,7 @@
         "address_zip": "21043",
         "url": "https://earlychildhood.marylandpublicschools.org/region-6-howard-county",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
+        "logo_file": "logos/28.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1596,18 +1664,20 @@
     {
         "id": 108,
         "organization": "Office of Child Care Region 7 Main Office (Washington County)",
+        "description": "Regional licensing offices for the Maryland Office of Child Care can help you navigate the licensing process, connect you with required training, and provide guidance on meeting state health and safety standards for your child care program.",
         "type": "County",
         "area": [
             "Allegany County",
             "Garrett County",
             "Washington County"
         ],
-        "address": "1075C Sherman Avenue\r\n",
+        "address": "1075C Sherman Avenue\n",
         "address_city": "Hagerstown",
         "address_state": "Maryland",
         "address_zip": "21740",
         "url": "https://earlychildhood.marylandpublicschools.org/region-7-western-maryland-allegany-garrett-and-washington-counties",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
+        "logo_file": "logos/28.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1655,7 +1725,8 @@
     },
     {
         "id": 114,
-        "organization": "Office of Child Care Region 7 Allegany County Field Office\r\n",
+        "organization": "Office of Child Care Region 7 Allegany County Field Office\n",
+        "description": "Regional licensing offices for the Maryland Office of Child Care can help you navigate the licensing process, connect you with required training, and provide guidance on meeting state health and safety standards for your child care program.",
         "type": "County",
         "area": [
             "Allegany County"
@@ -1666,6 +1737,7 @@
         "address_zip": "21502",
         "url": "https://earlychildhood.marylandpublicschools.org/region-7-western-maryland-allegany-garrett-and-washington-counties",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
+        "logo_file": "logos/28.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1685,7 +1757,8 @@
     },
     {
         "id": 115,
-        "organization": "Office of Child Care Region 8 (Upper Shore Office)\r\n",
+        "organization": "Office of Child Care Region 8 (Upper Shore Office)\n",
+        "description": "Regional licensing offices for the Maryland Office of Child Care can help you navigate the licensing process, connect you with required training, and provide guidance on meeting state health and safety standards for your child care program.",
         "type": "County",
         "area": [
             "Caroline County",
@@ -1700,6 +1773,7 @@
         "address_zip": "21601",
         "url": "https://earlychildhood.marylandpublicschools.org/region-8-upper-shore-office-caroline-dorchester-kent-queen-annes-talbot-counties",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
+        "logo_file": "logos/28.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1741,25 +1815,27 @@
                 "title": "Licensing Specialist",
                 "phone": "410-819-5801",
                 "fax": null,
-                "email": "cheryl.willis@maryland.gov"
+                "email": "cheryl.willis@maryland.govRetry"
             }
         ]
     },
     {
         "id": 121,
         "organization": "Office of Child Care Region 9 (Lower Shore Office)",
+        "description": "Regional licensing offices for the Maryland Office of Child Care can help you navigate the licensing process, connect you with required training, and provide guidance on meeting state health and safety standards for your child care program.",
         "type": "County",
         "area": [
             "Somerset County",
             "Wicomico County",
             "Worcester County"
         ],
-        "address": "201 Baptist Street, Suite 32 Multi-Service Building, 2nd Floor\r\n\r\n",
+        "address": "201 Baptist Street, Suite 32 Multi-Service Building, 2nd Floor\n\n",
         "address_city": "Salisbury",
         "address_state": "Maryland",
         "address_zip": "21801",
         "url": "https://earlychildhood.marylandpublicschools.org/region-9-lower-shore-office-somerset-wicomico-and-worcester-counties",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
+        "logo_file": "logos/28.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1801,18 +1877,20 @@
     {
         "id": 126,
         "organization": "Office of Child Care Region 10  (Southern Maryland Office)",
+        "description": "Regional licensing offices for the Maryland Office of Child Care can help you navigate the licensing process, connect you with required training, and provide guidance on meeting state health and safety standards for your child care program.",
         "type": "County",
         "area": [
             "Calvert County",
             "Charles County",
             "St. Mary's County"
         ],
-        "address": "41670 Courthouse Drive P.O. Box 1709\r\n\r\n",
+        "address": "41670 Courthouse Drive P.O. Box 1709\n\n",
         "address_city": "Leonardtown",
         "address_state": "Maryland",
         "address_zip": "20650",
         "url": "https://earlychildhood.marylandpublicschools.org/region-10-southern-maryland-office-calvert-charles-and-st-marys-counties",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
+        "logo_file": "logos/28.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1924,6 +2002,7 @@
     {
         "id": 141,
         "organization": "Office of Child Care Region 11 (Cecil and Harford Counties)",
+        "description": "Regional licensing offices for the Maryland Office of Child Care can help you navigate the licensing process, connect you with required training, and provide guidance on meeting state health and safety standards for your child care program.",
         "type": "County",
         "area": [
             "Cecil County",
@@ -1935,11 +2014,12 @@
         "address_zip": "21009",
         "url": "https://earlychildhood.marylandpublicschools.org/region-11-north-central-office-cecil-and-harford-counties",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
+        "logo_file": "logos/28.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
         "business_category": "Child Care",
-        "phone": "410-569-2879\r\n\u200bToll free 1-800-343-0955",
+        "phone": "410-569-2879\n\u200bToll free 1-800-343-0955",
         "fax": "410-569-8658",
         "email": "occ11harf.msde@maryland.gov",
         "contacts": [
@@ -2004,6 +2084,7 @@
     {
         "id": 150,
         "organization": "Office of Child Care Region 12 (Frederick County)",
+        "description": "Regional licensing offices for the Maryland Office of Child Care can help you navigate the licensing process, connect you with required training, and provide guidance on meeting state health and safety standards for your child care program.",
         "type": "County",
         "area": [
             "Frederick County"
@@ -2014,6 +2095,7 @@
         "address_zip": "21703",
         "url": "https://earlychildhood.marylandpublicschools.org/region-12-frederick-county",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
+        "logo_file": "logos/28.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -2089,7 +2171,8 @@
     },
     {
         "id": 160,
-        "organization": "Office of Child Care Region 13 (Carroll County)\r\n",
+        "organization": "Office of Child Care Region 13 (Carroll County)\n",
+        "description": "Regional licensing offices for the Maryland Office of Child Care can help you navigate the licensing process, connect you with required training, and provide guidance on meeting state health and safety standards for your child care program.",
         "type": "County",
         "area": [
             "Carroll County"
@@ -2100,6 +2183,7 @@
         "address_zip": "21784",
         "url": "https://earlychildhood.marylandpublicschools.org/region-13-carroll-county",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
+        "logo_file": "logos/28.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -2148,6 +2232,7 @@
     {
         "id": 166,
         "organization": "Maryland Small Business Development Center (Western Region)",
+        "description": "Maryland Small Business Development Centers (SBDCs) provide free one-on-one business consulting and  training to help entrepreneurs start, grow, and manage their businesses.",
         "type": "County",
         "area": [
             "Allegany County",
@@ -2160,13 +2245,14 @@
         "address_zip": null,
         "url": "https://www.marylandsbdc.org/locations/western-region/western-staff",
         "logo_link": "https://s3.amazonaws.com/bb-cms/AppData/Websites/1076/Images/pages/Maryland%20SBDC%20Logo.png",
+        "logo_file": "logos/166.jpg",
         "question_tags": [
-            "Permits and Licensing",
             "Find Funding",
             "Networking",
-            "Create a Business Plan",
+            "Business Operations and Planning",
             "Find a Site/Location",
-            "Guidance and Support"
+            "Getting Started",
+            "Permits and Licensing"
         ],
         "business_category": "All",
         "phone": null,
@@ -2199,6 +2285,7 @@
     {
         "id": 169,
         "organization": "Maryland Small Business Development Center (Northern Region)",
+        "description": "Maryland Small Business Development Centers (SBDCs) provide free one-on-one business consulting and  training to help entrepreneurs start, grow, and manage their businesses.",
         "type": "County",
         "area": [
             "Frederick County",
@@ -2212,13 +2299,14 @@
         "address_zip": null,
         "url": "https://www.marylandsbdc.org/locations/northern-region/staff",
         "logo_link": "https://s3.amazonaws.com/bb-cms/AppData/Websites/1076/Images/pages/Maryland%20SBDC%20Logo.png",
+        "logo_file": "logos/166.jpg",
         "question_tags": [
-            "Permits and Licensing",
             "Find Funding",
             "Networking",
-            "Create a Business Plan",
+            "Business Operations and Planning",
             "Find a Site/Location",
-            "Guidance and Support"
+            "Getting Started",
+            "Permits and Licensing"
         ],
         "business_category": "All",
         "phone": null,
@@ -2265,6 +2353,7 @@
     {
         "id": 174,
         "organization": "Maryland Small Business Development Center (Baltimore Region)",
+        "description": "Maryland Small Business Development Centers (SBDCs) provide free one-on-one business consulting and  training to help entrepreneurs start, grow, and manage their businesses.",
         "type": "County",
         "area": [
             "Baltimore City",
@@ -2276,13 +2365,14 @@
         "address_zip": null,
         "url": "https://www.marylandsbdc.org/locations/baltimore-region/staff",
         "logo_link": "https://s3.amazonaws.com/bb-cms/AppData/Websites/1076/Images/pages/Maryland%20SBDC%20Logo.png",
+        "logo_file": "logos/166.jpg",
         "question_tags": [
-            "Permits and Licensing",
             "Find Funding",
             "Networking",
-            "Create a Business Plan",
+            "Business Operations and Planning",
             "Find a Site/Location",
-            "Guidance and Support"
+            "Getting Started",
+            "Permits and Licensing"
         ],
         "business_category": "All",
         "phone": null,
@@ -2329,6 +2419,7 @@
     {
         "id": 179,
         "organization": "Maryland Small Business Development Center (Eastern Region)",
+        "description": "Maryland Small Business Development Centers (SBDCs) provide free one-on-one business consulting and  training to help entrepreneurs start, grow, and manage their businesses.",
         "type": "County",
         "area": [
             "Caroline County",
@@ -2340,19 +2431,20 @@
             "Wicomico County",
             "Worcester County"
         ],
-        "address": "Perdue School of Business - Salisbury University 215 East Campus Complex\r\n\r\n",
+        "address": "Perdue School of Business - Salisbury University 215 East Campus Complex\n\n",
         "address_city": "Salisbury",
         "address_state": "Maryland",
         "address_zip": "21801",
         "url": "https://www.marylandsbdc.org/locations/eastern-region",
         "logo_link": "https://s3.amazonaws.com/bb-cms/AppData/Websites/1076/Images/pages/Maryland%20SBDC%20Logo.png",
+        "logo_file": "logos/166.jpg",
         "question_tags": [
-            "Permits and Licensing",
             "Find Funding",
             "Networking",
-            "Create a Business Plan",
+            "Business Operations and Planning",
             "Find a Site/Location",
-            "Guidance and Support"
+            "Getting Started",
+            "Permits and Licensing"
         ],
         "business_category": "All",
         "phone": "410-548-4419",
@@ -2392,6 +2484,7 @@
     {
         "id": 180,
         "organization": "Maryland Small Business Development Center (Eastern Region), Chesapeake College",
+        "description": "Maryland Small Business Development Centers (SBDCs) provide free one-on-one business consulting and  training to help entrepreneurs start, grow, and manage their businesses.",
         "type": "County",
         "area": [
             "Caroline County",
@@ -2403,19 +2496,20 @@
             "Wicomico County",
             "Worcester County"
         ],
-        "address": "Chesapeake College\r\nEconomic Development Center \u2013 EDC\r\nP.O. Box 8\r\n1000 College Circle",
+        "address": "Chesapeake College\nEconomic Development Center \u2013 EDC\nP.O. Box 8\n1000 College Circle",
         "address_city": "Wye Mills",
         "address_state": "Maryland",
         "address_zip": "21679",
         "url": "https://www.marylandsbdc.org/locations/eastern-region",
         "logo_link": "https://s3.amazonaws.com/bb-cms/AppData/Websites/1076/Images/pages/Maryland%20SBDC%20Logo.png",
+        "logo_file": "logos/166.jpg",
         "question_tags": [
-            "Permits and Licensing",
             "Find Funding",
             "Networking",
-            "Create a Business Plan",
+            "Business Operations and Planning",
             "Find a Site/Location",
-            "Guidance and Support"
+            "Getting Started",
+            "Permits and Licensing"
         ],
         "business_category": "All",
         "phone": "410-822-5400 ext. 2340",
@@ -2426,6 +2520,7 @@
     {
         "id": 185,
         "organization": "Maryland Small Business Development Center (Corridor Region)",
+        "description": "Maryland Small Business Development Centers (SBDCs) provide free one-on-one business consulting and  training to help entrepreneurs start, grow, and manage their businesses.",
         "type": "County",
         "area": [
             "Anne Arundel County",
@@ -2439,13 +2534,14 @@
         "address_zip": null,
         "url": "https://www.marylandsbdc.org/locations/corridor-region/corridor-staff",
         "logo_link": "https://s3.amazonaws.com/bb-cms/AppData/Websites/1076/Images/pages/Maryland%20SBDC%20Logo.png",
+        "logo_file": "logos/166.jpg",
         "question_tags": [
-            "Permits and Licensing",
             "Find Funding",
             "Networking",
-            "Create a Business Plan",
+            "Business Operations and Planning",
             "Find a Site/Location",
-            "Guidance and Support"
+            "Getting Started",
+            "Permits and Licensing"
         ],
         "business_category": "All",
         "phone": null,
@@ -2513,6 +2609,7 @@
     {
         "id": 193,
         "organization": "Maryland Small Business Development Center (Southern Region)",
+        "description": "Maryland Small Business Development Centers (SBDCs) provide free one-on-one business consulting and  training to help entrepreneurs start, grow, and manage their businesses.",
         "type": "County",
         "area": [
             "Charles County"
@@ -2523,13 +2620,14 @@
         "address_zip": null,
         "url": null,
         "logo_link": "https://s3.amazonaws.com/bb-cms/AppData/Websites/1076/Images/pages/Maryland%20SBDC%20Logo.png",
+        "logo_file": "logos/166.jpg",
         "question_tags": [
-            "Permits and Licensing",
             "Find Funding",
             "Networking",
-            "Create a Business Plan",
+            "Business Operations and Planning",
             "Find a Site/Location",
-            "Guidance and Support"
+            "Getting Started",
+            "Permits and Licensing"
         ],
         "business_category": "All",
         "phone": null,
@@ -2583,6 +2681,7 @@
     {
         "id": 199,
         "organization": "Maryland Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "State",
         "area": [
             "Maryland"
@@ -2593,9 +2692,10 @@
         "address_zip": "21401",
         "url": "https://www.mdchamber.org/",
         "logo_link": "https://growthzonecmsprodeastus.azureedge.net/sites/47/2017/09/Maryland-Chamber-logo.png",
+        "logo_file": "logos/199.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-269-0642",
@@ -2606,6 +2706,7 @@
     {
         "id": 200,
         "organization": "Baltimore City Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Baltimore City"
@@ -2616,9 +2717,10 @@
         "address_zip": "21202",
         "url": "https://baltimorecitychamber.org/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJKuKGVCWZtEvmuZ6wT4hKQAKe58U60ZhDtw&s",
+        "logo_file": "logos/200.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "443-860-2020",
@@ -2629,6 +2731,7 @@
     {
         "id": 201,
         "organization": "Harford County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Harford County"
@@ -2639,12 +2742,13 @@
         "address_zip": "21014",
         "url": "https://harfordchamber.org/",
         "logo_link": "https://harfordchamber.org/wp-content/uploads/2020/03/cropped-HCCC-1-6.png",
+        "logo_file": "logos/201.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-838-2020\r\n",
+        "phone": "410-838-2020\n",
         "fax": null,
         "email": "info@harfordchamber.org",
         "contacts": []
@@ -2652,6 +2756,7 @@
     {
         "id": 202,
         "organization": "Southern Anne Arundel Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Anne Arundel County"
@@ -2662,9 +2767,10 @@
         "address_zip": "20733",
         "url": "https://www.southcounty.org/",
         "logo_link": "https://www.southcounty.org/wp-content/uploads/2018/07/soco-chamber-logo.png",
+        "logo_file": "logos/202.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-867-3129",
@@ -2675,6 +2781,7 @@
     {
         "id": 203,
         "organization": "Hispanic Chamber of Commerce Prince George's County",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Prince George's County"
@@ -2685,9 +2792,10 @@
         "address_zip": "20773",
         "url": "https://www.hccpg.com/",
         "logo_link": "https://static.wixstatic.com/media/4f3028_cac89a3cc89144b8ba2c4f09a732af00~mv2.jpg",
+        "logo_file": "logos/203.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "202-706-8946",
@@ -2698,6 +2806,7 @@
     {
         "id": 204,
         "organization": "Taneytown Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Carroll County"
@@ -2708,9 +2817,10 @@
         "address_zip": "21787",
         "url": "https://taneytownchamber.org/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEkHHE7DvLRHS7N49P0TZAaGJWiGr51T8Lbw&s",
+        "logo_file": "logos/204.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-756-4234",
@@ -2721,6 +2831,7 @@
     {
         "id": 205,
         "organization": "Snow Hill Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Worcester County"
@@ -2731,9 +2842,10 @@
         "address_zip": "21863",
         "url": "https://www.snowhillchamber.com/",
         "logo_link": "https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-1/434808522_751933757076766_3741753589895688978_n.jpg?stp=dst-jpg_s480x480_tt6&_nc_cat=111&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=PBu18zEv03UQ7kNvwFKa_72&_nc_oc=AdmrHJxoJkZNI0RAO__kh5l1idOw37-1naPXaLMAme0G4j85QJM8Hl_rMbLdwsxZRbNqyoUXe9fIvOWd9pBhq-js&_nc_zt=24&_nc_ht=scontent-iad3-2.xx&_nc_gid=XsS53IxcAS4wNOGEIlWTog&oh=00_AfhgvHzWWTtyT3K8zN1B7-3V_ySynoTJV3XpfQJJkWxpjg&oe=6926A336",
+        "logo_file": "logos/205.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "443-420-7441",
@@ -2744,6 +2856,7 @@
     {
         "id": 206,
         "organization": "Wheaton & Kensington Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Montgomery County"
@@ -2754,9 +2867,10 @@
         "address_zip": "20902",
         "url": "https://www.wkchamber.org/",
         "logo_link": "https://www.wkchamber.org/wp-content/uploads/wheaton-kensington-chamber-logo.png",
+        "logo_file": "logos/206.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "301-949-0080",
@@ -2767,6 +2881,7 @@
     {
         "id": 207,
         "organization": "Greater Severna Park and Arnold Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Anne Arundel County"
@@ -2777,9 +2892,10 @@
         "address_zip": "21146",
         "url": "https://gspacc.com/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQUIWWiAj-CVoz7mbXXWxV_EoL7p_YHf2Xmg&s",
+        "logo_file": "logos/207.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-647-3900",
@@ -2790,6 +2906,7 @@
     {
         "id": 208,
         "organization": "Poolesville Area Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Montgomery County"
@@ -2800,9 +2917,10 @@
         "address_zip": "20837",
         "url": "https://poolesvillechamber.com/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGNMOoOqZuXpK_MdWE1U4eeiMesgNIyrww8g&s",
+        "logo_file": "logos/208.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "301-370-4326",
@@ -2813,6 +2931,7 @@
     {
         "id": 209,
         "organization": "Pocomoke Area Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Worcester County"
@@ -2823,9 +2942,10 @@
         "address_zip": "21851",
         "url": "https://pocomokechamber.com/",
         "logo_link": "https://storage.googleapis.com/sos-websvc/uploads/0030355DEA003329/images/Pocomoke%20CoC.png",
+        "logo_file": "logos/209.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-957-1919",
@@ -2836,6 +2956,7 @@
     {
         "id": 210,
         "organization": "North East Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Cecil County"
@@ -2846,9 +2967,10 @@
         "address_zip": "21901",
         "url": "https://northeastchamber.org/",
         "logo_link": "https://northeastchamber.org/wp-content/uploads/2025/01/NECC-Logo100.png",
+        "logo_file": "logos/210.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-287-0018",
@@ -2859,6 +2981,7 @@
     {
         "id": 211,
         "organization": "Havre de Grace Chamber of Commerce ",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Harford County"
@@ -2869,9 +2992,10 @@
         "address_zip": "21078",
         "url": "https://www.hdgchamber.com/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy7DnVwS8ZEleX5vwyNEF8xsDACyWH-bnEpw&s",
+        "logo_file": "logos/211.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-939-3303",
@@ -2882,6 +3006,7 @@
     {
         "id": 212,
         "organization": "Northern Anne Arundel County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Anne Arundel County"
@@ -2892,9 +3017,10 @@
         "address_zip": "21061",
         "url": "https://www.naaccc.com/",
         "logo_link": "https://res.cloudinary.com/micronetonline/image/upload/c_crop,h_172,w_332,x_0,y_0/f_auto/q_auto:best/v1721237414/tenants/82a0008a-fcd5-4c4d-aa3d-cb1883498c8b/04ed37db290f43f78e27274424733baa/NAACC-Logo-Final.png",
+        "logo_file": "logos/212.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-766-8282",
@@ -2905,6 +3031,7 @@
     {
         "id": 213,
         "organization": "Greater Catonsville Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Baltimore County"
@@ -2915,9 +3042,10 @@
         "address_zip": "21228",
         "url": "https://www.catonsville.org/",
         "logo_link": "https://growthzonecmsprodeastus.azureedge.net/sites/967/2017/09/GCCC-Logo-2006-Color-transparent.png",
+        "logo_file": "logos/213.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-719-9609",
@@ -2928,6 +3056,7 @@
     {
         "id": 214,
         "organization": "Dorchester Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Dorchester County"
@@ -2938,9 +3067,10 @@
         "address_zip": "21613",
         "url": "https://www.dorchesterchamber.org/",
         "logo_link": "https://chambermaster.blob.core.windows.net/images/events/3422/15678/EventSNPImage_DOC_color.jpg",
+        "logo_file": "logos/214.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-228-3575",
@@ -2951,6 +3081,7 @@
     {
         "id": 215,
         "organization": "Worcester County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Worcester County"
@@ -2961,9 +3092,10 @@
         "address_zip": "21811",
         "url": "https://www.worcestercountychamber.org/",
         "logo_link": "https://growthzonecmsprodeastus.azureedge.net/sites/595/2024/03/logo.jpeg",
+        "logo_file": "logos/215.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-641-5306",
@@ -2974,6 +3106,7 @@
     {
         "id": 216,
         "organization": "Berlin Maryland Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Worcester County"
@@ -2984,9 +3117,10 @@
         "address_zip": "21811",
         "url": "https://berlinchamber.org/",
         "logo_link": "https://website-media.com/berlin-chamber-of-commerce/berlin-chamber-2025/2024/05/21095747/berlin-chamber-of-commerce-logo.png",
+        "logo_file": "logos/216.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-641-4775",
@@ -2997,6 +3131,7 @@
     {
         "id": 217,
         "organization": "Greater Baltimore Black Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Baltimore City"
@@ -3007,9 +3142,10 @@
         "address_zip": "21282",
         "url": "https://www.greaterbaltimoreblackchamber.org/",
         "logo_link": "https://content.app-sources.com/s/10873599219160446/thumbnails/640x480/Images/348433275_260843726424695_69463770195756464_n-3182654.jpg?format=webp",
+        "logo_file": "logos/217.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "443-424-2201",
@@ -3020,6 +3156,7 @@
     {
         "id": 218,
         "organization": "Aberdeen Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Harford County"
@@ -3030,9 +3167,10 @@
         "address_zip": "21001",
         "url": "https://www.aberdeencc.org/",
         "logo_link": "https://bigideasd.com/wp-content/uploads/Aberdeen-Area-Chamber-of-Commerce-1-21.png",
+        "logo_file": "logos/218.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "\u200b410-272-2580",
@@ -3043,6 +3181,7 @@
     {
         "id": 219,
         "organization": "Carroll County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Carroll County"
@@ -3053,9 +3192,10 @@
         "address_zip": "21157",
         "url": "https://www.carrollcountychamber.org/",
         "logo_link": "https://www.carrollcountychamber.org/wp-content/uploads/2023/10/cropped-H-BluGold-CarrollCty-Chamber-LOGO-288-118-1024x359.png",
+        "logo_file": "logos/219.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-848-9050",
@@ -3065,7 +3205,8 @@
     },
     {
         "id": 220,
-        "organization": "Salisbury Area Chamber of Commerce\r\n",
+        "organization": "Salisbury Area Chamber of Commerce\n",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Wicomico County"
@@ -3076,9 +3217,10 @@
         "address_zip": "21801",
         "url": "https://salisburyarea.com/",
         "logo_link": "https://lirp.cdn-website.com/e8f99108/dms3rep/multi/opt/Salisbury-chamber-logo-2fa4040b-640w.png",
+        "logo_file": "logos/220.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-749-0144",
@@ -3089,6 +3231,7 @@
     {
         "id": 221,
         "organization": "Greater Rockville Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Montgomery County"
@@ -3099,9 +3242,10 @@
         "address_zip": "20850",
         "url": "https://www.rockvillechamber.org/",
         "logo_link": "https://growthzonecmsprodeastus.azureedge.net/sites/713/2017/09/Untitled-design-2023-03-01T081206.300.png",
+        "logo_file": "logos/221.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "301-424-9300 ",
@@ -3112,6 +3256,7 @@
     {
         "id": 222,
         "organization": "Calvert County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Calvert County"
@@ -3122,9 +3267,10 @@
         "address_zip": "20678",
         "url": "https://calvertchamber.org/",
         "logo_link": "https://calvertchamber.org/wp-content/uploads/2025/10/Logo-without-pillars-1.jpg",
+        "logo_file": "logos/222.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-535-2577",
@@ -3135,6 +3281,7 @@
     {
         "id": 223,
         "organization": "Northwest Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Baltimore County"
@@ -3145,9 +3292,10 @@
         "address_zip": "21117",
         "url": "https://northwestchambermd.com/",
         "logo_link": "https://northwestchambermd.com/wp-content/uploads/2024/01/Northwest-Chamber-Logo-r2-3-blue.png",
+        "logo_file": "logos/223.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-702-7073",
@@ -3158,6 +3306,7 @@
     {
         "id": 224,
         "organization": "Olney Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Montgomery County"
@@ -3168,9 +3317,10 @@
         "address_zip": "20830",
         "url": null,
         "logo_link": "https://growthzonecmsprodeastus.azureedge.net/sites/191/2023/09/OCC-logo200.jpg",
+        "logo_file": "logos/224.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "301-774-7117",
@@ -3181,6 +3331,7 @@
     {
         "id": 225,
         "organization": "Central Maryland Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Anne Arundel County",
@@ -3198,9 +3349,10 @@
         "address_zip": "21076",
         "url": "https://www.centralmarylandchamber.org/",
         "logo_link": "https://www.centralmarylandchamber.org/uploads/1/0/6/8/106891967/2025-cmc-logo-stacked-png_orig.png",
+        "logo_file": "logos/225.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-672-3422",
@@ -3211,6 +3363,7 @@
     {
         "id": 226,
         "organization": "Ocean City Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Worcester County"
@@ -3221,9 +3374,10 @@
         "address_zip": "21842",
         "url": "https://oceancity.org/",
         "logo_link": "https://oceancity.org/wp-content/uploads/2025/03/2023-chamber-logo-e1742827979691.png",
+        "logo_file": "logos/226.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-213-0144",
@@ -3234,6 +3388,7 @@
     {
         "id": 227,
         "organization": "Prince George\u2019s Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Prince George's County"
@@ -3244,9 +3399,10 @@
         "address_zip": "20706",
         "url": "https://pgcoc.org/",
         "logo_link": "https://pgcoc.org/wp-content/uploads/2025/05/PGCOC-Logo-768x219.png",
+        "logo_file": "logos/227.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "301-731-5000",
@@ -3257,6 +3413,7 @@
     {
         "id": 228,
         "organization": "Charles County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Charles County"
@@ -3267,9 +3424,10 @@
         "address_zip": "20646",
         "url": "https://www.charlescountychamber.org/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOXSzIB13th_JyhCt38kcUOYEIiUKp7oABNg&s",
+        "logo_file": "logos/228.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "301-932-6500",
@@ -3280,6 +3438,7 @@
     {
         "id": 229,
         "organization": "Gaithersburg-Germantown Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Montgomery County"
@@ -3290,9 +3449,10 @@
         "address_zip": "20878",
         "url": "https://www.ggchamber.org/",
         "logo_link": "https://www.ggchamber.org/wp-content/themes/encompass/images/layout/ggcc-logo.png",
+        "logo_file": "logos/229.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "301-840-1400",
@@ -3303,6 +3463,7 @@
     {
         "id": 230,
         "organization": "Cecil County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Cecil County"
@@ -3313,9 +3474,10 @@
         "address_zip": "21921",
         "url": "https://www.cecilchamber.com/",
         "logo_link": "https://static.wixstatic.com/media/00cd2a_9ea5bf0c252b4249a9f9c52ffc5d7e20~mv2.png/v1/crop/x_0,y_39,w_2434,h_771/fill/w_261,h_81,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/CCCC_NewLogo_Finals_Sept23_Horizontal%20on%20White.png",
+        "logo_file": "logos/230.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-392-3833",
@@ -3326,6 +3488,7 @@
     {
         "id": 231,
         "organization": "Caroline County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Caroline County"
@@ -3336,9 +3499,10 @@
         "address_zip": "21629",
         "url": "https://www.carolinechamber.org/",
         "logo_link": "https://chambermaster.blob.core.windows.net/images/chambers/1366/ChamberImages/logo/200x200/Caroline-Chamber-Logo.png",
+        "logo_file": "logos/231.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-479-4638",
@@ -3349,6 +3513,7 @@
     {
         "id": 232,
         "organization": "Allegany County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Allegany County"
@@ -3359,9 +3524,10 @@
         "address_zip": "21502",
         "url": "https://alleganycountychamber.com/",
         "logo_link": "https://alleganycountychamber.com/wp-content/uploads/2021/09/chamber-logo-color-high-res-scaled.jpg",
+        "logo_file": "logos/232.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "301-722-2820",
@@ -3372,6 +3538,7 @@
     {
         "id": 233,
         "organization": "Greater Crofton Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Anne Arundel County"
@@ -3382,9 +3549,10 @@
         "address_zip": "21114",
         "url": "https://www.croftonchamber.com/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyROypevhHKSlGM6qLCchJOuraoan9sly4aw&s",
+        "logo_file": "logos/233.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-721-9131",
@@ -3395,6 +3563,7 @@
     {
         "id": 234,
         "organization": "Kent County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Kent County"
@@ -3405,9 +3574,10 @@
         "address_zip": "21620",
         "url": "https://www.kentchamber.org/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRZAADQZMj-Ew7Q8iVeIuDjkezRUVX2gjVKw&s",
+        "logo_file": "logos/234.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": null,
@@ -3426,6 +3596,7 @@
     {
         "id": 235,
         "organization": "Queen Anne's County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Queen Anne's County"
@@ -3436,9 +3607,10 @@
         "address_zip": "21619",
         "url": "https://www.qacchamber.com/",
         "logo_link": "https://growthzonecmsprodeastus.azureedge.net/sites/526/2022/02/QAC_Logo_tagline_color-1c068119-0942-4037-8ddc-d3d93afcab86.png",
+        "logo_file": "logos/235.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-643-8530",
@@ -3449,6 +3621,7 @@
     {
         "id": 236,
         "organization": "Maryland Hispanic Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "State",
         "area": [
             "Maryland"
@@ -3459,12 +3632,13 @@
         "address_zip": "21201",
         "url": "https://maryland-hispanic-chamber-of-commerce.org/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2FtuET0WKC4DERwdzUMnlO9sCOLeRvdqorQ&s",
+        "logo_file": "logos/236.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "443-620-016\r\n",
+        "phone": "443-620-016\n",
         "fax": null,
         "email": "info@mdhcc.org",
         "contacts": []
@@ -3472,6 +3646,7 @@
     {
         "id": 237,
         "organization": "Chesapeake Gateway Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Baltimore County"
@@ -3482,9 +3657,10 @@
         "address_zip": "21220",
         "url": "https://www.chesapeakechamber.org/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPYkp-EZPTqj-uU5ZoeR6VNcY-dw-4X1HzVw&s",
+        "logo_file": "logos/237.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "443-317-8763",
@@ -3495,6 +3671,7 @@
     {
         "id": 238,
         "organization": "Anne Arundel Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Anne Arundel County"
@@ -3505,9 +3682,10 @@
         "address_zip": "21401",
         "url": "https://annearundelchamber.org/",
         "logo_link": "https://annearundelchamber.org/wp-content/uploads/2022/09/logo.png",
+        "logo_file": "logos/238.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "443-603-0233",
@@ -3518,6 +3696,7 @@
     {
         "id": 239,
         "organization": "Greater Silver Spring Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "City",
         "area": [
             "Montgomery County"
@@ -3528,9 +3707,10 @@
         "address_zip": "20910",
         "url": "https://www.gsscc.org/",
         "logo_link": "https://www.gsscc.org/uploads/1/3/9/4/139422626/published/gsscc-logo-rebrand-white-swoops.png?1728586797",
+        "logo_file": "logos/239.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "301-565-3777",
@@ -3541,6 +3721,7 @@
     {
         "id": 240,
         "organization": "Montgomery County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Montgomery County"
@@ -3551,9 +3732,10 @@
         "address_zip": "20850",
         "url": "https://www.mcccmd.com/",
         "logo_link": "https://thedailyrecord.com/files/2025/10/MCCC-pic-300x300.png",
+        "logo_file": "logos/240.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "301-738-0015",
@@ -3564,6 +3746,7 @@
     {
         "id": 241,
         "organization": "Greater Baltimore Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Baltimore County"
@@ -3574,9 +3757,10 @@
         "address_zip": "21208",
         "url": "https://www.greaterbaltimorechamber.org/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5_OkrErYS1Y8dJb9NoWflkRJCxLOB2xAiEg&s",
+        "logo_file": "logos/241.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-484-2337",
@@ -3587,6 +3771,7 @@
     {
         "id": 242,
         "organization": "Garrett County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Garrett County"
@@ -3597,9 +3782,10 @@
         "address_zip": "21541",
         "url": "https://www.visitdeepcreek.com/about-us/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWUBpnRm9AxTtMQmIfkqVu0keMUHXvXiH2dA&s",
+        "logo_file": "logos/242.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "888-387-5237",
@@ -3610,6 +3796,7 @@
     {
         "id": 243,
         "organization": "St. Mary\u2019s County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "St. Mary's County"
@@ -3620,9 +3807,10 @@
         "address_zip": "20653",
         "url": "https://smcchamber.com/",
         "logo_link": "https://smcchamber.com/wp-content/uploads/Transparent-3color-500x281-3.png",
+        "logo_file": "logos/243.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "301-737-3001",
@@ -3633,6 +3821,7 @@
     {
         "id": 244,
         "organization": "Washington County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Washington County"
@@ -3643,9 +3832,10 @@
         "address_zip": "21740",
         "url": "https://www.hagerstown.org/",
         "logo_link": "https://www.washingtoncountychamberor.com/wp-content/uploads/2021/08/WCCC_logo-4C.png",
+        "logo_file": "logos/244.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "301-739-2015",
@@ -3656,6 +3846,7 @@
     {
         "id": 245,
         "organization": "Frederick County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Frederick County"
@@ -3666,9 +3857,10 @@
         "address_zip": "21701",
         "url": "https://www.frederickchamber.org/",
         "logo_link": "https://cityoffrederickmd.gov/ImageRepository/Document?documentID=19625",
+        "logo_file": "logos/245.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "301-662-4164",
@@ -3679,6 +3871,7 @@
     {
         "id": 246,
         "organization": "Talbot County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Talbot County"
@@ -3689,9 +3882,10 @@
         "address_zip": "21601",
         "url": "https://www.talbotchamber.org/",
         "logo_link": "https://chambermaster.blob.core.windows.net/images/members/3409/1940/MemLogo_ModifiedVersion.png",
+        "logo_file": "logos/246.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-822-4653",
@@ -3702,6 +3896,7 @@
     {
         "id": 247,
         "organization": "Howard County Chamber of Commerce",
+        "description": "Local chambers of commerce offer networking opportunities and community events to help businesses connect and grow within the community.",
         "type": "County",
         "area": [
             "Howard County"
@@ -3712,9 +3907,10 @@
         "address_zip": "21044",
         "url": "https://www.howardchamber.com/",
         "logo_link": "https://assets.simpleviewinc.com/simpleview/image/upload/crm/howardcounty/Ho-Co-Chamber_52110E5B-5056-B3A8-4953A0241EA30F3C-52110d775056b3a_52110e9d-5056-b3a8-499c99faf998ae8d.png",
+        "logo_file": "logos/247.jpg",
         "question_tags": [
             "Networking",
-            "Guidance and Support"
+            "Business Operations and Planning"
         ],
         "business_category": "All",
         "phone": "410-730-4111 ",
@@ -3725,6 +3921,7 @@
     {
         "id": 248,
         "organization": "Calvert County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Calvert County"
@@ -3735,6 +3932,7 @@
         "address_zip": null,
         "url": "https://www.calverthealth.org/community/environmentalhealthservices/foodservice.htm",
         "logo_link": "https://www.calverthealth.org/_images/photos/hdlogo.png",
+        "logo_file": "logos/248.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -3755,6 +3953,7 @@
     {
         "id": 249,
         "organization": "Caroline County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Caroline County"
@@ -3765,6 +3964,7 @@
         "address_zip": null,
         "url": "https://www.carolinehd.org/environmental-health/food-safety/",
         "logo_link": "https://www.carolinehd.org/wp-content/uploads/2023/01/CCHD-Logo.png",
+        "logo_file": "logos/249.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -3785,6 +3985,7 @@
     {
         "id": 250,
         "organization": "Carroll County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Carroll County"
@@ -3795,6 +3996,7 @@
         "address_zip": null,
         "url": "https://health.maryland.gov/carroll/Pages/Food-Protection.aspx",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbXvzX4jjb6HDBzbgE07cpxKysKXlYwrknbA&s",
+        "logo_file": "logos/250.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -3815,6 +4017,7 @@
     {
         "id": 251,
         "organization": "Cecil County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Cecil County"
@@ -3825,6 +4028,7 @@
         "address_zip": null,
         "url": "https://cecilcountyhealth.org/services/environmental-health-services/food-safety/",
         "logo_link": "https://website-media.com/cecil-county-health-department/cecil-county-health-dept-2024/2020/08/21143731/logo.png",
+        "logo_file": "logos/251.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -3845,6 +4049,7 @@
     {
         "id": 252,
         "organization": "Charles County Department of Health",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Charles County"
@@ -3855,6 +4060,7 @@
         "address_zip": null,
         "url": "https://charlescountyhealth.org/food-safety-food-safety/",
         "logo_link": "https://lockitupcc.org/images/cch-logo.jpg",
+        "logo_file": "logos/252.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -3875,6 +4081,7 @@
     {
         "id": 253,
         "organization": "Dorchester County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Dorchester County"
@@ -3885,6 +4092,7 @@
         "address_zip": null,
         "url": "https://dorchesterhealth.org/environmental-health/food-safety/",
         "logo_link": "https://dorchesterhealth.org/wp-content/uploads/2022/10/DCHD-Logo-Horizontal-Web-Small.png",
+        "logo_file": "logos/253.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -3905,6 +4113,7 @@
     {
         "id": 254,
         "organization": "Frederick County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Frederick County"
@@ -3915,6 +4124,7 @@
         "address_zip": null,
         "url": "https://health.frederickcountymd.gov/352/Food-Control",
         "logo_link": "https://yt3.googleusercontent.com/ytc/AIdro_lEvg0a6gutynANtLE020SoM5mZnEXlhnQZ-Qrh2iU1pw=s900-c-k-c0x00ffffff-no-rj",
+        "logo_file": "logos/254.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -3935,6 +4145,7 @@
     {
         "id": 255,
         "organization": "Garrett County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Garrett County"
@@ -3945,6 +4156,7 @@
         "address_zip": null,
         "url": "https://garretthealth.org/food-service-inspections/",
         "logo_link": "https://garretthealth.org/wp-content/uploads/2022/05/2020-GCHD-Logo.png",
+        "logo_file": "logos/255.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -3965,6 +4177,7 @@
     {
         "id": 256,
         "organization": "Harford County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Harford County"
@@ -3975,6 +4188,7 @@
         "address_zip": null,
         "url": "https://harfordcountyhealth.com/environmental-health-services/food-protection/",
         "logo_link": "https://yt3.googleusercontent.com/ytc/AIdro_maF4P2khnHE-80ZNkQXDU5hOsC0c67FReybu4A_wB26g=s900-c-k-c0x00ffffff-no-rj",
+        "logo_file": "logos/256.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -3995,6 +4209,7 @@
     {
         "id": 257,
         "organization": "Howard County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Howard County"
@@ -4005,6 +4220,7 @@
         "address_zip": null,
         "url": "https://www.howardcountymd.gov/health/food-protection-program",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPgneSBiX1cmHIFiLIY4fZaJaIlg5bfy2Mzw&s",
+        "logo_file": "logos/257.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -4025,6 +4241,7 @@
     {
         "id": 258,
         "organization": "Kent County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Kent County"
@@ -4035,6 +4252,7 @@
         "address_zip": null,
         "url": "https://kenthd.org/environmental-health/programs-and-services/#licenses-permits",
         "logo_link": "https://www.kentcountymi.gov/ImageRepository/Document?documentID=5269",
+        "logo_file": "logos/258.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -4055,6 +4273,7 @@
     {
         "id": 259,
         "organization": "Montgomery County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Montgomery County"
@@ -4065,6 +4284,7 @@
         "address_zip": null,
         "url": "https://www.montgomerycountymd.gov/HHS/LandR/FoodServiceFacility.html",
         "logo_link": "https://montgomerycountyhealthky.gov/wp-content/uploads/2022/10/mchd-logo-png-1024x695.png",
+        "logo_file": "logos/259.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -4085,6 +4305,7 @@
     {
         "id": 260,
         "organization": "Prince George's County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Prince George's County"
@@ -4095,6 +4316,7 @@
         "address_zip": null,
         "url": "https://www.princegeorgescountymd.gov/departments-offices/health/environmental-health/food-safety-permits-inspections",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUaqqgpeJYMNHDn14mDFSN6UI-d2bAAH8TSw&s",
+        "logo_file": "logos/260.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -4115,6 +4337,7 @@
     {
         "id": 261,
         "organization": "Queen Anne's County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Queen Anne's County"
@@ -4125,6 +4348,7 @@
         "address_zip": null,
         "url": "https://health.maryland.gov/qahealth/environmental-health/Pages/Food-Protection-Program.aspx",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFe_HOdf2DO_AsqFoon9C-vBw7wt2vB1nrUg&s",
+        "logo_file": "logos/261.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -4145,6 +4369,7 @@
     {
         "id": 262,
         "organization": "Somerset County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Somerset County"
@@ -4155,6 +4380,7 @@
         "address_zip": null,
         "url": "https://somersethealth.org/environmental-health/food-services/",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsWBoSoh-n1p0XUlqMWMheWhaOnNvmIq7z7Q&s",
+        "logo_file": "logos/262.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -4175,6 +4401,7 @@
     {
         "id": 263,
         "organization": "St. Mary's County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "St. Mary's County"
@@ -4185,6 +4412,7 @@
         "address_zip": null,
         "url": "https://smchd.org/environmental/food-safety/",
         "logo_link": "https://smchd.org/wp-content/uploads/SMCHD-logo-tagline-2-1.png",
+        "logo_file": "logos/263.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -4205,6 +4433,7 @@
     {
         "id": 264,
         "organization": "Talbot County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Talbot County"
@@ -4215,6 +4444,7 @@
         "address_zip": null,
         "url": "https://talbothealth.org/environmental-health/food-safety/",
         "logo_link": "https://talbothealth.org/wp-content/uploads/2023/12/favicon-v2.png",
+        "logo_file": "logos/264.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -4235,6 +4465,7 @@
     {
         "id": 265,
         "organization": "Washington County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Washington County"
@@ -4245,6 +4476,7 @@
         "address_zip": null,
         "url": "https://washcohealth.org/health-services/environmental-health/forms-applications/",
         "logo_link": "https://washcohealth.org/wp-content/themes/washcohealth-pro/images/wchd-logo.png",
+        "logo_file": "logos/265.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -4265,6 +4497,7 @@
     {
         "id": 266,
         "organization": "Wicomico County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Wicomico County"
@@ -4275,6 +4508,7 @@
         "address_zip": null,
         "url": "https://wicomicohealth.org/environmental-health/food-safety/",
         "logo_link": "https://website-media.com/wicomico-county-health-department/wicomico-county-health-department-2025/2025/06/11144432/WiCHD-full-color-logo-912x1024.png",
+        "logo_file": "logos/266.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -4295,6 +4529,7 @@
     {
         "id": 267,
         "organization": "Worcester County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Worcester County"
@@ -4305,6 +4540,7 @@
         "address_zip": null,
         "url": "https://www.worcesterhealth.org/protect-menu/licensing-and-inspections-of-food-service-facilitiesservicearticle",
         "logo_link": "https://www.worcesterhealth.org/images/WCHD-Public-Health-Logo.png",
+        "logo_file": "logos/267.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -4325,6 +4561,7 @@
     {
         "id": 268,
         "organization": "Allegany County Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Allegany County"
@@ -4335,6 +4572,7 @@
         "address_zip": null,
         "url": "https://myalleganyhealth.org/environmental/#food",
         "logo_link": "https://myalleganyhealth.org/wp-content/uploads/2025/05/headerwhitelogo.png",
+        "logo_file": "logos/268.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -4355,6 +4593,7 @@
     {
         "id": 269,
         "organization": "Anne Arundel County Department of Health",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Anne Arundel County"
@@ -4365,6 +4604,7 @@
         "address_zip": null,
         "url": "https://www.aahealth.org/environmental-health/food-protection",
         "logo_link": "https://www.aahealth.org/sites/default/files/AAHealth%20Web%20Logo%20copy.png",
+        "logo_file": "logos/269.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -4385,6 +4625,7 @@
     {
         "id": 270,
         "organization": "Baltimore City Health Department",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Baltimore City"
@@ -4395,6 +4636,7 @@
         "address_zip": null,
         "url": "https://health.baltimorecity.gov/environmental-health/food-facilities",
         "logo_link": "https://health.baltimorecity.gov/sites/default/files/styles/flight_slideshow/public/BCHD%20Final%20Logo%20Color%20Large%20White%20Background-03_3.png?itok=mwPMSHHM",
+        "logo_file": "logos/270.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -4415,6 +4657,7 @@
     {
         "id": 271,
         "organization": "Baltimore County Department of Health",
+        "description": "Local health departments issue food service permits and licenses, conduct health inspections, provide food safety training, and offer guidance on regulations for handling, storing, and selling fresh food.",
         "type": "County",
         "area": [
             "Baltimore County"
@@ -4425,6 +4668,7 @@
         "address_zip": null,
         "url": "https://www.baltimorecountymd.gov/departments/health/environmental/food-program",
         "logo_link": "https://www.baltimorecountymd.gov/files/styles/large/public/departments/health/images/logo-dhhs-accred.jpg?itok=mlL6gjTB",
+        "logo_file": "logos/271.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -4439,6 +4683,383 @@
                 "phone": "410-887-3663",
                 "fax": null,
                 "email": "ehs@baltimorecountymd.gov"
+            }
+        ]
+    },
+    {
+        "id": 272,
+        "organization": "Baltimore City Child Care Resource Center",
+        "description": "Child Care Resource Centers provide training, guidance, and support to help you start and operate a child care program, including information on licensing requirements, professional development, and improving program quality.",
+        "type": "County",
+        "area": [
+            "Baltimore City"
+        ],
+        "address": "The Family Tree 2108 N Charles St",
+        "address_city": "Baltimore",
+        "address_state": "Maryland",
+        "address_zip": "21218",
+        "url": "https://familytreemd.org/bcccrc/",
+        "logo_link": "https://www.familytreemd.org/wp-content/uploads/2023/08/cropped-LBH_TFT_VERT_logo_rgb.png",
+        "logo_file": "logos/272.jpg",
+        "question_tags": [
+            "Networking",
+            "Getting Started",
+            "Business Operations and Planning"
+        ],
+        "business_category": "Child Care",
+        "phone": null,
+        "fax": null,
+        "email": null,
+        "contacts": [
+            {
+                "name": "Tracy Harris",
+                "title": "Director",
+                "phone": "410-889-2300",
+                "fax": null,
+                "email": "tharris@familytreemd.org"
+            },
+            {
+                "name": "Michelle Giove",
+                "title": "Program Manager",
+                "phone": "410-889-2300",
+                "fax": null,
+                "email": "mgiove@familytreemd.org "
+            }
+        ]
+    },
+    {
+        "id": 274,
+        "organization": "Abilities Network Project ACT (Central Maryland North Child Care Resource Center)",
+        "description": "Child Care Resource Centers provide training, guidance, and support to help you start and operate a child care program, including information on licensing requirements, professional development, and improving program quality.",
+        "type": "County",
+        "area": [
+            "Baltimore County",
+            "Cecil County",
+            "Harford County"
+        ],
+        "address": "8503 LaSalle Rd",
+        "address_city": "Towson",
+        "address_state": "Maryland",
+        "address_zip": "21286",
+        "url": "https://anprojectact.org/",
+        "logo_link": "https://anprojectact.org/wp-content/uploads/2023/01/ANPA_Logo.svg",
+        "logo_file": "logos/274.jpg",
+        "question_tags": [
+            "Networking",
+            "Getting Started",
+            "Business Operations and Planning"
+        ],
+        "business_category": "Child Care",
+        "phone": null,
+        "fax": null,
+        "email": null,
+        "contacts": [
+            {
+                "name": "Sara Foura",
+                "title": "Program Manager ",
+                "phone": "410-828-7700",
+                "fax": null,
+                "email": "sfoura@abilitiesnetwork.org"
+            }
+        ]
+    },
+    {
+        "id": 275,
+        "organization": "Child Resource Connect (Central Maryland South Child Care Resource Center)",
+        "description": "Child Care Resource Centers provide training, guidance, and support to help you start and operate a child care program, including information on licensing requirements, professional development, and improving program quality.",
+        "type": "County",
+        "area": [
+            "Anne Arundel County",
+            "Calvert County",
+            "Charles County",
+            "Prince George's County",
+            "St. Mary's County"
+        ],
+        "address": "9475 Lottsford Rd Ste 202",
+        "address_city": "Largo",
+        "address_state": "Maryland",
+        "address_zip": "20774",
+        "url": "https://www.childresource.org/",
+        "logo_link": "https://www.childresource.org/wp-content/uploads/2024/02/CRC-logo-1x.png",
+        "logo_file": "logos/275.jpg",
+        "question_tags": [
+            "Networking",
+            "Getting Started",
+            "Business Operations and Planning"
+        ],
+        "business_category": "Child Care",
+        "phone": null,
+        "fax": null,
+        "email": null,
+        "contacts": [
+            {
+                "name": "Laura Terrell",
+                "title": "Program Manager",
+                "phone": "301-772-8420",
+                "fax": null,
+                "email": "lterrell@childresource.org"
+            }
+        ]
+    },
+    {
+        "id": 276,
+        "organization": "Adelphi Child Resource Connect\n",
+        "description": "Child Care Resource Centers provide training, guidance, and support to help you start and operate a child care program, including information on licensing requirements, professional development, and improving program quality.",
+        "type": "County",
+        "area": [
+            "Prince George's County"
+        ],
+        "address": "Cool Spring Elementary School 8908 Riggs Road\n",
+        "address_city": "Adelphi",
+        "address_state": "Maryland",
+        "address_zip": "20783",
+        "url": "https://www.childresource.org/",
+        "logo_link": "https://www.childresource.org/wp-content/uploads/2024/02/CRC-logo-1x.png",
+        "logo_file": "logos/275.jpg",
+        "question_tags": [
+            "Networking",
+            "Getting Started",
+            "Business Operations and Planning"
+        ],
+        "business_category": "Child Care",
+        "phone": "301-431-6210",
+        "fax": null,
+        "email": null,
+        "contacts": []
+    },
+    {
+        "id": 277,
+        "organization": "Annapolis Child Resource Connect",
+        "description": "Child Care Resource Centers provide training, guidance, and support to help you start and operate a child care program, including information on licensing requirements, professional development, and improving program quality.",
+        "type": "County",
+        "area": [
+            "Anne Arundel County"
+        ],
+        "address": "44 Calvert Street Suite 140A",
+        "address_city": "Annapolis",
+        "address_state": "Maryland",
+        "address_zip": "21401",
+        "url": "https://www.childresource.org/",
+        "logo_link": "https://www.childresource.org/wp-content/uploads/2024/02/CRC-logo-1x.png",
+        "logo_file": "logos/275.jpg",
+        "question_tags": [
+            "Networking",
+            "Getting Started",
+            "Business Operations and Planning"
+        ],
+        "business_category": "Child Care",
+        "phone": "443-782-5001",
+        "fax": null,
+        "email": null,
+        "contacts": []
+    },
+    {
+        "id": 278,
+        "organization": "Eastern Shore Child Care Resource Center",
+        "description": "Child Care Resource Centers provide training, guidance, and support to help you start and operate a child care program, including information on licensing requirements, professional development, and improving program quality.",
+        "type": "County",
+        "area": [
+            "Caroline County",
+            "Dorchester County",
+            "Kent County",
+            "Queen Anne's County",
+            "Somerset County",
+            "Talbot County",
+            "Worcester County",
+            "Wicomico County"
+        ],
+        "address": null,
+        "address_city": null,
+        "address_state": null,
+        "address_zip": null,
+        "url": "http://www.easternshoreccrc.org/",
+        "logo_link": null,
+        "logo_file": null,
+        "question_tags": [
+            "Networking",
+            "Getting Started",
+            "Business Operations and Planning"
+        ],
+        "business_category": "Child Care",
+        "phone": null,
+        "fax": null,
+        "email": null,
+        "contacts": [
+            {
+                "name": "Leslie Sinclair",
+                "title": "Project Director",
+                "phone": null,
+                "fax": null,
+                "email": "lasinclair@salisbury.edu "
+            },
+            {
+                "name": "Rosalie Merryweather",
+                "title": "Technical Assistance Coordinator/Infant & Toddler Specialist",
+                "phone": null,
+                "fax": null,
+                "email": "rdmerryweather@salisbury.edu"
+            },
+            {
+                "name": "Lynne Doeler",
+                "title": "Early Childhood Coach",
+                "phone": null,
+                "fax": null,
+                "email": "lsdoeler@salisbury.edu"
+            },
+            {
+                "name": "Jennifer Hogan",
+                "title": "GOFCC Coordinator",
+                "phone": null,
+                "fax": null,
+                "email": "jrhogan@salisbury.edu"
+            },
+            {
+                "name": "Sophia Smith",
+                "title": "Administrative Assistant",
+                "phone": null,
+                "fax": null,
+                "email": "spsmith@salisbury.edu"
+            }
+        ]
+    },
+    {
+        "id": 283,
+        "organization": "Howard County Child Care Resource Center",
+        "description": "Child Care Resource Centers provide training, guidance, and support to help you start and operate a child care program, including information on licensing requirements, professional development, and improving program quality.",
+        "type": "County",
+        "area": [
+            "Howard County"
+        ],
+        "address": "9830 Patuxent Woods Dr",
+        "address_city": "Columbia",
+        "address_state": "Maryland",
+        "address_zip": "21046",
+        "url": "https://www.howardcountymd.gov/children-families/child-care-resource-center",
+        "logo_link": "https://www.howardcountymd.gov/themes/hoco/logo.svg",
+        "logo_file": "logos/283.jpg",
+        "question_tags": [
+            "Networking",
+            "Getting Started",
+            "Business Operations and Planning"
+        ],
+        "business_category": "Child Care",
+        "phone": null,
+        "fax": null,
+        "email": null,
+        "contacts": [
+            {
+                "name": "Georgia Ferentinos",
+                "title": "Program Manager",
+                "phone": "410-313-1940",
+                "fax": null,
+                "email": "gferentinos@howardcountymd.gov"
+            }
+        ]
+    },
+    {
+        "id": 284,
+        "organization": "Montgomery County Child Care Support Services",
+        "description": "Child Care Resource Centers provide training, guidance, and support to help you start and operate a child care program, including information on licensing requirements, professional development, and improving program quality.",
+        "type": "County",
+        "area": [
+            "Montgomery County"
+        ],
+        "address": "1401 Rockville Pike Ste 200",
+        "address_city": "Rockville",
+        "address_state": "Maryland",
+        "address_zip": "20852",
+        "url": "ymd.gov/HHS-Program/CYF/MCCCRRC/index.html",
+        "logo_link": "https://www.montgomerycountymd.gov/HHS-Program/Resources/Images/MCCCRRC/CCSS%20Banner%20Logo.png",
+        "logo_file": "logos/284.jpg",
+        "question_tags": [
+            "Networking",
+            "Getting Started",
+            "Business Operations and Planning"
+        ],
+        "business_category": "Child Care",
+        "phone": null,
+        "fax": null,
+        "email": null,
+        "contacts": [
+            {
+                "name": "Tamieka Thomasson",
+                "title": "Program Manager",
+                "phone": "240-777-4769",
+                "fax": null,
+                "email": "tamieka.thomasson@montgomerycountymd.gov\n"
+            }
+        ]
+    },
+    {
+        "id": 285,
+        "organization": "Child Care Choices (Western Maryland Child Care Resource Center) \n",
+        "description": "Child Care Resource Centers provide training, guidance, and support to help you start and operate a child care program, including information on licensing requirements, professional development, and improving program quality.",
+        "type": "County",
+        "area": [
+            "Allegany County",
+            "Carroll County",
+            "Frederick County",
+            "Garrett County",
+            "Washington County"
+        ],
+        "address": "226 S Jefferson St",
+        "address_city": "Frederick",
+        "address_state": "Maryland",
+        "address_zip": "21701",
+        "url": "https://fcmha.org/how-we-help/child-care-choices/",
+        "logo_link": null,
+        "logo_file": null,
+        "question_tags": [
+            "Networking",
+            "Getting Started",
+            "Business Operations and Planning"
+        ],
+        "business_category": "Child Care",
+        "phone": null,
+        "fax": null,
+        "email": null,
+        "contacts": [
+            {
+                "name": "Sarah Martin",
+                "title": "Program Director",
+                "phone": "301-663-0011",
+                "fax": null,
+                "email": "smartin@fcmha.org"
+            }
+        ]
+    },
+    {
+        "id": 286,
+        "organization": "Maryland Family Network",
+        "description": "The Maryland Family Network coordinates the statewide Child Care Resource Network and other child care resources, including the LOCATE: Child Care database, guidance on opening and operating a program, and advocacy for early childhood policy.",
+        "type": "State",
+        "area": [
+            "Maryland"
+        ],
+        "address": "1800 Washington Blvd Ste 445",
+        "address_city": "Baltimore",
+        "address_state": "Maryland",
+        "address_zip": "21230",
+        "url": "https://www.marylandfamilynetwork.org/",
+        "logo_link": "https://www.marylandfamilynetwork.org/modules/custom/pip_custom_blocks/dist/images/header/mfn-logo-full.png",
+        "logo_file": "logos/286.jpg",
+        "question_tags": [
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Getting Started"
+        ],
+        "business_category": "Child Care",
+        "phone": "410-659-7701",
+        "fax": null,
+        "email": "info@marylandfamilynetwork.org",
+        "contacts": [
+            {
+                "name": null,
+                "title": "LOCATE: Child Care & Family Resource Specialists",
+                "phone": "877-261-0060",
+                "fax": null,
+                "email": "info@marylandfamilynetwork.org"
             }
         ]
     }
