@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Methodology - Maryland Community Business Compass</title>
+    <title>Terms & Conditions - Maryland Community Business Compass</title>
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
     <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
 
@@ -110,22 +110,22 @@
         .usa-header--basic { border-bottom: 1px solid #dfe1e2; }
         
         /* ------------------------------------------------------------------
-           METHODOLOGY PAGE SPECIFIC STYLES
+           LEGAL PAGE SPECIFIC STYLES
            ------------------------------------------------------------------ */
         
         /* Hero Section */
-        .methodology-header {
+        .legal-header {
             background-image: url('../assets/bg-dark.svg');
             background-color: #19355d;
             background-size: cover;
             background-position: center center;
             padding: 4rem 0; /* Taller padding for Hero feel */
         }
-        .methodology-header h1 {
+        .legal-header h1 {
             color: white;
             margin-top: 0;
         }
-        .methodology-header p {
+        .legal-header p {
             color: white;
             font-size: 1.3rem;
             max-width: 65ch;
@@ -153,22 +153,11 @@
         }
 
         /* Section Layouts */
-        .methodology-section {
+        .legal-section {
             scroll-margin-top: 6rem; 
             margin-bottom: 4rem;
         }
-
-        /* Table Text Wrapping */
-        #data-sources-table {
-            table-layout: fixed; /* Strictly respects the 40%/60% column widths */
-        }
-        #data-sources-table td, 
-        #data-sources-table th {
-            white-space: normal;      /* Allows text to wrap */
-            word-wrap: break-word;    /* Legacy support for breaking long words */
-            overflow-wrap: anywhere;  /* Modern support to break long URLs anywhere */
-        }
-
+        
         /* Data Source / Indicator Box Styling */
         .data-source-box {
             background-color: #f0f0f0; /* base-lightest */
@@ -187,14 +176,14 @@
         }
         
         /* Accordion Customization */
-        .methodology-section .usa-accordion__button {
+        .legal-section .usa-accordion__button {
             background-color: #ffffff;
             border: 1px solid #dfe1e2;
         }
-        .methodology-section .usa-accordion__button:hover {
+        .legal-section .usa-accordion__button:hover {
             background-color: #f0f0f0;
         }
-        .methodology-section .usa-accordion__content {
+        .legal-section .usa-accordion__content {
             background-color: #f8f9fa;
             border: 1px solid #dfe1e2;
             border-top: 0;
@@ -207,6 +196,12 @@
             min-height: 0;
             padding-top: 0.25rem;
             padding-bottom: 0.25rem;
+        }
+
+        #legal-content-container a {
+            color: #005ea2;
+            text-decoration: underline;
+            word-break: break-word;
         }
     </style>
     <script>
@@ -316,70 +311,156 @@
 
     <main id="main-content">
         
-        <section class="methodology-header">
+        <section class="legal-header">
             <div class="grid-container">
                 <div class="grid-row grid-gap-6">
                     <div class="tablet-lg:grid-col-8">
-                        <h1 class="font-serif-2xl tablet:font-serif-3xl text-bold">Methodology & Data Sources</h1>
+                        <h1 class="font-serif-2xl tablet:font-serif-3xl text-bold">Terms & Conditions</h1>
                         <p class="font-sans-lg">
-                            This page details how we calculate indicators, where our data comes from, and the technical decisions behind the Maryland Community Business Compass.
+                            Welcome to the Maryland Community Business Compass. Please read these terms, conditions, and notices carefully.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="usa-section padding-top-2">
+        <section class="usa-section">
             <div class="grid-container">
                 <div class="grid-row grid-gap-6">
                     
-                    <aside class="tablet:grid-col-3" aria-label="Methodology Navigation">
+                    <aside class="tablet:grid-col-3" aria-label="Terms Navigation">
                         <div class="sticky-sidebar">
                             <h2 class="font-sans-lg text-bold">On this page</h2>
-                            <nav class="margin-top-2" aria-label="Methodology Sections">
-                                <ul id="methodology-sidenav" class="usa-sidenav">
+                            <nav class="margin-top-2" aria-label="Terms Sections">
+                                <ul id="legal-sidenav" class="usa-sidenav">
+                                    <li class="usa-sidenav__item">
+                                        <a href="#introduction" class="usa-nav__link">Introduction</a>
+                                    </li>
+                                    <li class="usa-sidenav__item">
+                                        <a href="#disclaimers" class="usa-nav__link">Disclaimers & Liability</a>
+                                    </li>
+                                    <li class="usa-sidenav__item">
+                                        <a href="#third-party" class="usa-nav__link">Third-Party Sites</a>
+                                    </li>
+                                    <li class="usa-sidenav__item">
+                                        <a href="#modifications" class="usa-nav__link">Modifications</a>
+                                    </li>
+                                    <li class="usa-sidenav__item">
+                                        <a href="#jurisdiction" class="usa-nav__link">Jurisdiction</a>
+                                    </li>
+                                    <li class="usa-sidenav__item">
+                                        <a href="#ai-features" class="usa-nav__link">AI Features</a>
+                                    </li>
+                                    <li class="usa-sidenav__item">
+                                        <a href="#general" class="usa-nav__link">General Provisions</a>
+                                    </li>
+                                    <li class="usa-sidenav__item">
+                                        <a href="#how-it-works" class="usa-nav__link">How This Site Works</a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
                     </aside>
 
                     <div class="tablet:grid-col-9">
-                        <div id="data-sources" class="methodology-section">
-                            <h2 class="font-serif-xl text-primary-darker">Data Sources</h2>
-                            <p class="font-sans-lg text-light">
-                                This table provides a comprehensive list of data sources for all data indicators, map layers, and points of interest used throughout the Maryland Community Business Compass.
-                            </p>
+                        <div id="legal-content-container" class="usa-prose">
+                            
+                            <div id="introduction" class="legal-section">
+                                <p class="usa-intro">
+                                    By using this website, you acknowledge that you have read and understand <a href="#how-it-works">How This Site Works</a>, as well as these Terms and Conditions and agree to be bound by the terms, conditions, and notices set forth herein (collectively, the “Agreement”).
+                                </p>
+                                <hr class="usa-divider margin-y-4">
+                            </div>
 
-                            <div class="usa-accordion usa-accordion--bordered margin-top-3">
-                                <h3 class="usa-accordion__heading">
-                                    <button type="button" class="usa-accordion__button" aria-expanded="false" aria-controls="data-sources-content">
-                                        Data Sources Table
-                                    </button>
-                                </h3>
-                                <div id="data-sources-content" class="usa-accordion__content" hidden>
-                                    <div class="usa-table-container--scrollable" tabindex="0">
-                                        <table class="usa-table usa-table--borderless width-full" id="data-sources-table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col" style="width: 40%;">Indicator / Layer Name</th>
-                                                    <th scope="col" style="width: 60%;">Data Source(s)</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
+                            <div id="disclaimers" class="legal-section">
+                                <h2 class="font-serif-xl text-primary-darker">Disclaimers and Limitation of Liability</h2>
+                                <p>Please read this section carefully. The information provided through this website is for general informational purposes only and does not constitute legal advice or professional guidance.</p>
+                                <p>This website is provided “as is” and “as available” and to the extent permitted by law without warranties of any kind. The State of Maryland makes no representations or warranties, express or implied, about the completeness, accuracy, or reliability of the information or its suitability for or applicability to your circumstances.</p>
+                                <p>Information may become outdated and laws and regulations vary by jurisdiction. You assume all risk associated with the use of this information and are solely responsible for evaluating whether it is applicable to your specific circumstances and for verifying any information before relying on it.</p>
+                                <p>You should seek appropriate legal advice or professional guidance before acting or refraining from acting based on the information provided.</p>
+                                <p>To the fullest extent permitted by law, we disclaim all liability for any loss, damage, or injury resulting from any reliance on information provided, including but not limited to direct, indirect, incidental, consequential, or punitive damages.</p>
+                                <hr class="usa-divider margin-y-4">
+                            </div>
+
+                            <div id="third-party" class="legal-section">
+                                <h2 class="font-serif-xl text-primary-darker">Third-Party Sites and Services</h2>
+                                <p>This site may contain hyperlinks to websites operated by parties other than the State of Maryland. Such hyperlinks are provided for your reference only. The State does not control such websites and is not responsible for their contents or the privacy or other practices of such websites.</p>
+                                <p>Further, it is up to you to take precautions to ensure that whatever links you select or software you download (whether from this or any other website) is free of such items as viruses, defects and other items of a destructive nature. The State’s inclusion of hyperlinks to such websites does not imply any endorsement or recommendation of the material on such third-party websites or apps or any association with their operators.</p>
+                                <p>In some cases, you may be asked by a third-party site to create a profile or otherwise input data, including personal identifying information. You are responsible for deciding if you choose to do so, it is purely optional. You should read the terms and conditions and privacy policy of the third-party sites and apps that you visit as they have rules and permissions about how they use your information that may differ from the services, including our websites. We encourage you to review these third-party sites and apps and to use them at your own risk.</p>
+                                <hr class="usa-divider margin-y-4">
+                            </div>
+
+                            <div id="modifications" class="legal-section">
+                                <h2 class="font-serif-xl text-primary-darker">Modifications to this Agreement</h2>
+                                <p>The State may change, add or delete these terms and conditions of this Agreement or any portion thereof from time to time in its sole discretion where we deem it necessary for legal, general regulatory and technical purposes, or due to changes in the services provided or nature or layout of services. Thereafter, you expressly agree to be bound by the terms and conditions of this Agreement as amended.</p>
+                                <hr class="usa-divider margin-y-4">
+                            </div>
+
+                            <div id="jurisdiction" class="legal-section">
+                                <h2 class="font-serif-xl text-primary-darker">Jurisdiction and Governing Law</h2>
+                                <p>This website is owned and controlled by the State of Maryland. This Agreement and any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with it or its subject matter or formation shall be governed by and construed in accordance with the laws of Maryland.</p>
+                                <p>You hereby consent to the exclusive jurisdiction and venue of courts in Maryland and stipulate to the fairness and convenience of proceedings in such courts for all disputes, both contractual and non-contractual, arising out of or relating to the use of the services by you or any third party. You agree that all claims you may have against the State arising from or relating to the services must be heard and resolved in a court of competent subject matter jurisdiction located in Maryland.</p>
+                                <hr class="usa-divider margin-y-4">
+                            </div>
+
+                            <div id="ai-features" class="legal-section">
+                                <h2 class="font-serif-xl text-primary-darker">AI Features</h2>
+                                <p>This website includes AI-enabled features (“AI Features”) that use inputs like text, images, files, documents, and data (“Inputs”) to generate content and responses based on those Inputs (“Outputs”).</p>
+                                <p>While we integrate certain safeguards into AI Features, Outputs may not be reviewed in advance and may be inaccurate, incomplete, misleading, offensive, objectionable, inappropriate, infringing, unsuitable, unlawful, unfit for particular purposes, or the same or similar to content generated for other users of the Services.</p>
+                                <p>Outputs may also contain content inconsistent with the State’s view, and the State does not endorse any content included in any Outputs. If Outputs reference individuals or third parties including their products or services, it does not mean the individual or third party endorses the State of Maryland, this website, or that they or these third-parties are affiliated with the State of Maryland.</p>
+                                <div class="usa-alert usa-alert--warning">
+                                    <div class="usa-alert__body">
+                                        <h3 class="usa-alert__heading">No Warranties</h3>
+                                        <p class="usa-alert__text">
+                                            AI Features and Outputs are provided as-is and made available to you without representations or warranties of any kind, whether express or implied. This means that your use of any AI Features and Outputs is at your own risk, and you should not rely solely on them for any purpose, including to make decisions or for professional, medical, legal, financial, educational or other advice. Outputs are not the State’s representations.
+                                        </p>
                                     </div>
                                 </div>
+                                <hr class="usa-divider margin-y-4">
                             </div>
-                            <hr class="usa-divider margin-y-4">
-                        </div>
-                        <div id="methodology-content-container" class="usa-prose">
+
+                            <div id="general" class="legal-section">
+                                <h2 class="font-serif-xl text-primary-darker">General Provisions</h2>
+                                <p>You agree that no joint venture, agency, partnership or employment relationship exists between you and the State of Maryland as a result of this Agreement or use of this website.</p>
+                                <p>More than one counterpart of this Agreement may be executed by the Parties hereto, and each fully executed counterpart shall be deemed an original.</p>
+                                <p>The invalidity or unenforceability of any provision of this MOU shall not affect the validity or enforceability of any other provision hereof. In the event that any provision of this MOU is determined to be invalid, unenforceable or otherwise illegal, such provision will be deemed restated, in accordance with applicable law, to reflect as nearly as possible the original intentions of the parties, and the remainder of this Agreement shall be in full force and effect.</p>
+                                <p>This Agreement does not create any right or benefit, substantive or procedural, express or implied, enforceable at law or otherwise by any third party against the parties to this Agreement, their parent, or affiliated entities.</p>
+                                <hr class="usa-divider margin-y-4">
+                            </div>
+
+                            <div id="how-it-works" class="legal-section">
+                                <h2 class="font-serif-xl text-primary-darker">How This Site Works</h2>
+                                
+                                <h3 class="font-serif-lg text-bold margin-top-3">No endorsement of any listed businesses/experts</h3>
+                                <p>The State of Maryland does not own or endorse any of the third-party businesses or experts listed on this site.</p>
+
+                                <h3 class="font-serif-lg text-bold margin-top-3">Main features of the Business Compass</h3>
+                                <p>The Business Compass relies on OpenStreetMap for locations of known food retail locations. As OpenStreetMap is crowd-sourced, it may contain inaccurate information.</p>
+                                <p>A compilation of State Agency public data is used to determine locations of licensed child care providers and display their Maryland EXCELS quality rating. To read more about the Maryland EXCELS program, visit <a href="https://marylandexcels.org/" target="_blank" rel="noopener noreferrer">https://marylandexcels.org/</a>.</p>
+
+                                <h3 class="font-serif-lg text-bold margin-top-3">Main features of “Find Government Funding” section</h3>
+                                <p>Grant, loan, and tax-credit information is updated on a periodic basis by the granting entity, and is provided solely as a general resource. Information is originally sourced from the <a href="https://apps.planning.maryland.gov/OurWork/Infoportal/" target="_blank" rel="noopener noreferrer">Maryland Department of Planning InfoPortal</a>, and supplemented with information from relevant Maryland State agency websites and county development entities.</p>
+                                <p>Third-party requirements for incentives change regularly. This means, for example, that new incentives may become available that are not listed and others may become unavailable. Similarly, deadlines for grant applications and requirements for eligibility may change.</p>
+
+                                <h3 class="font-serif-lg text-bold margin-top-3">Main features of “Connect with Experts” section</h3>
+                                <p>The "Connect with Experts" page contains publicly available contact information provided by individuals and organizations that support entrepreneurs and small businesses. This information was collected from publicly available third-party websites and may be incorrect or outdated.</p>
+                                <p>The State of Maryland does not own or endorse any of the third-party businesses or experts listed on this site. Users are encouraged to independently verify credentials and qualifications before engaging with providers.</p>
+                                <p>If you would like to submit a correction or request that your information be removed from this page, please email <a href="mailto:compass@maryland.gov">compass@maryland.gov</a>.</p>
+
+                                <h3 class="font-serif-lg text-bold margin-top-3">Main features of AI-Powered Summaries</h3>
+                                <p>This site facilitates easier access to information regarding community planning document contents. The “Community Voice” quotes are extracted with the assistance of generative AI and offer qualitative information to supplement quantitative data. These outputs should be read in the context of the original planning documents on which they are based.</p>
+                                <ul>
+                                    <li>Sustainable Community applications are sourced from <a href="https://dhcd.maryland.gov/Communities/pages/dn/default.aspx" target="_blank" rel="noopener noreferrer">Maryland DHCD</a>.</li>
+                                    <li>Comprehensive Plans are sourced from <a href="https://planning.maryland.gov/Pages/OurWork/PBP/compplans/viewplans.aspx" target="_blank" rel="noopener noreferrer">Maryland Department of Planning</a>.</li>
+                                    <li>Baltimore City Community Plans are sourced from the <a href="https://planning.baltimorecity.gov/planning-plans/neighborhood" target="_blank" rel="noopener noreferrer">Baltimore City Planning Department</a>.</li>
+                                </ul>
+                                <p>The State of Maryland provides this feature for convenience and does not endorse or assume responsibility for the content.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer class="maryland-footer" aria-labelledby="footer">
@@ -431,10 +512,10 @@
                             </h3>
                             <ul class="maryland-footer__link-group-list">
                                 <li>
-                                    <a href="./">Methodology</a>
+                                    <a href="../methodology/">Methodology</a>
                                 </li>
                                 <li>
-                                    <a href="../legal/">Terms & Conditions</a>
+                                    <a href="./">Terms & Conditions</a>
                                 </li>
                             </ul>
                         </nav>
@@ -521,161 +602,29 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Fetch Methodology Content
-            fetch('methodology.json')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    renderMethodology(data);
-                    initScrollSpy();
+            // 1. Initialize Scroll Spy immediately since HTML is hardcoded
+            initScrollSpy();
 
-                    // Deep Linking Logic
-                    if (window.location.hash) {
-                        const targetId = window.location.hash.substring(1);
-                        const targetSection = document.getElementById(targetId);
-                        
-                        if (targetSection) {
-                            requestAnimationFrame(() => {
-                                targetSection.scrollIntoView({ 
-                                    behavior: 'auto', 
-                                    block: 'start' 
-                                });
-                            });
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.error('Unable to fetch methodology data:', error);
-                    const container = document.getElementById('methodology-content-container');
-                    if (container) {
-                        container.innerHTML = 
-                            `<div class="usa-alert usa-alert--error">
-                                <div class="usa-alert__body">
-                                    <h3 class="usa-alert__heading">Error Loading Data</h3>
-                                    <p class="usa-alert__text">Unable to load methodology content.</p>
-                                </div>
-                            </div>`;
-                    }
-                });
-
-            // 2. Fetch and Render Data Sources Table
-            renderDataSources();
+            // 2. Handle Deep Linking (Robust Method)
+            if (window.location.hash) {
+                const targetId = window.location.hash.substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    // requestAnimationFrame ensures the DOM elements are painted 
+                    // and have calculated heights before we try to scroll.
+                    requestAnimationFrame(() => {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'auto', // Instant jump is more reliable on load than smooth
+                            block: 'start' 
+                        });
+                    });
+                }
+            }
         });
 
-        function renderMethodology(data) {
-            const navContainer = document.getElementById('methodology-sidenav');
-            const contentContainer = document.getElementById('methodology-content-container');
-            
-            navContainer.innerHTML = '';
-            contentContainer.innerHTML = '';
-
-            // Manually add Data Sources link to sidebar
-            const dsLi = document.createElement('li');
-            dsLi.className = 'usa-sidenav__item';
-            dsLi.innerHTML = `<a href="#data-sources" class="usa-nav__link">Data Sources</a>`;
-            navContainer.appendChild(dsLi);
-
-            data.forEach(item => {
-                // Generate Sidebar Link
-                const li = document.createElement('li');
-                li.className = 'usa-sidenav__item';
-                li.innerHTML = `<a href="#${item.id}" class="usa-nav__link">${item.title}</a>`;
-                navContainer.appendChild(li);
-
-                // Generate Section
-                const section = document.createElement('div');
-                section.id = item.id;
-                section.className = 'methodology-section';
-
-                // Data Source Boxes
-                let boxesHtml = '';
-                if (item.dataSource && item.whatItMeans) {
-                    boxesHtml = `
-                        <div class="grid-row grid-gap">
-                            <div class="tablet:grid-col-4" style="display: flex; flex-direction: column;">
-                                <div class="data-source-box" style="flex: 1;">
-                                    <div class="data-source-title">Data Source</div>
-                                    <p class="font-sans-sm margin-bottom-0">${item.dataSource}</p>
-                                </div>
-                            </div>
-                            <div class="tablet:grid-col-8" style="display: flex; flex-direction: column;">
-                                <div class="data-source-box" style="border-left-color: #e5a000; flex: 1;">
-                                    <div class="data-source-title">What this means</div>
-                                    <p class="font-sans-sm margin-bottom-0">${item.whatItMeans}</p>
-                                </div>
-                            </div>
-                        </div>`;
-                }
-
-                // Technical Accordion (Closed by default)
-                let accordionHtml = '';
-                if (item.techTitle && item.techContent) {
-                    accordionHtml = `
-                        <div class="usa-accordion usa-accordion--bordered margin-top-3">
-                            <h3 class="usa-accordion__heading">
-                                <button type="button" class="usa-accordion__button" aria-expanded="false" aria-controls="tech-${item.id}">
-                                    ${item.techTitle}
-                                </button>
-                            </h3>
-                            <div id="tech-${item.id}" class="usa-accordion__content usa-prose" hidden>
-                                ${item.techContent}
-                            </div>
-                        </div>`;
-                }
-
-                // Check for units and format them
-                const unitHtml = item.unit 
-                    ? `<br/><strong class="text-base-darker">Units: ${item.unit}</strong>` 
-                    : '';
-
-                section.innerHTML = `
-                    <h2 class="font-serif-xl text-primary-darker">${item.title}</h2>
-                    <p class="font-sans-lg text-light">
-                        ${item.description}
-                        ${unitHtml}
-                    </p>
-                    ${boxesHtml}
-                    ${accordionHtml}
-                    <hr class="usa-divider margin-y-4">
-                `;
-
-                contentContainer.appendChild(section);
-            });
-        }
-
-        function renderDataSources() {
-            fetch('sources.json')
-                .then(response => {
-                    if (!response.ok) throw new Error('Failed to load sources.json');
-                    return response.json();
-                })
-                .then(data => {
-                    // Sort alphabetically by indicator name
-                    data.sort((a, b) => a.indicator.localeCompare(b.indicator));
-
-                    const tbody = document.querySelector('#data-sources-table tbody');
-                    if (!tbody) return;
-
-                    tbody.innerHTML = '';
-
-                    data.forEach(item => {
-                        const tr = document.createElement('tr');
-                        tr.innerHTML = `
-                            <th scope="row" class="font-sans-xs text-bold text-top">${item.indicator}</th>
-                            <td class="font-sans-xs text-top">${item.source || '<span class="text-base-light italic">Source to be added</span>'}</td>
-                        `;
-                        tbody.appendChild(tr);
-                    });
-                })
-                .catch(err => console.error('Error rendering data sources:', err));
-        }
-
         function initScrollSpy() {
-            const sidenav = document.getElementById('methodology-sidenav');
+            const sidenav = document.getElementById('legal-sidenav');
             const links = sidenav.querySelectorAll('a');
             const sections = [];
             let isUserScrolling = false;
@@ -829,8 +778,8 @@
                 <div class="tc-notification-banner__inner">
                     <p>
                         Welcome to the Maryland Community Business Compass. By using this website, you acknowledge that you have read and understand 
-                        <a href="../legal/#how-it-works" target="_blank" rel="noopener noreferrer">How This Site Works<span class="tc-sr-only"> (opens in new tab)</span></a>, as well as these 
-                        <a href="../legal/" target="_blank" rel="noopener noreferrer">Terms and Conditions<span class="tc-sr-only"> (opens in new tab)</span></a> and agree to be bound by the terms, conditions, and notices therein.
+                        <a href="./#how-it-works">How This Site Works</a>, as well as these 
+                        Terms and Conditions and agree to be bound by the terms, conditions, and notices therein.
                     </p>
                     <button type="button" id="tc-accept-btn">Accept</button>
                 </div>

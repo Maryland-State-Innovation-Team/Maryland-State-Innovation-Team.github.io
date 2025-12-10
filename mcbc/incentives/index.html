@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find Government Funding - Maryland Community Business Compass</title>
-    
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
     <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
 
     <style>
         body {
             font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
         }
-        /* Custom styles for logo and minor adjustments */
+        /* Custom styles for logo */
         .custom-logo a {
             display: flex;
             align-items: flex-end;
@@ -159,8 +159,6 @@
                 min-width: 0 !important;
             }
 
-            /* (no extra margin here; the container uses space-between and the nav won't stretch) */
-
             /* Hide the mobile close button icon on desktop */
             .usa-nav__close {
                 display: none;
@@ -295,7 +293,7 @@
         }
         /* Add these new styles inside the <style> tag */
 
-        /* 0. Style search input with a magnifying glass icon */
+        /* Style search input with a magnifying glass icon */
         #search-input {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23565c65'%3E%3Cpath d='M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
@@ -339,7 +337,7 @@
 
 
 
-        /* 2. Style the mobile menu button like the example image */
+        /* Style the mobile menu button like the example image */
         .usa-menu-btn {
             background-color: #005ea2; /* primary-default */
             color: white;
@@ -350,7 +348,7 @@
             margin: 0;
         }
 
-        /* 3. Ensure the results count/CSV button container is full width */
+        /* Ensure the results count/CSV button container is full width */
         #results-container {
             width: 100%;
         }
@@ -403,7 +401,7 @@
             top: 1.5rem;
         }
 
-        /* New grey pill tag for the info box */
+        /* Grey pill tag for the info box */
         .info-box-tag {
             display: inline-block;
             padding: 0.25rem 0.75rem;
@@ -420,7 +418,7 @@
             text-transform: capitalize;
         }
 
-        /* New white <hr> for the hero */
+        /* White <hr> for the hero */
         .incentive-detail-header .white-divider {
             border: 0;
             height: 1px;
@@ -430,7 +428,7 @@
             margin-bottom: 1rem;
         }
 
-        /* New grey <hr> for the info box */
+        /* Grey <hr> for the info box */
         .info-box .info-box-divider {
             margin: 1rem 0;
             border: 0;
@@ -524,12 +522,12 @@
         .usa-checkbox:focus-within {
             z-index: 1;
         }
-        /* 1. Apply the pointer cursor to the row so the user knows it's clickable */
+        /* Apply the pointer cursor to the row so the user knows it's clickable */
         .clickable-row {
             cursor: pointer;
         }
 
-        /* 2. High-Specificity Hover State 
+        /* High-Specificity Hover State 
         We target the 'td' inside the hovered row to override the 
         striped background color. */
         table.usa-table tr.clickable-row:hover td {
@@ -537,7 +535,7 @@
             color: #1b1b1b; /* Ensure text stays legible */
         }
 
-        /* 3. Optional: Active state (when clicking down) */
+        /* Active state (when clicking down) */
         table.usa-table tr.clickable-row:active td {
             background-color: #cfd2d4 !important; /* Slightly darker */
         }
@@ -581,7 +579,7 @@
             display: none;
         }
 
-        /* Desktop Overrides (min-width: 1024px to match your existing 'tablet-lg' breakpoint) */
+        /* Desktop Overrides (min-width: 1024px to match 'tablet-lg' breakpoint) */
         @media (min-width: 1024px) {
             /* Hide the toggle button on large screens */
             .mobile-filter-toggle {
@@ -749,7 +747,7 @@
             overflow: hidden;
         }
 
-        /* 1. Float the Download CSV button to the right in its container */
+        /* Float the Download CSV button to the right in its container */
         #results-container #download-csv-btn {
             margin-left: auto;
             order: 2; /* keep it after the results count in flex order */
@@ -1124,6 +1122,9 @@
                             <ul class="maryland-footer__link-group-list">
                                 <li>
                                     <a href="../methodology/">Methodology</a>
+                                </li>
+                                <li>
+                                    <a href="../legal/">Terms & Conditions</a>
                                 </li>
                             </ul>
                         </nav>
@@ -2020,6 +2021,173 @@
                 }
             });
         });
+    </script>
+    <script>
+        /**
+         * Injects a dismissible Terms & Conditions footer banner.
+         * Features:
+         * - LocalStorage persistence
+         * - Accessibility: Focus management
+         * - Accessibility: Screen reader support for external links
+         */
+        (function() {
+            'use strict';
+
+            // 1. Configuration
+            const STORAGE_KEY = 'md_business_compass_tc_accepted';
+            const BANNER_ID = 'tc-banner';
+            
+            // 2. Check if already accepted
+            if (localStorage.getItem(STORAGE_KEY) === 'true') {
+                return; // Exit immediately if already accepted
+            }
+
+            // 3. Define CSS Styles
+            const styles = `
+                .tc-notification-banner {
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    background-color: #1b1b1b;
+                    color: #ffffff;
+                    z-index: 40000;
+                    padding: 1rem 0;
+                    box-shadow: 0 -4px 10px rgba(0,0,0,0.25);
+                    border-top: 4px solid #e5a000;
+                    font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+                }
+                .tc-notification-banner__inner {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 2rem;
+                    max-width: 90rem;
+                    margin-left: auto;
+                    margin-right: auto;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                }
+                .tc-notification-banner p {
+                    margin: 0;
+                    font-size: 0.9rem;
+                    line-height: 1.4;
+                }
+                .tc-notification-banner a {
+                    color: #ffffff;
+                    text-decoration: underline;
+                    font-weight: bold;
+                }
+                .tc-notification-banner a:hover {
+                    color: #e5a000;
+                }
+                .tc-notification-banner button {
+                    cursor: pointer;
+                    background-color: #ffffff;
+                    color: #1b1b1b;
+                    border: none;
+                    padding: 0.75rem 1.25rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 0.93rem;
+                    line-height: 0.9;
+                    border-radius: 0.25rem;
+                    flex-shrink: 0;
+                }
+                .tc-notification-banner button:hover {
+                    background-color: #f0f0f0;
+                    color: #005ea2;
+                }
+                /* Utility for screen readers */
+                .tc-sr-only {
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    padding: 0;
+                    margin: -1px;
+                    overflow: hidden;
+                    clip: rect(0, 0, 0, 0);
+                    white-space: nowrap;
+                    border: 0;
+                }
+                @media (max-width: 768px) {
+                    .tc-notification-banner {
+                        padding: 1rem;
+                    }
+                    .tc-notification-banner__inner {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: 1rem;
+                    }
+                    .tc-notification-banner button {
+                        width: 100%;
+                    }
+                }
+            `;
+
+            // 4. Define HTML Structure
+            const htmlContent = `
+                <div class="tc-notification-banner__inner">
+                    <p>
+                        Welcome to the Maryland Community Business Compass. By using this website, you acknowledge that you have read and understand 
+                        <a href="../legal/#how-it-works" target="_blank" rel="noopener noreferrer">How This Site Works<span class="tc-sr-only"> (opens in new tab)</span></a>, as well as these 
+                        <a href="../legal/" target="_blank" rel="noopener noreferrer">Terms and Conditions<span class="tc-sr-only"> (opens in new tab)</span></a> and agree to be bound by the terms, conditions, and notices therein.
+                    </p>
+                    <button type="button" id="tc-accept-btn">Accept</button>
+                </div>
+            `;
+
+            // 5. Injection Logic
+            function injectBanner() {
+                // Inject Styles
+                const styleSheet = document.createElement("style");
+                styleSheet.textContent = styles;
+                document.head.appendChild(styleSheet);
+
+                // Inject HTML
+                const bannerDiv = document.createElement("div");
+                bannerDiv.id = BANNER_ID;
+                bannerDiv.className = "tc-notification-banner";
+                // role="alertdialog" effectively communicates this is a blocking interaction 
+                // requiring user acknowledgment, which justifies the auto-focus.
+                bannerDiv.setAttribute("role", "alertdialog"); 
+                bannerDiv.setAttribute("aria-label", "Terms and Conditions Agreement");
+                bannerDiv.innerHTML = htmlContent;
+                
+                document.body.appendChild(bannerDiv);
+
+                // Bind Event Listener
+                const btn = document.getElementById('tc-accept-btn');
+                if (btn) {
+                    // Focus Management: Auto-focus the button on mount
+                    // We use a slight timeout to ensure the browser has rendered the element
+                    setTimeout(() => {
+                        btn.focus();
+                    }, 100);
+
+                    btn.addEventListener('click', function() {
+                        try {
+                            localStorage.setItem(STORAGE_KEY, 'true');
+                            
+                            // Remove banner
+                            bannerDiv.remove();
+                        } catch (e) {
+                            console.error('T&C Banner: Could not save to localStorage', e);
+                        }
+                    });
+                }
+            }
+
+            // 6. Run on Load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', injectBanner);
+            } else {
+                injectBanner();
+            }
+
+        })();
     </script>
 </body>
 </html>
