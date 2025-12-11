@@ -717,6 +717,14 @@
                 console.warn('Could not load env.json, GA suppressed.', error);
             });
     </script>
+    <noscript>
+        <style>
+            /* Hide the interactive app view if JS is disabled */
+            #view-initial, #view-results {
+                display: none !important;
+            }
+        </style>
+    </noscript>
 </head>
 <body>
 
@@ -792,7 +800,20 @@
         </header>
 
         <main id="main-content">
-            
+            <noscript>
+                <section class="usa-section padding-y-4">
+                    <div class="grid-container">
+                        <div class="usa-alert usa-alert--error" role="alert">
+                            <div class="usa-alert__body">
+                                <h4 class="usa-alert__heading">JavaScript is required</h4>
+                                <p class="usa-alert__text">
+                                    We're sorry, but the Maryland Community Business Compass requires JavaScript to be enabled in your browser to search, filter, and connect with business support experts. Please enable JavaScript in your browser settings to continue.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </noscript>
             <div id="view-initial">
                 <section class="hero-section">
                     <div class="hero-split-container">

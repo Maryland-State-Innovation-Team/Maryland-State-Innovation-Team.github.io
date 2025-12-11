@@ -154,6 +154,7 @@
                             </button>
                         </div>
                     </header>
+
                     <div class="usa-banner__content usa-accordion__content" id="gov-banner-default" hidden="true">
                         <div class="grid-row grid-gap-lg">
                             <div class="usa-banner__guidance tablet:grid-col-6">
@@ -206,6 +207,52 @@
                 </nav>
             </div>
         </header>
+
+        <noscript>
+            <style>
+                /* 1. Hide the overlays that block the screen */
+                #loading-overlay, 
+                #tour-overlay, 
+                #explore-modal-overlay, 
+                #sector-modal-overlay,
+                #mobile-layer-modal {
+                    display: none !important;
+                }
+
+                /* 2. Hide the interactive map area (Main Content) */
+                /* We leave #app-container visible so the Header/Banner still show */
+                #main-content {
+                    display: none !important;
+                }
+                
+                /* 3. Style the alert area */
+                .no-js-wrapper {
+                    flex-grow: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 4rem 1rem;
+                    background-color: #f1f5f9; /* Slate-100 to match bg */
+                }
+                
+                .usa-alert {
+                    max-width: 600px;
+                    width: 100%;
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                }
+            </style>
+            
+            <div class="no-js-wrapper">
+                <div class="usa-alert usa-alert--error" role="alert">
+                    <div class="usa-alert__body">
+                        <h3 class="usa-alert__heading text-bold">JavaScript is required</h3>
+                        <p class="usa-alert__text">
+                            We're sorry, but the Maryland Community Business Compass requires JavaScript to be enabled in your browser to use the interactive map. Please enable JavaScript in your browser settings to continue.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </noscript>
         
         <div id="main-content" class="relative flex-grow" inert>
             <div id="top-controls-wrapper" role="region" aria-label="Map Controls" class="absolute top-0 left-0 w-full p-2 md:p-4 z-[1005] flex flex-col md:flex-row md:justify-between md:items-start gap-3 pointer-events-none">
