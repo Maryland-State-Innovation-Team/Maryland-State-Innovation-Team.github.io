@@ -1483,8 +1483,8 @@
     "assistance_nonfinancial": "",
     "structured_extraction": {
       "featured": true,
-      "featured_img": "../assets/nourish_square.png",
-      "featured_img_alt": "A smiling woman in a denim jacket holds a shopping basket filled with fresh vegetables and berries at a market.",
+      "featured_img": "../assets/nourish-md-compressed.jpg",
+      "featured_img_alt": "A woman shopping for fresh fruit in a grocery store produce section.",
       "featured_description": "Grants of up to $150,000 to support capital-related needs for grocery stores and markets in areas with limited healthy food access.",
       "program_name": "NourishMD Grant Program",
       "program_description": "The NourishMD Grant Program expands access to fresh foods in food-insecure communities. It provides grants to eligible food retailers to support operations and improvements.",
@@ -1552,8 +1552,8 @@
     "assistance_nonfinancial": "",
     "structured_extraction": {
       "featured": true,
-      "featured_img": "../assets/cc_square.png",
-      "featured_img_alt": "A smiling woman and three young children sit at a round table in a bright classroom, playing with wooden blocks and colorful shape puzzles together.",
+      "featured_img": "../assets/revolving-loan-fund-compressed.jpg",
+      "featured_img_alt": "A caregiver making paper crafts with children in a child care setting.",
       "featured_description": "No-interest loans for capital expenses to child care providers who participate in the Child Care Scholarship Program.",
       "program_name": "Child Care Capital Support Revolving Loan Fund",
       "program_description": "The Maryland Department of Commerce manages this fund. It offers no-interest loans to child care providers for capital expenses. To qualify, providers must participate in the State Department of Education's Child Care Scholarship Program.",
