@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        // Immediately remove the "no-js" class to indicate JS is enabled
+        document.documentElement.classList.remove("no-js");
+    </script>
     <title>Terms of Service - Maryland Community Business Compass</title>
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
     <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
@@ -202,6 +206,12 @@
             color: #005ea2;
             text-decoration: underline;
             word-break: break-word;
+        }
+        /* ------------------------------------------------------------------
+           NO-JS FALLBACK
+           ------------------------------------------------------------------ */
+        .no-js #tos-acknowledgement {
+            display: none !important;
         }
     </style>
     <script>
@@ -451,7 +461,7 @@
                                 <hr class="usa-divider margin-y-4">
                             </div>
 
-                            <div>
+                            <div id="tos-acknowledgement">
                                 <h3 class="font-serif-lg text-bold">Acknowledgement</h3>
                                 <p>By clicking "Accept" below, you acknowledge that you have read and agree to these Terms of Service.</p>
                                 <button type="button" class="usa-button" id="accept-tos-page-btn">Accept Terms of Service</button>
@@ -463,6 +473,16 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <noscript>
+                                <div class="usa-alert usa-alert--warning margin-top-4">
+                                    <div class="usa-alert__body">
+                                        <p class="usa-alert__text">
+                                            <strong>Note:</strong> JavaScript is required to digitally accept these terms. Please enable JavaScript.
+                                        </p>
+                                    </div>
+                                </div>
+                            </noscript>
                         </div>
                     </div>
                 </div>
