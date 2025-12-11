@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Methodology - Maryland Community Business Compass</title>
+    <title>How This Site Works - Maryland Community Business Compass</title>
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
     <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
 
@@ -110,22 +110,22 @@
         .usa-header--basic { border-bottom: 1px solid #dfe1e2; }
         
         /* ------------------------------------------------------------------
-           METHODOLOGY PAGE SPECIFIC STYLES
+           LEGAL PAGE SPECIFIC STYLES
            ------------------------------------------------------------------ */
         
         /* Hero Section */
-        .methodology-header {
+        .legal-header {
             background-image: url('../assets/bg-dark.svg');
             background-color: #19355d;
             background-size: cover;
             background-position: center center;
             padding: 4rem 0; /* Taller padding for Hero feel */
         }
-        .methodology-header h1 {
+        .legal-header h1 {
             color: white;
             margin-top: 0;
         }
-        .methodology-header p {
+        .legal-header p {
             color: white;
             font-size: 1.3rem;
             max-width: 65ch;
@@ -153,22 +153,11 @@
         }
 
         /* Section Layouts */
-        .methodology-section {
+        .legal-section {
             scroll-margin-top: 6rem; 
             margin-bottom: 4rem;
         }
-
-        /* Table Text Wrapping */
-        #data-sources-table {
-            table-layout: fixed; /* Strictly respects the 40%/60% column widths */
-        }
-        #data-sources-table td, 
-        #data-sources-table th {
-            white-space: normal;      /* Allows text to wrap */
-            word-wrap: break-word;    /* Legacy support for breaking long words */
-            overflow-wrap: anywhere;  /* Modern support to break long URLs anywhere */
-        }
-
+        
         /* Data Source / Indicator Box Styling */
         .data-source-box {
             background-color: #f0f0f0; /* base-lightest */
@@ -187,14 +176,14 @@
         }
         
         /* Accordion Customization */
-        .methodology-section .usa-accordion__button {
+        .legal-section .usa-accordion__button {
             background-color: #ffffff;
             border: 1px solid #dfe1e2;
         }
-        .methodology-section .usa-accordion__button:hover {
+        .legal-section .usa-accordion__button:hover {
             background-color: #f0f0f0;
         }
-        .methodology-section .usa-accordion__content {
+        .legal-section .usa-accordion__content {
             background-color: #f8f9fa;
             border: 1px solid #dfe1e2;
             border-top: 0;
@@ -207,6 +196,12 @@
             min-height: 0;
             padding-top: 0.25rem;
             padding-bottom: 0.25rem;
+        }
+
+        #legal-content-container a {
+            color: #005ea2;
+            text-decoration: underline;
+            word-break: break-word;
         }
     </style>
     <script>
@@ -316,70 +311,130 @@
 
     <main id="main-content">
         
-        <section class="methodology-header">
+        <section class="legal-header">
             <div class="grid-container">
                 <div class="grid-row grid-gap-6">
                     <div class="tablet-lg:grid-col-8">
-                        <h1 class="font-serif-2xl tablet:font-serif-3xl text-bold">Methodology & Data Sources</h1>
+                        <h1 class="font-serif-2xl tablet:font-serif-3xl text-bold">How This Site Works</h1>
                         <p class="font-sans-lg">
-                            This page details how we calculate indicators, where our data comes from, and the technical decisions behind the Maryland Community Business Compass.
+                            Learn how the Compass aggregates public data and AI insights to help you locate business opportunities, find funding, and connect with support networks.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="usa-section padding-top-2">
+        <section class="usa-section">
             <div class="grid-container">
                 <div class="grid-row grid-gap-6">
                     
-                    <aside class="tablet:grid-col-3" aria-label="Methodology Navigation">
+                    <aside class="tablet:grid-col-3" aria-label="Terms Navigation">
                         <div class="sticky-sidebar">
                             <h2 class="font-sans-lg text-bold">On this page</h2>
-                            <nav class="margin-top-2" aria-label="Methodology Sections">
-                                <ul id="methodology-sidenav" class="usa-sidenav">
+                            <nav class="margin-top-2" aria-label="Terms Sections">
+                                <ul id="legal-sidenav" class="usa-sidenav">
+                                    <li class="usa-sidenav__item">
+                                        <a href="#introduction" class="usa-nav__link">Introduction</a>
+                                    </li>
+                                    <li class="usa-sidenav__item">
+                                        <a href="#no-endorsement" class="usa-nav__link">No Endorsement</a>
+                                    </li>
+                                    <li class="usa-sidenav__item">
+                                        <a href="#locate-opportunity" class="usa-nav__link">Locate the Opportunity</a>
+                                    </li>
+                                    <li class="usa-sidenav__item">
+                                        <a href="#government-funding" class="usa-nav__link">Government Funding</a>
+                                    </li>
+                                    <li class="usa-sidenav__item">
+                                        <a href="#connect-experts" class="usa-nav__link">Connect with Experts</a>
+                                    </li>
+                                    <li class="usa-sidenav__item">
+                                        <a href="#corrections" class="usa-nav__link">Corrections</a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
                     </aside>
 
                     <div class="tablet:grid-col-9">
-                        <div id="data-sources" class="methodology-section">
-                            <h2 class="font-serif-xl text-primary-darker">Data Sources</h2>
-                            <p class="font-sans-lg text-light">
-                                This table provides a comprehensive list of data sources for all data indicators, map layers, and points of interest used throughout the Maryland Community Business Compass.
-                            </p>
-
-                            <div class="usa-accordion usa-accordion--bordered margin-top-3">
-                                <h3 class="usa-accordion__heading">
-                                    <button type="button" class="usa-accordion__button" aria-expanded="false" aria-controls="data-sources-content">
-                                        Data Sources Table
-                                    </button>
-                                </h3>
-                                <div id="data-sources-content" class="usa-accordion__content" hidden>
-                                    <div class="usa-table-container--scrollable" tabindex="0">
-                                        <table class="usa-table usa-table--borderless width-full" id="data-sources-table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col" style="width: 40%;">Indicator / Layer Name</th>
-                                                    <th scope="col" style="width: 60%;">Data Source(s)</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                        <div id="legal-content-container" class="usa-prose">
+                            
+                            <div id="introduction" class="legal-section">
+                                <h2 class="font-serif-xl text-primary-darker">Introduction</h2>
+                                <p class="usa-intro">
+                                    The Maryland Community Business Compass (the “Compass”) is a neighborhood development platform designed to bridge the gap between community needs and business opportunities across the state. By analyzing data on local access to essential services, such as fresh food and childcare, the Compass identifies neighborhoods where investment can have the greatest impact.
+                                </p>
+                                <p>
+                                    The platform equips entrepreneurs, government agencies, and developers with unique insights to estimate a neighborhood's economic potential for new businesses. Intended as a starting point for your research, this site allows users to locate business opportunities, search for government incentives, and connect with support networks to help build sustainable communities.
+                                </p>
+                                <hr class="usa-divider margin-y-4">
                             </div>
-                            <hr class="usa-divider margin-y-4">
-                        </div>
-                        <div id="methodology-content-container" class="usa-prose">
+
+                            <div id="no-endorsement" class="legal-section">
+                                <h2 class="font-serif-xl text-primary-darker">No endorsement of any listed businesses/experts</h2>
+                                <p>
+                                    The State of Maryland (the “State”) does not own or endorse any of the third-party businesses or experts listed on this site. Where we have been able to locate contact information on the public web pages of Maryland economic development and business support organizations, this information has been aggregated into the “Connect with Experts” section of the Compass.
+                                </p>
+                                <hr class="usa-divider margin-y-4">
+                            </div>
+
+                            <div id="locate-opportunity" class="legal-section">
+                                <h2 class="font-serif-xl text-primary-darker">Main features of the “Locate the Opportunity” section</h2>
+                                <p>
+                                    The Compass relies on <a href="https://www.openstreetmap.org" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> for locations of known food retail locations. As OpenStreetMap is crowd-sourced, it may contain inaccurate information. Food retail locations are categorized into “Convenience”, “Specialty foods”, or “Fresh produce” segments with the assistance of generative AI, and may contain mistakes.
+                                </p>
+                                <p>
+                                    A compilation of State public data is used to determine locations of licensed child care providers and display their Maryland EXCELS quality rating. To read more about the Maryland EXCELS program, visit <a href="https://marylandexcels.org/" target="_blank" rel="noopener noreferrer">https://marylandexcels.org/</a>.
+                                </p>
+                                <h3 class="font-serif-lg text-bold margin-top-3">AI-Powered Summaries</h3>
+                                <p>
+                                    The AI-powered summaries found in the “Locate the Opportunity” section provide easier, summarized access to the contents of community planning documents. “Community Voice” quotes are extracted from publicly available county or municipal comprehensive plans with the assistance of generative AI and offer qualitative information to supplement quantitative data. Users should read these summaries in the context of the original source on which they are based.
+                                </p>
+                                <ul>
+                                    <li>Sustainable Community applications are sourced from <a href="https://dhcd.maryland.gov/Communities/pages/dn/default.aspx" target="_blank" rel="noopener noreferrer">Maryland DHCD</a>.</li>
+                                    <li>Comprehensive Plans are sourced from <a href="https://planning.maryland.gov/Pages/OurWork/PBP/compplans/viewplans.aspx" target="_blank" rel="noopener noreferrer">Maryland Department of Planning</a>.</li>
+                                    <li>Baltimore City Community Plans are sourced from the <a href="https://planning.baltimorecity.gov/planning-plans/neighborhood" target="_blank" rel="noopener noreferrer">Baltimore City Planning Department</a>.</li>
+                                </ul>
+                                <p>
+                                    The State of Maryland provides this feature for convenience and does not endorse or assume responsibility for the content of the summaries.
+                                </p>
+                                <hr class="usa-divider margin-y-4">
+                            </div>
+
+                            <div id="government-funding" class="legal-section">
+                                <h2 class="font-serif-xl text-primary-darker">Main features of “Find Government Funding” section</h2>
+                                <p>
+                                    Grant, loan, and tax-credit information is updated on a periodic basis by the granting entity, and is provided solely as a general resource. Information is originally sourced from the <a href="https://apps.planning.maryland.gov/OurWork/Infoportal/" target="_blank" rel="noopener noreferrer">Maryland Department of Planning InfoPortal</a>, and supplemented with information from relevant Maryland State agency websites and county development entities with the assistance of generative AI.
+                                </p>
+                                <p>
+                                    Third-party requirements for grants change regularly. This means, for example, that new grants may become available that are not listed and others may become unavailable. Similarly, deadlines for grant applications and requirements for eligibility may change.
+                                </p>
+                                <hr class="usa-divider margin-y-4">
+                            </div>
+
+                            <div id="connect-experts" class="legal-section">
+                                <h2 class="font-serif-xl text-primary-darker">Main features of “Connect with Experts” section</h2>
+                                <p>
+                                    The "Connect with Experts" page contains publicly available contact information provided by individuals and organizations that support entrepreneurs and small businesses. As this information is collected from publicly available third-party websites, it may contain inaccurate information. Users are encouraged to independently verify credentials and qualifications before engaging with providers.
+                                </p>
+                                <hr class="usa-divider margin-y-4">
+                            </div>
+
+                            <div id="corrections" class="legal-section">
+                                <h2 class="font-serif-xl text-primary-darker">Corrections and Removal Requests</h2>
+                                <p>
+                                    The Compass aggregates data from various public and third-party sources, including OpenStreetMap for food retail locations, and State agency records for child care providers. We strive to ensure this information is current and accurate.
+                                </p>
+                                <p>
+                                    If you identify an error regarding any listing on this site, whether it is a business, service provider, funding opportunity, or subject matter expert, or if you would like to request that your information be updated or removed, please email <a href="mailto:compass@maryland.gov">compass@maryland.gov</a>.
+                                </p>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer class="maryland-footer" aria-labelledby="footer">
@@ -431,7 +486,7 @@
                             </h3>
                             <ul class="maryland-footer__link-group-list">
                                 <li>
-                                    <a href="./">Methodology</a>
+                                    <a href="../methodology/">Methodology</a>
                                 </li>
                                 <li>
                                     <a href="../terms-of-service/">Terms of Service</a>
@@ -524,161 +579,29 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Fetch Methodology Content
-            fetch('methodology.json')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    renderMethodology(data);
-                    initScrollSpy();
+            // 1. Initialize Scroll Spy immediately since HTML is hardcoded
+            initScrollSpy();
 
-                    // Deep Linking Logic
-                    if (window.location.hash) {
-                        const targetId = window.location.hash.substring(1);
-                        const targetSection = document.getElementById(targetId);
-                        
-                        if (targetSection) {
-                            requestAnimationFrame(() => {
-                                targetSection.scrollIntoView({ 
-                                    behavior: 'auto', 
-                                    block: 'start' 
-                                });
-                            });
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.error('Unable to fetch methodology data:', error);
-                    const container = document.getElementById('methodology-content-container');
-                    if (container) {
-                        container.innerHTML = 
-                            `<div class="usa-alert usa-alert--error">
-                                <div class="usa-alert__body">
-                                    <h3 class="usa-alert__heading">Error Loading Data</h3>
-                                    <p class="usa-alert__text">Unable to load methodology content.</p>
-                                </div>
-                            </div>`;
-                    }
-                });
-
-            // 2. Fetch and Render Data Sources Table
-            renderDataSources();
+            // 2. Handle Deep Linking (Robust Method)
+            if (window.location.hash) {
+                const targetId = window.location.hash.substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    // requestAnimationFrame ensures the DOM elements are painted 
+                    // and have calculated heights before we try to scroll.
+                    requestAnimationFrame(() => {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'auto', // Instant jump is more reliable on load than smooth
+                            block: 'start' 
+                        });
+                    });
+                }
+            }
         });
 
-        function renderMethodology(data) {
-            const navContainer = document.getElementById('methodology-sidenav');
-            const contentContainer = document.getElementById('methodology-content-container');
-            
-            navContainer.innerHTML = '';
-            contentContainer.innerHTML = '';
-
-            // Manually add Data Sources link to sidebar
-            const dsLi = document.createElement('li');
-            dsLi.className = 'usa-sidenav__item';
-            dsLi.innerHTML = `<a href="#data-sources" class="usa-nav__link">Data Sources</a>`;
-            navContainer.appendChild(dsLi);
-
-            data.forEach(item => {
-                // Generate Sidebar Link
-                const li = document.createElement('li');
-                li.className = 'usa-sidenav__item';
-                li.innerHTML = `<a href="#${item.id}" class="usa-nav__link">${item.title}</a>`;
-                navContainer.appendChild(li);
-
-                // Generate Section
-                const section = document.createElement('div');
-                section.id = item.id;
-                section.className = 'methodology-section';
-
-                // Data Source Boxes
-                let boxesHtml = '';
-                if (item.dataSource && item.whatItMeans) {
-                    boxesHtml = `
-                        <div class="grid-row grid-gap">
-                            <div class="tablet:grid-col-4" style="display: flex; flex-direction: column;">
-                                <div class="data-source-box" style="flex: 1;">
-                                    <div class="data-source-title">Data Source</div>
-                                    <p class="font-sans-sm margin-bottom-0">${item.dataSource}</p>
-                                </div>
-                            </div>
-                            <div class="tablet:grid-col-8" style="display: flex; flex-direction: column;">
-                                <div class="data-source-box" style="border-left-color: #e5a000; flex: 1;">
-                                    <div class="data-source-title">What this means</div>
-                                    <p class="font-sans-sm margin-bottom-0">${item.whatItMeans}</p>
-                                </div>
-                            </div>
-                        </div>`;
-                }
-
-                // Technical Accordion (Closed by default)
-                let accordionHtml = '';
-                if (item.techTitle && item.techContent) {
-                    accordionHtml = `
-                        <div class="usa-accordion usa-accordion--bordered margin-top-3">
-                            <h3 class="usa-accordion__heading">
-                                <button type="button" class="usa-accordion__button" aria-expanded="false" aria-controls="tech-${item.id}">
-                                    ${item.techTitle}
-                                </button>
-                            </h3>
-                            <div id="tech-${item.id}" class="usa-accordion__content usa-prose" hidden>
-                                ${item.techContent}
-                            </div>
-                        </div>`;
-                }
-
-                // Check for units and format them
-                const unitHtml = item.unit 
-                    ? `<br/><strong class="text-base-darker">Units: ${item.unit}</strong>` 
-                    : '';
-
-                section.innerHTML = `
-                    <h2 class="font-serif-xl text-primary-darker">${item.title}</h2>
-                    <p class="font-sans-lg text-light">
-                        ${item.description}
-                        ${unitHtml}
-                    </p>
-                    ${boxesHtml}
-                    ${accordionHtml}
-                    <hr class="usa-divider margin-y-4">
-                `;
-
-                contentContainer.appendChild(section);
-            });
-        }
-
-        function renderDataSources() {
-            fetch('sources.json')
-                .then(response => {
-                    if (!response.ok) throw new Error('Failed to load sources.json');
-                    return response.json();
-                })
-                .then(data => {
-                    // Sort alphabetically by indicator name
-                    data.sort((a, b) => a.indicator.localeCompare(b.indicator));
-
-                    const tbody = document.querySelector('#data-sources-table tbody');
-                    if (!tbody) return;
-
-                    tbody.innerHTML = '';
-
-                    data.forEach(item => {
-                        const tr = document.createElement('tr');
-                        tr.innerHTML = `
-                            <th scope="row" class="font-sans-xs text-bold text-top">${item.indicator}</th>
-                            <td class="font-sans-xs text-top">${item.source || '<span class="text-base-light italic">Source to be added</span>'}</td>
-                        `;
-                        tbody.appendChild(tr);
-                    });
-                })
-                .catch(err => console.error('Error rendering data sources:', err));
-        }
-
         function initScrollSpy() {
-            const sidenav = document.getElementById('methodology-sidenav');
+            const sidenav = document.getElementById('legal-sidenav');
             const links = sidenav.querySelectorAll('a');
             const sections = [];
             let isUserScrolling = false;
@@ -721,10 +644,6 @@
                 scrollTimeout = setTimeout(() => { isUserScrolling = false; }, 1000);
             });
         }
-    </script>
-    <script src="../assets/tos_notification.js"></script>
-    <script>
-        window.initTermsBanner({ rootPath: '..' });
     </script>
 </body>
 </html>
