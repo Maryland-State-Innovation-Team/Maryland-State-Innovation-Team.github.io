@@ -116,8 +116,8 @@ window.initTermsBanner = function(config) {
         <div class="tc-notification-banner__inner">
             <p>
                 Welcome to the Maryland Community Business Compass. By using this website, you acknowledge that you have read and understand the 
-                <a href="${options.rootPath}/terms-of-service" target="_blank" rel="noopener noreferrer">Website Terms of Service<span class="tc-sr-only"> (opens in new tab)</span></a>, and 
-                <a href="${options.rootPath}/how-this-site-works/" target="_blank" rel="noopener noreferrer">How This Site Works<span class="tc-sr-only"> (opens in new tab)</span></a> and agree to be bound by the terms, conditions, and notices therein. For future reference, a link to both the Website Terms of Service and How This Site Works can be found in the footer of each page of this website.
+                <a href="${options.rootPath}/terms-of-service" target="_blank" rel="noopener noreferrer">Website Terms of Service<span class="tc-sr-only"> (opens in new tab)</span></a> and 
+                <a href="${options.rootPath}/how-this-site-works/" target="_blank" rel="noopener noreferrer">How This Site Works<span class="tc-sr-only"> (opens in new tab)</span></a>, and agree to be bound by the terms, conditions, and notices therein. For future reference, a link to both the Website Terms of Service and How This Site Works can be found in the footer of each page of this website.
             </p>
             <button type="button" id="tc-accept-btn">Accept</button>
         </div>
