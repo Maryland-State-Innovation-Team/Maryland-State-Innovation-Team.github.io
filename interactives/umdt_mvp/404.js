@@ -1,0 +1,297 @@
+// 1. Initialize dataLayer and gtag (Safe Shim)
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+
+// 2. Fetch environment config & Analytics
+fetch('/env.json')
+    .then(function(response) { return response.json(); })
+    .then(function(config) {
+        if (config.environment === 'production') {
+            var gaId = 'G-W4R4JXSE3R';
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+            document.head.appendChild(script);
+            gtag('js', new Date());
+            gtag('config', gaId);                    
+        } else {
+            console.log('Google Analytics suppressed (' + config.environment + ').');
+        }
+    })
+    .catch(function(error) {
+        console.warn('Could not load env.json, GA suppressed.', error);
+    });
+
+// 3. 404 Page Rendering Logic
+// We store the static HTML in a template literal to keep 404.html small.
+const contentHTML = `
+    <div class="usa-banner-container">
+        <section class="usa-banner" aria-label="Official website of the State of Maryland">
+            <div class="usa-accordion">
+                <header class="usa-banner__header padding-x-2">
+                    <div class="usa-banner__inner padding-0 display-flex flex-align-center">
+                        <div class="grid-col-auto display-flex flex-align-center">
+                            <img class="usa-banner__header-flag" aria-hidden="true" src="data:image/svg+xml,%3csvg%20width='18'%20height='13'%20viewBox='0%200%2018%2013'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20x='7'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='5'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='1'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='7'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='3'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='3'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='5'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='11'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2011%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='13'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2013%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='17'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2017%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='11'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2011%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='15'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2015%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='15'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2015%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='13'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2013%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='17'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2017%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='6.5'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='9.25'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='6.5'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='1'%20y='9.25'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2017%206.5)'%20fill='white'/%3e%3crect%20x='13'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2013%203.75)'%20fill='white'/%3e%3crect%20x='13'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2013%206.5)'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2017%203.75)'%20fill='%23B50909'/%3e%3crect%20x='0.75'%20y='0.75'%20width='16.5'%20height='11.5'%20stroke='black'%20stroke-width='0.5'/%3e%3c/svg%3e">
+                        </div>
+                        <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
+                            <p class="usa-banner__header-text">An official website of the State of Maryland</p>
+                            <p class="usa-banner__header-action">Here’s how you know</p>
+                        </div>
+                        <button type="button" class="usa-accordion__button usa-banner__button" aria-controls="gov-banner-default" aria-expanded="false">
+                            <span class="usa-banner__button-text">Here’s how you know</span>
+                        </button>
+                    </div>
+                </header>
+                <div class="usa-banner__content usa-accordion__content" id="gov-banner-default" hidden="true">
+                    <div class="grid-row grid-gap-lg">
+                        <div class="usa-banner__guidance tablet:grid-col-6">
+                            <img class="usa-banner__icon usa-media-block__img" role="img" alt="" aria-hidden="true" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3e%3ctitle%3eicon-dot-gov%3c/title%3e%3cpath%20fill='%232378C3'%20fill-rule='evenodd'%20d='m32%200c17.7%200%2032%2014.3%2032%2032s-14.3%2032-32%2032-32-14.3-32-32%2014.3-32%2032-32zm0%201.2c-17%200-30.8%2013.8-30.8%2030.8s13.8%2030.8%2030.8%2030.8%2030.8-13.8%2030.8-30.8-13.8-30.8-30.8-30.8zm11.4%2038.9c.5%200%20.9.4.9.8v1.6h-24.6v-1.6c0-.5.4-.8.9-.8zm-17.1-12.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h.8c.5%200%20.9.4.9.8v.8h-21.4v-.8c0-.5.4-.8.9-.8h.8v-9.8zm5.7-8.2%2012.3%204.9v1.6h-1.6c0%20.5-.4.8-.9.8h-19.6c-.5%200-.9-.4-.9-.8h-1.6v-1.6s12.3-4.9%2012.3-4.9z'/%3e%3c/svg%3e">
+                            <div class="usa-media-block__body">
+                                <p><strong>Official websites use .gov</strong><br>A <strong>.gov</strong> website belongs to an official government organization in the United States.</p>
+                            </div>
+                        </div>
+                        <div class="usa-banner__guidance tablet:grid-col-6">
+                            <img class="usa-banner__icon usa-media-block__img" role="img" alt="" aria-hidden="true" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3e%3ctitle%3eicon-https%3c/title%3e%3cpath%20fill='%23719F2A'%20fill-rule='evenodd'%20d='M32%200c17.673%200%2032%2014.327%2032%2032%200%2017.673-14.327%2032-32%2032C14.327%2064%200%2049.673%200%2032%200%2014.327%2014.327%200%2032%200zm0%201.208C14.994%201.208%201.208%2014.994%201.208%2032S14.994%2062.792%2032%2062.792%2062.792%2049.006%2062.792%2032%2049.006%201.208%2032%201.208zm0%2018.886a7.245%207.245%200%200%201%207.245%207.245v3.103h.52c.86%200%201.557.698%201.557%201.558v9.322c0%20.86-.697%201.558-1.557%201.558h-15.53c-.86%200-1.557-.697-1.557-1.558V32c0-.86.697-1.558%201.557-1.558h.52V27.34A7.245%207.245%200%200%201%2032%2020.094zm0%203.103a4.142%204.142%200%200%200-4.142%204.142v3.103h8.284V27.34A4.142%204.142%200%200%200%2032%2023.197z'/%3e%3c/svg%3e">
+                            <div class="usa-media-block__body">
+                                <p><strong>Secure .gov websites use HTTPS</strong><br>A <strong>lock</strong> (<span class="icon-lock"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="64" viewBox="0 0 52 64" class="usa-banner__lock-image" role="img" aria-labelledby="banner-lock-description-default" focusable="false"><title id="banner-lock-title-default">Lock</title><desc id="banner-lock-description-default">Locked padlock icon</desc><path fill="#000000" fill-rule="evenodd" d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"></path></svg></span>) or <strong>https://</strong> means you’ve safely connected to the .gov website. Share sensitive information only on official, secure websites.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="app">
+        <header class="usa-header usa-header--basic">
+            <div class="usa-nav-container">
+                <div class="usa-navbar">
+                    <div class="usa-logo custom-logo" id="basic-logo">
+                        <div class="usa-logo__text">
+                            <a href="/" title="Home" aria-label="Home">
+                                <img src="/assets/mdwds_logo_notext.svg" alt="Maryland Business Compass Logo">
+                                <span>Maryland Community<br>Business Compass</span>
+                            </a>
+                        </div>
+                    </div>
+                    <button type="button" class="usa-menu-btn">Menu</button>
+                </div>
+                <nav aria-label="Primary navigation" class="usa-nav">
+                    <button type="button" class="usa-nav__close"></button>
+                    <ul class="usa-nav__primary usa-accordion">
+                        <li class="usa-nav__primary-item">
+                            <a href="/" class="usa-nav__link"><span>Home</span></a>
+                        </li>
+                        <li class="usa-nav__primary-item">
+                            <a href="/map/" class="usa-nav__link"><span>Locate the Opportunity</span></a>
+                        </li>
+                        <li class="usa-nav__primary-item">
+                            <a href="/incentives/" class="usa-nav__link"><span>Find Government Funding</span></a>
+                        </li>
+                        <li class="usa-nav__primary-item">
+                            <a href="/resources/" class="usa-nav__link"><span>Connect with Experts</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main id="main-content">
+        
+        <section class="not-found-header">
+            <div class="grid-container">
+                <div class="grid-row grid-gap-6">
+                    <div class="tablet-lg:grid-col-8">
+                        <h1 class="font-serif-2xl tablet:font-serif-3xl text-bold">Page Not Found</h1>
+                        <p class="font-sans-lg">
+                            We are sorry, but the page you are looking for does not exist or has been moved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="usa-section">
+            <div class="grid-container">
+                <div class="grid-row grid-gap">
+                    <div class="tablet:grid-col-8">
+                        <h2 class="font-heading-xl margin-top-0">What can you do?</h2>
+                        <p class="usa-intro">
+                            It seems you have hit a dead end. You can return to the homepage to start over, or use the menu above to locate opportunities and funding.
+                        </p>
+                        <div class="margin-top-4">
+                            <a href="/" class="usa-button">Return to Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    </div>
+    
+    <footer class="maryland-footer" aria-labelledby="footer">
+        <h2 id="footer" class="usa-sr-only">Footer</h2>
+        <div class="maryland-footer__container">
+            
+            <section aria-labelledby="agency-footer" class="maryland-footer__section">
+                <div class="maryland-footer__agency">
+                    <img class="maryland-footer__agency-logo" src="/assets/innovation-website-logo-light.png" alt="Maryland State Innovation Team Logo" style="height: 50px; width: auto;">
+                    <h3 class="maryland-footer__agency-name" id="agency-footer">
+                        Maryland State Innovation Team
+                    </h3>
+                    <ul class="maryland-footer__agency-social">
+                        <li>
+                            <a href="https://www.instagram.com/marylandinnovation/" target="_blank" class="maryland-footer__agency-social-link maryland-footer__agency-social-link--instagram">
+                                <span class="usa-sr-only">Connect with Maryland State Innovation Team on instagram.com</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/@MarylandStateInnovationTeam" target="_blank" class="maryland-footer__agency-social-link maryland-footer__agency-social-link--youtube">
+                                <span class="usa-sr-only">Connect with Maryland State Innovation Team on youtube.com</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/company/marylanditeam" target="_blank" class="maryland-footer__agency-social-link maryland-footer__agency-social-link--linkedin">
+                                <span class="usa-sr-only">Connect with Maryland State Innovation Team on linkedin.com</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <hr class="maryland-footer__divider">
+
+                <div class="maryland-footer__agency-menu">
+                    <div class="maryland-footer__agency-contact">
+                        <div class="maryland-footer__link-group">
+                            <h3 class="maryland-footer__link-group-heading">Contact us</h3>
+                            <ul class="maryland-footer__link-group-list">
+                                <li>6 Saint Paul Street, Baltimore, MD 21202</li>
+                                <li><a href="mailto:compass@maryland.gov">compass@maryland.gov</a></li>
+                                <li><a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank">Visit Our Website</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="maryland-footer__agency-links">
+                        <nav class="maryland-footer__link-group">
+                            <h3 class="maryland-footer__link-group-heading">
+                            Learn more
+                            </h3>
+                            <ul class="maryland-footer__link-group-list">
+                                <li>
+                                    <a href="/methodology/">Methodology</a>
+                                </li>
+                                <li>
+                                    <a href="/terms-of-service/">Website Terms of Service</a>
+                                </li>
+                                <li>
+                                    <a href="/how-this-site-works/">How This Site Works</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="maryland-footer__divider">
+
+            <section aria-labelledby="global-footer" class="maryland-footer__section">
+                <h3 class="maryland-footer__title" id="global-footer">
+                    Explore Maryland.gov
+                </h3>
+                <div class="maryland-footer__content">
+                    <nav class="maryland-footer__link-group" aria-labelledby="top-services">
+                        <h3 class="maryland-footer__link-group-heading" id="top-services">Top services</h3>
+                        <ul class="maryland-footer__link-group-list">
+                            <li><a href="https://mva.maryland.gov/vehicles">Vehicle services</a></li>
+                            <li><a href="https://dhs.maryland.gov/supplemental-nutrition-assistance-program/">Food assistance / SNAP</a></li>
+                            <li><a href="https://www.labor.maryland.gov/employment/unemployment.shtml">Unemployment services</a></li>
+                            <li><a href="https://www.marylandtaxes.gov/individual/index.php">Taxes</a></li>
+                            <li><a href="https://elections.maryland.gov/voter_registration/index.html">Register to vote</a></li>
+                            <li><a href="https://www.maryland.gov/pages/residents.aspx">Resident resources</a></li>
+                            <li><a href="https://www.visitmaryland.org/">Visit Maryland</a></li>
+                            <li><a href="https://www.maryland.gov/pages/online_services.aspx">More online services</a></li>
+                        </ul>
+                    </nav>
+                    <nav class="maryland-footer__link-group" aria-labelledby="government">
+                        <h3 class="maryland-footer__link-group-heading" id="government">Government</h3>
+                        <ul class="maryland-footer__link-group-list">
+                            <li><a href="https://governor.maryland.gov/">Governor Wes Moore</a></li>
+                            <li><a href="https://governor.maryland.gov/leadership/cabinet/">Maryland cabinet agencies</a></li>
+                            <li><a href="http://www.maryland.gov/pages/agency_directory.aspx">All state agencies</a></li>
+                            <li><a href="https://www.maryland.gov/pages/state_employees.aspx">For state employees</a></li>
+                            <li><a href="https://www.maryland.gov/pages/jobs.aspx">Maryland state jobs</a></li>
+                            <li><a href="https://www.ola.state.md.us/fraud/ola-fraud-hotline/">Report state government fraud</a></li>
+                        </ul>
+                    </nav>
+                    <nav class="maryland-footer__link-group" aria-labelledby="policies">
+                        <h3 class="maryland-footer__link-group-heading" id="policies">Policies</h3>
+                        <ul class="maryland-footer__link-group-list">
+                            <li><a href="https://www.maryland.gov/pages/accessibility.aspx">Accessibility</a></li>
+                            <li><a href="https://www.maryland.gov/pages/privacy_security.aspx">Privacy &amp; security</a></li>
+                        </ul>
+                    </nav>
+                    <nav class="maryland-footer__link-group" aria-labelledby="connect">
+                        <h3 class="maryland-footer__link-group-heading" id="connect">Connect</h3>
+                        <ul class="maryland-footer__link-group-list">
+                            <li><a href="https://mdrelay.maryland.gov/Pages/default.aspx">Maryland Relay: 7-1-1</a></li>
+                            <li><a href="http://www.doit.state.md.us/phonebook/">State employee directory</a></li>
+                            <li><a href="https://news.maryland.gov/">Maryland news</a></li>
+                            <li><a href="https://www.doit.state.md.us/selectsurvey/TakeSurvey.aspx?SurveyID=86M2956">Customer service survey</a></li>
+                        </ul>
+                    </nav>
+                    <nav class="maryland-footer__link-group" aria-labelledby="alerts">
+                        <h3 class="maryland-footer__link-group-heading" id="alerts">Alerts</h3>
+                        <ul class="maryland-footer__link-group-list">
+                            <li><a href="https://mdready.maryland.gov/be-informed/Pages/sign-up-for-alerts.aspx">Emergency alerts</a></li>
+                            <li><a href="https://chart.maryland.gov/Incidents/GetIncidents">Travel alerts</a></li>
+                            <li><a href="https://doit.maryland.gov/cybersecurity/">Cybersecurity</a></li>
+                            <li><a href="https://goccp.maryland.gov/victim-services/human-trafficking/">Report human trafficking</a></li>
+                            <li><a href="https://response.maryland.gov/bridge">Key bridge</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                
+                <hr class="maryland-footer__divider">
+                
+                <div class="maryland-footer__branding">
+                    <img class="maryland-footer__logo" alt="Maryland full logo" src="/assets/mdwds_logo_horizontal_inverted.svg" style="height: 40px;">
+                    <div class="maryland-footer__copyright">
+                        © 2025 State of Maryland. All rights reserved.
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+    </footer>
+`;
+
+// Helper to load external scripts sequentially
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        var s = document.createElement('script');
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.body.appendChild(s);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Inject the HTML into the body, preserving the <noscript> tag if preferred, 
+    // or simply overwriting. Here we overwrite for a clean state.
+    document.body.innerHTML = contentHTML;
+
+    // 2. Define global config required by mdwds-core
+    window.mdwds = { image_path: "https://cdn.maryland.gov/mdwds/0.12.0/img" };
+
+    // 3. Load Dependencies
+    loadScript("https://cdn.maryland.gov/mdwds/0.12.0/js/mdwds-core.js")
+        .then(() => loadScript("/assets/tos_notification.js"))
+        .then(() => {
+            if (window.initTermsBanner) {
+                window.initTermsBanner({ rootPath: '.' });
+            }
+        })
+        .catch(err => console.error("Error loading 404 dependencies", err));
+});

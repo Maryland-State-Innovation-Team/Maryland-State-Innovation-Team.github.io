@@ -978,30 +978,6 @@
         ]
     },
     {
-        "id": 28,
-        "organization": "Maryland Office of Child Care",
-        "description": "The Maryland Office of Child Care oversees licensing, quality standards, and financial assistance for child care across Maryland.",
-        "type": "State",
-        "area": [
-            "Maryland"
-        ],
-        "address": null,
-        "address_city": null,
-        "address_state": null,
-        "address_zip": null,
-        "url": "https://marylandchild.org/contact-us/",
-        "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
-        "logo_file": "logos/28.jpg",
-        "question_tags": [
-            "Permits and Licensing"
-        ],
-        "business_category": "Child Care",
-        "phone": null,
-        "fax": null,
-        "email": null,
-        "contacts": []
-    },
-    {
         "id": 29,
         "organization": "Office of Child Care Region 1 (Anne Arundel County)",
         "description": "Regional licensing offices for the Maryland Office of Child Care can help you navigate the licensing process, connect you with required training, and provide guidance on meeting state health and safety standards for your child care program.",
@@ -1015,7 +991,7 @@
         "address_zip": "21401",
         "url": "https://earlychildhood.marylandpublicschools.org/region-1-anne-arundel-county",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
-        "logo_file": "logos/28.jpg",
+        "logo_file": "logos/29.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1124,7 +1100,7 @@
         "address_zip": "21215",
         "url": "https://earlychildhood.marylandpublicschools.org/region-2-baltimore-city",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
-        "logo_file": "logos/28.jpg",
+        "logo_file": "logos/29.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1148,7 +1124,7 @@
         "address_zip": "21204",
         "url": "https://earlychildhood.marylandpublicschools.org/region-3-baltimore-county",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
-        "logo_file": "logos/28.jpg",
+        "logo_file": "logos/29.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1292,7 +1268,7 @@
         "address_zip": "20785",
         "url": "https://earlychildhood.marylandpublicschools.org/region-4-prince-georges-county",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
-        "logo_file": "logos/28.jpg",
+        "logo_file": "logos/29.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1436,7 +1412,7 @@
         "address_zip": "20850",
         "url": "https://earlychildhood.marylandpublicschools.org/region-5-montgomery-county",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
-        "logo_file": "logos/28.jpg",
+        "logo_file": "logos/29.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1594,7 +1570,7 @@
         "address_zip": "21043",
         "url": "https://earlychildhood.marylandpublicschools.org/region-6-howard-county",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
-        "logo_file": "logos/28.jpg",
+        "logo_file": "logos/29.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1677,7 +1653,7 @@
         "address_zip": "21740",
         "url": "https://earlychildhood.marylandpublicschools.org/region-7-western-maryland-allegany-garrett-and-washington-counties",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
-        "logo_file": "logos/28.jpg",
+        "logo_file": "logos/29.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1737,7 +1713,7 @@
         "address_zip": "21502",
         "url": "https://earlychildhood.marylandpublicschools.org/region-7-western-maryland-allegany-garrett-and-washington-counties",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
-        "logo_file": "logos/28.jpg",
+        "logo_file": "logos/29.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1773,7 +1749,7 @@
         "address_zip": "21601",
         "url": "https://earlychildhood.marylandpublicschools.org/region-8-upper-shore-office-caroline-dorchester-kent-queen-annes-talbot-counties",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
-        "logo_file": "logos/28.jpg",
+        "logo_file": "logos/29.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1835,7 +1811,7 @@
         "address_zip": "21801",
         "url": "https://earlychildhood.marylandpublicschools.org/region-9-lower-shore-office-somerset-wicomico-and-worcester-counties",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
-        "logo_file": "logos/28.jpg",
+        "logo_file": "logos/29.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -1890,7 +1866,7 @@
         "address_zip": "20650",
         "url": "https://earlychildhood.marylandpublicschools.org/region-10-southern-maryland-office-calvert-charles-and-st-marys-counties",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
-        "logo_file": "logos/28.jpg",
+        "logo_file": "logos/29.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -2014,7 +1990,7 @@
         "address_zip": "21009",
         "url": "https://earlychildhood.marylandpublicschools.org/region-11-north-central-office-cecil-and-harford-counties",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
-        "logo_file": "logos/28.jpg",
+        "logo_file": "logos/29.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -2095,7 +2071,7 @@
         "address_zip": "21703",
         "url": "https://earlychildhood.marylandpublicschools.org/region-12-frederick-county",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
-        "logo_file": "logos/28.jpg",
+        "logo_file": "logos/29.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
@@ -2183,7 +2159,7 @@
         "address_zip": "21784",
         "url": "https://earlychildhood.marylandpublicschools.org/region-13-carroll-county",
         "logo_link": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qu8Agp3k5VdNJWlZFMsWfJosPswPvd7G-g&s",
-        "logo_file": "logos/28.jpg",
+        "logo_file": "logos/29.jpg",
         "question_tags": [
             "Permits and Licensing"
         ],
