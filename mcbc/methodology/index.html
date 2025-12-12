@@ -135,6 +135,11 @@
         .sticky-sidebar {
             position: sticky;
             top: 1.5rem;
+            max-height: calc(100vh - 3rem); /* Limits height to viewport minus top/bottom buffer */
+            overflow-y: auto; /* Adds scrollbar if content exceeds height */
+            overflow-x: hidden; /* Prevents horizontal scrolling */
+            padding-left: 0.5rem; /* Creates buffer so left-aligned text/borders aren't clipped */
+            padding-right: 0.5rem; /* Balances spacing and separates text from the scrollbar */
         }
         .usa-sidenav__item a {
             color: #005ea2;
