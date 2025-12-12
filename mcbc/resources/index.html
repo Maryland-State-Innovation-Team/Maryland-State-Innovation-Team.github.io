@@ -1514,7 +1514,8 @@
                     const firstContact = contacts.length > 0 ? contacts[0] : null;
 
                     // Phone: Org > First Contact > null
-                    const displayPhone = item.phone || (firstContact ? firstContact.phone : null);
+                    // Expecting object: { display: "xxx-xxx-xxxx", link: "tel:+1..." }
+                    const phoneData = item.phone || (firstContact ? firstContact.phone : null);
 
                     // 3. Construct Description
                     // Use explicit description from data, falling back to constructed string only if missing
@@ -1527,7 +1528,7 @@
                             <tr>
                                 <td>${c.name || '-'}</td>
                                 <td>${c.title || '-'}</td>
-                                <td>${c.phone ? `<a href="tel:${c.phone}">${c.phone}</a>` : '-'}</td>
+                                <td>${c.phone ? `<a href="${c.phone.link}">${c.phone.display}</a>` : '-'}</td>
                                 <td>${c.email ? `<a href="mailto:${c.email}">${c.email}</a>` : '-'}</td>
                             </tr>
                         `).join('');
@@ -1574,11 +1575,11 @@
                                     <div style="padding-top:4px;">${tagsHtml || 'General Support'}</div>
                                 </div>
 
-                                ${displayPhone ? `
+                                ${phoneData ? `
                                 <div class="sidebar-section">
                                     <span class="sidebar-label">Phone</span>
-                                    <a href="tel:${displayPhone}" class="sidebar-link">
-                                        ${displayPhone}
+                                    <a href="${phoneData.link}" class="sidebar-link">
+                                        ${phoneData.display}
                                     </a>
                                 </div>` : ''}
 

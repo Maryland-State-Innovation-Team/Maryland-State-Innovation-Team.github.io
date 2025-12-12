@@ -30,7 +30,10 @@
             {
                 "name": "Jeff Barclay",
                 "title": "Economic Development Representative",
-                "phone": "800-555-4080",
+                "phone": {
+                    "display": "800-555-4080",
+                    "link": "tel:+18005554080"
+                },
                 "fax": "301-777-2194",
                 "email": "jbarclay@alleganygov.org"
             }
@@ -67,7 +70,10 @@
             {
                 "name": "Wes MacQulliam",
                 "title": "Vice President; Business Development & Real Estate",
-                "phone": "410-222-7410",
+                "phone": {
+                    "display": "410-222-7410",
+                    "link": "tel:+14102227410"
+                },
                 "fax": null,
                 "email": "wmacquilliam@aaedc.org"
             }
@@ -104,7 +110,10 @@
             {
                 "name": "Otis Rolley",
                 "title": "President and CEO",
-                "phone": "410-837-9305",
+                "phone": {
+                    "display": "410-837-9305",
+                    "link": "tel:+14108379305"
+                },
                 "fax": "410-547-7211",
                 "email": "info@baltimoredevelopment.com"
             }
@@ -141,7 +150,10 @@
             {
                 "name": "Jonathan Sacks",
                 "title": "Director",
-                "phone": "410-887-8000",
+                "phone": {
+                    "display": "410-887-8000",
+                    "link": "tel:+14108878000"
+                },
                 "fax": null,
                 "email": "businesshelp@baltimorecountymd.gov"
             }
@@ -178,7 +190,10 @@
             {
                 "name": "Julianne A. Oberg",
                 "title": "Director",
-                "phone": "410-535-4583",
+                "phone": {
+                    "display": "410-535-4583",
+                    "link": "tel:+14105354583"
+                },
                 "fax": "410-535-4585",
                 "email": "info@choosecalvert.com"
             }
@@ -215,7 +230,10 @@
             {
                 "name": "Bob Zimberoff",
                 "title": "Director",
-                "phone": "410-829-2763",
+                "phone": {
+                    "display": "410-829-2763",
+                    "link": "tel:+14108292763"
+                },
                 "fax": null,
                 "email": "info@carolinebusiness.com"
             }
@@ -252,7 +270,10 @@
             {
                 "name": "Paige Sunderland",
                 "title": "Deputy Director / Business Development",
-                "phone": "410-386-2070",
+                "phone": {
+                    "display": "410-386-2070",
+                    "link": "tel:+14103862070"
+                },
                 "fax": "410-876-8471",
                 "email": "PSunderland@carrollbiz.org"
             }
@@ -289,7 +310,10 @@
             {
                 "name": "Sandra Edwards",
                 "title": "Director",
-                "phone": "410-996-8465",
+                "phone": {
+                    "display": "410-996-8465",
+                    "link": "tel:+14109968465"
+                },
                 "fax": "888-869-8212",
                 "email": "sedwards@cecilcountymd.gov"
             }
@@ -326,7 +350,10 @@
             {
                 "name": "Jim Chandler",
                 "title": "Director",
-                "phone": "301-885-1340",
+                "phone": {
+                    "display": "301-885-1340",
+                    "link": "tel:+13018851340"
+                },
                 "fax": null,
                 "email": "info@meetcharlescounty.com"
             }
@@ -363,7 +390,10 @@
             {
                 "name": "Susan Banks",
                 "title": "Director",
-                "phone": "410-228-0155",
+                "phone": {
+                    "display": "410-228-0155",
+                    "link": "tel:+14102280155"
+                },
                 "fax": "410-228-9518",
                 "email": "sbanks@choosedorchester.org"
             }
@@ -400,7 +430,10 @@
             {
                 "name": "Mary Ford Naill",
                 "title": "Economic Development Manager",
-                "phone": "301-600-6362",
+                "phone": {
+                    "display": "301-600-6362",
+                    "link": "tel:+13016006362"
+                },
                 "fax": null,
                 "email": "mnail@cityoffrederickmd.gov"
             }
@@ -437,7 +470,10 @@
             {
                 "name": "Troy Bolyard",
                 "title": "Director of Business Attraction",
-                "phone": "301-600-1037",
+                "phone": {
+                    "display": "301-600-1037",
+                    "link": "tel:+13016001037"
+                },
                 "fax": null,
                 "email": "tbolyard@frederickcountymd.gov"
             }
@@ -474,8 +510,11 @@
             {
                 "name": "Kim Durst",
                 "title": "Manager of Business Development",
-                "phone": "301-334-1992",
-                "fax": "(301) 334-7469",
+                "phone": {
+                    "display": "301-334-1992",
+                    "link": "tel:+13013341992"
+                },
+                "fax": "301-334-7469",
                 "email": "kdurst@garrettcountymd.gov"
             }
         ]
@@ -511,7 +550,10 @@
             {
                 "name": "Shawn Krout",
                 "title": "Business Development Manager/Enterprise Zone Administrator",
-                "phone": "410-638-3414",
+                "phone": {
+                    "display": "410-638-3414",
+                    "link": "tel:+14106383414"
+                },
                 "fax": null,
                 "email": "slkrout@harfordcountymd.gov"
             }
@@ -548,7 +590,10 @@
             {
                 "name": "Jennifer D. Jones",
                 "title": "CEO",
-                "phone": "410- 313-6500",
+                "phone": {
+                    "display": "410- 313-6500",
+                    "link": "tel:4103136500"
+                },
                 "fax": null,
                 "email": "jdjone@hceda.org"
             }
@@ -585,7 +630,10 @@
             {
                 "name": "Jamie Williams",
                 "title": "Director Economic & Tourism Development",
-                "phone": "410-810-2168",
+                "phone": {
+                    "display": "410-810-2168",
+                    "link": "tel:+14108102168"
+                },
                 "fax": null,
                 "email": "jlwilliams@kentgov.org"
             }
@@ -615,7 +663,10 @@
             "Getting Started"
         ],
         "business_category": "All",
-        "phone": "240-641-6700",
+        "phone": {
+            "display": "240-641-6700",
+            "link": "tel:+12406416700"
+        },
         "fax": null,
         "email": "connect@thinkmoco.com",
         "contacts": []
@@ -651,7 +702,10 @@
             {
                 "name": "John A Mason",
                 "title": "Economic Development Manager",
-                "phone": "240-542-2044",
+                "phone": {
+                    "display": "240-542-2044",
+                    "link": "tel:+12405422044"
+                },
                 "fax": null,
                 "email": "jmason@greenbeltmd.gov"
             }
@@ -688,7 +742,10 @@
             {
                 "name": "Larry Hentz",
                 "title": "Executive Director of Business Development",
-                "phone": "301-583-4602",
+                "phone": {
+                    "display": "301-583-4602",
+                    "link": "tel:+13015834602"
+                },
                 "fax": null,
                 "email": "Lhentz@co.pg.md.us"
             }
@@ -725,7 +782,10 @@
             {
                 "name": "Heather Tinelli",
                 "title": "Economic and Tourism Development Director",
-                "phone": "410-604-2100",
+                "phone": {
+                    "display": "410-604-2100",
+                    "link": "tel:+14106042100"
+                },
                 "fax": null,
                 "email": "htinelli@qac.org"
             }
@@ -762,7 +822,10 @@
             {
                 "name": "Daniel Thompson",
                 "title": "Executive Director",
-                "phone": "410-651-0500",
+                "phone": {
+                    "display": "410-651-0500",
+                    "link": "tel:+14106510500"
+                },
                 "fax": "410-651-3836",
                 "email": "DThompson@somersetmd.us"
             }
@@ -792,7 +855,10 @@
             "Getting Started"
         ],
         "business_category": "All",
-        "phone": "301-475-4200 x1400",
+        "phone": {
+            "display": "301-475-4200 ext. 1400",
+            "link": "tel:+13014754200;ext=1400"
+        },
         "fax": "301-475-4414",
         "email": "ded@stmarysmd.com",
         "contacts": []
@@ -828,7 +894,10 @@
             {
                 "name": "Cassandra Vanhooser",
                 "title": "Director",
-                "phone": "410-770-8000",
+                "phone": {
+                    "display": "410-770-8000",
+                    "link": "tel:+14107708000"
+                },
                 "fax": null,
                 "email": "cvanhooser@talbotcountymd.gov"
             }
@@ -865,7 +934,10 @@
             {
                 "name": "Jonathan Horowitz",
                 "title": "Director",
-                "phone": "240-313-2283",
+                "phone": {
+                    "display": "240-313-2283",
+                    "link": "tel:+12403132283"
+                },
                 "fax": null,
                 "email": "jhorowitz@washco-md.net"
             }
@@ -902,7 +974,10 @@
             {
                 "name": "David Ryan",
                 "title": "Executive Director",
-                "phone": "410-749-1251",
+                "phone": {
+                    "display": "410-749-1251",
+                    "link": "tel:+14107491251"
+                },
                 "fax": "410-749-1252",
                 "email": "dryan@swed.org"
             }
@@ -939,7 +1014,10 @@
             {
                 "name": "Melanie Pursel",
                 "title": "Director",
-                "phone": "410-632-3112",
+                "phone": {
+                    "display": "410-632-3112",
+                    "link": "tel:+14106323112"
+                },
                 "fax": null,
                 "email": "mdcoastinfo@co.worcester.md.us"
             }
@@ -971,7 +1049,10 @@
             {
                 "name": "Alexander Hamann",
                 "title": null,
-                "phone": "410-767-6316",
+                "phone": {
+                    "display": "410-767-6316",
+                    "link": "tel:+14107676316"
+                },
                 "fax": null,
                 "email": "PropInfo.Commerce@Maryland.gov"
             }
@@ -996,91 +1077,130 @@
             "Permits and Licensing"
         ],
         "business_category": "Child Care",
-        "phone": "410-573-9522",
+        "phone": {
+            "display": "410-573-9522",
+            "link": "tel:+14105739522"
+        },
         "fax": "410-573-9848",
         "email": "\tocc1aa.msde@maryland.gov",
         "contacts": [
             {
                 "name": "Charlene Farley",
                 "title": "Regional Manager\t",
-                "phone": "410-573-9522",
+                "phone": {
+                    "display": "410-573-9522",
+                    "link": "tel:+14105739522"
+                },
                 "fax": null,
                 "email": "charlene.farley@maryland.gov"
             },
             {
                 "name": "Tonya Smith",
                 "title": "Office Secretary III",
-                "phone": "410-573-9522",
+                "phone": {
+                    "display": "410-573-9522",
+                    "link": "tel:+14105739522"
+                },
                 "fax": null,
                 "email": "tonya.smith1@maryland.gov"
             },
             {
                 "name": "Erin Hewitt",
                 "title": "Licensing Supervisor",
-                "phone": "410-573-9841",
+                "phone": {
+                    "display": "410-573-9841",
+                    "link": "tel:+14105739841"
+                },
                 "fax": null,
                 "email": "erin.hewitt@maryland.gov"
             },
             {
                 "name": "Nancy Cahlink-Seidler",
                 "title": "Licensing Specialist",
-                "phone": "410-573-9843",
+                "phone": {
+                    "display": "410-573-9843",
+                    "link": "tel:+14105739843"
+                },
                 "fax": null,
                 "email": "nancy.cahlink-seidler@maryland.gov"
             },
             {
                 "name": "James Sherwood",
                 "title": "Lead Licensing Specialist",
-                "phone": "410-573-9846",
+                "phone": {
+                    "display": "410-573-9846",
+                    "link": "tel:+14105739846"
+                },
                 "fax": null,
                 "email": "james.sherwood@maryland.gov"
             },
             {
                 "name": "Nikya Green",
                 "title": "Lead Licensing Specialist",
-                "phone": "410-573-9526",
+                "phone": {
+                    "display": "410-573-9526",
+                    "link": "tel:+14105739526"
+                },
                 "fax": null,
                 "email": "nikya.green@maryland.gov"
             },
             {
                 "name": "Racheal Brown",
                 "title": "Licensing Specialist",
-                "phone": "410-573-9524",
+                "phone": {
+                    "display": "410-573-9524",
+                    "link": "tel:+14105739524"
+                },
                 "fax": null,
                 "email": "racheal.brown1@maryland.gov"
             },
             {
                 "name": "Katherine Justice",
                 "title": "Licensing Specialist",
-                "phone": "410-573-9528",
+                "phone": {
+                    "display": "410-573-9528",
+                    "link": "tel:+14105739528"
+                },
                 "fax": null,
                 "email": "katherine.justice@maryland.gov"
             },
             {
                 "name": "Dawn Hollenczer",
                 "title": "Licensing Specialist",
-                "phone": "410-573-9844",
+                "phone": {
+                    "display": "410-573-9844",
+                    "link": "tel:+14105739844"
+                },
                 "fax": null,
                 "email": "dawn.hollenczer@maryland.gov"
             },
             {
                 "name": "Greta Adams-Harper",
                 "title": "Licensing Specialist",
-                "phone": "410-573-9525",
+                "phone": {
+                    "display": "410-573-9525",
+                    "link": "tel:+14105739525"
+                },
                 "fax": null,
                 "email": "greta.adamsharper@maryland.gov"
             },
             {
                 "name": "Theadora Quible",
                 "title": "Licensing Specialist",
-                "phone": "410-573-9527",
+                "phone": {
+                    "display": "410-573-9527",
+                    "link": "tel:+14105739527"
+                },
                 "fax": null,
                 "email": "theadora.quible@maryland.gov"
             },
             {
                 "name": "Rhonda Paige",
                 "title": "EXCELS Specialist",
-                "phone": "410-573-9523",
+                "phone": {
+                    "display": "410-573-9523",
+                    "link": "tel:+14105739523"
+                },
                 "fax": null,
                 "email": "rhonda.paige@maryland.gov"
             }
@@ -1105,7 +1225,10 @@
             "Permits and Licensing"
         ],
         "business_category": "Child Care",
-        "phone": "667-354-5178",
+        "phone": {
+            "display": "667-354-5178",
+            "link": "tel:+16673545178"
+        },
         "fax": null,
         "email": "\tocc2bci.msde@maryland.gov",
         "contacts": []
@@ -1129,126 +1252,180 @@
             "Permits and Licensing"
         ],
         "business_category": "Child Care",
-        "phone": "410-583-6200",
+        "phone": {
+            "display": "410-583-6200",
+            "link": "tel:+14105836200"
+        },
         "fax": null,
         "email": "\tocc3bco.msde@maryland.gov",
         "contacts": [
             {
                 "name": "Amber Riley",
                 "title": "Regional Manager",
-                "phone": "410-583-6204",
+                "phone": {
+                    "display": "410-583-6204",
+                    "link": "tel:+14105836204"
+                },
                 "fax": null,
                 "email": "Amber.Riley@maryland.gov"
             },
             {
                 "name": "Andrea Brown",
                 "title": "Secretary",
-                "phone": "410-583-6203",
+                "phone": {
+                    "display": "410-583-6203",
+                    "link": "tel:+14105836203"
+                },
                 "fax": null,
                 "email": "Andrea.Brown@maryland.gov"
             },
             {
                 "name": "Theresa Chenowith",
                 "title": "Licensing Supervisor",
-                "phone": "410-583-6206",
+                "phone": {
+                    "display": "410-583-6206",
+                    "link": "tel:+14105836206"
+                },
                 "fax": null,
                 "email": "Theresa.Chenowith@maryland.gov"
             },
             {
                 "name": "Patricia Deal",
                 "title": "Licensing Supervisor",
-                "phone": "410-583-6224",
+                "phone": {
+                    "display": "410-583-6224",
+                    "link": "tel:+14105836224"
+                },
                 "fax": null,
                 "email": "Patricia.Deal@maryland.gov"
             },
             {
                 "name": "Anna Trzos",
                 "title": "Licensing Specialist",
-                "phone": "410-583-6207",
+                "phone": {
+                    "display": "410-583-6207",
+                    "link": "tel:+14105836207"
+                },
                 "fax": null,
                 "email": "Anna.Trzos@maryland.gov"
             },
             {
                 "name": "Grace Lawrence",
                 "title": "Licensing Specialist Trainee",
-                "phone": "410-583-6212",
+                "phone": {
+                    "display": "410-583-6212",
+                    "link": "tel:+14105836212"
+                },
                 "fax": null,
                 "email": "Grace.Lawrence@maryland.gov"
             },
             {
                 "name": "Donna Holden",
                 "title": "Licensing Specialist",
-                "phone": "410-583-6209",
+                "phone": {
+                    "display": "410-583-6209",
+                    "link": "tel:+14105836209"
+                },
                 "fax": null,
                 "email": "Donna.Holden1@maryland.gov"
             },
             {
                 "name": "Lisa Weeks",
                 "title": "Licensing Specialist",
-                "phone": "410-583-6208",
+                "phone": {
+                    "display": "410-583-6208",
+                    "link": "tel:+14105836208"
+                },
                 "fax": null,
                 "email": "Lisa.Weeks1@maryland.gov"
             },
             {
                 "name": "Jennifer Woodard",
                 "title": "Licensing Specialist",
-                "phone": "410-583-6223",
+                "phone": {
+                    "display": "410-583-6223",
+                    "link": "tel:+14105836223"
+                },
                 "fax": null,
                 "email": "jennifer.woodard@maryland.gov"
             },
             {
                 "name": "Michelle Grant",
                 "title": "Licensing Specialist",
-                "phone": "410-583-6216",
+                "phone": {
+                    "display": "410-583-6216",
+                    "link": "tel:+14105836216"
+                },
                 "fax": null,
                 "email": "Michelle.Grant@maryland.gov"
             },
             {
                 "name": "Jason Harvey",
                 "title": "Licensing Specialist",
-                "phone": "410-583-6211",
+                "phone": {
+                    "display": "410-583-6211",
+                    "link": "tel:+14105836211"
+                },
                 "fax": null,
                 "email": "Jason.Harvey@Maryland.gov"
             },
             {
                 "name": "Alexis Thomas",
                 "title": "Licensing Specialist Trainee",
-                "phone": "410-583-6222",
+                "phone": {
+                    "display": "410-583-6222",
+                    "link": "tel:+14105836222"
+                },
                 "fax": null,
                 "email": "Alexis.Thomas@maryland.gov"
             },
             {
                 "name": "Antoinette Harvey",
                 "title": "Licensing Specialist",
-                "phone": "410-583-6218",
+                "phone": {
+                    "display": "410-583-6218",
+                    "link": "tel:+14105836218"
+                },
                 "fax": null,
                 "email": "Antoinette.Harvey@maryland.gov"
             },
             {
                 "name": "Felecia White",
                 "title": "Licensing Specialist",
-                "phone": "410-583-6217",
+                "phone": {
+                    "display": "410-583-6217",
+                    "link": "tel:+14105836217"
+                },
                 "fax": null,
                 "email": "Felecia.White@maryland.gov"
             },
             {
                 "name": "Kara Young",
                 "title": "Licensing Specialist",
-                "phone": "410-583-6221",
+                "phone": {
+                    "display": "410-583-6221",
+                    "link": "tel:+14105836221"
+                },
                 "fax": null,
                 "email": "Kara.Young@maryland.gov"
             },
             {
                 "name": "Kiani Strong",
                 "title": "Licensing Specialist Trainee",
-                "phone": "410-583-6210",
+                "phone": {
+                    "display": "410-583-6210",
+                    "link": "tel:+14105836210"
+                },
                 "fax": null,
                 "email": "Kiani.Strong1@Maryland.gov"
             },
             {
                 "name": "Nichole Allen",
                 "title": "Licensing Specialist Trainee",
-                "phone": "410-583-6214",
+                "phone": {
+                    "display": "410-583-6214",
+                    "link": "tel:+14105836214"
+                },
                 "fax": null,
                 "email": "Nichole.Allen@Maryland.gov"
             }
@@ -1273,126 +1450,180 @@
             "Permits and Licensing"
         ],
         "business_category": "Child Care",
-        "phone": "301-333-6940",
+        "phone": {
+            "display": "301-333-6940",
+            "link": "tel:+13013336940"
+        },
         "fax": "301-499-6999",
         "email": "\tocc4pg.msde@maryland.gov",
         "contacts": [
             {
                 "name": "LyTia Williams",
                 "title": "Regional Manager",
-                "phone": "301-333-6940",
+                "phone": {
+                    "display": "301-333-6940",
+                    "link": "tel:+13013336940"
+                },
                 "fax": null,
                 "email": "LyTia.williams@maryland.gov"
             },
             {
                 "name": "Kimberly Chambers",
                 "title": "Secretary",
-                "phone": "301-333-6940/46",
+                "phone": {
+                    "display": "301-333-6940 ext. 46",
+                    "link": "tel:+13013336940;ext=46"
+                },
                 "fax": null,
                 "email": "Kimberly.Chambers@maryland.gov"
             },
             {
                 "name": "Sheri Neal",
                 "title": "Licensing Supervisor",
-                "phone": "301-333-6943",
+                "phone": {
+                    "display": "301-333-6943",
+                    "link": "tel:+13013336943"
+                },
                 "fax": null,
                 "email": "Sheri.Neal@maryland.gov"
             },
             {
                 "name": "Viola Epps",
                 "title": "Licensing Supervisor",
-                "phone": "301-333-6970",
+                "phone": {
+                    "display": "301-333-6970",
+                    "link": "tel:+13013336970"
+                },
                 "fax": null,
                 "email": "Viola.Epps@maryland.gov"
             },
             {
                 "name": "Dacia Paige",
                 "title": "Licensing Specialist",
-                "phone": "301-333-6944",
+                "phone": {
+                    "display": "301-333-6944",
+                    "link": "tel:+13013336944"
+                },
                 "fax": null,
                 "email": "Dacia.Paige@maryland.gov"
             },
             {
                 "name": "Lamont Bruce",
                 "title": "Licensing Specialist",
-                "phone": "301-333-6949",
+                "phone": {
+                    "display": "301-333-6949",
+                    "link": "tel:+13013336949"
+                },
                 "fax": null,
                 "email": "Lamont.Bruce@maryland.gov"
             },
             {
                 "name": "Sundarys Prince",
                 "title": "Licensing Specialist",
-                "phone": "301-333-6952",
+                "phone": {
+                    "display": "301-333-6952",
+                    "link": "tel:+13013336952"
+                },
                 "fax": null,
                 "email": "Sundarys.Prince@maryland.gov"
             },
             {
                 "name": "Carolyn Hunt",
                 "title": "Licensing Specialist",
-                "phone": "301-333-6957",
+                "phone": {
+                    "display": "301-333-6957",
+                    "link": "tel:+13013336957"
+                },
                 "fax": null,
                 "email": "Carolyn.Hunt@maryland.gov"
             },
             {
                 "name": "Lakisa Johnson",
                 "title": "Licensing Specialist",
-                "phone": "301-333-6956",
+                "phone": {
+                    "display": "301-333-6956",
+                    "link": "tel:+13013336956"
+                },
                 "fax": null,
                 "email": "Lakisa.Johnson@maryland.gov"
             },
             {
                 "name": "Jessica Jacobs",
                 "title": "Licensing Specialist",
-                "phone": "301-333-6959",
+                "phone": {
+                    "display": "301-333-6959",
+                    "link": "tel:+13013336959"
+                },
                 "fax": null,
                 "email": "Jessica.Jacobs1@maryland.gov"
             },
             {
                 "name": "Lena Dixon",
                 "title": "Licensing Specialist",
-                "phone": "301-333-6958",
+                "phone": {
+                    "display": "301-333-6958",
+                    "link": "tel:+13013336958"
+                },
                 "fax": null,
                 "email": "Lena.Dixon@maryland.gov"
             },
             {
                 "name": "Pamela Reynolds",
                 "title": "Licensing Specialist",
-                "phone": "301-333-6951",
+                "phone": {
+                    "display": "301-333-6951",
+                    "link": "tel:+13013336951"
+                },
                 "fax": null,
                 "email": "Pamela.Reynolds@maryland.gov"
             },
             {
                 "name": "Lena Wilson",
                 "title": "Licensing Specialist",
-                "phone": "301-333-6964",
+                "phone": {
+                    "display": "301-333-6964",
+                    "link": "tel:+13013336964"
+                },
                 "fax": null,
                 "email": "Lena.Wilson@maryland.gov"
             },
             {
                 "name": "Role'se Logan",
                 "title": "Licensing Specialist",
-                "phone": "301-333-6960",
+                "phone": {
+                    "display": "301-333-6960",
+                    "link": "tel:+13013336960"
+                },
                 "fax": null,
                 "email": "Rolesa.Logan@maryland.gov"
             },
             {
                 "name": "Stephanie Wheeler",
                 "title": "Licensing Specialist",
-                "phone": "301-333-6950",
+                "phone": {
+                    "display": "301-333-6950",
+                    "link": "tel:+13013336950"
+                },
                 "fax": null,
                 "email": "Stephanie.Wheeler@maryland.gov"
             },
             {
                 "name": "Brenda Curtis",
                 "title": "Licensing Specialist",
-                "phone": "301-333-6947",
+                "phone": {
+                    "display": "301-333-6947",
+                    "link": "tel:+13013336947"
+                },
                 "fax": null,
                 "email": "Brenda.Curtis@maryland.gov"
             },
             {
                 "name": "Gail Brownlee",
                 "title": "Licensing Specialist",
-                "phone": "301-333-6948",
+                "phone": {
+                    "display": "301-333-6948",
+                    "link": "tel:+13013336948"
+                },
                 "fax": null,
                 "email": "Gail.Brownlee1@maryland.gov"
             }
@@ -1417,140 +1648,200 @@
             "Permits and Licensing"
         ],
         "business_category": "Child Care",
-        "phone": "240-314-1400",
+        "phone": {
+            "display": "240-314-1400",
+            "link": "tel:+12403141400"
+        },
         "fax": "240-314-1444",
         "email": "occ5mont.msde@maryland.gov",
         "contacts": [
             {
                 "name": "Laurie Moran",
                 "title": "Regional Manager",
-                "phone": "240-314-1403",
+                "phone": {
+                    "display": "240-314-1403",
+                    "link": "tel:+12403141403"
+                },
                 "fax": null,
                 "email": "laurie.moran@maryland.gov"
             },
             {
                 "name": "LaTonya Jones",
                 "title": "Office Secretary",
-                "phone": "240-314-1430",
+                "phone": {
+                    "display": "240-314-1430",
+                    "link": "tel:+12403141430"
+                },
                 "fax": null,
                 "email": "latonya.jones1@maryland.gov"
             },
             {
                 "name": "Donna Mills",
                 "title": "Licensing Supervisor",
-                "phone": "240-314-1427",
+                "phone": {
+                    "display": "240-314-1427",
+                    "link": "tel:+12403141427"
+                },
                 "fax": null,
                 "email": "donna.mills@maryland.gov"
             },
             {
                 "name": "Carol McLellan",
                 "title": "Licensing Supervisor",
-                "phone": "240-314-1402",
+                "phone": {
+                    "display": "240-314-1402",
+                    "link": "tel:+12403141402"
+                },
                 "fax": null,
                 "email": "carol.mclellan@maryland.gov"
             },
             {
                 "name": "Davina Ragin-Hopkins",
                 "title": "Licensing Supervisor",
-                "phone": "240-314-1424",
+                "phone": {
+                    "display": "240-314-1424",
+                    "link": "tel:+12403141424"
+                },
                 "fax": null,
                 "email": "davina.raginhopkins@maryland.gov"
             },
             {
                 "name": "Valentine Encarnacion",
                 "title": "Licensing Specialist",
-                "phone": "240-314-1428",
+                "phone": {
+                    "display": "240-314-1428",
+                    "link": "tel:+12403141428"
+                },
                 "fax": null,
                 "email": "valentine.encarnacion@maryland.gov"
             },
             {
                 "name": "Andrew Jimenez",
                 "title": "Licensing Specialist",
-                "phone": "240-214-1411",
+                "phone": {
+                    "display": "240-214-1411",
+                    "link": "tel:+12402141411"
+                },
                 "fax": null,
                 "email": "andrew.jimenez@maryland.gov"
             },
             {
                 "name": "Johanna Thomas",
                 "title": "Licensing Specialist",
-                "phone": "240-314-1429",
+                "phone": {
+                    "display": "240-314-1429",
+                    "link": "tel:+12403141429"
+                },
                 "fax": null,
                 "email": "johanna.thomas@maryland.gov"
             },
             {
                 "name": "Geimma Diaz-Fuentes",
                 "title": "Licensing Specialist",
-                "phone": "240-314-1416",
+                "phone": {
+                    "display": "240-314-1416",
+                    "link": "tel:+12403141416"
+                },
                 "fax": null,
                 "email": "geimma.diazfuentes@maryland.gov"
             },
             {
                 "name": "Kristina Green",
                 "title": "Licensing Specialist",
-                "phone": "240-314-1420",
+                "phone": {
+                    "display": "240-314-1420",
+                    "link": "tel:+12403141420"
+                },
                 "fax": null,
                 "email": "kristina.green1@maryland.gov"
             },
             {
                 "name": "Gearnia Green",
                 "title": "Lead Licensing Specialist",
-                "phone": "240-314-1404",
+                "phone": {
+                    "display": "240-314-1404",
+                    "link": "tel:+12403141404"
+                },
                 "fax": null,
                 "email": "gearnia.green@maryland.gov"
             },
             {
                 "name": "Patricia Harrell",
                 "title": "Licensing Specialist",
-                "phone": "240-314-1410",
+                "phone": {
+                    "display": "240-314-1410",
+                    "link": "tel:+12403141410"
+                },
                 "fax": null,
                 "email": "patricia.harrell@maryland.gov"
             },
             {
                 "name": "Shaunte Boddy",
                 "title": "Licensing Specialist",
-                "phone": "240-314-1415",
+                "phone": {
+                    "display": "240-314-1415",
+                    "link": "tel:+12403141415"
+                },
                 "fax": null,
                 "email": "shaunte.boddy@maryland.gov"
             },
             {
                 "name": "Terisa Spain",
                 "title": "Licensing Specialist",
-                "phone": "240-314-1405",
+                "phone": {
+                    "display": "240-314-1405",
+                    "link": "tel:+12403141405"
+                },
                 "fax": null,
                 "email": "terisa.spain@maryland.gov"
             },
             {
                 "name": "Ebony Ruffin",
                 "title": "Licensing Specialist",
-                "phone": "240-314-1413",
+                "phone": {
+                    "display": "240-314-1413",
+                    "link": "tel:+12403141413"
+                },
                 "fax": null,
                 "email": "ebony.ruffin1@maryland.gov"
             },
             {
                 "name": "Chanelle Lomax",
                 "title": "Licensing Specialist",
-                "phone": "240-314-1407",
+                "phone": {
+                    "display": "240-314-1407",
+                    "link": "tel:+12403141407"
+                },
                 "fax": null,
                 "email": "chanelle.lomax@maryland.gov"
             },
             {
                 "name": "Kimberly Addai",
                 "title": "Licensing Specialist",
-                "phone": "240-314-1406",
+                "phone": {
+                    "display": "240-314-1406",
+                    "link": "tel:+12403141406"
+                },
                 "fax": null,
                 "email": "kimberly.addai@maryland.gov"
             },
             {
                 "name": "Shante Furby",
                 "title": "Licensing Specialist",
-                "phone": "240-314-1428",
+                "phone": {
+                    "display": "240-314-1428",
+                    "link": "tel:+12403141428"
+                },
                 "fax": null,
                 "email": "shante.furby@maryland.gov"
             },
             {
                 "name": "Jenna Hecox",
                 "title": "Licensing Specialist",
-                "phone": "240-314-1414",
+                "phone": {
+                    "display": "240-314-1414",
+                    "link": "tel:+12403141414"
+                },
                 "fax": null,
                 "email": "Jenna.Hecox@maryland.gov"
             }
@@ -1575,63 +1866,90 @@
             "Permits and Licensing"
         ],
         "business_category": "Child Care",
-        "phone": "410-750-8771",
+        "phone": {
+            "display": "410-750-8771",
+            "link": "tel:+14107508771"
+        },
         "fax": "410-750-0324",
         "email": "occ6how.msde@maryland.gov",
         "contacts": [
             {
                 "name": "Sharon Afework",
                 "title": "Regional Manager",
-                "phone": "410-750-8779",
+                "phone": {
+                    "display": "410-750-8779",
+                    "link": "tel:+14107508779"
+                },
                 "fax": null,
                 "email": "Sharon.Afework@maryland.gov"
             },
             {
                 "name": "Bryan Shaw",
                 "title": "Secretary",
-                "phone": "410-750-8771",
+                "phone": {
+                    "display": "410-750-8771",
+                    "link": "tel:+14107508771"
+                },
                 "fax": null,
                 "email": "Bryan.Shaw@maryland.gov"
             },
             {
                 "name": "Patricia Leffson",
                 "title": "Licensing Supervisor",
-                "phone": "410-549-6495",
+                "phone": {
+                    "display": "410-549-6495",
+                    "link": "tel:+14105496495"
+                },
                 "fax": null,
                 "email": "Patricia.Leffson@maryland.gov"
             },
             {
                 "name": "Susan Newell",
                 "title": "Licensing Supervisor",
-                "phone": "410-750-7940",
+                "phone": {
+                    "display": "410-750-7940",
+                    "link": "tel:+14107507940"
+                },
                 "fax": null,
                 "email": "Susan.Newell@maryland.gov"
             },
             {
                 "name": "Michelle Bronson",
                 "title": "Lead Licensing Specialist",
-                "phone": "410-750-8775",
+                "phone": {
+                    "display": "410-750-8775",
+                    "link": "tel:+14107508775"
+                },
                 "fax": null,
                 "email": "Michelle.Bronson@maryland.gov"
             },
             {
                 "name": "Keisha Greene",
                 "title": "Licensing Specialist",
-                "phone": "410-549-6493",
+                "phone": {
+                    "display": "410-549-6493",
+                    "link": "tel:+14105496493"
+                },
                 "fax": null,
                 "email": "Keisha.Greene1@maryland.gov"
             },
             {
                 "name": "Sara Moran",
                 "title": "Licensing Specialist",
-                "phone": "410-750-8601",
+                "phone": {
+                    "display": "410-750-8601",
+                    "link": "tel:+14107508601"
+                },
                 "fax": null,
                 "email": "Sara.Moran@maryland.gov"
             },
             {
                 "name": "Jennifer Thompson",
                 "title": "Licensing Specialist",
-                "phone": "410-750-8365",
+                "phone": {
+                    "display": "410-750-8365",
+                    "link": "tel:+14107508365"
+                },
                 "fax": null,
                 "email": "Jennifer.Thompson@maryland.gov"
             }
@@ -1658,42 +1976,60 @@
             "Permits and Licensing"
         ],
         "business_category": "Child Care",
-        "phone": "301-791-4585",
+        "phone": {
+            "display": "301-791-4585",
+            "link": "tel:+13017914585"
+        },
         "fax": "301-791-4629",
         "email": "occ7wash.msde@maryland.gov",
         "contacts": [
             {
                 "name": "Jennifer Campbell",
                 "title": "Regional Manager",
-                "phone": "301-791-4069",
+                "phone": {
+                    "display": "301-791-4069",
+                    "link": "tel:+13017914069"
+                },
                 "fax": null,
                 "email": "Jennifer.Campbell@maryland.gov"
             },
             {
                 "name": "Dee Myers",
                 "title": "Secretary",
-                "phone": "301-791-4585",
+                "phone": {
+                    "display": "301-791-4585",
+                    "link": "tel:+13017914585"
+                },
                 "fax": null,
                 "email": "Dorothea.Myers@maryland.gov"
             },
             {
                 "name": "Katharine Long",
                 "title": "Licensing Specialist",
-                "phone": "301-791-4592",
+                "phone": {
+                    "display": "301-791-4592",
+                    "link": "tel:+13017914592"
+                },
                 "fax": null,
                 "email": "Katharine.Long@maryland.gov"
             },
             {
                 "name": "Audrey Gaines",
                 "title": "Licensing Specialist",
-                "phone": "301-733-8567",
+                "phone": {
+                    "display": "301-733-8567",
+                    "link": "tel:+13017338567"
+                },
                 "fax": null,
                 "email": "Audrey.Gaines@maryland.gov"
             },
             {
                 "name": "Kandyce Dorsey",
                 "title": "Licensing Specialist Trainee",
-                "phone": "301-791-4589",
+                "phone": {
+                    "display": "301-791-4589",
+                    "link": "tel:+13017914589"
+                },
                 "fax": null,
                 "email": "Kandyce.Dorsey1@maryland.gov"
             }
@@ -1725,7 +2061,10 @@
             {
                 "name": "Ruth Lafferty",
                 "title": "Lead Licensing Specialist",
-                "phone": "301-777-2091",
+                "phone": {
+                    "display": "301-777-2091",
+                    "link": "tel:+13017772091"
+                },
                 "fax": "301-777-5870",
                 "email": "Ruth.Lafferty@maryland.gov"
             }
@@ -1754,42 +2093,60 @@
             "Permits and Licensing"
         ],
         "business_category": "Child Care",
-        "phone": "410-819-5801",
+        "phone": {
+            "display": "410-819-5801",
+            "link": "tel:+14108195801"
+        },
         "fax": "410-819-5805",
         "email": "occ8talb.msde@maryland.gov",
         "contacts": [
             {
                 "name": "Sandy Kepler-Klunk",
                 "title": "Regional Manager",
-                "phone": "410-819-5801",
+                "phone": {
+                    "display": "410-819-5801",
+                    "link": "tel:+14108195801"
+                },
                 "fax": null,
                 "email": "sandy.klunk@maryland.gov"
             },
             {
                 "name": "Julia Gross",
                 "title": "Licensing Specialist",
-                "phone": "410-819-5801",
+                "phone": {
+                    "display": "410-819-5801",
+                    "link": "tel:+14108195801"
+                },
                 "fax": null,
                 "email": "julia.gross@maryland.gov"
             },
             {
                 "name": "Abby Bruns",
                 "title": "Licensing Specialist",
-                "phone": "410-819-5801",
+                "phone": {
+                    "display": "410-819-5801",
+                    "link": "tel:+14108195801"
+                },
                 "fax": null,
                 "email": "abbygail.bruns@maryland.gov"
             },
             {
                 "name": "Beth Hill",
                 "title": "Licensing Specialist",
-                "phone": "410-819-5801",
+                "phone": {
+                    "display": "410-819-5801",
+                    "link": "tel:+14108195801"
+                },
                 "fax": null,
                 "email": "Jane.Hill@maryland.gov"
             },
             {
                 "name": "Cheryl Willis",
                 "title": "Licensing Specialist",
-                "phone": "410-819-5801",
+                "phone": {
+                    "display": "410-819-5801",
+                    "link": "tel:+14108195801"
+                },
                 "fax": null,
                 "email": "cheryl.willis@maryland.govRetry"
             }
@@ -1816,35 +2173,50 @@
             "Permits and Licensing"
         ],
         "business_category": "Child Care",
-        "phone": "410-713-3430",
+        "phone": {
+            "display": "410-713-3430",
+            "link": "tel:+14107133430"
+        },
         "fax": "410-713-3439",
         "email": "occ9wic.msde@maryland.gov",
         "contacts": [
             {
                 "name": "Suzanne Ruark",
                 "title": "Regional Manager",
-                "phone": "410-713-3430",
+                "phone": {
+                    "display": "410-713-3430",
+                    "link": "tel:+14107133430"
+                },
                 "fax": null,
                 "email": "Suzanne.Ruark@maryland.gov"
             },
             {
                 "name": "Angelia L. Bell",
                 "title": "Secretary",
-                "phone": "410-713-3430",
+                "phone": {
+                    "display": "410-713-3430",
+                    "link": "tel:+14107133430"
+                },
                 "fax": null,
                 "email": "Angelia.Bell@maryland.gov"
             },
             {
                 "name": "Teresa Handy",
                 "title": "Licensing Specialist",
-                "phone": "410-713-3430",
+                "phone": {
+                    "display": "410-713-3430",
+                    "link": "tel:+14107133430"
+                },
                 "fax": null,
                 "email": "Teresa.Handy@maryland.gov"
             },
             {
                 "name": "Johanna Brown",
                 "title": "Licensing Specialist",
-                "phone": "410-713-3430",
+                "phone": {
+                    "display": "410-713-3430",
+                    "link": "tel:+14107133430"
+                },
                 "fax": null,
                 "email": "Johanna.Brown@maryland.gov"
             }
@@ -1871,105 +2243,150 @@
             "Permits and Licensing"
         ],
         "business_category": "Child Care",
-        "phone": "301-475-3770",
+        "phone": {
+            "display": "301-475-3770",
+            "link": "tel:+13014753770"
+        },
         "fax": "301-475-4017",
         "email": "occ10stm.msde@maryland.gov",
         "contacts": [
             {
                 "name": "Susan Copsey",
                 "title": "Regional Manager",
-                "phone": "301-475-3770",
+                "phone": {
+                    "display": "301-475-3770",
+                    "link": "tel:+13014753770"
+                },
                 "fax": null,
                 "email": "susan.copsey@maryland.gov"
             },
             {
                 "name": "Caty Clements",
                 "title": "Office Secretary",
-                "phone": "301-475-3770",
+                "phone": {
+                    "display": "301-475-3770",
+                    "link": "tel:+13014753770"
+                },
                 "fax": null,
                 "email": "catherine.clements@maryland.gov"
             },
             {
                 "name": "Joy Robertson",
                 "title": "Licensing Supervisor",
-                "phone": "301-475-3770",
+                "phone": {
+                    "display": "301-475-3770",
+                    "link": "tel:+13014753770"
+                },
                 "fax": null,
                 "email": "joy.robertson@maryland.gov"
             },
             {
                 "name": "Janet Hodkiewicz",
                 "title": "Lead Licensing Specialist",
-                "phone": "301-475-3770",
+                "phone": {
+                    "display": "301-475-3770",
+                    "link": "tel:+13014753770"
+                },
                 "fax": null,
                 "email": "janet.hodkiewicz@maryland.gov"
             },
             {
                 "name": "Kim McCauley",
                 "title": "Lead Licensing Specialist",
-                "phone": "301-475-3770",
+                "phone": {
+                    "display": "301-475-3770",
+                    "link": "tel:+13014753770"
+                },
                 "fax": null,
                 "email": "kimberly.mccauley@maryland.gov"
             },
             {
                 "name": "Julie Alpert",
                 "title": "Licensing Specialist",
-                "phone": "301-475-3770",
+                "phone": {
+                    "display": "301-475-3770",
+                    "link": "tel:+13014753770"
+                },
                 "fax": null,
                 "email": "julie.alpert@maryland.gov"
             },
             {
                 "name": "Amy Farr",
                 "title": "Licensing Specialist",
-                "phone": "301-475-3770",
+                "phone": {
+                    "display": "301-475-3770",
+                    "link": "tel:+13014753770"
+                },
                 "fax": null,
                 "email": "amy.farr@maryland.gov"
             },
             {
                 "name": "Stacy Modlin",
                 "title": "Licensing Specialist",
-                "phone": "301-475-3770",
+                "phone": {
+                    "display": "301-475-3770",
+                    "link": "tel:+13014753770"
+                },
                 "fax": null,
                 "email": "stacy.modlin@maryland.gov"
             },
             {
                 "name": "Rachel Rolen",
                 "title": "Licensing Specialist",
-                "phone": "301-475-3770",
+                "phone": {
+                    "display": "301-475-3770",
+                    "link": "tel:+13014753770"
+                },
                 "fax": null,
                 "email": "Rachel.Rolen@maryland.gov"
             },
             {
                 "name": "Deborah Shirley",
                 "title": "Licensing Specialist",
-                "phone": "301-475-3770",
+                "phone": {
+                    "display": "301-475-3770",
+                    "link": "tel:+13014753770"
+                },
                 "fax": null,
                 "email": "deborah.shirley@maryland.gov"
             },
             {
                 "name": "Janice Walker",
                 "title": "Licensing Specialist",
-                "phone": "301-475-3770",
+                "phone": {
+                    "display": "301-475-3770",
+                    "link": "tel:+13014753770"
+                },
                 "fax": null,
                 "email": "janice.walker4@maryland.gov"
             },
             {
                 "name": "Courtney Wise",
                 "title": "Licensing Specialist",
-                "phone": "301-475-3770",
+                "phone": {
+                    "display": "301-475-3770",
+                    "link": "tel:+13014753770"
+                },
                 "fax": null,
                 "email": "courtney.wise@maryland.gov"
             },
             {
                 "name": "LaQuanna Brandon",
                 "title": "Licensing Specialist",
-                "phone": "301-475-3770",
+                "phone": {
+                    "display": "301-475-3770",
+                    "link": "tel:+13014753770"
+                },
                 "fax": null,
                 "email": "laquanna.brandon@maryland.gov"
             },
             {
                 "name": "Shanelle Patterson",
                 "title": "Quality Assurance Specialist",
-                "phone": "301-475-3770 Ext. 119",
+                "phone": {
+                    "display": "301-475-3770 ext. 119",
+                    "link": "tel:+13014753770;ext=119"
+                },
                 "fax": null,
                 "email": "shanelle.patterson@maryland.gov"
             }
@@ -1995,63 +2412,90 @@
             "Permits and Licensing"
         ],
         "business_category": "Child Care",
-        "phone": "410-569-2879\n\u200bToll free 1-800-343-0955",
+        "phone": {
+            "display": "410-569-2879",
+            "link": "tel:+14105692879"
+        },
         "fax": "410-569-8658",
         "email": "occ11harf.msde@maryland.gov",
         "contacts": [
             {
                 "name": "Beth O'Connor",
                 "title": "Regional Manager",
-                "phone": "410-569-8065",
+                "phone": {
+                    "display": "410-569-8065",
+                    "link": "tel:+14105698065"
+                },
                 "fax": null,
                 "email": "Katherine.O'Connor@maryland.gov"
             },
             {
                 "name": "Alexandria Campbell",
                 "title": "Office Secretary",
-                "phone": "410-357-1018",
+                "phone": {
+                    "display": "410-357-1018",
+                    "link": "tel:+14103571018"
+                },
                 "fax": null,
                 "email": "Alexandria.Campbell@maryland.gov"
             },
             {
                 "name": "Denise Perry",
                 "title": "Lead Licensing Specialist",
-                "phone": "410-357-6381",
+                "phone": {
+                    "display": "410-357-6381",
+                    "link": "tel:+14103576381"
+                },
                 "fax": null,
                 "email": "Denise.Perry@maryland.gov"
             },
             {
                 "name": "Betty Johnson",
                 "title": "Licensing Specialist",
-                "phone": "410-357-6852",
+                "phone": {
+                    "display": "410-357-6852",
+                    "link": "tel:+14103576852"
+                },
                 "fax": null,
                 "email": "Betty.Johnson@maryland.gov"
             },
             {
                 "name": "Darlene Mckenzie",
                 "title": "Licensing Specialist",
-                "phone": "410-357-6412",
+                "phone": {
+                    "display": "410-357-6412",
+                    "link": "tel:+14103576412"
+                },
                 "fax": null,
                 "email": "Darlene.Mckenzie@maryland.gov"
             },
             {
                 "name": "Shantell Fletcher",
                 "title": "Licensing Specialist",
-                "phone": "410-357-6302",
+                "phone": {
+                    "display": "410-357-6302",
+                    "link": "tel:+14103576302"
+                },
                 "fax": null,
                 "email": "Shantell.Fletcher1@maryland.gov"
             },
             {
                 "name": "Latasha Quarterman",
                 "title": "Licensing Specialist",
-                "phone": "667-406-0243",
+                "phone": {
+                    "display": "667-406-0243",
+                    "link": "tel:+16674060243"
+                },
                 "fax": null,
                 "email": "Latasha.Quarterman@maryland.gov"
             },
             {
                 "name": "Dannise Reed",
                 "title": "Licensing Specialist",
-                "phone": "410-357-1988",
+                "phone": {
+                    "display": "410-357-1988",
+                    "link": "tel:+14103571988"
+                },
                 "fax": null,
                 "email": "Dannise.Reed@maryland.gov"
             }
@@ -2076,70 +2520,100 @@
             "Permits and Licensing"
         ],
         "business_category": "Child Care",
-        "phone": "301-696-9766",
+        "phone": {
+            "display": "301-696-9766",
+            "link": "tel:+13016969766"
+        },
         "fax": "301-696-0629",
         "email": "occ12fred.msde@maryland.gov",
         "contacts": [
             {
                 "name": "Rousana Soto",
                 "title": "Regional Manager",
-                "phone": "443-915-2361",
+                "phone": {
+                    "display": "443-915-2361",
+                    "link": "tel:+14439152361"
+                },
                 "fax": null,
                 "email": "rousana.soto@maryland.gov"
             },
             {
                 "name": "Patricia Leffson",
                 "title": "Licensing Specialist Supervisor",
-                "phone": "410-656-2186",
+                "phone": {
+                    "display": "410-656-2186",
+                    "link": "tel:+14106562186"
+                },
                 "fax": null,
                 "email": "Patricia.Leffson@maryland.gov"
             },
             {
                 "name": "Melissa Huffer",
                 "title": "Secretary",
-                "phone": "301-696-9766 - ext. 1 667-406-0093",
+                "phone": {
+                    "display": "301-696-9766 ext. 1",
+                    "link": "tel:+13016969766;ext=1"
+                },
                 "fax": null,
                 "email": "Melissa.Huffer@maryland.gov"
             },
             {
                 "name": "Rebecca Bozarth",
                 "title": "Licensing Specialist",
-                "phone": "410-656-1517",
+                "phone": {
+                    "display": "410-656-1517",
+                    "link": "tel:+14106561517"
+                },
                 "fax": null,
                 "email": "rebecca.bozarth@maryland.gov"
             },
             {
                 "name": "Monica Barnes",
                 "title": "Licensing Specialist",
-                "phone": "410-204-1381",
+                "phone": {
+                    "display": "410-204-1381",
+                    "link": "tel:+14102041381"
+                },
                 "fax": null,
                 "email": "monica.barnes2@maryland.gov"
             },
             {
                 "name": "Erin Ringley",
                 "title": "Licensing Specialist",
-                "phone": "410-635-9417",
+                "phone": {
+                    "display": "410-635-9417",
+                    "link": "tel:+14106359417"
+                },
                 "fax": null,
                 "email": "erin.ringley@maryland.gov"
             },
             {
                 "name": "Amy Chehi",
                 "title": "Licensing Specialist",
-                "phone": "410-656-1130",
+                "phone": {
+                    "display": "410-656-1130",
+                    "link": "tel:+14106561130"
+                },
                 "fax": null,
                 "email": "amy.chehi@maryland.gov"
             },
             {
                 "name": "Tracey Elliott",
                 "title": "Licensing Specialist",
-                "phone": "667-406-0093",
+                "phone": {
+                    "display": "667-406-0093",
+                    "link": "tel:+16674060093"
+                },
                 "fax": null,
                 "email": "Tracey.Elliott@maryland.gov"
             },
             {
                 "name": "Sarah Zaccaria",
                 "title": "Licensing Specialist",
-                "phone": "667-406-0229",
+                "phone": {
+                    "display": "667-406-0229",
+                    "link": "tel:+16674060229"
+                },
                 "fax": null,
                 "email": "Sarah.Zaccaria1@maryland.gov"
             }
@@ -2164,42 +2638,60 @@
             "Permits and Licensing"
         ],
         "business_category": "Child Care",
-        "phone": "410-750-8771",
+        "phone": {
+            "display": "410-750-8771",
+            "link": "tel:+14107508771"
+        },
         "fax": "410-549-6490",
         "email": "occ13carr.msde@maryland.gov",
         "contacts": [
             {
                 "name": "Sharon Afework",
                 "title": "Regional Manager",
-                "phone": "410-750-8779",
+                "phone": {
+                    "display": "410-750-8779",
+                    "link": "tel:+14107508779"
+                },
                 "fax": null,
                 "email": "Sharon.Afework@maryland.gov"
             },
             {
                 "name": "Patricia Leffson",
                 "title": "Licensing Supervisor",
-                "phone": "410-549-6495",
+                "phone": {
+                    "display": "410-549-6495",
+                    "link": "tel:+14105496495"
+                },
                 "fax": null,
                 "email": "Patricia.Leffson@maryland.gov"
             },
             {
                 "name": "Keisha Greene",
                 "title": "Licensing Specialist",
-                "phone": "410-549-6493",
+                "phone": {
+                    "display": "410-549-6493",
+                    "link": "tel:+14105496493"
+                },
                 "fax": null,
                 "email": "Keisha.Greene1@maryland.gov"
             },
             {
                 "name": "Lisa Warner",
                 "title": "Licensing Specialist",
-                "phone": "410-549-6498",
+                "phone": {
+                    "display": "410-549-6498",
+                    "link": "tel:+14105496498"
+                },
                 "fax": null,
                 "email": "Lisa.Warner@maryland.gov"
             },
             {
                 "name": "Lori Crocken",
                 "title": "Licensing Specialist",
-                "phone": "410-549-6492",
+                "phone": {
+                    "display": "410-549-6492",
+                    "link": "tel:+14105496492"
+                },
                 "fax": null,
                 "email": "Lori.Crocken@maryland.gov"
             }
@@ -2238,21 +2730,30 @@
             {
                 "name": "Jodi Broadwater",
                 "title": "Regional Director",
-                "phone": " 888-237-9007 ext. 3",
+                "phone": {
+                    "display": "888-237-9007 ext. 3",
+                    "link": "tel:+18882379007;ext=3"
+                },
                 "fax": null,
                 "email": "jdmcclintock@frostburg.edu"
             },
             {
                 "name": "Herb Melrath",
                 "title": "Business Consultant",
-                "phone": "888-237-9007 ext. 4",
+                "phone": {
+                    "display": "888-237-9007 ext. 4",
+                    "link": "tel:+18882379007;ext=4"
+                },
                 "fax": null,
                 "email": "hjmelrath@frostburg.edu"
             },
             {
                 "name": "Tracey Engle",
                 "title": "Business Consultant",
-                "phone": "888-237-9007 ext. 2",
+                "phone": {
+                    "display": "888-237-9007 ext. 2",
+                    "link": "tel:+18882379007;ext=2"
+                },
                 "fax": null,
                 "email": "tlengle@frostburg.edu"
             }
@@ -2292,35 +2793,50 @@
             {
                 "name": "Amy Yingling",
                 "title": "Regional Director",
-                "phone": "410-386-8390",
+                "phone": {
+                    "display": "410-386-8390",
+                    "link": "tel:+14103868390"
+                },
                 "fax": null,
                 "email": "ayingling@carrollcc.edu"
             },
             {
                 "name": "Darren Peyton",
                 "title": "Assistant Director",
-                "phone": "410-386-8390",
+                "phone": {
+                    "display": "410-386-8390",
+                    "link": "tel:+14103868390"
+                },
                 "fax": null,
                 "email": "dpeyton@carrollcc.edu"
             },
             {
                 "name": "Maura Van Syckle",
                 "title": "Business Consultant",
-                "phone": "410-386-8390",
+                "phone": {
+                    "display": "410-386-8390",
+                    "link": "tel:+14103868390"
+                },
                 "fax": null,
                 "email": "mvansyckle@carrollcc.edu"
             },
             {
                 "name": "Ryan Del Gallo",
                 "title": "Business Consultant",
-                "phone": "410-386-8390",
+                "phone": {
+                    "display": "410-386-8390",
+                    "link": "tel:+14103868390"
+                },
                 "fax": null,
                 "email": "rdelgallo@carrollcc.edu"
             },
             {
                 "name": "Lee Drosdak",
                 "title": "Business Consultant",
-                "phone": "443-819-5638",
+                "phone": {
+                    "display": "443-819-5638",
+                    "link": "tel:+14438195638"
+                },
                 "fax": null,
                 "email": "ldrosdak@carrollcc.edu"
             }
@@ -2358,7 +2874,10 @@
             {
                 "name": "Jennifer Funn",
                 "title": "Regional Director",
-                "phone": "240-342-9410",
+                "phone": {
+                    "display": "240-342-9410",
+                    "link": "tel:+12403429410"
+                },
                 "fax": null,
                 "email": "jsmithfu@umd.edu"
             },
@@ -2386,7 +2905,10 @@
             {
                 "name": "Monica Smith",
                 "title": "Business Consultant",
-                "phone": "240-926-6098",
+                "phone": {
+                    "display": "240-926-6098",
+                    "link": "tel:+12409266098"
+                },
                 "fax": null,
                 "email": "msmith01@umd.edu"
             }
@@ -2423,14 +2945,20 @@
             "Permits and Licensing"
         ],
         "business_category": "All",
-        "phone": "410-548-4419",
+        "phone": {
+            "display": "410-548-4419",
+            "link": "tel:+14105484419"
+        },
         "fax": "410-548-5389",
         "email": null,
         "contacts": [
             {
                 "name": "Vanette Seals",
                 "title": "Administration",
-                "phone": "410-822-5400 ext. 2340",
+                "phone": {
+                    "display": "410-822-5400 ext. 2340",
+                    "link": "tel:+14108225400;ext=2340"
+                },
                 "fax": null,
                 "email": "vseals@chesapeake.edu"
             },
@@ -2444,16 +2972,12 @@
             {
                 "name": "Sumathy Chandrashekar",
                 "title": "Business Consultant",
-                "phone": "410-548-4463",
+                "phone": {
+                    "display": "410-548-4463",
+                    "link": "tel:+14105484463"
+                },
                 "fax": null,
                 "email": "sxchandrashekar@salisbury.edu"
-            },
-            {
-                "name": "Richard Loeffler",
-                "title": "Business Consultant",
-                "phone": "410-822-5305 Chesapeake Office; 410-228-8191 Cambridge Office",
-                "fax": null,
-                "email": "rloeffler@chesapeake.edu"
             }
         ]
     },
@@ -2488,10 +3012,57 @@
             "Permits and Licensing"
         ],
         "business_category": "All",
-        "phone": "410-822-5400 ext. 2340",
+        "phone": {
+            "display": "410-822-5400 ext. 2340",
+            "link": "tel:+14108225400;ext=2340"
+        },
         "fax": null,
         "email": null,
         "contacts": []
+    },
+    {
+        "id": 184,
+        "organization": "Maryland Small Business Development Center (Eastern Region; Chesapeake Office)",
+        "description": "Maryland Small Business Development Centers (SBDCs) provide free one-on-one business consulting and  training to help entrepreneurs start, grow, and manage their businesses.",
+        "type": "County",
+        "area": [
+            "Caroline County",
+            "Dorchester County",
+            "Kent County",
+            "Queen Anne's County",
+            "Talbot County"
+        ],
+        "address": null,
+        "address_city": null,
+        "address_state": null,
+        "address_zip": null,
+        "url": "https://www.marylandsbdc.org/locations/eastern-region/staff",
+        "logo_link": "https://s3.amazonaws.com/bb-cms/AppData/Websites/1076/Images/pages/Maryland%20SBDC%20Logo.png",
+        "logo_file": "logos/166.jpg",
+        "question_tags": [
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started",
+            "Permits and Licensing"
+        ],
+        "business_category": "All",
+        "phone": null,
+        "fax": null,
+        "email": null,
+        "contacts": [
+            {
+                "name": "Richard Loeffler",
+                "title": "Business Consultant",
+                "phone": {
+                    "display": "410-822-5305",
+                    "link": "tel:+14108225305"
+                },
+                "fax": null,
+                "email": "rloeffler@chesapeake.edu"
+            }
+        ]
     },
     {
         "id": 185,
@@ -2613,42 +3184,60 @@
             {
                 "name": "Bill Hitte",
                 "title": "Senior Business Consultant",
-                "phone": "301-542-4309",
+                "phone": {
+                    "display": "301-542-4309",
+                    "link": "tel:+13015424309"
+                },
                 "fax": null,
                 "email": "wmhitte@csmd.edu"
             },
             {
                 "name": "Katrina M. Briscoe",
                 "title": "Business Consultant",
-                "phone": "240-585-2084",
+                "phone": {
+                    "display": "240-585-2084",
+                    "link": "tel:+12405852084"
+                },
                 "fax": null,
                 "email": "kmbriscoe3@csmd.edu"
             },
             {
                 "name": "Dr. Frank Clinton",
                 "title": "Business Consultant",
-                "phone": "301-542-9609",
+                "phone": {
+                    "display": "301-542-9609",
+                    "link": "tel:+13015429609"
+                },
                 "fax": null,
                 "email": "faclinton@csmd.edu"
             },
             {
                 "name": "James Vasquez",
                 "title": "Regional Director",
-                "phone": "240-585-1681",
+                "phone": {
+                    "display": "240-585-1681",
+                    "link": "tel:+12405851681"
+                },
                 "fax": null,
                 "email": "jrvasquez@csmd.edu"
             },
             {
                 "name": "Rebakah Jones",
                 "title": "Administration",
-                "phone": "240-585-1555",
+                "phone": {
+                    "display": "240-585-1555",
+                    "link": "tel:+12405851555"
+                },
                 "fax": null,
                 "email": "rajones10@csmd.edu"
             },
             {
                 "name": "Tammy L.S. Wright",
                 "title": "Business Consultant",
-                "phone": "301-934-7819",
+                "phone": {
+                    "display": "301-934-7819",
+                    "link": "tel:+13019347819"
+                },
                 "fax": null,
                 "email": "tlwright5@csmd.edu"
             }
@@ -2674,7 +3263,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-269-0642",
+        "phone": {
+            "display": "410-269-0642",
+            "link": "tel:+14102690642"
+        },
         "fax": null,
         "email": "mdchamber@mdchamber.org   ",
         "contacts": []
@@ -2699,7 +3291,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "443-860-2020",
+        "phone": {
+            "display": "443-860-2020",
+            "link": "tel:+14438602020"
+        },
         "fax": null,
         "email": "info@baltimorecitychamber.org",
         "contacts": []
@@ -2724,7 +3319,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-838-2020\n",
+        "phone": {
+            "display": "410-838-2020",
+            "link": "tel:+14108382020"
+        },
         "fax": null,
         "email": "info@harfordchamber.org",
         "contacts": []
@@ -2749,7 +3347,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-867-3129",
+        "phone": {
+            "display": "410-867-3129",
+            "link": "tel:+14108673129"
+        },
         "fax": "410-867-3556",
         "email": null,
         "contacts": []
@@ -2774,7 +3375,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "202-706-8946",
+        "phone": {
+            "display": "202-706-8946",
+            "link": "tel:+12027068946"
+        },
         "fax": null,
         "email": "info@hccpg.com",
         "contacts": []
@@ -2799,7 +3403,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-756-4234",
+        "phone": {
+            "display": "410-756-4234",
+            "link": "tel:+14107564234"
+        },
         "fax": null,
         "email": "info@taneytownchamber.org",
         "contacts": []
@@ -2824,7 +3431,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "443-420-7441",
+        "phone": {
+            "display": "443-420-7441",
+            "link": "tel:+14434207441"
+        },
         "fax": null,
         "email": "info@snowhillchamber.com",
         "contacts": []
@@ -2849,7 +3459,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "301-949-0080",
+        "phone": {
+            "display": "301-949-0080",
+            "link": "tel:+13019490080"
+        },
         "fax": null,
         "email": "contactus@wkchamber.org",
         "contacts": []
@@ -2874,7 +3487,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-647-3900",
+        "phone": {
+            "display": "410-647-3900",
+            "link": "tel:+14106473900"
+        },
         "fax": null,
         "email": "info@gspacc.com",
         "contacts": []
@@ -2899,7 +3515,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "301-370-4326",
+        "phone": {
+            "display": "301-370-4326",
+            "link": "tel:+13013704326"
+        },
         "fax": null,
         "email": "info@poolesvillechamber.com",
         "contacts": []
@@ -2924,7 +3543,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-957-1919",
+        "phone": {
+            "display": "410-957-1919",
+            "link": "tel:+14109571919"
+        },
         "fax": null,
         "email": "pocomokechamber@gmail.com",
         "contacts": []
@@ -2949,7 +3571,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-287-0018",
+        "phone": {
+            "display": "410-287-0018",
+            "link": "tel:+14102870018"
+        },
         "fax": null,
         "email": "info@northeastchamber.org",
         "contacts": []
@@ -2974,7 +3599,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-939-3303",
+        "phone": {
+            "display": "410-939-3303",
+            "link": "tel:+14109393303"
+        },
         "fax": null,
         "email": "coordinator@hdgchamber.com",
         "contacts": []
@@ -2999,7 +3627,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-766-8282",
+        "phone": {
+            "display": "410-766-8282",
+            "link": "tel:+14107668282"
+        },
         "fax": null,
         "email": "info@naaccc.com",
         "contacts": []
@@ -3024,7 +3655,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-719-9609",
+        "phone": {
+            "display": "410-719-9609",
+            "link": "tel:+14107199609"
+        },
         "fax": null,
         "email": "chamber@catonsville.org",
         "contacts": []
@@ -3049,7 +3683,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-228-3575",
+        "phone": {
+            "display": "410-228-3575",
+            "link": "tel:+14102283575"
+        },
         "fax": "410-228-6848",
         "email": "info@dorchesterchamber.org",
         "contacts": []
@@ -3074,7 +3711,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-641-5306",
+        "phone": {
+            "display": "410-641-5306",
+            "link": "tel:+14106415306"
+        },
         "fax": null,
         "email": "info@worcestercountychamber.org",
         "contacts": []
@@ -3099,7 +3739,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-641-4775",
+        "phone": {
+            "display": "410-641-4775",
+            "link": "tel:+14106414775"
+        },
         "fax": null,
         "email": "info@berlinchamber.org",
         "contacts": []
@@ -3124,7 +3767,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "443-424-2201",
+        "phone": {
+            "display": "443-424-2201",
+            "link": "tel:+14434242201"
+        },
         "fax": null,
         "email": "info@gbbcc.org",
         "contacts": []
@@ -3149,7 +3795,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "\u200b410-272-2580",
+        "phone": {
+            "display": "410-272-2580",
+            "link": "tel:+14102722580"
+        },
         "fax": null,
         "email": "director@aberdeencc.org",
         "contacts": []
@@ -3174,7 +3823,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-848-9050",
+        "phone": {
+            "display": "410-848-9050",
+            "link": "tel:+14108489050"
+        },
         "fax": null,
         "email": "info@carrollcountychamber.org",
         "contacts": []
@@ -3199,7 +3851,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-749-0144",
+        "phone": {
+            "display": "410-749-0144",
+            "link": "tel:+14107490144"
+        },
         "fax": null,
         "email": "chamber@salisburyarea.com",
         "contacts": []
@@ -3224,7 +3879,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "301-424-9300 ",
+        "phone": {
+            "display": "301-424-9300",
+            "link": "tel:+13014249300"
+        },
         "fax": "301-762-7599",
         "email": "dawn@rockvillechamber.org",
         "contacts": []
@@ -3249,7 +3907,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-535-2577",
+        "phone": {
+            "display": "410-535-2577",
+            "link": "tel:+14105352577"
+        },
         "fax": null,
         "email": "leah@calvertchamber.org",
         "contacts": []
@@ -3274,7 +3935,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-702-7073",
+        "phone": {
+            "display": "410-702-7073",
+            "link": "tel:+14107027073"
+        },
         "fax": null,
         "email": "nw@northwestchambermd.com",
         "contacts": []
@@ -3299,7 +3963,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "301-774-7117",
+        "phone": {
+            "display": "301-774-7117",
+            "link": "tel:+13017747117"
+        },
         "fax": null,
         "email": "chamber@olneymd.org",
         "contacts": []
@@ -3331,7 +3998,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-672-3422",
+        "phone": {
+            "display": "410-672-3422",
+            "link": "tel:+14106723422"
+        },
         "fax": null,
         "email": "info@centralmarylandchamber.org",
         "contacts": []
@@ -3356,7 +4026,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-213-0144",
+        "phone": {
+            "display": "410-213-0144",
+            "link": "tel:+14102130144"
+        },
         "fax": null,
         "email": "mychamber@oceancity.org",
         "contacts": []
@@ -3381,7 +4054,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "301-731-5000",
+        "phone": {
+            "display": "301-731-5000",
+            "link": "tel:+13017315000"
+        },
         "fax": "301-731-8015",
         "email": "info@pgcoc.org",
         "contacts": []
@@ -3406,7 +4082,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "301-932-6500",
+        "phone": {
+            "display": "301-932-6500",
+            "link": "tel:+13019326500"
+        },
         "fax": null,
         "email": "info@charlescountychamber.org",
         "contacts": []
@@ -3431,7 +4110,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "301-840-1400",
+        "phone": {
+            "display": "301-840-1400",
+            "link": "tel:+13018401400"
+        },
         "fax": null,
         "email": "info@ggchamber.org",
         "contacts": []
@@ -3456,7 +4138,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-392-3833",
+        "phone": {
+            "display": "410-392-3833",
+            "link": "tel:+14103923833"
+        },
         "fax": null,
         "email": "info@cecilchamber.com",
         "contacts": []
@@ -3481,7 +4166,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-479-4638",
+        "phone": {
+            "display": "410-479-4638",
+            "link": "tel:+14104794638"
+        },
         "fax": null,
         "email": "info@carolinechamber.org",
         "contacts": []
@@ -3506,7 +4194,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "301-722-2820",
+        "phone": {
+            "display": "301-722-2820",
+            "link": "tel:+13017222820"
+        },
         "fax": null,
         "email": "info@alleganycountychamber.com",
         "contacts": []
@@ -3531,7 +4222,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-721-9131",
+        "phone": {
+            "display": "410-721-9131",
+            "link": "tel:+14107219131"
+        },
         "fax": null,
         "email": "info@croftonchamber.com",
         "contacts": []
@@ -3563,7 +4257,10 @@
             {
                 "name": "Sarah King",
                 "title": "Executive Director",
-                "phone": "410-810-2968",
+                "phone": {
+                    "display": "410-810-2968",
+                    "link": "tel:+14108102968"
+                },
                 "fax": null,
                 "email": "sking@kentchamber.org"
             }
@@ -3589,7 +4286,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-643-8530",
+        "phone": {
+            "display": "410-643-8530",
+            "link": "tel:+14106438530"
+        },
         "fax": "410-643-8477",
         "email": "linda@qacchamber.com",
         "contacts": []
@@ -3614,7 +4314,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "443-620-016\n",
+        "phone": {
+            "display": "443-620-016",
+            "link": "tel:443620016"
+        },
         "fax": null,
         "email": "info@mdhcc.org",
         "contacts": []
@@ -3639,7 +4342,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "443-317-8763",
+        "phone": {
+            "display": "443-317-8763",
+            "link": "tel:+14433178763"
+        },
         "fax": null,
         "email": "info@chesapeakechamber.org",
         "contacts": []
@@ -3664,7 +4370,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "443-603-0233",
+        "phone": {
+            "display": "443-603-0233",
+            "link": "tel:+14436030233"
+        },
         "fax": null,
         "email": "info@aaaccc.org",
         "contacts": []
@@ -3689,7 +4398,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "301-565-3777",
+        "phone": {
+            "display": "301-565-3777",
+            "link": "tel:+13015653777"
+        },
         "fax": null,
         "email": " info@gsscc.org",
         "contacts": []
@@ -3714,7 +4426,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "301-738-0015",
+        "phone": {
+            "display": "301-738-0015",
+            "link": "tel:+13017380015"
+        },
         "fax": "301-738-8792",
         "email": null,
         "contacts": []
@@ -3739,7 +4454,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-484-2337",
+        "phone": {
+            "display": "410-484-2337",
+            "link": "tel:+14104842337"
+        },
         "fax": null,
         "email": "info@greaterbaltimorechamber.org",
         "contacts": []
@@ -3764,7 +4482,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "888-387-5237",
+        "phone": {
+            "display": "888-387-5237",
+            "link": "tel:+18883875237"
+        },
         "fax": null,
         "email": "info@garrettchamber.com",
         "contacts": []
@@ -3789,7 +4510,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "301-737-3001",
+        "phone": {
+            "display": "301-737-3001",
+            "link": "tel:+13017373001"
+        },
         "fax": null,
         "email": "info@smcchamber.com",
         "contacts": []
@@ -3814,7 +4538,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "301-739-2015",
+        "phone": {
+            "display": "301-739-2015",
+            "link": "tel:+13017392015"
+        },
         "fax": null,
         "email": null,
         "contacts": []
@@ -3839,7 +4566,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "301-662-4164",
+        "phone": {
+            "display": "301-662-4164",
+            "link": "tel:+13016624164"
+        },
         "fax": null,
         "email": "info@frederickchamber.org ",
         "contacts": []
@@ -3864,7 +4594,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-822-4653",
+        "phone": {
+            "display": "410-822-4653",
+            "link": "tel:+14108224653"
+        },
         "fax": null,
         "email": "info@talbotchamber.org",
         "contacts": []
@@ -3889,7 +4622,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "410-730-4111 ",
+        "phone": {
+            "display": "410-730-4111",
+            "link": "tel:+14107304111"
+        },
         "fax": "410-730-4584",
         "email": "info@howardchamber.com ",
         "contacts": []
@@ -3920,7 +4656,10 @@
             {
                 "name": "Jessica Williams",
                 "title": "Environmental Health Division",
-                "phone": "410- 535-5400",
+                "phone": {
+                    "display": "410- 535-5400",
+                    "link": "tel:4105355400"
+                },
                 "fax": "410-535-5285",
                 "email": "mdh-dl-calchd-environmentalhealthcchd@maryland.gov"
             }
@@ -3952,7 +4691,10 @@
             {
                 "name": null,
                 "title": "Environmental Health Division",
-                "phone": "410-479-8045",
+                "phone": {
+                    "display": "410-479-8045",
+                    "link": "tel:+14104798045"
+                },
                 "fax": "410-479-4082",
                 "email": "CarolineEH.Programs@maryland.gov"
             }
@@ -3984,7 +4726,10 @@
             {
                 "name": null,
                 "title": "Food Protection",
-                "phone": "410-876-1884",
+                "phone": {
+                    "display": "410-876-1884",
+                    "link": "tel:+14108761884"
+                },
                 "fax": null,
                 "email": null
             }
@@ -4016,7 +4761,10 @@
             {
                 "name": "Ed Arellano",
                 "title": "Director, Environmental Health Division",
-                "phone": "410-996-5160",
+                "phone": {
+                    "display": "410-996-5160",
+                    "link": "tel:+14109965160"
+                },
                 "fax": null,
                 "email": "info@cecilcountyhealth.org"
             }
@@ -4048,7 +4796,10 @@
             {
                 "name": null,
                 "title": "Food Safety Program",
-                "phone": "301-609-6900",
+                "phone": {
+                    "display": "301-609-6900",
+                    "link": "tel:+13016096900"
+                },
                 "fax": null,
                 "email": null
             }
@@ -4080,7 +4831,10 @@
             {
                 "name": null,
                 "title": "Food Safety Program",
-                "phone": "410-228-1167",
+                "phone": {
+                    "display": "410-228-1167",
+                    "link": "tel:+14102281167"
+                },
                 "fax": null,
                 "email": "dchd.environmental@maryland.gov"
             }
@@ -4112,7 +4866,10 @@
             {
                 "name": null,
                 "title": "Food Control Office",
-                "phone": "301-600-2542",
+                "phone": {
+                    "display": "301-600-2542",
+                    "link": "tel:+13016002542"
+                },
                 "fax": "301-600-3180",
                 "email": "FoodControl@FrederickCountyMD.gov"
             }
@@ -4144,7 +4901,10 @@
             {
                 "name": "Craig P. Umbel",
                 "title": "Director of Environmental Health",
-                "phone": "301-334-7760",
+                "phone": {
+                    "display": "301-334-7760",
+                    "link": "tel:+13013347760"
+                },
                 "fax": "301-334-7769",
                 "email": "environmental.health@maryland.gov"
             }
@@ -4176,7 +4936,10 @@
             {
                 "name": null,
                 "title": "Division of Food Control",
-                "phone": "410-877-2305",
+                "phone": {
+                    "display": "410-877-2305",
+                    "link": "tel:+14108772305"
+                },
                 "fax": "443-643-0333",
                 "email": null
             }
@@ -4208,7 +4971,10 @@
             {
                 "name": null,
                 "title": "Bureau of Environmental Health",
-                "phone": "410-313-1772",
+                "phone": {
+                    "display": "410-313-1772",
+                    "link": "tel:+14103131772"
+                },
                 "fax": null,
                 "email": null
             }
@@ -4240,7 +5006,10 @@
             {
                 "name": null,
                 "title": "Environmental Health",
-                "phone": "410-778-1361",
+                "phone": {
+                    "display": "410-778-1361",
+                    "link": "tel:+14107781361"
+                },
                 "fax": "410-778-7017",
                 "email": "KCHD.EH@maryland.gov"
             }
@@ -4272,7 +5041,10 @@
             {
                 "name": null,
                 "title": "Environmental Health",
-                "phone": "240-777-3986",
+                "phone": {
+                    "display": "240-777-3986",
+                    "link": "tel:+12407773986"
+                },
                 "fax": null,
                 "email": "HHSMail@montgomerycountymd.gov"
             }
@@ -4304,7 +5076,10 @@
             {
                 "name": null,
                 "title": "Food Protection/Policy Program",
-                "phone": "301-883-7690",
+                "phone": {
+                    "display": "301-883-7690",
+                    "link": "tel:+13018837690"
+                },
                 "fax": null,
                 "email": null
             }
@@ -4336,7 +5111,10 @@
             {
                 "name": null,
                 "title": "Environmental Health Division",
-                "phone": "410-758-2281",
+                "phone": {
+                    "display": "410-758-2281",
+                    "link": "tel:+14107582281"
+                },
                 "fax": null,
                 "email": null
             }
@@ -4368,7 +5146,10 @@
             {
                 "name": null,
                 "title": "Environmental Health",
-                "phone": "443-523-1700",
+                "phone": {
+                    "display": "443-523-1700",
+                    "link": "tel:+14435231700"
+                },
                 "fax": null,
                 "email": null
             }
@@ -4400,7 +5181,10 @@
             {
                 "name": null,
                 "title": "Environmental Health Division",
-                "phone": "301-475-4321",
+                "phone": {
+                    "display": "301-475-4321",
+                    "link": "tel:+13014754321"
+                },
                 "fax": null,
                 "email": "smchd.env@maryland.gov"
             }
@@ -4432,7 +5216,10 @@
             {
                 "name": null,
                 "title": "Office of Environmental Health",
-                "phone": "410-770-6880",
+                "phone": {
+                    "display": "410-770-6880",
+                    "link": "tel:+14107706880"
+                },
                 "fax": null,
                 "email": null
             }
@@ -4464,7 +5251,10 @@
             {
                 "name": null,
                 "title": "Environmental Health Division",
-                "phone": "240-313-3400 ",
+                "phone": {
+                    "display": "240-313-3400",
+                    "link": "tel:+12403133400"
+                },
                 "fax": "240-313-3424",
                 "email": "wchd.eh@maryland.gov"
             }
@@ -4496,7 +5286,10 @@
             {
                 "name": null,
                 "title": "Food Safety",
-                "phone": "410-546-4446",
+                "phone": {
+                    "display": "410-546-4446",
+                    "link": "tel:+14105464446"
+                },
                 "fax": null,
                 "email": "wicomico.environmentalhealth@maryland.gov"
             }
@@ -4528,7 +5321,10 @@
             {
                 "name": null,
                 "title": "Office of Environmental Health",
-                "phone": "410-352-3234",
+                "phone": {
+                    "display": "410-352-3234",
+                    "link": "tel:+14103523234"
+                },
                 "fax": null,
                 "email": null
             }
@@ -4560,7 +5356,10 @@
             {
                 "name": null,
                 "title": "Allegany County Environmental Health Division",
-                "phone": "301-759-5040",
+                "phone": {
+                    "display": "301-759-5040",
+                    "link": "tel:+13017595040"
+                },
                 "fax": null,
                 "email": null
             }
@@ -4592,7 +5391,10 @@
             {
                 "name": null,
                 "title": "Food Service Professionals",
-                "phone": "410-222-7192  ",
+                "phone": {
+                    "display": "410-222-7192",
+                    "link": "tel:+14102227192"
+                },
                 "fax": null,
                 "email": "hdsodhf@aacounty.org"
             }
@@ -4624,7 +5426,10 @@
             {
                 "name": null,
                 "title": "Environmental Health",
-                "phone": "410-396-4424",
+                "phone": {
+                    "display": "410-396-4424",
+                    "link": "tel:+14103964424"
+                },
                 "fax": null,
                 "email": null
             }
@@ -4656,7 +5461,10 @@
             {
                 "name": null,
                 "title": "Environmental Health Services",
-                "phone": "410-887-3663",
+                "phone": {
+                    "display": "410-887-3663",
+                    "link": "tel:+14108873663"
+                },
                 "fax": null,
                 "email": "ehs@baltimorecountymd.gov"
             }
@@ -4690,14 +5498,20 @@
             {
                 "name": "Tracy Harris",
                 "title": "Director",
-                "phone": "410-889-2300",
+                "phone": {
+                    "display": "410-889-2300",
+                    "link": "tel:+14108892300"
+                },
                 "fax": null,
                 "email": "tharris@familytreemd.org"
             },
             {
                 "name": "Michelle Giove",
                 "title": "Program Manager",
-                "phone": "410-889-2300",
+                "phone": {
+                    "display": "410-889-2300",
+                    "link": "tel:+14108892300"
+                },
                 "fax": null,
                 "email": "mgiove@familytreemd.org "
             }
@@ -4733,7 +5547,10 @@
             {
                 "name": "Sara Foura",
                 "title": "Program Manager ",
-                "phone": "410-828-7700",
+                "phone": {
+                    "display": "410-828-7700",
+                    "link": "tel:+14108287700"
+                },
                 "fax": null,
                 "email": "sfoura@abilitiesnetwork.org"
             }
@@ -4771,7 +5588,10 @@
             {
                 "name": "Laura Terrell",
                 "title": "Program Manager",
-                "phone": "301-772-8420",
+                "phone": {
+                    "display": "301-772-8420",
+                    "link": "tel:+13017728420"
+                },
                 "fax": null,
                 "email": "lterrell@childresource.org"
             }
@@ -4798,7 +5618,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "Child Care",
-        "phone": "301-431-6210",
+        "phone": {
+            "display": "301-431-6210",
+            "link": "tel:+13014316210"
+        },
         "fax": null,
         "email": null,
         "contacts": []
@@ -4824,7 +5647,10 @@
             "Business Operations and Planning"
         ],
         "business_category": "Child Care",
-        "phone": "443-782-5001",
+        "phone": {
+            "display": "443-782-5001",
+            "link": "tel:+14437825001"
+        },
         "fax": null,
         "email": null,
         "contacts": []
@@ -4926,7 +5752,10 @@
             {
                 "name": "Georgia Ferentinos",
                 "title": "Program Manager",
-                "phone": "410-313-1940",
+                "phone": {
+                    "display": "410-313-1940",
+                    "link": "tel:+14103131940"
+                },
                 "fax": null,
                 "email": "gferentinos@howardcountymd.gov"
             }
@@ -4960,7 +5789,10 @@
             {
                 "name": "Tamieka Thomasson",
                 "title": "Program Manager",
-                "phone": "240-777-4769",
+                "phone": {
+                    "display": "240-777-4769",
+                    "link": "tel:+12407774769"
+                },
                 "fax": null,
                 "email": "tamieka.thomasson@montgomerycountymd.gov\n"
             }
@@ -4998,7 +5830,10 @@
             {
                 "name": "Sarah Martin",
                 "title": "Program Director",
-                "phone": "301-663-0011",
+                "phone": {
+                    "display": "301-663-0011",
+                    "link": "tel:+13016630011"
+                },
                 "fax": null,
                 "email": "smartin@fcmha.org"
             }
@@ -5026,14 +5861,20 @@
             "Getting Started"
         ],
         "business_category": "Child Care",
-        "phone": "410-659-7701",
+        "phone": {
+            "display": "410-659-7701",
+            "link": "tel:+14106597701"
+        },
         "fax": null,
         "email": "info@marylandfamilynetwork.org",
         "contacts": [
             {
                 "name": null,
                 "title": "LOCATE: Child Care & Family Resource Specialists",
-                "phone": "877-261-0060",
+                "phone": {
+                    "display": "877-261-0060",
+                    "link": "tel:+18772610060"
+                },
                 "fax": null,
                 "email": "info@marylandfamilynetwork.org"
             }
@@ -5062,9 +5903,56 @@
             "Business Operations and Planning"
         ],
         "business_category": "All",
-        "phone": "301-315-8091",
+        "phone": {
+            "display": "301-315-8091",
+            "link": "tel:+13013158091"
+        },
         "fax": null,
         "email": null,
         "contacts": []
+    },
+    {
+        "id": 288,
+        "organization": "Maryland Small Business Development Center (Eastern Region; Cambridge Office)",
+        "description": "Maryland Small Business Development Centers (SBDCs) provide free one-on-one business consulting and  training to help entrepreneurs start, grow, and manage their businesses.",
+        "type": "County",
+        "area": [
+            "Caroline County",
+            "Dorchester County",
+            "Kent County",
+            "Queen Anne's County",
+            "Talbot County"
+        ],
+        "address": null,
+        "address_city": null,
+        "address_state": null,
+        "address_zip": null,
+        "url": "https://www.marylandsbdc.org/locations/eastern-region/staff",
+        "logo_link": "https://s3.amazonaws.com/bb-cms/AppData/Websites/1076/Images/pages/Maryland%20SBDC%20Logo.png",
+        "logo_file": "logos/166.jpg",
+        "question_tags": [
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started",
+            "Permits and Licensing"
+        ],
+        "business_category": "All",
+        "phone": null,
+        "fax": null,
+        "email": null,
+        "contacts": [
+            {
+                "name": "Richard Loeffler",
+                "title": "Business Consultant",
+                "phone": {
+                    "display": "410-228-8191",
+                    "link": "tel:+14102288191"
+                },
+                "fax": null,
+                "email": "rloeffler@chesapeake.edu"
+            }
+        ]
     }
 ]

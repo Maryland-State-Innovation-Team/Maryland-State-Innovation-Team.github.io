@@ -1,30 +1,233 @@
-// 1. Initialize dataLayer and gtag (Safe Shim)
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Maryland Community Business Compass</title>
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
 
-// 2. Fetch environment config & Analytics
-fetch('/env.json')
-    .then(function(response) { return response.json(); })
-    .then(function(config) {
-        if (config.environment === 'production') {
-            var gaId = 'G-W4R4JXSE3R';
-            var script = document.createElement('script');
-            script.async = true;
-            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
-            document.head.appendChild(script);
-            gtag('js', new Date());
-            gtag('config', gaId);                    
-        } else {
-            console.log('Google Analytics suppressed (' + config.environment + ').');
+    <style>
+        body {
+            font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
         }
-    })
-    .catch(function(error) {
-        console.warn('Could not load env.json, GA suppressed.', error);
-    });
+        .usa-menu-btn {
+            background-color: #005ea2; /* primary-default */
+            color: white;
+            padding: 0.5rem 1rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            border: none;
+            margin: 0;
+        }
+        .custom-logo a {
+            display: flex;
+            align-items: flex-end;
+            text-decoration: none;
+            border-bottom: 1.25rem solid transparent;
+        }
+        .custom-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .custom-logo .usa-logo__text {
+            font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            line-height: 1.2;
+            color: #1b1b1b;
+            font-style: normal;
+        }
+        @media (min-width: 1024px) {
+            .custom-logo .usa-logo__text {
+                font-size: 1.13rem;
+            }
+            .custom-logo img {
+                height: 50px;
+            }
+        }
+        .custom-logo .usa-logo__text a,
+        .custom-logo .usa-logo__text a:visited {
+             color: #1b1b1b;
+        }
+        .usa-header {
+            padding-top: 0.5rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .usa-nav-container {
+            padding: 0 0.5rem;
+        }
+        .usa-header--basic {
+            border-bottom: 1px solid #dfe1e2; /* base-lighter */
+        }
+        .usa-nav__primary > .usa-nav__primary-item > .usa-nav__link {
+            border-bottom: 0.25rem solid transparent;
+        }
+        .usa-nav__primary > .usa-nav__primary-item > .usa-nav__link.usa-current {
+            border-bottom: 0.25rem solid #005ea2; /* primary-default */
+        }
+        .usa-nav__close {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath fill='%231b1b1b' d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 1.5rem;
+        }
 
-// 3. 404 Page Rendering Logic
-// We store the static HTML in a template literal to keep 404.html small.
-const contentHTML = `
+        @media (min-width: 1024px) {
+            .usa-menu-btn { display: none; }
+            .usa-nav-container { display: flex; align-items: flex-end; gap: 1rem; justify-content: space-between; padding: 0 1.5rem; }
+            .usa-header { padding-top: 0.75rem; padding-left: 1.5rem; padding-right: 1.5rem; }
+            .usa-nav-container .usa-navbar { display: flex; align-items: center; gap: 1rem; flex: 0 0 auto; width: auto; }
+            .usa-nav { order: 2; flex: 0 1 auto; display: flex; justify-content: flex-end; background: transparent; box-shadow: none; }
+            .usa-nav__primary { display: inline-flex; gap: 1.25rem; align-items: flex-end; }
+            .usa-nav__primary-item { display: inline-flex; align-items: center; }
+            header .usa-nav-container .usa-nav { flex: 0 0 auto !important; width: auto !important; max-width: none !important; }
+            header .usa-nav-container .usa-nav__primary { display: inline-flex !important; width: auto !important; justify-content: flex-end !important; margin-left: 0 !important; }
+            header .usa-nav-container > .usa-nav { margin-left: auto !important; max-width: -moz-fit-content !important; max-width: fit-content !important; min-width: 0 !important; }
+            .usa-nav__close { display: none; }
+            .usa-nav-container > .usa-nav { margin-top: 0; }
+        }
+        @media (max-width: 1023.98px) {
+            .usa-navbar { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 1rem; }
+            .usa-logo.custom-logo { order: 1; flex: 0 1 auto; }
+            .usa-menu-btn { order: 2; margin-left: auto; display: inline-flex; align-items: center; }
+            .usa-nav { order: 3; }
+        }
+
+        .usa-banner__header {
+            min-height: 0;
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+
+        
+        /* Hero Section */
+        .not-found-header {
+            background-image: url('../assets/bg-dark.svg');
+            background-color: #19355d;
+            background-size: cover;
+            background-position: center center;
+            padding: 4rem 0; /* Taller padding for Hero feel */
+        }
+        .not-found-header h1 {
+            color: white;
+            margin-top: 0;
+        }
+        .not-found-header p {
+            color: white;
+            font-size: 1.3rem;
+            margin-top: 1rem;
+        }
+
+        /* Sticky Sidebar & Nav */
+        .sticky-sidebar {
+            position: sticky;
+            top: 1.5rem;
+        }
+        .usa-sidenav__item a {
+            color: #005ea2;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .usa-sidenav__item a:hover {
+            text-decoration: underline;
+            color: #1a4480;
+        }
+        .usa-sidenav__item a.usa-current {
+            color: #1b1b1b;
+            font-weight: 700;
+            padding-left: 0.75rem; /* Offset for border */
+        }
+
+        /* Section Layouts */
+        .not-found-section {
+            scroll-margin-top: 6rem; 
+            margin-bottom: 4rem;
+        }
+        
+        /* Data Source / Indicator Box Styling */
+        .data-source-box {
+            background-color: #f0f0f0; /* base-lightest */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #005ea2;
+        }
+        .data-source-title {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            color: #565c65;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        /* Accordion Customization */
+        .not-found-section .usa-accordion__button {
+            background-color: #ffffff;
+            border: 1px solid #dfe1e2;
+        }
+        .not-found-section .usa-accordion__button:hover {
+            background-color: #f0f0f0;
+        }
+        .not-found-section .usa-accordion__content {
+            background-color: #f8f9fa;
+            border: 1px solid #dfe1e2;
+            border-top: 0;
+        }
+        .usa-prose>p {
+            max-width: none;
+        }
+
+        .usa-banner__header {
+            min-height: 0;
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+
+        #not-found-content-container a {
+            color: #005ea2;
+            text-decoration: underline;
+            word-break: break-word;
+        }
+
+    </style>
+    <script>
+        // 1. Initialize dataLayer and gtag immediately (Safe Shim)
+        // This ensures window.gtag exists for other scripts, preventing ReferenceErrors
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+
+        // 2. Fetch environment config
+        fetch('../env.json')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(config) {
+                if (config.environment === 'production') {
+                    var gaId = 'G-W4R4JXSE3R';
+                    
+                    // 3. Load the Google Tag Manager script asynchronously
+                    var script = document.createElement('script');
+                    script.async = true;
+                    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+                    document.head.appendChild(script);
+
+                    // 4. Configure GA (Processing the queue)
+                    gtag('js', new Date());
+                    gtag('config', gaId);                    
+                } else {
+                    console.log('Google Analytics suppressed (' + config.environment + ').');
+                }
+            })
+            .catch(function(error) {
+                console.warn('Could not load env.json, GA suppressed.', error);
+            });
+    </script>
+</head>
+<body>
+
     <div class="usa-banner-container">
         <section class="usa-banner" aria-label="Official website of the State of Maryland">
             <div class="usa-accordion">
@@ -68,8 +271,8 @@ const contentHTML = `
                 <div class="usa-navbar">
                     <div class="usa-logo custom-logo" id="basic-logo">
                         <div class="usa-logo__text">
-                            <a href="/" title="Home" aria-label="Home">
-                                <img src="/assets/mdwds_logo_notext.svg" alt="Maryland Business Compass Logo">
+                            <a href="../" title="Home" aria-label="Home">
+                                <img src="../assets/mdwds_logo_notext.svg" alt="Maryland Business Compass Logo">
                                 <span>Maryland Community<br>Business Compass</span>
                             </a>
                         </div>
@@ -80,16 +283,16 @@ const contentHTML = `
                     <button type="button" class="usa-nav__close"></button>
                     <ul class="usa-nav__primary usa-accordion">
                         <li class="usa-nav__primary-item">
-                            <a href="/" class="usa-nav__link"><span>Home</span></a>
+                            <a href="../" class="usa-nav__link"><span>Home</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
-                            <a href="/map/" class="usa-nav__link"><span>Locate the Opportunity</span></a>
+                            <a href="../map/" class="usa-nav__link"><span>Locate the Opportunity</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
-                            <a href="/incentives/" class="usa-nav__link"><span>Find Government Funding</span></a>
+                            <a href="../incentives/" class="usa-nav__link"><span>Find Government Funding</span></a>
                         </li>
                         <li class="usa-nav__primary-item">
-                            <a href="/resources/" class="usa-nav__link"><span>Connect with Experts</span></a>
+                            <a href="../resources/" class="usa-nav__link"><span>Connect with Experts</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -120,7 +323,7 @@ const contentHTML = `
                             It seems you have hit a dead end. You can return to the homepage to start over, or use the menu above to locate opportunities and funding.
                         </p>
                         <div class="margin-top-4">
-                            <a href="/" class="usa-button">Return to Home</a>
+                            <a href="../" class="usa-button">Return to Home</a>
                         </div>
                     </div>
                 </div>
@@ -136,7 +339,7 @@ const contentHTML = `
             
             <section aria-labelledby="agency-footer" class="maryland-footer__section">
                 <div class="maryland-footer__agency">
-                    <img class="maryland-footer__agency-logo" src="/assets/innovation-website-logo-light.png" alt="Maryland State Innovation Team Logo" style="height: 50px; width: auto;">
+                    <img class="maryland-footer__agency-logo" src="../assets/innovation-website-logo-light.png" alt="Maryland State Innovation Team Logo" style="height: 50px; width: auto;">
                     <h3 class="maryland-footer__agency-name" id="agency-footer">
                         Maryland State Innovation Team
                     </h3>
@@ -179,13 +382,13 @@ const contentHTML = `
                             </h3>
                             <ul class="maryland-footer__link-group-list">
                                 <li>
-                                    <a href="/methodology/">Methodology</a>
+                                    <a href="../methodology/">Methodology</a>
                                 </li>
                                 <li>
-                                    <a href="/terms-of-service/">Website Terms of Service</a>
+                                    <a href="../terms-of-service/">Website Terms of Service</a>
                                 </li>
                                 <li>
-                                    <a href="/how-this-site-works/">How This Site Works</a>
+                                    <a href="../how-this-site-works/">How This Site Works</a>
                                 </li>
                             </ul>
                         </nav>
@@ -255,7 +458,7 @@ const contentHTML = `
                 <hr class="maryland-footer__divider">
                 
                 <div class="maryland-footer__branding">
-                    <img class="maryland-footer__logo" alt="Maryland full logo" src="/assets/mdwds_logo_horizontal_inverted.svg" style="height: 40px;">
+                    <img class="maryland-footer__logo" alt="Maryland full logo" src="../assets/mdwds_logo_horizontal_inverted.svg" style="height: 40px;">
                     <div class="maryland-footer__copyright">
                         © 2025 State of Maryland. All rights reserved.
                     </div>
@@ -264,34 +467,15 @@ const contentHTML = `
             
         </div>
     </footer>
-`;
 
-// Helper to load external scripts sequentially
-function loadScript(src) {
-    return new Promise((resolve, reject) => {
-        var s = document.createElement('script');
-        s.src = src;
-        s.onload = resolve;
-        s.onerror = reject;
-        document.body.appendChild(s);
-    });
-}
 
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Inject the HTML into the body, preserving the <noscript> tag if preferred, 
-    // or simply overwriting. Here we overwrite for a clean state.
-    document.body.innerHTML = contentHTML;
-
-    // 2. Define global config required by mdwds-core
-    window.mdwds = { image_path: "https://cdn.maryland.gov/mdwds/0.12.0/img" };
-
-    // 3. Load Dependencies
-    loadScript("https://cdn.maryland.gov/mdwds/0.12.0/js/mdwds-core.js")
-        .then(() => loadScript("/assets/tos_notification.js"))
-        .then(() => {
-            if (window.initTermsBanner) {
-                window.initTermsBanner({ rootPath: '.' });
-            }
-        })
-        .catch(err => console.error("Error loading 404 dependencies", err));
-});
+    <script>
+        var mdwds = { image_path: "https://cdn.maryland.gov/mdwds/0.12.0/img" };
+    </script>
+    <script src="https://cdn.maryland.gov/mdwds/0.12.0/js/mdwds-core.js"></script>
+    <script src="../assets/tos_notification.js"></script>
+    <script>
+        window.initTermsBanner({ rootPath: '..' });
+    </script>
+</body>
+</html>
