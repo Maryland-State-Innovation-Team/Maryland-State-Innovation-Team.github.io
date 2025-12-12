@@ -1470,6 +1470,75 @@
     }
   },
   {
+    "program_name": "NourishMD Grant Program",
+    "agency": "Maryland Department of Housing and Community Development (DHCD)",
+    "summary": "The NourishMD Grant Program expands access to healthy and fresh foods in Maryland communities experiencing food insecurity by providing direct grants to eligible retailers.",
+    "application_due": "February 20 @ 5:00 p.m. EST",
+    "more_details_url": "https://dhcd.maryland.gov/business",
+    "contact_name": null,
+    "contact_email": "nourishmd@manyland.gov",
+    "contact_phone": "1-800-756-0119",
+    "eligibility": "For-Profit, Non-Profit",
+    "assistance_financial": "Grant",
+    "assistance_nonfinancial": "",
+    "structured_extraction": {
+      "featured": true,
+      "featured_img": "../assets/nourish-md-compressed.jpg",
+      "featured_img_alt": "A woman shopping for fresh fruit in a grocery store produce section.",
+      "featured_description": "Grants of up to $150,000 to support capital-related needs for grocery stores and markets in areas with limited healthy food access.",
+      "program_name": "NourishMD Grant Program",
+      "program_description": "The NourishMD Grant Program expands access to fresh foods in food-insecure communities. It provides grants to eligible food retailers to support operations and improvements.",
+      "agency": "Maryland Department of Housing and Community Development (DHCD)",
+      "list_of_eligible_counties": [
+        "All"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [
+        "NourishMD Eligibility Zone"
+      ],
+      "eligible_organization_types": [
+        "for-profit",
+        "non-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Grocery Stores and Fresh Food Retailers",
+        "Retail Trade",
+        "Agriculture, Forestry, Fishing and Hunting"
+      ],
+      "list_of_prioritized_industries": [
+        "Grocery Stores and Fresh Food Retailers"
+      ],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "The program awards grants between $25,000 and $150,000. A total of up to $2 million is available for funding.",
+      "URL": "https://dhcd.maryland.gov/business",
+      "application_deadline_string": "February 20 @ 5:00 p.m. EST",
+      "application_deadline_date": "2026-02-20",
+      "contact_name": null,
+      "contact_email": "nourishmd@manyland.gov",
+      "contact_phone": "1-800-756-0119",
+      "program_audience": "Eligible applicants include grocery stores, corner stores, co-ops, farm stands, farmers' markets, delivery retailers, and small food-focused stores.",
+      "use_of_funds": "Recipients use funds for equipment like refrigeration and shelving, facility upgrades, inventory expansion capital, working capital, and SNAP/EBT technology.",
+      "geographic_eligibility": "Businesses must serve a community with a Maryland Community Business Compass (MCBC) Fresh Food Gap Score of 60% or higher.",
+      "requirements_list": [
+        "Must operate at least 5 days per week, year-round (farmers markets and on-farm markets are exempt).",
+        "Must currently offer or plan to offer fresh, frozen, or minimally processed healthy foods.",
+        "Must dedicate at least 20% of inventory or food-sales space to healthy food items.",
+        "Must meet SNAP eligibility or plan to adopt SNAP functionality.",
+        "A $250 processing fee is sourced from the award amount."
+      ],
+      "application_process_overview": "Applicants submit a complete application through the DHCD portal between January 20 and February 20. The agency reviews applications in February and March and finalizes recommendations in April. Award notifications occur in May, followed by disbursements in June.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
     "program_name": "Child Care Capital Support Revolving Loan Fund",
     "agency": "Maryland Department of Commerce",
     "summary": "The Child Care Capital Support Revolving Loan Fund provides no-interest loans for capital expenses to child care providers who participate in the State Department of Education's Child Care Scholarship Program.",
