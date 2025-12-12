@@ -1849,7 +1849,12 @@
             }
 
             function downloadCSV() {
-                if (displayedIncentives.length === 0) { alert("No results to download."); return; }
+                // Use displayedIncentives. If zero, verify if it's because of filters or loading.
+                // In this context, displayedIncentives is the source of truth for the table.
+                if (displayedIncentives.length === 0) { 
+                    alert("No results to download."); 
+                    return; 
+                }
                 
                 // GA4: Track Download
                 trackEvent('download_csv', {
@@ -1858,15 +1863,42 @@
                 });
 
                 const headers = ["Program Name", "Agency", "URL", "Eligible Counties", "Assistance Type", "Eligible Organization Types", "Eligible Industries", "Application Deadline", "Summary"];
-                const rows = displayedIncentives.map(item => { const d = item.structured_extraction; return [d.program_name, d.agency, d.URL, d.list_of_eligible_counties?.join('; '), d.assistance_type?.join('; '), d.eligible_organization_types?.join('; '), d.list_of_eligible_industries?.join('; '), d.application_deadline_string, item.summary || d.program_description]; });
+                
                 const escapeCSV = (s) => (s === null || s === undefined) ? '' : `"${String(s).replace(/"/g, '""')}"`;
-                let csvContent = "data:text/csv;charset=utf-8," + headers.map(escapeCSV).join(',') + '\r\n' + rows.map(r => r.map(escapeCSV).join(',')).join('\r\n');
+
+                const rows = displayedIncentives.map(item => { 
+                    const d = item.structured_extraction; 
+                    return [
+                        d.program_name, 
+                        d.agency, 
+                        d.URL, 
+                        d.list_of_eligible_counties?.join('; '), 
+                        d.assistance_type?.join('; '), 
+                        d.eligible_organization_types?.join('; '), 
+                        d.list_of_eligible_industries?.join('; '), 
+                        d.application_deadline_string, 
+                        item.summary || d.program_description
+                    ]; 
+                });
+
+                // Construct the CSV string
+                const csvString = headers.map(escapeCSV).join(',') + '\r\n' + rows.map(r => r.map(escapeCSV).join(',')).join('\r\n');
+                
+                // Use Blob API to bypass browser URL length limits
+                const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                
                 const link = document.createElement("a");
-                link.setAttribute("href", encodeURI(csvContent));
+                link.setAttribute("href", url);
                 link.setAttribute("download", "maryland_incentives.csv");
+                link.style.visibility = 'hidden';
+                
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
+                
+                // Clean up memory
+                URL.revokeObjectURL(url);
             }
             
             const detailContentsNav = document.getElementById('detail-contents-nav');
