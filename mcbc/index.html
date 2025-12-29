@@ -294,6 +294,45 @@
             padding-bottom: 0.25rem;
         }
 
+        .usa-banner__button {
+            cursor: pointer;
+        }
+
+        /* --- ACCESSIBILITY UTILITIES --- */
+        .visually-hidden {
+            position: absolute !important;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            width: 1px;
+            height: 1px;
+            white-space: nowrap; /* Prevent line breaks */
+        }
+        
+        /* When focused, return to the document flow to push content down */
+        .focusable:focus {
+            position: relative !important;
+            width: fit-content !important; 
+            height: auto;
+            clip: auto;
+            overflow: visible;
+            white-space: normal;
+            
+            /* Visual Styling */
+            display: block;
+            background-color: #ffffff;
+            color: #005ea2;
+            padding: 0.5rem 1rem;
+            text-decoration: underline;
+            font-weight: 700;
+            z-index: auto;
+        }
+
+        /* Utility to hide focus ring on non-interactive targets */
+        .focus-outline-none:focus {
+            outline: none !important;
+            box-shadow: none !important; 
+        }
+
     </style>
     <script>
         // 1. Initialize dataLayer and gtag immediately (Safe Shim)
@@ -329,7 +368,9 @@
     </script>
 </head>
 <body>
-
+    <a href="#main-content" class="visually-hidden focusable">
+       Skip to main content
+    </a>
     <div class="usa-banner-container">
         <section class="usa-banner" aria-label="Official website of the State of Maryland">
             <div class="usa-accordion">
@@ -340,10 +381,12 @@
                         </div>
                         <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
                             <p class="usa-banner__header-text">An official website of the State of Maryland</p>
-                            <p class="usa-banner__header-action">Here’s how you know</p>
                         </div>
-                        <button type="button" class="usa-accordion__button usa-banner__button" aria-controls="gov-banner-default" aria-expanded="false">
-                            <span class="usa-banner__button-text">Here’s how you know</span>
+                        <button type="button" class="usa-banner__button" aria-expanded="false" aria-controls="gov-banner-default">
+                            Here’s how you know
+                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor" aria-hidden="true" focusable="false">
+                                <path d="M576-253.85 349.85-480 576-706.15 613.15-669l-189 189 189 189L576-253.85Z"></path>
+                            </svg>
                         </button>
                     </div>
                 </header>
@@ -373,16 +416,16 @@
                 <div class="usa-navbar">
                     <div class="usa-logo custom-logo" id="basic-logo">
                         <div class="usa-logo__text">
-                            <a href="./" title="Home" aria-label="Home">
-                                <img src="./assets/mdwds_logo_notext.svg" alt="Maryland Business Compass Logo">
-                                <span>Maryland Community<br>Business Compass</span>
+                            <a href="./" title="Home">
+                                <img src="./assets/mdwds_logo_notext.svg" alt="">
+                                <span>Maryland Community<br>Business Compass<span class="visually-hidden"> Home</span></span>
                             </a>
                         </div>
                     </div>
                     <button type="button" class="usa-menu-btn">Menu</button>
                 </div>
                 <nav aria-label="Primary navigation" class="usa-nav">
-                    <button type="button" class="usa-nav__close"></button>
+                    <button type="button" class="usa-nav__close" aria-label="Close Menu"></button>
                     <ul class="usa-nav__primary usa-accordion">
                         <li class="usa-nav__primary-item">
                             <a href="./" class="usa-nav__link usa-current" aria-current="page"><span>Home</span></a>
@@ -401,12 +444,12 @@
             </div>
         </header>
 
-        <main id="main-content">
+        <main id="main-content" tabindex="-1" class="focus-outline-none">
             <section class="hero-section">
                 <div class="hero-split-container">
                     <div class="hero-left">
                         <h1 class="font-serif-xl tablet:font-serif-2xl desktop:font-serif-3xl margin-top-0 margin-bottom-4">Discover Opportunities in Your Community</h1>
-                        <p class="font-serif-lg margin-top-0">Get the help you need to provide child care, fresh food, and other essential services</p>
+                        <p class="font-serif-lg margin-top-0">Get the help you need to provide essential services, starting with child care and fresh food</p>
                     </div>
                     <div class="hero-right">
                         <img src="assets/53525754812_16be886cd0_k_cropped.jpg" alt="Governor Wes Moore kneels to high-five a toddler inside a colorful child care center.">
@@ -419,7 +462,7 @@
                     <div class="tablet:grid-col-4">
                         <div class="feature-card feature-card--opportunity">
                             <div class="feature-card__icon-wrapper">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px"><path d="M640-560v-126 126ZM174-132q-20 8-37-4.5T120-170v-560q0-13 7.5-23t20.5-15l212-72 240 84 186-72q20-8 37 4.5t17 33.5v337q-15-23-35.5-42T760-528v-204l-120 46v126q-21 0-41 3.5T560-546v-140l-160-56v523l-226 87Zm26-96 120-46v-468l-120 40v474Zm440-12q34 0 56.5-20t23.5-60q1-34-22.5-57T640-400q-34 0-57 23t-23 57q0 34 23 57t57 23Zm0 80q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 43.5T778-238l102 102-56 56-102-102q-18 11-38.5 16.5T640-160ZM320-742v468-468Z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" aria-hidden="true" focusable="false"><path d="M640-560v-126 126ZM174-132q-20 8-37-4.5T120-170v-560q0-13 7.5-23t20.5-15l212-72 240 84 186-72q20-8 37 4.5t17 33.5v337q-15-23-35.5-42T760-528v-204l-120 46v126q-21 0-41 3.5T560-546v-140l-160-56v523l-226 87Zm26-96 120-46v-468l-120 40v474Zm440-12q34 0 56.5-20t23.5-60q1-34-22.5-57T640-400q-34 0-57 23t-23 57q0 34 23 57t57 23Zm0 80q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 23-5.5 43.5T778-238l102 102-56 56-102-102q-18 11-38.5 16.5T640-160ZM320-742v468-468Z"/></svg>
                             </div>
                             <h2 class="font-serif-lg">Locate the Opportunity</h2>
                             <p class="font-sans-sm">Explore business-relevant data for locations across Maryland to help you decide where to build your business.</p>
@@ -430,7 +473,7 @@
                     <div class="tablet:grid-col-4">
                         <div class="feature-card feature-card--incentives">
                             <div class="feature-card__icon-wrapper">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" aria-hidden="true" focusable="false"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z"/></svg>
                             </div>
                             <h2 class="font-serif-lg">Find Government Funding</h2>
                             <p class="font-sans-sm">Discover state and local incentive programs and learn how to apply, all in one place. Explore government grants, loans, tax-credits, and more.</p>
@@ -441,7 +484,7 @@
                     <div class="tablet:grid-col-4">
                         <div class="feature-card feature-card--resources">
                             <div class="feature-card__icon-wrapper">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px"><path d="m480-80-10-120h-10q-142 0-241-99t-99-241q0-142 99-241t241-99q71 0 132.5 26.5t108 73q46.5 46.5 73 108T800-540q0 75-24.5 144t-67 128q-42.5 59-101 107T480-80Zm80-146q71-60 115.5-140.5T720-540q0-109-75.5-184.5T460-800q-109 0-184.5 75.5T200-540q0 109 75.5 184.5T460-280h100v54Zm-101-95q17 0 29-12t12-29q0-17-12-29t-29-12q-17 0-29 12t-12 29q0 17 12 29t29 12Zm-29-127h60q0-30 6-42t38-44q18-18 30-39t12-45q0-51-34.5-76.5T460-720q-44 0-74 24.5T344-636l56 22q5-17 19-33.5t41-16.5q27 0 40.5 15t13.5 33q0 17-10 30.5T480-558q-35 30-42.5 47.5T430-448Zm30-65Z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" aria-hidden="true" focusable="false"><path d="m480-80-10-120h-10q-142 0-241-99t-99-241q0-142 99-241t241-99q71 0 132.5 26.5t108 73q46.5 46.5 73 108T800-540q0 75-24.5 144t-67 128q-42.5 59-101 107T480-80Zm80-146q71-60 115.5-140.5T720-540q0-109-75.5-184.5T460-800q-109 0-184.5 75.5T200-540q0 109 75.5 184.5T460-280h100v54Zm-101-95q17 0 29-12t12-29q0-17-12-29t-29-12q-17 0-29 12t-12 29q0 17 12 29t29 12Zm-29-127h60q0-30 6-42t38-44q18-18 30-39t12-45q0-51-34.5-76.5T460-720q-44 0-74 24.5T344-636l56 22q5-17 19-33.5t41-16.5q27 0 40.5 15t13.5 33q0 17-10 30.5T480-558q-35 30-42.5 47.5T430-448Zm30-65Z"/></svg>
                             </div>
                             <h2 class="font-serif-lg">Connect with Experts</h2>
                             <p class="font-sans-sm">Get connected with people and organizations who can guide you through the process of starting and running a small business.</p>
@@ -453,13 +496,15 @@
         </main>
     </div>
     
+    <div id="md-tos-banner-container" aria-live="polite"></div>
+
     <footer class="maryland-footer" aria-labelledby="footer">
         <h2 id="footer" class="usa-sr-only">Footer</h2>
         <div class="maryland-footer__container">
             
             <section aria-labelledby="agency-footer" class="maryland-footer__section">
                 <div class="maryland-footer__agency">
-                    <img class="maryland-footer__agency-logo" src="./assets/innovation-website-logo-light.png" alt="Maryland State Innovation Team Logo" style="height: 50px; width: auto;">
+                    <img class="maryland-footer__agency-logo" src="./assets/innovation-website-logo-light.png" alt="The office of Governor Wes Moore Innovation Team logo" style="height: 50px; width: auto;">
                     <h3 class="maryland-footer__agency-name" id="agency-footer">
                         Maryland State Innovation Team
                     </h3>
@@ -491,7 +536,7 @@
                             <ul class="maryland-footer__link-group-list">
                                 <li>6 Saint Paul Street, Baltimore, MD 21202</li>
                                 <li><a href="mailto:compass@maryland.gov">compass@maryland.gov</a></li>
-                                <li><a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank">Visit Our Website</a></li>
+                                <li><a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank">Visit the Innovation Team Website</a></li>
                             </ul>
                         </div>
                     </div>
@@ -509,6 +554,9 @@
                                 </li>
                                 <li>
                                     <a href="./how-this-site-works/">How This Site Works</a>
+                                </li>
+                                <li>
+                                    <a href="./sitemap/">Sitemap</a>
                                 </li>
                             </ul>
                         </nav>

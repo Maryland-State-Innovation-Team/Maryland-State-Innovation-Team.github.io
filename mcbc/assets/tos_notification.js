@@ -4,6 +4,7 @@
  * - LocalStorage persistence
  * - Accessibility: Focus management
  * - Accessibility: Screen reader support for external links
+ * - Accessibility: Uses pre-existing DOM element for reliable aria-live announcements
  * * Usage:
  * window.initTermsBanner({
  * rootPath: '.'  // or '..' depending on file location
@@ -18,7 +19,8 @@ window.initTermsBanner = function(config) {
     }, config);
 
     const STORAGE_KEY = 'md_business_compass_tc_accepted';
-    const BANNER_ID = 'tc-banner';
+    const CONTAINER_ID = 'md-tos-banner-container'; // Must match ID in index.html
+    const DESCRIPTION_ID = 'tc-banner-description'; // ID for aria-describedby
     
     // 2. Check if already accepted
     if (localStorage.getItem(STORAGE_KEY) === 'true') {
@@ -112,11 +114,12 @@ window.initTermsBanner = function(config) {
 
     // 4. Define HTML Structure
     // Uses ${options.rootPath} to ensure links work from subdirectories
+    // Added ID to paragraph for aria-describedby association
     const htmlContent = `
         <div class="tc-notification-banner__inner">
-            <p>
+            <p id="${DESCRIPTION_ID}">
                 Welcome to the Maryland Community Business Compass. By using this website, you acknowledge that you have read and understand the 
-                <a href="${options.rootPath}/terms-of-service" target="_blank" rel="noopener noreferrer">Website Terms of Service<span class="tc-sr-only"> (opens in new tab)</span></a> and 
+                <a href="${options.rootPath}/terms-of-service/" target="_blank" rel="noopener noreferrer">Website Terms of Service<span class="tc-sr-only"> (opens in new tab)</span></a> and 
                 <a href="${options.rootPath}/how-this-site-works/" target="_blank" rel="noopener noreferrer">How This Site Works<span class="tc-sr-only"> (opens in new tab)</span></a>, and agree to be bound by the terms, conditions, and notices therein. For future reference, a link to both the Website Terms of Service and How This Site Works can be found in the footer of each page of this website.
             </p>
             <button type="button" id="tc-accept-btn">Accept</button>
@@ -130,32 +133,54 @@ window.initTermsBanner = function(config) {
         styleSheet.textContent = styles;
         document.head.appendChild(styleSheet);
 
-        // Inject HTML
-        const bannerDiv = document.createElement("div");
-        bannerDiv.id = BANNER_ID;
-        bannerDiv.className = "tc-notification-banner";
-        // role="alertdialog" effectively communicates this is a blocking interaction 
-        // requiring user acknowledgment, which justifies the auto-focus.
-        bannerDiv.setAttribute("role", "alertdialog"); 
-        bannerDiv.setAttribute("aria-label", "Terms and Conditions Agreement");
-        bannerDiv.innerHTML = htmlContent;
+        // Find existing container (preferred for accessibility) or create fallback
+        let bannerDiv = document.getElementById(CONTAINER_ID);
         
-        document.body.appendChild(bannerDiv);
+        if (!bannerDiv) {
+            // Fallback creation if HTML wasn't updated
+            bannerDiv = document.createElement("div");
+            bannerDiv.id = CONTAINER_ID;
+            document.body.appendChild(bannerDiv);
+        }
+
+        // Apply classes and attributes
+        bannerDiv.className = "tc-notification-banner";
+        
+        // ACCESSIBILITY CHANGE: 
+        // We use role="region" instead of "alertdialog" to prevent it from being treated 
+        // as a modal. This ensures it does not conflict with the Map Modal or Skip Link.
+        // The 'aria-live' attribute on the container (in HTML) handles the announcement.
+        bannerDiv.setAttribute("role", "region"); 
+        bannerDiv.setAttribute("aria-label", "Terms of Service Notification");
+        
+        // Connect the container to the description text explicitly
+        bannerDiv.setAttribute("aria-describedby", DESCRIPTION_ID);
+        
+        // Inject Content
+        bannerDiv.innerHTML = htmlContent;
 
         // Bind Event Listener
         const btn = document.getElementById('tc-accept-btn');
         if (btn) {
-            // Focus Management: Auto-focus the button on mount
-            setTimeout(() => {
-                btn.focus();
-            }, 100);
+            // NOTE: Auto-focus removed to preserve 'Skip to Main Content' functionality (RF-1)
+            // and prevent conflicts with Map Modals (RF-25).
 
             btn.addEventListener('click', function() {
                 try {
                     localStorage.setItem(STORAGE_KEY, 'true');
                     
-                    // Remove banner
-                    bannerDiv.remove();
+                    // Remove banner content/styling but leave container if it was in HTML
+                    bannerDiv.innerHTML = '';
+                    bannerDiv.className = '';
+                    bannerDiv.removeAttribute("role");
+                    bannerDiv.removeAttribute("aria-label");
+                    bannerDiv.removeAttribute("aria-describedby");
+                    
+                    // If we created it dynamically, remove it entirely. 
+                    // If it was in HTML, we leave the empty node to maintain DOM stability.
+                    if (!document.getElementById(CONTAINER_ID)) {
+                        bannerDiv.remove(); 
+                    }
                 } catch (e) {
                     console.error('T&C Banner: Could not save to localStorage', e);
                 }

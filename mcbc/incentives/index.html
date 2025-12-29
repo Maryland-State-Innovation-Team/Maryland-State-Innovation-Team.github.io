@@ -215,11 +215,11 @@
         }
 
         /* 2. Prevent the main table from increasing the app width — allow horizontal scroll on small screens */
-        div[tabindex="0"] {
+        .table-scroll-container {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
-        div[tabindex="0"] .usa-table {
+        .table-scroll-container .usa-table {
             width: 100%;
             max-width: 100%;
             min-width: 0; /* allow table cells to shrink / wrap where appropriate */
@@ -646,6 +646,18 @@
                 flex: 0 0 auto; /* Don't shrink */
             }
 
+            /* Ensure the inner content wrapper grows to fill the space between header and footer.
+            We set min-height: 0 and overflow: hidden to prevent it from breaking out of the flex container,
+            allowing the child .scrollable-filters to handle the actual scrolling.
+            */
+            #filters-inner-content {
+                flex: 1 1 auto;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                min-height: 0;
+            }
+
             /* The accordion container needs to grow to fill the middle space and scroll independently */
             .scrollable-filters {
                 flex: 1 1 auto;
@@ -780,6 +792,38 @@
             padding-top: 0.25rem;
             padding-bottom: 0.25rem;
         }
+
+        .usa-banner__button {
+            cursor: pointer;
+        }
+        /* --- ACCESSIBILITY UTILITIES --- */
+        .visually-hidden {
+            position: absolute !important;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            width: 1px;
+            height: 1px;
+            white-space: nowrap; /* Prevent line breaks */
+        }
+        
+        /* When focused, return to the document flow to push content down */
+        .focusable:focus {
+            position: relative !important;
+            width: fit-content !important; 
+            height: auto;
+            clip: auto;
+            overflow: visible;
+            white-space: normal;
+            
+            /* Visual Styling */
+            display: block;
+            background-color: #ffffff;
+            color: #005ea2;
+            padding: 0.5rem 1rem;
+            text-decoration: underline;
+            font-weight: 700;
+            z-index: auto;
+        }
     </style>
     <script>
         // 1. Initialize dataLayer and gtag immediately (Safe Shim)
@@ -815,7 +859,9 @@
     </script>
 </head>
 <body>
-
+    <a href="#main-content" class="visually-hidden focusable">
+       Skip to main content
+    </a>
     <div class="usa-banner-container">
         <section class="usa-banner" aria-label="Official website of the State of Maryland">
             <div class="usa-accordion">
@@ -826,10 +872,12 @@
                         </div>
                         <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
                             <p class="usa-banner__header-text">An official website of the State of Maryland</p>
-                            <p class="usa-banner__header-action">Here’s how you know</p>
                         </div>
-                        <button type="button" class="usa-accordion__button usa-banner__button" aria-controls="gov-banner-default" aria-expanded="false">
-                            <span class="usa-banner__button-text">Here’s how you know</span>
+                        <button type="button" class="usa-banner__button" aria-expanded="false" aria-controls="gov-banner-default">
+                            Here’s how you know
+                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor" aria-hidden="true" focusable="false">
+                                <path d="M576-253.85 349.85-480 576-706.15 613.15-669l-189 189 189 189L576-253.85Z"></path>
+                            </svg>
                         </button>
                     </div>
                 </header>
@@ -859,16 +907,16 @@
                 <div class="usa-navbar">
                     <div class="usa-logo custom-logo" id="basic-logo">
                         <div class="usa-logo__text">
-                            <a href="../" title="Home" aria-label="Home">
-                                <img src="../assets/mdwds_logo_notext.svg" alt="Maryland Business Compass Logo">
-                                <span>Maryland Community<br>Business Compass</span>
+                            <a href="../" title="Home">
+                                <img src="../assets/mdwds_logo_notext.svg" alt="">
+                                <span>Maryland Community<br>Business Compass<span class="visually-hidden"> Home</span></span>
                             </a>
                         </div>
                     </div>
                     <button type="button" class="usa-menu-btn">Menu</button>
                 </div>
                 <nav aria-label="Primary navigation" class="usa-nav">
-                    <button type="button" class="usa-nav__close"></button>
+                    <button type="button" class="usa-nav__close" aria-label="Close Menu"></button>
                     <ul class="usa-nav__primary usa-accordion">
                         <li class="usa-nav__primary-item">
                             <a href="../" class="usa-nav__link"><span>Home</span></a>
@@ -887,7 +935,9 @@
             </div>
         </header>
 
-        <main id="main-content">
+        <div id="md-tos-banner-container" aria-live="polite"></div>
+
+        <main id="main-content" tabindex="-1" class="focus-outline-none">
             <noscript>
                 <section class="usa-section padding-y-4">
                     <div class="grid-container">
@@ -981,7 +1031,7 @@
 
                         <div class="desktop:grid-col-9">
                             <div id="results-container" class="display-flex flex-justify-between flex-align-center margin-bottom-1">
-                                <p id="results-count" class="font-sans-sm text-base">Loading results...</p>
+                                <p id="results-count" class="font-sans-sm text-base" role="status" aria-live="polite">Loading results...</p>
                                 <button id="download-csv-btn" class="usa-button usa-button--outline" aria-label="Download List">
                                     <span class="download-text">Download</span>
                                     <svg class="usa-icon margin-left-05" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">
@@ -990,7 +1040,7 @@
                                 </button>
                             </div>
 
-                            <div tabindex="0" class="table-scroll-container">
+                            <div class="table-scroll-container">
                                 <table class="usa-table usa-table--striped width-full">
                                     <caption class="usa-sr-only">Incentives search results table</caption>
                                     <thead>
@@ -1092,7 +1142,7 @@
                 
                 <section aria-labelledby="agency-footer" class="maryland-footer__section">
                     <div class="maryland-footer__agency">
-                        <img class="maryland-footer__agency-logo" src="../assets/innovation-website-logo-light.png" alt="Maryland State Innovation Team Logo" style="height: 50px; width: auto;">
+                        <img class="maryland-footer__agency-logo" src="../assets/innovation-website-logo-light.png" alt="The office of Governor Wes Moore Innovation Team logo" style="height: 50px; width: auto;">
                         <h3 class="maryland-footer__agency-name" id="agency-footer">
                             Maryland State Innovation Team
                         </h3>
@@ -1124,7 +1174,7 @@
                                 <ul class="maryland-footer__link-group-list">
                                     <li>6 Saint Paul Street, Baltimore, MD 21202</li>
                                     <li><a href="mailto:compass@maryland.gov">compass@maryland.gov</a></li>
-                                    <li><a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank">Visit Our Website</a></li>
+                                    <li><a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank">Visit the Innovation Team Website</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1142,6 +1192,9 @@
                                 </li>
                                 <li>
                                     <a href="../how-this-site-works/">How This Site Works</a>
+                                </li>
+                                <li>
+                                    <a href="../sitemap/">Sitemap</a>
                                 </li>
                             </ul>
                         </nav>
@@ -1267,6 +1320,7 @@
             let allIncentives = [];
             let lastListScrollPosition = 0;
             let displayedIncentives = [];
+            let isInitialLoad = true;
             const activeFilters = {
                 searchTerm: '',
                 counties: new Set(),
@@ -1410,11 +1464,16 @@
                 applyFilters();
 
                 // Add focus management
+                // We only move focus if this is NOT the initial load. 
+                // On initial load, we must let the user start at the top of the document to find the "Skip to main content" link.
                 const listHeading = document.getElementById('list-view-title');
-                if (listHeading) {
+                if (listHeading && !isInitialLoad) {
                     // preventScroll ensures the browser doesn't jump to top before we restore position
                     listHeading.focus({ preventScroll: true });
                 }
+
+                // If this was the first load, toggle the flag so future navigations (e.g. Back button) DO manage focus.
+                if (isInitialLoad) isInitialLoad = false;
 
                 // Restore previous scroll position
                 if (lastListScrollPosition > 0) {
@@ -1435,10 +1494,14 @@
                 window.scrollTo(0, 0);
 
                 // Add focus management
+                // We suppress focus on initial load to preserve the "Skip to main content" flow.
                 const detailHeading = document.getElementById('detail-title');
-                if (detailHeading) {
+                if (detailHeading && !isInitialLoad) {
                     detailHeading.focus();
                 }
+
+                // If this was the first load (deep link), toggle the flag.
+                if (isInitialLoad) isInitialLoad = false;
             }
             
             function renderFilterUI() {
@@ -1475,7 +1538,10 @@
                 const count = document.querySelectorAll(`#filters-sidebar input[data-filter-key="${filterKey}"]:checked`).length;
                 const el = document.querySelector(`.filter-count[data-count-for="${filterKey}"]`);
                 if (!el) return;
-                el.textContent = count;
+                
+                // Update with accessible text structure
+                el.innerHTML = `<span aria-hidden="true">${count}</span><span class="visually-hidden">${count} filters selected</span>`;
+                
                 if (count > 0) el.classList.remove('hidden'); else el.classList.add('hidden');
             }
 
@@ -1493,7 +1559,10 @@
                     tagsHtml += `
                         <span class="md-tag">
                             Keyword: ${activeFilters.searchTerm}
-                            <button data-action="clear-search" aria-label="Remove keyword filter">&times;</button>
+                            <button data-action="clear-search">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="visually-hidden">Remove keyword filter</span>
+                            </button>
                         </span>
                     `;
                 }
@@ -1505,7 +1574,10 @@
                             tagsHtml += `
                                 <span class="md-tag" data-filter-key="${key}">
                                     ${value}
-                                    <button data-filter-key="${key}" data-value="${value}" aria-label="Remove ${value} filter">&times;</button>
+                                    <button data-filter-key="${key}" data-value="${value}">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="visually-hidden">Remove ${value} filter</span>
+                                    </button>
                                 </span>
                             `;
                         });
@@ -2001,15 +2073,13 @@
                 const html = featuredItems.map(item => {
                     const data = item.structured_extraction;
                     const imgUrl = data.featured_img || '../assets/mdwds_logo_notext.svg';
-                    // Use the alt text from JSON, or fallback to a descriptive default
-                    const imgAlt = data.featured_img_alt || `Image for ${data.program_name}`;
-
+                    // Description logic
                     const description = data.featured_description || item.summary || data.program_description || '';
 
                     return `
                         <div class="desktop:grid-col-6 margin-bottom-2 desktop:margin-bottom-0">
                             <a href="#/incentive/${item.slug}" class="featured-card" aria-label="Featured Opportunity: ${data.program_name}">
-                                <div class="featured-card-image" style="background-image: url('${imgUrl}');" role="img" aria-label="${imgAlt}"></div>
+                                <div class="featured-card-image" style="background-image: url('${imgUrl}');"></div>
                                 <div class="featured-card-content">
                                     <span class="featured-eyebrow">Featured Funding Opportunity</span>
                                     <div class="featured-title">${data.program_name}</div>

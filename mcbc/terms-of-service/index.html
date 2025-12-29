@@ -201,6 +201,10 @@
             padding-bottom: 0.25rem;
         }
 
+        .usa-banner__button {
+            cursor: pointer;
+        }
+
         #legal-content-container a {
             color: #005ea2;
             text-decoration: underline;
@@ -211,6 +215,41 @@
            ------------------------------------------------------------------ */
         .no-js #tos-acknowledgement {
             display: none !important;
+        }
+
+        /* --- ACCESSIBILITY UTILITIES --- */
+        .visually-hidden {
+            position: absolute !important;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            width: 1px;
+            height: 1px;
+            white-space: nowrap; /* Prevent line breaks */
+        }
+        
+        /* When focused, return to the document flow to push content down */
+        .focusable:focus {
+            position: relative !important;
+            width: fit-content !important; 
+            height: auto;
+            clip: auto;
+            overflow: visible;
+            white-space: normal;
+            
+            /* Visual Styling */
+            display: block;
+            background-color: #ffffff;
+            color: #005ea2;
+            padding: 0.5rem 1rem;
+            text-decoration: underline;
+            font-weight: 700;
+            z-index: auto;
+        }
+
+        /* Utility to hide focus ring on non-interactive targets */
+        .focus-outline-none:focus {
+            outline: none !important;
+            box-shadow: none !important; 
         }
     </style>
     <script>
@@ -247,7 +286,9 @@
     </script>
 </head>
 <body>
-
+    <a href="#main-content" class="visually-hidden focusable">
+       Skip to main content
+    </a>
     <div class="usa-banner-container">
         <section class="usa-banner" aria-label="Official website of the State of Maryland">
             <div class="usa-accordion">
@@ -258,10 +299,12 @@
                         </div>
                         <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
                             <p class="usa-banner__header-text">An official website of the State of Maryland</p>
-                            <p class="usa-banner__header-action">Here’s how you know</p>
                         </div>
-                        <button type="button" class="usa-accordion__button usa-banner__button" aria-controls="gov-banner-default" aria-expanded="false">
-                            <span class="usa-banner__button-text">Here’s how you know</span>
+                        <button type="button" class="usa-banner__button" aria-expanded="false" aria-controls="gov-banner-default">
+                            Here’s how you know
+                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor" aria-hidden="true" focusable="false">
+                                <path d="M576-253.85 349.85-480 576-706.15 613.15-669l-189 189 189 189L576-253.85Z"></path>
+                            </svg>
                         </button>
                     </div>
                 </header>
@@ -290,16 +333,16 @@
             <div class="usa-navbar">
                 <div class="usa-logo custom-logo" id="basic-logo">
                     <div class="usa-logo__text">
-                        <a href="../" title="Home" aria-label="Home">
-                            <img src="../assets/mdwds_logo_notext.svg" alt="Maryland Community Business Compass Logo">
-                            <span>Maryland Community<br>Business Compass</span>
+                        <a href="../" title="Home">
+                            <img src="../assets/mdwds_logo_notext.svg" alt="">
+                            <span>Maryland Community<br>Business Compass<span class="visually-hidden"> Home</span></span>
                         </a>
                     </div>
                 </div>
                 <button type="button" class="usa-menu-btn">Menu</button>
             </div>
             <nav aria-label="Primary navigation" class="usa-nav">
-                <button type="button" class="usa-nav__close"></button>
+                <button type="button" class="usa-nav__close" aria-label="Close Menu"></button>
                 <ul class="usa-nav__primary usa-accordion">
                     <li class="usa-nav__primary-item">
                             <a href="../" class="usa-nav__link"><span>Home</span></a>
@@ -318,7 +361,7 @@
         </div>
     </header>
 
-    <main id="main-content">
+    <main id="main-content" tabindex="-1" class="focus-outline-none">
         
         <section class="legal-header">
             <div class="grid-container">
@@ -389,31 +432,31 @@
                                 <h2 class="font-serif-xl text-primary-darker">1. Disclaimers and Limitation of Liability</h2>
                                 <p>Please read this section carefully. The information provided through this Website is for general informational purposes only and does not constitute legal advice or professional guidance.</p>
                                 
-                                <p class="text-uppercase text-bold margin-top-2">
+                                <strong class="text-uppercase text-bold display-block margin-top-2">
                                     THIS WEBSITE, INCLUDING BUT NOT LIMITED TO ANY AI FEATURES OR OUTPUTS (AS DEFINED IN SECTION 5), IS PROVIDED “AS IS” AND “AS AVAILABLE” AND TO THE EXTENT PERMITTED BY LAW WITHOUT WARRANTIES OF ANY KIND.
-                                </p>
-                                <p class="text-uppercase text-bold">
+                                </strong>
+                                <strong class="text-uppercase text-bold display-block">
                                     THE STATE MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED, ABOUT THE COMPLETENESS, ACCURACY, NON-INFRINGEMENT, OR RELIABILITY OF THE INFORMATION OR ITS SUITABILITY FOR OR APPLICABILITY TO YOUR CIRCUMSTANCES.
-                                </p>
-                                <p class="text-uppercase text-bold">
+                                </strong>
+                                <strong class="text-uppercase text-bold display-block">
                                     WE MAKE NO REPRESENTATION OR WARRANTY THAT THE WEBSITE WILL BE AVAILABLE ON AN UNINTERRUPTED, TIMELY, SECURE, OR ERROR-FREE BASIS, OR WILL BE ACCURATE RELIABLE, FREE OF VIRUSES OR OTHER HARMFUL CODE, COMPLETE, LEGAL OR SAFE.
-                                </p>
+                                </strong>
                                 
-                                <p class="text-uppercase text-bold">INFORMATION MAY BECOME OUTDATED AND LAWS AND REGULATIONS VARY BY JURISDICTION.</p>
+                                <strong class="text-uppercase text-bold display-block">INFORMATION MAY BECOME OUTDATED AND LAWS AND REGULATIONS VARY BY JURISDICTION.</strong>
 
-                                <p class="text-uppercase text-bold margin-top-2">
+                                <strong class="text-uppercase text-bold display-block margin-top-2">
                                     YOU ASSUME ALL RISK ASSOCIATED WITH THE USE OF THIS INFORMATION AND ARE SOLELY RESPONSIBLE FOR EVALUATING WHETHER IT IS APPLICABLE TO YOUR SPECIFIC CIRCUMSTANCES AND FOR VERIFYING ANY INFORMATION BEFORE RELYING ON IT.
-                                </p>
-                                <p class="text-uppercase text-bold">
+                                </strong>
+                                <strong class="text-uppercase text-bold display-block">
                                     YOU ASSUME ALL RISK ASSOCIATED WITH THE USE OF THIS INFORMATION AND SHOULD SEEK APPROPRIATE LEGAL ADVICE OR PROFESSIONAL GUIDANCE BEFORE ACTING OR REFRAINING FROM ACTING BASED ON THE INFORMATION PROVIDED.
-                                </p>
-                                <p class="text-uppercase text-bold">
+                                </strong>
+                                <strong class="text-uppercase text-bold display-block">
                                     WITH REGARD TO ANY AI FEATURES OR OUTPUTS, YOUR USE OF AI FEATURES AND OUTPUTS IS AT YOUR OWN RISK, AND YOU SHOULD NOT RELY ON THEM FOR ANY PURPOSE, INCLUDING TO MAKE DECISIONS OR FOR PROFESSIONAL, MEDICAL, LEGAL, FINANCIAL, EDUCATIONAL OR OTHER ADVICE. OUTPUTS ARE NOT THE STATE’S REPRESENTATIONS.
-                                </p>
+                                </strong>
 
-                                <p class="text-uppercase text-bold margin-top-2">
+                                <strong class="text-uppercase text-bold display-block margin-top-2">
                                     TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL LIABILITY FOR ANY LOSS, DAMAGE, OR INJURY RESULTING FROM ANY RELIANCE ON INFORMATION PROVIDED, INCLUDING BUT NOT LIMITED TO DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES.
-                                </p>
+                                </strong>
                                 <hr class="usa-divider margin-y-4">
                             </div>
 
@@ -495,7 +538,7 @@
             
             <section aria-labelledby="agency-footer" class="maryland-footer__section">
                 <div class="maryland-footer__agency">
-                    <img class="maryland-footer__agency-logo" src="../assets/innovation-website-logo-light.png" alt="Maryland State Innovation Team Logo" style="height: 50px; width: auto;">
+                    <img class="maryland-footer__agency-logo" src="../assets/innovation-website-logo-light.png" alt="The office of Governor Wes Moore Innovation Team logo" style="height: 50px; width: auto;">
                     <h3 class="maryland-footer__agency-name" id="agency-footer">
                         Maryland State Innovation Team
                     </h3>
@@ -527,7 +570,7 @@
                             <ul class="maryland-footer__link-group-list">
                                 <li>6 Saint Paul Street, Baltimore, MD 21202</li>
                                 <li><a href="mailto:compass@maryland.gov">compass@maryland.gov</a></li>
-                                <li><a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank">Visit Our Website</a></li>
+                                <li><a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank">Visit the Innovation Team Website</a></li>
                             </ul>
                         </div>
                     </div>
@@ -545,6 +588,9 @@
                                 </li>
                                 <li>
                                     <a href="../how-this-site-works/">How This Site Works</a>
+                                </li>
+                                <li>
+                                    <a href="../sitemap/">Sitemap</a>
                                 </li>
                             </ul>
                         </nav>

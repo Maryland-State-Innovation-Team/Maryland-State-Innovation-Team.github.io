@@ -1474,7 +1474,7 @@
     "agency": "Maryland Department of Housing and Community Development (DHCD)",
     "summary": "The NourishMD Grant Program expands access to healthy and fresh foods in Maryland communities experiencing food insecurity by providing direct grants to eligible retailers.",
     "application_due": "February 20 @ 5:00 p.m. EST",
-    "more_details_url": "https://dhcd.maryland.gov/business",
+    "more_details_url": "https://dhcd.maryland.gov/Business/Pages/NourishMD-Grant-Program.aspx",
     "contact_name": null,
     "contact_email": "nourishmd@maryland.gov",
     "contact_phone": "1-800-756-0119",
@@ -1484,7 +1484,6 @@
     "structured_extraction": {
       "featured": true,
       "featured_img": "../assets/nourish-md-compressed.jpg",
-      "featured_img_alt": "A woman shopping for fresh fruit in a grocery store produce section.",
       "featured_description": "Grants of up to $150,000 to support capital-related needs for grocery stores and markets in areas with limited healthy food access.",
       "program_name": "NourishMD Grant Program",
       "program_description": "The NourishMD Grant Program expands access to fresh foods in food-insecure communities. It provides grants to eligible food retailers to support operations and improvements.",
@@ -1514,7 +1513,7 @@
         "grant"
       ],
       "assistance_description": "The program awards grants between $25,000 and $150,000. A total of up to $2 million is available for funding.",
-      "URL": "https://dhcd.maryland.gov/business",
+      "URL": "https://dhcd.maryland.gov/Business/Pages/NourishMD-Grant-Program.aspx",
       "application_deadline_string": "February 20 @ 5:00 p.m. EST",
       "application_deadline_date": "2026-02-20",
       "contact_name": null,
@@ -1553,7 +1552,6 @@
     "structured_extraction": {
       "featured": true,
       "featured_img": "../assets/revolving-loan-fund-compressed.jpg",
-      "featured_img_alt": "A caregiver making paper crafts with children in a child care setting.",
       "featured_description": "No-interest loans for capital expenses to child care providers who participate in the Child Care Scholarship Program.",
       "program_name": "Child Care Capital Support Revolving Loan Fund",
       "program_description": "The Maryland Department of Commerce manages this fund. It offers no-interest loans to child care providers for capital expenses. To qualify, providers must participate in the State Department of Education's Child Care Scholarship Program.",
