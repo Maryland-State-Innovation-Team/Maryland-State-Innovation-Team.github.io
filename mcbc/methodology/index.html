@@ -188,6 +188,7 @@
             color: #565c65;
             font-weight: 700;
             margin-bottom: 0.25rem;
+            margin-top: 0;
         }
         
         /* Accordion Customization */
@@ -211,6 +212,45 @@
             min-height: 0;
             padding-top: 0.25rem;
             padding-bottom: 0.25rem;
+        }
+
+        .usa-banner__button {
+            cursor: pointer;
+        }
+
+        /* --- ACCESSIBILITY UTILITIES --- */
+        .visually-hidden {
+            position: absolute !important;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            width: 1px;
+            height: 1px;
+            white-space: nowrap; /* Prevent line breaks */
+        }
+        
+        /* When focused, return to the document flow to push content down */
+        .focusable:focus {
+            position: relative !important;
+            width: fit-content !important; 
+            height: auto;
+            clip: auto;
+            overflow: visible;
+            white-space: normal;
+            
+            /* Visual Styling */
+            display: block;
+            background-color: #ffffff;
+            color: #005ea2;
+            padding: 0.5rem 1rem;
+            text-decoration: underline;
+            font-weight: 700;
+            z-index: auto;
+        }
+
+        /* Utility to hide focus ring on non-interactive targets */
+        .focus-outline-none:focus {
+            outline: none !important;
+            box-shadow: none !important; 
         }
     </style>
     <script>
@@ -247,7 +287,9 @@
     </script>
 </head>
 <body>
-
+    <a href="#main-content" class="visually-hidden focusable">
+       Skip to main content
+    </a>
     <div class="usa-banner-container">
         <section class="usa-banner" aria-label="Official website of the State of Maryland">
             <div class="usa-accordion">
@@ -258,10 +300,12 @@
                         </div>
                         <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
                             <p class="usa-banner__header-text">An official website of the State of Maryland</p>
-                            <p class="usa-banner__header-action">Here’s how you know</p>
                         </div>
-                        <button type="button" class="usa-accordion__button usa-banner__button" aria-controls="gov-banner-default" aria-expanded="false">
-                            <span class="usa-banner__button-text">Here’s how you know</span>
+                        <button type="button" class="usa-banner__button" aria-expanded="false" aria-controls="gov-banner-default">
+                            Here’s how you know
+                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor" aria-hidden="true" focusable="false">
+                                <path d="M576-253.85 349.85-480 576-706.15 613.15-669l-189 189 189 189L576-253.85Z"></path>
+                            </svg>
                         </button>
                     </div>
                 </header>
@@ -290,16 +334,16 @@
             <div class="usa-navbar">
                 <div class="usa-logo custom-logo" id="basic-logo">
                     <div class="usa-logo__text">
-                        <a href="../" title="Home" aria-label="Home">
-                            <img src="../assets/mdwds_logo_notext.svg" alt="Maryland Community Business Compass Logo">
-                            <span>Maryland Community<br>Business Compass</span>
+                        <a href="../" title="Home">
+                            <img src="../assets/mdwds_logo_notext.svg" alt="">
+                            <span>Maryland Community<br>Business Compass<span class="visually-hidden"> Home</span></span>
                         </a>
                     </div>
                 </div>
                 <button type="button" class="usa-menu-btn">Menu</button>
             </div>
             <nav aria-label="Primary navigation" class="usa-nav">
-                <button type="button" class="usa-nav__close"></button>
+                <button type="button" class="usa-nav__close" aria-label="Close Menu"></button>
                 <ul class="usa-nav__primary usa-accordion">
                     <li class="usa-nav__primary-item">
                             <a href="../" class="usa-nav__link"><span>Home</span></a>
@@ -318,7 +362,9 @@
         </div>
     </header>
 
-    <main id="main-content">
+    <div id="md-tos-banner-container" aria-live="polite"></div>
+
+    <main id="main-content" tabindex="-1" class="focus-outline-none">
         
         <section class="methodology-header">
             <div class="grid-container">
@@ -380,6 +426,7 @@
                                 <div id="data-sources-content" class="usa-accordion__content" hidden>
                                     <div class="usa-table-container--scrollable" tabindex="0">
                                         <table class="usa-table usa-table--borderless width-full" id="data-sources-table">
+                                            <caption class="usa-sr-only">Data Sources by Indicator</caption>
                                             <thead>
                                                 <tr>
                                                     <th scope="col" style="width: 40%;">Indicator / Layer Name</th>
@@ -409,7 +456,7 @@
             
             <section aria-labelledby="agency-footer" class="maryland-footer__section">
                 <div class="maryland-footer__agency">
-                    <img class="maryland-footer__agency-logo" src="../assets/innovation-website-logo-light.png" alt="Maryland State Innovation Team Logo" style="height: 50px; width: auto;">
+                    <img class="maryland-footer__agency-logo" src="../assets/innovation-website-logo-light.png" alt="The office of Governor Wes Moore Innovation Team logo" style="height: 50px; width: auto;">
                     <h3 class="maryland-footer__agency-name" id="agency-footer">
                         Maryland State Innovation Team
                     </h3>
@@ -441,7 +488,7 @@
                             <ul class="maryland-footer__link-group-list">
                                 <li>6 Saint Paul Street, Baltimore, MD 21202</li>
                                 <li><a href="mailto:compass@maryland.gov">compass@maryland.gov</a></li>
-                                <li><a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank">Visit Our Website</a></li>
+                                <li><a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank">Visit the Innovation Team Website</a></li>
                             </ul>
                         </div>
                     </div>
@@ -459,6 +506,9 @@
                                 </li>
                                 <li>
                                     <a href="../how-this-site-works/">How This Site Works</a>
+                                </li>
+                                <li>
+                                    <a href="../sitemap/">Sitemap</a>
                                 </li>
                             </ul>
                         </nav>
@@ -622,13 +672,13 @@
                         <div class="grid-row grid-gap">
                             <div class="tablet:grid-col-4" style="display: flex; flex-direction: column;">
                                 <div class="data-source-box" style="flex: 1;">
-                                    <div class="data-source-title">Data Source</div>
+                                    <h3 class="data-source-title">Data Source</h3>
                                     <p class="font-sans-sm margin-bottom-0">${item.dataSource}</p>
                                 </div>
                             </div>
                             <div class="tablet:grid-col-8" style="display: flex; flex-direction: column;">
                                 <div class="data-source-box" style="border-left-color: #e5a000; flex: 1;">
-                                    <div class="data-source-title">What this means</div>
+                                    <h3 class="data-source-title">What this means</h3>
                                     <p class="font-sans-sm margin-bottom-0">${item.whatItMeans}</p>
                                 </div>
                             </div>

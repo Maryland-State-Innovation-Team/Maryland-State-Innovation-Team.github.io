@@ -391,7 +391,6 @@
             font-size: 0.875rem;
             font-weight: 700;
             margin-top: 0.5rem;
-            visibility: hidden;
             min-height: 1.5em; /* Ensures the height is reserved even if empty */
         }
 
@@ -540,9 +539,6 @@
         .error-border {
             border: 2px solid #b50909 !important;
         }
-        .error-text-visible {
-            visibility: visible !important;
-        }
 
         /* Responsive Error Text Positioning */
         #view-results .form-col-topics {
@@ -684,6 +680,45 @@
             padding-top: 0.25rem;
             padding-bottom: 0.25rem;
         }
+
+        .usa-banner__button {
+            cursor: pointer;
+        }
+
+        /* --- ACCESSIBILITY UTILITIES --- */
+        .visually-hidden {
+            position: absolute !important;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            width: 1px;
+            height: 1px;
+            white-space: nowrap; /* Prevent line breaks */
+        }
+        
+        /* When focused, return to the document flow to push content down */
+        .focusable:focus {
+            position: relative !important;
+            width: fit-content !important; 
+            height: auto;
+            clip: auto;
+            overflow: visible;
+            white-space: normal;
+            
+            /* Visual Styling */
+            display: block;
+            background-color: #ffffff;
+            color: #005ea2;
+            padding: 0.5rem 1rem;
+            text-decoration: underline;
+            font-weight: 700;
+            z-index: auto;
+        }
+
+        /* Utility to hide focus ring on non-interactive targets */
+        .focus-outline-none:focus {
+            outline: none !important;
+            box-shadow: none !important; 
+        }
     </style>
     <script>
         // 1. Initialize dataLayer and gtag immediately (Safe Shim)
@@ -727,7 +762,9 @@
     </noscript>
 </head>
 <body>
-
+    <a href="#main-content" class="visually-hidden focusable">
+       Skip to main content
+    </a>
     <div class="usa-banner-container">
         <section class="usa-banner" aria-label="Official website of the State of Maryland">
             <div class="usa-accordion">
@@ -738,10 +775,12 @@
                         </div>
                         <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
                             <p class="usa-banner__header-text">An official website of the State of Maryland</p>
-                            <p class="usa-banner__header-action">Here’s how you know</p>
                         </div>
-                        <button type="button" class="usa-accordion__button usa-banner__button" aria-controls="gov-banner-default" aria-expanded="false">
-                            <span class="usa-banner__button-text">Here’s how you know</span>
+                        <button type="button" class="usa-banner__button" aria-expanded="false" aria-controls="gov-banner-default">
+                            Here’s how you know
+                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor" aria-hidden="true" focusable="false">
+                                <path d="M576-253.85 349.85-480 576-706.15 613.15-669l-189 189 189 189L576-253.85Z"></path>
+                            </svg>
                         </button>
                     </div>
                 </header>
@@ -771,16 +810,16 @@
                 <div class="usa-navbar">
                     <div class="usa-logo custom-logo" id="basic-logo">
                         <div class="usa-logo__text">
-                            <a href="../" title="Home" aria-label="Home">
-                                <img src="../assets/mdwds_logo_notext.svg" alt="Maryland Business Compass Logo">
-                                <span>Maryland Community<br>Business Compass</span>
+                            <a href="../" title="Home">
+                                <img src="../assets/mdwds_logo_notext.svg" alt="">
+                                <span>Maryland Community<br>Business Compass<span class="visually-hidden"> Home</span></span>
                             </a>
                         </div>
                     </div>
                     <button type="button" class="usa-menu-btn">Menu</button>
                 </div>
                 <nav aria-label="Primary navigation" class="usa-nav">
-                    <button type="button" class="usa-nav__close"></button>
+                    <button type="button" class="usa-nav__close" aria-label="Close Menu"></button>
                     <ul class="usa-nav__primary usa-accordion">
                         <li class="usa-nav__primary-item">
                             <a href="../" class="usa-nav__link"><span>Home</span></a>
@@ -799,7 +838,7 @@
             </div>
         </header>
 
-        <main id="main-content">
+        <main id="main-content" tabindex="-1" class="focus-outline-none">
             <noscript>
                 <section class="usa-section padding-y-4">
                     <div class="grid-container">
@@ -834,7 +873,7 @@
                                         <div class="search-grid">
                                             <div class="usa-form-group margin-top-0">
                                                 <label class="search-label" for="initial-industry">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b" aria-hidden="true"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg>
                                                     Industry
                                                 </label>
                                                 <select class="search-select" id="initial-industry">
@@ -844,7 +883,7 @@
 
                                             <div class="usa-form-group margin-top-0">
                                                 <label class="search-label" for="initial-location">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b" aria-hidden="true"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
                                                     Location
                                                 </label>
                                                 <select class="search-select" id="initial-location">
@@ -854,25 +893,25 @@
 
                                             <div class="usa-form-group margin-top-0 search-grid-full">
                                                 <label class="search-label">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b"><path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
-                                                    Help Topic
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b" aria-hidden="true"><path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+                                                    Help Topic <span style="color: #b50909; margin-left: 4px;" title="Required">*</span>
                                                 </label>
                                                 
                                                 <div class="custom-multiselect" id="ms-container-initial">
-                                                    <button type="button" class="multiselect-trigger" id="ms-trigger-initial" aria-haspopup="listbox" aria-expanded="false">
+                                                    <button type="button" class="multiselect-trigger" id="ms-trigger-initial" aria-haspopup="listbox" aria-expanded="false" aria-required="true">
                                                         Select your topic(s)
                                                     </button>
                                                     <div class="multiselect-options" id="ms-options-initial" role="listbox">
                                                         </div>
                                                 </div>
-                                                <div id="error-initial" class="error-text">Please select at least one topic</div>
+                                                <div id="error-initial" class="error-text" role="alert" aria-live="assertive" aria-atomic="true"></div>
                                             </div>
                                         </div>
                                         
                                         <div class="card-footer-row">
                                             <button type="button" id="reset-initial" class="usa-button usa-button--unstyled text-bold text-primary">Reset</button>
                                             <button style="padding-left:15px" type="submit" id="search-initial" class="usa-button display-flex flex-align-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" height="18px" width="18px"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" height="18px" width="18px" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
                                                 Search
                                             </button>
                                         </div>
@@ -882,7 +921,7 @@
 
                         </div>
                         <div class="hero-right">
-                             <img src="../assets/resources-compressed.jpg" alt="An entrepreneur consulting with a business support advisor while reviewing information on a tablet." onerror="this.style.display='none';">
+                             <img src="../assets/resources-compressed.jpg" alt="" onerror="this.style.display='none';">
                         </div>
                     </div>
                 </section>
@@ -896,7 +935,7 @@
                                 <div class="compact-search-row">
                                     <div class="usa-form-group form-col-industry">
                                         <label class="search-label" for="results-industry">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b" aria-hidden="true"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg>
                                             Industry
                                         </label>
                                         <select class="search-select" id="results-industry">
@@ -906,7 +945,7 @@
 
                                     <div class="usa-form-group form-col-location">
                                         <label class="search-label" for="results-location">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b" aria-hidden="true"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
                                             Location
                                         </label>
                                         <select class="search-select" id="results-location">
@@ -916,24 +955,24 @@
 
                                     <div class="usa-form-group form-col-topics">
                                         <label class="search-label">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b"><path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
-                                            Help Topic
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#1b1b1b" aria-hidden="true"><path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+                                            Help Topic <span style="color: #b50909; margin-left: 4px;" title="Required">*</span>
                                         </label>
                                         <div class="custom-multiselect" id="ms-container-results">
-                                            <button type="button" class="multiselect-trigger" id="ms-trigger-results" aria-haspopup="listbox" aria-expanded="false">
+                                            <button type="button" class="multiselect-trigger" id="ms-trigger-results" aria-haspopup="listbox" aria-expanded="false" aria-required="true">
                                                 Select your topic(s)
                                             </button>
                                             <div class="multiselect-options" id="ms-options-results" role="listbox">
                                                 </div>
                                         </div>
-                                        <div id="error-results" class="error-text">Please select at least one topic</div>
+                                        <div id="error-results" class="error-text" role="alert" aria-live="assertive" aria-atomic="true"></div>
                                     </div>
                                     
                                     <div class="form-actions">
                                         <button type="button" id="reset-results-mobile" class="usa-button usa-button--unstyled text-bold text-primary tablet:display-none margin-top-1">Reset</button>
                                         <button type="button" id="reset-results" class="usa-button usa-button--unstyled text-bold text-primary display-none tablet:display-inline-block margin-x-2">Reset</button>
                                         <button style="padding-left: 15px;" type="submit" id="search-results" class="usa-button display-flex flex-align-center margin-right-0">
-                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" height="18px" width="18px"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" height="18px" width="18px" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
                                              Search
                                         </button>
                                     </div>
@@ -946,8 +985,9 @@
                 <div class="grid-container margin-bottom-6 padding-0">
                     <div class="grid-row">
                         <div class="tablet:grid-col-12" id="results-container">
+                            <h1 class="visually-hidden">Connect with Experts</h1>
                             <h2 class="font-serif-xl margin-bottom-3">Relevant Resources</h2>
-                            <div id="results-status" class="font-sans-sm margin-bottom-2 text-base"></div>
+                            <div id="results-status" class="font-sans-sm margin-bottom-2 text-base" role="status" aria-live="polite"></div>
                             <div id="resource-list" class="resource-list">
                                 </div>
                         </div>
@@ -957,13 +997,15 @@
         </main>
     </div>
     
+    <div id="md-tos-banner-container" aria-live="polite"></div>
+
     <footer class="maryland-footer" aria-labelledby="footer">
             <h2 id="footer" class="usa-sr-only">Footer</h2>
             <div class="maryland-footer__container">
                 
                 <section aria-labelledby="agency-footer" class="maryland-footer__section">
                     <div class="maryland-footer__agency">
-                        <img class="maryland-footer__agency-logo" src="../assets/innovation-website-logo-light.png" alt="Maryland State Innovation Team Logo" style="height: 50px; width: auto;">
+                        <img class="maryland-footer__agency-logo" src="../assets/innovation-website-logo-light.png" alt="The office of Governor Wes Moore Innovation Team logo" style="height: 50px; width: auto;">
                         <h3 class="maryland-footer__agency-name" id="agency-footer">
                             Maryland State Innovation Team
                         </h3>
@@ -995,7 +1037,7 @@
                                 <ul class="maryland-footer__link-group-list">
                                     <li>6 Saint Paul Street, Baltimore, MD 21202</li>
                                     <li><a href="mailto:compass@maryland.gov">compass@maryland.gov</a></li>
-                                    <li><a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank">Visit Our Website</a></li>
+                                    <li><a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank">Visit the Innovation Team Website</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1013,6 +1055,9 @@
                                 </li>
                                 <li>
                                     <a href="../how-this-site-works/">How This Site Works</a>
+                                </li>
+                                <li>
+                                    <a href="../sitemap/">Sitemap</a>
                                 </li>
                             </ul>
                         </nav>
@@ -1399,16 +1444,41 @@
             function clearErrors() {
                 ['initial', 'results'].forEach(view => {
                     inputs[view].msTrigger.classList.remove('error-border');
-                    inputs[view].errorMsg.classList.remove('error-text-visible');
+                    
+                    // Remove ARIA error states
+                    inputs[view].msTrigger.removeAttribute('aria-describedby');
+                    inputs[view].msTrigger.removeAttribute('aria-invalid');
+                    
+                    // Clear text so it doesn't get read by screen readers
+                    inputs[view].errorMsg.textContent = ""; 
                 });
             }
 
             function validate() {
                 if (state.topics.size === 0) {
                     ['initial', 'results'].forEach(view => {
+                        // Visual Error
                         inputs[view].msTrigger.classList.add('error-border');
-                        inputs[view].errorMsg.classList.add('error-text-visible');
+
+                        // ARIA Error States
+                        inputs[view].msTrigger.setAttribute('aria-invalid', 'true');
+                        inputs[view].msTrigger.setAttribute('aria-describedby', inputs[view].errorMsg.id);
+
+                        // Inject text to trigger "Live Region" announcement
+                        inputs[view].errorMsg.textContent = "Please select at least one topic";
                     });
+
+                    // Move focus to the invalid input so the screen reader immediately
+                    // announces the field label + the error description via aria-describedby.
+                    const isResultsView = !views.results.classList.contains('view-hidden');
+                    const activeView = isResultsView ? 'results' : 'initial';
+                    
+                    // A small timeout ensures the DOM and ARIA attributes update 
+                    // before focus moves, guaranteeing the description is read.
+                    setTimeout(() => {
+                        inputs[activeView].msTrigger.focus();
+                    }, 50);
+
                     return false;
                 }
                 clearErrors();
@@ -1488,12 +1558,10 @@
                 views.results.classList.add('view-hidden');
                 views.initial.classList.remove('view-hidden');
                 resourceList.innerHTML = ''; // Clear list
-                
-                // Accessibility: Move focus back to the main Hero Heading
-                const mainHeading = document.querySelector('#view-initial h1');
-                if (mainHeading) {
-                    mainHeading.setAttribute('tabindex', '-1');
-                    mainHeading.focus();
+
+                // Accessibility: Move focus to the first form field (Industry Select)
+                if (inputs.initial.industry) {
+                    inputs.initial.industry.focus();
                 }
             }
 
@@ -1536,7 +1604,7 @@
                         contactsTableHtml = `
                             <h4 class="font-sans-xs text-uppercase text-base margin-bottom-1 margin-top-2">Organization Contacts</h4>
                             <div class="table-scroll-wrapper" tabindex="0">
-                                <table class="contact-table">
+                                <table class="contact-table" aria-label="Organization contacts for ${item.organization}">
                                     <thead>
                                         <tr>
                                             <th scope="col">Name</th>
@@ -1586,7 +1654,12 @@
                                 ${item.url ? `
                                 <div class="sidebar-section">
                                     <span class="sidebar-label">Website</span>
-                                    <a href="${item.url.startsWith('http') ? item.url : 'https://' + item.url}" target="_blank" rel="noopener" class="sidebar-link">Visit website</a>
+                                    <a href="${item.url.startsWith('http') ? item.url : 'https://' + item.url}" 
+                                       target="_blank" 
+                                       rel="noopener" 
+                                       class="sidebar-link">
+                                       Visit website <span class="visually-hidden">for ${item.organization}</span>
+                                    </a>
                                 </div>` : ''}
                             </div>
                         </article>
