@@ -26,10 +26,19 @@
 
     <main class="dashboard-grid">
       
-      <section class="intro-section" style="margin-bottom: 1rem;">
-        <p style="font-size: 1.1rem; line-height: 1.6; color: #374151;">
-          This dashboard tracks and visualizes reductions in federal funding to Maryland state agencies and organizations following recent federal administrative actions. The data below highlights specific transactions identified as policy-driven rescissions or scope reductions.
+      <section class="intro-section" style="margin-bottom: 2rem;">
+        <p style="font-size: 1.1rem; line-height: 1.6; color: #374151; margin-bottom: 1.5rem;">
+          This dashboard tracks and visualizes reductions in federal funding to Maryland state agencies and organizations following the start of <strong>President Trump's second term</strong>. The visuals below highlight specific transactions identified as <strong>Executive Actions</strong> (policy-driven rescissions or scope reductions) occurring on or after January 20, 2025.
         </p>
+
+        <div style="background-color: #f3f4f6; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #374151;">
+          <a href="data/maryland_federal_cuts_report.csv" download style="display: inline-block; background-color: #374151; color: white; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 6px; font-weight: 600; margin-bottom: 0.75rem;">
+            Download Full Data Report (CSV)
+          </a>
+          <p style="font-size: 0.9rem; color: #4b5563; margin: 0; line-height: 1.5;">
+            <strong>Dataset Note:</strong> This file contains <em>all</em> negative transactions found in the source data, including routine entitlement adjustments (Medicaid/Medicare), contract cancellations, major deobligations, and administrative closeouts that could not be definitively identified as policy-related.
+          </p>
+        </div>
       </section>
 
       <section class="topline-stats" id="topline-container">
@@ -84,22 +93,22 @@
         <div class="methodology-grid">
           <div class="method-col">
             <h4>Data Source</h4>
-            <p>Data is sourced directly from the <strong>USAspending.gov</strong> "Spending by Transaction" API. The analysis targets transactions occurring after <strong>February 1, 2025</strong>, to isolate recent federal administrative actions.</p>
+            <p>Data is sourced directly from the <strong>USAspending.gov</strong> "Spending by Transaction" API. The analysis targets transactions occurring on or after <strong>January 20, 2025</strong>, to isolate actions taken during the Trump Administration's second term.</p>
           </div>
           <div class="method-col">
             <h4>Classification Logic</h4>
             <ul>
-              <li><strong>Tier 1 (Confirmed Cuts):</strong> Transactions explicitly citing "Rescission," "Sequestration," "DOGE," "Scope Reduction," "EO 14222," or "Radical Transparency." Only these are visualized on the map.</li>
-              <li><strong>Tier 2 (Unexplained):</strong> Large de-obligations (>$1M) lacking explanatory keywords. These are flagged for manual review but excluded from dashboard totals to remain conservative.</li>
-              <li><strong>Tier 3 (Routine):</strong> Standard closeouts ("unused funds"), administrative corrections, and accounting adjustments.</li>
+              <li><strong>Executive Action (Visualized):</strong> Transactions explicitly citing keywords such as "Rescission," "DOGE," "Scope Reduction," "EO 14222," or "Radical Transparency." Only these are shown on the dashboard map and totals.</li>
+              <li><strong>Terminations & Deobligations (CSV Only):</strong> Contract cancellations or large withdrawals (>$1M) lacking explanatory keywords. These are included in the full download for transparency but excluded from the dashboard visualization to remain conservative.</li>
+              <li><strong>Routine (CSV Only):</strong> Standard administrative closeouts ("unused funds"), accounting adjustments, and clerical corrections.</li>
             </ul>
           </div>
           <div class="method-col">
-            <h4>Exclusions & Safeguards</h4>
-            <p>To prevent false positives, this dashboard excludes:</p>
+            <h4>Exclusions & Context</h4>
+            <p>To ensure accuracy, the visual dashboard applies strict filters:</p>
             <ul>
-              <li><strong>Generic EO Citations:</strong> Old grants citing historical Executive Orders are ignored unless they reference specific 2025 directives (e.g., EO 14222).</li>
-              <li><strong>Entitlement Programs:</strong> Downward adjustments to Medicaid/Medicare are excluded unless explicitly flagged as "Sequestration" or "Rescission."</li>
+              <li><strong>Entitlements:</strong> Routine downward adjustments to Medicaid, Medicare, and Social Security are classified as "Routine" and excluded from the dashboard unless explicitly flagged as a policy-driven "Sequestration."</li>
+              <li><strong>Historical Data:</strong> Generic citations of older Executive Orders are ignored unless specific 2025 directives are referenced.</li>
             </ul>
           </div>
         </div>
