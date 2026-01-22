@@ -53,7 +53,7 @@
     "title": "Estimated Fresh Food Access Score",
     "description": "A measure of physical access to high-quality grocery stores, adjusted for transportation mobility.",
     "unit": "Percentile from 0-100",
-    "dataSource": "Innovation Team Calculation Based on OpenStreetMap and Census ACS (5-Year Estimates)",
+    "dataSource": "Innovation Team Calculation Based on OpenStreetMap, USDA, and Census ACS (5-Year Estimates)",
     "whatItMeans": "This score measures how accessible full-service supermarkets and fresh produce retailers are to a neighborhood, adjusted for transportation. Only high-quality fresh food retailers are included in this measure, with specialty shops and convenience stores excluded.",
     "techTitle": "Technical Deep Dive: AI Classification & Gravity Models",
     "techContent": "<p><b>AI-Driven Quality Filtering:</b> We use a Large Language Model (LLM) to semantically analyze business names and categories, rating them on their likelihood of selling fresh proteins and produce. </p><p>Crucially, this distinguishes \"Specialty Foods\" (e.g., Bakeries, Pie Shops) and \"Convenience Stores\" from fresh produce retailers. While convenience stores and specialty stores appear on the map for reference, <b>they are excluded from the Access Score calculation.</b> We filter strictly for locations that are primary sources of fresh food to calculate the final access score.</p>"
@@ -83,7 +83,7 @@
     "title": "Fresh Food Gap Score",
     "description": "This score measures the intersection of high food insecurity and low physical access, highlighting areas where the need for fresh food is critical yet unaddressed.",
     "unit": "Percentile from 0-100",
-    "dataSource": "Innovation Team Calculation Based on CDC PLACES (Model-based Estimates) and OpenStreetMap",
+    "dataSource": "Innovation Team Calculation Based on CDC PLACES (Model-based Estimates), OpenStreetMap, and USDA",
     "whatItMeans": "This score helps answer the question “Where is fresh food access most critically needed?” Higher scores indicate neighborhoods with both high food insecurity and limited access to fresh food retailers, meaning the gap between need and availability is the widest.",
     "techTitle": "Technical Deep Dive: Multi-Factor Interaction",
     "techContent": "<p>This score represents the intersection of high need and low supply. We utilize modeled Food Insecurity prevalence as the \"Need\" coefficient and invert our Gravity-based \"Supply Score\" to represent lack of access. This multiplicative approach ensures priority is given only where both physiological need and physical isolation overlap.</p>"
@@ -93,7 +93,7 @@
     "title": "Fresh Food Market Opportunity Score",
     "description": "A score that compares a neighborhood's grocery spending capacity to its current access to fresh food retailers, revealing where market opportunity exists.",
     "unit": "Percentile from 0-100",
-    "dataSource": "Innovation Team Calculation Based on Census ACS (5-Year Estimates) and OpenStreetMap",
+    "dataSource": "Innovation Team Calculation Based on Census ACS (5-Year Estimates), OpenStreetMap, and USDA",
     "whatItMeans": "This score helps identify underserved markets where new fresh food providers may thrive. High scores indicate strong spending power with room to support more fresh food providers. Low scores imply saturation where current retail options already meet or exceed the community's estimated spending capacity.",
     "techTitle": "Technical Deep Dive: Supply/Demand Delta & Normalization",
     "techContent": "<p>We first model the \"Total Potential Market Demand\" (estimated grocery spending) and compare it to the actual Supply Score. We calculate the net difference: <b>Market Demand − Supply</b>.</p><p>To ensure readability, we normalize this delta onto a 0–100 scale using the formula: <code>((Demand - Supply) + 100) / 2</code>. This effectively compresses the variance; a score of 50 represents equilibrium, while scores below 50 indicate that supply exceeds demand. Because the range is compressed, even small point differences (e.g., 10 points) can represent significant gaps in economic opportunity.</p>"
@@ -130,7 +130,7 @@
     "title": "Social Investment Need Score",
     "description": "This score identifies the areas where social intervention can have the greatest impact. It shows the neighborhoods where there is a critical gap in fresh food access but where local spending power is unlikely to attract or sustain private-sector fresh food providers.",
     "unit": "Percentile from 0-100",
-    "dataSource": "Innovation Team Calculation Based on OpenStreetMap, CDC PLACES (Model-based Estimates), Census ACS (5-Year Estimates), and Census Business Builder",
+    "dataSource": "Innovation Team Calculation Based on OpenStreetMap, USDA, CDC PLACES (Model-based Estimates), Census ACS (5-Year Estimates), and Census Business Builder",
     "whatItMeans": "Neighborhoods with high scores have significant food access needs but limited spending power meaning that market-based solutions are unlikely to fill the gap. For funders, policymakers, and non-profits, these are the highest-opportunity areas for grants, subsidies, or alternative grocery models.",
     "techTitle": "Technical Deep Dive: Modeling Market Failure",
     "techContent": "<p>We calculate a \"Market Strength Index\" by normalizing the total estimated grocery spending potential of every neighborhood on a 0–1 scale. We then invert this to derive a \"Market Multiplier\" (where 1.0 represents the lowest purchasing power).</p><p>The final score is the product of the <b>Fresh Food Gap Score</b> and the <b>Market Multiplier</b>. This multiplicative approach isolates the intersection of high physiological need and low economic viability, filtering out wealthy areas that lack stores simply by choice while highlighting areas dependent on social investment.</p>"
