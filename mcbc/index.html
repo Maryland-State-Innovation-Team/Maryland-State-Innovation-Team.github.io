@@ -167,7 +167,7 @@
         /* --- FEATURE CARDS --- */
         .feature-cards-section {
             padding-top: 2.5rem;
-            padding-bottom: 4rem;
+            padding-bottom: 2rem;
             padding-left: 1.5rem;
             padding-right: 1.5rem;
         }
@@ -333,6 +333,47 @@
             box-shadow: none !important; 
         }
 
+    /* --- VIDEO SECTION --- */
+        .video-section {
+            padding-top: 0px;
+            padding-bottom: 2rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .video-section {
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px; /* Optional: Matches card aesthetic */
+            background-color: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Add spacing between stacked videos on mobile */
+        .video-section .grid-row > div {
+            margin-bottom: 1.5rem;
+        }
+        @media (min-width: 640px) {
+            .video-section .grid-row > div {
+                margin-bottom: 0;
+            }
+        }
     </style>
     <script>
         // 1. Initialize dataLayer and gtag immediately (Safe Shim)
@@ -489,6 +530,21 @@
                             <h2 class="font-serif-lg">Connect with Experts</h2>
                             <p class="font-sans-sm">Get connected with people and organizations who can guide you through the process of starting and running a small business.</p>
                              <a href="./resources/" class="usa-button">Find Support</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="usa-section video-section">
+                <div class="grid-row grid-gap">
+                    <div class="tablet:grid-col-6">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/M53_yPMS7XA?si=Dp3T-KsON2qJrW93" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                    <div class="tablet:grid-col-6">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/vsbPXW_w-eY?si=t96CbK7pQfi8WA2R" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
