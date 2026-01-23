@@ -57,19 +57,19 @@
   },
   {
     "indicator": "Food Retail Locations",
-    "source": "Innovation Team Calculation Based on OpenStreetMap and the USDA SNAP Retailer Locator"
+    "source": "Innovation Team Calculation Based on OpenStreetMap"
   },
   {
     "indicator": "Fresh Food Access Score",
-    "source": "Innovation Team Calculation Based on OpenStreetMap, the USDA SNAP Retailer Locator, and Census ACS (5-Year Estimates)"
+    "source": "Innovation Team Calculation Based on OpenStreetMap and Census ACS (5-Year Estimates)"
   },
   {
     "indicator": "Fresh Food Gap Score",
-    "source": "Innovation Team Calculation Based on CDC PLACES (Model-based Estimates), OpenStreetMap, and the USDA SNAP Retailer Locator"
+    "source": "Innovation Team Calculation Based on CDC PLACES (Model-based Estimates) and OpenStreetMap"
   },
   {
     "indicator": "Fresh Food Market Opportunity Score",
-    "source": "Innovation Team Calculation Based on Census ACS (5-Year Estimates), OpenStreetMap, and the USDA SNAP Retailer Locator"
+    "source": "Innovation Team Calculation Based on Census ACS (5-Year Estimates) and OpenStreetMap"
   },
   {
     "indicator": "Fresh Food Spending Capacity Score",
@@ -89,7 +89,7 @@
   },
   {
     "indicator": "NourishMD Eligibility Zone",
-    "source": "Innovation Team Calculation Based on CDC PLACES (Model-based Estimates), OpenStreetMap, and the USDA SNAP Retailer Locator"
+    "source": "Innovation Team Calculation Based on CDC PLACES (Model-based Estimates) and OpenStreetMap"
   },
   {
     "indicator": "Opportunity Zones",
@@ -121,7 +121,7 @@
   },
   {
     "indicator": "Social Investment Need Score",
-    "source": "Innovation Team Calculation Based on OpenStreetMap, the USDA SNAP Retailer Locator, CDC PLACES (Model-based Estimates), Census ACS (5-Year Estimates), and Census Business Builder"
+    "source": "Innovation Team Calculation Based on OpenStreetMap, CDC PLACES (Model-based Estimates), Census ACS (5-Year Estimates), and Census Business Builder"
   },
   {
     "indicator": "Sustainable Communities",

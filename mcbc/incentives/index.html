@@ -1773,7 +1773,15 @@
                         let subContentHtml = '';
                         if(title === 'Eligibility') {
                              if(content.Audience) subContentHtml += `<h3>Program Audience</h3><p>${content.Audience}</p>`;
-                             if(content.Geographic) subContentHtml += `<h3>Geographic Eligibility</h3><p>${content.Geographic}</p>`;
+                             
+                             if(content.Geographic) {
+                                // Check if the content contains HTML tags. 
+                                // If yes, use a div wrapper to allow elements like iframes. If no, use <p> for typography.
+                                const isHtml = /<[a-z][\s\S]*>/i.test(content.Geographic);
+                                const wrapper = isHtml ? 'div' : 'p';
+                                subContentHtml += `<h3>Geographic Eligibility</h3><${wrapper}>${content.Geographic}</${wrapper}>`;
+                             }
+
                              if(content.Requirements?.length > 0) subContentHtml += `<h3>Requirements</h3><ul>${content.Requirements.map(req => `<li>${req}</li>`).join('')}</ul>`;
                         }
                         if(title === 'Contact') {

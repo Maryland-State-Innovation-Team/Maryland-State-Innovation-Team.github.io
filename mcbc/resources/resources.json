@@ -5954,5 +5954,153 @@
                 "email": "rloeffler@chesapeake.edu"
             }
         ]
+    },
+    {
+        "id": 289,
+        "organization": "Latino Child Care Association of Maryland, Inc",
+        "description": "Latino Child Care Association of Maryland (LCAM) was founded in 2010 as the first Latino child care association in the state. Since then, LCAM has grown into the largest, inspiring the creation of other organizations that were born out of its leadership and example.\n\nMission: LCAM\u2019s mission is to empower Latino family child care and early childhood educators by providing bilingual training, technical assistance, and advocacy that address their unique cultural and developmental needs, while strengthening trust and positive connections between caregivers and families.\n\nVision: LCAM envisions a Maryland where Latino educators are fully supported in their first language, recognized for their expertise, and equipped with the resources needed to provide high\u2011quality early childhood education to all children, regardless of background.\n",
+        "type": "State",
+        "area": [
+            "Maryland"
+        ],
+        "address": null,
+        "address_city": null,
+        "address_state": null,
+        "address_zip": null,
+        "url": "https://latinochildcareassociationmd.com/",
+        "logo_link": "https://drive.google.com/file/d/1PRJXLhbSYCCMdH7eNT0_DTs2kBR6zwTY/view?usp=drive_open",
+        "logo_file": "logos/289.jpg",
+        "question_tags": [
+            "Networking",
+            "Business Operations and Planning",
+            "Getting Started"
+        ],
+        "business_category": "Child Care",
+        "phone": null,
+        "fax": null,
+        "email": null,
+        "contacts": [
+            {
+                "name": "Rossana Espinoza-Thorndahl",
+                "title": "Program Director",
+                "phone": {
+                    "display": "240-883-1699",
+                    "link": "tel:+12408831699"
+                },
+                "fax": null,
+                "email": "info@lcam-md.com"
+            }
+        ]
+    },
+    {
+        "id": 290,
+        "organization": "Maryland State Child Care Association ",
+        "description": "The Maryland State Child Care Association's mission statement is to promote the growth and development of professional licensed child care and learning centers in Maryland.\n",
+        "type": "State",
+        "area": [
+            "Maryland"
+        ],
+        "address": null,
+        "address_city": null,
+        "address_state": null,
+        "address_zip": null,
+        "url": "https://mscca.org",
+        "logo_link": "https://drive.google.com/file/d/19vI6BRo0r2Asu8UqoRmyEPvxUHAegpWB/view",
+        "logo_file": "logos/290.jpg",
+        "question_tags": [
+            "Networking",
+            "Business Operations and Planning",
+            "Getting Started"
+        ],
+        "business_category": "Child Care",
+        "phone": {
+            "display": "410-820-9196",
+            "link": "tel:+14108209196"
+        },
+        "fax": null,
+        "email": "info@mscca.org",
+        "contacts": []
+    },
+    {
+        "id": 291,
+        "organization": "Maryland State Family Child Care Association",
+        "description": "Founded in 1983, the Maryland State Family Child Care Association (MSFCCA) has been a dedicated advocate for family child care providers across Maryland, ensuring their voices are heard in decisions that impact family child care and the children they serve. From the beginning, MSFCCA has focused on empowering family child care providers most of whom are women through education, advocacy, and collaboration. As MSFCCA continues to grow, we remain committed to expanding resources, building capacity, and advocating for a strong, equitable family child care system supporting providers, children, and communities across Maryland.\n",
+        "type": "State",
+        "area": [
+            "Maryland"
+        ],
+        "address": null,
+        "address_city": null,
+        "address_state": null,
+        "address_zip": null,
+        "url": "www.msfcca.org",
+        "logo_link": "https://drive.google.com/file/d/1KhD6tJALPRaGWdkCJP7wYewRM1W-sSJv/view",
+        "logo_file": "logos/291.jpg",
+        "question_tags": [
+            "Networking",
+            "Business Operations and Planning",
+            "Getting Started"
+        ],
+        "business_category": "Child Care",
+        "phone": null,
+        "fax": null,
+        "email": null,
+        "contacts": [
+            {
+                "name": "Ruby Daniels",
+                "title": "MSFCCA President",
+                "phone": {
+                    "display": "410-531-5159",
+                    "link": "tel:+14105315159"
+                },
+                "fax": null,
+                "email": "marylandstatefamilychildcare@gmail.com"
+            },
+            {
+                "name": "Wendy Dingus",
+                "title": "MSFCCA Vice President, Membership",
+                "phone": {
+                    "display": "301-392-3481",
+                    "link": "tel:+13013923481"
+                },
+                "fax": null,
+                "email": "marylandstatefamilychildcare@gmail.com"
+            }
+        ]
+    },
+    {
+        "id": 293,
+        "organization": "Prince Georges County Department of Permitting, Inspections and Enforcement (DPIE)",
+        "description": "The Business Development Section offers specialized services to support the growth of businesses in Prince George\u2019s County. We provide expert guidance and technical assistance to both entrepreneurs and established business owners as they navigate the construction, permitting and licensing processes.",
+        "type": "County",
+        "area": [
+            "Prince George's County"
+        ],
+        "address": null,
+        "address_city": null,
+        "address_state": null,
+        "address_zip": null,
+        "url": "https://www.princegeorgescountymd.gov/departments-offices/permitting-inspections-and-enforcement",
+        "logo_link": "https://www.princegeorgescountymd.gov/sites/default/files/media-image/seal_CEX_elevate_colour%5B65%5D_0.png",
+        "logo_file": "logos/293.jpg",
+        "question_tags": [
+            "Permits and Licensing"
+        ],
+        "business_category": "All",
+        "phone": null,
+        "fax": null,
+        "email": null,
+        "contacts": [
+            {
+                "name": "Charles H. Cooper",
+                "title": "Chief of Business Development  ",
+                "phone": {
+                    "display": "240-419-9379",
+                    "link": "tel:+12404199379"
+                },
+                "fax": null,
+                "email": "chcooper@co.pg.md.us"
+            }
+        ]
     }
 ]
