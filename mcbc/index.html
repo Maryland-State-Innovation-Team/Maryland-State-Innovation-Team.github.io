@@ -335,7 +335,7 @@
 
     /* --- VIDEO SECTION --- */
         .video-section {
-            padding-top: 0px;
+            padding-top: 2px;
             padding-bottom: 2rem;
             padding-left: 1.5rem;
             padding-right: 1.5rem;
@@ -373,6 +373,25 @@
             .video-section .grid-row > div {
                 margin-bottom: 0;
             }
+        }
+
+        /* --- VIDEO ALIGNMENT UTILS --- */
+        /* Ensures the columns stretch to equal height on desktop */
+        .video-section .grid-row {
+            align-items: stretch; 
+        }
+
+        /* Makes the column a vertical flex container */
+        .video-column {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        /* Pushes the video to the bottom of the container, aligning them across the row */
+        .video-column .video-container {
+            margin-top: auto;
+            width: 100%;
         }
     </style>
     <script>
@@ -535,16 +554,28 @@
                 </div>
             </section>
             <section class="usa-section video-section">
+                <div class="grid-row grid-gap margin-bottom-2">
+                    <div class="grid-col-12">
+                        <h2 class="font-serif-xl margin-top-0 margin-bottom-0">See the Tools in Action</h2>
+                    </div>
+                </div>
+
                 <div class="grid-row grid-gap">
                     <div class="tablet:grid-col-6">
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/M53_yPMS7XA?si=Dp3T-KsON2qJrW93" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div class="video-column">
+                            <h3 class="font-serif-lg margin-top-0 margin-bottom-2">Getting Started with the Maryland Community Business Compass</h3>
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/M53_yPMS7XA?si=Dp3T-KsON2qJrW93" title="Getting Started with the Maryland Community Business Compass" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="tablet:grid-col-6">
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/vsbPXW_w-eY?si=t96CbK7pQfi8WA2R" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div class="video-column">
+                            <h3 class="font-serif-lg margin-top-0 margin-bottom-2">NourishMD Grant: How to Find the Fresh Food Gap Score</h3>
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/vsbPXW_w-eY?si=t96CbK7pQfi8WA2R" title="NourishMD Grant: How to Find the Fresh Food Gap Score" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
                         </div>
                     </div>
                 </div>
