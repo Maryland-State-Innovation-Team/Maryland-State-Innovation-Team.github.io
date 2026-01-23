@@ -5994,7 +5994,7 @@
     },
     {
         "id": 290,
-        "organization": "Maryland State Child Care Association ",
+        "organization": "Maryland State Family Child Care Association",
         "description": "The Maryland State Child Care Association's mission statement is to promote the growth and development of professional licensed child care and learning centers in Maryland.\n",
         "type": "State",
         "area": [
@@ -6019,32 +6019,6 @@
         },
         "fax": null,
         "email": "info@mscca.org",
-        "contacts": []
-    },
-    {
-        "id": 291,
-        "organization": "Maryland State Family Child Care Association",
-        "description": "Founded in 1983, the Maryland State Family Child Care Association (MSFCCA) has been a dedicated advocate for family child care providers across Maryland, ensuring their voices are heard in decisions that impact family child care and the children they serve. From the beginning, MSFCCA has focused on empowering family child care providers most of whom are women through education, advocacy, and collaboration. As MSFCCA continues to grow, we remain committed to expanding resources, building capacity, and advocating for a strong, equitable family child care system supporting providers, children, and communities across Maryland.\n",
-        "type": "State",
-        "area": [
-            "Maryland"
-        ],
-        "address": null,
-        "address_city": null,
-        "address_state": null,
-        "address_zip": null,
-        "url": "www.msfcca.org",
-        "logo_link": "https://drive.google.com/file/d/1KhD6tJALPRaGWdkCJP7wYewRM1W-sSJv/view",
-        "logo_file": "logos/291.jpg",
-        "question_tags": [
-            "Networking",
-            "Business Operations and Planning",
-            "Getting Started"
-        ],
-        "business_category": "Child Care",
-        "phone": null,
-        "fax": null,
-        "email": null,
         "contacts": [
             {
                 "name": "Ruby Daniels",
