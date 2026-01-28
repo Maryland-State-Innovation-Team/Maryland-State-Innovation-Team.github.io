@@ -2,11 +2,11 @@
   {
     "program_name": "Prekindergarten Expansion Grant (FY27)",
     "agency": "Maryland State Department of Education (MSDE), Division of Early Childhood",
-    "summary": "The Prekindergarten Expansion Grant helps schools and private child care centers offer more high-quality, full-day prekindergarten seats for three- and four-year-old children from families with household incomes at or below 300% of the Federal Poverty Level.",
+    "summary": "The Maryland State Department of Education (MSDE) provides competitive grants to expand high-quality, full-day prekindergarten for three- and four-year-old children from families with household incomes at or below 300% of the Federal Poverty Level.",
     "more_details_url": "https://earlychildhood.marylandpublicschools.org/prekindergarten-expansion",
     "structured_extraction": {
       "program_name": "Prekindergarten Expansion Grant (FY27)",
-      "program_description": "The Prekindergarten Expansion Grant helps schools and private child care centers offer more high-quality, full-day prekindergarten seats for three- and four-year-old children from families with household incomes at or below 300% of the Federal Poverty Level.",
+      "program_description": "The Maryland State Department of Education (MSDE) provides competitive grants to expand high-quality, full-day prekindergarten for three- and four-year-old children from families with household incomes at or below 300% of the Federal Poverty Level.",
       "agency": "Maryland State Department of Education (MSDE), Division of Early Childhood",
       "list_of_eligible_counties": [
         "All"
@@ -31,25 +31,25 @@
       "assistance_type": [
         "grant"
       ],
-      "assistance_description": "Competitive grant funding the creation and operation of new high-quality Pre-K seats and school readiness services.",
+      "assistance_description": "A competitive grant to help schools, private child care centers, and Head Start programs offer more high-quality prekindergarten seats and school readiness services.",
       "URL": "https://earlychildhood.marylandpublicschools.org/prekindergarten-expansion",
-      "application_deadline_string": "Monday, March 9, 2026, 5:00 p.m. EST",
+      "application_deadline_string": "Monday, March 9, 2026, no later than 5:00 p.m. EST",
       "application_deadline_date": "2026-03-09",
       "contact_name": "Dr. Nykia Washington",
       "contact_email": "nykia.washington@maryland.gov",
       "contact_phone": "(410) 767-0088",
-      "program_audience": "Local education agencies, licensed private child care providers, Head Start programs, and families with children aged 3 to 4.",
-      "use_of_funds": "Funds pay for staff salaries, teaching materials, training, rent, utility bills, and administering high-quality prekindergarten programs meeting state school readiness standards (The Blueprint for Maryland’s Future).",
-      "geographic_eligibility": "Available statewide throughout Maryland, with priority given to areas showing the greatest need for more prekindergarten services.",
+      "program_audience": "Local school systems, licensed private child care providers, Head Start programs, and families with children aged 3 to 4 earning up to 300% of the Federal Poverty Level.",
+      "use_of_funds": "The funds pay for staff salaries, teaching materials, training, rent, utility bills, and administering prekindergarten educational programming following 'The Blueprint for Maryland's Future' standards.",
+      "geographic_eligibility": "The program is available throughout Maryland. The state gives priority to areas that show the greatest need for more prekindergarten services.",
       "requirements_list": [
-        "Must serve children three or four years old",
-        "Must serve families with incomes up to 300% of the Federal Poverty Level",
+        "Must serve children who are three or four years old",
+        "Families must have household incomes at or below 300% of the Federal Poverty Level",
         "Private providers must have a valid license or registration and a Maryland EXCELS rating of 3, 4, or 5",
         "Programs must offer full-day services and meet the state definition of High Quality Prekindergarten",
         "Services must be free for eligible families",
-        "Align with The Blueprint for Maryland’s Future standards"
+        "Programs must follow 'The Blueprint for Maryland's Future' standards"
       ],
-      "application_process_overview": "Applicants apply through the MSDE grant portal (Qualtrics). Steps include attending a support webinar or office hours in January/February, conducting a needs assessment, and submitting a project description and detailed budget by March 9, 2026, at 5:00 p.m. EST.",
+      "application_process_overview": "Applicants should read the Grant Information Guide and attend support sessions or office hours in January and February 2026. Prepare application materials (including needs assessment, project description, and budget) and submit the final application through the online MSDE grant portal by 5:00 p.m. EST on March 9, 2026.",
       "is_out_of_date": false
     }
   },
@@ -789,11 +789,11 @@
   {
     "program_name": "Minds In Motion (Scholarship & Certificates)",
     "agency": "Maryland Public Secondary Schools Athletic Association (MPSSAA)",
-    "summary": "This program rewards student-athletes who do well in school and sports. It provides $1,000 scholarships to seniors and certificates of recognition to students who keep a high grade point average during their sports season.",
+    "summary": "The Minds In Motion program recognizes student-athletes who excel both in the classroom and on the field. It provides $1,000 scholarships to outstanding seniors and awards certificates of recognition to any student-athlete who maintains a 3.25 GPA or higher during their sports season.",
     "more_details_url": "https://www.mpssaa.org/membership-services/minds-in-motion/",
     "structured_extraction": {
       "program_name": "Minds In Motion (Scholarship & Certificates)",
-      "program_description": "This program rewards student-athletes who do well in school and sports. It provides $1,000 scholarships to seniors and certificates of recognition to students who keep a high grade point average during their sports season.",
+      "program_description": "The Minds In Motion program recognizes student-athletes who excel both in the classroom and on the field. It provides $1,000 scholarships to outstanding seniors and awards certificates of recognition to any student-athlete who maintains a 3.25 GPA or higher during their sports season.",
       "agency": "Maryland Public Secondary Schools Athletic Association (MPSSAA)",
       "list_of_eligible_counties": [
         "All"
@@ -814,22 +814,22 @@
       "assistance_type": [
         "grant"
       ],
-      "assistance_description": "The program awards $1,000 scholarships to selected senior student-athletes. It also awards certificates to students who maintain at least a 3.25 GPA.",
+      "assistance_description": "The program awards $1,000 scholarships to selected senior student-athletes (one male and one female from each of the nine athletic districts). It also provides certificates to students who maintain at least a 3.25 GPA during their season of participation.",
       "URL": "https://www.mpssaa.org/membership-services/minds-in-motion/",
-      "application_deadline_string": "Mid-to-late February 2026",
-      "application_deadline_date": "2026-02-01",
+      "application_deadline_string": "The application window typically opens in February and closes in late March or early April.",
+      "application_deadline_date": "2026-04-01",
       "contact_name": "Melissa Miranda Jones",
       "contact_email": "mpssaabusiness@gmail.com",
       "contact_phone": "(410) 767-0555",
-      "program_audience": "High school senior student-athletes at Maryland public schools.",
-      "use_of_funds": "Recipients use the funds for expenses related to education after high school.",
-      "geographic_eligibility": "Students from all Maryland counties are eligible if they attend a member public high school.",
+      "program_audience": "High school senior student-athletes attending Maryland public schools.",
+      "use_of_funds": "Recipients use scholarship funds for expenses related to post-secondary education.",
+      "geographic_eligibility": "Students from all 23 Maryland counties and Baltimore City are eligible if they attend an MPSSAA member public high school.",
       "requirements_list": [
         "Must be a high school senior",
-        "Must have a minimum 3.25 unweighted GPA",
-        "Must participate in MPSSAA-recognized interscholastic athletic activities"
+        "Must have a minimum 3.25 unweighted cumulative GPA",
+        "Must participate in MPSSAA-recognized/sanctioned interscholastic athletic activities"
       ],
-      "application_process_overview": "Fill out the online application on the MPSSAA website once the application period begins.",
+      "application_process_overview": "Submit an online application through the MPSSAA website during the open application period. Applicants must provide proof of academic and athletic status.",
       "is_out_of_date": false
     }
   },
@@ -924,53 +924,6 @@
         "The school must participate in sanctioned regional or state-level post-season events."
       ],
       "application_process_overview": "Schools contact their local District Athletic Supervisor. The MPSSAA gives funds to the districts. The districts then pay the schools for their travel costs.",
-      "is_out_of_date": false
-    }
-  },
-  {
-    "program_name": "Minds In Motion Scholar-Athlete Scholarship",
-    "agency": "Maryland Public Secondary Schools Athletic Association (MPSSAA)",
-    "summary": "This program provides $1,000 scholarships to Maryland public high school seniors who excel in both academics and interscholastic sports. One male and one female student-athlete are selected from each of the nine athletic districts in Maryland.",
-    "more_details_url": "https://www.mpssaa.org/mpssaa-honors-18-recipients-at-the-minds-in-motion-luncheon1/",
-    "structured_extraction": {
-      "program_name": "Minds In Motion Scholar-Athlete Scholarship",
-      "program_description": "This program provides $1,000 scholarships to Maryland public high school seniors who excel in both academics and interscholastic sports. One male and one female student-athlete are selected from each of the nine athletic districts in Maryland.",
-      "agency": "Maryland Public Secondary Schools Athletic Association (MPSSAA)",
-      "list_of_eligible_counties": [
-        "All"
-      ],
-      "list_of_prioritized_counties": [
-        "All"
-      ],
-      "list_of_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "list_of_eligible_industries": [
-        "Educational Services"
-      ],
-      "list_of_prioritized_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "grant"
-      ],
-      "assistance_description": "The program awards a $1,000 scholarship to selected students to help pay for college or other post-secondary education expenses.",
-      "URL": "https://www.mpssaa.org/mpssaa-honors-18-recipients-at-the-minds-in-motion-luncheon1/",
-      "application_deadline_string": "The application window typically opens in February and closes in late March or early April.",
-      "application_deadline_date": "2026-04-01",
-      "contact_name": "Melissa Miranda Jones",
-      "contact_email": null,
-      "contact_phone": "(410) 767-0555",
-      "program_audience": "Maryland public high school seniors who participate in MPSSAA-sanctioned interscholastic sports.",
-      "use_of_funds": "Funds are intended for post-secondary education expenses.",
-      "geographic_eligibility": "The program is open to students attending MPSSAA member public high schools in all 23 Maryland counties and Baltimore City.",
-      "requirements_list": [
-        "Must be a senior at an MPSSAA member public high school.",
-        "Must have a minimum cumulative 3.25 unweighted GPA.",
-        "Must have participated in MPSSAA-sanctioned interscholastic sports during high school."
-      ],
-      "application_process_overview": "Submit an online application through the MPSSAA website. Applicants must provide proof of academic and athletic status during the application window (February to late March).",
       "is_out_of_date": false
     }
   },
@@ -1336,11 +1289,11 @@
   {
     "program_name": "Maryland Weatherization Assistance Program (WAP)",
     "agency": "Maryland Department of Housing and Community Development (DHCD)",
-    "summary": "This program helps low-income homeowners and renters lower their energy bills and heating/cooling costs by providing energy-efficiency improvements, such as insulation and air sealing, at no cost. The service also makes homes safer and healthier for families.",
+    "summary": "This program helps low-income households lower their energy bills and heating/cooling costs. It provides energy-efficiency improvements like materials for insulation, air sealing, and professional installation at no cost. The service also makes homes safer and healthier for families.",
     "more_details_url": "https://dhcd.maryland.gov/Energy-Home-Repair/Pages/Homeowner-Grants/WAP.aspx",
     "structured_extraction": {
       "program_name": "Maryland Weatherization Assistance Program (WAP)",
-      "program_description": "This program helps low-income homeowners and renters lower their energy bills and heating/cooling costs by providing energy-efficiency improvements, such as insulation and air sealing, at no cost. The service also makes homes safer and healthier for families.",
+      "program_description": "This program helps low-income households lower their energy bills and heating/cooling costs. It provides energy-efficiency improvements like materials for insulation, air sealing, and professional installation at no cost. The service also makes homes safer and healthier for families.",
       "agency": "Maryland Department of Housing and Community Development (DHCD)",
       "list_of_eligible_counties": [
         "All"
@@ -1361,26 +1314,73 @@
         "Any"
       ],
       "assistance_type": [
-        "grant",
-        "support"
+        "grant"
       ],
-      "assistance_description": "The program provides energy conservation materials, professional installation services, and home improvements at no charge to the participant.",
+      "assistance_description": "The program provides energy conservation materials, professional installation services, and direct energy-efficiency improvements at no charge to eligible households.",
       "URL": "https://dhcd.maryland.gov/Energy-Home-Repair/Pages/Homeowner-Grants/WAP.aspx",
       "application_deadline_string": "Ongoing",
       "application_deadline_date": null,
       "contact_name": "Housing and Building Energy Programs",
       "contact_email": "CustomerService.dhcd@maryland.gov",
       "contact_phone": "1-855-583-8976",
-      "program_audience": "Low-income homeowners and renters in Maryland, with priority for people older than 60, people with disabilities, and families with children.",
+      "program_audience": "Low-income homeowners and renters in Maryland, with priority for seniors, people with disabilities, and families with children.",
       "use_of_funds": "Funds cover air sealing and insulation for attics, floors, and walls. They also pay for hot water system upgrades, lighting retrofits, and the repair or replacement of furnaces.",
-      "geographic_eligibility": "The program is available statewide through local weatherization agencies in every county and all 24 Maryland jurisdictions.",
+      "geographic_eligibility": "The program is available statewide through local weatherization agencies in all 24 Maryland jurisdictions.",
       "requirements_list": [
         "Household income must be at or below 200% of the federal poverty level or 60% of the State Median Income.",
         "Recipients of MEAP, SSI, TANF, SNAP, or HUD housing assistance are automatically eligible.",
         "The program prioritizes people older than 60, people with disabilities, and families with children.",
         "The home must undergo a professional energy audit."
       ],
-      "application_process_overview": "First, contact your local weatherization agency. Second, submit a formal application. Third, the agency reviews your eligibility based on income and priority. Fourth, the agency schedules a professional energy audit of your home. Finally, if the home qualifies, professional contractors install the energy-saving measures.",
+      "application_process_overview": "First, contact your local weatherization agency. Second, submit a formal application. Third, the agency reviews your eligibility and schedules a professional energy audit of your home. Finally, if the home qualifies, professional contractors install the energy-saving measures.",
+      "is_out_of_date": false
+    }
+  },
+  {
+    "program_name": "Maryland Energy Assistance Program (MEAP)",
+    "agency": "Maryland Department of Housing and Community Development (DHCD)",
+    "summary": "This program helps eligible homeowners and renters repair or replace broken heating, cooling, and water heating systems. The program provides these services at no cost to help keep homes comfortable.",
+    "more_details_url": "https://dhcd.maryland.gov/Energy-Home-Repair/Pages/Homeowner-Grants/MEAP.aspx",
+    "structured_extraction": {
+      "program_name": "Maryland Energy Assistance Program (MEAP)",
+      "program_description": "This program helps eligible homeowners and renters repair or replace broken heating, cooling, and water heating systems. The program provides these services at no cost to help keep homes comfortable.",
+      "agency": "Maryland Department of Housing and Community Development (DHCD)",
+      "list_of_eligible_counties": [
+        "All"
+      ],
+      "list_of_prioritized_counties": [
+        "Allegany",
+        "Garrett"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "individuals"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "The program provides no-cost repairs or replacements for non-functioning heating, cooling, and water heating systems. It does not help pay utility bills.",
+      "URL": "https://dhcd.maryland.gov/Energy-Home-Repair/Pages/Homeowner-Grants/MEAP.aspx",
+      "application_deadline_string": "Year-round",
+      "application_deadline_date": null,
+      "contact_name": "Housing and Building Energy Programs",
+      "contact_email": null,
+      "contact_phone": "1-855-583-8976",
+      "program_audience": "Maryland homeowners and renters with low incomes who have broken HVAC systems.",
+      "use_of_funds": "Funds pay for the repair or replacement of heating, cooling, and water heating systems.",
+      "geographic_eligibility": "The program is available statewide. Residents of Allegany and Garrett counties may receive special flood-related assistance.",
+      "requirements_list": [
+        "Household income must be 200% or less of the Federal Poverty Level.",
+        "The home must have a non-functioning heating, cooling, or water heating system.",
+        "People who receive SNAP, TANF, SSI, or HUD housing assistance are automatically income-eligible."
+      ],
+      "application_process_overview": "First, you submit an application and all required documents to the agency. Next, the agency reviews your eligibility. Then, a local agency schedules an assessment of your home. Finally, the agency schedules a contractor to perform the recommended repairs.",
       "is_out_of_date": false
     }
   },
@@ -1485,11 +1485,11 @@
   {
     "program_name": "Maryland Housing Rehabilitation Program (MHRP) - Single Family",
     "agency": "Maryland Department of Housing and Community Development (DHCD)",
-    "summary": "This program provides low-interest loans to homeowners to fix health and safety issues, repair critical home systems, remove lead paint, and make homes more accessible for people with disabilities or to meet building codes.",
+    "summary": "This program provides low-interest loans to homeowners to fix health and safety issues, repair critical home systems, correct building code violations, and make homes more accessible for people with disabilities.",
     "more_details_url": "https://dhcd.maryland.gov/Energy-Home-Repair/Pages/Homeowner-Loans/Rehab.aspx",
     "structured_extraction": {
       "program_name": "Maryland Housing Rehabilitation Program (MHRP) - Single Family",
-      "program_description": "This program provides low-interest loans to homeowners to fix health and safety issues, repair critical home systems, remove lead paint, and make homes more accessible for people with disabilities or to meet building codes.",
+      "program_description": "This program provides low-interest loans to homeowners to fix health and safety issues, repair critical home systems, correct building code violations, and make homes more accessible for people with disabilities.",
       "agency": "Maryland Department of Housing and Community Development (DHCD)",
       "list_of_eligible_counties": [
         "All"
@@ -1510,23 +1510,23 @@
       "assistance_type": [
         "loan"
       ],
-      "assistance_description": "The program offers loans up to $50,000 with interest rates between 0% and 6%. The maximum repayment term is 30 years. Households with income at or below 50% of the Area Median Income (AMI) may qualify for deferred payments.",
+      "assistance_description": "The program offers loans up to $50,000 with interest rates between 0% and 6% and repayment terms up to 30 years. Households with income at or below 50% of the Area Median Income (AMI) may qualify for deferred payments.",
       "URL": "https://dhcd.maryland.gov/Energy-Home-Repair/Pages/Homeowner-Loans/Rehab.aspx",
-      "application_deadline_string": "None (rolling application)",
+      "application_deadline_string": "Rolling application process",
       "application_deadline_date": null,
       "contact_name": "DHCD Special Loan Programs",
       "contact_email": "DHCD.SpecialLoans@maryland.gov",
       "contact_phone": "(301) 429-7409",
-      "program_audience": "Low-to-moderate income homeowners who own and occupy a single-family house as their primary residence.",
-      "use_of_funds": "Funds can be used for fixing roofs, plumbing, electrical systems, building code violations, and removing mold, lead, or asbestos. It also covers installation of disability aids like ramps or lifts.",
-      "geographic_eligibility": "Available in all Maryland counties through local housing offices or the state DHCD office.",
+      "program_audience": "Homeowners who live in their own single-family homes and have low to moderate incomes (at or below 80% AMI).",
+      "use_of_funds": "Funds can be used for fixing roofs, plumbing, electrical systems, mold/lead/asbestos abatement, installation of disability aids like ramps or lifts, and repairs needed to meet building codes.",
+      "geographic_eligibility": "This program is available throughout the state of Maryland and is managed through local housing offices.",
       "requirements_list": [
-        "You must own and live in a single-family home as your primary residence",
-        "Your total household income must be at or below 80% of the area median income",
-        "You must provide a work proposal from a contractor",
-        "Mobile homes do not qualify"
+        "You must own and live in the single-family home as your primary residence.",
+        "Your total household income must be at or below 80% of the area median income.",
+        "You must provide a work proposal from a contractor.",
+        "Mobile homes do not qualify."
       ],
-      "application_process_overview": "Contact your local county housing office or the MD DHCD Special Loan Programs to start. Local agencies and non-profit groups help prepare and submit the application, which includes documentation and a plan for intended repairs.",
+      "application_process_overview": "Contact your local county housing office or the MD DHCD Special Loan Programs to start the process. Local agencies and non-profit groups will help you prepare and submit documentation along with a plan for the intended repairs.",
       "is_out_of_date": false
     }
   },
@@ -1580,11 +1580,11 @@
   {
     "program_name": "Maryland Fresh Food Financing Initiative (MFFFI) / NourishMD Grant Program",
     "agency": "Maryland Department of Housing and Community Development (DHCD)",
-    "summary": "This program helps food retailers like grocery stores, co-ops, and farmers' markets sell more healthy and fresh food in Maryland communities that need better food access. It provides grants through the NourishMD component and flexible loans through the broader MFFFI initiative.",
-    "more_details_url": "https://dhcd.maryland.gov/Communities/Pages/freshfood/default.aspx",
+    "summary": "This program helps food retailers like grocery stores and farmers' markets by providing grants and loans to sell more healthy food in Maryland communities that need better food access.",
+    "more_details_url": "https://dhcd.maryland.gov/Business/Pages/NourishMD-Grant-Program.aspx",
     "structured_extraction": {
       "program_name": "Maryland Fresh Food Financing Initiative (MFFFI) / NourishMD Grant Program",
-      "program_description": "This program helps food retailers like grocery stores, co-ops, and farmers' markets sell more healthy and fresh food in Maryland communities that need better food access. It provides grants through the NourishMD component and flexible loans through the broader MFFFI initiative.",
+      "program_description": "This program helps food retailers like grocery stores and farmers' markets by providing grants and loans to sell more healthy food in Maryland communities that need better food access.",
       "agency": "Maryland Department of Housing and Community Development (DHCD)",
       "list_of_eligible_counties": [
         "All"
@@ -1612,23 +1612,23 @@
         "loan",
         "grant"
       ],
-      "assistance_description": "NourishMD offers grants from $25,000 to $150,000. MFFFI also provides flexible loans through local lenders. A $250 processing fee is deducted from final grant awards.",
-      "URL": "https://dhcd.maryland.gov/Communities/Pages/freshfood/default.aspx",
+      "assistance_description": "The NourishMD part offers grants from $25,000 to $150,000. The initiative also offers flexible loans through local lenders. The agency takes a $250 processing fee out of the final grant award.",
+      "URL": "https://dhcd.maryland.gov/Business/Pages/NourishMD-Grant-Program.aspx",
       "application_deadline_string": "February 20, 2026, at 5:00 p.m. EST",
       "application_deadline_date": "2026-02-20",
       "contact_name": "Brittney Dillon",
       "contact_email": "dhcd.businesslending@maryland.gov",
       "contact_phone": "443-401-5601",
-      "program_audience": "For-profit and non-profit food retailers, including grocery stores, co-ops, and farmers' markets.",
-      "use_of_funds": "Funds can be used for equipment (refrigeration, shelving), building upgrades, purchasing inventory, and setting up SNAP or EBT systems.",
-      "geographic_eligibility": "Statewide availability. Businesses must be located in a Sustainable Community, a Food Desert, or an area with a Fresh Food Gap Score of 60% or higher.",
+      "program_audience": "For-profit and non-profit food retailers such as grocery stores, co-ops, and farmers' markets who sell fresh food.",
+      "use_of_funds": "Funds can be used for equipment like refrigeration and shelving, building upgrades, inventory costs, and setting up SNAP or EBT systems.",
+      "geographic_eligibility": "Statewide. Businesses must be in a Sustainable Community, a designated Food Desert, or an area with a Fresh Food Gap Score of 60% or higher on the Maryland Community Business Compass.",
       "requirements_list": [
         "Must serve a community with a Fresh Food Gap Score of 60% or higher",
         "Must dedicate at least 20% of inventory or sales space to healthy foods",
         "Must operate year-round (at least 5 days per week)",
-        "Must offer fresh, frozen, or minimally processed healthy foods"
+        "Must offer fresh or minimally processed healthy foods (fresh or frozen)"
       ],
-      "application_process_overview": "Review the NourishMD Program Guide and contact staff for assistance. Submit applications via the online portal. There is no fee to submit an application.",
+      "application_process_overview": "First, review the NourishMD Program Guide. Apply through the online portal. There is no fee to submit the application, however, the state deducts a $250 processing fee from the final grant award.",
       "is_out_of_date": false
     }
   },
@@ -1738,13 +1738,13 @@
     }
   },
   {
-    "program_name": "Maryland State Small Business Credit Initiative (SSBCI)",
+    "program_name": "Maryland State Small Business Credit Initiative (SSBCI) - Neighborhood BusinessWorks",
     "agency": "Maryland Department of Housing and Community Development (DHCD)",
-    "summary": "This federal program helps small businesses get loans and investments. The state manages the funds to help businesses that have trouble getting traditional financing. It focuses on helping disadvantaged business owners and communities.",
+    "summary": "This federal program, managed by the Maryland Department of Housing and Community Development (DHCD), provides financial assistance to small businesses through loans and equity investments. It is designed to help businesses that struggle to obtain traditional financing, with a focus on disadvantaged business owners and communities.",
     "more_details_url": "https://dhcd.maryland.gov/Business/Pages/SSBCI.aspx",
     "structured_extraction": {
-      "program_name": "Maryland State Small Business Credit Initiative (SSBCI)",
-      "program_description": "This federal program helps small businesses get loans and investments. The state manages the funds to help businesses that have trouble getting traditional financing. It focuses on helping disadvantaged business owners and communities.",
+      "program_name": "Maryland State Small Business Credit Initiative (SSBCI) - Neighborhood BusinessWorks",
+      "program_description": "This federal program, managed by the Maryland Department of Housing and Community Development (DHCD), provides financial assistance to small businesses through loans and equity investments. It is designed to help businesses that struggle to obtain traditional financing, with a focus on disadvantaged business owners and communities.",
       "agency": "Maryland Department of Housing and Community Development (DHCD)",
       "list_of_eligible_counties": [
         "All"
@@ -1769,23 +1769,25 @@
       "assistance_type": [
         "loan"
       ],
-      "assistance_description": "The program provides flexible loans and equity investments. Small business loans often go up to $350,000, while larger investments can reach $1,000,000. Most programs require a private lender or investor to match the state's money.",
+      "assistance_description": "Provides flexible loans and equity investments. Loans typically range from $350,000 up to $5,000,000. Many programs require a 1:1 match from private lenders or investors.",
       "URL": "https://dhcd.maryland.gov/Business/Pages/SSBCI.aspx",
-      "application_deadline_string": "The program is open and accepts applications on a rolling basis.",
+      "application_deadline_string": "Applications are accepted on a rolling, first-come, first-served basis.",
       "application_deadline_date": null,
       "contact_name": "General Program Administration",
-      "contact_email": "dhcd.businesslending@maryland.gov",
+      "contact_email": "dhcd.ssbci@maryland.gov",
       "contact_phone": "866-226-3559",
-      "program_audience": "Small businesses in Maryland, especially those owned by socially and economically disadvantaged individuals or located in designated investment areas.",
-      "use_of_funds": "Businesses can use the money for daily costs, buying machinery, or buying and fixing commercial buildings that the business occupies.",
-      "geographic_eligibility": "The program is available statewide but gives priority to projects in Sustainable Communities, Priority Funding Areas, and CDFI Investment Areas.",
+      "program_audience": "Small businesses with fewer than 500 employees, particularly those owned by socially and economically disadvantaged individuals or located in designated investment areas.",
+      "use_of_funds": "Funds can be used for property acquisition, renovation of owner-occupied commercial buildings, purchasing equipment or machinery, and general working capital.",
+      "geographic_eligibility": "Available statewide in Maryland, with priority given to projects in Sustainable Communities, Priority Funding Areas, and CDFI Investment Areas.",
       "requirements_list": [
         "Must be a Maryland-based business",
         "Must have fewer than 500 employees",
         "Most programs require a 1:1 match from private capital",
-        "Commercial real estate must be at least 51% owner-occupied"
+        "Commercial real estate must be at least 51% owner-occupied",
+        "Must demonstrate business viability",
+        "Cannot be in excluded industries like gambling, liquor stores, or adult entertainment"
       ],
-      "application_process_overview": "Interested business owners should email the program to ask for a consultation. Some programs require a $250 application fee. The agency reviews applications as they are submitted.",
+      "application_process_overview": "Interested business owners should email the program for a consultation or submit a completed application package to the agency or through partner lenders like Lendistry or FSC First. Some programs require a $250 application fee.",
       "is_out_of_date": false
     }
   },
@@ -2002,11 +2004,11 @@
   {
     "program_name": "Rental Housing Program (RHP)",
     "agency": "Maryland Department of Housing and Community Development (DHCD)",
-    "summary": "Provides low-interest loans to buy, build, and fix affordable rental homes for low-income families, seniors, and people with disabilities.",
-    "more_details_url": "https://dhcd.maryland.gov/HousingDevelopment/Pages/FinancingPrograms.aspx",
+    "summary": "Provides low-interest loans to help developers buy, build, or renovate affordable rental homes for low-income families, seniors, and people with disabilities. The program offers subordinate loans that work alongside federal funds, tax credits, and bonds.",
+    "more_details_url": "https://dhcd.maryland.gov/HousingDevelopment/Pages/rhf/factsheet.aspx",
     "structured_extraction": {
       "program_name": "Rental Housing Program (RHP)",
-      "program_description": "Provides low-interest loans to buy, build, and fix affordable rental homes for low-income families, seniors, and people with disabilities.",
+      "program_description": "Provides low-interest loans to help developers buy, build, or renovate affordable rental homes for low-income families, seniors, and people with disabilities. The program offers subordinate loans that work alongside federal funds, tax credits, and bonds.",
       "agency": "Maryland Department of Housing and Community Development (DHCD)",
       "list_of_eligible_counties": [
         "All"
@@ -2026,7 +2028,7 @@
         "government"
       ],
       "list_of_eligible_industries": [
-        "Any"
+        "Real Estate and Rental and Leasing"
       ],
       "list_of_prioritized_industries": [
         "Any"
@@ -2034,23 +2036,133 @@
       "assistance_type": [
         "loan"
       ],
-      "assistance_description": "The program offers low-interest state loans. These loans often work alongside federal funds and tax credits.",
-      "URL": "https://dhcd.maryland.gov/HousingDevelopment/Pages/FinancingPrograms.aspx",
+      "assistance_description": "The program provides subordinate loans of up to $2 million. These loans typically have a 2% interest rate and terms up to 40 years.",
+      "URL": "https://dhcd.maryland.gov/HousingDevelopment/Pages/rhf/factsheet.aspx",
       "application_deadline_string": "Listening sessions for the 2026 cycle begin in February 2026.",
       "application_deadline_date": "2026-02-01",
       "contact_name": "Alvin Lawson",
-      "contact_email": "dhcd.qap@maryland.gov",
+      "contact_email": "dhcd.rentalhousing@maryland.gov",
       "contact_phone": "(301) 429-7854",
-      "program_audience": "Non-profit organizations, for-profit developers, and public housing authorities.",
-      "use_of_funds": "The funds cover the costs of buying land, building new homes, or repairing existing rental housing.",
+      "program_audience": "Non-profit organizations, for-profit developers, local government agencies, and public housing authorities.",
+      "use_of_funds": "The funds cover the costs of buying land, building new homes, or repairing existing rental housing, as well as legal, engineering, and architectural fees.",
       "geographic_eligibility": "Projects can be anywhere in Maryland. New construction must be in Priority Funding Areas.",
       "requirements_list": [
-        "You must reserve units for households making 60% of the Area Median Income or less",
-        "You must have control of the project site",
-        "You must show your team has the right experience",
-        "You must pass a credit history review"
+        "Residents must earn 60% or less of the Area Median Income (AMI)",
+        "Applicants must have control of the project site",
+        "Team must demonstrate relevant development experience",
+        "Applicants must pass a credit history review",
+        "Owners must set aside a proportion of units for low-income tenants based on funding received",
+        "Projects must follow the Qualified Allocation Plan (QAP)",
+        "Applications must be submitted through the Multifamily Housing Development Document Library system"
       ],
-      "application_process_overview": "Apply during the yearly competitive round. The agency reviews your team's background and credit. They score your project against others. The Housing Finance Review Committee examines recommendations. The Secretary provides final approval.",
+      "application_process_overview": "Apply during the yearly competitive round via the online Multifamily Housing Development Document Library system. The agency scores projects based on income limits, location, and team background. The Housing Finance Review Committee examines recommendations, and the Secretary provides final approval.",
+      "is_out_of_date": false
+    }
+  },
+  {
+    "program_name": "Partnership Rental Housing Program",
+    "agency": "Maryland Department of Housing and Community Development (DHCD)",
+    "summary": "This program increases the number of affordable rental homes for families with low incomes. It creates partnerships between state and local governments to build or fix housing. It also helps non-government groups create homes for people with disabilities or special needs.",
+    "more_details_url": "https://dhcd.maryland.gov/HousingDevelopment/Pages/prhp/default.aspx",
+    "structured_extraction": {
+      "program_name": "Partnership Rental Housing Program",
+      "program_description": "This program increases the number of affordable rental homes for families with low incomes. It creates partnerships between state and local governments to build or fix housing. It also helps non-government groups create homes for people with disabilities or special needs.",
+      "agency": "Maryland Department of Housing and Community Development (DHCD)",
+      "list_of_eligible_counties": [
+        "All"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "non-profit",
+        "for-profit",
+        "government"
+      ],
+      "list_of_eligible_industries": [
+        "Construction",
+        "Real Estate and Rental and Leasing"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "loan"
+      ],
+      "assistance_description": "The program provides loans where repayment is usually delayed for up to 40 years.",
+      "URL": "https://dhcd.maryland.gov/HousingDevelopment/Pages/prhp/default.aspx",
+      "application_deadline_string": "Ongoing",
+      "application_deadline_date": null,
+      "contact_name": "Housing Development Programs",
+      "contact_email": "dhcd.rentalhousing@maryland.gov",
+      "contact_phone": "301-429-7854",
+      "program_audience": "Local governments, housing authorities, and non-government groups that develop affordable housing.",
+      "use_of_funds": "You can use funds to buy land, build new housing, or renovate existing rental buildings. This includes apartments, townhouses, single-family homes, and shared housing.",
+      "geographic_eligibility": "The program is available throughout the state of Maryland.",
+      "requirements_list": [
+        "Residents must earn 50% or less of the state median income.",
+        "Residents in disability units must earn 30% or less of the Area Median Income (AMI).",
+        "Local governments must provide land or money of equal value from non-state sources.",
+        "Tenants must provide 'Tenant Contributed Services' unless they live in disability or special needs units.",
+        "Loans for large projects cannot exceed $75,000 per unit.",
+        "Loans for small projects with 40 units or fewer cannot exceed $2 million."
+      ],
+      "application_process_overview": "The agency accepts applications at any time. Staff review requests based on the project's goals, how ready the project is to start, and the amount of money available. If you combine this with other state funds, you must follow the rules for those programs as well.",
+      "is_out_of_date": false
+    }
+  },
+  {
+    "program_name": "Rental Housing Works",
+    "agency": "Maryland Department of Housing and Community Development (DHCD)",
+    "summary": "This program provides secondary loans to help build or preserve affordable rental housing. It aims to create jobs and boost Maryland's economy. You must use this loan together with tax-exempt bonds and 4% Low Income Housing Tax Credits.",
+    "more_details_url": "https://dhcd.maryland.gov/HousingDevelopment/Pages/rhw/default.aspx",
+    "structured_extraction": {
+      "program_name": "Rental Housing Works",
+      "program_description": "This program provides secondary loans to help build or preserve affordable rental housing. It aims to create jobs and boost Maryland's economy. You must use this loan together with tax-exempt bonds and 4% Low Income Housing Tax Credits.",
+      "agency": "Maryland Department of Housing and Community Development (DHCD)",
+      "list_of_eligible_counties": [
+        "All"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [
+        "Priority Funding Areas"
+      ],
+      "eligible_organization_types": [
+        "non-profit",
+        "for-profit",
+        "government"
+      ],
+      "list_of_eligible_industries": [
+        "Real Estate and Rental and Leasing"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "loan"
+      ],
+      "assistance_description": "The program offers a loan to fill funding gaps. The loan typically has a 40-year term and a 2% interest rate. You make payments using 75% of your annual cash flow.",
+      "URL": "https://dhcd.maryland.gov/HousingDevelopment/Pages/rhw/default.aspx",
+      "application_deadline_string": "Ongoing",
+      "application_deadline_date": null,
+      "contact_name": "Alvin Lawson",
+      "contact_email": "dhcd.rentalhousing@maryland.gov",
+      "contact_phone": "1-800-543-4505",
+      "program_audience": "Non-profit and for-profit developers, county and municipal governments, and local housing authorities.",
+      "use_of_funds": "You can use the money to buy land, build new homes, or fix existing rental units. You can also pay for design fees and legal costs. You cannot use the money as cash security for short-term bonds.",
+      "geographic_eligibility": "The program is available throughout Maryland. All new construction projects must be located within Priority Funding Areas.",
+      "requirements_list": [
+        "You must use these funds with DHCD tax-exempt bonds and 4% Low Income Housing Tax Credits.",
+        "You must show that you have the required zoning for the project.",
+        "You must document projected full-time jobs using the program's calculator.",
+        "The Board of Public Works must approve all funding awards.",
+        "You must have all other required funding already awarded.",
+        "Most residents must have incomes at or below 60% of the area median income."
+      ],
+      "application_process_overview": "Submit your application through the online document library. The agency reviews applications in the order they receive them. They check if you meet the basic rules and then score your project. If you pass, the agency will meet with you to discuss the next steps. Funding is given to projects that are ready to start first.",
       "is_out_of_date": false
     }
   },
@@ -2173,59 +2285,6 @@
         "Loan terms cannot exceed 30 years or the useful life of the project."
       ],
       "application_process_overview": "Applicants must complete a credit-worthiness evaluation similar to a bond rating review. You can submit an 'Expression of Interest' form if you need technical help before you apply.",
-      "is_out_of_date": false
-    }
-  },
-  {
-    "program_name": "Partnership Rental Housing Program",
-    "agency": "Maryland Department of Housing and Community Development (DHCD)",
-    "summary": "This program increases the number of affordable rental homes for families with low incomes. It creates partnerships between state and local governments to build or fix housing. It also helps non-government groups create homes for people with disabilities or special needs.",
-    "more_details_url": "https://dhcd.maryland.gov/HousingDevelopment/Pages/prhp/default.aspx",
-    "structured_extraction": {
-      "program_name": "Partnership Rental Housing Program",
-      "program_description": "This program increases the number of affordable rental homes for families with low incomes. It creates partnerships between state and local governments to build or fix housing. It also helps non-government groups create homes for people with disabilities or special needs.",
-      "agency": "Maryland Department of Housing and Community Development (DHCD)",
-      "list_of_eligible_counties": [
-        "All"
-      ],
-      "list_of_prioritized_counties": [
-        "All"
-      ],
-      "list_of_incentive_areas": [],
-      "eligible_organization_types": [
-        "non-profit",
-        "for-profit",
-        "government"
-      ],
-      "list_of_eligible_industries": [
-        "Construction",
-        "Real Estate and Rental and Leasing"
-      ],
-      "list_of_prioritized_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "loan"
-      ],
-      "assistance_description": "The program provides loans where repayment is usually delayed for up to 40 years.",
-      "URL": "https://dhcd.maryland.gov/HousingDevelopment/Pages/prhp/default.aspx",
-      "application_deadline_string": "Ongoing",
-      "application_deadline_date": null,
-      "contact_name": "Housing Development Programs",
-      "contact_email": "dhcd.rentalhousing@maryland.gov",
-      "contact_phone": "301-429-7854",
-      "program_audience": "Local governments, housing authorities, and non-government groups that develop affordable housing.",
-      "use_of_funds": "You can use funds to buy land, build new housing, or renovate existing rental buildings. This includes apartments, townhouses, single-family homes, and shared housing.",
-      "geographic_eligibility": "The program is available throughout the state of Maryland.",
-      "requirements_list": [
-        "Residents must earn 50% or less of the state median income.",
-        "Residents in disability units must earn 30% or less of the Area Median Income (AMI).",
-        "Local governments must provide land or money of equal value from non-state sources.",
-        "Tenants must provide 'Tenant Contributed Services' unless they live in disability or special needs units.",
-        "Loans for large projects cannot exceed $75,000 per unit.",
-        "Loans for small projects with 40 units or fewer cannot exceed $2 million."
-      ],
-      "application_process_overview": "The agency accepts applications at any time. Staff review requests based on the project's goals, how ready the project is to start, and the amount of money available. If you combine this with other state funds, you must follow the rules for those programs as well.",
       "is_out_of_date": false
     }
   },
@@ -2522,112 +2581,6 @@
     }
   },
   {
-    "program_name": "Rental Housing Program",
-    "agency": "Maryland Department of Housing and Community Development",
-    "summary": "The program helps developers build or renovate affordable rental homes. It offers low-interest loans that work with other funding sources like tax credits and bonds.",
-    "more_details_url": "https://dhcd.maryland.gov/HousingDevelopment/Pages/rhf/factsheet.aspx",
-    "structured_extraction": {
-      "program_name": "Rental Housing Program",
-      "program_description": "The program helps developers build or renovate affordable rental homes. It offers low-interest loans that work with other funding sources like tax credits and bonds.",
-      "agency": "Maryland Department of Housing and Community Development",
-      "list_of_eligible_counties": [
-        "All"
-      ],
-      "list_of_prioritized_counties": [
-        "All"
-      ],
-      "list_of_incentive_areas": [
-        "Priority Funding Areas"
-      ],
-      "eligible_organization_types": [
-        "non-profit",
-        "for-profit",
-        "government"
-      ],
-      "list_of_eligible_industries": [
-        "Real Estate and Rental and Leasing"
-      ],
-      "list_of_prioritized_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "loan"
-      ],
-      "assistance_description": "The program provides subordinate loans of up to $2 million. These loans have a 2% interest rate and terms up to 40 years.",
-      "URL": "https://dhcd.maryland.gov/HousingDevelopment/Pages/rhf/factsheet.aspx",
-      "application_deadline_string": "TBD following the release of the 2026 Guide and QAP",
-      "application_deadline_date": null,
-      "contact_name": "Alvin Lawson",
-      "contact_email": "dhcd.rentalhousing@maryland.gov",
-      "contact_phone": "301-429-7854",
-      "program_audience": "For-profit and non-profit developers, and local government agencies building affordable rental housing.",
-      "use_of_funds": "Developers use these funds to buy, build, or renovate rental housing. The funds also cover costs like legal fees, engineering, and architectural design.",
-      "geographic_eligibility": "The program serves all of Maryland. Projects involving new construction must be in Priority Funding Areas.",
-      "requirements_list": [
-        "Residents must earn 60% or less of the area's median income.",
-        "Owners must set aside a proportion of units for low-income tenants based on the amount of funding received.",
-        "Projects must follow the Qualified Allocation Plan (QAP).",
-        "Applicants must submit materials through the Multifamily Housing Development Document Library system."
-      ],
-      "application_process_overview": "The department holds competitive rounds to award funds. Applicants submit documents through an online system during open windows. The agency reviews each project based on its income limits, location, and length of unit restriction.",
-      "is_out_of_date": false
-    }
-  },
-  {
-    "program_name": "Rental Housing Works",
-    "agency": "Maryland Department of Housing and Community Development (DHCD)",
-    "summary": "This program provides secondary loans to help build or preserve affordable rental housing. It aims to create jobs and boost Maryland's economy. You must use this loan together with tax-exempt bonds and 4% Low Income Housing Tax Credits.",
-    "more_details_url": "https://dhcd.maryland.gov/HousingDevelopment/Pages/rhw/default.aspx",
-    "structured_extraction": {
-      "program_name": "Rental Housing Works",
-      "program_description": "This program provides secondary loans to help build or preserve affordable rental housing. It aims to create jobs and boost Maryland's economy. You must use this loan together with tax-exempt bonds and 4% Low Income Housing Tax Credits.",
-      "agency": "Maryland Department of Housing and Community Development (DHCD)",
-      "list_of_eligible_counties": [
-        "All"
-      ],
-      "list_of_prioritized_counties": [
-        "All"
-      ],
-      "list_of_incentive_areas": [
-        "Priority Funding Areas"
-      ],
-      "eligible_organization_types": [
-        "non-profit",
-        "for-profit",
-        "government"
-      ],
-      "list_of_eligible_industries": [
-        "Real Estate and Rental and Leasing"
-      ],
-      "list_of_prioritized_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "loan"
-      ],
-      "assistance_description": "The program offers a loan to fill funding gaps. The loan typically has a 40-year term and a 2% interest rate. You make payments using 75% of your annual cash flow.",
-      "URL": "https://dhcd.maryland.gov/HousingDevelopment/Pages/rhw/default.aspx",
-      "application_deadline_string": "Ongoing",
-      "application_deadline_date": null,
-      "contact_name": "Alvin Lawson",
-      "contact_email": "dhcd.rentalhousing@maryland.gov",
-      "contact_phone": "1-800-543-4505",
-      "program_audience": "Non-profit and for-profit developers, county and municipal governments, and local housing authorities.",
-      "use_of_funds": "You can use the money to buy land, build new homes, or fix existing rental units. You can also pay for design fees and legal costs. You cannot use the money as cash security for short-term bonds.",
-      "geographic_eligibility": "The program is available throughout Maryland. All new construction projects must be located within Priority Funding Areas.",
-      "requirements_list": [
-        "You must use these funds with DHCD tax-exempt bonds and 4% Low Income Housing Tax Credits.",
-        "You must show that you have the required zoning for the project.",
-        "You must document projected full-time jobs using the program's calculator.",
-        "The Board of Public Works must approve all funding awards.",
-        "You must have all other required funding already awarded.",
-        "Most residents must have incomes at or below 60% of the area median income."
-      ],
-      "application_process_overview": "Submit your application through the online document library. The agency reviews applications in the order they receive them. They check if you meet the basic rules and then score your project. If you pass, the agency will meet with you to discuss the next steps. Funding is given to projects that are ready to start first.",
-      "is_out_of_date": false
-    }
-  },
-  {
     "program_name": "Section 811 Project Rental Assistance Program",
     "agency": "Maryland Department of Housing and Community Development (DHCD)",
     "summary": "This program provides rental help for adults with disabilities. It helps people with very low incomes live in apartments within their community. The program pays a portion of the rent directly to the landlord so the tenant can live independently.",
@@ -2841,11 +2794,11 @@
   {
     "program_name": "EmPOWER Maryland Limited Income Energy Efficiency Program (LIEEP) / Weatherization Assistance Program (WAP)",
     "agency": "Maryland Department of Housing and Community Development (DHCD)",
-    "summary": "This program provides energy audits and weatherization services to households with limited income to lower energy bills and improve home efficiency and safety through insulation, air sealing, and equipment repairs.",
+    "summary": "This program provides no-cost energy audits and weatherization services to households with limited income in Maryland. Administered by the DHCD, it helps residents lower energy bills by improving home efficiency and safety through insulation, air sealing, lighting retrofits, and repair or replacement of heating and cooling systems.",
     "more_details_url": "https://dhcd.maryland.gov/Energy-Home-Repair/Pages/Homeowner-Grants/EmPOWER.aspx",
     "structured_extraction": {
       "program_name": "EmPOWER Maryland Limited Income Energy Efficiency Program (LIEEP) / Weatherization Assistance Program (WAP)",
-      "program_description": "This program provides energy audits and weatherization services to households with limited income to lower energy bills and improve home efficiency and safety through insulation, air sealing, and equipment repairs.",
+      "program_description": "This program provides no-cost energy audits and weatherization services to households with limited income in Maryland. Administered by the DHCD, it helps residents lower energy bills by improving home efficiency and safety through insulation, air sealing, lighting retrofits, and repair or replacement of heating and cooling systems.",
       "agency": "Maryland Department of Housing and Community Development (DHCD)",
       "list_of_eligible_counties": [
         "All"
@@ -2871,26 +2824,29 @@
         "Any"
       ],
       "assistance_type": [
-        "grant"
+        "grant",
+        "loan"
       ],
-      "assistance_description": "The program provides grants, energy-saving equipment, and direct services to pay for energy audits, weatherization measures, and health or safety repairs at no cost to the resident.",
+      "assistance_description": "The program provides grants for direct energy-saving equipment and home repairs at no charge. It covers home energy audits, weatherization measures, and health or safety repairs. Loans may be available for broader home repair needs through related DHCD sub-programs.",
       "URL": "https://dhcd.maryland.gov/Energy-Home-Repair/Pages/Homeowner-Grants/EmPOWER.aspx",
-      "application_deadline_string": "Ongoing; Competitive rounds for network partners occur at least every three years.",
+      "application_deadline_string": "Rolling / Ongoing",
       "application_deadline_date": null,
       "contact_name": "Seth Fawcett (EmPOWER); Patrick Hall (BeSMART)",
       "contact_email": "Seth.Fawcett@maryland.gov",
-      "contact_phone": "1-855-583-8976 / 844-400-3423",
-      "program_audience": "Low-income homeowners, renters, and contractors specializing in home improvement, HVACR, or weatherization.",
-      "use_of_funds": "Funds pay for insulation, air sealing, HVAC repair or replacement, water heater replacements, LED lighting, and health and safety improvements.",
-      "geographic_eligibility": "The program is available statewide in all Maryland counties through Local Weatherization Agencies to customers of BGE, Delmarva Power, FirstEnergy, Pepco, SMECO, and Washington Gas.",
+      "contact_phone": "1-855-583-8976",
+      "program_audience": "Maryland homeowners and renters with limited household income (generally at or below 250% of the Federal Poverty Level), and contractors specializing in HVACR, MHIC, or weatherization.",
+      "use_of_funds": "Funds cover insulation, air sealing, heating and cooling repairs/replacements, water heater upgrades, LED lighting, and health/safety improvements.",
+      "geographic_eligibility": "The program is available statewide across Maryland. Participation is generally available to customers of BGE, Delmarva Power, FirstEnergy, Pepco, SMECO, and Washington Gas.",
       "requirements_list": [
-        "Household income must be at or below 250% of the Federal Poverty Level",
-        "Building must be a single-family home, multifamily home, or manufactured home",
-        "Contractors must hold a Maryland HVACR or MHIC license and register on eMMA",
-        "Applicants must provide proof of income and recent utility bills",
-        "The home must have an energy audit and a follow-up evaluation after work is completed"
+        "Household income must be at or below 250% of the Federal Poverty Level.",
+        "Applicants must be Maryland homeowners or renters.",
+        "Building must be a single-family home, multifamily home, or manufactured home.",
+        "Applicants must provide proof of income and recent utility bills.",
+        "The home must undergo an energy audit and a follow-up evaluation.",
+        "Contractors must hold a Maryland HVACR or MHIC license and register on eMaryland Marketplace Advantage (eMMA).",
+        "Priority is given to elderly residents, persons with disabilities, and families with children."
       ],
-      "application_process_overview": "First, complete the DHCD Energy and Repair Programs Application and submit it by mail or through a local agency. Second, the agency conducts an energy audit. Third, a work order is created and contractors install improvements. Finally, the agency inspects the completed work to ensure quality.",
+      "application_process_overview": "1. Call 1-855-583-8976 or contact a local agency to verify eligibility. 2. Complete and submit the DHCD Energy and Repair Programs Application by mail or through a local agency. 3. The agency conducts a home energy audit to identify needed improvements. 4. A work order is created and licensed contractors perform the installations. 5. The agency inspects the completed work for quality assurance.",
       "is_out_of_date": false
     }
   },
@@ -2946,11 +2902,11 @@
   {
     "program_name": "Community Schools Rental Assistance Program (CSRAP)",
     "agency": "Maryland Department of Housing and Community Development (DHCD)",
-    "summary": "The Community Schools Rental Assistance Program (CSRAP) provides emergency financial assistance to families with students enrolled in Maryland Community Schools. Administered by the Maryland Department of Housing and Community Development (DHCD) through local partners, the program helps pay for rent and utilities to prevent eviction and homelessness.",
+    "summary": "The Community Schools Rental Assistance Program (CSRAP) provides emergency financial assistance to families with students enrolled in community schools to pay for rent and utilities, preventing eviction and homelessness.",
     "more_details_url": "https://dhcd.maryland.gov/HomelessSolutions/Pages/Community-Schools.aspx",
     "structured_extraction": {
       "program_name": "Community Schools Rental Assistance Program (CSRAP)",
-      "program_description": "The Community Schools Rental Assistance Program (CSRAP) provides emergency financial assistance to families with students enrolled in Maryland Community Schools. Administered by the Maryland Department of Housing and Community Development (DHCD) through local partners, the program helps pay for rent and utilities to prevent eviction and homelessness.",
+      "program_description": "The Community Schools Rental Assistance Program (CSRAP) provides emergency financial assistance to families with students enrolled in community schools to pay for rent and utilities, preventing eviction and homelessness.",
       "agency": "Maryland Department of Housing and Community Development (DHCD)",
       "list_of_eligible_counties": [
         "Anne Arundel",
@@ -2978,121 +2934,25 @@
       "assistance_type": [
         "grant"
       ],
-      "assistance_description": "The program offers grants to help pay for past-due rent, utility bills, late fees, court fees, security deposits, first month's rent, relocation costs, and future housing costs.",
+      "assistance_description": "The program offers grants to cover past-due rent, utility bills, late fees, court fees, security deposits, first month's rent, and future housing or relocation costs.",
       "URL": "https://dhcd.maryland.gov/HomelessSolutions/Pages/Community-Schools.aspx",
       "application_deadline_string": null,
       "application_deadline_date": null,
       "contact_name": null,
       "contact_email": "homelessness.dhcd@maryland.gov",
       "contact_phone": "301-797-4161",
-      "program_audience": "Families with students enrolled in Maryland Community Schools who need help with housing costs or are at risk of eviction.",
-      "use_of_funds": "Funds cover past due rent, utility bills, late fees, and court fees. You can also use money for moving costs, security deposits, first month's rent, and future housing costs.",
+      "program_audience": "Families with students enrolled in Maryland Community Schools who are homeless or at risk of eviction.",
+      "use_of_funds": "Funds cover past due rent, utility bills, late fees, court fees, moving costs, security deposits, first month's rent, and future housing costs.",
       "geographic_eligibility": "The program is available in Anne Arundel, Baltimore City, Baltimore, Frederick, Montgomery, Prince George's, Washington, and Wicomico counties for households with students in Community Schools.",
       "requirements_list": [
-        "You must have a student enrolled in a Community School.",
+        "You must have a student enrolled in a designated Community School.",
         "You must live in a participating county.",
-        "You must be a renter and head of household.",
+        "You must be a renter.",
         "You must be facing housing instability like eviction or homelessness.",
+        "You must be the head of your household.",
         "Your landlord must agree to participate and verify information."
       ],
-      "application_process_overview": "Visit the DHCD website to select your county and follow the link to your local application portal. In Washington County, applications are managed by the Washington County Community Action Council (WCCAC) through an online portal; staff will verify details with your landlord and contact you regarding approval.",
-      "is_out_of_date": false
-    }
-  },
-  {
-    "program_name": "Whole Home Energy and Repair",
-    "agency": "Maryland Department of Housing and Community Development (DHCD)",
-    "summary": "This program helps Maryland homeowners and renters improve energy efficiency in their homes. It provides resources for upgrades like insulation, hot water systems, and furnace repairs to lower energy costs and improve comfort.",
-    "more_details_url": "https://dhcd.maryland.gov/Energy-Home-Repair/Pages/default.aspx",
-    "structured_extraction": {
-      "program_name": "Whole Home Energy and Repair",
-      "program_description": "This program helps Maryland homeowners and renters improve energy efficiency in their homes. It provides resources for upgrades like insulation, hot water systems, and furnace repairs to lower energy costs and improve comfort.",
-      "agency": "Maryland Department of Housing and Community Development (DHCD)",
-      "list_of_eligible_counties": [
-        "All"
-      ],
-      "list_of_prioritized_counties": [
-        "All"
-      ],
-      "list_of_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "list_of_eligible_industries": [
-        "Any"
-      ],
-      "list_of_prioritized_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "grant",
-        "loan"
-      ],
-      "assistance_description": "The program offers grants for direct energy efficiency services and loans for home repairs. Sub-programs provide no-charge upgrades and system replacements for eligible households.",
-      "URL": "https://dhcd.maryland.gov/Energy-Home-Repair/Pages/default.aspx",
-      "application_deadline_string": "Rolling",
-      "application_deadline_date": null,
-      "contact_name": null,
-      "contact_email": null,
-      "contact_phone": "1-855-583-8976",
-      "program_audience": "Maryland homeowners and renters, specifically those with limited household income.",
-      "use_of_funds": "Residents use funds for air infiltration reduction, insulation, hot water system improvements, lighting retrofits, and HVAC repairs or replacements.",
-      "geographic_eligibility": "The program is available statewide across Maryland. Some sub-programs require you to be a customer of specific utilities like BGE, FirstEnergy, Delmarva Power, Pepco, or SMECO.",
-      "requirements_list": [
-        "You must be a homeowner or renter in Maryland.",
-        "Your household income must meet specific limits, generally at or below 250% of the Federal Poverty Level.",
-        "To qualify for system repairs, your heating, cooling, or water heating system must be non-functioning.",
-        "Priority is given to elderly residents, persons with disabilities, and families with children."
-      ],
-      "application_process_overview": "Interested residents should call 1-855-583-8976 to connect with a local agency. The local agency reviews your eligibility and manages the installation of energy-saving measures.",
-      "is_out_of_date": false
-    }
-  },
-  {
-    "program_name": "Maryland Energy Assistance Program (MEAP)",
-    "agency": "Maryland Department of Housing and Community Development (DHCD)",
-    "summary": "This program helps eligible homeowners and renters repair or replace broken heating, cooling, and water heating systems. The program provides these services at no cost to help keep homes comfortable.",
-    "more_details_url": "https://dhcd.maryland.gov/Energy-Home-Repair/Pages/Homeowner-Grants/MEAP.aspx",
-    "structured_extraction": {
-      "program_name": "Maryland Energy Assistance Program (MEAP)",
-      "program_description": "This program helps eligible homeowners and renters repair or replace broken heating, cooling, and water heating systems. The program provides these services at no cost to help keep homes comfortable.",
-      "agency": "Maryland Department of Housing and Community Development (DHCD)",
-      "list_of_eligible_counties": [
-        "All"
-      ],
-      "list_of_prioritized_counties": [
-        "Allegany",
-        "Garrett"
-      ],
-      "list_of_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "list_of_eligible_industries": [
-        "Any"
-      ],
-      "list_of_prioritized_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "grant"
-      ],
-      "assistance_description": "The program provides no-cost repairs or replacements for non-functioning heating, cooling, and water heating systems. It does not help pay utility bills.",
-      "URL": "https://dhcd.maryland.gov/Energy-Home-Repair/Pages/Homeowner-Grants/MEAP.aspx",
-      "application_deadline_string": "Year-round",
-      "application_deadline_date": null,
-      "contact_name": "Housing and Building Energy Programs",
-      "contact_email": null,
-      "contact_phone": "1-855-583-8976",
-      "program_audience": "Maryland homeowners and renters with low incomes who have broken HVAC systems.",
-      "use_of_funds": "Funds pay for the repair or replacement of heating, cooling, and water heating systems.",
-      "geographic_eligibility": "The program is available statewide. Residents of Allegany and Garrett counties may receive special flood-related assistance.",
-      "requirements_list": [
-        "Household income must be 200% or less of the Federal Poverty Level.",
-        "The home must have a non-functioning heating, cooling, or water heating system.",
-        "People who receive SNAP, TANF, SSI, or HUD housing assistance are automatically income-eligible."
-      ],
-      "application_process_overview": "First, you submit an application and all required documents to the agency. Next, the agency reviews your eligibility. Then, a local agency schedules an assessment of your home. Finally, the agency schedules a contractor to perform the recommended repairs.",
+      "application_process_overview": "Visit the DHCD program website and select your county. Follow the link to your local county's application portal (e.g., Washington County Community Action Council for Washington County). Typically involves an online application followed by landlord verification and staff review.",
       "is_out_of_date": false
     }
   },
@@ -3363,67 +3223,14 @@
     }
   },
   {
-    "program_name": "SSBCI Neighborhood BusinessWorks (NBW) Programs",
+    "program_name": "SSBCI NBW Loan to Lender Program",
     "agency": "Maryland Department of Housing and Community Development (DHCD)",
-    "summary": "This program provides financial help to small businesses in Maryland. It offers loans and venture capital to help businesses buy property, get equipment, and grow.",
-    "more_details_url": "https://dhcd.maryland.gov/Business/Pages/SSBCI/SSBCI-NBW.aspx",
-    "structured_extraction": {
-      "program_name": "SSBCI Neighborhood BusinessWorks (NBW) Programs",
-      "program_description": "This program provides financial help to small businesses in Maryland. It offers loans and venture capital to help businesses buy property, get equipment, and grow.",
-      "agency": "Maryland Department of Housing and Community Development (DHCD)",
-      "list_of_eligible_counties": [
-        "All"
-      ],
-      "list_of_prioritized_counties": [
-        "All"
-      ],
-      "list_of_incentive_areas": [],
-      "eligible_organization_types": [
-        "for-profit",
-        "non-profit"
-      ],
-      "list_of_eligible_industries": [
-        "Manufacturing",
-        "Other Services (except Public Administration)",
-        "Retail Trade",
-        "Professional, Scientific, and Technical Services"
-      ],
-      "list_of_prioritized_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "loan"
-      ],
-      "assistance_description": "Small businesses can get loans between $350,000 and $5,000,000. The program also offers venture capital and loans for lenders to help small businesses.",
-      "URL": "https://dhcd.maryland.gov/Business/Pages/SSBCI/SSBCI-NBW.aspx",
-      "application_deadline_string": "First-come, first-served basis",
-      "application_deadline_date": null,
-      "contact_name": null,
-      "contact_email": "dhcd.ssbci@maryland.gov",
-      "contact_phone": "301-429-7400",
-      "program_audience": "Small businesses with fewer than 500 employees, businesses owned by disadvantaged individuals, and community lenders.",
-      "use_of_funds": "You can use the funds to buy or renovate business buildings, purchase machinery, or pay for general business operations.",
-      "geographic_eligibility": "Businesses must be in Maryland and must be located in a CDFI Investment Area.",
-      "requirements_list": [
-        "Must have fewer than 500 employees",
-        "Must provide a private money match of at least 1:1",
-        "Must provide collateral and personal guarantees",
-        "Must show the business is viable",
-        "Cannot be in excluded industries like gambling, liquor stores, or adult entertainment"
-      ],
-      "application_process_overview": "Submit a completed loan application package to the agency. You can also apply through partner lenders like Lendistry, FSC First, or NCRC.",
-      "is_out_of_date": false
-    }
-  },
-  {
-    "program_name": "NBW Loan to Lender Program",
-    "agency": "Maryland Department of Housing and Community Development",
-    "summary": "This program provides loans to Community Development Financial Institutions (CDFIs). These organizations then lend the money to small businesses to help them grow and succeed.",
+    "summary": "This program provides loans to Community Development Financial Institutions (CDFIs) which then lend the money to small businesses in Maryland to help them grow and succeed. The program prioritizes businesses owned by socially and economically disadvantaged individuals and those located in specific investment areas.",
     "more_details_url": "https://dhcd.maryland.gov/Business/Pages/SSBCI/SSBCI-NBW.aspx#CDFILoan",
     "structured_extraction": {
-      "program_name": "NBW Loan to Lender Program",
-      "program_description": "This program provides loans to Community Development Financial Institutions (CDFIs). These organizations then lend the money to small businesses to help them grow and succeed.",
-      "agency": "Maryland Department of Housing and Community Development",
+      "program_name": "SSBCI NBW Loan to Lender Program",
+      "program_description": "This program provides loans to Community Development Financial Institutions (CDFIs) which then lend the money to small businesses in Maryland to help them grow and succeed. The program prioritizes businesses owned by socially and economically disadvantaged individuals and those located in specific investment areas.",
+      "agency": "Maryland Department of Housing and Community Development (DHCD)",
       "list_of_eligible_counties": [
         "All"
       ],
@@ -3451,16 +3258,16 @@
       "contact_name": "SSBCI Program Team",
       "contact_email": "dhcd.ssbci@maryland.gov",
       "contact_phone": "301-429-7400",
-      "program_audience": "Community Development Financial Institutions that serve small businesses.",
+      "program_audience": "Community Development Financial Institutions (CDFIs) that serve Maryland small businesses.",
       "use_of_funds": "Lenders must use the funds to provide loans to small businesses. They must combine this money with private funds.",
-      "geographic_eligibility": "The program focuses on businesses located in CDFI Investment Areas.",
+      "geographic_eligibility": "The program prioritizes lending in CDFI Investment Areas across Maryland.",
       "requirements_list": [
         "Lenders must keep 20% of the risk.",
         "Lenders must provide proof of private capital matching.",
         "The program targets a 4:1 private match for most businesses.",
-        "The program targets a 2.3:1 match for socially disadvantaged or very small businesses."
+        "The program targets a 2.3:1 match for socially and economically disadvantaged individuals or very small businesses."
       ],
-      "application_process_overview": "Download and complete the specific Loan to Lender PDF application from the program website and submit it for review.",
+      "application_process_overview": "Interested CDFIs must download and submit the Loan to Lender Application PDF from the DHCD website for review.",
       "is_out_of_date": false
     }
   },
@@ -3513,54 +3320,6 @@
         "Priority for Socially and Economically Disadvantaged Individual (SEDI) owned businesses."
       ],
       "application_process_overview": "Interested businesses should email the SSBCI team at dhcd.ssbci@maryland.gov to begin the inquiry process.",
-      "is_out_of_date": false
-    }
-  },
-  {
-    "program_name": "SSBCI NBW Loan to Lender Program",
-    "agency": "Maryland Department of Housing and Community Development (DHCD)",
-    "summary": "This program provides loans to Community Development Financial Institutions (CDFIs). These CDFIs then lend the money to small businesses in Maryland. The program helps businesses owned by socially and economically disadvantaged individuals and businesses located in specific investment areas.",
-    "more_details_url": "https://dhcd.maryland.gov/Business/Pages/SSBCI/SSBCI-NBW.aspx#ParticipatingCDFIs",
-    "structured_extraction": {
-      "program_name": "SSBCI NBW Loan to Lender Program",
-      "program_description": "This program provides loans to Community Development Financial Institutions (CDFIs). These CDFIs then lend the money to small businesses in Maryland. The program helps businesses owned by socially and economically disadvantaged individuals and businesses located in specific investment areas.",
-      "agency": "Maryland Department of Housing and Community Development (DHCD)",
-      "list_of_eligible_counties": [
-        "All"
-      ],
-      "list_of_prioritized_counties": [
-        "All"
-      ],
-      "list_of_incentive_areas": [],
-      "eligible_organization_types": [
-        "non-profit",
-        "for-profit"
-      ],
-      "list_of_eligible_industries": [
-        "Any"
-      ],
-      "list_of_prioritized_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "loan"
-      ],
-      "assistance_description": "The agency provides loans ranging from $500,000 to $15,000,000 to CDFIs to relend to small businesses.",
-      "URL": "https://dhcd.maryland.gov/Business/Pages/SSBCI/SSBCI-NBW.aspx#ParticipatingCDFIs",
-      "application_deadline_string": "First-come, first-served",
-      "application_deadline_date": null,
-      "contact_name": null,
-      "contact_email": "dhcd.ssbci@maryland.gov",
-      "contact_phone": null,
-      "program_audience": "Community Development Financial Institutions (CDFIs) that support Maryland small businesses.",
-      "use_of_funds": "CDFIs use these loans to provide capital to small businesses. The funding must be combined with a private capital match.",
-      "geographic_eligibility": "The program prioritizes lending in CDFI Investment Areas across Maryland.",
-      "requirements_list": [
-        "CDFIs must keep 20% of the loan amount at risk.",
-        "CDFIs must target a private capital match of 4:1 for most businesses.",
-        "CDFIs must target a private capital match of 2.3:1 for businesses owned by socially and economically disadvantaged individuals or very small businesses."
-      ],
-      "application_process_overview": "Interested CDFIs must download and submit the Loan to Lender Application PDF from the DHCD website.",
       "is_out_of_date": false
     }
   },
@@ -4227,11 +3986,11 @@
   {
     "program_name": "Ride Assist Program",
     "agency": "Washington County Transit (WCT)",
-    "summary": "The Ride Assist Program helps elderly residents and people with disabilities pay for taxi rides. The program provides discounted vouchers that save users at least 50% on taxi fares for general transportation needs.",
+    "summary": "The Ride Assist Program, part of the Statewide Special Transportation Assistance Program (SSTAP), helps elderly residents and people with disabilities pay for taxi rides. The program provides discounted vouchers that save users at least 50% on taxi fares for general transportation needs, specifically for those who cannot use standard fixed-route bus systems.",
     "more_details_url": "https://www.washco-md.net/transit/ride-assist-program-faq/",
     "structured_extraction": {
       "program_name": "Ride Assist Program",
-      "program_description": "The Ride Assist Program helps elderly residents and people with disabilities pay for taxi rides. The program provides discounted vouchers that save users at least 50% on taxi fares for general transportation needs.",
+      "program_description": "The Ride Assist Program, part of the Statewide Special Transportation Assistance Program (SSTAP), helps elderly residents and people with disabilities pay for taxi rides. The program provides discounted vouchers that save users at least 50% on taxi fares for general transportation needs, specifically for those who cannot use standard fixed-route bus systems.",
       "agency": "Washington County Transit (WCT)",
       "list_of_eligible_counties": [
         "Washington"
@@ -4252,71 +4011,25 @@
       "assistance_type": [
         "grant"
       ],
-      "assistance_description": "The program provides discounted vouchers for taxi rides. These vouchers give users a savings of at least 50% on their fares.",
+      "assistance_description": "The program provides discounted vouchers for taxi rides. These vouchers give users a savings of at least 50% on their fares, effectively providing a voucher-based subsidy that reduces the cost of transportation services.",
       "URL": "https://www.washco-md.net/transit/ride-assist-program-faq/",
       "application_deadline_string": "June 30 annually",
       "application_deadline_date": "2026-06-30",
       "contact_name": "Washington County Transit Department",
       "contact_email": "transit@washco-md.net",
       "contact_phone": "240-313-2750",
-      "program_audience": "Elderly residents and individuals with disabilities who live in Washington County.",
-      "use_of_funds": "Vouchers pay for general taxi transportation through registered providers. You cannot use vouchers to tip drivers.",
+      "program_audience": "Senior citizens aged 60 and older and individuals with documented disabilities who live in Washington County and are unable to use fixed-route buses.",
+      "use_of_funds": "Participants use vouchers to pay for general taxi transportation through registered providers. You cannot use vouchers to tip drivers.",
       "geographic_eligibility": "This program is only available to residents of Washington County, Maryland.",
       "requirements_list": [
         "Must be a Washington County resident",
-        "Must be age 60 or older, or have a disability",
+        "Must be age 60 or older, or have a documented disability",
         "Must be unable to use fixed-route buses",
         "Applicants under age 60 must have a healthcare professional certify their disability",
+        "Must submit a completed application and proof of eligibility",
         "Must renew the application every year"
       ],
-      "application_process_overview": "First, pick up an application at the transit office or request one by mail. Second, fill out the form and include medical certification if you are under age 60. Third, mail the form or drop it off at the office; the agency does not accept faxes. Fourth, once approved, buy vouchers in person or by mail. Finally, use the vouchers to pay for rides from participating taxi companies.",
-      "is_out_of_date": false
-    }
-  },
-  {
-    "program_name": "Statewide Special Transportation Assistance Program (SSTAP) - Washington County Ride Assist",
-    "agency": "Washington County Transit",
-    "summary": "This program provides discounted transportation vouchers to senior citizens and people with disabilities. It helps individuals who cannot use the standard fixed-route bus system.",
-    "more_details_url": "https://www.washco-md.net/transit/ride-assist-program-faq/",
-    "structured_extraction": {
-      "program_name": "Statewide Special Transportation Assistance Program (SSTAP) - Washington County Ride Assist",
-      "program_description": "This program provides discounted transportation vouchers to senior citizens and people with disabilities. It helps individuals who cannot use the standard fixed-route bus system.",
-      "agency": "Washington County Transit",
-      "list_of_eligible_counties": [
-        "Washington"
-      ],
-      "list_of_prioritized_counties": [
-        "All"
-      ],
-      "list_of_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "list_of_eligible_industries": [
-        "Any"
-      ],
-      "list_of_prioritized_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "grant"
-      ],
-      "assistance_description": "The program provides a voucher-based subsidy that reduces the cost of transportation services.",
-      "URL": "https://www.washco-md.net/transit/ride-assist-program-faq/",
-      "application_deadline_string": "Vouchers and applications expire annually on June 30.",
-      "application_deadline_date": "2026-06-30",
-      "contact_name": null,
-      "contact_email": "transit@washco-md.net",
-      "contact_phone": "240-313-2750",
-      "program_audience": "Senior citizens aged 60 and older and individuals with documented disabilities.",
-      "use_of_funds": "Participants use vouchers to pay for transportation services from participating taxi and transportation companies.",
-      "geographic_eligibility": "This program is available to residents of Washington County, Maryland.",
-      "requirements_list": [
-        "Must be 60 years of age or older or have a documented disability",
-        "Must be unable to use the fixed-route bus system",
-        "Must submit a completed application and proof of eligibility"
-      ],
-      "application_process_overview": "First, submit an application to Washington County Transit. Second, provide the required proof of age or disability. Third, purchase vouchers once the agency approves your application.",
+      "application_process_overview": "First, pick up an application at the transit office or request one by mail. Second, fill out the form and include medical certification if you are under age 60. Third, mail the form or drop it off at the office; the agency does not accept faxes. Fourth, once approved, purchase vouchers in person or by mail. Finally, use the vouchers to pay for rides from participating taxi companies.",
       "is_out_of_date": false
     }
   },
