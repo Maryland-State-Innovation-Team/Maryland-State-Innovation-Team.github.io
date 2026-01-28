@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maryland Legi-Assist</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* Custom Scrollbar for nicer UI */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+        .md-flag-strip {
+            background: linear-gradient(90deg, #bf0d3e 25%, #fff 25%, #fff 50%, #000 50%, #000 75%, #e0aa0f 75%);
+            height: 8px;
+            width: 100%;
+        }
+        [v-cloak] { display: none; }
+    </style>
+</head>
+<body class="bg-gray-50 text-slate-800 font-sans h-screen flex flex-col overflow-hidden">
+
+    <div id="app" v-cloak class="flex flex-col h-full">
+
+        <header class="bg-white shadow-sm z-10 shrink-0">
+            <div class="md-flag-strip"></div>
+            <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <i class="ph ph-scroll text-3xl text-red-800"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Maryland Legi-Assist</h1>
+                        <p class="text-xs text-slate-500">AI-Powered Legislative Analysis (2023-2026)</p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">
+                    <div class="relative">
+                        <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input 
+                            v-model="searchQuery" 
+                            type="text" 
+                            placeholder="Search bills, keywords..." 
+                            class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-800 focus:border-red-800 outline-none w-full md:w-64"
+                        >
+                    </div>
+                    
+                    <select v-model="selectedYear" class="px-4 py-2 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-red-800 outline-none">
+                        <option value="all">All Years</option>
+                        <option v-for="year in availableYears" :value="year">{{ String(year) }}</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-hidden flex relative">
+            
+            <div v-if="loading" class="absolute inset-0 z-50 bg-white/80 flex items-center justify-center flex-col">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-red-800 mb-4"></div>
+                <p class="text-slate-600 font-medium">Loading Legislative Data...</p>
+                <p class="text-xs text-slate-400 mt-2">Ensure this is running on a local web server (http://localhost)</p>
+            </div>
+
+            <div v-if="error" class="absolute inset-0 z-50 bg-white flex items-center justify-center flex-col p-8 text-center">
+                <i class="ph ph-warning-circle text-4xl text-red-600 mb-4"></i>
+                <h2 class="text-xl font-bold text-slate-800">Unable to Load Data</h2>
+                <p class="text-slate-600 mt-2 max-w-md">{{ error }}</p>
+                <p class="text-sm text-slate-500 mt-4 bg-gray-100 p-4 rounded text-left font-mono">
+                    Expected structure:<br>
+                    /data/2023rs/csv/legislation_model_responses.csv<br>
+                    /data/2024rs/csv/...
+                </p>
+            </div>
+
+            <div class="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
+                <div class="max-w-7xl mx-auto">
+                    
+                    <div class="flex justify-between items-end mb-4">
+                        <h2 class="text-lg font-semibold text-slate-700">
+                            Results <span class="text-sm font-normal text-slate-500">({{ filteredBills.length }} bills found)</span>
+                        </h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <article 
+                            v-for="bill in filteredBills" 
+                            :key="bill.id" 
+                            class="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer flex flex-col group"
+                            @click="openModal(bill)"
+                        >
+                            <div class="p-5 border-b border-gray-100">
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">
+                                        {{ bill.YearAndSession }}
+                                    </span>
+                                </div>
+                                <h3 class="text-lg font-bold text-red-900 group-hover:text-red-700 transition-colors">
+                                    {{ bill.BillNumber }}
+                                </h3>
+                                <p class="text-sm font-medium text-slate-800 line-clamp-2 mt-1" :title="bill.Title">
+                                    {{ bill.Title }}
+                                </p>
+                            </div>
+
+                            <div class="p-5 flex-1 flex flex-col">
+                                <p class="text-sm text-slate-600 line-clamp-4 mb-4 flex-1">
+                                    {{ bill.bill_summary || bill.Synopsis }}
+                                </p>
+                                
+                                <div class="space-y-2 mt-auto pt-4 border-t border-gray-100 text-xs">
+                                    <div v-if="bill.funding && bill.funding !== 'None' && bill.funding !== 'N/A'" class="flex items-start gap-2">
+                                        <i class="ph ph-currency-dollar text-slate-400 mt-0.5"></i>
+                                        <span class="font-semibold text-slate-700">Funding:</span>
+                                        <span class="text-slate-600 truncate">{{ formatMoney(bill.funding) }}</span>
+                                    </div>
+                                    <div v-if="bill.responsible_party && bill.responsible_party !== 'N/A'" class="flex items-start gap-2">
+                                        <i class="ph ph-buildings text-slate-400 mt-0.5"></i>
+                                        <span class="font-semibold text-slate-700">Agency:</span>
+                                        <span class="text-slate-600 truncate">{{ bill.responsible_party }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    
+                    <div v-if="filteredBills.length === 0 && !loading" class="text-center py-20">
+                        <i class="ph ph-files text-4xl text-gray-300 mb-3"></i>
+                        <p class="text-gray-500">No bills found matching your criteria.</p>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+        <transition name="fade">
+            <div v-if="selectedBill" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" @click.self="closeModal">
+                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden animate-scale-in">
+                    
+                    <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-start bg-slate-50 shrink-0">
+                        <div>
+                            <div class="flex items-center gap-3 mb-1">
+                                <h2 class="text-2xl font-bold text-red-900">{{ selectedBill.BillNumber }}</h2>
+                                <span class="px-2 py-1 bg-slate-200 text-slate-700 text-xs rounded font-mono">{{ selectedBill.YearAndSession }}</span>
+                            </div>
+                            <h3 class="font-semibold text-slate-800 leading-tight">{{ selectedBill.Title }}</h3>
+                        </div>
+                        <button @click="closeModal" class="p-2 hover:bg-slate-200 rounded-full transition-colors">
+                            <i class="ph ph-x text-xl text-slate-500"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex-1 overflow-y-auto p-6 md:p-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            
+                            <div class="md:col-span-2 space-y-6">
+                                
+                                <section>
+                                    <h4 class="text-sm uppercase tracking-wider text-slate-500 font-bold mb-2">Plain-English Summary</h4>
+                                    <div class="prose prose-sm text-slate-700 bg-blue-50/50 p-4 rounded-lg border border-blue-100">
+                                        {{ selectedBill.bill_summary }}
+                                    </div>
+                                </section>
+
+                                <section>
+                                    <h4 class="text-sm uppercase tracking-wider text-slate-500 font-bold mb-2">Official Synopsis</h4>
+                                    <p class="text-sm text-slate-600 leading-relaxed">{{ selectedBill.Synopsis }}</p>
+                                </section>
+
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-xs font-bold text-slate-500 uppercase mb-1">Program Start</h4>
+                                        <p class="font-medium">{{ formatYear(selectedBill.program_start_year) }}</p>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-xs font-bold text-slate-500 uppercase mb-1">Program End</h4>
+                                        <p class="font-medium">{{ formatYear(selectedBill.program_end_year) }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                
+                                <div class="space-y-4">
+                                    <div>
+                                        <h4 class="text-xs font-bold text-slate-500 uppercase mb-1">Responsible Party</h4>
+                                        <div class="flex items-start gap-2">
+                                            <i class="ph ph-buildings text-red-800"></i>
+                                            <span class="text-sm text-slate-800">{{ selectedBill.responsible_party }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h4 class="text-xs font-bold text-slate-500 uppercase mb-1">Funding Allocated</h4>
+                                        <div class="flex items-start gap-2">
+                                            <i class="ph ph-money text-green-700"></i>
+                                            <span class="text-sm text-slate-800 font-medium">{{ formatMoney(selectedBill.funding) }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h4 class="text-xs font-bold text-slate-500 uppercase mb-1">Stakeholders Impacted</h4>
+                                        <div class="flex items-start gap-2">
+                                            <i class="ph ph-users text-blue-700"></i>
+                                            <span class="text-sm text-slate-800">{{ selectedBill.stakeholders }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="border-gray-100">
+
+                                <div class="space-y-3">
+                                    <a :href="getMgalegUrl(selectedBill)" target="_blank" class="flex items-center justify-center w-full gap-2 px-4 py-2.5 bg-red-800 hover:bg-red-900 text-white rounded-lg font-medium transition-colors text-sm">
+                                        View on MGA Website
+                                        <i class="ph ph-arrow-square-out"></i>
+                                    </a>
+
+                                    <button 
+                                        @click="fetchAndCopyMarkdown(selectedBill)" 
+                                        class="flex items-center justify-center w-full gap-2 px-4 py-2.5 bg-white border border-gray-300 hover:bg-gray-50 text-slate-700 rounded-lg font-medium transition-colors text-sm"
+                                        :disabled="copying"
+                                    >
+                                        <i class="ph" :class="copying ? 'ph-spinner animate-spin' : (copySuccess ? 'ph-check text-green-600' : 'ph-copy')"></i>
+                                        {{ copyButtonText }}
+                                    </button>
+                                    <p class="text-xs text-center text-slate-400">Copies raw markdown for use in AI tools</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
+
+    </div>
+
+    <script>
+        const { createApp, ref, computed, onMounted } = Vue;
+
+        createApp({
+            setup() {
+                // State
+                const allBills = ref([]);
+                const loading = ref(true);
+                const error = ref(null);
+                const searchQuery = ref("");
+                // Default to 2026 as requested
+                const selectedYear = ref(2026);
+                const selectedBill = ref(null);
+                
+                // Copy State
+                const copying = ref(false);
+                const copySuccess = ref(false);
+                const copyButtonText = ref("Copy Full Text to Clipboard");
+
+                // Configuration
+                const yearsToLoad = [2023, 2024, 2025, 2026];
+                
+                // --- Methods ---
+
+                // 1. Load Data
+                const loadData = async () => {
+                    const promises = yearsToLoad.map(year => {
+                        const path = `data/${year}rs/csv/legislation_model_responses.csv`;
+                        return new Promise((resolve) => {
+                            Papa.parse(path, {
+                                download: true,
+                                header: true,
+                                skipEmptyLines: true,
+                                complete: (results) => {
+                                    if(results.data && results.data.length > 0) {
+                                        // Inject source year just in case
+                                        const processed = results.data.map(d => ({...d, _sourceYear: year}));
+                                        resolve(processed);
+                                    } else {
+                                        console.warn(`No data found for ${year}`);
+                                        resolve([]);
+                                    }
+                                },
+                                error: (err) => {
+                                    console.warn(`Failed to load ${path}`, err);
+                                    resolve([]); // Resolve empty so we don't crash
+                                }
+                            });
+                        });
+                    });
+
+                    try {
+                        const results = await Promise.all(promises);
+                        allBills.value = results.flat();
+                        if (allBills.value.length === 0) {
+                            error.value = "No data files could be loaded. Please check file paths.";
+                        }
+                    } catch (e) {
+                        error.value = "Unexpected error loading data.";
+                        console.error(e);
+                    } finally {
+                        loading.value = false;
+                    }
+                };
+
+                // 2. Computed Properties
+                const availableYears = computed(() => {
+                    // Extract only the raw integer years to prevent formatting issues (no commas/decimals)
+                    // We prioritize _sourceYear which is the clean integer from our config
+                    const years = allBills.value.map(b => b._sourceYear).filter(y => y);
+                    return [...new Set(years)].sort().reverse();
+                });
+
+                const filteredBills = computed(() => {
+                    return allBills.value.filter(bill => {
+                        // Search Filter
+                        const searchLower = searchQuery.value.toLowerCase();
+                        const matchesSearch = !searchQuery.value || 
+                            (bill.BillNumber && bill.BillNumber.toLowerCase().includes(searchLower)) ||
+                            (bill.Title && bill.Title.toLowerCase().includes(searchLower)) ||
+                            (bill.bill_summary && bill.bill_summary.toLowerCase().includes(searchLower));
+
+                        // Year Filter
+                        const matchesYear = selectedYear.value === "all" || 
+                            (bill._sourceYear == selectedYear.value);
+
+                        return matchesSearch && matchesYear;
+                    });
+                });
+
+                // 3. Helpers
+                const isTrue = (val) => {
+                    if (typeof val === 'boolean') return val;
+                    if (typeof val === 'string') return val.toLowerCase() === 'true';
+                    return false;
+                };
+
+                const formatMoney = (val) => {
+                    if (!val || val === 'None') return 'N/A';
+                    if (!isNaN(val)) {
+                        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
+                    }
+                    return val;
+                };
+
+                const formatYear = (val) => {
+                    if (!val || val === 'N/A' || val === 'None') return 'N/A';
+                    // Parse float converts "2026.0" to 2026 (number), String converts it back to "2026"
+                    const num = parseFloat(val);
+                    return isNaN(num) ? val : String(num);
+                };
+
+                const getMgalegUrl = (bill) => {
+                    if (!bill) return '#';
+                    const billNum = bill.BillNumber ? bill.BillNumber.toLowerCase() : '';
+                    // Extract Year. Prefer _sourceYear for consistency
+                    let year = bill._sourceYear;
+                    if(!year && bill.YearAndSession) {
+                        const match = bill.YearAndSession.match(/\d{4}/);
+                        if(match) year = match[0];
+                    }
+                    return `https://mgaleg.maryland.gov/mgawebsite/Legislation/Details/${billNum}?ys=${year}RS`;
+                };
+
+                const openModal = (bill) => {
+                    selectedBill.value = bill;
+                    // Reset copy state
+                    copySuccess.value = false;
+                    copyButtonText.value = "Copy Full Text to Clipboard";
+                };
+
+                const closeModal = () => {
+                    selectedBill.value = null;
+                };
+
+                // 4. Copy Logic
+                const fetchAndCopyMarkdown = async (bill) => {
+                    if (!bill) return;
+                    copying.value = true;
+                    
+                    let year = bill._sourceYear;
+                    if(!year && bill.YearAndSession) {
+                        const match = bill.YearAndSession.match(/\d{4}/);
+                        if(match) year = match[0];
+                    }
+
+                    const pathsToTry = [
+                        `data/${year}rs/md/${bill.BillNumber}.md`,
+                        `data/${year}rs/md/${bill.BillNumber}_amended.md`,
+                        `data/${year}rs/md/${bill.BillNumber.toLowerCase()}.md`
+                    ];
+
+                    let text = null;
+
+                    for (const path of pathsToTry) {
+                        try {
+                            const response = await fetch(path);
+                            if (response.ok) {
+                                text = await response.text();
+                                break;
+                            }
+                        } catch (e) {
+                            console.log(`Could not fetch ${path}`);
+                        }
+                    }
+
+                    if (text) {
+                        try {
+                            await navigator.clipboard.writeText(text);
+                            copySuccess.value = true;
+                            copyButtonText.value = "Copied to Clipboard!";
+                            setTimeout(() => {
+                                copySuccess.value = false;
+                                copyButtonText.value = "Copy Full Text to Clipboard";
+                            }, 3000);
+                        } catch (err) {
+                            copyButtonText.value = "Clipboard permission denied";
+                        }
+                    } else {
+                        copyButtonText.value = "Text file not found";
+                    }
+                    
+                    copying.value = false;
+                };
+
+                // Init
+                onMounted(() => {
+                    loadData();
+                });
+
+                return {
+                    loading,
+                    error,
+                    searchQuery,
+                    selectedYear,
+                    availableYears,
+                    filteredBills,
+                    selectedBill,
+                    openModal,
+                    closeModal,
+                    isTrue,
+                    formatMoney,
+                    formatYear,
+                    getMgalegUrl,
+                    fetchAndCopyMarkdown,
+                    copying,
+                    copySuccess,
+                    copyButtonText
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
