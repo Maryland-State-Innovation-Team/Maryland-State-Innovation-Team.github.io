@@ -1376,23 +1376,22 @@
                 applyFiltersFromUrl();
                 updateCheckboxesFromState();
                 try {
-                    const [localRes, stateRes] = await Promise.all([
-                        fetch('local_incentives_structured.json'),
-                        fetch('state_incentives_structured.json')
-                    ]);
-                    if (!localRes.ok || !stateRes.ok) throw new Error("Network response was not ok.");
+                    // Single fetch for the unified data file
+                    const response = await fetch('incentives_structured.json');
+                    if (!response.ok) throw new Error("Network response was not ok.");
 
-                    const localData = await localRes.json();
-                    const stateData = await stateRes.json();
-                    
-                    allIncentives = [...localData, ...stateData]
+                    const data = await response.json();
+
+                    // Process single data source and apply 'is_out_of_date' filter
+                    allIncentives = data
                         .filter(item => item.structured_extraction && item.structured_extraction.program_name)
+                        .filter(item => item.structured_extraction.is_out_of_date !== true) // Filter out outdated items
                         .filter(item => {
                             const types = item.structured_extraction.assistance_type;
                             return !(Array.isArray(types) && types.length === 1 && types[0] === 'support');
                         })
                         .map(item => ({ ...item, slug: slugify(item.structured_extraction.program_name) }));
-                    
+
                     renderFeaturedIncentives(allIncentives);
 
                     handleRouting();
