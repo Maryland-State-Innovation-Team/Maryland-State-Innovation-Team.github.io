@@ -5,6 +5,8 @@ new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"
 if(length(new.packages)) install.packages(new.packages)
 suppressPackageStartupMessages(lapply(list.of.packages, require, character.only=T))
 
+federal_nonmilitary_discretionary_percent_cut = -0.23
+
 getCurrentFileLocation =  function()
 {
   this_file = commandArgs() %>% 
