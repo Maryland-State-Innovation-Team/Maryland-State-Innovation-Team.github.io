@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Redirecting to Maryland Compass...</title>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #d32f2f; /* Standard Maryland Red-ish tone for attention */
+        }
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        a.manual-link {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        a.manual-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <script>
+        (function() {
+            // Configuration
+            const targetDomain = "https://compass.maryland.gov";
+            const triggerPath = "/mcbc/";
+
+            // Get current URL parts
+            const currentPath = window.location.pathname;
+            const currentSearch = window.location.search; // ?query=...
+            const currentHash = window.location.hash;     // #hash
+
+            // Logic: Find where '/mcbc/' occurs and grab everything after it
+            const splitIndex = currentPath.indexOf(triggerPath);
+            let pathAfterTrigger = "";
+
+            if (splitIndex !== -1) {
+                // Determine the path relative to /mcbc/
+                // triggerPath.length ensures we start grabbing AFTER the slash
+                pathAfterTrigger = currentPath.substring(splitIndex + triggerPath.length);
+            } else {
+                // Fallback: If this file is placed in a root not containing /mcbc/,
+                // we treat the current path as the intended path on the new domain
+                // or default to root if that's safer.
+                pathAfterTrigger = currentPath.substring(1); // Remove leading slash
+            }
+
+            // Construct final URL
+            // Ensure we don't end up with double slashes if pathAfterTrigger is empty
+            const separator = pathAfterTrigger ? "" : ""; 
+            const finalUrl = targetDomain + "/" + pathAfterTrigger + currentSearch + currentHash;
+
+            // Perform Redirect
+            // .replace() is preferred over .href assignment so the back button works correctly
+            // (it replaces the current history entry instead of adding a new one)
+            window.location.replace(finalUrl);
+            
+            // For older browsers or fail-safes, set the link in the DOM
+            window.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('manual-link').href = finalUrl;
+            });
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Redirecting...</h1>
+        <p>The page you are looking for has moved to the new Maryland Compass portal.</p>
+        <p>If you are not redirected automatically within a few seconds, please click the button below.</p>
+        
+        <a id="manual-link" href="https://compass.maryland.gov" class="manual-link">Go to Maryland Compass</a>
+    </div>
+</body>
+</html>
