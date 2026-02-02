@@ -35,6 +35,17 @@
             width: 100%;
         }
         [v-cloak] { display: none; }
+
+        /* Chat Transition */
+        .slide-up-enter-active,
+        .slide-up-leave-active {
+            transition: all 0.3s ease;
+        }
+        .slide-up-enter-from,
+        .slide-up-leave-to {
+            opacity: 0;
+            transform: translateY(20px);
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-slate-800 font-sans h-screen flex flex-col overflow-hidden">
@@ -249,7 +260,81 @@
                 </div>
             </div>
         </transition>
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-4">
+            
+            <transition name="slide-up">
+                <div v-if="isChatOpen" class="w-full sm:w-96 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden flex flex-col h-[500px] max-h-[80vh] mb-2">
+                    <div class="bg-red-800 p-4 flex justify-between items-center text-white shrink-0">
+                        <div class="flex items-center gap-2">
+                            <div class="bg-white/20 p-1.5 rounded-lg">
+                                <i class="ph ph-robot text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-sm">Legi-Bot AI</h3>
+                                <p class="text-xs text-red-100 flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span> Online
+                                </p>
+                            </div>
+                        </div>
+                        <button @click="toggleChat" class="hover:bg-white/10 p-1 rounded transition-colors">
+                            <i class="ph ph-minus text-lg"></i>
+                        </button>
+                    </div>
 
+                    <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50" ref="chatContainer">
+                        
+                        <div class="flex justify-center my-4">
+                            <span class="text-xs text-slate-400 bg-slate-100 px-3 py-1 rounded-full">Today</span>
+                        </div>
+
+                        <div v-for="msg in chatMessages" :key="msg.id" :class="['flex', msg.sender === 'user' ? 'justify-end' : 'justify-start']">
+                            <div :class="['max-w-[85%] rounded-2xl px-4 py-2.5 text-sm shadow-sm', 
+                                msg.sender === 'user' 
+                                    ? 'bg-red-800 text-white rounded-br-none' 
+                                    : 'bg-white border border-gray-100 text-slate-700 rounded-bl-none']">
+                                <p>{{ msg.text }}</p>
+                                <p class="text-[10px] mt-1 opacity-70 text-right">{{ msg.time }}</p>
+                            </div>
+                        </div>
+
+                        <div v-if="isTyping" class="flex justify-start animate-pulse">
+                            <div class="bg-white border border-gray-100 rounded-2xl rounded-bl-none px-4 py-3 shadow-sm flex gap-1.5 items-center">
+                                <div class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce"></div>
+                                <div class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce delay-100"></div>
+                                <div class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce delay-200"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-white border-t border-gray-100 shrink-0">
+                        <form @submit.prevent="sendMessage" class="flex items-center gap-2">
+                            <input 
+                                v-model="currentChatMessage" 
+                                type="text" 
+                                placeholder="Ask about legislation..." 
+                                class="flex-1 px-4 py-2.5 bg-gray-100 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-red-800 focus:bg-white transition-all"
+                            >
+                            <button 
+                                type="submit" 
+                                :disabled="!currentChatMessage.trim() || isTyping"
+                                class="p-2.5 bg-red-800 text-white rounded-full hover:bg-red-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm flex items-center justify-center"
+                            >
+                                <i class="ph ph-paper-plane-right text-lg"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </transition>
+
+            <button 
+                @click="toggleChat"
+                class="group p-4 bg-red-800 text-white rounded-full shadow-lg hover:shadow-xl hover:bg-red-900 transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-red-200"
+                aria-label="Open AI Assistant"
+            >
+                <i v-if="!isChatOpen" class="ph ph-chat-teardrop-text text-3xl group-hover:scale-110 transition-transform"></i>
+                <i v-else class="ph ph-x text-3xl rotate-0 hover:rotate-90 transition-transform"></i>
+            </button>
+        </div>
     </div>
 
     <script>
@@ -257,12 +342,13 @@
 
         createApp({
             setup() {
-                // State
+                const { createApp, ref, computed, onMounted, nextTick } = Vue;
+
+                // --- Legislation Logic ---
                 const allBills = ref([]);
                 const loading = ref(true);
                 const error = ref(null);
                 const searchQuery = ref("");
-                // Default to 2026 as requested
                 const selectedYear = ref(2026);
                 const selectedBill = ref(null);
                 
@@ -274,6 +360,20 @@
                 // Configuration
                 const yearsToLoad = [2023, 2024, 2025, 2026];
                 
+                // --- Chatbot Logic ---
+                const isChatOpen = ref(false);
+                const isTyping = ref(false);
+                const currentChatMessage = ref("");
+                const chatContainer = ref(null);
+                const chatMessages = ref([
+                    { 
+                        id: 1, 
+                        text: "Hello! I'm Legi-Bot. I can help you summarize bills or find funding details. What are you looking for today?", 
+                        sender: 'bot',
+                        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                    }
+                ]);
+
                 // --- Methods ---
 
                 // 1. Load Data
@@ -287,7 +387,6 @@
                                 skipEmptyLines: true,
                                 complete: (results) => {
                                     if(results.data && results.data.length > 0) {
-                                        // Inject source year just in case
                                         const processed = results.data.map(d => ({...d, _sourceYear: year}));
                                         resolve(processed);
                                     } else {
@@ -297,7 +396,7 @@
                                 },
                                 error: (err) => {
                                     console.warn(`Failed to load ${path}`, err);
-                                    resolve([]); // Resolve empty so we don't crash
+                                    resolve([]); 
                                 }
                             });
                         });
@@ -319,22 +418,18 @@
 
                 // 2. Computed Properties
                 const availableYears = computed(() => {
-                    // Extract only the raw integer years to prevent formatting issues (no commas/decimals)
-                    // We prioritize _sourceYear which is the clean integer from our config
                     const years = allBills.value.map(b => b._sourceYear).filter(y => y);
                     return [...new Set(years)].sort().reverse();
                 });
 
                 const filteredBills = computed(() => {
                     return allBills.value.filter(bill => {
-                        // Search Filter
                         const searchLower = searchQuery.value.toLowerCase();
                         const matchesSearch = !searchQuery.value || 
                             (bill.BillNumber && bill.BillNumber.toLowerCase().includes(searchLower)) ||
                             (bill.Title && bill.Title.toLowerCase().includes(searchLower)) ||
                             (bill.bill_summary && bill.bill_summary.toLowerCase().includes(searchLower));
 
-                        // Year Filter
                         const matchesYear = selectedYear.value === "all" || 
                             (bill._sourceYear == selectedYear.value);
 
@@ -359,7 +454,6 @@
 
                 const formatYear = (val) => {
                     if (!val || val === 'N/A' || val === 'None') return 'N/A';
-                    // Parse float converts "2026.0" to 2026 (number), String converts it back to "2026"
                     const num = parseFloat(val);
                     return isNaN(num) ? val : String(num);
                 };
@@ -367,7 +461,6 @@
                 const getMgalegUrl = (bill) => {
                     if (!bill) return '#';
                     const billNum = bill.BillNumber ? bill.BillNumber.toLowerCase() : '';
-                    // Extract Year. Prefer _sourceYear for consistency
                     let year = bill._sourceYear;
                     if(!year && bill.YearAndSession) {
                         const match = bill.YearAndSession.match(/\d{4}/);
@@ -378,7 +471,6 @@
 
                 const openModal = (bill) => {
                     selectedBill.value = bill;
-                    // Reset copy state
                     copySuccess.value = false;
                     copyButtonText.value = "Copy Full Text to Clipboard";
                 };
@@ -437,6 +529,60 @@
                     copying.value = false;
                 };
 
+                // 5. Chat Methods
+                const toggleChat = () => {
+                    isChatOpen.value = !isChatOpen.value;
+                    if (isChatOpen.value) {
+                        scrollToBottom();
+                    }
+                };
+
+                const scrollToBottom = () => {
+                    nextTick(() => {
+                        if (chatContainer.value) {
+                            chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
+                        }
+                    });
+                };
+
+                const sendMessage = () => {
+                    if (!currentChatMessage.value.trim()) return;
+
+                    // Add User Message
+                    chatMessages.value.push({
+                        id: Date.now(),
+                        text: currentChatMessage.value,
+                        sender: 'user',
+                        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                    });
+
+                    const userQuery = currentChatMessage.value;
+                    currentChatMessage.value = "";
+                    scrollToBottom();
+                    isTyping.value = true;
+
+                    // Mock API Delay
+                    setTimeout(() => {
+                        let responseText = "I see you're interested in that. I'm currently in demo mode, but I can tell you that the 2026 session is particularly focused on budget allocations.";
+                        
+                        if (userQuery.toLowerCase().includes("fund")) {
+                            responseText = "For funding specific inquiries, please look for the green dollar signs ($) on the bill cards. These indicate fiscal notes are attached.";
+                        } else if (userQuery.toLowerCase().includes("education")) {
+                            responseText = "Education bills are often handled by the Ways and Means committee. Try searching for 'Education' in the top search bar.";
+                        }
+
+                        chatMessages.value.push({
+                            id: Date.now() + 1,
+                            text: responseText,
+                            sender: 'bot',
+                            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                        });
+                        
+                        isTyping.value = false;
+                        scrollToBottom();
+                    }, 1500);
+                };
+
                 // Init
                 onMounted(() => {
                     loadData();
@@ -459,7 +605,15 @@
                     fetchAndCopyMarkdown,
                     copying,
                     copySuccess,
-                    copyButtonText
+                    copyButtonText,
+                    // Chat exports
+                    isChatOpen,
+                    isTyping,
+                    chatMessages,
+                    currentChatMessage,
+                    toggleChat,
+                    sendMessage,
+                    chatContainer
                 };
             }
         }).mount('#app');
