@@ -427,14 +427,24 @@
                     }
                 };
 
-                const filteredAgencies = computed(() => {
+                // Optimization: Calculate the master list of agencies once (cached) 
+                // instead of re-looping through all bills on every keystroke.
+                const allAgencies = computed(() => {
                     const agencies = new Set();
                     allBills.value.forEach(b => {
-                        b.agency_relevance.forEach(a => agencies.add(a.agency_name));
+                        // Safety check: ensure agency_relevance exists
+                        b.agency_relevance?.forEach(a => agencies.add(a.agency_name));
                     });
-                    const list = Array.from(agencies).sort();
+                    return Array.from(agencies).sort();
+                });
+
+                // Lightweight filter that runs against the cached list
+                const filteredAgencies = computed(() => {
+                    const list = allAgencies.value;
                     if (!agencySearch.value) return list;
-                    return list.filter(a => a.toLowerCase().includes(agencySearch.value.toLowerCase()));
+                    
+                    const query = agencySearch.value.toLowerCase();
+                    return list.filter(a => a.toLowerCase().includes(query));
                 });
 
                 const uniqueBroadSubjects = computed(() => {
