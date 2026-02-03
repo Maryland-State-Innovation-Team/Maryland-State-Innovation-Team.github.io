@@ -178,7 +178,9 @@
                             <div class="flex justify-between items-start gap-4">
                                 <div class="flex-1">
                                     <div class="flex items-center gap-3 mb-1">
-                                        <span class="text-lg font-black text-red-800 group-hover:underline">{{ bill.BillNumber }}</span>
+                                        <span class="text-lg font-black text-red-800 group-hover:underline">
+                                            {{ bill.BillNumber }}{{ bill.CrossfileBillNumber ? '/' + bill.CrossfileBillNumber : '' }}
+                                        </span>
                                         <span v-if="getRelevance(bill)" class="px-2 py-0.5 bg-amber-100 text-amber-800 text-xs font-bold rounded">
                                             Relevance Rating: {{ getRelevance(bill).relevance_rating }}/5
                                         </span>
@@ -214,7 +216,9 @@
                     <header class="p-6 border-b border-gray-100 bg-gray-50 flex justify-between items-start">
                         <div>
                             <div class="flex items-center gap-3 mb-1">
-                                <h2 id="modal-title" ref="modalTitle" tabindex="-1" class="text-3xl font-black text-red-900 outline-none">{{ activeBill.BillNumber }}</h2>
+                                <h2 id="modal-title" ref="modalTitle" tabindex="-1" class="text-3xl font-black text-red-900 outline-none">
+                                    {{ activeBill.BillNumber }}{{ activeBill.CrossfileBillNumber ? '/' + activeBill.CrossfileBillNumber : '' }}
+                                </h2>
                                 <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-bold text-slate-500">{{ activeBill.YearAndSession }}</span>
                             </div>
                             <h3 class="text-lg font-bold text-slate-800">{{ activeBill.Title }}</h3>
@@ -286,6 +290,20 @@
                                     View Bill on MGA
                                     <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
                                 </a>
+                            </div>
+                        </div>
+
+                        <div class="mt-10 pt-6 border-t border-gray-100">
+                            <div class="flex flex-col sm:flex-row gap-3 items-start bg-slate-50 p-4 rounded-xl border border-slate-200 text-slate-600">
+                                <i class="ph ph-robot text-xl shrink-0 mt-0.5 text-slate-400" aria-hidden="true"></i>
+                                <div class="text-xs font-medium leading-relaxed">
+                                    <strong class="block mb-1 text-slate-700 uppercase tracking-wide">Automated Summary Disclaimer</strong>
+                                    <p>
+                                        The summary content, relevance ratings, and fiscal analysis displayed here were generated using AI and may contain inaccuracies. 
+                                        This tool is for research assistance only. Please verify all details directly against the official 
+                                        <a :href="'https://mgaleg.maryland.gov/mgawebsite/Legislation/Details/' + activeBill.BillNumber + '?ys=' + selectedYear + 'RS'" target="_blank" class="underline hover:text-red-800 text-slate-900 font-bold decoration-slate-400 underline-offset-2">Maryland General Assembly website</a>.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -465,6 +483,7 @@
                         const q = searchQuery.value.toLowerCase();
                         results = results.filter(b => 
                             b.BillNumber.toLowerCase().includes(q) ||
+                            (b.CrossfileBillNumber && b.CrossfileBillNumber.toLowerCase().includes(q)) ||
                             b.Title.toLowerCase().includes(q) ||
                             b.bill_summary.toLowerCase().includes(q) ||
                             b.Synopsis.toLowerCase().includes(q)
