@@ -40,13 +40,20 @@
                     <div class="flex items-center gap-3">
                         <i class="ph ph-shield-check text-3xl text-red-800" aria-hidden="true"></i>
                         <div>
-                            <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Maryland Legi-Assist</h1>
-                            <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">AI-assisted Legislative Research</p>
+                            <a href="./" class="hover:opacity-70 transition-opacity">
+                                <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Maryland Legi-Assist</h1>
+                            </a>
+                            <div class="flex items-center gap-1">
+                                <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">AI-assisted Legislative Research</p>
+                                <button @click="showAboutModal = true" class="text-slate-400 hover:text-red-800 transition-colors focus:outline-none focus:ring-1 focus:ring-red-800 rounded" aria-label="Learn more about this site's unique features">
+                                    <i class="ph ph-question text-base" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
-                        <div class="relative flex-1 lg:w-80">
+                        <div ref="agencyFilterContainer" class="relative flex-1 lg:w-80">
                             <i class="ph ph-buildings absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" aria-hidden="true"></i>
                             <input 
                                 v-model="agencySearch" 
@@ -100,6 +107,10 @@
                         <button @click="exportToExcel" class="flex items-center gap-2 px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg transition-colors text-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-green-700 outline-none">
                             <i class="ph ph-file-xls" aria-hidden="true"></i> Export
                         </button>
+
+                        <a href="https://github.com/Maryland-State-Innovation-Team/Legi-Assist/" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-black text-white rounded-lg transition-colors text-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-slate-800 outline-none">
+                            <i class="ph ph-github-logo" aria-hidden="true"></i> GitHub
+                        </a>
                     </div>
                 </div>
             </div>
@@ -107,6 +118,15 @@
 
         <main id="main-content" class="flex-1 overflow-hidden flex flex-col md:flex-row">
             <aside class="w-full md:w-80 bg-white border-r border-gray-200 overflow-y-auto p-4 space-y-6">
+                <div class="flex items-center justify-between mb-2">
+                    <h2 class="text-xs font-black text-gray-500 uppercase tracking-widest">Filters</h2>
+                    <button 
+                        @click="clearFilters" 
+                        class="text-[10px] font-bold text-red-700 hover:text-red-900 uppercase bg-red-50 px-2 py-1 rounded border border-red-100 transition-colors"
+                    >
+                        Clear All
+                    </button>
+                </div>
                 <div>
                     <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Keyword Search</label>
                     <div class="relative">
@@ -310,10 +330,83 @@
                 </div>
             </div>
         </transition>
+
+        <transition name="fade">
+            <div 
+                v-if="showAboutModal" 
+                role="dialog" 
+                aria-modal="true" 
+                aria-labelledby="about-modal-title"
+                class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" 
+                @click.self="showAboutModal = false"
+                @keydown.esc="showAboutModal = false"
+                @keydown.tab="trapFocus"
+            >
+                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl flex flex-col overflow-hidden">
+                    <header class="p-6 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                        <h2 id="about-modal-title" ref="modalTitle" tabindex="-1" class="text-xl font-bold text-slate-900 outline-none">
+                            About Maryland Legi-Assist
+                        </h2>
+                        <button @click="showAboutModal = false" aria-label="Close Modal" class="p-2 hover:bg-gray-200 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-red-800">
+                            <i class="ph ph-x text-xl" aria-hidden="true"></i>
+                        </button>
+                    </header>
+                    <div class="p-8 space-y-6">
+                        <section class="flex gap-4">
+                            <div class="bg-red-50 p-3 rounded-lg h-fit text-red-800">
+                                <i class="ph ph-file-text text-2xl" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900 mb-1">LLM-Friendly Conversion</h3>
+                                <p class="text-slate-600 text-sm leading-relaxed">
+                                    Unlike standard PDF tools, our custom conversion process identifies and preserves 
+                                    <span class="font-mono bg-gray-100 px-1 rounded text-red-700">~struck-through~</span> 
+                                    language. This ensures the AI understands exactly what is being removed from current law, 
+                                    not just what is being added.
+                                </p>
+                            </div>
+                        </section>
+
+                        <section class="flex gap-4">
+                            <div class="bg-blue-50 p-3 rounded-lg h-fit text-blue-800">
+                                <i class="ph ph-git-merge text-2xl" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900 mb-1">Real-time Amendment Previews</h3>
+                                <p class="text-slate-600 text-sm leading-relaxed">
+                                    Legislative text changes fast. We use AI to programmatically apply adopted 
+                                    amendments to the base bill text, providing an "early enrolled" preview 
+                                    before official documents are even published by the MGA.
+                                </p>
+                            </div>
+                        </section>
+
+                        <section class="flex gap-4">
+                            <div class="bg-emerald-50 p-3 rounded-lg h-fit text-emerald-800">
+                                <i class="ph ph-sparkle text-2xl" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900 mb-1">AI-Generated Summaries & Ratings</h3>
+                                <p class="text-slate-600 text-sm leading-relaxed">
+                                    Every bill is enhanced with plain-English summaries, fiscal impact extractions, 
+                                    and relevance ratings for dozens of Maryland State agencies, helping you 
+                                    identify what matters most at a glance.
+                                </p>
+                            </div>
+                        </section>
+                    </div>
+                    <footer class="p-6 bg-slate-50 border-t border-gray-100 flex justify-end">
+                        <button @click="showAboutModal = false" class="px-6 py-2 bg-slate-900 text-white rounded-lg font-bold hover:bg-black transition-colors">
+                            Got it
+                        </button>
+                    </footer>
+                </div>
+            </div>
+        </transition>
     </div>
 
     <script>
-        const { createApp, ref, computed, onMounted, watch, nextTick } = Vue;
+        const { createApp, ref, computed, onMounted, onUnmounted, watch, nextTick } = Vue;
 
         createApp({
             setup() {
@@ -328,12 +421,14 @@
                 const filterNarrow = ref([]);
                 const filterRating = ref("all");
                 const activeBill = ref(null);
+                const showAboutModal = ref(false);
                 const modalTitle = ref(null);
+                const agencyFilterContainer = ref(null);
                 let lastActiveElement = null;
 
                 // A11y: Manage Focus
-                watch(activeBill, async (newVal) => {
-                    if (newVal) {
+                watch([activeBill, showAboutModal], async ([newBill, newAbout]) => {
+                    if (newBill || newAbout) {
                         // Modal Opening: Save current focus and move to modal
                         lastActiveElement = document.activeElement;
                         await nextTick();
@@ -344,6 +439,22 @@
                         if (lastActiveElement) lastActiveElement.focus();
                     }
                 });
+
+                const handleClickOutside = (event) => {
+                    if (agencyFilterContainer.value && !agencyFilterContainer.value.contains(event.target)) {
+                        showAgencyList.value = false;
+                    }
+                };
+
+                const clearFilters = () => {
+                    searchQuery.value = "";
+                    agencySearch.value = "";
+                    selectedAgency.value = "";
+                    filterBroad.value = [];
+                    filterNarrow.value = [];
+                    filterRating.value = "all";
+                    updateUrl();
+                };
 
                 // Sync Filters to URL
                 watch([searchQuery, filterBroad, filterNarrow], () => {
@@ -635,15 +746,20 @@
                 onMounted(() => {
                     initFromUrl();
                     fetchData();
+                    window.addEventListener('click', handleClickOutside);
+                });
+
+                onUnmounted(() => {
+                    window.removeEventListener('click', handleClickOutside);
                 });
 
                 return {
                     allBills, loading, selectedYear, searchQuery, agencySearch, selectedAgency,
-                    showAgencyList, filterBroad, filterNarrow, filterRating, activeBill,
+                    showAgencyList, filterBroad, filterNarrow, filterRating, activeBill, showAboutModal,
                     filteredAgencies, uniqueBroadSubjects, uniqueNarrowSubjects, filteredBills,
                     selectAgency, getRelevance, openBill, closeBill, formatCurrency,
                     formatDate, formatTime, exportToExcel, fetchData, getNextAction,
-                    modalTitle, trapFocus, clearAgency
+                    modalTitle, trapFocus, clearAgency, clearFilters, agencyFilterContainer
                 };
             }
         }).mount('#app');
