@@ -236,61 +236,79 @@
     ],
     "YearAndSession": "2024 Regular Session",
     "StatusCurrentAsOf": "2024-11-13T09:05:06.703",
-    "bill_summary": "This bill requires paint manufacturers to establish and fund a program for the collection, transportation, and recycling of leftover architectural paint. Starting in 2026, a stewardship assessment fee will be added to the purchase price of paint sold in Maryland to cover the costs of this program. The Maryland Department of the Environment (MDE) must review and approve program plans and annual reports, and paint producers must participate in the program to sell their products in the state.",
+    "bill_summary": "This bill requires producers of architectural paint to establish and implement a Paint Stewardship Program in Maryland for the collection, transportation, and processing of postconsumer paint. The program is funded by a paint stewardship assessment added to the purchase price of paint sold in the state, and producers or a representative organization must submit plans and annual reports to the Maryland Department of the Environment for approval and oversight.",
     "start_year": 2024,
     "end_year": null,
-    "funding": 70200,
-    "responsible_party": "Maryland Department of the Environment",
-    "stakeholders": "Paint producers, retailers, distributors, consumers of architectural paint, local governments, and the Maryland Department of the Environment.",
-    "fiscal_impact_summary": "State special fund revenues and expenditures are estimated to increase by $70,200 in FY 2026 and $64,300 in FY 2027 to cover MDE's program oversight costs, which are fully offset by plan and report review fees paid by producers. Local governments may experience reduced household hazardous waste management costs. Consumers and government agencies will see a minimal increase in paint purchase costs due to the mandated stewardship assessment.",
+    "funding": 70212,
+    "responsible_party": "Maryland Department of the Environment, Office of Recycling",
+    "stakeholders": "Architectural paint producers, retailers, distributors, consumers, local governments, and the Maryland Department of the Environment.",
+    "fiscal_impact_summary": "The bill is expected to have no fiscal impact in FY 2025. Starting in FY 2026, State special fund expenditures and revenues increase by an estimated $70,212, and $64,307 in FY 2027. These expenditures cover the Maryland Department of the Environment's administrative and oversight costs, which are offset by plan and report review fees paid by paint producers. Local governments may see a decrease in waste management costs as paint is diverted from landfills, though both state and local agencies will face minimal increases in the cost of purchasing paint due to the stewardship assessment.",
     "agency_relevance": [
       {
         "agency_name": "Department of the Environment",
         "is_relevant": true,
-        "relevance_explanation": "The Department of the Environment is the primary implementing agency for the bill. It oversees the Office of Recycling, which is responsible for reviewing and approving Paint Stewardship Program plans, setting assessment fees, managing the State Recycling Trust Fund, and enforcing compliance through penalties.",
+        "relevance_explanation": "As the primary agency responsible for enforcing environmental laws and oversight of the Office of Recycling, MDE is the lead regulator for the Paint Stewardship Program. The agency must review and approve stewardship plans, assessments, and annual reports, while also maintaining a public list of compliant producers.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Maryland Environmental Service",
         "is_relevant": true,
-        "relevance_explanation": "The bill explicitly requires the Office of Recycling to coordinate with the Maryland Environmental Service to study and report on recycling centers, public education needs, and the economics of waste disposal and recycling every two years.",
+        "relevance_explanation": "MES is explicitly required by the bill to coordinate with the Office of Recycling to study and report on recycling centers, financing of systems, and the economics of waste disposal and recycling as part of the biennial report to the Governor.",
         "relevance_rating": 4
-      },
-      {
-        "agency_name": "Department of General Services",
-        "is_relevant": true,
-        "relevance_explanation": "As the agency responsible for the maintenance and construction of state-owned facilities, DGS is a significant consumer of architectural paint and will be impacted by the new paint stewardship assessments added to the purchase price of paint.",
-        "relevance_rating": 3
       },
       {
         "agency_name": "Comptroller of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "The Comptroller is the state's chief financial officer and is explicitly tasked by the bill to account for the State Recycling Trust Fund, which will receive program fees and penalties.",
+        "relevance_explanation": "The Comptroller is responsible for accounting for the State Recycling Trust Fund, which will now receive new revenue from paint stewardship plan review fees, annual report fees, and penalties.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Maryland State Treasurer's Office",
         "is_relevant": true,
-        "relevance_explanation": "The State Treasurer is the custodian of the state's funds and is responsible for holding and investing the money within the State Recycling Trust Fund as established or amended by the bill.",
+        "relevance_explanation": "The State Treasurer's Office is the custodian of the State Recycling Trust Fund and is responsible for holding and investing the funds collected through the program's fees and assessments.",
         "relevance_rating": 3
+      },
+      {
+        "agency_name": "Department of General Services",
+        "is_relevant": true,
+        "relevance_explanation": "DGS is responsible for the maintenance and renovation of state-owned facilities. As a consumer of architectural paint for these facilities, the agency will be subject to the paint stewardship assessments added to the purchase price of paint.",
+        "relevance_rating": 2
       },
       {
         "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The Governor's Office oversees executive departments like MDE and will receive several reports mandated by the bill, including the biennial recycling study and the specific cost-benefit review of the Paint Stewardship Program due in 2028.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Department of Budget and Management",
-        "is_relevant": true,
-        "relevance_explanation": "DBM oversees state personnel and budgeting. The fiscal note indicates the need for a new contractual environmental compliance specialist at MDE to manage the additional workload created by the bill, requiring DBM's administrative oversight.",
+        "relevance_explanation": "The Governor's Office receives mandatory reports from MDE and MES regarding recycling centers and the overall cost-benefit review of the Paint Stewardship Program due by 2028.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Office of the Attorney General",
         "is_relevant": true,
-        "relevance_explanation": "The OAG acts as the legal advisor to MDE and will be responsible for representing the state in enforcement actions and the collection of civil or administrative penalties for violations of the Paint Stewardship Program.",
+        "relevance_explanation": "The OAG acts as the primary legal advisor for MDE and would be involved in enforcing the civil and administrative penalties established for violations of the Paint Stewardship Program.",
         "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Budget and Management",
+        "is_relevant": true,
+        "relevance_explanation": "DBM oversees the state's personnel and budget system. The fiscal note indicates the need for additional contractual staff and special fund budget authority to handle the program's implementation and oversight.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Office of Administrative Hearings",
+        "is_relevant": true,
+        "relevance_explanation": "The OAH provides a forum for residents and businesses to challenge agency decisions. This would apply to any contested enforcement actions or administrative penalties issued by MDE under the program.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Commerce",
+        "is_relevant": true,
+        "relevance_explanation": "The bill impacts producers, retailers, and distributors of architectural paint. As the state's primary economic development agency, Commerce has a secondary interest in how these regulations affect the business environment and retail sector.",
+        "relevance_rating": 1
+      },
+      {
+        "agency_name": "Office of Legislative Audits",
+        "is_relevant": true,
+        "relevance_explanation": "OLA is responsible for auditing state agencies like MDE to ensure public funds and the State Recycling Trust Fund are handled according to state law and that financial controls for the new fees are in place.",
+        "relevance_rating": 1
       }
     ]
   },
@@ -414,48 +432,48 @@
     ],
     "YearAndSession": "2024 Regular Session",
     "StatusCurrentAsOf": "2024-11-13T09:05:06.703",
-    "bill_summary": "This bill authorizes Baltimore City and Maryland counties to establish a subclass of real property for vacant lots or improved properties cited as vacant and unfit for habitation. It further empowers these local governments to set a special property tax rate for this subclass and requires jurisdictions that do so to submit an annual report to the Department of Housing and Community Development and the General Assembly regarding the rate, revenue, and conversion plans for such properties.",
+    "bill_summary": "This bill authorizes the Mayor and City Council of Baltimore City or the governing body of any Maryland county to establish a subclass of real property for vacant lots or improved properties cited as vacant and unfit for habitation on a housing or building violation notice. It further allows these local governments to set a special property tax rate for such properties and requires them to report annually to the Department of Housing and Community Development and the General Assembly on the rates set and the results thereof.",
     "start_year": 2024,
     "end_year": null,
     "funding": null,
-    "responsible_party": "Mayor and City Council of Baltimore City, governing bodies of Maryland counties, and the Maryland Department of Housing and Community Development",
-    "stakeholders": "Owners of vacant and abandoned property, small businesses owning such properties, Baltimore City, and Maryland county governments",
-    "fiscal_impact_summary": "There is no impact on State finances. Local property tax revenues for Baltimore City and counties may increase or otherwise be affected depending on the specific tax rates set for the vacant property subclass. Small businesses owning these properties may experience a meaningful fiscal impact. Administrative reporting requirements for local governments are expected to be handled with existing resources.",
+    "responsible_party": "Mayor and City Council of Baltimore City or the governing body of a county",
+    "stakeholders": "Owners of vacant and abandoned property, small businesses owning such property, Baltimore City, and Maryland county governments.",
+    "fiscal_impact_summary": "The bill has no impact on State finances. Local property tax revenues for Baltimore City and county governments may be affected depending on the specific tax rates established for the new property subclass. Small businesses that own vacant or abandoned property may be meaningfully affected. Local jurisdictions that enact a special rate are responsible for reporting requirements, which can be managed with existing resources.",
     "agency_relevance": [
       {
         "agency_name": "Department of Housing and Community",
         "is_relevant": true,
-        "relevance_explanation": "The bill explicitly requires the Mayor and City Council of Baltimore City or the governing body of a county to report to this department annually by December 1. Specifically, jurisdictions must report the special rate set, the number of properties affected, revenue changes, and plans for adaptive reuse of these vacant properties. This aligns with the department's mission of neighborhood revitalization and managing programs to rehabilitate blighted areas.",
+        "relevance_explanation": "The bill explicitly requires Baltimore City and any county enacting a special tax rate for vacant property to report annual data to the Department of Housing and Community Development (DHCD). This data includes property counts, revenue changes, and plans for adaptive reuse, aligning with DHCD's mission of neighborhood revitalization and affordable housing management.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "As the principal executive agency, the Governor's Office is responsible for signing or vetoing legislation such as this bill. Furthermore, the bill addresses a significant statewide policy issue\u2014vacant and abandoned property\u2014which aligns with the office's initiative to improve economic opportunity and oversee the operations of state departments like DHCD.",
+        "relevance_explanation": "As the principal executive agency, the Governor's Office oversees the implementation of new laws and the operations of the DHCD, which is tasked with the bill's reporting requirements. The bill is a priority piece of legislation (HB 2) signed by the Governor to improve community economic opportunities.",
         "relevance_rating": 4
       },
       {
         "agency_name": "Department of Planning",
         "is_relevant": true,
-        "relevance_explanation": "The bill concerns land use and the classification of vacant real property for taxation. It specifically mentions 'adaptive reuse,' a key concept in historical preservation and urban planning managed by the Maryland Historical Trust and other planning services within this department. The department's mission is to ensure the vitality of communities and implement smart growth strategies.",
+        "relevance_explanation": "The Department of Planning coordinates land use and sustainable growth. This bill addresses vacant and abandoned properties, which are central to the agency's mission of protecting community vitality and implementing smart growth strategies to balance development and environmental stewardship.",
         "relevance_rating": 3
-      },
-      {
-        "agency_name": "Department of Commerce",
-        "is_relevant": true,
-        "relevance_explanation": "The fiscal note identifies a potentially meaningful effect on small businesses that own vacant or abandoned property. The Department of Commerce is the state's primary agency for supporting small businesses and stimulating economic growth, including the revitalization of commercial properties and distressed areas.",
-        "relevance_rating": 2
       },
       {
         "agency_name": "Office of the Attorney General",
         "is_relevant": true,
-        "relevance_explanation": "The OAG serves as the primary legal advisor to the General Assembly and state agencies. They would be responsible for providing legal counsel regarding the implementation and interpretation of this new property tax subclass and the authority granted to local governments.",
+        "relevance_explanation": "The OAG serves as the legal advisor to state agencies, including the DHCD. They may be required to provide legal guidance on the interpretation of the new tax subclass authority or the enforcement of the reporting requirements established by the bill.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Comptroller of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "As the state's fiscal watchdog and chief financial officer, the Comptroller monitors state and local revenue structures. While this bill impacts local property taxes, the Comptroller's role in economic forecasting and financial reporting makes the fiscal implications of new property tax classes relevant to their oversight of the state's long-term fiscal health.",
+        "relevance_explanation": "As the state's chief financial officer and fiscal watchdog, the Comptroller monitors changes to tax law and local revenue structures. While this bill affects local property tax rates, the Comptroller sits on the Board of Public Works and oversees the state's long-term fiscal health which is impacted by local property revitalization.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Budget and Management",
+        "is_relevant": true,
+        "relevance_explanation": "DBM serves as the state's central fiscal authority. While the bill has no direct state fiscal impact, DBM monitors local revenue trends and the fiscal accountability of state agencies like DHCD that manage the resulting reporting data.",
         "relevance_rating": 1
       }
     ]
@@ -692,72 +710,54 @@
     ],
     "YearAndSession": "2024 Regular Session",
     "StatusCurrentAsOf": "2024-11-13T09:05:06.703",
-    "bill_summary": "This bill prohibits Maryland institutions of higher education that receive State funds from considering an applicant's familial relationship to an alumnus (legacy preference) or to a financial donor (donor preference) as a criterion for admission. Institutions are still permitted to collect information about familial relationships to alumni for data collection purposes.",
+    "bill_summary": "This bill prohibits public and private institutions of higher education in Maryland that receive State funds from using legacy preference or donor preference as a criterion for admission. Legacy preference is defined as a preference based on an applicant's relationship to an alum, while donor preference is based on a relationship to a financial supporter. Institutions are still permitted to collect information about familial relationships to alumni for data collection purposes.",
     "start_year": 2024,
     "end_year": null,
     "funding": null,
-    "responsible_party": "Institutions of higher education in Maryland that receive State funds, including public, private nonprofit, and for-profit institutions.",
-    "stakeholders": "Applicants for admission to Maryland institutions of higher education, alumni, donors, and the administrative departments of public and private colleges and universities.",
-    "fiscal_impact_summary": "The bill is expected to have no material fiscal impact on State public four-year institutions or Baltimore City Community College, as any necessary changes to the admissions process can be managed with existing resources. Local community colleges are unaffected as they do not use legacy or donor preferences. While some private nonprofit institutions may see an impact on tuition revenue or alumni giving, the overall fiscal impact is assumed to be minimal and cannot be reliably estimated.",
+    "responsible_party": "Maryland institutions of higher education that receive State funds, including the University System of Maryland, Morgan State University, St. Mary's College of Maryland, and participating private institutions.",
+    "stakeholders": "Applicants to Maryland higher education institutions, alumni, financial donors, and the administrative bodies of public and private colleges and universities.",
+    "fiscal_impact_summary": "The bill is expected to have no material fiscal impact on State or local governments. Public four-year institutions and community colleges can adjust admissions processes using existing resources. While some private nonprofit institutions indicated that removing legacy incentives might affect tuition revenue or alumni giving, the Department of Legislative Services assumes any such impact would be minimal and cannot be reliably estimated.",
     "agency_relevance": [
-      {
-        "agency_name": "Higher Education Commission",
-        "is_relevant": true,
-        "relevance_explanation": "MHEC is the state's primary regulatory and coordinating board for higher education, responsible for establishing statewide policies and overseeing both public and private institutions affected by the admissions standards prohibition.",
-        "relevance_rating": 5
-      },
       {
         "agency_name": "Maryland Higher Education Commission",
         "is_relevant": true,
-        "relevance_explanation": "MHEC is the state's primary regulatory and coordinating board for higher education, responsible for establishing statewide policies and overseeing both public and private institutions affected by the admissions standards prohibition.",
+        "relevance_explanation": "As the state's primary regulatory and coordinating board for public and private colleges and universities, MHEC is responsible for establishing statewide policies and overseeing institutional standards, making it the central agency for enforcing the bill's prohibition on legacy and donor preferences.",
         "relevance_rating": 5
       },
       {
         "agency_name": "University System of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "USM is the primary public higher education agency overseeing 12 universities that are directly subject to the bill's prohibition on legacy and donor preferences in admissions.",
+        "relevance_explanation": "USM oversees 12 public universities that are directly subject to this bill. The bill explicitly changes the undergraduate admissions standards for all constituent institutions within the system.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Morgan State University",
         "is_relevant": true,
-        "relevance_explanation": "As an independent public state university and state agency, Morgan State is directly prohibited by this bill from considering legacy or donor preferences in its admissions process.",
+        "relevance_explanation": "As an independent public university that receives state funds, Morgan State is directly impacted by the bill's restrictions on admission criteria and will need to ensure its admissions processes comply with the prohibition on legacy and donor preferences.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Saint Mary's College of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "As Maryland's public honors college and an independent state agency, Saint Mary's College is directly required to comply with the bill's restrictions on admissions criteria.",
+        "relevance_explanation": "As a state-funded public honors college, Saint Mary's is directly subject to the bill. While the fiscal note suggests it does not heavily rely on legacy status, the college must legally ensure its admissions standards do not consider donor or legacy preferences.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Office of the Attorney General",
         "is_relevant": true,
-        "relevance_explanation": "The OAG serves as the legal advisor for state institutions of higher education and will provide legal counsel on the implementation and enforcement of the new admissions standards.",
+        "relevance_explanation": "The OAG serves as the legal advisor to state agencies and institutions of higher education. It will likely provide legal guidance on the implementation of these new standards and defend the state in potential challenges regarding the legality of admission criteria.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The Governor's Office enforces state laws, signs legislation, and oversees the operations of all state departments and institutions, including the public universities implementing these changes.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Department of Budget and Management",
-        "is_relevant": true,
-        "relevance_explanation": "The bill applies to any institution of higher education in the state that receives State funds; DBM is the central fiscal authority managing these allocations.",
+        "relevance_explanation": "The Governor's Office oversees executive departments and signs legislation into law. This bill represents a significant shift in state educational policy that the Governor's administration will monitor and potentially coordinate through its educational initiatives.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Maryland Longitudinal Data System",
         "is_relevant": true,
-        "relevance_explanation": "The MLDS Center maintains linked student and higher education data; the bill's provision allowing for the collection of familial relationship data for reporting purposes impacts the type of student records the agency manages.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Office of Legislative Audits",
-        "is_relevant": true,
-        "relevance_explanation": "OLA conducts fiscal and performance audits of executive branch agencies and universities; it would be responsible for auditing compliance with state-mandated admissions standards.",
+        "relevance_explanation": "The bill explicitly allows institutions to collect data on familial relationships to alumni for the purpose of data collection. As the agency responsible for tracking student and workforce outcomes, MLDS may eventually manage or analyze this data to study admissions trends and educational equity.",
         "relevance_rating": 2
       }
     ]
@@ -842,66 +842,72 @@
     ],
     "YearAndSession": "2024 Regular Session",
     "StatusCurrentAsOf": "2024-11-13T09:05:06.703",
-    "bill_summary": "This bill codifies the common law crime of indecent exposure and establishes a new, more severe misdemeanor offense for committing indecent exposure with prurient intent in the presence of a minor. The new offense applies if the minor is at least two years old and more than four years younger than the offender. It increases the maximum penalty for this specific situation to five years of imprisonment and/or a $10,000 fine.",
+    "bill_summary": "This bill codifies the common law crime of indecent exposure and establishes a more severe misdemeanor penalty for committing indecent exposure with prurient intent in the presence of a minor, specifically when the minor is at least 2 years old and more than 4 years younger than the offender.",
     "start_year": 2024,
     "end_year": null,
     "funding": null,
     "responsible_party": "Maryland Judiciary and the Department of Public Safety and Correctional Services",
-    "stakeholders": "Individuals charged with or convicted of indecent exposure, minors, the Maryland court system, and State and local correctional facilities.",
-    "fiscal_impact_summary": "The bill results in a minimal increase in State and local revenues and expenditures. State general fund revenues increase due to fines collected in District Court, while State expenditures increase minimally due to incarceration costs for longer sentences and potential payments to counties for inmate reimbursement. Local revenues and expenditures also increase minimally through circuit court fines and the costs of housing inmates in local detention facilities.",
+    "stakeholders": "Minors, individuals charged with indecent exposure offenses, and the Maryland criminal justice system.",
+    "fiscal_impact_summary": "State and local revenues and expenditures are expected to increase minimally due to the bill's penalty provisions. The new offense for indecent exposure in the presence of a minor carries a maximum penalty of 5 years imprisonment and a $10,000 fine, which is higher than the standard penalty of 3 years and a $1,000 fine.",
     "agency_relevance": [
       {
         "agency_name": "Administrative Office of the Courts",
         "is_relevant": true,
-        "relevance_explanation": "The bill codifies a common law crime and establishes a new criminal offense, directly impacting judicial proceedings. The fiscal note explicitly mentions the Judiciary's role in processing violations and provides data on charges and convictions in the District and circuit courts.",
+        "relevance_explanation": "The bill creates a new criminal offense and codifies existing common law, directly impacting court filings, case management, and sentencing. The fiscal note provides specific data on indecent exposure violations currently filed in District and Circuit courts.",
         "relevance_rating": 4
       },
       {
         "agency_name": "Department of Public Safety and Correctional Services",
         "is_relevant": true,
-        "relevance_explanation": "DPSCS is responsible for the management of the state's correctional system, parole, and probation. The fiscal note details the impact on incarceration costs and identifies that the Division of Correction and Division of Parole and Probation will manage individuals sentenced under the bill's provisions.",
+        "relevance_explanation": "The bill increases the maximum penalty for indecent exposure in the presence of a minor to 5 years. Individuals sentenced to more than 18 months are incarcerated in State facilities managed by this agency. The agency also oversees parole and probation intakes for these offenders.",
         "relevance_rating": 4
       },
       {
         "agency_name": "Maryland Office of the Public Defender",
         "is_relevant": true,
-        "relevance_explanation": "The Office of the Public Defender is responsible for providing legal representation to indigent residents. The fiscal note specifically notes that the agency expects an increase in caseloads requiring additional staffing due to the new criminal offense defined by the bill.",
+        "relevance_explanation": "This agency is responsible for representing indigent defendants in criminal cases where incarceration is possible. The fiscal note specifically notes that the Public Defender anticipates an increase in attorney caseloads due to the new statutory offense.",
         "relevance_rating": 4
       },
       {
-        "agency_name": "Governor's Office",
+        "agency_name": "Maryland State Police",
         "is_relevant": true,
-        "relevance_explanation": "As the principal executive agency, the Governor's Office is responsible for signing or vetoing legislation. Governor Wes Moore signed this specific bill (Chapter 858) into law.",
+        "relevance_explanation": "As a primary statewide law enforcement agency, the State Police are responsible for investigating criminal law violations and enforcing the new specific charges related to indecent exposure in the presence of a minor.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Governor's Office of Crime Prevention and Policy",
         "is_relevant": true,
-        "relevance_explanation": "This agency serves as the state's central hub for public safety policy. This bill alters criminal law and penalties, which falls under their purview for advising the Governor on criminal justice strategies.",
+        "relevance_explanation": "This office serves as the central hub for public safety policy and advises the Governor on criminal justice strategies. The bill's focus on crime prevention and specific protections for minors falls within its policy mandate.",
         "relevance_rating": 3
       },
       {
-        "agency_name": "Maryland State Police",
+        "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The Maryland State Police are responsible for enforcing criminal laws statewide. This bill establishes a new criminal misdemeanor that their officers would be responsible for investigating and charging.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Office of the Attorney General",
-        "is_relevant": true,
-        "relevance_explanation": "The OAG handles criminal appeals in state and federal courts. Any appeals resulting from convictions under this new subsection of the Criminal Law Article would be managed by this agency.",
+        "relevance_explanation": "The Governor's Office is responsible for signing the bill into law and overseeing the general enforcement of state criminal statutes through its executive agencies.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Comptroller of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "The Comptroller is the state's tax collector and fiscal watchdog. The bill's penalty provisions include fines of up to $10,000, which contribute to the state's general fund revenues managed by the Comptroller.",
+        "relevance_explanation": "The Comptroller acts as the state's tax collector and fiscal watchdog; the bill is expected to generate a minimal increase in general fund revenues through the collection of new criminal fines.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Office of the Attorney General",
+        "is_relevant": true,
+        "relevance_explanation": "The OAG manages criminal appeals and provides legal advice to the state agencies tasked with enforcing this new provision of the Criminal Law Article.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Budget and Management",
+        "is_relevant": true,
+        "relevance_explanation": "DBM oversees the state budget and general fund; the bill will result in a minimal increase in expenditures related to incarceration costs and revenue from fines.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Governor's Office for Children",
         "is_relevant": true,
-        "relevance_explanation": "The Governor's Office for Children leads policy efforts to improve the well-being of children. This bill is specifically designed to protect minors from indecent exposure by creating a enhanced penalty for offenses committed in their presence.",
+        "relevance_explanation": "The GOC leads policy action to improve the well-being and safety of children. This bill specifically creates a new criminal offense to protect minors from indecent exposure.",
         "relevance_rating": 2
       }
     ]
@@ -1195,48 +1201,66 @@
     ],
     "YearAndSession": "2024 Regular Session",
     "StatusCurrentAsOf": "2024-11-13T09:05:06.703",
-    "bill_summary": "The Housing Innovation Pilot Program Act of 2024 establishes the Housing Innovation Pilot Program and the Housing Innovation Fund within the Department of Housing and Community Development. The program provides low-interest or no-interest loans to local housing authorities and county governments to develop mixed-income, cross-subsidized housing projects that are publicly owned or controlled and serve households earning between 50% and 60% of the area median income.",
+    "bill_summary": "This bill establishes the Housing Innovation Pilot Program and the Housing Innovation Fund within the Department of Housing and Community Development (DHCD). The program provides low- or no-interest loans to local housing authorities and county governments to develop mixed-income, cross-subsidized housing projects. These projects must prioritize public ownership, prevailing wage commitments, and long-term affordability set-asides.",
     "start_year": 2024,
     "end_year": 2029,
-    "funding": 30000000,
-    "responsible_party": "Department of Housing and Community Development",
-    "stakeholders": "Local housing authorities, county governments, private housing developers, and low-to-moderate income Maryland residents qualifying for affordable housing.",
-    "fiscal_impact_summary": "The bill increases state special fund revenues and expenditures by $10 million in FY 2025 and $5 million annually from FY 2026 through 2029, often via the reallocation of existing rental housing program funds. General fund expenditures increase by $170,535 in FY 2025 for department administrative staffing and costs, with subsequent annual increases for inflation. Local governments and housing authorities will see increased revenues and expenditures as they receive and expend loan funds for housing projects.",
+    "funding": 10000000,
+    "responsible_party": "Maryland Department of Housing and Community Development (DHCD)",
+    "stakeholders": "Local housing authorities, county governments, private housing developers, and Maryland residents seeking affordable or mixed-income housing.",
+    "fiscal_impact_summary": "The bill increases State general obligation (GO) bond expenditures by $10,000,000 in FY 2025 due to a budget restriction for the pilot program. From FY 2026 through 2029, the Governor may reallocate $5,000,000 annually from existing rental housing programs to the new fund. General fund expenditures for DHCD administration increase by $170,535 in FY 2025, rising to $175,200 by FY 2029. Local jurisdictions will see increased revenues and expenditures via loan receipts and project costs.",
     "agency_relevance": [
       {
         "agency_name": "Department of Housing and Community",
         "is_relevant": true,
-        "relevance_explanation": "As the primary implementing agency, DHCD is responsible for establishing and administering the Housing Innovation Pilot Program and the associated Housing Innovation Fund, including soliciting applications and selecting projects for funding.",
+        "relevance_explanation": "The bill establishes the Housing Innovation Pilot Program and the Housing Innovation Fund within this department, designating it as the primary agency for administration, project selection, and loan management.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The Governor is authorized to include annual appropriations of $5,000,000 in the state budget for the program and exercises executive oversight over the agency's implementation of this new housing policy initiative.",
-        "relevance_rating": 4
-      },
-      {
-        "agency_name": "Maryland State Treasurer's Office",
-        "is_relevant": true,
-        "relevance_explanation": "The bill explicitly mandates that the State Treasurer hold the Housing Innovation Fund separately and invest the money of the fund in the same manner as other state money.",
+        "relevance_explanation": "As the head of the executive branch, the Governor oversees the program's implementation and is authorized by the bill to include specific appropriations for the Housing Innovation Fund in the annual state budget.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Comptroller of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "The bill explicitly requires the Comptroller to account for the newly established Housing Innovation Fund.",
+        "relevance_explanation": "The bill statutorily requires the Comptroller to account for the newly created Housing Innovation Fund as a special, nonlapsing fund within the state's financial system.",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "Maryland State Treasurer's Office",
+        "is_relevant": true,
+        "relevance_explanation": "The Treasurer is required to hold and invest the Housing Innovation Fund's assets and manages the general obligation bonds used to capitalize the program as identified in the fiscal note.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Department of Budget and Management",
         "is_relevant": true,
-        "relevance_explanation": "DBM oversees the state's annual budget process and the allocation of the $5 million annual appropriation authorized by the bill, and manages the personnel needs (1.5 positions) identified in the fiscal note.",
+        "relevance_explanation": "This agency manages the state's budget process and oversees the allocation of the $5 million annual appropriations and the $10 million in bond funding authorized for the pilot program.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Department of Labor",
         "is_relevant": true,
-        "relevance_explanation": "The bill prioritizes housing projects that include a commitment to prevailing wage requirements, which falls under the regulatory and enforcement domain of the Department of Labor.",
+        "relevance_explanation": "The bill prioritizes housing projects that commit to prevailing wage requirements, a regulatory area managed and enforced by the Department of Labor.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Office of the Attorney General",
+        "is_relevant": true,
+        "relevance_explanation": "The OAG serves as the legal advisor to the Department of Housing and Community Development and will assist in drafting program regulations and reviewing loan agreements.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Office of Legislative Audits",
+        "is_relevant": true,
+        "relevance_explanation": "The OLA will be responsible for conducting fiscal and compliance audits of the new program and the Housing Innovation Fund to ensure the proper use of state resources.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Board of Public Works",
+        "is_relevant": true,
+        "relevance_explanation": "The Board approves significant state expenditures and the use of general obligation bonds, which are the primary funding source for the program's initial capitalization.",
         "relevance_rating": 2
       }
     ]
@@ -1955,48 +1979,48 @@
     ],
     "YearAndSession": "2024 Regular Session",
     "StatusCurrentAsOf": "2024-11-13T09:05:06.703",
-    "bill_summary": "This bill authorizes a condominium regime to be established on a leasehold estate owned by an affordable housing land trust.",
+    "bill_summary": "This bill authorizes the establishment of a condominium regime on a leasehold estate where an affordable housing land trust owns the reversionary fee simple estate. This places affordable housing land trusts on the same footing as the State, counties, municipal corporations, and the Washington Metropolitan Area Transit Authority regarding the authority to establish residential condominium regimes on leasehold property.",
     "start_year": 2024,
     "end_year": null,
     "funding": null,
-    "responsible_party": "Secretary of State and State Department of Assessments and Taxation",
-    "stakeholders": "Affordable housing land trusts, low-income families, and moderate-income families",
-    "fiscal_impact_summary": "The bill is not anticipated to materially affect State or local government finances or operations. Small business impact is expected to be minimal.",
+    "responsible_party": "Maryland Secretary of State and affordable housing land trusts",
+    "stakeholders": "Affordable housing land trusts, low-income and moderate-income families, and residential property developers.",
+    "fiscal_impact_summary": "The bill is not anticipated to materially affect Maryland State or local government finances or operations. Revenues and expenditures are expected to remain unaffected, and the impact on small businesses is categorized as minimal.",
     "agency_relevance": [
       {
         "agency_name": "Department of Housing and Community",
         "is_relevant": true,
-        "relevance_explanation": "The bill focuses on affordable housing land trusts, which are central to the Department's mission to expand access to affordable housing and support neighborhood revitalization. DHCD is also identified in the fiscal note as a key agency for implementation.",
+        "relevance_explanation": "As the primary state agency dedicated to expanding access to affordable housing and fostering neighborhood revitalization, the department is directly impacted by changes to the operational authority of affordable housing land trusts, which are key partners in their mission.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Secretary of State",
         "is_relevant": true,
-        "relevance_explanation": "The Secretary of State is responsible for the registration of residential condominiums in Maryland and oversees the registration of charitable organizations, which are the entities specifically authorized to manage affordable housing land trusts.",
+        "relevance_explanation": "The Secretary of State is responsible for the oversight and registration of condominium regimes in Maryland; this bill expands the types of entities authorized to establish such regimes on leasehold estates.",
         "relevance_rating": 4
       },
       {
         "agency_name": "Administrative Office of the Courts",
         "is_relevant": true,
-        "relevance_explanation": "Condominium regimes are established by recording declarations and plats in the county land records. The Administrative Office of the Courts maintains the administrative and technological infrastructure, such as public records portals, used for these legal filings.",
+        "relevance_explanation": "The bill requires that condominium declarations, bylaws, and plats be recorded among the county land records, which are maintained by the clerks of the court under the guidance of the Administrative Office of the Courts.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Department of Planning",
         "is_relevant": true,
-        "relevance_explanation": "The agency coordinates land use and sustainable growth strategies; authorizing land trusts to establish condominium regimes impacts urban design, infrastructure management, and community planning policies overseen by the department.",
+        "relevance_explanation": "The Department of Planning coordinates land use and sustainable growth policy; authorizing new residential condominium structures on land trust property aligns with their mission to support community development and smart growth.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Office of the Attorney General",
         "is_relevant": true,
-        "relevance_explanation": "The OAG serves as the primary legal advisor for the executive branch and its agencies. It provides essential legal counsel regarding changes to real property law, condominium regulations, and the statutory powers of land trusts.",
+        "relevance_explanation": "The Office of the Attorney General provides legal counsel on the interpretation and enforcement of the Real Property Article, which this bill amends regarding the establishment of condominium regimes.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "As the principal executive agency, the Governor's Office signed this bill into law and oversees the Department of Housing and Community Development and other agencies implementing statewide affordable housing initiatives.",
+        "relevance_explanation": "The Governor\u2019s Office is responsible for signing or vetoing legislation and oversees the executive agencies, such as DHCD, that implement affordable housing initiatives enabled by this bill.",
         "relevance_rating": 1
       }
     ]
@@ -2330,73 +2354,73 @@
     ],
     "YearAndSession": "2024 Regular Session",
     "StatusCurrentAsOf": "2024-11-13T09:05:06.703",
-    "bill_summary": "This bill requires the State Department of Assessments and Taxation to maintain a website for voluntary donations to the Homeowner Protection Program, which provides assistance to low-income, elderly, and disabled homeowners to prevent tax sale foreclosure. Additionally, local tax collectors must include a separate informational insert with each property tax bill that describes the program and encourages taxpayers to make a donation through the state website.",
+    "bill_summary": "The bill requires the State Department of Assessments and Taxation (SDAT) to maintain a website for voluntary electronic donations to the Homeowner Protection Program (HPP). It also mandates that local tax collectors include an insert with each property tax bill, designed by the State Tax Sale Ombudsman, which describes the HPP and encourages taxpayers to make a donation to the Homeowner Protection Fund.",
     "start_year": 2024,
     "end_year": null,
     "funding": null,
     "responsible_party": "State Department of Assessments and Taxation",
-    "stakeholders": "Low-income, elderly, and disabled homeowners; Maryland property owners; local government tax collectors",
-    "fiscal_impact_summary": "State special fund revenues will increase starting in FY 2025 from voluntary donations to the Homeowner Protection Fund, though the total amount cannot be reliably estimated. Local government expenditures will increase to cover the costs of including the required inserts in property tax bills, with estimated costs ranging from $3,200 to $70,000 annually per jurisdiction.",
+    "stakeholders": "Low-income, elderly, and disabled homeowners; Maryland taxpayers; local tax collectors",
+    "fiscal_impact_summary": "Special fund revenues for the Homeowner Protection Fund will increase starting in FY 2025 due to voluntary donations, though the total amount cannot be reliably estimated. Local government expenditures will increase to cover the costs of including the required program inserts in property tax bills, with estimated annual costs ranging from $3,200 to $70,000 per jurisdiction.",
     "agency_relevance": [
       {
-        "agency_name": "Governor's Office",
+        "agency_name": "Department of Housing and Community",
         "is_relevant": true,
-        "relevance_explanation": "The bill requires the Governor to include a specific annual appropriation of $750,000 in the budget for the Homeowner Protection Fund through fiscal 2025, which aligns with the office's responsibility for drafting the state's annual budget.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Comptroller of Maryland",
-        "is_relevant": true,
-        "relevance_explanation": "As the state's chief financial officer and tax collector, the Comptroller oversees fiscal policies and revenue collection. While property taxes are local, the bill involves state-level tax policy and the management of a state special fund.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Maryland State Treasurer's Office",
-        "is_relevant": true,
-        "relevance_explanation": "The Treasurer is the custodian of state funds, including the management and investment of public funds like the Homeowner Protection Fund mentioned in the bill.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Office of the Attorney General",
-        "is_relevant": true,
-        "relevance_explanation": "The OAG serves as the legal advisor for state agencies, including the State Department of Assessments and Taxation (SDAT), which is tasked with maintaining the donation website and the Homeowner Protection Program.",
-        "relevance_rating": 2
+        "relevance_explanation": "The bill's primary purpose is to fund the Homeowner Protection Program (HPP), which prevents homeowners from losing their homes to tax sale foreclosure. This aligns directly with the agency's mission to expand access to affordable housing and manage homelessness prevention programs.",
+        "relevance_rating": 4
       },
       {
         "agency_name": "Department of Aging",
         "is_relevant": true,
-        "relevance_explanation": "The Homeowner Protection Program explicitly targets elderly homeowners to prevent loss of homes through tax sale foreclosure, aligning with the Department of Aging's mission to advocate for and provide services to older adults.",
+        "relevance_explanation": "The Homeowner Protection Program specifically targets elderly homeowners to prevent them from losing their homes. The agency is responsible for advocating for older adults and ensuring they can age with dignity in their own communities.",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "Department of Disabilities",
+        "is_relevant": true,
+        "relevance_explanation": "The bill's mandated property tax bill insert must describe how the program assists disabled homeowners in preventing foreclosure. The agency serves as a policy leader to ensure Marylanders with disabilities have equal access to stable housing.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Department of Budget and Management",
         "is_relevant": true,
-        "relevance_explanation": "DBM oversees the state budget and the allocation of taxpayer resources; the bill mandates specific budget appropriations and the management of a special fund.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Department of Disabilities",
-        "is_relevant": true,
-        "relevance_explanation": "The bill's funding mechanism supports a program that protects disabled homeowners from tax sale foreclosure, which falls under the Department of Disabilities' mandate to ensure independence and community-based living for individuals with disabilities.",
+        "relevance_explanation": "The bill impacts the Homeowner Protection Fund, which receives a mandated annual appropriation of $750,000 through fiscal year 2025. DBM is responsible for formulating the state's annual budget and overseeing such funds.",
         "relevance_rating": 3
       },
       {
-        "agency_name": "Department of Housing and Community",
+        "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "Preventing tax sale foreclosure is a critical component of housing stability and homelessness prevention, which are core missions of the Department of Housing and Community Development.",
-        "relevance_rating": 4
+        "relevance_explanation": "As the principal executive agency, the Governor's Office oversees the implementation of state initiatives like the Homeowner Protection Program and manages the state's budget, which includes mandated appropriations for the HPP Fund.",
+        "relevance_rating": 2
       },
       {
         "agency_name": "Administrative Office of the Courts",
         "is_relevant": true,
-        "relevance_explanation": "Tax sale foreclosures are judicial proceedings. The Administrative Office of the Courts manages the infrastructure of the judiciary and provided information for the fiscal note regarding the bill's impact.",
+        "relevance_explanation": "Tax sale foreclosures are legal proceedings managed within the judiciary. The success of the Homeowner Protection Program in diverting homeowners from foreclosure directly affects the volume of such cases handled by the court system.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Maryland State Treasurer's Office",
+        "is_relevant": true,
+        "relevance_explanation": "The Treasurer is the principal custodian of the state\u2019s financial assets, including the Homeowner Protection Fund, and oversees the management and protection of these public funds.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Comptroller of Maryland",
+        "is_relevant": true,
+        "relevance_explanation": "The Comptroller serves as the state\u2019s chief financial officer and tax collector. While property taxes are local, the bill establishes state-level mechanisms for collecting voluntary donations that must be credited to a state special fund.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Maryland Tax Court",
         "is_relevant": true,
-        "relevance_explanation": "The Maryland Tax Court adjudicates tax-related grievances, including those related to property assessments which underpin the tax sales addressed by the Homeowner Protection Program.",
+        "relevance_explanation": "The Tax Court adjudicates tax controversies in the state. Programs and funding mechanisms related to tax sales and property tax relief are within the broader scope of their administrative review work.",
         "relevance_rating": 2
+      },
+      {
+        "agency_name": "Office of the Attorney General",
+        "is_relevant": true,
+        "relevance_explanation": "The OAG acts as the primary legal advisor for state agencies and would provide legal counsel regarding the implementation of tax sale regulations and the administration of the Homeowner Protection Fund.",
+        "relevance_rating": 1
       }
     ]
   },
@@ -2512,60 +2536,48 @@
     ],
     "YearAndSession": "2024 Regular Session",
     "StatusCurrentAsOf": "2024-11-13T09:05:06.703",
-    "bill_summary": "This bill requires charter counties and certain code counties in Maryland to include an assessment of fair housing in the housing element of their comprehensive plans. The assessment must demonstrate that the county is affirmatively furthering fair housing by taking actions to overcome patterns of segregation and fostering inclusive communities free from housing barriers.",
+    "bill_summary": "This bill requires Maryland's charter counties (including Baltimore City) and certain code counties to include an assessment of fair housing in the housing element of their comprehensive plans. It establishes a duty for these counties to affirmatively further fair housing through their housing and urban development programs by taking meaningful actions to overcome patterns of segregation and foster inclusive communities.",
     "start_year": 2024,
     "end_year": null,
     "funding": null,
-    "responsible_party": "The Maryland Department of Planning, the Department of Housing and Community Development, and charter and code county governments.",
-    "stakeholders": "Residents of Maryland charter and code counties, particularly those seeking low-income and workforce housing, and local planning commissions.",
-    "fiscal_impact_summary": "The bill's requirements can be implemented by the State with existing resources, and revenues are not affected. The bill is not expected to have a direct, material impact on local government finances, as many jurisdictions already prepare similar assessments for federal funding requirements.",
+    "responsible_party": "Maryland Department of Planning and Maryland Department of Housing and Community Development",
+    "stakeholders": "Charter counties, Baltimore City, code counties, and Maryland residents, particularly those in need of low-income or workforce housing.",
+    "fiscal_impact_summary": "The bill is expected to have no material fiscal impact on State or local governments. The Maryland Department of Planning and the Department of Housing and Community Development can provide technical assistance using existing resources. Local governments are expected to implement the requirements within existing resources as part of their standard comprehensive plan updates.",
     "agency_relevance": [
       {
         "agency_name": "Department of Planning",
         "is_relevant": true,
-        "relevance_explanation": "As the agency that requested this departmental bill, MDP is primarily responsible for providing technical assistance to charter counties to develop the housing element of their comprehensive plans and ensuring compliance with land use requirements.",
+        "relevance_explanation": "The bill explicitly requires the Department of Planning to provide technical assistance to charter counties in developing the housing element of their comprehensive plans to ensure they affirmatively further fair housing.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Department of Housing and Community",
         "is_relevant": true,
-        "relevance_explanation": "DHCD is explicitly tasked with providing technical assistance to counties in consultation with MDP. The bill also relies on housing definitions and fair housing standards managed by this agency.",
+        "relevance_explanation": "The bill requires the Department of Planning to consult with DHCD to provide technical assistance to counties. Furthermore, the bill's core mandate of 'affirmatively furthering fair housing' is defined within the Housing and Community Development Article administered by this agency.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Commission on Civil Rights",
         "is_relevant": true,
-        "relevance_explanation": "MCCR is responsible for enforcing anti-discrimination laws in housing. The bill's mandate for counties to assess and affirmatively further fair housing directly aligns with the commission's mission to overcome patterns of segregation.",
+        "relevance_explanation": "The bill's focus on affirmatively furthering fair housing includes overcoming patterns of segregation and fostering inclusive communities free from barriers based on protected characteristics, which aligns directly with the Commission's mission to enforce anti-discrimination laws in housing.",
         "relevance_rating": 3
-      },
-      {
-        "agency_name": "Office of the Attorney General",
-        "is_relevant": true,
-        "relevance_explanation": "The OAG serves as the legal advisor to the state agencies (MDP and DHCD) implementing this law and provides guidance on the rule of law regarding fair housing and civil rights.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Department of Disabilities",
-        "is_relevant": true,
-        "relevance_explanation": "The department coordinates policy for accessible housing. Affirmatively furthering fair housing requires assessing and removing barriers for individuals with disabilities, a core focus of this agency.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Department of Aging",
-        "is_relevant": true,
-        "relevance_explanation": "The department advocates for equitable access to essential resources for older adults. Assessment of fair housing in comprehensive plans must account for the specific housing needs and potential barriers faced by Maryland's aging population.",
-        "relevance_rating": 2
       },
       {
         "agency_name": "Smart, Green & Growing",
         "is_relevant": true,
-        "relevance_explanation": "This multi-agency initiative coordinates state land-use and sustainable growth efforts. Incorporating fair housing assessments into county comprehensive plans is a key component of sustainable and equitable community development.",
+        "relevance_explanation": "This multi-agency initiative coordinates the state's 'Smart Growth' efforts, which include sound land-use policies and community revitalization. Integrating fair housing assessments into local comprehensive plans is a key component of sustainable and equitable growth management.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Office of the Attorney General",
+        "is_relevant": true,
+        "relevance_explanation": "As the primary legal advisor to state agencies, the OAG may be required to provide counsel to MDP and DHCD regarding the implementation of these new statutory requirements and the legal definitions of fair housing obligations.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The Governor's Office oversees all state departments and signs legislation. This bill supports statewide initiatives spearheaded by the office to improve economic opportunity and community well-being through equitable housing policy.",
+        "relevance_explanation": "As the principal executive agency, the Governor's Office oversees the operations of MDP and DHCD and spearheads statewide initiatives aimed at economic opportunity and community well-being, which this bill supports.",
         "relevance_rating": 1
       }
     ]
@@ -2862,54 +2874,54 @@
     ],
     "YearAndSession": "2024 Regular Session",
     "StatusCurrentAsOf": "2024-11-13T09:05:06.703",
-    "bill_summary": "This bill officially changes the common name of the northern snakehead to 'Chesapeake Channa' in Maryland. It renames the commercial fishing license accordingly and mandates that the Department of Natural Resources adopt regulations and update all published materials to reflect this name change by January 1, 2025.",
+    "bill_summary": "This bill renames the northern snakehead fish as the \"Chesapeake Channa\" for official state purposes. It updates the name of the commercial northern snakehead license and requires the Department of Natural Resources to adopt regulations and update all applicable published materials to reflect the new common name by January 1, 2025.",
     "start_year": 2024,
     "end_year": null,
-    "funding": 0,
+    "funding": null,
     "responsible_party": "Maryland Department of Natural Resources",
-    "stakeholders": "Commercial fishers, small businesses in the seafood industry, and the Maryland Department of Natural Resources.",
-    "fiscal_impact_summary": "The bill can be implemented using existing State resources and has no local fiscal impact. It may have a potential meaningful impact on small businesses in the commercial fishing and seafood industry if the rebranding leads to increased marketing and harvesting of the species.",
+    "stakeholders": "Commercial fishers, the seafood industry, and small businesses involved in fish harvesting and marketing.",
+    "fiscal_impact_summary": "The State and local fiscal impact is expected to be minimal, as the bill can be implemented with existing resources. There is a potential meaningful positive impact on small businesses in the commercial fishing and seafood industry if the name change improves marketing and harvesting efforts for the species.",
     "agency_relevance": [
       {
         "agency_name": "Department of Natural Resources",
         "is_relevant": true,
-        "relevance_explanation": "The Department of Natural Resources is the primary agency responsible for implementing this bill. It is specifically mandated to adopt regulations establishing the 'Chesapeake Channa' name, rename the commercial fishing license, and ensure the new name is used on all departmental publications.",
+        "relevance_explanation": "DNR is the primary agency responsible for implementing the bill; it is explicitly tasked with adopting naming regulations and updating all licensing and published materials to reflect 'Chesapeake Channa' as the common name for the northern snakehead.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Department of Agriculture",
         "is_relevant": true,
-        "relevance_explanation": "The Department of Agriculture is involved in seafood marketing through initiatives like 'Maryland's Best.' Renaming the invasive northern snakehead to the more marketable 'Chesapeake Channa' directly impacts their efforts to promote local seafood and was identified as a stakeholder in the fiscal note.",
+        "relevance_explanation": "The MDA markets Maryland seafood through the 'Maryland\u2019s Best' initiative; rebranding an invasive species to increase its commercial appeal and consumer demand directly aligns with the agency's mission to support the local seafood market.",
         "relevance_rating": 3
-      },
-      {
-        "agency_name": "Maryland Food Center Authority",
-        "is_relevant": true,
-        "relevance_explanation": "The MFCA operates the Maryland Market Center (Seafood Market) in Jessup. Renaming a commercially harvested species affects the distribution, inventory, and labeling of products within the state's primary wholesale seafood distribution hub.",
-        "relevance_rating": 2
       },
       {
         "agency_name": "Department of Commerce",
         "is_relevant": true,
-        "relevance_explanation": "The Department of Commerce supports small businesses and marketing for local industries. The fiscal note suggests the bill may have a meaningful economic impact on small businesses in the commercial fishing and seafood sectors by potentially increasing demand.",
+        "relevance_explanation": "Commerce supports small businesses and economic development; the rebranding of the species facilitates new commercial opportunities and job growth within the state's seafood harvesting and processing sectors.",
         "relevance_rating": 2
       },
       {
-        "agency_name": "Smart, Green & Growing",
+        "agency_name": "Maryland Office of Tourism Development",
         "is_relevant": true,
-        "relevance_explanation": "This multi-agency initiative focuses on the health of the Chesapeake Bay. Renaming an invasive species to include 'Chesapeake' in its name aligns with the initiative's efforts to coordinate branding and environmental stewardship of the Bay's ecosystem.",
+        "relevance_explanation": "MOTD promotes Maryland's culinary identity; the name change supports the agency's efforts to market local, sustainable seafood as a destination-based tourism asset and culinary attraction.",
         "relevance_rating": 2
       },
       {
-        "agency_name": "Office of the Attorney General",
+        "agency_name": "Maryland Agricultural & Resource-Based Industry Development Corp.",
         "is_relevant": true,
-        "relevance_explanation": "The OAG serves as the legal advisor for state agencies and will be responsible for providing legal counsel and reviewing the new regulations mandated by the bill for the Department of Natural Resources.",
-        "relevance_rating": 1
+        "relevance_explanation": "MARBIDCO provides financial support to seafood businesses; rebranding the northern snakehead into a commercial product helps create new market segments and investment opportunities for rural entrepreneurs in the industry.",
+        "relevance_rating": 2
       },
       {
         "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The Governor's Office oversees all executive agencies and departments, including the implementation of new legislation and the coordination of the executive branch's response to invasive species and economic development.",
+        "relevance_explanation": "The Governor's Office oversees the executive agencies tasked with the implementation of the rebranding and regulatory updates, and the Governor signed the legislation into law.",
+        "relevance_rating": 1
+      },
+      {
+        "agency_name": "Maryland Food Center Authority",
+        "is_relevant": true,
+        "relevance_explanation": "The MFCA operates the state's wholesale seafood distribution hub in Jessup; a successful rebranding that increases commercial volume of the species would directly impact the operations of their distribution infrastructure.",
         "relevance_rating": 1
       }
     ]
@@ -3304,61 +3316,55 @@
     ],
     "YearAndSession": "2024 Regular Session",
     "StatusCurrentAsOf": "2024-11-13T09:05:06.703",
-    "bill_summary": "This bill requires the Maryland State Highway Administration (SHA) to update its pollinator habitat plan to include policies that encourage the use of native plants, establish habitat areas along state highways, and educate the public about these efforts. SHA is also mandated to track and apply for federal funding related to pollinator habitats and invasive species control, and must publish annual updates including the locations and sizes of maintained habitat areas.",
+    "bill_summary": "This bill requires the Maryland State Highway Administration to update its pollinator habitat plan to include specific policies for native plant use, habitat maintenance along highways, and public education. It mandates that the agency track and apply for federal funding for pollinator habitats and provide annual public updates regarding the location and size of these areas.",
     "start_year": 2024,
     "end_year": null,
-    "funding": 50000,
-    "responsible_party": "State Highway Administration",
-    "stakeholders": "Pollinators, the general public (drivers, bicyclists, and pedestrians), community associations, and the Maryland Department of Transportation.",
-    "fiscal_impact_summary": "State Transportation Trust Fund expenditures are expected to increase minimally, likely by less than $50,000 annually, including an estimated $35,000 in fiscal 2025 for signage and public outreach events. There is a potential increase in federal fund revenues if SHA successfully applies for and receives federal grants for pollinator habitats.",
+    "funding": null,
+    "responsible_party": "Maryland State Highway Administration",
+    "stakeholders": "Maryland motorists, bicyclists, pedestrians, community associations, elected officials, and pollinator species.",
+    "fiscal_impact_summary": "State Transportation Trust Fund expenditures are expected to increase by less than $50,000 annually due to costs for signage and outreach. There is a potential increase in federal fund revenues if the State Highway Administration receives federal grants. Local government finances are not affected.",
     "agency_relevance": [
       {
         "agency_name": "State Highway Administration",
         "is_relevant": true,
-        "relevance_explanation": "SHA is the primary agency responsible for implementing the bill, including updating its pollinator habitat plan, developing policies for native plants, maintaining habitat areas along highways, and tracking/applying for federal funding for these purposes.",
+        "relevance_explanation": "The bill specifically mandates the State Highway Administration (SHA) to update its pollinator habitat plan, include new policies for native plants and public education, and track/apply for federal funding related to these initiatives.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Department of Transportation",
         "is_relevant": true,
-        "relevance_explanation": "As the parent agency of SHA, MDOT is impacted by the bill's requirements and the associated fiscal impact on the Transportation Trust Fund. The bill governs operations along the state highway network managed by its business unit.",
+        "relevance_explanation": "As the parent department of the State Highway Administration, MDOT is responsible for the overall planning and maintenance of the state's transportation network, which the bill directly impacts through its requirements for SHA.",
         "relevance_rating": 4
       },
       {
         "agency_name": "Department of Agriculture",
         "is_relevant": true,
-        "relevance_explanation": "The bill amends the Agriculture Article and explicitly requires SHA to consult with the Department of Agriculture when establishing and maintaining its pollinator habitat plan.",
+        "relevance_explanation": "The bill amends the Agriculture Article and requires the pollinator habitat plans to be developed in consultation with the Department of Agriculture. Additionally, the bill preserves the authority of MDA over weed control programs.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Department of Natural Resources",
         "is_relevant": true,
-        "relevance_explanation": "DNR is one of the three agencies, along with SHA and MES, that is statutory required to establish and maintain a pollinator habitat plan and make it available to the public.",
+        "relevance_explanation": "The bill modifies the specific section of law (2-1801 of the Agriculture Article) that mandates DNR to maintain and implement its own pollinator habitat plan, alongside SHA and MES.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Maryland Environmental Service",
         "is_relevant": true,
-        "relevance_explanation": "MES is one of the three agencies required by statute to establish a pollinator habitat plan and share it on its website. It also provides technical and operational services for environmental projects that overlap with the bill's conservation goals.",
+        "relevance_explanation": "MES is one of the three agencies (with SHA and DNR) originally required to establish and implement a pollinator habitat plan under the statute being amended.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Department of Health",
         "is_relevant": true,
-        "relevance_explanation": "The Secretary of Health is responsible for determining if the use of toxic pesticides, otherwise prohibited by a pollinator habitat plan, is necessary to respond to specific public health threats.",
+        "relevance_explanation": "The bill grants the Secretary of Health specific authority to determine when certain pesticides otherwise prohibited in pollinator habitats may be used to respond to public health threats.",
         "relevance_rating": 2
       },
       {
-        "agency_name": "Governor's Grants Office",
+        "agency_name": "Department of Budget and Management",
         "is_relevant": true,
-        "relevance_explanation": "The bill requires SHA to track and evaluate federal programs that provide funding for pollinator habitats and native plants, which falls within the Grants Office's mission to maximize federal funding for state agencies.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Smart, Green & Growing",
-        "is_relevant": true,
-        "relevance_explanation": "This multi-agency initiative coordinates stewardship of the state's natural resources and land-use policies among the departments of Agriculture, Natural Resources, and Transportation, all of which are involved in the pollinator plan mandate.",
-        "relevance_rating": 2
+        "relevance_explanation": "DBM is relevant due to the bill's fiscal impact on the Transportation Trust Fund (TTF), as the agency oversees the state's central fiscal authority and budget formulation.",
+        "relevance_rating": 1
       }
     ]
   },
