@@ -4,86 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maryland Legi-Assist | Research & Tracking</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    <style>
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #555; }
-        
-        .md-flag-strip {
-            background: linear-gradient(90deg, #bf0d3e 25%, #fff 25%, #fff 50%, #000 50%, #000 75%, #e0aa0f 75%);
-            height: 8px;
-            width: 100%;
-        }
-        [v-cloak] { display: none; }
+    <link rel="stylesheet" href="./assets/output_style.css">
 
-        .form-select-multi {
-            max-height: 120px;
-            overflow-y: auto;
-        }
-        
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-        
-        button:focus-visible,
-        a:focus-visible,
-        input:focus-visible,
-        select:focus-visible,
-        [tabindex="0"]:focus-visible {
-            outline: 2px solid #991b1b;
-            outline-offset: 2px;
-        }
-        
-        button:focus:not(:focus-visible),
-        a:focus:not(:focus-visible) {
-            outline: none;
-        }
-        
-        @media (prefers-contrast: high) {
-            .border-gray-200 { border-color: #000; }
-            .text-slate-500, .text-slate-600 { color: #000; }
-            .bg-red-50 { background-color: #fee; border: 1px solid #991b1b; }
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-            .animate-spin { animation: none; }
-        }
-        
-        @media (pointer: coarse) {
-            button, a, input[type="checkbox"], select {
-                min-height: 44px;
-                min-width: 44px;
-            }
-            .form-select-multi label {
-                min-height: 44px;
-                display: flex;
-                align-items: center;
-            }
-        }
-        
-        article:focus-within {
-            border-color: #fca5a5;
-        }
-    </style>
 </head>
 <body class="bg-gray-50 text-slate-800 font-sans h-screen flex flex-col overflow-hidden">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:text-red-800 focus:p-4 focus:font-bold focus:border-2 focus:border-red-800 focus:rounded-lg focus:shadow-xl">
@@ -92,25 +17,53 @@
     <div id="app" v-cloak class="flex flex-col h-full">
         <header class="bg-white shadow-sm z-20 shrink-0">
             <div class="md-flag-strip"></div>
-            <div class="max-w-7xl mx-auto px-4 py-4">
-                <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
-                    <div class="flex items-center gap-3">
-                        <i class="ph ph-shield-check text-3xl text-red-800" aria-hidden="true"></i>
-                        <div>
-                            <a href="./" class="hover:opacity-70 transition-opacity">
-                                <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Maryland Legi-Assist</h1>
-                            </a>
-                            <div class="flex items-center gap-1">
-                                <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">AI-assisted Legislative Research</p>
-                                <button @click="showAboutModal = true" class="text-slate-400 hover:text-red-800 transition-colors focus:outline-none focus:ring-1 focus:ring-red-800 rounded" aria-label="Learn more about this site's unique features">
-                                    <i class="ph ph-question text-base" aria-hidden="true"></i>
-                                </button>
+            <div class="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4">
+                <div class="flex flex-col gap-3">
+                    <!-- Top row: Logo and actions -->
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-2 sm:gap-3">
+                            <div>
+                                <a href="./" class="hover:opacity-70 transition-opacity">
+                                    <h1 class="text-lg sm:text-2xl font-bold text-slate-900 tracking-tight">Maryland Legi-Assist</h1>
+                                </a>
+                                <div class="flex items-center gap-1">
+                                    <p class="text-xs sm:text-sm text-slate-500 uppercase font-bold tracking-widest">AI-assisted Research</p>
+                                    <button @click="showAboutModal = true" class="text-slate-400 hover:text-red-800 transition-colors focus:outline-none focus:ring-1 focus:ring-red-800 rounded" aria-label="Learn more about this site's unique features">
+                                        <i class="ph ph-question text-base sm:text-lg" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
+                        </div>
+
+                        <!-- Desktop actions -->
+                        <div class="hidden lg:flex items-center gap-3">
+                            <button @click="exportToExcel" class="flex items-center gap-2 px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg transition-colors text-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-green-700 outline-none">
+                                <i class="ph ph-file-xls" aria-hidden="true"></i> Export
+                            </button>
+                        </div>
+
+                        <!-- Mobile menu button -->
+                        <div class="flex lg:hidden items-center gap-2">
+                            <button @click="exportToExcel" class="p-2 bg-green-700 hover:bg-green-800 text-white rounded-lg" aria-label="Export to Excel">
+                                <i class="ph ph-file-xls text-lg" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </div>
 
-                    <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
-                        <div ref="agencyFilterContainer" class="relative flex-1 lg:w-80">
+                    <!-- Search row -->
+                    <div class="flex items-center gap-2 sm:gap-3">
+                        <!-- Mobile filter toggle -->
+                        <button 
+                            @click="showFilterDrawer = true"
+                            class="lg:hidden flex items-center justify-center gap-2 px-3 py-2 bg-red-800 text-white rounded-lg font-medium text-sm shrink-0"
+                            aria-label="Open filters"
+                        >
+                            <i class="ph ph-funnel text-lg" aria-hidden="true"></i>
+                            <span class="hidden sm:inline">Filters</span>
+                            <span v-if="activeFilterCount > 0" class="bg-white text-red-800 text-xs font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center">{{ activeFilterCount }}</span>
+                        </button>
+
+                        <div ref="agencyFilterContainer" class="relative flex-1">
                             <i class="ph ph-buildings absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" aria-hidden="true"></i>
                             <input 
                                 v-model="agencySearch" 
@@ -125,8 +78,8 @@
                                 aria-haspopup="listbox"
                                 :aria-expanded="showAgencyList && filteredAgencies.length > 0"
                                 aria-controls="agency-results-list"
-                                placeholder="Filter by Agency Relevance..." 
-                                class="pl-10 pr-12 py-2 border border-gray-500 placeholder-gray-600 text-slate-900 rounded-lg focus:ring-2 focus:ring-red-800 w-full outline-none font-medium"
+                                placeholder="Filter by Agency..." 
+                                class="w-full pl-10 pr-10 py-3 border border-gray-500 placeholder-gray-600 text-slate-900 rounded-lg focus:ring-2 focus:ring-red-800 outline-none font-medium text-sm sm:text-base"
                             >
                             <ul 
                                 v-if="showAgencyList && filteredAgencies.length" 
@@ -144,7 +97,7 @@
                                     tabindex="0"
                                     role="option"
                                     :aria-selected="agency === selectedAgency"
-                                    class="px-4 py-2 hover:bg-red-50 focus:bg-red-50 cursor-pointer text-sm border-b border-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-800 text-slate-800"
+                                    class="px-4 py-3 hover:bg-red-50 focus:bg-red-50 cursor-pointer text-sm border-b border-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-800 text-slate-800"
                                 >
                                     {{ agency }}
                                 </li>
@@ -155,30 +108,21 @@
                                 aria-label="Clear selected agency"
                                 class="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-red-800"
                             >
-                                <i class="ph ph-x-circle text-slate-500 hover:text-red-600" aria-hidden="true"></i>
+                                <i class="ph ph-x-circle text-slate-500 hover:text-red-600 text-lg" aria-hidden="true"></i>
                             </button>
                         </div>
 
-                        <select v-model="selectedYear" @change="fetchData" aria-label="Select Legislative Session" class="px-4 py-2 border border-gray-500 rounded-lg bg-white focus:ring-2 focus:ring-red-800 outline-none font-bold">
-                            <option v-for="year in [2026, 2025, 2024, 2023]" :value="year">{{ year }} Session</option>
+                        <select v-model="selectedYear" @change="fetchData" aria-label="Select Legislative Session" class="px-2 sm:px-4 py-2 border border-gray-500 rounded-lg bg-white focus:ring-2 focus:ring-red-800 outline-none font-bold text-sm sm:text-base shrink-0">
+                            <option v-for="year in [2026, 2025, 2024, 2023]" :value="year">{{ year }}</option>
                         </select>
-
-                        <button @click="exportToExcel" class="flex items-center gap-2 px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg transition-colors text-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-green-700 outline-none">
-                            <i class="ph ph-file-xls" aria-hidden="true"></i> Export
-                        </button>
-
-                        <a href="https://github.com/Maryland-State-Innovation-Team/Legi-Assist/" target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-black text-white rounded-lg transition-colors text-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-slate-800 outline-none">
-                            <i class="ph ph-github-logo" aria-hidden="true"></i> 
-                            GitHub
-                            <span class="sr-only">(opens in new tab)</span>
-                        </a>
                     </div>
                 </div>
             </div>
         </header>
 
-        <main id="main-content" class="flex-1 overflow-hidden flex flex-col md:flex-row">
-            <aside aria-label="Filter options" class="w-full md:w-80 bg-white border-r border-gray-200 overflow-y-auto p-4 space-y-6">
+        <main id="main-content" class="flex-1 overflow-hidden flex flex-col lg:flex-row">
+            <!-- Desktop Sidebar -->
+            <aside aria-label="Filter options" class="hidden lg:block w-80 bg-white border-r border-gray-200 overflow-y-auto p-4 space-y-6 shrink-0">
                 <div class="flex items-center justify-between mb-2">
                     <h2 class="text-xs font-black text-gray-500 uppercase tracking-widest">Filters</h2>
                     <button 
@@ -190,16 +134,16 @@
                 </div>
                 
                 <div role="search">
-                    <label for="keyword-search-input" class="block text-xs font-bold text-gray-500 uppercase mb-2">Keyword Search</label>
+                    <label for="keyword-search-input-desktop" class="block text-xs font-bold text-gray-500 uppercase mb-2">Keyword Search</label>
                     <div class="relative">
                         <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" aria-hidden="true"></i>
-                        <input id="keyword-search-input" v-model="searchQuery" type="text" class="w-full pl-9 pr-4 py-2 border border-gray-400 rounded-lg text-sm text-slate-900 placeholder-gray-600 focus:ring-2 focus:ring-red-800 outline-none" placeholder="Title, summary, ID...">
+                        <input id="keyword-search-input-desktop" v-model="searchQuery" type="text" class="w-full pl-9 pr-4 py-2 border border-gray-400 rounded-lg text-sm text-slate-900 placeholder-gray-600 focus:ring-2 focus:ring-red-800 outline-none" placeholder="Title, summary, ID...">
                     </div>
                 </div>
                 
                 <div v-if="selectedAgency" class="p-3 bg-red-50 rounded-lg border border-red-100">
-                    <label for="impact-rating-filter" class="block text-[10px] font-black text-red-800 uppercase mb-2 tracking-wider">Filter by Impact Level</label>
-                    <select id="impact-rating-filter" v-model="filterRating" class="w-full bg-white border border-gray-400 rounded px-2 py-1 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-red-800">
+                    <label for="impact-rating-filter-desktop" class="block text-[10px] font-black text-red-800 uppercase mb-2 tracking-wider">Filter by Impact Level</label>
+                    <select id="impact-rating-filter-desktop" v-model="filterRating" class="w-full bg-white border border-gray-400 rounded px-2 py-1 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-red-800">
                         <option value="all">All Relevance Levels</option>
                         <option value="5">5 - Primary Relevance</option>
                         <option value="4">4 - High Relevance</option>
@@ -212,8 +156,8 @@
                 <fieldset>
                     <legend class="block text-xs font-bold text-gray-500 uppercase mb-2">Broad Subjects</legend>
                     <div class="form-select-multi border border-gray-400 rounded-lg p-2 space-y-1" role="group">
-                        <label v-for="sub in uniqueBroadSubjects" :key="sub.Code" class="flex items-center gap-2 text-sm cursor-pointer hover:bg-gray-50 p-1 rounded">
-                            <input type="checkbox" v-model="filterBroad" :value="sub.Name" class="rounded text-red-800 focus:ring-red-800">
+                        <label v-for="sub in uniqueBroadSubjects" :key="sub.Code" class="checkbox-label flex items-center gap-2 text-sm cursor-pointer hover:bg-gray-50 px-2 py-1 rounded">
+                            <input type="checkbox" v-model="filterBroad" :value="sub.Name" class="rounded text-red-800 focus:ring-red-800 w-4 h-4 shrink-0">
                             <span>{{ sub.Name }}</span>
                         </label>
                     </div>
@@ -222,35 +166,125 @@
                 <fieldset>
                     <legend class="block text-xs font-bold text-gray-500 uppercase mb-2">Narrow Subjects</legend>
                     <div class="form-select-multi border border-gray-400 rounded-lg p-2 space-y-1" role="group">
-                        <label v-for="sub in uniqueNarrowSubjects" :key="sub.Code" class="flex items-center gap-2 text-xs cursor-pointer hover:bg-gray-50 p-1 rounded">
-                            <input type="checkbox" v-model="filterNarrow" :value="sub.Name" class="rounded text-red-800 focus:ring-red-800">
+                        <label v-for="sub in uniqueNarrowSubjects" :key="sub.Code" class="checkbox-label flex items-center gap-2 text-xs cursor-pointer hover:bg-gray-50 px-2 py-1 rounded">
+                            <input type="checkbox" v-model="filterNarrow" :value="sub.Name" class="rounded text-red-800 focus:ring-red-800 w-4 h-4 shrink-0">
                             <span>{{ sub.Name }}</span>
                         </label>
                     </div>
                 </fieldset>
             </aside>
 
-            <section class="flex-1 overflow-y-auto bg-gray-50 p-4 relative">
+            <!-- Mobile Filter Drawer -->
+            <transition name="fade">
+                <div 
+                    v-if="showFilterDrawer"
+                    class="lg:hidden fixed inset-0 z-50 drawer-overlay"
+                    @click.self="showFilterDrawer = false"
+                >
+                    <aside 
+                        ref="filterDrawer"
+                        class="absolute left-0 top-0 bottom-0 w-[85vw] max-w-sm bg-white shadow-2xl overflow-y-auto drawer-transition"
+                        :class="drawerReady ? 'drawer-open' : 'drawer-enter'"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Filter options"
+                        @keydown.esc="showFilterDrawer = false"
+                    >
+                        <div class="sticky top-0 bg-white border-b border-gray-200 p-4 flex items-center justify-between z-10">
+                            <h2 class="text-lg font-bold text-slate-900">Filters</h2>
+                            <button 
+                                @click="showFilterDrawer = false"
+                                class="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                                aria-label="Close filters"
+                            >
+                                <i class="ph ph-x text-xl" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="p-4 space-y-6">
+                            <div class="flex justify-end">
+                                <button 
+                                    @click="clearFilters" 
+                                    class="text-xs font-bold text-red-700 hover:text-red-900 uppercase bg-red-50 px-3 py-2 rounded border border-red-100 transition-colors"
+                                >
+                                    Clear All Filters
+                                </button>
+                            </div>
+                            
+                            <div role="search">
+                                <label for="keyword-search-input-mobile" class="block text-xs font-bold text-gray-500 uppercase mb-2">Keyword Search</label>
+                                <div class="relative">
+                                    <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" aria-hidden="true"></i>
+                                    <input id="keyword-search-input-mobile" v-model="searchQuery" type="text" class="w-full pl-9 pr-4 py-3 border border-gray-400 rounded-lg text-base text-slate-900 placeholder-gray-600 focus:ring-2 focus:ring-red-800 outline-none" placeholder="Title, summary, ID...">
+                                </div>
+                            </div>
+                            
+                            <div v-if="selectedAgency" class="p-4 bg-red-50 rounded-lg border border-red-100">
+                                <label for="impact-rating-filter-mobile" class="block text-[10px] font-black text-red-800 uppercase mb-2 tracking-wider">Filter by Impact Level</label>
+                                <select id="impact-rating-filter-mobile" v-model="filterRating" class="w-full bg-white border border-gray-400 rounded px-3 py-3 text-base text-slate-900 outline-none focus:ring-2 focus:ring-red-800">
+                                    <option value="all">All Relevance Levels</option>
+                                    <option value="5">5 - Primary Relevance</option>
+                                    <option value="4">4 - High Relevance</option>
+                                    <option value="3">3 - Moderate Relevance</option>
+                                    <option value="2">2 - Low Relevance</option>
+                                    <option value="1">1 - Minimal Relevance</option>
+                                </select>
+                            </div>
+                            
+                            <fieldset>
+                                <legend class="block text-xs font-bold text-gray-500 uppercase mb-2">Broad Subjects</legend>
+                                <div class="form-select-multi border border-gray-400 rounded-lg p-2 space-y-0 max-h-48" role="group">
+                                    <label v-for="sub in uniqueBroadSubjects" :key="sub.Code" class="checkbox-label flex items-center gap-3 text-sm cursor-pointer hover:bg-gray-50 px-2 rounded">
+                                        <input type="checkbox" v-model="filterBroad" :value="sub.Name" class="rounded text-red-800 focus:ring-red-800 w-5 h-5 shrink-0">
+                                        <span>{{ sub.Name }}</span>
+                                    </label>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend class="block text-xs font-bold text-gray-500 uppercase mb-2">Narrow Subjects</legend>
+                                <div class="form-select-multi border border-gray-400 rounded-lg p-2 space-y-0 max-h-48" role="group">
+                                    <label v-for="sub in uniqueNarrowSubjects" :key="sub.Code" class="checkbox-label flex items-center gap-3 text-xs cursor-pointer hover:bg-gray-50 px-2 rounded">
+                                        <input type="checkbox" v-model="filterNarrow" :value="sub.Name" class="rounded text-red-800 focus:ring-red-800 w-5 h-5 shrink-0">
+                                        <span>{{ sub.Name }}</span>
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        
+                        <div class="sticky bottom-0 bg-white border-t border-gray-200 p-4">
+                            <button 
+                                @click="showFilterDrawer = false"
+                                class="w-full py-3 bg-red-800 text-white rounded-lg font-bold text-base hover:bg-red-900 transition-colors"
+                            >
+                                Show {{ filteredBills.length }} Results
+                            </button>
+                        </div>
+                    </aside>
+                </div>
+            </transition>
+
+            <section class="flex-1 overflow-y-auto bg-gray-50 p-3 sm:p-4 relative">
                 <div v-if="loading" role="status" aria-live="polite" class="absolute inset-0 z-10 bg-white/80 flex items-center justify-center flex-col">
                     <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-red-800 mb-4"></div>
                     <p class="font-medium text-slate-600">Syncing Legislative Data...</p>
                 </div>
 
                 <div class="max-w-5xl mx-auto">
-                    <div class="flex justify-between items-center mb-6">
+                    <div class="flex justify-between items-center mb-4 sm:mb-6">
                         <div role="status" aria-live="polite" aria-atomic="true" class="sr-only">
                             <template v-if="loading">Loading bills...</template>
                             <template v-else>
                                 {{ filteredBills.length }} bills match your search criteria<template v-if="selectedAgency"> for {{ selectedAgency }}</template>.
                             </template>
                         </div>
-                        <h2 class="text-xl font-bold text-slate-800" aria-hidden="true">
-                            {{ filteredBills.length }} Bills Match
-                            <span v-if="selectedAgency" class="text-red-800">for {{ selectedAgency }}</span>
+                        <h2 class="text-base sm:text-xl font-bold text-slate-800" aria-hidden="true">
+                            {{ filteredBills.length }} Bills
+                            <span v-if="selectedAgency" class="text-red-800 block sm:inline text-sm sm:text-xl">for {{ selectedAgency }}</span>
                         </h2>
                     </div>
 
-                    <div class="space-y-4">
+                    <div class="space-y-3 sm:space-y-4">
                         <article 
                             v-for="bill in filteredBills" 
                             :key="bill.BillNumber"
@@ -258,24 +292,24 @@
                         >
                             <button
                                 @click="openBill(bill)"
-                                class="w-full text-left p-5 focus:outline-none"
+                                class="w-full text-left p-4 sm:p-5 focus:outline-none"
                                 :aria-label="'View details for bill ' + bill.BillNumber + ': ' + bill.Title"
                             >
-                                <div class="flex justify-between items-start gap-4">
-                                    <div class="flex-1">
-                                        <div class="flex items-center gap-3 mb-1">
-                                            <span class="text-lg font-black text-red-800 group-hover:underline">
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-4">
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-1">
+                                            <span class="text-base sm:text-lg font-black text-red-800 group-hover:underline">
                                                 {{ bill.BillNumber }}{{ bill.CrossfileBillNumber ? '/' + bill.CrossfileBillNumber : '' }}
                                             </span>
                                             <span v-if="getRelevance(bill)" class="px-2 py-0.5 bg-amber-100 text-amber-800 text-xs font-bold rounded">
-                                                Relevance Rating: {{ getRelevance(bill).relevance_rating }}/5
+                                                {{ getRelevance(bill).relevance_rating }}/5
                                             </span>
                                         </div>
-                                        <h3 class="font-bold text-slate-900 leading-tight mb-2">{{ bill.Title }}</h3>
-                                        <p class="text-sm text-slate-600 line-clamp-2">{{ bill.bill_summary }}</p>
+                                        <h3 class="font-bold text-slate-900 leading-tight mb-2 text-sm sm:text-base">{{ bill.Title }}</h3>
+                                        <p class="text-xs sm:text-sm text-slate-600 line-clamp-2">{{ bill.bill_summary }}</p>
                                     </div>
 
-                                    <div v-if="selectedYear === 2026 && getNextAction(bill)" class="text-right shrink-0">
+                                    <div v-if="selectedYear === 2026 && getNextAction(bill)" class="text-left sm:text-right shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-100">
                                         <div class="text-[10px] font-bold text-red-700 uppercase tracking-tighter">{{ getNextAction(bill).label }}</div>
                                         <div class="text-sm font-bold text-slate-700">{{ formatDate(getNextAction(bill).date) }}</div>
                                         <div v-if="getNextAction(bill).isTime" class="text-xs text-slate-500">{{ formatTime(getNextAction(bill).date) }}</div>
@@ -288,78 +322,79 @@
             </section>
         </main>
 
+        <!-- Bill Detail Modal -->
         <transition name="fade">
             <div 
                 v-if="activeBill" 
                 role="dialog" 
                 aria-modal="true" 
                 aria-labelledby="modal-title"
-                class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" 
+                class="fixed inset-0 z-[60] flex items-end sm:items-center justify-center sm:p-4 bg-slate-900/60 backdrop-blur-sm" 
                 @click.self="closeBill"
                 @keydown.esc="closeBill"
                 @keydown.tab="trapFocus"
             >
-                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-5xl max-h-[90vh] flex flex-col overflow-hidden">
-                    <header class="p-6 border-b border-gray-100 bg-gray-50 flex justify-between items-start">
-                        <div>
-                            <div class="flex items-center gap-3 mb-1">
-                                <h2 id="modal-title" ref="modalTitle" tabindex="-1" class="text-3xl font-black text-red-900 outline-none">
+                <div class="bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl w-full sm:max-w-5xl max-h-[95vh] sm:max-h-[90vh] flex flex-col overflow-hidden">
+                    <header class="p-4 sm:p-6 border-b border-gray-100 bg-gray-50 flex justify-between items-start gap-3 shrink-0">
+                        <div class="min-w-0 flex-1">
+                            <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-1">
+                                <h2 id="modal-title" ref="modalTitle" tabindex="-1" class="text-xl sm:text-3xl font-black text-red-900 outline-none">
                                     {{ activeBill.BillNumber }}{{ activeBill.CrossfileBillNumber ? '/' + activeBill.CrossfileBillNumber : '' }}
                                 </h2>
-                                <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-bold text-slate-500">{{ activeBill.YearAndSession }}</span>
+                                <span class="px-2 sm:px-3 py-1 bg-white border border-gray-200 rounded-full text-[10px] sm:text-xs font-bold text-slate-500">{{ activeBill.YearAndSession }}</span>
                             </div>
-                            <h3 class="text-lg font-bold text-slate-800">{{ activeBill.Title }}</h3>
+                            <h3 class="text-sm sm:text-lg font-bold text-slate-800 line-clamp-2 sm:line-clamp-none">{{ activeBill.Title }}</h3>
                         </div>
-                        <button @click="closeBill" aria-label="Close Modal" class="p-2 hover:bg-gray-200 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-red-800">
-                            <i class="ph ph-x text-2xl" aria-hidden="true"></i>
+                        <button @click="closeBill" aria-label="Close Modal" class="p-2 hover:bg-gray-200 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-red-800 shrink-0">
+                            <i class="ph ph-x text-xl sm:text-2xl" aria-hidden="true"></i>
                         </button>
                     </header>
 
-                    <div class="flex-1 overflow-y-auto p-6 md:p-10">
-                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                            <div class="lg:col-span-2 space-y-8">
-                                <section v-if="getRelevance(activeBill)" aria-labelledby="relevance-heading" class="bg-red-50 border-l-4 border-red-800 p-6 rounded-r-xl">
+                    <div class="flex-1 overflow-y-auto p-4 sm:p-6 md:p-10">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-10">
+                            <div class="lg:col-span-2 space-y-6 sm:space-y-8">
+                                <section v-if="getRelevance(activeBill)" aria-labelledby="relevance-heading" class="bg-red-50 border-l-4 border-red-800 p-4 sm:p-6 rounded-r-xl">
                                     <h4 id="relevance-heading" class="text-red-900 font-bold uppercase text-xs tracking-widest mb-2">Agency Relevance: {{ selectedAgency }}</h4>
-                                    <p class="text-slate-800 font-medium leading-relaxed">{{ getRelevance(activeBill).relevance_explanation }}</p>
+                                    <p class="text-slate-800 font-medium leading-relaxed text-sm sm:text-base">{{ getRelevance(activeBill).relevance_explanation }}</p>
                                 </section>
 
                                 <section aria-labelledby="summary-heading">
                                     <h4 id="summary-heading" class="text-slate-600 font-bold uppercase text-xs tracking-widest mb-3">Plain-English Summary</h4>
-                                    <p class="text-slate-700 leading-relaxed text-lg">{{ activeBill.bill_summary }}</p>
+                                    <p class="text-slate-700 leading-relaxed text-base sm:text-lg">{{ activeBill.bill_summary }}</p>
                                 </section>
 
                                 <section aria-labelledby="fiscal-heading">
                                     <h4 id="fiscal-heading" class="text-slate-600 font-bold uppercase text-xs tracking-widest mb-3">Fiscal Impact Analysis</h4>
-                                    <div class="bg-emerald-50 text-emerald-900 p-5 rounded-xl border border-emerald-100">
+                                    <div class="bg-emerald-50 text-emerald-900 p-4 sm:p-5 rounded-xl border border-emerald-100 text-sm sm:text-base">
                                         {{ activeBill.fiscal_impact_summary }}
                                     </div>
                                 </section>
 
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                                     <div class="p-4 bg-gray-50 rounded-lg">
                                         <h5 class="text-xs font-bold text-slate-600 uppercase mb-2">Responsible Party</h5>
-                                        <p class="font-bold text-slate-800">{{ activeBill.responsible_party || 'N/A' }}</p>
+                                        <p class="font-bold text-slate-800 text-sm sm:text-base">{{ activeBill.responsible_party || 'N/A' }}</p>
                                     </div>
                                     <div class="p-4 bg-gray-50 rounded-lg">
                                         <h5 class="text-xs font-bold text-slate-600 uppercase mb-2">Stakeholders</h5>
-                                        <p class="text-sm text-slate-700">{{ activeBill.stakeholders }}</p>
+                                        <p class="text-xs sm:text-sm text-slate-700">{{ activeBill.stakeholders }}</p>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="space-y-6">
-                                <dl class="bg-slate-50 rounded-xl p-5 space-y-4">
+                                <dl class="bg-slate-50 rounded-xl p-4 sm:p-5 space-y-4">
                                     <div>
                                         <dt class="text-[10px] font-bold text-slate-600 uppercase">Primary Sponsor</dt>
-                                        <dd class="font-bold text-slate-900">{{ activeBill.SponsorPrimary }}</dd>
+                                        <dd class="font-bold text-slate-900 text-sm sm:text-base">{{ activeBill.SponsorPrimary }}</dd>
                                     </div>
                                     <div>
                                         <dt class="text-[10px] font-bold text-slate-600 uppercase">Current Status</dt>
-                                        <dd class="text-sm font-medium text-red-800">{{ activeBill.Status }}</dd>
+                                        <dd class="text-xs sm:text-sm font-medium text-red-800">{{ activeBill.Status }}</dd>
                                     </div>
                                     <div v-if="activeBill.funding !== null">
                                         <dt class="text-[10px] font-bold text-slate-600 uppercase">Est. Funding Impact</dt>
-                                        <dd class="text-lg font-black text-emerald-700">{{ formatCurrency(activeBill.funding) }}</dd>
+                                        <dd class="text-base sm:text-lg font-black text-emerald-700">{{ formatCurrency(activeBill.funding) }}</dd>
                                     </div>
                                 </dl>
 
@@ -374,7 +409,7 @@
                                 <a :href="'https://mgaleg.maryland.gov/mgawebsite/Legislation/Details/' + activeBill.BillNumber + '?ys=' + selectedYear + 'RS'" 
                                 target="_blank"
                                 rel="noopener"
-                                class="flex items-center justify-center gap-2 w-full py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-black transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-slate-900">
+                                class="flex items-center justify-center gap-2 w-full py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-black transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 text-sm sm:text-base">
                                     View Bill on MGA
                                     <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
                                     <span class="sr-only">(opens in new tab)</span>
@@ -382,7 +417,7 @@
                             </div>
                         </div>
 
-                        <div class="mt-10 pt-6 border-t border-gray-100">
+                        <div class="mt-6 sm:mt-10 pt-4 sm:pt-6 border-t border-gray-100">
                             <div class="flex flex-col sm:flex-row gap-3 items-start bg-slate-50 p-4 rounded-xl border border-slate-200 text-slate-600">
                                 <i class="ph ph-robot text-xl shrink-0 mt-0.5 text-slate-400" aria-hidden="true"></i>
                                 <div class="text-xs font-medium leading-relaxed">
@@ -403,72 +438,72 @@
             </div>
         </transition>
 
+        <!-- About Modal -->
         <transition name="fade">
             <div 
                 v-if="showAboutModal" 
                 role="dialog" 
                 aria-modal="true" 
                 aria-labelledby="about-modal-title"
-                class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" 
+                class="fixed inset-0 z-[60] flex items-end sm:items-center justify-center sm:p-4 bg-slate-900/60 backdrop-blur-sm" 
                 @click.self="showAboutModal = false"
                 @keydown.esc="showAboutModal = false"
                 @keydown.tab="trapFocus"
             >
-                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl flex flex-col overflow-hidden">
-                    <header class="p-6 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
-                        <h2 id="about-modal-title" ref="modalTitle" tabindex="-1" class="text-xl font-bold text-slate-900 outline-none">
+                <div class="bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl w-full sm:max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
+                    <header class="p-4 sm:p-6 border-b border-gray-100 bg-gray-50 flex justify-between items-center shrink-0">
+                        <h2 id="about-modal-title" ref="modalTitle" tabindex="-1" class="text-lg sm:text-xl font-bold text-slate-900 outline-none">
                             About Maryland Legi-Assist
                         </h2>
                         <button @click="showAboutModal = false" aria-label="Close Modal" class="p-2 hover:bg-gray-200 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-red-800">
                             <i class="ph ph-x text-xl" aria-hidden="true"></i>
                         </button>
                     </header>
-                    <div class="p-8 space-y-6">
-                        <section class="flex gap-4">
-                            <div class="bg-red-50 p-3 rounded-lg h-fit text-red-800">
-                                <i class="ph ph-file-text text-2xl" aria-hidden="true"></i>
+                    <div class="p-6 sm:p-8 space-y-6 overflow-y-auto">
+                        <section class="flex gap-3 sm:gap-4">
+                            <div class="bg-red-50 p-2 sm:p-3 rounded-lg h-fit text-red-800 shrink-0">
+                                <i class="ph ph-file-text text-xl sm:text-2xl" aria-hidden="true"></i>
                             </div>
                             <div>
-                                <h3 class="font-bold text-slate-900 mb-1">LLM-Friendly Conversion</h3>
-                                <p class="text-slate-600 text-sm leading-relaxed">
+                                <h3 class="font-bold text-slate-900 mb-1 text-sm sm:text-base">LLM-Friendly Conversion</h3>
+                                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
                                     Unlike standard PDF tools, our custom conversion process identifies and preserves 
-                                    <span class="font-mono bg-gray-100 px-1 rounded text-red-700">~struck-through~</span> 
-                                    language. This ensures the AI understands exactly what is being removed from current law, 
-                                    not just what is being added.
+                                    <span class="font-mono bg-gray-100 px-1 rounded text-red-700">~stricken~</span> 
+                                    language.
                                 </p>
                             </div>
                         </section>
 
-                        <section class="flex gap-4">
-                            <div class="bg-blue-50 p-3 rounded-lg h-fit text-blue-800">
-                                <i class="ph ph-git-merge text-2xl" aria-hidden="true"></i>
+                        <section class="flex gap-3 sm:gap-4">
+                            <div class="bg-blue-50 p-2 sm:p-3 rounded-lg h-fit text-blue-800 shrink-0">
+                                <i class="ph ph-git-merge text-xl sm:text-2xl" aria-hidden="true"></i>
                             </div>
                             <div>
-                                <h3 class="font-bold text-slate-900 mb-1">Real-time Amendment Previews</h3>
-                                <p class="text-slate-600 text-sm leading-relaxed">
-                                    Legislative text changes fast. We use AI to programmatically apply adopted 
-                                    amendments to the base bill text, providing an "early enrolled" preview 
-                                    before official documents are even published by the MGA.
+                                <h3 class="font-bold text-slate-900 mb-1 text-sm sm:text-base">Real-time Amendment Previews</h3>
+                                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                    We use AI to programmatically apply adopted amendments to the base bill text, providing an "early enrolled" preview.
                                 </p>
                             </div>
                         </section>
 
-                        <section class="flex gap-4">
-                            <div class="bg-emerald-50 p-3 rounded-lg h-fit text-emerald-800">
-                                <i class="ph ph-sparkle text-2xl" aria-hidden="true"></i>
+                        <section class="flex gap-3 sm:gap-4">
+                            <div class="bg-emerald-50 p-2 sm:p-3 rounded-lg h-fit text-emerald-800 shrink-0">
+                                <i class="ph ph-sparkle text-xl sm:text-2xl" aria-hidden="true"></i>
                             </div>
                             <div>
-                                <h3 class="font-bold text-slate-900 mb-1">AI-Generated Summaries & Ratings</h3>
-                                <p class="text-slate-600 text-sm leading-relaxed">
-                                    Every bill is enhanced with plain-English summaries, fiscal impact extractions, 
-                                    and relevance ratings for dozens of Maryland State agencies, helping you 
-                                    identify what matters most at a glance.
+                                <h3 class="font-bold text-slate-900 mb-1 text-sm sm:text-base">AI-Generated Summaries & Ratings</h3>
+                                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                                    Every bill is enhanced with plain-English summaries, fiscal impact extractions, and relevance ratings.
                                 </p>
                             </div>
                         </section>
                     </div>
-                    <footer class="p-6 bg-slate-50 border-t border-gray-100 flex justify-end">
-                        <button @click="showAboutModal = false" class="px-6 py-2 bg-slate-900 text-white rounded-lg font-bold hover:bg-black transition-colors">
+                    <footer class="p-4 sm:p-6 bg-slate-50 border-t border-gray-100 flex justify-between items-center shrink-0">
+                        <a href="https://github.com/Maryland-State-Innovation-Team/Legi-Assist/" target="_blank" rel="noopener" class="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors text-sm font-medium">
+                            <i class="ph ph-github-logo text-lg" aria-hidden="true"></i> View on GitHub
+                            <span class="sr-only">(opens in new tab)</span>
+                        </a>
+                        <button @click="showAboutModal = false" class="px-6 py-3 bg-slate-900 text-white rounded-lg font-bold hover:bg-black transition-colors">
                             Got it
                         </button>
                     </footer>
@@ -494,27 +529,56 @@
                 const filterRating = ref("all");
                 const activeBill = ref(null);
                 const showAboutModal = ref(false);
+                const showFilterDrawer = ref(false);
+                const drawerReady = ref(false);
                 const modalTitle = ref(null);
                 const agencyFilterContainer = ref(null);
+                const filterDrawer = ref(null);
                 let lastActiveElement = null;
 
-                // A11y: Manage Focus
-                watch([activeBill, showAboutModal], async ([newBill, newAbout]) => {
-                    if (newBill || newAbout) {
-                        // Modal Opening: Save current focus
+                // Count active filters for badge
+                const activeFilterCount = computed(() => {
+                    let count = 0;
+                    if (searchQuery.value) count++;
+                    if (filterRating.value !== 'all') count++;
+                    count += filterBroad.value.length;
+                    count += filterNarrow.value.length;
+                    return count;
+                });
+
+                // Handle drawer animation
+                watch(showFilterDrawer, async (val) => {
+                    if (val) {
+                        drawerReady.value = false;
                         lastActiveElement = document.activeElement;
                         await nextTick();
-                        
-                        // Focus the close button (first interactive element) instead of title
+                        requestAnimationFrame(() => {
+                            drawerReady.value = true;
+                        });
+                        // Focus first focusable element in drawer
+                        await nextTick();
+                        const firstInput = filterDrawer.value?.querySelector('input, button, select');
+                        if (firstInput) firstInput.focus();
+                    } else {
+                        drawerReady.value = false;
+                        await nextTick();
+                        if (lastActiveElement && document.body.contains(lastActiveElement)) {
+                            lastActiveElement.focus();
+                        }
+                    }
+                });
+
+                // A11y: Manage Focus for modals
+                watch([activeBill, showAboutModal], async ([newBill, newAbout]) => {
+                    if (newBill || newAbout) {
+                        lastActiveElement = document.activeElement;
+                        await nextTick();
                         const modal = document.querySelector('[role="dialog"]');
                         if (modal) {
                             const closeBtn = modal.querySelector('button[aria-label="Close Modal"]');
-                            if (closeBtn) {
-                                closeBtn.focus();
-                            }
+                            if (closeBtn) closeBtn.focus();
                         }
                     } else {
-                        // Modal Closing: Return focus to trigger
                         await nextTick();
                         if (lastActiveElement && document.body.contains(lastActiveElement)) {
                             lastActiveElement.focus();
@@ -538,62 +602,31 @@
                     updateUrl();
                 };
 
-                // Sync Filters to URL
-                watch([searchQuery, filterBroad, filterNarrow], () => {
-                    updateUrl();
-                });
+                watch([searchQuery, filterBroad, filterNarrow], () => { updateUrl(); });
 
-                // Initialize from URL
                 const initFromUrl = () => {
                     const params = new URLSearchParams(window.location.search);
                     if (params.get('year')) selectedYear.value = parseInt(params.get('year'));
-                    
                     if (params.get('agency')) {
                         selectedAgency.value = params.get('agency');
                         agencySearch.value = params.get('agency');
                     }
-
-                    // Restore Keyword Search
-                    if (params.get('q')) {
-                        searchQuery.value = params.get('q');
-                    }
-
-                    // Restore Broad Subjects (multi-value)
+                    if (params.get('q')) searchQuery.value = params.get('q');
                     const broad = params.getAll('broad');
-                    if (broad.length > 0) {
-                        filterBroad.value = broad;
-                    }
-
-                    // Restore Narrow Subjects (multi-value)
+                    if (broad.length > 0) filterBroad.value = broad;
                     const narrow = params.getAll('narrow');
-                    if (narrow.length > 0) {
-                        filterNarrow.value = narrow;
-                    }
-
-                    if (params.get('bill')) {
-                        // We'll open this after data loads
-                    }
+                    if (narrow.length > 0) filterNarrow.value = narrow;
                 };
 
                 const updateUrl = () => {
                     const params = new URLSearchParams();
                     params.set('year', selectedYear.value);
-                    
                     if (selectedAgency.value) params.set('agency', selectedAgency.value);
                     if (activeBill.value) params.set('bill', activeBill.value.BillNumber);
-                    
-                    // Add Keyword Search
                     if (searchQuery.value) params.set('q', searchQuery.value);
-
-                    // Add Broad Subjects
                     filterBroad.value.forEach(val => params.append('broad', val));
-
-                    // Add Narrow Subjects (URLSearchParams handles encoding automatically)
                     filterNarrow.value.forEach(val => params.append('narrow', val));
-                    
                     const newUrl = `${window.location.pathname}?${params.toString()}`;
-                    
-                    // Use replaceState to update URL without cluttering browser history during filtering
                     window.history.replaceState({}, '', newUrl);
                 };
 
@@ -602,10 +635,7 @@
                     try {
                         const resp = await fetch(`data/${selectedYear.value}rs/frontend_data.json`);
                         const data = await resp.json();
-                        // Filter out bills without agency processing
                         allBills.value = data.filter(b => b.agency_relevance && b.agency_relevance.length > 0);
-                        
-                        // Deep link to bill if in URL
                         const params = new URLSearchParams(window.location.search);
                         const billId = params.get('bill');
                         if (billId) {
@@ -620,22 +650,17 @@
                     }
                 };
 
-                // Optimization: Calculate the master list of agencies once (cached) 
-                // instead of re-looping through all bills on every keystroke.
                 const allAgencies = computed(() => {
                     const agencies = new Set();
                     allBills.value.forEach(b => {
-                        // Safety check: ensure agency_relevance exists
                         b.agency_relevance?.forEach(a => agencies.add(a.agency_name));
                     });
                     return Array.from(agencies).sort();
                 });
 
-                // Lightweight filter that runs against the cached list
                 const filteredAgencies = computed(() => {
                     const list = allAgencies.value;
                     if (!agencySearch.value) return list;
-                    
                     const query = agencySearch.value.toLowerCase();
                     return list.filter(a => a.toLowerCase().includes(query));
                 });
@@ -658,30 +683,22 @@
 
                 const filteredBills = computed(() => {
                     let results = allBills.value;
-
-                    // Agency Filter + Sorting + Rating Filter
                     if (selectedAgency.value) {
                         results = results.filter(b => 
                             b.agency_relevance.some(a => a.agency_name === selectedAgency.value)
                         );
-
-                        // Apply Relevance Rating Filter if not "all"
                         if (filterRating.value !== "all") {
                             results = results.filter(b => {
                                 const rel = b.agency_relevance.find(ar => ar.agency_name === selectedAgency.value);
                                 return rel && rel.relevance_rating == filterRating.value;
                             });
                         }
-
-                        // Sort by Rating (High to Low)
                         results = [...results].sort((a, b) => {
                             const relA = a.agency_relevance.find(ar => ar.agency_name === selectedAgency.value)?.relevance_rating || 0;
                             const relB = b.agency_relevance.find(ar => ar.agency_name === selectedAgency.value)?.relevance_rating || 0;
                             return relB - relA;
                         });
                     }
-
-                    // Keyword
                     if (searchQuery.value) {
                         const q = searchQuery.value.toLowerCase();
                         results = results.filter(b => 
@@ -692,8 +709,6 @@
                             b.Synopsis.toLowerCase().includes(q)
                         );
                     }
-
-                    // Subjects
                     if (filterBroad.value.length > 0) {
                         results = results.filter(b => 
                             b.BroadSubjects?.some(s => filterBroad.value.includes(s.Name))
@@ -704,7 +719,6 @@
                             b.NarrowSubjects?.some(s => filterNarrow.value.includes(s.Name))
                         );
                     }
-
                     return results;
                 });
 
@@ -719,7 +733,6 @@
                     selectedAgency.value = '';
                     agencySearch.value = '';
                     updateUrl();
-                    // Wait for DOM update so the clear button disappears
                     await nextTick(); 
                     const input = document.getElementById('agency-filter-input');
                     if (input) input.focus();
@@ -743,8 +756,6 @@
                 const trapFocus = (e) => {
                     const modal = document.querySelector('[role="dialog"]');
                     if (!modal) return;
-
-                    // Get all focusable elements, excluding hidden ones
                     const focusableSelectors = [
                         'button:not([disabled]):not([aria-hidden="true"])',
                         'a[href]:not([aria-hidden="true"])',
@@ -753,23 +764,17 @@
                         'textarea:not([disabled])',
                         '[tabindex]:not([tabindex="-1"]):not([aria-hidden="true"])'
                     ].join(', ');
-                    
                     const focusableElements = Array.from(modal.querySelectorAll(focusableSelectors))
-                        .filter(el => el.offsetParent !== null); // Filter out invisible elements
-                    
+                        .filter(el => el.offsetParent !== null);
                     if (focusableElements.length === 0) return;
-                    
                     const firstElement = focusableElements[0];
                     const lastElement = focusableElements[focusableElements.length - 1];
-
                     if (e.shiftKey) {
-                        // Shift+Tab: if on first element, go to last
                         if (document.activeElement === firstElement) {
                             e.preventDefault();
                             lastElement.focus();
                         }
                     } else {
-                        // Tab: if on last element, go to first
                         if (document.activeElement === lastElement) {
                             e.preventDefault();
                             firstElement.focus();
@@ -784,19 +789,16 @@
                         { label: 'Hearing', date: bill.HearingDateTimeSecondaryHouseOfOrigin, isTime: true },
                         { label: '2nd Reading', date: bill.SecondReadingDateHouseOfOrigin, isTime: false },
                         { label: '3rd Reading', date: bill.ThirdReadingDateHouseOfOrigin, isTime: false },
-                        { label: 'Opposite Hearing', date: bill.HearingDateTimePrimaryOppositeHouse, isTime: true },
-                        { label: 'Opposite Hearing', date: bill.HearingDateTimeSecondaryOppositeHouse, isTime: true },
-                        { label: 'Opp. 2nd Reading', date: bill.SecondReadingDateOppositeHouse, isTime: false },
-                        { label: 'Opp. 3rd Reading', date: bill.ThirdReadingDateOppositeHouse, isTime: false }
+                        { label: 'Opp. Hearing', date: bill.HearingDateTimePrimaryOppositeHouse, isTime: true },
+                        { label: 'Opp. Hearing', date: bill.HearingDateTimeSecondaryOppositeHouse, isTime: true },
+                        { label: 'Opp. 2nd', date: bill.SecondReadingDateOppositeHouse, isTime: false },
+                        { label: 'Opp. 3rd', date: bill.ThirdReadingDateOppositeHouse, isTime: false }
                     ];
-
-                    // Filter for valid dates that are today or in the future
                     const upcoming = actions
                         .filter(a => a.date)
                         .map(a => ({ ...a, date: new Date(a.date) }))
                         .filter(a => a.date >= now.setHours(0, 0, 0, 0))
                         .sort((a, b) => a.date - b.date);
-
                     return upcoming.length > 0 ? upcoming[0] : null;
                 };
 
@@ -823,34 +825,26 @@
                         Broad_Subjects: b.BroadSubjects?.map(s => s.Name).join('; ') || '',
                         Narrow_Subjects: b.NarrowSubjects?.map(s => s.Name).join('; ') || ''
                     }));
-
                     if (rows.length === 0) {
                         announceToScreenReader('No bills to export.');
                         return;
                     }
-                    
                     const header = Object.keys(rows[0]).join(',');
                     const csv = [header, ...rows.map(row => 
                         Object.values(row).map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')
                     )].join('\n');
-
                     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
                     const link = document.createElement("a");
                     link.href = URL.createObjectURL(blob);
                     link.download = `MD_Legislation_Export_${selectedYear.value}.csv`;
                     link.click();
-                    
                     setTimeout(() => URL.revokeObjectURL(link.href), 100);
-                    
-                    // Announce to screen readers
                     announceToScreenReader(`Export complete. ${rows.length} bills downloaded as CSV.`);
                 };
 
                 const focusFirstOption = () => {
                     const firstOption = document.querySelector('#agency-results-list li');
-                    if (firstOption) {
-                        firstOption.focus();
-                    }
+                    if (firstOption) firstOption.focus();
                 };
 
                 const announceToScreenReader = (message) => {
@@ -861,11 +855,7 @@
                     announcement.className = 'sr-only';
                     announcement.textContent = message;
                     document.body.appendChild(announcement);
-                    
-                    // Remove after announcement is made
-                    setTimeout(() => {
-                        document.body.removeChild(announcement);
-                    }, 1000);
+                    setTimeout(() => { document.body.removeChild(announcement); }, 1000);
                 };
 
                 onMounted(() => {
@@ -881,11 +871,12 @@
                 return {
                     allBills, loading, selectedYear, searchQuery, agencySearch, selectedAgency,
                     showAgencyList, filterBroad, filterNarrow, filterRating, activeBill, showAboutModal,
+                    showFilterDrawer, drawerReady, activeFilterCount,
                     filteredAgencies, uniqueBroadSubjects, uniqueNarrowSubjects, filteredBills,
                     selectAgency, getRelevance, openBill, closeBill, formatCurrency,
                     formatDate, formatTime, exportToExcel, fetchData, getNextAction,
                     modalTitle, trapFocus, clearAgency, clearFilters, agencyFilterContainer,
-                    focusFirstOption, announceToScreenReader
+                    filterDrawer, focusFirstOption, announceToScreenReader
                 };
             }
         }).mount('#app');
