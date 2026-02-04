@@ -628,6 +628,24 @@
                     filterNarrow.value.forEach(val => params.append('narrow', val));
                     const newUrl = `${window.location.pathname}?${params.toString()}`;
                     window.history.replaceState({}, '', newUrl);
+                    notifyParentOfUrlChange();
+                };
+
+                const notifyParentOfUrlChange = () => {
+                    if (window.parent !== window) {
+                        try {
+                            const targetOrigin = window.location.hostname === 'localhost'
+                                ? '*'
+                                : 'https://ai.maryland.gov';
+                            window.parent.postMessage({
+                                type: 'legiassist-url-change',
+                                params: window.location.search,
+                                title: document.title
+                            }, targetOrigin);
+                        } catch (e) {
+                            // Silently fail if postMessage blocked
+                        }
+                    }
                 };
 
                 const fetchData = async () => {
@@ -862,6 +880,26 @@
                     initFromUrl();
                     fetchData();
                     window.addEventListener('click', handleClickOutside);
+                    // Listen for URL state from parent
+                    window.addEventListener('message', (event) => {
+                        const allowedOrigins = [
+                            'https://ai.maryland.gov',
+                            'http://localhost:8000'
+                        ];
+                        if (!allowedOrigins.includes(event.origin)) return;
+                        
+                        if (event.data.type === 'legiassist-set-params') {
+                            const params = new URLSearchParams(event.data.params);
+                            if (params.get('year')) selectedYear.value = parseInt(params.get('year'));
+                            if (params.get('agency')) {
+                                selectedAgency.value = params.get('agency');
+                                agencySearch.value = params.get('agency');
+                            }
+                            if (params.get('q')) searchQuery.value = params.get('q');
+                            fetchData();
+                            updateUrl();
+                        }
+                    });
                 });
 
                 onUnmounted(() => {
