@@ -205,126 +205,78 @@
     ],
     "YearAndSession": "2023 Regular Session",
     "StatusCurrentAsOf": "2023-11-09T14:58:21.977",
-    "bill_summary": "The Child Victims Act of 2023 repeals the statute of limitations and statute of repose for civil actions involving child sexual abuse, allowing victims to file claims at any time. It expands the definition of \"sexual abuse,\" establishes a $1.5 million cap on noneconomic damages for revived claims against single defendants, and raises liability limits for State and local government entities to $890,000 for these specific claims. The act applies retroactively to revive previously barred actions, though it prohibits new claims if the victim is deceased at the time the action commences.",
+    "bill_summary": "The Child Victims Act of 2023 eliminates the statute of limitations and the statute of repose for civil actions related to child sexual abuse, allowing survivors to file lawsuits at any time regardless of when the abuse occurred. It retroactively revives previously time-barred claims, establishes a $1.5 million cap on noneconomic damages for certain revived claims against single defendants, and increases liability limits for the State and local governments to $890,000 for sexual abuse claims.",
     "start_year": 2023,
     "end_year": null,
     "funding": 70700,
-    "responsible_party": "Maryland State Treasurer's Office, Maryland Judiciary, and Maryland State Department of Education",
-    "stakeholders": "Victims of child sexual abuse, state and local government entities, county boards of education, and legal professionals.",
-    "fiscal_impact_summary": "State special fund expenditures increase for the State Insurance Trust Fund (SITF) to cover litigation and claim payments. The State Treasurer\u2019s Office requires an estimated $70,700 in FY 2024 for a new claims adjuster. Local government and school board expenditures are expected to increase due to higher liability limits ($890,000), increased litigation costs (estimated at least $200,000 per case for local governments), and rising insurance premiums. Noneconomic damages for revived claims against private defendants are capped at $1,500,000 per claimant.",
+    "responsible_party": "Maryland State Treasurer's Office",
+    "stakeholders": "Survivors of child sexual abuse, state and local government agencies, county boards of education, and legal professionals",
+    "fiscal_impact_summary": "State and local expenditures are expected to increase significantly due to a rise in litigation and claim payments. Special fund expenditures for the State Insurance Trust Fund will increase to cover potential settlements. Reimbursable fund expenditures for the State Treasurer's Office increase by $70,700 in FY 2024 to hire a claims adjuster. Local government expenditures will rise for insurance premiums and costs to defend revived claims. Liability for the State and local entities is capped at $890,000 per claimant.",
     "agency_relevance": [
       {
-        "agency_name": "Governor's Office",
+        "agency_name": "Administrative Office of the Courts",
         "is_relevant": true,
-        "relevance_explanation": "As the principal executive agency, the Governor's Office signed the bill into law and oversees the cabinet agencies and state units that face significant fiscal and legal impacts from the revival of child sexual abuse claims.",
-        "relevance_rating": 4
-      },
-      {
-        "agency_name": "Office of the Attorney General",
-        "is_relevant": true,
-        "relevance_explanation": "The OAG acts as the primary legal representative for state agencies and will be responsible for defending the State and its units against the anticipated volume of civil suits revived by the repeal of the statute of limitations.",
+        "relevance_explanation": "The Act repeals the statute of limitations and the statute of repose for civil actions relating to child sexual abuse, which will result in a significant increase in the volume of litigation. The AOC is responsible for the administrative and financial infrastructure of the Maryland Judiciary and must manage the increased caseload and judicial resources required to adjudicate these revived claims.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Maryland State Treasurer's Office",
         "is_relevant": true,
-        "relevance_explanation": "The Treasurer's Office manages the State Insurance Trust Fund (SITF) and the fiscal note explicitly identifies a need for additional personnel (claims adjuster) and increased expenditures to handle the investigation and payment of child sexual abuse claims.",
+        "relevance_explanation": "The Treasurer's Office manages the State Insurance Trust Fund (SITF), which is responsible for paying out tort claims against the state. The fiscal note explicitly states that the office will require an additional claims adjuster to handle the volume and complexity of lawsuits resulting from the retroactive revival of child sexual abuse claims.",
         "relevance_rating": 5
       },
       {
-        "agency_name": "Administrative Office of the Courts",
+        "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The AOC manages the judicial infrastructure that must handle a significant influx of cases, and the bill specifically modifies court procedures, including the ability to appeal certain interlocutory orders.",
-        "relevance_rating": 4
+        "relevance_explanation": "As the principal executive agency, the Governor's Office is responsible for signing the legislation and coordinating the executive branch's response to the policy changes, including budgetary allocations for increased state liability under the Maryland Tort Claims Act.",
+        "relevance_rating": 5
       },
       {
         "agency_name": "Department of Education",
         "is_relevant": true,
-        "relevance_explanation": "The bill mandates that MSDE establish standards for comprehensive liability insurance for county boards of education with a new minimum coverage of $890,000 specifically for sexual abuse claims.",
+        "relevance_explanation": "The bill specifically amends the Education Article to mandate new minimum comprehensive liability insurance standards for county boards of education (at least $890,000 for sexual abuse claims). The MSDE is responsible for establishing these insurance standards and overseeing the fiscal impact on the K-12 system.",
         "relevance_rating": 4
       },
       {
-        "agency_name": "Department of Health",
+        "agency_name": "Office of the Attorney General",
         "is_relevant": true,
-        "relevance_explanation": "As an agency operating healthcare and behavioral health facilities for minors, MDH faces potential liability and fiscal impact from claims involving past incidents that are no longer barred by time limitations.",
+        "relevance_explanation": "The OAG acts as the primary legal advisor and representative for state agencies. It will be responsible for defending the state and its units in civil litigation arising from the newly revived claims and may require additional staffing to manage the increased legal workload.",
+        "relevance_rating": 4
+      },
+      {
+        "agency_name": "Department of Budget and Management",
+        "is_relevant": true,
+        "relevance_explanation": "DBM serves as the state's central fiscal authority. It will be responsible for managing the increased budget expenditures for state agencies that will face higher insurance premiums and assessments for the SITF due to the anticipated rise in sexual abuse claim payments.",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "Maryland Insurance Administration",
+        "is_relevant": true,
+        "relevance_explanation": "The bill requires the State Insurance Commissioner, who leads the MIA, to approve the terms and conditions of individual self-insurance for county boards of education to ensure they meet the new statutory liability requirements for child sexual abuse cases.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Department of Human Services",
         "is_relevant": true,
-        "relevance_explanation": "DHS oversees child welfare and foster care systems; the removal of the statute of limitations creates significant potential liability for historical claims involving children formerly in state care or supervision.",
+        "relevance_explanation": "DHS oversees child welfare and protective services. As a state agency that manages vulnerable youth, it is a likely target for litigation regarding historical oversight and placements, necessitating extensive records retrieval and legal coordination for revived civil actions.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Department of Juvenile Services",
         "is_relevant": true,
-        "relevance_explanation": "DJS is responsible for youth in state custody and detention facilities, making it a primary state unit impacted by the revival of civil actions for child sexual abuse.",
+        "relevance_explanation": "DJS is responsible for youth in the juvenile justice system. Due to the retroactive revival of claims, DJS may face civil litigation related to historical incidents occurring within its facilities or under its supervision, requiring resource allocation for defense and records management.",
         "relevance_rating": 3
       },
       {
-        "agency_name": "Department of Budget and Management",
+        "agency_name": "Maryland State Archives",
         "is_relevant": true,
-        "relevance_explanation": "DBM serves as the central fiscal authority and will oversee the budgetary allocations and SITF premium adjustments for state agencies affected by increased litigation and settlement costs.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Maryland State Police",
-        "is_relevant": true,
-        "relevance_explanation": "The bill aligns liability limits for sexual abuse claims with the higher caps applied to law enforcement officers for intentional torts, potentially impacting MSP's fiscal liability for past or future claims.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Board of Public Works",
-        "is_relevant": true,
-        "relevance_explanation": "The BPW must review and approve significant state expenditures and procurement contracts, which include large legal settlements against the State resulting from child sexual abuse litigation.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "University System of Maryland",
-        "is_relevant": true,
-        "relevance_explanation": "As a state higher education agency, its member institutions are subject to the bill's changes regarding sovereign immunity waivers and liability limits for claims involving sexual abuse.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Morgan State University",
-        "is_relevant": true,
-        "relevance_explanation": "As a state-funded institution of higher education, the university is subject to the altered liability limits and potential for revived civil claims.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Saint Mary's College of Maryland",
-        "is_relevant": true,
-        "relevance_explanation": "As a public college and state agency, it faces increased liability exposure for sexual abuse claims under the Maryland Tort Claims Act as modified by this bill.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Maryland School for the Deaf",
-        "is_relevant": true,
-        "relevance_explanation": "MSD is a state agency providing education to minors; it is directly impacted by the new liability caps and the mandatory insurance standards established for educational boards.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Governor's Office for Children",
-        "is_relevant": true,
-        "relevance_explanation": "The GOC coordinates policy for child well-being and would be involved in the broader governmental response to historical and future child protection standards influenced by this legislation.",
+        "relevance_explanation": "The Archives is the central depository for government and legal records. The removal of time limitations for child sexual abuse claims will likely lead to an influx of requests from litigants and state agencies seeking historical records, requiring research assistance and document preservation support.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Governor's Office of Crime Prevention and Policy",
         "is_relevant": true,
-        "relevance_explanation": "GOCPP manages funding and policy for victim services and public safety, making it relevant to the bill's focus on justice and compensation for survivors of sexual abuse.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Comptroller of Maryland",
-        "is_relevant": true,
-        "relevance_explanation": "The Comptroller, as a member of the Board of Public Works and the state's fiscal watchdog, oversees the financial impact of large legal settlements and the state's overall fiscal health.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Maryland Insurance Administration",
-        "is_relevant": true,
-        "relevance_explanation": "The MIA is responsible for approving the terms and conditions of self-insurance for county boards of education, which must now meet higher minimum coverage standards for sexual abuse claims.",
+        "relevance_explanation": "The GOCPP coordinates statewide public safety policy and manages funding for victim services. While the bill focuses on civil litigation, the office's role in supporting crime victims and justice-involved youth makes the policy changes relevant to its advocacy and grant management missions.",
         "relevance_rating": 2
       }
     ]
@@ -409,72 +361,66 @@
     ],
     "YearAndSession": "2023 Regular Session",
     "StatusCurrentAsOf": "2023-11-09T14:58:21.977",
-    "bill_summary": "This bill allows Maryland taxpayers to claim a subtraction modification for union dues paid during the taxable year to determine their Maryland adjusted gross income, provided the amount does not exceed $250 per year.",
+    "bill_summary": "This bill allows Maryland residents to claim a subtraction modification on their state income tax for union dues paid during the taxable year. The subtraction is limited to $250 per taxable year and applies to dues that were previously deductible under federal law prior to the Tax Cuts and Jobs Act of 2017.",
     "start_year": 2023,
     "end_year": null,
     "funding": 50000,
-    "responsible_party": "Comptroller of Maryland",
+    "responsible_party": "Comptroller's Office",
     "stakeholders": "Maryland taxpayers who pay union dues",
-    "fiscal_impact_summary": "State general fund revenues are estimated to decrease by $9.88 million in FY 2024, with future decreases projected to reach $11.56 million by FY 2028. Local income tax revenues are estimated to decrease by $6.45 million in FY 2024 and $7.54 million by FY 2028. General fund expenditures increase by $50,000 in FY 2024 for the Comptroller's Office to implement one-time tax system changes.",
+    "fiscal_impact_summary": "The bill results in a significant reduction in revenues. State general fund revenues are estimated to decrease by $9.88 million in FY 2024, increasing to $11.56 million by FY 2028. Local revenues are estimated to decrease by $6.45 million in FY 2024, increasing to $7.54 million by FY 2028. Additionally, state general fund expenditures will increase by $50,000 in FY 2024 only for the Comptroller's Office to update tax systems.",
     "agency_relevance": [
-      {
-        "agency_name": "Governor's Office",
-        "is_relevant": true,
-        "relevance_explanation": "As the chief executive, the Governor is responsible for signing or vetoing legislation, and this specific bill was signed by Governor Wes Moore. Furthermore, the office oversees the state budget, which is directly impacted by the projected multi-million dollar decrease in general fund revenues resulting from this tax subtraction.",
-        "relevance_rating": 5
-      },
       {
         "agency_name": "Comptroller of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "The Comptroller is the state's tax collector and is primarily responsible for implementing the subtraction modification. The fiscal note explicitly identifies a $50,000 expenditure requirement for the Comptroller to update tax systems to accommodate this new subtraction.",
+        "relevance_explanation": "As the state's chief financial officer and tax collector, the Comptroller is the primary agency responsible for implementing this subtraction modification. The fiscal note explicitly identifies a $50,000 expenditure for the Comptroller to update its tax systems to accommodate the new union dues subtraction.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Department of Budget and Management",
         "is_relevant": true,
-        "relevance_explanation": "DBM is responsible for estimating state revenues and formulating the annual operating budget. The bill's significant impact on general fund revenues (exceeding $11 million by FY 2028) requires DBM to adjust fiscal planning and revenue forecasts.",
+        "relevance_explanation": "DBM oversees the state's budget and estimates revenues. This bill results in a significant reduction in General Fund revenues (exceeding $10 million annually by FY 2025), which directly impacts DBM's fiscal planning and budget formulation responsibilities.",
         "relevance_rating": 4
       },
       {
-        "agency_name": "Department of Labor",
+        "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The Department of Labor is dedicated to the economic welfare of Maryland residents and oversees workforce development. This bill directly impacts the net income and financial welfare of unionized workers, a key segment of Maryland's labor force.",
-        "relevance_rating": 4
-      },
-      {
-        "agency_name": "Public Employee Relations Board",
-        "is_relevant": true,
-        "relevance_explanation": "PERB oversees collective bargaining and labor relations for the state's public workforce. Since the bill provides a tax benefit specifically for union dues, it is highly relevant to the administrative and labor environment the board manages.",
-        "relevance_rating": 4
-      },
-      {
-        "agency_name": "Maryland Tax Court",
-        "is_relevant": true,
-        "relevance_explanation": "The Maryland Tax Court adjudicates disputes regarding tax assessments and subtractions. It would be the appellate body for any controversies between taxpayers and the state regarding the eligibility or calculation of this specific union dues subtraction.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Governor's Workforce Development Board",
-        "is_relevant": true,
-        "relevance_explanation": "The GWDB focuses on removing barriers to employment and creating pathways for workers. Financial incentives and tax policies affecting union members are relevant to the board's strategic oversight of worker engagement and industry alignment.",
+        "relevance_explanation": "The Governor signed this legislation into law and oversees the operations of the executive departments. The bill's impact on the general fund necessitates adjustments in the annual budget drafted by the Governor's Office.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Maryland State Treasurer's Office",
         "is_relevant": true,
-        "relevance_explanation": "As the custodian of state financial assets, the Treasurer's office is impacted by changes in the flow of state revenues. While not directly implementing the tax law, the revenue reduction affects the public funds the office manages and invests.",
+        "relevance_explanation": "The Treasurer manages the state's financial assets and serves as a fiscal steward. The bill's reduction in state revenue affects the public funds overseen by the Treasurer and the state's overall financial health monitored by the Board of Public Works.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Office of Legislative Audits",
+        "is_relevant": true,
+        "relevance_explanation": "OLA conducts fiscal compliance audits of executive agencies. They will be responsible for auditing the Comptroller\u2019s Office to ensure the new tax subtraction for union dues is administered according to state law.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Maryland Tax Court",
+        "is_relevant": true,
+        "relevance_explanation": "As the administrative agency for tax controversies, the Maryland Tax Court would be responsible for adjudicating any disputes between taxpayers and the Comptroller regarding eligibility for this specific subtraction modification.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Labor",
+        "is_relevant": true,
+        "relevance_explanation": "The Department of Labor promotes the economic welfare of residents and interacts with workforce stakeholders. Since the bill provides a financial benefit specifically for union members, it directly impacts a key constituency involved in the department's labor and workforce initiatives.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Public Employee Relations Board",
+        "is_relevant": true,
+        "relevance_explanation": "PERB oversees labor relations and collective bargaining for the state\u2019s public workforce. The ability for public employees to subtract union dues from their income tax is a relevant economic policy for the unionized employees whose labor relations are managed by this board.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Office of the Attorney General",
         "is_relevant": true,
-        "relevance_explanation": "The OAG acts as the legal advisor for state agencies, including the Comptroller. They may be required to provide legal guidance on the interpretation of the Internal Revenue Code sections referenced in the bill to ensure proper state compliance.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Maryland State Innovation Team",
-        "is_relevant": true,
-        "relevance_explanation": "The Innovation Team focuses on economic mobility and data-driven solutions to support families. This tax subtraction is a policy tool aimed at increasing the disposable income of workers, aligning with the team's mission to improve economic outcomes.",
+        "relevance_explanation": "The OAG provides legal counsel to the Comptroller of Maryland. They would be involved in drafting regulations or defending the state\u2019s implementation of this tax subtraction if challenged in court.",
         "relevance_rating": 2
       }
     ]
@@ -571,48 +517,54 @@
     ],
     "YearAndSession": "2023 Regular Session",
     "StatusCurrentAsOf": "2023-11-09T14:58:21.977",
-    "bill_summary": "This bill expands the scope of the Maryland State Police Gun Center to include the tracking, screening, and vetting of firearms surrendered under final protective orders. It requires the Center to create a statewide database for this information and mandates that local law enforcement agencies report details regarding the number and type of surrendered firearms, the jurisdiction of surrender, and demographic information about the individuals surrendering them.",
+    "bill_summary": "This bill expands the mission of the Maryland State Police Gun Center to include the tracking, screening, and vetting of all firearms surrendered under final protective orders. It requires the Center to maintain a statewide database for these firearms and mandates that all Maryland law enforcement agencies report specific information to the Center, including the number and type of firearms surrendered and details about the individuals surrendering them.",
     "start_year": 2023,
     "end_year": null,
     "funding": null,
     "responsible_party": "Maryland Department of State Police",
-    "stakeholders": "Maryland law enforcement agencies, the Maryland Department of State Police, and individuals subject to final protective orders",
-    "fiscal_impact_summary": "The bill's requirements are expected to be handled with existing budgeted resources for both state and local law enforcement agencies. The Department of State Police Gun Center already has an operational budget (approximately $3.3 million in fiscal 2024) which is expected to cover these expanded duties. There is no impact on state or local revenues.",
+    "stakeholders": "Individuals subject to final protective orders, Maryland law enforcement agencies, and the Maryland Department of State Police.",
+    "fiscal_impact_summary": "The bill's requirements can be handled with existing budgeted resources for both State and local law enforcement agencies. No impact on State or local revenues is expected. The Department of State Police Gun Center's existing fiscal 2024 budget includes approximately $3.3 million in general funds to support its operations.",
     "agency_relevance": [
       {
         "agency_name": "Maryland State Police",
         "is_relevant": true,
-        "relevance_explanation": "The bill directly relates to the Maryland State Police Gun Center, which is established within the Department of State Police. The agency is responsible for creating and maintaining the database to track firearms surrendered under final protective orders.",
+        "relevance_explanation": "The bill directly tasks the Maryland State Police Gun Center, which is a unit within the Department of State Police, with tracking, screening, and vetting all firearms surrendered under final protective orders and maintaining a statewide database for this information.",
         "relevance_rating": 5
       },
       {
-        "agency_name": "Governor's Office",
+        "agency_name": "Administrative Office of the Courts",
         "is_relevant": true,
-        "relevance_explanation": "The Governor oversees the Department of State Police and is responsible for signing or vetoing legislation. The fiscal note also specifies that the Governor must include a sufficient appropriation in the annual State budget to fund the operations of the Gun Center.",
+        "relevance_explanation": "The firearms tracked under this bill are surrendered pursuant to final protective orders, which are issued by the Maryland Judiciary. The AOC manages the judicial budget and technological infrastructure, which may be impacted by data-sharing requirements between the courts and the State Police Gun Center.",
         "relevance_rating": 4
       },
       {
         "agency_name": "Governor's Office of Crime Prevention and Policy",
         "is_relevant": true,
-        "relevance_explanation": "This agency serves as the state's central hub for public safety policy and coordinates statewide initiatives to reduce crime. The expansion of the Gun Center's database to track surrendered firearms aligns with their mission to use data-driven insights to manage public safety resources.",
+        "relevance_explanation": "This agency serves as the state's hub for public safety policy and manages statewide initiatives to reduce crime and violence. The new requirement to track firearms from protective orders provides a critical data source for their crime reduction and victim services policy development.",
         "relevance_rating": 3
       },
       {
-        "agency_name": "Administrative Office of the Courts",
+        "agency_name": "Department of Public Safety and Correctional Services",
         "is_relevant": true,
-        "relevance_explanation": "The firearms in question are surrendered under final protective orders, which are issued by the state's court system. The AOC provides the administrative and technological infrastructure for the Judiciary and was consulted during the fiscal analysis of this bill.",
+        "relevance_explanation": "As the agency responsible for maintaining the state's Criminal Justice Information System (CJIS) and coordinating with law enforcement agencies on reporting, DPSCS is impacted by the new requirements for law enforcement agencies to report firearm surrender data.",
         "relevance_rating": 3
       },
       {
-        "agency_name": "Office of the Attorney General",
+        "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The OAG acts as the primary legal advisor to the Maryland State Police and would provide legal guidance on the implementation of the new tracking, screening, and vetting requirements for firearms surrendered under protective orders.",
+        "relevance_explanation": "The Governor\u2019s Office oversees the operations of the Department of State Police and is responsible for signing the legislation and proposing the annual budget appropriation that funds the State Police Gun Center's operations.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Department of Budget and Management",
         "is_relevant": true,
-        "relevance_explanation": "DBM is responsible for formulating the state's annual operating budget. Since current law requires the Governor to include a specific appropriation for the Gun Center in the budget, DBM is involved in the fiscal oversight and allocation of these funds.",
+        "relevance_explanation": "The DBM is responsible for overseeing the state\u2019s annual operating budget. The fiscal note indicates the State Police Gun Center is funded through general fund appropriations which DBM manages and evaluates for efficiency.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Office of the Attorney General",
+        "is_relevant": true,
+        "relevance_explanation": "The OAG provides legal counsel and representation to nearly all state agencies, including the Maryland State Police. They would likely advise the State Police on the implementation and legal requirements of the expanded database and reporting protocols.",
         "relevance_rating": 2
       }
     ]
@@ -752,73 +704,67 @@
     ],
     "YearAndSession": "2023 Regular Session",
     "StatusCurrentAsOf": "2023-11-09T14:58:21.977",
-    "bill_summary": "This bill repeals the legal provision that generally prohibited the prosecution of an individual for rape or certain sexual offenses if the victim was the individual's legal spouse at the time of the alleged crime.",
+    "bill_summary": "This bill repeals the spousal defense for sexual crimes, allowing for the prosecution of an individual for rape or a sexual offense committed against their legal spouse, regardless of their living situation or previous legal exemptions.",
     "start_year": 2023,
     "end_year": null,
     "funding": null,
-    "responsible_party": "Maryland Judiciary, Office of the Public Defender, and Department of Public Safety and Correctional Services",
-    "stakeholders": "Legal spouses in Maryland, State's Attorneys, the Office of the Public Defender, and the Department of Public Safety and Correctional Services.",
-    "fiscal_impact_summary": "The bill is expected to cause a minimal increase in State general fund expenditures and local incarceration expenditures due to the expanded application of existing criminal penalties. State and local revenues are not materially affected. While the Office of the Public Defender estimated a potential cost of $110,101 in fiscal 2024 for additional staff, the Department of Legislative Services anticipates that any increase in cases can likely be absorbed within existing resources.",
+    "responsible_party": "Maryland Judiciary and Maryland State's Attorneys",
+    "stakeholders": "Spouses in Maryland, legal professionals, and the Maryland correctional system",
+    "fiscal_impact_summary": "State and local expenditures are expected to increase minimally due to the expanded application of existing incarceration penalties for sexual crimes. The bill is not expected to materially affect state or local revenues. While the Office of the Public Defender estimated a need for additional funding, the Department of Legislative Services anticipates that the minimal increase in cases can likely be absorbed within existing resources.",
     "agency_relevance": [
       {
         "agency_name": "Maryland Office of the Public Defender",
         "is_relevant": true,
-        "relevance_explanation": "The bill repeals a criminal defense for rape and sexual offenses, directly expanding the scope of crimes the Office of the Public Defender must provide legal representation for. The fiscal note explicitly identifies a potential increase in workload and expenditures for this agency to hire staff to handle these additional cases.",
+        "relevance_explanation": "The bill repeals the spousal defense for sexual crimes, directly expanding the potential caseload for the OPD. The fiscal note specifically identifies a potential need for additional attorney resources to handle the increased number of prosecutions.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Department of Public Safety and Correctional Services",
         "is_relevant": true,
-        "relevance_explanation": "The bill expands the application of existing incarceration penalties by allowing the prosecution of spouses for certain sexual crimes. The fiscal note indicates that general fund expenditures for this agency will increase due to a minimal rise in the number of individuals committed to State correctional facilities.",
-        "relevance_rating": 4
-      },
-      {
-        "agency_name": "Governor's Office of Crime Prevention and Policy",
-        "is_relevant": true,
-        "relevance_explanation": "As the state's hub for public safety policy and grant administration, this office is responsible for coordinating initiatives to reduce crime and managing programs for victim services. The repeal of the spousal defense is a significant policy shift regarding sexual violence and victim support.",
+        "relevance_explanation": "As the agency responsible for the state's correctional system, DPSCS will be impacted by an increase in the inmate population, as convictions for rape and third-degree sexual offenses result in felony sentences served in state facilities.",
         "relevance_rating": 4
       },
       {
         "agency_name": "Administrative Office of the Courts",
         "is_relevant": true,
-        "relevance_explanation": "The bill will result in criminal proceedings that the Judiciary must manage. The agency also maintains the Domestic Violence Central Repository and manages help centers that support victims of domestic and sexual crimes.",
+        "relevance_explanation": "The AOC manages the judicial infrastructure that will process criminal cases resulting from the repeal of the spousal defense, affecting court dockets and judicial resource allocation.",
         "relevance_rating": 4
       },
       {
-        "agency_name": "Maryland State Police",
+        "agency_name": "Governor's Office of Crime Prevention and Policy",
         "is_relevant": true,
-        "relevance_explanation": "The State Police are responsible for investigating major crimes including homicides and drug trafficking; the repeal of the spousal defense expands the categories of sexual offenses they are authorized to investigate and enforce.",
+        "relevance_explanation": "GOCPP is the state's hub for public safety policy and grant funding for victim services; it oversees the strategic implementation of criminal justice reforms and monitors data on crime trends related to sexual violence.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Office of the Attorney General",
         "is_relevant": true,
-        "relevance_explanation": "The OAG acts as the primary legal advisor for the state and manages civil and criminal appeals. This legislation changes the legal landscape for sexual offense prosecutions, impacting future legal counsel and appeals handled by the office.",
+        "relevance_explanation": "The OAG represents the state in criminal appeals and provides expert legal counsel to state agencies and the Governor regarding the enforcement of the amended Criminal Law Article.",
         "relevance_rating": 3
       },
       {
-        "agency_name": "Governor's Office",
+        "agency_name": "Maryland State Police",
         "is_relevant": true,
-        "relevance_explanation": "As the chief executive agency, the Governor's Office oversees the enforcement of state laws and signed this specific legislation into law. The office is also involved in the budgetary processes affected by increased correctional costs.",
-        "relevance_rating": 3
+        "relevance_explanation": "As a primary statewide law enforcement agency, the MSP is responsible for investigating sexual crimes; the bill expands their investigative authority to incidents where the suspect and victim are legally married.",
+        "relevance_rating": 2
       },
       {
         "agency_name": "Secretary of State",
         "is_relevant": true,
-        "relevance_explanation": "This agency manages the 'Safe at Home' Address Confidentiality Program for victims of domestic violence. Since marital rape is a form of domestic violence, this change in criminal law may impact the population eligible for and seeking these safety services.",
+        "relevance_explanation": "The Secretary of State manages the 'Safe at Home' program for victims of domestic violence; the repeal of the spousal defense may increase the number of survivors of domestic sexual assault eligible for these confidentiality services.",
         "relevance_rating": 2
       },
       {
-        "agency_name": "Department of Human Services",
+        "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "DHS oversees adult protective services and welfare programs designed to ensure safe environments for vulnerable individuals. The criminalization of all spousal sexual offenses relates to their mission of protecting individuals from domestic harm.",
+        "relevance_explanation": "The Governor's Office oversees the operations of all state departments involved in the bill's implementation and was responsible for signing this public safety legislation into law.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Department of Budget and Management",
         "is_relevant": true,
-        "relevance_explanation": "DBM is responsible for the state's annual operating budget. The fiscal note specifies a minimal increase in general fund expenditures due to increased incarceration, which falls under DBM\u2019s fiscal oversight.",
-        "relevance_rating": 2
+        "relevance_explanation": "DBM manages the state's central fiscal authority and will oversee the minimal increase in general fund expenditures for incarceration and public defense noted in the fiscal note.",
+        "relevance_rating": 1
       }
     ]
   },
@@ -1103,72 +1049,78 @@
     ],
     "YearAndSession": "2023 Regular Session",
     "StatusCurrentAsOf": "2023-11-09T14:58:21.977",
-    "bill_summary": "The Maryland Sustainable Buildings Act of 2023 requires the Department of General Services (DGS) to establish and periodically update standards for State buildings to conserve energy and minimize bird collisions. These standards apply to the construction, substantial alteration, or acquisition of buildings where State funds provide more than 50% of the cost and the contract is at least $500,000. The bill mandates that interior and exterior lighting be minimized during spring and fall bird migration periods and requires the use of automatic lighting control technologies in existing State buildings where practicable.",
+    "bill_summary": "The Maryland Sustainable Buildings Act of 2023 requires the Department of General Services to establish and periodically update standards for State-owned or majority State-funded buildings to conserve energy and minimize bird collisions. The bill mandates that interior and exterior lighting be shielded and minimized during peak bird migration periods (March-May and August-October) and requires new, substantially altered, or acquired State buildings to meet these standards within budgetary constraints.",
     "start_year": 2023,
     "end_year": null,
     "funding": null,
     "responsible_party": "Maryland Department of General Services",
-    "stakeholders": "Maryland State agencies and departments, occupants of State buildings, and construction and architectural firms contracted for State projects.",
-    "fiscal_impact_summary": "The fiscal impact on State construction and maintenance costs cannot be reliably estimated, as the cost of bird-friendly glass and mitigation features varies by design; however, the bill specifies implementation must be within budgetary constraints. Reductions in building lighting may lead to decreased State utility expenditures over time. There is no local fiscal impact as the bill applies only to State-owned or majority State-funded buildings.",
+    "stakeholders": "State agencies and departments, occupants of State buildings, and Maryland taxpayers.",
+    "fiscal_impact_summary": "State utility costs may decrease over time due to energy conservation. However, the impact on construction and maintenance costs cannot be reliably estimated, as costs depend on specific building designs and the types of materials (such as frosted or etched glass) used to deter bird collisions. The Department of General Services can implement standard-setting with existing resources. There is no local fiscal impact as the bill only applies to State buildings.",
     "agency_relevance": [
       {
         "agency_name": "Department of General Services",
         "is_relevant": true,
-        "relevance_explanation": "As the primary implementing agency, DGS is responsible for establishing, updating, and enforcing the energy-conserving and bird-friendly standards for State buildings, as well as managing the reduction of lighting in existing buildings.",
+        "relevance_explanation": "The Department of General Services is the primary agency responsible for implementing the bill. It is tasked with establishing, updating, and enforcing the energy-conserving and bird-safe standards for State buildings, as well as managing the reduction of lighting in existing buildings.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Executive Commissions, Committees, Task Forces, and Advisory Boards",
         "is_relevant": true,
-        "relevance_explanation": "The Maryland Green Building Council, which falls under this category, is specifically mandated by the bill to incorporate the new bird-friendly and energy standards into the Maryland High Performance Green Building Program.",
+        "relevance_explanation": "The bill explicitly requires the Maryland Green Building Council (which falls under this category as an advisory body) to include the new standards within the requirements for the Maryland High Performance Green Building Program.",
         "relevance_rating": 4
       },
       {
         "agency_name": "Department of Transportation",
         "is_relevant": true,
-        "relevance_explanation": "MDOT manages a significant portion of state-owned facilities and buildings independently of DGS; these facilities must comply with the new construction, renovation, and lighting standards established by the bill.",
+        "relevance_explanation": "According to the fiscal note, MDOT is responsible for managing a portion of State-owned buildings that are not handled by DGS. These buildings will be subject to the new construction and lighting standards established under the bill.",
         "relevance_rating": 3
       },
       {
         "agency_name": "University System of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "USM is responsible for approximately one-third of all state-owned buildings, which will be subject to the bill's requirements for new construction, major renovations, and lighting controls.",
+        "relevance_explanation": "The fiscal note identifies the University System of Maryland as an entity that manages a significant number of State-owned buildings. As such, any new construction or substantial renovations within the system must comply with the bird-safe and energy-conserving standards.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Department of Budget and Management",
         "is_relevant": true,
-        "relevance_explanation": "DBM oversees the state's capital budget and co-manages the high-performance building waiver process; the new standards will impact the fiscal planning and performance requirements for state construction projects.",
+        "relevance_explanation": "DBM shares responsibility with DGS for the high-performance building program and waiver process. Additionally, the department oversees the State's annual capital and operating budgets, which may be impacted by changes in construction and utility costs resulting from this legislation.",
         "relevance_rating": 3
       },
       {
-        "agency_name": "Maryland Stadium Authority",
+        "agency_name": "Board of Public Works",
         "is_relevant": true,
-        "relevance_explanation": "MSA plans, finances, and manages various state-funded sports, entertainment, and community facilities that meet the bill's definition of a 'State building' and must therefore comply with the new standards.",
+        "relevance_explanation": "The Board of Public Works approves major State procurement contracts and capital improvements. Construction projects subject to these new standards will require BPW approval for the expenditure of State funds.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Morgan State University",
         "is_relevant": true,
-        "relevance_explanation": "As an independent state agency and university with its own building management authority, Morgan State must ensure its campus construction and renovation projects comply with the new sustainability and bird-safety standards.",
-        "relevance_rating": 3
+        "relevance_explanation": "As a state agency with independent facility management, Morgan State University's building projects (constructed or renovated with over 50% State funds) will be required to adhere to the standards set by DGS.",
+        "relevance_rating": 2
       },
       {
         "agency_name": "Saint Mary's College of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "As an independent public honors college, the institution manages its own facilities and must adhere to the new standards for any state-funded building projects or alterations.",
-        "relevance_rating": 3
+        "relevance_explanation": "As a public institution and state agency, Saint Mary's College manages its own facilities and would be subject to the standards for any applicable construction or renovation projects.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Natural Resources",
+        "is_relevant": true,
+        "relevance_explanation": "The bill's focus on minimizing adverse impacts on birds aligns with the DNR's mission to manage and protect living resources. DNR may be consulted during the standard-setting process.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of the Environment",
+        "is_relevant": true,
+        "relevance_explanation": "The bill's objectives of energy conservation and building sustainability are central to the MDE's mission and the state's broader climate change and environmental initiatives.",
+        "relevance_rating": 2
       },
       {
         "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The Governor's Office provides executive oversight for state departments and the budget process; the Governor is responsible for signing the legislation and overseeing its implementation through the Secretary of General Services.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Office of the Attorney General",
-        "is_relevant": true,
-        "relevance_explanation": "The OAG provides legal counsel to DGS and the Maryland Green Building Council in the development of the new regulations and standards required by the bill.",
+        "relevance_explanation": "As the head of the executive branch, the Governor's Office oversees DGS and the other agencies implementing these standards, and the bill was signed into law by the Governor.",
         "relevance_rating": 2
       }
     ]
@@ -1628,91 +1580,103 @@
     ],
     "YearAndSession": "2023 Regular Session",
     "StatusCurrentAsOf": "2023-11-09T14:58:21.977",
-    "bill_summary": "This bill requires the Maryland Department of Transportation (MDOT) and the Maryland Transit Administration (MTA) to prioritize equity in transportation planning. It mandates that these agencies conduct transit equity and cost-benefit analyses before implementing major service changes or reducing/canceling capital expansion projects. The bill also expands the advisory committee on State transportation goals to include representatives from the NAACP and labor organizations, and it requires the evaluation of transportation indicators for racial, ethnic, disability, and low-income disparities.",
+    "bill_summary": "The bill requires equity to be considered in the development of State transportation plans and goals. It mandates that the Maryland Department of Transportation (MDOT) and the Maryland Transit Administration (MTA) conduct transit equity and cost-benefit analyses, as well as community outreach, before announcing major service changes or reductions in capital expansion projects. Additionally, it expands the membership of the advisory committee on State transportation goals to include representatives from the NAACP, labor organizations, and the construction industry.",
     "start_year": 2023,
     "end_year": null,
     "funding": 602600,
     "responsible_party": "Maryland Department of Transportation (MDOT) and the Maryland Transit Administration (MTA)",
-    "stakeholders": "Racial minority communities, low-income populations, persons with disabilities, transit-reliant riders, senior riders, riders with limited English proficiency, and the transportation construction industry.",
-    "fiscal_impact_summary": "State expenditures from the Transportation Trust Fund are expected to increase by $602,600 in fiscal 2025 to cover new staff, consultants, and the costs of required transit equity and cost-benefit analyses. Ongoing annual expenditures are estimated to be approximately $544,700 to $557,100. Revenues are not directly affected. Local government finances are not directly impacted. Small businesses that provide data analysis and community outreach consulting services may benefit from increased contracting opportunities.",
+    "stakeholders": "Racial minority and low-income communities, persons with disabilities, transit-reliant riders, senior riders, riders with limited English proficiency, and transportation industry labor and construction groups.",
+    "fiscal_impact_summary": "Transportation Trust Fund (TTF) expenditures increase by $602,600 in FY 2025 to cover new staff and consultant costs for required analyses; future years reflect ongoing costs. There is no fiscal impact in FY 2023 or 2024. Local governments are not directly affected financially, though state transportation changes may impact local jurisdictions. Small businesses in consulting may benefit from increased demand for data analysis and outreach services.",
     "agency_relevance": [
       {
         "agency_name": "Department of Transportation",
         "is_relevant": true,
-        "relevance_explanation": "MDOT is the primary agency responsible for implementing the bill's requirements, including updating the Maryland Transportation Plan, coordinating transit equity analyses, and considering equity when developing State transportation goals.",
+        "relevance_explanation": "MDOT is the primary agency responsible for implementing the bill's requirements, including developing equity goals in the Maryland Transportation Plan and collaborating on transit equity analyses for service changes and capital projects.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Maryland Transit Administration",
         "is_relevant": true,
-        "relevance_explanation": "MTA is specifically required to conduct transit equity analyses, perform cost-benefit analyses, and consult with communities before major service changes or capital project cancellations. It must also develop new equity policies and guidelines.",
+        "relevance_explanation": "MTA is specifically required to conduct transit equity and cost-benefit analyses before major service changes or capital project cancellations, and must develop policies and guidelines for these evaluations.",
         "relevance_rating": 5
       },
       {
-        "agency_name": "Board of Public Works",
+        "agency_name": "Department of Planning",
         "is_relevant": true,
-        "relevance_explanation": "The bill requires that reports on the impacts of proposed service changes and capital project reductions be distributed to the members of the Board of Public Works for oversight.",
-        "relevance_rating": 4
-      },
-      {
-        "agency_name": "Office of the Attorney General",
-        "is_relevant": true,
-        "relevance_explanation": "The Attorney General is a mandated recipient of the transit equity and cost-benefit analysis reports. Additionally, the office may provide legal counsel on compliance with Title VI and ADA requirements cited in the bill.",
+        "relevance_explanation": "The Maryland Department of Planning is explicitly named as a member of the advisory committee on State transportation goals and is involved in the Smart Growth Subcabinet which reviews these goals.",
         "relevance_rating": 4
       },
       {
         "agency_name": "Executive Commissions, Committees, Task Forces, and Advisory Boards",
         "is_relevant": true,
-        "relevance_explanation": "The bill directly alters the membership, responsibilities, and meeting requirements of the statutory advisory committee that advises MDOT on state transportation goals and benchmarks.",
-        "relevance_rating": 4
-      },
-      {
-        "agency_name": "Comptroller of Maryland",
-        "is_relevant": true,
-        "relevance_explanation": "As a member of the Board of Public Works, the Comptroller is a mandated recipient of the equity impact reports and maintains fiscal oversight over the transportation investments discussed in the bill.",
-        "relevance_rating": 4
-      },
-      {
-        "agency_name": "Maryland State Treasurer's Office",
-        "is_relevant": true,
-        "relevance_explanation": "As a member of the Board of Public Works, the Treasurer is a mandated recipient of the equity impact reports and oversees the financial integrity of state spending on major transportation projects.",
+        "relevance_explanation": "The bill significantly alters the membership and duties of the advisory committee responsible for advising MDOT on state transportation goals, benchmarks, and indicators.",
         "relevance_rating": 4
       },
       {
         "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The Governor is responsible for appointing members to the advisory committee on transportation goals and serves as the chair of the Board of Public Works, which receives mandated reports under the bill.",
+        "relevance_explanation": "The Governor is responsible for appointing the members and the chairman of the expanded advisory committee on State transportation goals, benchmarks, and indicators.",
         "relevance_rating": 3
       },
       {
-        "agency_name": "Department of Planning",
+        "agency_name": "Board of Public Works",
         "is_relevant": true,
-        "relevance_explanation": "The Department of Planning is a named member of the advisory committee on transportation goals and is part of the Smart Growth Subcabinet, which must be consulted on transit-oriented development and transportation goals.",
+        "relevance_explanation": "The bill requires that reports on transit equity analyses and cost-benefit analyses for major service changes or capital project cancellations be distributed to the members of the Board of Public Works.",
         "relevance_rating": 3
       },
       {
-        "agency_name": "State Highway Administration",
+        "agency_name": "Office of the Attorney General",
         "is_relevant": true,
-        "relevance_explanation": "The bill's requirements for equity analysis apply to the Consolidated Transportation Program (CTP), which includes the capital expansion projects managed by the State Highway Administration.",
+        "relevance_explanation": "The Attorney General is a designated recipient of the mandatory reports concerning the impacts of proposed transit service changes or project cancellations.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Department of Disabilities",
         "is_relevant": true,
-        "relevance_explanation": "The bill mandates transit equity analyses specifically for impacts on persons with disabilities and requires community outreach to disabled riders, aligning with the department's role as a cross-disability policy leader.",
+        "relevance_explanation": "The bill focuses heavily on equity for persons with disabilities, requiring specific transit equity analyses for this population and including disability representation on the advisory committee.",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "Department of the Environment",
+        "is_relevant": true,
+        "relevance_explanation": "The bill requires cost-benefit analyses to include environmental justice impacts as defined in the Environment Article and references the Climate Action Plan goals overseen by MDE.",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "Smart, Green & Growing",
+        "is_relevant": true,
+        "relevance_explanation": "The bill mandates that the Smart Growth Subcabinet, which is central to this initiative, conducts an annual review of the State transportation goals, benchmarks, and indicators.",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "Comptroller of Maryland",
+        "is_relevant": true,
+        "relevance_explanation": "As a member of the Board of Public Works, the Comptroller is a mandatory recipient of the impact reports generated for service changes and capital project reductions.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Maryland State Treasurer's Office",
+        "is_relevant": true,
+        "relevance_explanation": "As a member of the Board of Public Works, the Treasurer is a mandatory recipient of the impact reports generated for service changes and capital project reductions.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Labor",
+        "is_relevant": true,
+        "relevance_explanation": "The bill adds a representative of a transportation labor organization, designated by the AFL-CIO, to the advisory committee, impacting labor relations and workforce representation in transportation planning.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Department of Aging",
         "is_relevant": true,
-        "relevance_explanation": "The bill requires MDOT and MTA to consult with and analyze impacts on 'senior riders' as part of the mandated transit equity analysis process for major service changes.",
+        "relevance_explanation": "The bill requires MDOT and MTA to consult with senior riders before proposing major service changes, aligning with the Department of Aging's advocacy for older adults' access to resources.",
         "relevance_rating": 2
       },
       {
-        "agency_name": "Department of the Environment",
+        "agency_name": "Department of Budget and Management",
         "is_relevant": true,
-        "relevance_explanation": "The bill references the definition of 'environmental justice' as found in the Environment Article, which is a required component of the cost-benefit analyses MDOT must perform.",
-        "relevance_rating": 1
+        "relevance_explanation": "The fiscal note indicates a significant increase in Transportation Trust Fund expenditures ($602,600 in FY 2025) which falls under DBM's oversight of state budget formulation and fiscal accountability.",
+        "relevance_rating": 2
       }
     ]
   },
@@ -1792,30 +1756,42 @@
     ],
     "YearAndSession": "2023 Regular Session",
     "StatusCurrentAsOf": "2023-11-09T14:58:21.977",
-    "bill_summary": "This bill requires membership in the Correctional Officers\u2019 Retirement System for local detention center officers of Talbot County if the county becomes a participating governmental unit. It provides for the transfer of service credit from the Employees\u2019 Pension System and exempts officers from paying the difference in contribution rates that would normally be required for such a transfer.",
+    "bill_summary": "This bill requires Talbot County detention center officers to join the Correctional Officers\u2019 Retirement System (CORS) as a condition of employment if Talbot County elects to participate in the system. Affected officers will transfer from the Employees\u2019 Pension System (EPS) to CORS and receive credit for prior service with the county without being required to pay the difference in member contribution rates.",
     "start_year": 2023,
     "end_year": null,
-    "funding": 94000,
+    "funding": 918300,
     "responsible_party": "State Retirement Agency",
-    "stakeholders": "Talbot County detention center officers",
-    "fiscal_impact_summary": "The bill has no impact on State revenues or expenditures. Locally, assuming Talbot County elects to participate, pension liabilities are estimated to increase by $918,300, resulting in an annual increase of $94,000 in employer pension contributions. There is no effect on local revenues or other participating governmental units.",
+    "stakeholders": "Talbot County detention center officers and the Talbot County government",
+    "fiscal_impact_summary": "There is no impact on state revenues or expenditures. For Talbot County, assuming it elects to participate in CORS, pension liabilities are estimated to increase by $918,300, leading to an annual increase of approximately $94,000 in employer pension contributions for 25 years. There is no discernible effect on other participating governmental units or local revenues.",
     "agency_relevance": [
       {
         "agency_name": "Maryland State Retirement Agency",
         "is_relevant": true,
-        "relevance_explanation": "The Maryland State Retirement Agency (SRA) is the primary agency impacted as it serves as the administrative arm for the state's retirement plans. The bill specifically mandates that SRA manage the transition of Talbot County detention center officers from the Employees' Pension System to the Correctional Officers' Retirement System, including the administration of service credits and contribution collection.",
+        "relevance_explanation": "The Maryland State Retirement Agency (SRA) is the primary agency responsible for administering the state's retirement and pension plans, including the Employees\u2019 Pension System (EPS) and the Correctional Officers\u2019 Retirement System (CORS). The bill specifically requires SRA to facilitate the transfer of Talbot County detention center officers between these systems, calculate service credits, and manage the resulting pension liabilities and employer contributions.",
         "relevance_rating": 5
       },
       {
-        "agency_name": "Office of the Attorney General",
+        "agency_name": "Maryland State Treasurer's Office",
         "is_relevant": true,
-        "relevance_explanation": "The OAG acts as the primary legal advisor to state agencies, including the State Retirement Agency. It would be responsible for providing legal guidance on the interpretation of the State Personnel and Pensions Article and the bill's specific provision that bypasses standard service credit transfer rules under Title 37.",
+        "relevance_explanation": "As the principal custodian of the state's financial assets and a key member of the state's financial leadership, the Treasurer's Office oversees the management and protection of public funds, including those within the state's retirement systems. The office ensures the state maintains high credit ratings while managing long-term fiscal liabilities like the pension obligations adjusted by this bill.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Comptroller of Maryland",
+        "is_relevant": true,
+        "relevance_explanation": "The Comptroller serves as the state's chief financial officer and fiscal watchdog. In this capacity, the agency monitors the financial health of the state's retirement funds and ensures that the collection of revenues and allocation of pension-related expenditures are conducted according to state law.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The Governor's Office is relevant as the Governor is responsible for signing the legislation into law and oversees the executive agencies, such as the SRA, that are tasked with implementing these changes to the state's retirement systems.",
+        "relevance_explanation": "The Governor's Office is responsible for signing or vetoing legislation and oversees the operations of executive agencies like the State Retirement Agency. The Governor signed this bill into law, allowing for the transition of local Talbot County officers into a different state-managed retirement tier.",
+        "relevance_rating": 1
+      },
+      {
+        "agency_name": "Department of Budget and Management",
+        "is_relevant": true,
+        "relevance_explanation": "The Department of Budget and Management (DBM) is the state\u2019s central fiscal and personnel authority. While the bill impacts local county officers, DBM oversees the statewide personnel and benefits frameworks that interact with the State Retirement and Pension System to ensure fiscal accountability across all participating units.",
         "relevance_rating": 1
       }
     ]
@@ -2018,55 +1994,91 @@
     ],
     "YearAndSession": "2023 Regular Session",
     "StatusCurrentAsOf": "2023-11-09T14:58:21.977",
-    "bill_summary": "The Private Well Safety Act of 2023 requires the Maryland Department of the Environment (MDE) to adopt regulations for additional water quality testing standards for private wells and, subject to the availability of funding, develop and maintain an online portal for water quality data. The bill also mandates that contracts for the sale of real property served by a private well include a requirement for water quality testing (unless waived by the purchaser) and requires laboratories to report results to MDE. Additionally, MDE must study long-term funding options for groundwater monitoring and analysis.",
+    "bill_summary": "The Private Well Safety Act of 2023 requires the Maryland Department of the Environment (MDE) to adopt water quality testing standards for private and domestic wells by the end of 2026. The bill mandates the creation of an online portal to track and share well water quality data with health departments and the public, subject to available funding. It also requires that contracts for the sale of property with a private well include a condition for water quality testing (unless waived by the buyer) and tasks MDE with studying long-term funding for groundwater monitoring.",
     "start_year": 2024,
     "end_year": null,
     "funding": 186800,
     "responsible_party": "Maryland Department of the Environment",
-    "stakeholders": "Owners of property with private wells, prospective purchasers of properties with wells, residential landlords and tenants, and State-certified water quality testing laboratories.",
-    "fiscal_impact_summary": "State general fund expenditures increase by at least $186,800 in FY 2025 to hire three employees at the Maryland Department of the Environment to implement regulations and conduct required studies. These costs are projected to grow to approximately $250,700 by FY 2029. The development of an online database portal is estimated to cost $3.4 million over two years, though this requirement is contingent on available funding. There is no impact on state revenues. Local governments may experience indeterminate costs depending on the specific water quality standards adopted by MDE.",
+    "stakeholders": "Private well owners, tenants of rental properties served by private wells, homebuyers and sellers of properties with wells, State-certified laboratories, and local health departments.",
+    "fiscal_impact_summary": "State general fund expenditures increase by at least $186,800 in FY 2025 for MDE to hire three staff members to manage new standards, studies, and data reporting. Costs increase annually to approximately $250,700 by FY 2029. An online portal is estimated to cost an additional $3.4 million over two years, though this is subject to available funding. There is no effect on State revenues. Local governments may experience indeterminate fiscal impacts depending on the specific water quality standards adopted.",
     "agency_relevance": [
       {
-        "agency_name": "Governor's Office",
+        "agency_name": "Department of the Environment",
         "is_relevant": true,
-        "relevance_explanation": "The Governor's Office oversees the executive agencies (MDE, MDH, and DoIT) tasked with implementing the bill. Additionally, the Department of the Environment is required to submit a report on long-term funding options for groundwater monitoring directly to the Governor by December 1, 2025.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Office of the Attorney General",
-        "is_relevant": true,
-        "relevance_explanation": "The OAG will provide essential legal counsel to the Department of the Environment and the Maryland Department of Health during the adoption of new regulations for water quality testing standards and the enforcement of new reporting requirements for laboratories.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Department of Budget and Management",
-        "is_relevant": true,
-        "relevance_explanation": "The fiscal note indicates a significant increase in general fund expenditures (at least $186,800 in FY 2025) to fund new positions at MDE and potentially MDH to carry out the bill's mandates, requiring DBM oversight of these personnel and budgetary changes.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Department of Health",
-        "is_relevant": true,
-        "relevance_explanation": "The bill explicitly requires MDE to share water quality information with the Maryland Department of Health. Furthermore, the fiscal note identifies that MDH's Laboratories Administration may need to hire additional staff to handle increased testing volume resulting from the new standards established by the bill.",
+        "relevance_explanation": "The Maryland Department of the Environment (MDE) is the primary implementing agency for the Private Well Safety Act. It is responsible for establishing the Private Well Safety Program, adopting water quality testing regulations, managing the online portal for well results, and conducting a study on long-term funding for groundwater monitoring.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Department of Information Technology",
         "is_relevant": true,
-        "relevance_explanation": "The bill specifically mandates that the Department of the Environment consult with the Department of Information Technology to develop and utilize an online portal for receiving, uploading, and providing public access to water quality testing results.",
+        "relevance_explanation": "The bill explicitly requires MDE to consult with the Department of Information Technology (DoIT) for the planning and implementation of the online portal used to receive, upload, and provide public access to private well water quality results.",
+        "relevance_rating": 4
+      },
+      {
+        "agency_name": "Department of Health",
+        "is_relevant": true,
+        "relevance_explanation": "The bill requires MDE to share all collected well water information with the Maryland Department of Health (MDH) and encourages MDH to share relevant information to the online portal. The fiscal note also indicates MDH laboratories may experience increased workloads for additional water quality testing.",
         "relevance_rating": 4
       },
       {
         "agency_name": "Department of Natural Resources",
         "is_relevant": true,
-        "relevance_explanation": "The bill identifies the Maryland Geological Survey (MGS) as a key entity that must submit water quality testing results to the new online portal. The MGS is a division of the Department of Natural Resources.",
+        "relevance_explanation": "The bill mandates that MDE's online portal receive water quality testing results from the Maryland Geological Survey, which is a division of the Department of Natural Resources (DNR).",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "Office of the Attorney General",
+        "is_relevant": true,
+        "relevance_explanation": "The bill modifies real property law regarding contracts of sale and includes consumer protection elements related to water safety disclosures. The OAG would also likely provide legal counsel for the required regulatory adoptions and potential enforcement actions.",
         "relevance_rating": 2
       },
       {
-        "agency_name": "Department of the Environment",
+        "agency_name": "Department of Housing and Community",
         "is_relevant": true,
-        "relevance_explanation": "MDE is the primary agency responsible for implementing the Private Well Safety Act, including adopting new water quality regulations, managing the online portal for testing results, and conducting a study on long-term funding for groundwater monitoring.",
-        "relevance_rating": 5
+        "relevance_explanation": "The bill updates and renumbers requirements for residential rental property owners served by private wells, requiring them to conduct periodic testing and provide potable water to tenants in the event of contamination.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Budget and Management",
+        "is_relevant": true,
+        "relevance_explanation": "The fiscal note identifies a need for three new state positions to implement the bill's requirements. DBM oversees state personnel and will be involved in the allocation of the general fund expenditures identified in the fiscal analysis.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Governor's Office",
+        "is_relevant": true,
+        "relevance_explanation": "As the principal executive agency, the Governor's Office oversees MDE and will receive the required report on long-term funding options for groundwater monitoring and analysis.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Rural Maryland Council",
+        "is_relevant": true,
+        "relevance_explanation": "Private wells are a critical infrastructure issue for rural residents. The Council, as an advocate for Maryland's 18 rural counties, has a significant interest in the implementation of safety standards and funding for remediation in these communities.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Planning",
+        "is_relevant": true,
+        "relevance_explanation": "The Department of Planning coordinates land use and resource conservation. Groundwater monitoring and the availability of potable water are significant factors in sustainable growth and comprehensive community planning.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Maryland State Archives",
+        "is_relevant": true,
+        "relevance_explanation": "The Maryland State Archives is responsible for preserving government records of permanent value. The long-term data collected through the new online portal and geological surveys represents significant environmental and public health records for the state.",
+        "relevance_rating": 1
+      },
+      {
+        "agency_name": "Office of Legislative Audits",
+        "is_relevant": true,
+        "relevance_explanation": "The OLA will be responsible for conducting future fiscal and performance audits of the Private Well Safety Program and MDE\u2019s management of related data and potential funding sources.",
+        "relevance_rating": 1
+      },
+      {
+        "agency_name": "Office of Administrative Hearings",
+        "is_relevant": true,
+        "relevance_explanation": "The bill includes civil penalties for violations of rental property well safety requirements. Contested cases regarding these penalties or other regulatory enforcement actions may be adjudicated by the Office of Administrative Hearings.",
+        "relevance_rating": 1
       }
     ]
   },
@@ -2237,120 +2249,126 @@
     ],
     "YearAndSession": "2023 Regular Session",
     "StatusCurrentAsOf": "2023-11-09T14:58:21.977",
-    "bill_summary": "The Equitable and Inclusive Transit\u2013Oriented Development Enhancement Act expands the definition of transit-oriented development (TOD) to include transit corridors and shifts the authority to designate these areas to the Smart Growth Subcabinet in partnership with local governments. It establishes the Transit\u2013Oriented Development Capital Grant and Revolving Loan Fund, a special nonlapsing fund designed to provide financial assistance to local jurisdictions for design plans, public infrastructure improvements, and gap funding for projects within designated TOD areas.",
+    "bill_summary": "This bill establishes the Transit-Oriented Development (TOD) Capital Grant and Revolving Loan Fund to support equitable development near transit stations and corridors. It expands the definition of transit-oriented development to include transit corridors, transfers the authority to designate TOD areas to the Smart Growth Subcabinet, and requires the Maryland Department of Transportation to provide financial assistance to local jurisdictions for design plans, infrastructure improvements, and project gap funding.",
     "start_year": 2023,
     "end_year": null,
     "funding": 5000000,
-    "responsible_party": "Maryland Department of Transportation",
-    "stakeholders": "Local jurisdictions (counties and municipalities), private developers, nonprofit organizations, and residents and employees within transit-oriented development areas, particularly low-income and minority residents.",
-    "fiscal_impact_summary": "The bill mandates an annual appropriation of at least $5,000,000 to maintain the fund's balance starting in fiscal 2025. In fiscal 2024, general fund expenditures are estimated to increase by $5,000,000 to capitalize the fund, with corresponding special fund revenues and expenditures. Additionally, Transportation Trust Fund expenditures increase by approximately $258,249 in fiscal 2024 for MDOT to hire staff to administer the fund and produce required annual reports. Local jurisdictions will see increased revenue and expenditures to the extent they receive grants or loans from the fund.",
+    "responsible_party": "Maryland Department of Transportation (MDOT)",
+    "stakeholders": "Local jurisdictions (counties and municipalities), private and nonprofit developers, low-income and minority residents in transit areas, and small businesses located within transit-oriented developments.",
+    "fiscal_impact_summary": "The bill requires a mandated annual appropriation to ensure a fund balance of $5 million, likely increasing state general fund expenditures by $5 million annually starting in FY 2024. MDOT administrative costs increase by approximately $258,200 in FY 2024 to hire a program manager and accountant and set up an application platform. Local government revenues and expenditures increase to the extent they receive grants or loans from the fund.",
     "agency_relevance": [
       {
         "agency_name": "Department of Transportation",
         "is_relevant": true,
-        "relevance_explanation": "As the primary implementing agency, MDOT is responsible for administering the new Transit-Oriented Development Capital Grant and Revolving Loan Fund, submitting annual reports on TOD efforts, and coordinating the designation of transit corridors.",
+        "relevance_explanation": "The bill primarily affects MDOT as the Secretary of Transportation is tasked with reporting on TOD efforts, and the department administers the new Transit-Oriented Development Capital Grant and Revolving Loan Fund, including establishing scoring standards and providing technical services.",
+        "relevance_rating": 5
+      },
+      {
+        "agency_name": "Smart, Green & Growing",
+        "is_relevant": true,
+        "relevance_explanation": "The bill shifts the authority to designate transit-oriented developments to the Smart Growth Subcabinet, which this agency initiative coordinates. The subcabinet is also responsible for establishing eligibility requirements and objective scoring standards for the new fund.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Department of Housing and Community",
         "is_relevant": true,
-        "relevance_explanation": "The bill explicitly requires MDOT to collaborate with DHCD to provide technical services\u2014such as studies, plans, and code changes\u2014to recipients of awards from the new TOD fund.",
-        "relevance_rating": 4
-      },
-      {
-        "agency_name": "Department of Planning",
-        "is_relevant": true,
-        "relevance_explanation": "MDP is a key member of the Smart Growth Subcabinet, which is granted new authority by this bill to designate TODs and establish eligibility and scoring standards for the TOD fund.",
+        "relevance_explanation": "The bill specifically requires DHCD to collaborate with MDOT to provide technical services, such as studies and plan developments, to recipients of awards from the TOD Capital Grant and Revolving Loan Fund.",
         "relevance_rating": 4
       },
       {
         "agency_name": "Department of Budget and Management",
         "is_relevant": true,
-        "relevance_explanation": "The bill mandates that the Governor include an appropriation in the annual budget to maintain a $5 million balance in the TOD fund, and DBM is a member of the Smart Growth Subcabinet.",
+        "relevance_explanation": "The bill mandates a $5 million annual budget appropriation for the new fund and includes the DBM Secretary as a member of the Smart Growth Subcabinet, which now holds TOD designation authority.",
         "relevance_rating": 4
       },
       {
-        "agency_name": "Executive Commissions, Committees, Task Forces, and Advisory Boards",
+        "agency_name": "Department of Planning",
         "is_relevant": true,
-        "relevance_explanation": "This bill significantly empowers the Smart Growth Subcabinet, an executive body, to designate TODs and set the objective scoring standards for financial assistance applications.",
+        "relevance_explanation": "As a lead member of the Smart Growth Subcabinet with primary responsibility for land use and sustainable growth, MDP is central to the designation of TODs and the establishment of scoring criteria for the new grant and loan fund.",
         "relevance_rating": 4
       },
       {
         "agency_name": "Maryland State Treasurer's Office",
         "is_relevant": true,
-        "relevance_explanation": "The State Treasurer is responsible for holding the new TOD Capital Grant and Revolving Loan Fund and managing its investments.",
+        "relevance_explanation": "The Treasurer is responsible for holding the new fund separately and investing its money, ensuring that investment earnings are credited back to the fund.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Comptroller of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "The Comptroller is responsible for accounting for the new special fund and sits on the Board of Public Works, which oversees related property dispositions.",
+        "relevance_explanation": "The Comptroller is responsible for accounting for the new Transit-Oriented Development Capital Grant and Revolving Loan Fund and sits on the Smart Growth Subcabinet which designates TODs.",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "Department of General Services",
+        "is_relevant": true,
+        "relevance_explanation": "DGS manages state real estate and is a member of the Smart Growth Subcabinet. The bill addresses the disposition of capital assets (real property) for TOD purposes, which directly relates to DGS\u2019s infrastructure and land management duties.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Board of Public Works",
         "is_relevant": true,
-        "relevance_explanation": "The bill modifies provisions regarding the disposition of state-owned capital assets (real property) for TOD purposes, which falls under the oversight of the Board of Public Works.",
+        "relevance_explanation": "The bill involves the disposition of state-owned real property for TOD realization and redirects proceeds to specific funds, which often requires the review and approval of the Board of Public Works.",
         "relevance_rating": 3
+      },
+      {
+        "agency_name": "Governor's Office",
+        "is_relevant": true,
+        "relevance_explanation": "The Governor's Office is represented on the Smart Growth Subcabinet, which is granted new designation and scoring authority under the bill. Additionally, the Governor must include a mandated appropriation in the annual budget.",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "Department of Agriculture",
+        "is_relevant": true,
+        "relevance_explanation": "The Secretary of Agriculture is a member of the Smart Growth Subcabinet, which the bill empowers to designate TODs and set scoring standards for the new fund.",
+        "relevance_rating": 2
       },
       {
         "agency_name": "Department of Commerce",
         "is_relevant": true,
-        "relevance_explanation": "The Department of Commerce is a member of the Smart Growth Subcabinet and is involved in the awarding of state tax credits, which the bill identifies as a tool to realize TOD purposes.",
+        "relevance_explanation": "The Secretary of Commerce serves on the Smart Growth Subcabinet and the bill\u2019s focus on TODs impacts the state's economic development strategies and private investment opportunities.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Department of the Environment",
         "is_relevant": true,
-        "relevance_explanation": "The Secretary of the Environment is a statutory member of the Smart Growth Subcabinet, which is tasked with designating TODs and setting fund standards under this bill.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Department of Agriculture",
-        "is_relevant": true,
-        "relevance_explanation": "The Secretary of Agriculture is a member of the Smart Growth Subcabinet involved in the designation of TODs and fund oversight.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Department of General Services",
-        "is_relevant": true,
-        "relevance_explanation": "As the manager of state facilities and a member of the Smart Growth Subcabinet, DGS is impacted by provisions regarding the use of state real property for TOD realization.",
+        "relevance_explanation": "The Secretary of the Environment is a member of the Smart Growth Subcabinet, participating in TOD designations and fund eligibility standards that impact environmental stewardship.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Department of Health",
         "is_relevant": true,
-        "relevance_explanation": "The Secretary of Health is a member of the Smart Growth Subcabinet, which is responsible for designating TODs and establishing fund scoring criteria.",
+        "relevance_explanation": "The Secretary of Health is a member of the Smart Growth Subcabinet, which is charged with designating TODs and setting requirements for the grant and loan fund.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Department of Labor",
         "is_relevant": true,
-        "relevance_explanation": "The Secretary of Labor is a member of the Smart Growth Subcabinet, which is responsible for designating TODs and establishing fund scoring criteria.",
+        "relevance_explanation": "The Secretary of Labor serves on the Smart Growth Subcabinet and participates in the TOD designation process and fund management oversight established by the bill.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Department of Natural Resources",
         "is_relevant": true,
-        "relevance_explanation": "The Secretary of Natural Resources is a member of the Smart Growth Subcabinet, which is responsible for designating TODs and establishing fund scoring criteria.",
+        "relevance_explanation": "The Secretary of Natural Resources is a member of the Smart Growth Subcabinet, which is given authority to designate TODs and establish fund scoring standards.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Higher Education Commission",
         "is_relevant": true,
-        "relevance_explanation": "The Secretary of Higher Education is a member of the Smart Growth Subcabinet, which handles TOD designations and grant/loan eligibility standards.",
+        "relevance_explanation": "The Secretary of Higher Education is a member of the Smart Growth Subcabinet, which the bill empowers to designate TODs and establish objective scoring standards for financial assistance.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Maryland Energy Administration",
         "is_relevant": true,
-        "relevance_explanation": "The Director of the MEA is a member of the Smart Growth Subcabinet, which is tasked with designating TODs and setting fund standards under this bill.",
+        "relevance_explanation": "The Director of the MEA is a member of the Smart Growth Subcabinet, which is involved in designating TODs and creating eligibility requirements for the new fund.",
         "relevance_rating": 2
       },
       {
-        "agency_name": "Governor's Office",
+        "agency_name": "Executive Commissions, Committees, Task Forces, and Advisory Boards",
         "is_relevant": true,
-        "relevance_explanation": "The Governor's Office oversees the Smart Growth Subcabinet and is responsible for the mandated budget appropriations and the reporting requirements set forth in the bill.",
+        "relevance_explanation": "The Smart Growth Subcabinet is a cabinet-level body that functions as a coordinating committee. This bill significantly expands its role by granting it the authority to designate TODs and set funding standards.",
         "relevance_rating": 2
       }
     ]
@@ -2451,66 +2469,42 @@
     ],
     "YearAndSession": "2023 Regular Session",
     "StatusCurrentAsOf": "2023-11-09T14:58:21.977",
-    "bill_summary": "This bill creates a civil remedy for victims of hate crimes, allowing them to sue the person or persons who committed the act. It authorizes the court to issue injunctions and award economic damages, noneconomic damages (such as pain and suffering and emotional distress), and reasonable attorney's fees. Courts may award damages up to three times the amount of actual damages sustained by the victim.",
+    "bill_summary": "This bill establishes a civil cause of action for victims of hate crimes, allowing them to sue perpetrators for damages and seek injunctive relief. Courts are authorized to award economic and noneconomic damages, which may be up to three times the amount of actual damages, as well as reasonable attorney's fees and court costs.",
     "start_year": 2023,
     "end_year": null,
     "funding": null,
-    "responsible_party": "Maryland Judiciary (District Court and circuit courts)",
-    "stakeholders": "Victims of hate crimes, individuals who commit hate crimes, and the Maryland court system",
-    "fiscal_impact_summary": "The bill is not expected to affect state or local revenues. While it may increase the number of civil proceedings in District and circuit courts, the fiscal note indicates these can be managed with existing resources. Small business impact is considered minimal.",
+    "responsible_party": "Maryland Judiciary (District Court and Circuit Courts)",
+    "stakeholders": "Victims of hate crimes and individuals or groups committing acts that violate Maryland's hate crime statutes",
+    "fiscal_impact_summary": "The bill is expected to have a minimal impact on state and local finances. Any increase in District Court or circuit court proceedings resulting from the new civil remedy can be handled within the existing resources of the Maryland Judiciary. State and local revenues are not affected.",
     "agency_relevance": [
       {
         "agency_name": "Administrative Office of the Courts",
         "is_relevant": true,
-        "relevance_explanation": "The bill establishes a new civil cause of action for victims of hate crimes, which directly impacts the state court system's workload, administrative processes for handling civil suits, and the issuance of injunctions and damage awards as identified in the fiscal note.",
+        "relevance_explanation": "The bill creates a new civil cause of action for victims of hate crimes, which will be adjudicated within the Maryland court system managed by the AOC. The AOC also provided information for the bill's fiscal note regarding the impact on court proceedings.",
         "relevance_rating": 5
-      },
-      {
-        "agency_name": "Governor's Office of Crime Prevention and Policy",
-        "is_relevant": true,
-        "relevance_explanation": "As the state's central hub for public safety policy and victim services, this agency is directly concerned with legislation that provides new remedies and protections for crime victims and coordinates statewide strategies to address criminal activity like hate crimes.",
-        "relevance_rating": 4
       },
       {
         "agency_name": "Commission on Civil Rights",
         "is_relevant": true,
-        "relevance_explanation": "The agency's mission to enforce anti-discrimination laws aligns with the protected classes identified in the hate crime statutes (race, religion, sexual orientation, disability, etc.) that the bill seeks to provide further civil remedies for.",
-        "relevance_rating": 3
+        "relevance_explanation": "The MCCR is responsible for enforcing anti-discrimination laws and ensuring equal opportunity. Hate crimes are an extreme form of discrimination, and providing a civil remedy directly aligns with the commission's mission to protect residents from bias-motivated actions.",
+        "relevance_rating": 4
+      },
+      {
+        "agency_name": "Governor's Office of Crime Prevention and Policy",
+        "is_relevant": true,
+        "relevance_explanation": "This office serves as the state's hub for public safety policy and coordinates initiatives to reduce crime and violence. They track hate crime trends and policy developments as part of their mandate to advise the Governor on criminal justice strategies.",
+        "relevance_rating": 4
       },
       {
         "agency_name": "Office of the Attorney General",
         "is_relevant": true,
-        "relevance_explanation": "The OAG serves as the primary legal advisor to the state and handles civil rights advocacy; this bill expands civil liability and the rule of law regarding bias-motivated acts, which falls under their broad legal oversight mission.",
+        "relevance_explanation": "The OAG upholds the rule of law and protects the public interest. As the state's chief legal office, it monitors changes to criminal and civil law, particularly those involving public safety and civil rights protections.",
         "relevance_rating": 3
-      },
-      {
-        "agency_name": "Department of Disabilities",
-        "is_relevant": true,
-        "relevance_explanation": "The bill provides a civil remedy for victims of hate crimes motivated by disability, which is a core focus of this agency's mandate to advocate for the rights and community integration of individuals with disabilities.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Department of Human Services",
-        "is_relevant": true,
-        "relevance_explanation": "The hate crime laws cited in the bill specifically protect individuals based on their homeless status; DHS is the primary agency responsible for providing economic assistance and social services to Maryland's homeless population.",
-        "relevance_rating": 2
       },
       {
         "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The Governor's Office enforces state laws and leads statewide initiatives aimed at public safety and economic opportunity; this bill represents a significant policy shift in civil rights and public safety enforcement.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Maryland Center for School Safety",
-        "is_relevant": true,
-        "relevance_explanation": "This agency coordinates school safety and bridges gaps between students, parents, and law enforcement; bias-motivated crimes are a critical threat to safe and inclusive learning environments for K-12 students.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Maryland State Police",
-        "is_relevant": true,
-        "relevance_explanation": "The MSP is responsible for investigating the criminal acts that constitute violations of the hate crime statutes, which provide the factual basis for the civil actions authorized by this bill.",
+        "relevance_explanation": "The Governor's Office oversees the execution of state laws and signed this legislation into law. The office also manages statewide initiatives aimed at improving public safety, which includes addressing hate crimes.",
         "relevance_rating": 2
       }
     ]

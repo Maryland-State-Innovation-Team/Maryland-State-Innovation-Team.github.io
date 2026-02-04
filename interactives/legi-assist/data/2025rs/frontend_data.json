@@ -191,114 +191,120 @@
     ],
     "YearAndSession": "2025 Regular Session",
     "StatusCurrentAsOf": "2025-12-01T10:45:07.463",
-    "bill_summary": "Known as the See Someone, Save Someone Act, this bill requires the Maryland Department of Transportation to develop and implement a human trafficking identification and reporting training program for State and contract employees working at transit stations, airports, port facilities, and highway rest stops. It mandates that employers certify employee completion of the training annually, establish reporting procedures and prevention policies, and provide public service announcements in both English and Spanish at transportation hubs.",
+    "bill_summary": "This bill, known as the See Someone, Save Someone Act, requires the Maryland Department of Transportation (MDOT) to develop and implement a training program for certain transportation sector employees and contractors on the identification and reporting of suspected human trafficking. Employers must certify annually that their employees have completed this training, establish reporting procedures, and implement a human trafficking prevention policy. Additionally, MDOT is required to provide public service announcements in both English and Spanish regarding safety information for trafficking victims at airports, transit stations, ports, and highway rest stops.",
     "start_year": 2025,
     "end_year": null,
     "funding": 400000,
     "responsible_party": "Maryland Department of Transportation",
-    "stakeholders": "State employees and contract workers at transit stations, airports, port facilities, and highway rest stops; human trafficking victims; and the traveling public.",
-    "fiscal_impact_summary": "Transportation Trust Fund expenditures increase by $262,500 in FY 2026 and $137,500 in FY 2027 to develop the training curriculum and cover overtime costs for employees to complete the program. There is no impact on state revenues or local government finances.",
+    "stakeholders": "State and contract employees at transit stations, airports, port facilities, and highway rest stops; transit service providers; transportation sector employers; and potential human trafficking victims.",
+    "fiscal_impact_summary": "State expenditures from the Transportation Trust Fund increase by an estimated $262,500 in FY 2026 and $137,500 in FY 2027 to develop the training curriculum and cover overtime costs for employee attendance. No impact on State revenues or local government finances is expected.",
     "agency_relevance": [
       {
         "agency_name": "Department of Transportation",
         "is_relevant": true,
-        "relevance_explanation": "As the primary implementing agency, MDOT is responsible for developing, identifying, and administering the human trafficking training program, establishing reporting procedures, and ensuring public service announcements are made at its facilities.",
+        "relevance_explanation": "As the primary agency named in the bill, MDOT is responsible for developing, identifying, and implementing the human trafficking training program and ensuring the execution of public service announcements at transportation facilities.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Maryland Transit Administration",
         "is_relevant": true,
-        "relevance_explanation": "The MTA is a division of MDOT that operates transit services and stations. The fiscal note indicates MTA will lead the development of the training curriculum because the requirements primarily affect its employees.",
+        "relevance_explanation": "MTA is specifically impacted as the bill mandates training for employees at transit stations and those providing transit services. The fiscal note also indicates MTA will likely lead the development of the training curriculum.",
+        "relevance_rating": 5
+      },
+      {
+        "agency_name": "State Highway Administration",
+        "is_relevant": true,
+        "relevance_explanation": "SHA is responsible for managing highway rest stops, where the bill mandates both employee training and the provision of human trafficking safety public service announcements.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Maryland Aviation Administration",
         "is_relevant": true,
-        "relevance_explanation": "The MAA operates BWI Thurgood Marshall Airport, where the bill specifically requires employee training and frequent public service announcements regarding human trafficking.",
-        "relevance_rating": 4
+        "relevance_explanation": "MAA operates BWI and Martin State airports, both of which are specific locations where employees must be trained and public service announcements must be implemented.",
+        "relevance_rating": 5
       },
       {
         "agency_name": "Maryland Port Administration",
         "is_relevant": true,
-        "relevance_explanation": "The MPA manages port facilities where the bill requires specific employee training and the delivery of human trafficking safety information through public service announcements.",
-        "relevance_rating": 4
-      },
-      {
-        "agency_name": "State Highway Administration",
-        "is_relevant": true,
-        "relevance_explanation": "The SHA manages highway rest stops and may provide transit/shuttle services. The bill requires training for employees at these rest stops and the implementation of safety PSAs at these locations.",
-        "relevance_rating": 4
-      },
-      {
-        "agency_name": "Maryland Transportation Authority",
-        "is_relevant": true,
-        "relevance_explanation": "As the operator of major toll facilities and associated infrastructure (such as rest areas on toll roads), the MDTA is an employer whose staff and contractors are subject to the bill's training and policy requirements.",
-        "relevance_rating": 3
+        "relevance_explanation": "MPA manages port facilities, which are designated locations requiring staff training and the implementation of public service announcements under the bill.",
+        "relevance_rating": 5
       },
       {
         "agency_name": "Governor's Office of Crime Prevention and Policy",
         "is_relevant": true,
-        "relevance_explanation": "GOCPP manages the Safe Harbor Regional Navigator Grant Program and coordinates the regional navigators to whom the bill requires suspected trafficking incidents be reported.",
-        "relevance_rating": 3
+        "relevance_explanation": "GOCPP manages the Safe Harbor Regional Navigator Grant Program; the bill requires employers to establish procedures for reporting suspected trafficking to 'designated regional navigators,' which fall under GOCPP's administration.",
+        "relevance_rating": 4
       },
       {
         "agency_name": "Maryland State Police",
         "is_relevant": true,
-        "relevance_explanation": "MSP is responsible for investigating major crimes like human trafficking and maintaining highway safety; they may be involved in the reporting protocols or response procedures established by MDOT.",
+        "relevance_explanation": "MSP often provides security and law enforcement at MDOT facilities and highway rest stops; they would likely be the primary 'appropriate local agency' receiving reports of suspected trafficking.",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "Maryland Transportation Authority",
+        "is_relevant": true,
+        "relevance_explanation": "The MDTA manages toll facilities and has its own police force that protects ports and airports; its personnel and facilities may be impacted by the training and reporting protocols.",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "Department of Human Services",
+        "is_relevant": true,
+        "relevance_explanation": "DHS is involved in victim services and was identified as a stakeholder in the legislative analysis for the development of trafficking response protocols.",
         "relevance_rating": 2
       },
       {
-        "agency_name": "Motor Vehicle Administration",
+        "agency_name": "Department of Health",
         "is_relevant": true,
-        "relevance_explanation": "The MVA is a modal unit of MDOT, and while less directly affected than transit or ports, its employees and safety mission are part of the broader MDOT response to human trafficking.",
+        "relevance_explanation": "MDH collaborates on statewide human trafficking awareness and training initiatives and is a stakeholder in coordinating responses to potential victims.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Budget and Management",
+        "is_relevant": true,
+        "relevance_explanation": "DBM is responsible for the state's personnel and fiscal management; the bill has a notable fiscal impact on the Transportation Trust Fund for training and overtime costs.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Office of the Attorney General",
         "is_relevant": true,
-        "relevance_explanation": "The OAG acts as legal counsel to MDOT and would likely be involved in reviewing the human trafficking prevention policies and the liability immunity provisions established in the bill.",
-        "relevance_rating": 1
-      },
-      {
-        "agency_name": "Department of Health",
-        "is_relevant": true,
-        "relevance_explanation": "The MDH is involved in human trafficking awareness and training coordination for other sectors and was listed as an information source for this legislation.",
-        "relevance_rating": 1
-      },
-      {
-        "agency_name": "Department of Human Services",
-        "is_relevant": true,
-        "relevance_explanation": "DHS provides protective services for vulnerable individuals and victims of trafficking, making them a stakeholder in the reporting and resource connection protocols.",
-        "relevance_rating": 1
-      },
-      {
-        "agency_name": "Department of Education",
-        "is_relevant": true,
-        "relevance_explanation": "MSDE is listed as an information source for the bill and already manages similar trafficking awareness mandates for the education sector.",
-        "relevance_rating": 1
+        "relevance_explanation": "The OAG provides legal counsel to MDOT and would be responsible for advising on the immunity provisions for employees reporting incidents in good faith.",
+        "relevance_rating": 2
       },
       {
         "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The Governor's Office oversees all state departments, including the implementation of high-priority public safety initiatives like the See Someone, Save Someone Act.",
-        "relevance_rating": 1
+        "relevance_explanation": "The Governor's Office oversees executive branch agencies (MDOT) and signs the legislation into law; it also plays a role in coordinating multi-agency anti-trafficking efforts.",
+        "relevance_rating": 2
       },
       {
-        "agency_name": "University System of Maryland",
+        "agency_name": "Motor Vehicle Administration",
         "is_relevant": true,
-        "relevance_explanation": "Listed as an information source, USM may be impacted if university-run transit services or campus stations fall under the bill's reporting and training requirements.",
+        "relevance_explanation": "As a modal unit of MDOT, the MVA is generally responsible for driver and vehicle safety, though the bill focuses more on stations and ports.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Education",
+        "is_relevant": true,
+        "relevance_explanation": "MSDE is mentioned in the fiscal note as having existing human trafficking training mandates, serving as a policy precedent and potential collaborator for curriculum development.",
         "relevance_rating": 1
       },
       {
         "agency_name": "Morgan State University",
         "is_relevant": true,
-        "relevance_explanation": "As an independent state agency and educational institution, Morgan State was identified as an information source regarding potential impacts on campus transportation sectors.",
+        "relevance_explanation": "Morgan State University was listed as an information source for the fiscal note, indicating minimal impact or consultation regarding the bill's implementation.",
         "relevance_rating": 1
       },
       {
         "agency_name": "Saint Mary's College of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "Identified as an information source, the college may have minimal administrative or security overlap with the bill's transit-sector mandates.",
+        "relevance_explanation": "Saint Mary's College was listed as an information source for the fiscal note, indicating minimal impact or consultation regarding the bill's implementation.",
+        "relevance_rating": 1
+      },
+      {
+        "agency_name": "University System of Maryland",
+        "is_relevant": true,
+        "relevance_explanation": "The University System of Maryland was listed as an information source for the fiscal note, indicating minimal impact or consultation regarding the bill's implementation.",
         "relevance_rating": 1
       }
     ]
@@ -769,43 +775,37 @@
     ],
     "YearAndSession": "2025 Regular Session",
     "StatusCurrentAsOf": "2025-12-01T10:45:07.463",
-    "bill_summary": "This bill clarifies the definition of physical therapist assistants under the Maryland Physical Therapy Act and increases the size of the State Board of Physical Therapy Examiners from eight to nine members by adding a second licensed physical therapist assistant. Additionally, it transitions the license renewal notification process from first-class mail to electronic means, unless a licensee specifically requests a physical notice.",
+    "bill_summary": "This bill clarifies the definition of physical therapist assistant within the Maryland Physical Therapy Act and expands the State Board of Physical Therapy Examiners from eight to nine members by adding a second licensed physical therapist assistant. Additionally, the bill changes the default method for license renewal notifications from first-class mail to electronic means, unless a licensee specifically requests to receive the notice by mail.",
     "start_year": 2025,
     "end_year": null,
     "funding": null,
     "responsible_party": "State Board of Physical Therapy Examiners",
-    "stakeholders": "Licensed physical therapists, licensed physical therapist assistants, the State Board of Physical Therapy Examiners, and physical therapy patients.",
-    "fiscal_impact_summary": "The bill results in a net decrease in State special fund expenditures for the State Board of Physical Therapy Examiners of approximately $3,500 annually starting in fiscal 2026. This reflects a $1,500 increase for compensation of the additional board member, offset by an estimated $5,000 in savings from switching to electronic renewal notices. There is no impact on State revenues or local government finances.",
+    "stakeholders": "Physical therapists, physical therapist assistants, and the State Board of Physical Therapy Examiners.",
+    "fiscal_impact_summary": "Beginning in fiscal 2026, State Board of Physical Therapy Examiners special fund expenditures are expected to increase by $1,500 annually for the additional board member's compensation. However, the move to electronic renewal notices is expected to save approximately $5,000 annually in mailing costs, resulting in a net special fund expenditure savings of approximately $3,500 per year. There is no impact on State revenues or local government finances.",
     "agency_relevance": [
+      {
+        "agency_name": "Department of Budget and Management",
+        "is_relevant": true,
+        "relevance_explanation": "The bill has a direct fiscal impact on the State Board of Physical Therapy Examiners' special fund expenditures, including a $1,500 annual increase for member compensation and an estimated $5,000 annual decrease in mailing costs. As the state's central fiscal authority, DBM oversees budget formulation and the personnel systems related to these changes.",
+        "relevance_rating": 2
+      },
       {
         "agency_name": "Department of Health",
         "is_relevant": true,
-        "relevance_explanation": "The State Board of Physical Therapy Examiners is a regulatory board housed within the Maryland Department of Health. This bill directly modifies the Board's membership, the definitions of its practitioners, and its operational procedures for license renewals.",
+        "relevance_explanation": "The State Board of Physical Therapy Examiners is a regulatory body operating under the Maryland Department of Health. The bill directly alters the Board's membership, clarifies the definition of 'physical therapist assistant' in the Health Occupations Article, and mandates changes to the Board's administrative procedures for license renewals.",
         "relevance_rating": 5
-      },
-      {
-        "agency_name": "Office of Appointments",
-        "is_relevant": true,
-        "relevance_explanation": "The bill adds a second licensed physical therapist assistant member to the Board. The Office of Appointments is responsible for identifying, recruiting, and vetting candidates to serve on Maryland's boards and commissions.",
-        "relevance_rating": 4
       },
       {
         "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The Governor is the appointing authority for members of the State Board of Physical Therapy Examiners. Additionally, the office oversees the operations of all state departments, including the Department of Health.",
+        "relevance_explanation": "The Governor is the appointing authority for members of the State Board of Physical Therapy Examiners. The bill increases the number of Board members from 8 to 9 and explicitly requires the Governor to appoint the additional licensed physical therapist assistant member.",
         "relevance_rating": 3
       },
       {
-        "agency_name": "Department of Budget and Management",
+        "agency_name": "Office of Appointments",
         "is_relevant": true,
-        "relevance_explanation": "The fiscal note indicates a minimal increase in special fund expenditures for board member compensation and a decrease in expenditures related to the shift to electronic notices, which falls under DBM's fiscal oversight.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Department of Information Technology",
-        "is_relevant": true,
-        "relevance_explanation": "The bill mandates a shift from first-class mail to electronic means for license renewal notices. DoIT is responsible for the state's IT infrastructure and digital government services policies.",
-        "relevance_rating": 2
+        "relevance_explanation": "This office is responsible for identifying, recruiting, and vetting candidates to serve on Maryland's boards and commissions. It will manage the application and vetting process for the new board member position established by this legislation to ensure the candidate meets the specific professional requirements.",
+        "relevance_rating": 3
       }
     ]
   },
@@ -909,48 +909,42 @@
     ],
     "YearAndSession": "2025 Regular Session",
     "StatusCurrentAsOf": "2025-12-01T10:45:07.463",
-    "bill_summary": "The bill prohibits land use restrictions that unreasonably limit the installation of solar collector systems, defining 'unreasonable' as a restriction that increases costs by at least 5% or reduces energy generation by at least 10%. It allows community associations to prohibit or set reasonable restrictions on solar installations in common areas while granting boards of directors the discretion to install such systems, provided property owners submit verification from a certified specialist.",
+    "bill_summary": "This bill establishes specific criteria for what constitutes an unreasonable restriction on the installation of solar collector systems by community associations, defining it as a restriction that increases the system's cost by at least 5% or reduces its energy generation by at least 10%. It also clarifies the authority of community associations to prohibit or set reasonable restrictions on solar installations in common areas and requires property owners to provide documentation from certified solar panel design specialists to prove a restriction is unreasonable.",
     "start_year": 2025,
     "end_year": null,
     "funding": null,
-    "responsible_party": "Maryland Judiciary and community associations",
-    "stakeholders": "Property owners, community associations, and solar panel design specialists",
-    "fiscal_impact_summary": "The bill is not expected to have a material impact on State or local government finances or operations. Small business impact is considered minimal.",
+    "responsible_party": "Maryland Judiciary and Community Associations (homeowners and condominium associations)",
+    "stakeholders": "Maryland property owners, community associations, boards of directors of real estate developments, and solar panel design specialists.",
+    "fiscal_impact_summary": "The bill is not anticipated to materially impact State or local government operations or finances. The impact on small businesses is expected to be minimal as described in the fiscal note.",
     "agency_relevance": [
       {
         "agency_name": "Maryland Energy Administration",
         "is_relevant": true,
-        "relevance_explanation": "The bill directly concerns the installation and regulation of solar collector systems, which falls under the agency's mission to promote clean and affordable energy. MEA was also a listed information source for the bill's fiscal note.",
-        "relevance_rating": 4
+        "relevance_explanation": "The Maryland Energy Administration is the primary state agency responsible for renewable energy policy and initiatives. This bill directly impacts the adoption of solar collector systems by defining what constitutes an unreasonable restriction on their installation, a topic central to the MEA's mission of promoting clean energy and lowering costs for residents.",
+        "relevance_rating": 5
       },
       {
         "agency_name": "Department of Planning",
         "is_relevant": true,
-        "relevance_explanation": "The bill contains an explicit exemption for historic properties determined by the Director of the Maryland Historical Trust to be eligible for the Maryland Register of Historic Properties. The Maryland Historical Trust is a program within the Department of Planning.",
+        "relevance_explanation": "The bill explicitly mentions the Director of the Maryland Historical Trust, which is a division of the Department of Planning. The Trust is responsible for determining which properties are eligible for inclusion in the Maryland Register of Historic Properties, and the bill exempts such historic properties from the new solar installation rules.",
         "relevance_rating": 4
-      },
-      {
-        "agency_name": "Department of Housing and Community",
-        "is_relevant": true,
-        "relevance_explanation": "The bill establishes rules for community associations (HOAs and condominiums) regarding property use restrictions for energy improvements, which aligns with the agency's work in community development and housing sustainability.",
-        "relevance_rating": 3
       },
       {
         "agency_name": "Administrative Office of the Courts",
         "is_relevant": true,
-        "relevance_explanation": "The bill amends the Real Property Article regarding disputes between homeowners and community associations. The Judiciary was identified as an information source and the courts would be responsible for adjudicating disputes related to the new statutory thresholds for 'unreasonable' restrictions.",
+        "relevance_explanation": "The bill establishes specific legal thresholds (5% cost increase and 10% efficiency reduction) to determine if a restriction is 'unreasonable.' Disputes between property owners and community associations regarding these definitions will be adjudicated through the Maryland court system, which is supported by the Administrative Office of the Courts.",
         "relevance_rating": 3
       },
       {
-        "agency_name": "Department of the Environment",
+        "agency_name": "Maryland Clean Energy Center",
         "is_relevant": true,
-        "relevance_explanation": "As the agency leading the state's climate change initiatives, MDE has an interest in legislation that reduces barriers to the adoption of renewable energy technologies like solar collector systems.",
-        "relevance_rating": 2
+        "relevance_explanation": "The Maryland Clean Energy Center works to accelerate the adoption of clean energy and make sustainable technology more affordable. The bill's provisions to limit the financial and efficiency impacts of HOA restrictions directly align with the Center's work to reduce barriers for residents transitioning to solar energy.",
+        "relevance_rating": 3
       },
       {
         "agency_name": "Office of the Attorney General",
         "is_relevant": true,
-        "relevance_explanation": "The OAG acts as the primary legal advisor to state agencies and protects public interests. Legislative changes to property rights and consumer-related interactions with HOAs may require legal interpretation or enforcement by this office.",
+        "relevance_explanation": "The Office of the Attorney General provides legal counsel to state agencies and handles advocacy work regarding consumer protection and real property law. They may be involved in interpreting the impact of these changes on homeowners' rights and community association governance.",
         "relevance_rating": 2
       }
     ]
@@ -1667,103 +1661,109 @@
     ],
     "YearAndSession": "2025 Regular Session",
     "StatusCurrentAsOf": "2025-12-01T10:45:07.463",
-    "bill_summary": "This bill updates the Maryland Food System Resiliency Council's operations by defining \"healthy food priority areas\" and \"wasted food\" to replace outdated terminology. It repeals obsolete one-time reporting requirements and modifies ongoing reporting duties to include specific policy and legislative recommendations for increasing the long-term resiliency of the food system.",
+    "bill_summary": "This bill updates the terminology and reporting requirements for the Maryland Food System Resiliency Council. It defines 'healthy food priority areas' and 'wasted food' to replace outdated terms like 'food deserts' and 'food waste,' and tasks the Council with developing equity and sustainability policy recommendations. Additionally, it repeals several outdated one-time reporting requirements while establishing a permanent requirement for an annual report on the Council's findings and recommended legislative changes.",
     "start_year": 2025,
     "end_year": null,
     "funding": null,
-    "responsible_party": "Maryland Department of Emergency Management (MDEM)",
-    "stakeholders": "Maryland residents experiencing food insecurity, particularly those in lower-income areas with limited food access; local food council organizations; Maryland food businesses; and educational and nonprofit institutions involved in food procurement.",
-    "fiscal_impact_summary": "The Maryland Department of Emergency Management can implement the bill using existing budgeted resources. The bill is not expected to affect State revenues or materially impact local government operations and finances.",
+    "responsible_party": "Maryland Food System Resiliency Council within the Maryland Department of Emergency Management",
+    "stakeholders": "Maryland residents experiencing food insecurity, local food council organizations, Maryland food businesses, schools, institutions of higher education, and nonprofit organizations.",
+    "fiscal_impact_summary": "The Maryland Department of Emergency Management can implement the bill's requirements using existing budgeted resources. There is no impact on State revenues, and the bill is not anticipated to materially affect local government operations or finances.",
     "agency_relevance": [
       {
         "agency_name": "Department of Emergency Management",
         "is_relevant": true,
-        "relevance_explanation": "The Food System Resiliency Council is housed within the Office of Resilience in the Maryland Department of Emergency Management (MDEM), and MDEM is responsible for staffing the Council. This bill directly alters the Council's definitions and reporting requirements.",
+        "relevance_explanation": "The Maryland Food System Resiliency Council is explicitly housed within the Office of Resilience at MDEM, and the Secretary of Emergency Management is the primary executive authority defined in the bill. MDEM also provides the staffing and administrative support for the Council.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Executive Commissions, Committees, Task Forces, and Advisory Boards",
         "is_relevant": true,
-        "relevance_explanation": "The Maryland Food System Resiliency Council is a specialized advisory body that coordinates state and local efforts regarding food insecurity and system resiliency. This bill updates its statutory definitions and ongoing mandates.",
+        "relevance_explanation": "The Maryland Food System Resiliency Council functions as a specialized advisory body within the executive branch, which is the primary subject of this legislation.",
         "relevance_rating": 5
-      },
-      {
-        "agency_name": "Department of Agriculture",
-        "is_relevant": true,
-        "relevance_explanation": "The bill includes goals to increase the quantity, marketing, and distribution of local food, and create market opportunities for Maryland food businesses, which directly aligns with the MDA's mission to promote and protect the state's agricultural industry.",
-        "relevance_rating": 4
       },
       {
         "agency_name": "Department of Education",
         "is_relevant": true,
-        "relevance_explanation": "The bill specifically directs the Council to make recommendations to MSDE regarding the federal Community Eligibility Provision and increasing the procurement of local food through schools.",
+        "relevance_explanation": "The bill mandates that the Council make specific recommendations to the Maryland State Department of Education regarding the federal Community Eligibility Provision for student nutrition and targets local food procurement through schools.",
+        "relevance_rating": 4
+      },
+      {
+        "agency_name": "Department of Agriculture",
+        "is_relevant": true,
+        "relevance_explanation": "The Council's goals include increasing the production, aggregation, marketing, and distribution of local food, as well as creating market opportunities for Maryland food businesses and expanding food production infrastructure.",
         "relevance_rating": 4
       },
       {
         "agency_name": "Department of Health",
         "is_relevant": true,
-        "relevance_explanation": "The bill addresses diet-related public health disparities and food insecurity, which are core components of MDH's mission to protect and promote the health of all Marylanders.",
+        "relevance_explanation": "The Council is tasked with addressing diet-related public health disparities and food insecurity, which are core components of the Department of Health\u2019s public health and disease prevention mission.",
+        "relevance_rating": 4
+      },
+      {
+        "agency_name": "Department of the Environment",
+        "is_relevant": true,
+        "relevance_explanation": "The bill defines and targets 'wasted food' management, including composting and anaerobic digestion, and tasks the Council with addressing environmental impacts related to food waste, which aligns with MDE's regulatory and environmental protection oversight.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Department of Human Services",
         "is_relevant": true,
-        "relevance_explanation": "DHS is the state's primary provider of economic assistance, including SNAP. The Council's work on food insecurity and coordinating local level services directly impacts the populations DHS serves.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Department of the Environment",
-        "is_relevant": true,
-        "relevance_explanation": "The bill introduces a new definition for 'wasted food' that includes composting and anaerobic digestion, which are activities regulated and monitored by the MDE as part of its resource management and environmental protection duties.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Governor's Office",
-        "is_relevant": true,
-        "relevance_explanation": "The Council is an executive agency that advises the state government and provides reports to the General Assembly. Its initiatives on public safety and economic opportunity are key functions overseen by the Governor's Office.",
+        "relevance_explanation": "DHS is the primary provider of SNAP and other economic assistance; the Council\u2019s goal to coordinate State and local level food insecurity services directly intersects with DHS's social service delivery.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Governor's Office for Children",
         "is_relevant": true,
-        "relevance_explanation": "The GOC leads the state's efforts to eliminate childhood poverty and address food insecurity. The Council's mission to support residents and ensure students are fed through school programs directly complements GOC's mandate.",
+        "relevance_explanation": "The GOC leads a whole-of-government approach to child poverty and food insecurity, mirroring the Council's goals to coordinate statewide food services and address student nutrition.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Rural Maryland Council",
         "is_relevant": true,
-        "relevance_explanation": "The bill specifically addresses increasing the marketing and distribution of local food in rural settings and expanding access to small-scale manufacturing infrastructure, which are core priorities of the RMC.",
+        "relevance_explanation": "The bill specifically directs the Council to increase local food aggregation and distribution in rural settings and expand access to food production infrastructure, which are central to RMC's mission of supporting rural economic development and infrastructure.",
         "relevance_rating": 3
-      },
-      {
-        "agency_name": "Higher Education Commission",
-        "is_relevant": true,
-        "relevance_explanation": "The bill seeks to increase the procurement of local food through institutions of higher education, which are coordinated and regulated by the MHEC.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Department of Commerce",
-        "is_relevant": true,
-        "relevance_explanation": "The bill aims to create additional market opportunities for Maryland food businesses and expand infrastructure for food production, contributing to the state's economic development and business growth mission.",
-        "relevance_rating": 2
       },
       {
         "agency_name": "University System of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "As a major public institutional body, the USM would be impacted by efforts to increase the procurement of local food through institutions of higher education.",
+        "relevance_explanation": "The bill explicitly tasks the Council with increasing the procurement of local food through 'institutions of higher education' and 'universities,' which directly impacts USM's procurement policies.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Morgan State University",
         "is_relevant": true,
-        "relevance_explanation": "As a public university and state agency, Morgan State is part of the higher education sector targeted for increased local food procurement.",
+        "relevance_explanation": "As a primary procurement unit and institution of higher education, Morgan State is directly impacted by the bill's goal to increase local food procurement at universities.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Saint Mary's College of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "As a state institution of higher education, the college is part of the sector identified for local food procurement initiatives.",
+        "relevance_explanation": "As a public institution of higher education, the college is a target for the Council's goals regarding increased local food procurement by state institutions.",
         "relevance_rating": 2
+      },
+      {
+        "agency_name": "Higher Education Commission",
+        "is_relevant": true,
+        "relevance_explanation": "MHEC coordinates policy for public and private colleges and universities; the bill's goal to increase local food procurement at these institutions may require MHEC's coordinating involvement.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Planning",
+        "is_relevant": true,
+        "relevance_explanation": "The bill defines 'healthy food priority areas' and tasks the Council with mapping food insecurity, which utilizes demographic and land-use data analysis typically managed by MDP.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Commerce",
+        "is_relevant": true,
+        "relevance_explanation": "The Council's mission to create market opportunities for Maryland food businesses and increase marketing of local products aligns with the Department of Commerce\u2019s role in economic development and business support.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Governor's Office",
+        "is_relevant": true,
+        "relevance_explanation": "The Governor oversees the executive departments housing the Council (MDEM) and signs the resulting reports and legislative proposals into law.",
+        "relevance_rating": 1
       }
     ]
   },
@@ -2056,48 +2056,48 @@
     ],
     "YearAndSession": "2025 Regular Session",
     "StatusCurrentAsOf": "2025-12-01T10:45:07.463",
-    "bill_summary": "This bill expands and makes permanent requirements for health insurance carriers regarding referrals to nonparticipating specialists, particularly for mental health and substance use disorder services. It requires carriers to assist members in arranging coverage when in-network providers are unavailable within regulated travel and wait time standards and ensures that these services are provided at no additional cost to the member for the duration of the treatment plan. The bill also prohibits more restrictive utilization reviews for nonparticipating providers compared to network providers once a referral is approved and directs the Maryland Health Care Commission to hold public meetings to determine a reimbursement formula for these providers.",
+    "bill_summary": "This bill permanently extends and expands requirements for health insurance carriers to provide referrals to out-of-network specialists when a suitable in-network provider is unavailable within specific travel and wait-time standards. It specifically focuses on mental health and substance use disorder (SUD) services, requiring carriers to assist members in arranging coverage and ensuring cost-sharing remains at in-network levels for the duration of a treatment plan. It also prohibits insurers from imposing stricter utilization reviews on these out-of-network referrals than they would for in-network providers.",
     "start_year": 2025,
     "end_year": null,
     "funding": null,
     "responsible_party": "Maryland Insurance Administration and Maryland Health Care Commission",
-    "stakeholders": "Maryland residents seeking mental health or substance use disorder services, health insurance carriers, and nonparticipating healthcare specialists and behavioral health programs.",
-    "fiscal_impact_summary": "The bill has no fiscal effect in FY 2025. In FY 2026, the Maryland Insurance Administration will see a minimal special fund revenue increase from $125 form filing fees. There is no impact on the State Employee and Retiree Health and Welfare Benefits Program and no anticipated material effect on local government finances. Small business healthcare providers may experience a meaningful positive impact as they serve more patients under the referral procedures.",
+    "stakeholders": "Health insurance policyholders seeking mental health or substance use disorder treatment, health insurance carriers, and behavioral health providers",
+    "fiscal_impact_summary": "The bill has no fiscal effect in FY 2025. In FY 2026, the Maryland Insurance Administration will see a minimal increase in special fund revenue from $125 rate and form filing fees. The bill is not expected to impact the State Employee and Retiree Health and Welfare Benefits Program or local government finances. Small business healthcare practices may see a meaningful impact as nonparticipating providers may serve more patients under the bill's referral provisions.",
     "agency_relevance": [
       {
         "agency_name": "Maryland Insurance Administration",
         "is_relevant": true,
-        "relevance_explanation": "As the primary regulator of the state's insurance industry, the MIA is responsible for overseeing carrier compliance with the bill's new referral procedures, utilization review restrictions, and cost-sharing parity requirements. The fiscal note also indicates a revenue increase from rate and form filings processed by the MIA.",
+        "relevance_explanation": "As the primary regulator of the state's insurance industry, the MIA is responsible for enforcing the insurance laws amended by this bill, which governs carrier referral procedures, utilization reviews, and reimbursement for nonparticipating providers.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Maryland Health Care Commission",
         "is_relevant": true,
-        "relevance_explanation": "The bill explicitly mandates the Maryland Health Care Commission to hold public meetings with stakeholders and establish a reimbursement formula to determine the rates for nonparticipating providers delivering mental health and substance use disorder services.",
+        "relevance_explanation": "The bill specifically mandates that the MHCC hold public meetings with stakeholders to determine a reimbursement formula for nonparticipating providers delivering mental health and substance use disorder services.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Department of Health",
         "is_relevant": true,
-        "relevance_explanation": "The bill specifically includes behavioral health programs licensed under the Health-General Article (which MDH oversees) within the definition of nonphysician specialists and focuses on mental health and substance use disorder services.",
+        "relevance_explanation": "The bill focuses on access to mental health and substance use disorder services, which fall under the oversight of the MDH's behavioral health programs, and the MHCC is an independent unit within this department.",
         "relevance_rating": 3
       },
       {
-        "agency_name": "Maryland Health Benefit Exchange",
+        "agency_name": "Office of the Attorney General",
         "is_relevant": true,
-        "relevance_explanation": "The MHBE administers the Maryland Health Connection marketplace; the private health plans sold on the exchange are carriers subject to the bill's referral and reimbursement mandates.",
+        "relevance_explanation": "The OAG provides legal counsel to the Maryland Insurance Administration and the Maryland Health Care Commission regarding the implementation and enforcement of new health insurance regulations.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Department of Budget and Management",
         "is_relevant": true,
-        "relevance_explanation": "DBM manages the State Employee and Retiree Health and Welfare Benefits Program. While the fiscal note currently suggests no impact, the agency is responsible for monitoring legislation that regulates health benefit plans in the state.",
+        "relevance_explanation": "DBM is involved in the fiscal analysis of the bill to determine if the changes to insurance law would impact the State Employee and Retiree Health and Welfare Benefits Program.",
         "relevance_rating": 1
       },
       {
         "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "As the head of the executive branch, the Governor's Office oversees the various agencies (MIA, MHCC, MDH) tasked with implementing and enforcing these insurance regulations, and the Governor signed the bill into law.",
+        "relevance_explanation": "The Governor's Office is responsible for signing the bill into law and oversees the executive agencies (MIA and MDH) charged with implementing these mental health access policies.",
         "relevance_rating": 1
       }
     ]
@@ -2248,73 +2248,91 @@
     ],
     "YearAndSession": "2025 Regular Session",
     "StatusCurrentAsOf": "2025-12-01T10:45:07.463",
-    "bill_summary": "This bill regulates the sale and distribution of products containing tetrahydrocannabinol (THC) by prohibiting products that violate specific potency, packaging, or labeling standards. It expands the authority of the Alcohol, Tobacco, and Cannabis Commission (ATCC), specifically allowing its Field Enforcement Division to issue citations for THC-related offenses and authorizing its Executive Director to seize or destroy unlawful products. Non-licensed violators face misdemeanor charges and fines up to $5,000, while licensed cannabis businesses are subject to disciplinary action by the Maryland Cannabis Administration.",
+    "bill_summary": "This bill prohibits the sale and distribution of products containing tetrahydrocannabinol (THC) that violate Maryland's potency, packaging, or labeling requirements. It authorizes the Alcohol, Tobacco, and Cannabis Commission (ATCC) to issue citations and seize or destroy illegal products, while establishing that displaying THC products for sale without a license is evidence of an illegal sale.",
     "start_year": 2025,
     "end_year": null,
-    "funding": 0,
-    "responsible_party": "Alcohol, Tobacco, and Cannabis Commission (Field Enforcement Division and Executive Director) and the Maryland Cannabis Administration",
-    "stakeholders": "Cannabis licensees, unlicensed retailers of THC products, the Alcohol, Tobacco, and Cannabis Commission, the Maryland Cannabis Administration, and individuals under the age of 21.",
-    "fiscal_impact_summary": "State general fund revenues may increase minimally starting in FY 2026 due to fines from misdemeanor convictions and citations. The Alcohol, Tobacco, and Cannabis Commission and the Maryland Cannabis Administration are expected to implement the bill using existing budgeted resources. There is no anticipated material impact on local government revenues or expenditures.",
+    "funding": null,
+    "responsible_party": "Alcohol, Tobacco, and Cannabis Commission (ATCC) and the Maryland Cannabis Administration (MCA)",
+    "stakeholders": "Cannabis business licensees, unlicensed retailers of THC products, Maryland consumers, and law enforcement agencies",
+    "fiscal_impact_summary": "State general fund revenues are expected to increase minimally starting in fiscal 2026 due to the collection of misdemeanor fines and citations. The bill is not expected to have a significant impact on state or local expenditures, as the ATCC and MCA can implement its provisions using existing budgeted resources.",
     "agency_relevance": [
       {
         "agency_name": "Maryland Cannabis Administration",
         "is_relevant": true,
-        "relevance_explanation": "The Maryland Cannabis Administration (MCA) is the primary regulatory body for the cannabis industry in Maryland. The bill explicitly subjects cannabis licensees to disciplinary action by the MCA for violations of the new potency, packaging, and labeling requirements for products containing tetrahydrocannabinol (THC).",
+        "relevance_explanation": "As the primary regulator for medical and adult-use cannabis in Maryland, the MCA is responsible for overseeing license compliance and taking disciplinary actions against licensees who violate the potency, packaging, or labeling requirements established by this bill.",
         "relevance_rating": 5
       },
       {
-        "agency_name": "Governor's Office",
+        "agency_name": "Office of Controlled Substances Administration",
         "is_relevant": true,
-        "relevance_explanation": "The bill is a departmental request from the Alcohol, Tobacco, and Cannabis Commission, which is an executive agency overseen by the Governor's Office. Additionally, the Governor signed this legislation into law and the office oversees the state's budget and legislative implementation.",
+        "relevance_explanation": "The OCSA enforces the state's Controlled Dangerous Substances Act and monitors the legal supply chain. This bill regulates the sale of tetrahydrocannabinol (THC) products, including delta-8 and delta-10, which fall under the OCSA's broader mission of preventing drug abuse and diversion.",
+        "relevance_rating": 4
+      },
+      {
+        "agency_name": "Department of Health",
+        "is_relevant": true,
+        "relevance_explanation": "The Department of Health oversees public health services and regulatory oversight of healthcare and controlled substances. As the parent agency of the OCSA, it is involved in the health-related impacts of regulating intoxicating cannabinoids.",
+        "relevance_rating": 4
+      },
+      {
+        "agency_name": "Office of the Attorney General",
+        "is_relevant": true,
+        "relevance_explanation": "The OAG acts as the primary legal advisor for the Maryland Cannabis Administration and other state agencies. It would be responsible for providing legal counsel on the enforcement of these new regulations and managing any subsequent criminal or civil appeals.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Administrative Office of the Courts",
         "is_relevant": true,
-        "relevance_explanation": "The bill creates new misdemeanor offenses for non-licensees who violate THC sale and advertising restrictions. The fiscal note indicates that these cases will be heard in the District Court, which is managed and supported by the Administrative Office of the Courts.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Office of the Attorney General",
-        "is_relevant": true,
-        "relevance_explanation": "The Office of the Attorney General serves as the primary legal advisor to state agencies, including the Maryland Cannabis Administration and the Alcohol, Tobacco, and Cannabis Commission. The OAG would be involved in defending the state's regulations and managing legal aspects of enforcement and appeals.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Department of Agriculture",
-        "is_relevant": true,
-        "relevance_explanation": "The bill explicitly relies on the definition of 'Hemp' as stated in Section 14-401 of the Agriculture Article to define 'Tetrahydrocannabinol' for regulatory and enforcement purposes. The Department of Agriculture regulates the hemp industry and ensures compliance with related state standards.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Office of Controlled Substances Administration",
-        "is_relevant": true,
-        "relevance_explanation": "The OCSA, within the Department of Health, is responsible for enforcing the state\u2019s Controlled Dangerous Substances Act and preventing drug abuse and diversion. The bill's focus on regulating the sale and distribution of THC products directly intersects with the OCSA's mission to monitor the supply chain of intoxicating substances.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Governor's Office of Crime Prevention and Policy",
-        "is_relevant": true,
-        "relevance_explanation": "The GOCPP serves as the state\u2019s hub for public safety policy and advise the Governor on criminal justice strategies. This bill introduces new criminal offenses and expands the citation authority of enforcement officers, directly impacting state public safety policy and crime reduction strategies.",
+        "relevance_explanation": "The bill establishes new misdemeanor offenses and authorizes the issuance of citations for non-licensees. The AOC manages the District Court system where these cases and civil citations will be adjudicated.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Maryland State Police",
         "is_relevant": true,
-        "relevance_explanation": "The Field Enforcement Division officers authorized to issue citations under this bill are required to be sworn police officers with the powers and responsibilities of peace officers. The Maryland State Police often coordinate with such units to ensure statewide safety and enforcement of criminal laws.",
+        "relevance_explanation": "The bill grants enforcement powers to the Field Enforcement Division, whose officers are sworn police officers. The MSP investigates major crimes, including illegal drug distribution, and often works in coordination with other law enforcement units on statewide drug enforcement efforts.",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "Maryland Office of the Public Defender",
+        "is_relevant": true,
+        "relevance_explanation": "Because the bill creates new misdemeanor offenses for the sale of unauthorized THC products, the OPD would be responsible for providing legal representation to indigent residents charged under these provisions.",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "Governor's Office",
+        "is_relevant": true,
+        "relevance_explanation": "The Governor\u2019s Office oversees all state departments and agencies, including the ATCC and MCA. The Governor signed this legislation and directs the statewide initiatives regarding public safety and economic opportunity affected by cannabis regulation.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Comptroller of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "The bill explicitly states that the Field Enforcement Division may work and cooperate with the Office of the Comptroller to enforce the Alcoholic Beverages and Cannabis Article, particularly in areas related to taxes and unlicensed distribution.",
+        "relevance_explanation": "The bill specifies that the Field Enforcement Division may work and cooperate with the Office of the Comptroller. Additionally, the division's enforcement duties include handling cannabis on which state taxes are due and unpaid.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Office of Administrative Hearings",
+        "is_relevant": true,
+        "relevance_explanation": "The OAH conducts formal hearings for contested cases from state agencies. It may be required to adjudicate appeals from cannabis licensees facing disciplinary action by the MCA for potency or labeling violations.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Agriculture",
+        "is_relevant": true,
+        "relevance_explanation": "The bill explicitly references the definition of 'hemp' from the Agriculture Article to differentiate it from other THC products, impacting how the MDA's regulatory oversight of hemp production interacts with cannabis enforcement.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Department of Budget and Management",
         "is_relevant": true,
-        "relevance_explanation": "The bill mentions that the Field Enforcement Division may employ officers and employees as provided in the State budget. The DBM is responsible for formulating the state's budget and managing the personnel system for these state employees.",
+        "relevance_explanation": "The bill notes that the Field Enforcement Division may employ officers and employees as provided in the State budget, which is formulated and overseen by DBM.",
         "relevance_rating": 2
+      },
+      {
+        "agency_name": "Office of Legislative Audits",
+        "is_relevant": true,
+        "relevance_explanation": "The OLA conducts fiscal compliance audits of the MCA and ATCC to ensure that these agencies are following state laws and financial controls when enforcing the bill's provisions and managing confiscated products.",
+        "relevance_rating": 1
       }
     ]
   },
@@ -2723,96 +2741,60 @@
     ],
     "YearAndSession": "2025 Regular Session",
     "StatusCurrentAsOf": "2025-12-01T10:45:07.463",
-    "bill_summary": "This bill establishes the Maryland Limited Worker Cooperative Association Act, which authorizes the formation and operation of limited worker cooperative associations (LWCAs) as a specialized type of Maryland limited liability company (LLC). It provides a framework for these associations to be managed democratically by worker members, establishes requirements for their articles of organization and cooperative agreements, and defines rules for membership, voting power, and the distribution of profits and losses.",
+    "bill_summary": "The bill establishes the Maryland Limited Worker Cooperative Association Act, which authorizes the formation, operation, governance, and dissolution of limited worker cooperative associations (LWCAs), which are Maryland limited liability companies that elect to operate under worker-owned cooperative principles.",
     "start_year": 2026,
     "end_year": null,
     "funding": 278400,
-    "responsible_party": "State Department of Assessments and Taxation (SDAT) and the Maryland Insurance Commissioner",
-    "stakeholders": "Workers, limited liability companies seeking to elect cooperative status, investor members of cooperatives, and insurance companies providing workers' compensation insurance.",
-    "fiscal_impact_summary": "The bill has no fiscal impact in FY 2026. In FY 2027, State general fund expenditures increase by $278,400 for one-time programming costs at the State Department of Assessments and Taxation. There is a potential minimal increase in general fund revenues from business filing fees. There is no significant impact on local government finances.",
+    "responsible_party": "State Department of Assessments and Taxation and the Maryland Insurance Commissioner",
+    "stakeholders": "Workers, small business owners, and entrepreneurs interested in worker-owned cooperative business models.",
+    "fiscal_impact_summary": "State general fund expenditures increase by $278,400 in FY 2027 for one-time programming costs at the State Department of Assessments and Taxation to implement the new entity type. State revenues may see a minimal increase from filing fees associated with LWCA registrations. There is no anticipated material impact on local government finances.",
     "agency_relevance": [
       {
         "agency_name": "Maryland Insurance Administration",
         "is_relevant": true,
-        "relevance_explanation": "The bill explicitly adds to the powers and duties of the Insurance Commissioner, requiring the office to enforce new regulations regarding the calculation of workers' compensation insurance premiums for limited worker cooperative associations.",
+        "relevance_explanation": "The bill specifically tasks the Maryland Insurance Commissioner with enforcing Section 4A-12A-11, which regulates the calculation of workers' compensation insurance premiums for members of limited worker cooperative associations.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Comptroller of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "The bill amends the Tax-General Article to include limited worker cooperative associations in provisions related to personal liability for various taxes, including income tax withholding and sales and use tax, which are administered by the Comptroller.",
+        "relevance_explanation": "The bill amends several sections of the Tax - General Article to establish personal liability for taxes (admissions, motor fuel, income, and sales) for individuals managing limited worker cooperative associations. As the state's chief tax collector, this affects the Comptroller's enforcement and revenue collection duties.",
         "relevance_rating": 4
       },
       {
         "agency_name": "State Workers' Compensation Commission",
         "is_relevant": true,
-        "relevance_explanation": "The bill directly impacts workers' compensation standards by defining how premiums are calculated for members of Limited Worker Cooperative Associations, who are treated as covered employees under the Act.",
-        "relevance_rating": 4
-      },
-      {
-        "agency_name": "Department of Commerce",
-        "is_relevant": true,
-        "relevance_explanation": "As the state's primary economic development agency, the authorization of a new business entity type (worker cooperatives) is highly relevant to its mission of supporting entrepreneurship and private investment.",
+        "relevance_explanation": "The bill includes specific provisions regarding workers' compensation coverage for 'worker members' of these new associations, impacting the regulatory environment for workplace injury claims and mandatory insurance requirements.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Department of Labor",
         "is_relevant": true,
-        "relevance_explanation": "The bill establishes a business model where patronage is based on labor contributed by worker members, intersecting with the Department's oversight of workforce development and employment standards.",
+        "relevance_explanation": "The bill defines 'worker members' and clarifies that the formation of an LWCA does not create a presumption of employment for state law purposes, which is relevant to the Department's oversight of workforce development and labor standards.",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "Department of Commerce",
+        "is_relevant": true,
+        "relevance_explanation": "As the agency responsible for stimulating private investment and supporting small businesses, the creation of a new legal entity for worker cooperatives provides an additional framework for economic development and entrepreneurship.",
         "relevance_rating": 3
       },
       {
         "agency_name": "Department of Budget and Management",
         "is_relevant": true,
-        "relevance_explanation": "The fiscal note indicates a significant general fund expenditure of $278,400 for IT programming to implement the new entity type, which falls under DBM's responsibility for state budget oversight and fiscal accountability.",
-        "relevance_rating": 3
+        "relevance_explanation": "The fiscal note indicates a one-time general fund expenditure of $278,400 for programming costs, which falls under DBM's responsibility for overseeing state spending and the annual operating budget.",
+        "relevance_rating": 2
       },
       {
         "agency_name": "Office of the Attorney General",
         "is_relevant": true,
-        "relevance_explanation": "The OAG acts as the legal advisor to state agencies such as the Insurance Administration and the Comptroller, both of whom have new regulatory or tax-related enforcement duties under this bill.",
+        "relevance_explanation": "The OAG acts as the legal advisor to state agencies, including the Maryland Insurance Administration and the Comptroller, and will likely provide counsel on the implementation of this new act.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Administrative Office of the Courts",
         "is_relevant": true,
-        "relevance_explanation": "The bill establishes specific procedures for the service of process and judicial dissolution of Limited Worker Cooperative Associations, requiring the court system to manage these new legal filings.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Maryland Tax Court",
-        "is_relevant": true,
-        "relevance_explanation": "As the adjudicator for tax controversies, the Tax Court is likely to handle appeals regarding the personal liability for state taxes established for members and officers of limited worker cooperatives in the bill.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Injured Workers' Insurance Fund",
-        "is_relevant": true,
-        "relevance_explanation": "As a major writer of workers' compensation insurance in Maryland, this agency is directly affected by the bill's new formula for calculating premiums for cooperative members based on 'actual payroll value'.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Governor's Office",
-        "is_relevant": true,
-        "relevance_explanation": "The Governor's Office oversees the executive agencies responsible for implementing the Act and signed the legislation into law as part of its economic and workforce policy initiatives.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Office of Administrative Hearings",
-        "is_relevant": true,
-        "relevance_explanation": "OAH provides the forum for challenging decisions by state agencies, including the Insurance Administration, which is tasked with enforcing specific sections of this bill.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Governor's Office of Small, Minority & Women Business Affairs",
-        "is_relevant": true,
-        "relevance_explanation": "Worker cooperatives are an alternative business model that supports small business growth and inclusive entrepreneurship, aligning with this agency's advocacy for diverse business owners.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Governor's Workforce Development Board",
-        "is_relevant": true,
-        "relevance_explanation": "The creation of worker-owned associations represents a unique pathway to employment and economic mobility, which is a key focus of the board's strategy to remove barriers to career success.",
+        "relevance_explanation": "The bill establishes procedures for the judicial dissolution of limited worker cooperative associations and governance disputes, which impacts the administration of the state's court system.",
         "relevance_rating": 2
       }
     ]
@@ -3404,49 +3386,73 @@
     ],
     "YearAndSession": "2025 Regular Session",
     "StatusCurrentAsOf": "2025-12-01T10:45:07.463",
-    "bill_summary": "This bill extends the authorization for Montgomery County and Prince George's County to operate noise abatement monitoring systems pilot programs for an additional two years. It updates reporting requirements and changes the sunset date for the programs to June 30, 2028. Additionally, the bill establishes privacy protections for recorded images from these systems, requiring custodians to deny public inspection of the images except for specific legal or investigatory purposes.",
+    "bill_summary": "This bill extends the noise abatement monitoring system pilot programs in Montgomery and Prince George's counties for an additional two years, moving the expiration date from 2026 to 2028. It also extends the associated reporting deadlines for the participating counties and establishes privacy protections for recorded images captured by these noise cameras, aligning them with the standards used for other automated enforcement systems like speed cameras.",
     "start_year": 2025,
     "end_year": 2028,
     "funding": null,
     "responsible_party": "Montgomery County and Prince George's County governments",
-    "stakeholders": "Motor vehicle operators and residents in Montgomery County and Prince George's County",
-    "fiscal_impact_summary": "State general fund revenues are expected to increase minimally in FY 2027 and 2028 from contested citations heard in District Court. Local expenditures and revenues for Montgomery and Prince George's counties will increase as they continue the pilot programs; Montgomery County estimates annual program expenditures of $99,400, while revenue from civil penalties (limited to $75 per violation) is expected to be minimal.",
+    "stakeholders": "Motorists and residents in Montgomery County and Prince George's County, as well as the Maryland District Court system.",
+    "fiscal_impact_summary": "The bill extends the potential for local revenue and expenditures related to noise abatement programs through FY 2028. State general fund revenues may increase minimally due to contested citations handled by the District Court. Montgomery County expects annual operating costs of approximately $99,400, while citation revenues are expected to be minimal for both counties because civil penalties are capped at $75.",
     "agency_relevance": [
-      {
-        "agency_name": "Administrative Office of the Courts",
-        "is_relevant": true,
-        "relevance_explanation": "The bill extends a pilot program involving noise abatement monitoring systems that generate citations. The fiscal note indicates that contested citations are heard in the District Court, which is managed by the Administrative Office of the Courts.",
-        "relevance_rating": 4
-      },
-      {
-        "agency_name": "Department of Transportation",
-        "is_relevant": true,
-        "relevance_explanation": "The pilot program involves the use of noise abatement monitoring systems on State and local highways. MDOT, through the State Highway Administration and Motor Vehicle Administration, is directly involved in highway management and vehicle regulation relevant to these automated enforcement systems.",
-        "relevance_rating": 4
-      },
       {
         "agency_name": "Governor's Office",
         "is_relevant": true,
-        "relevance_explanation": "The bill requires participating counties to submit a formal report to the Governor by December 1, 2027, regarding the performance, costs, and effectiveness of the noise abatement systems.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Department of the Environment",
-        "is_relevant": true,
-        "relevance_explanation": "The Department of the Environment is responsible for safeguarding public health regarding environmental factors; it is listed as an information source for this bill due to its expertise in establishing maximum sound limits for motor vehicles.",
+        "relevance_explanation": "The bill requires the counties participating in the noise abatement monitoring pilot program to submit detailed performance and fiscal reports to the Governor by December 2027.",
         "relevance_rating": 2
       },
       {
-        "agency_name": "Maryland State Police",
+        "agency_name": "Comptroller of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "The Maryland State Police is responsible for highway safety and enforcement of motor vehicle laws; they were consulted for the fiscal note regarding the enforcement impact of extending these monitoring systems.",
+        "relevance_explanation": "The fiscal note indicates that general fund revenues will increase if citations are contested in the District Court, impacting the state's revenue collection managed by the Comptroller.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Office of the Attorney General",
         "is_relevant": true,
-        "relevance_explanation": "The bill modifies the General Provisions Article concerning the inspection of recorded images (public information accessibility). The OAG provides legal counsel to state agencies regarding the interpretation and enforcement of these disclosure laws.",
+        "relevance_explanation": "The bill modifies the Public Information Act regarding the inspection of recorded images from noise abatement systems, requiring legal guidance from the OAG on privacy and data disclosure.",
         "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of the Environment",
+        "is_relevant": true,
+        "relevance_explanation": "MDE is the state's primary regulatory agency for environmental health, including noise pollution, and was a consulted agency for the fiscal analysis of the pilot program.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Transportation",
+        "is_relevant": true,
+        "relevance_explanation": "The pilot program is authorized within the Transportation Article and affects the state's overall transportation and vehicle law policy, which is overseen by MDOT.",
+        "relevance_rating": 4
+      },
+      {
+        "agency_name": "Governor's Office of Crime Prevention and Policy",
+        "is_relevant": true,
+        "relevance_explanation": "GOCPP serves as the central hub for public safety policy and grant administration; the extension of automated noise enforcement systems falls within its criminal justice policy interests.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Maryland State Police",
+        "is_relevant": true,
+        "relevance_explanation": "As the primary agency for statewide highway safety and motor vehicle law enforcement, MSP is a stakeholder in noise abatement monitoring and was consulted for the fiscal note.",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "Administrative Office of the Courts",
+        "is_relevant": true,
+        "relevance_explanation": "The Administrative Office of the Courts oversees the District Court system, which is responsible for adjudicating contested citations and processing fines resulting from the pilot program.",
+        "relevance_rating": 4
+      },
+      {
+        "agency_name": "Motor Vehicle Administration",
+        "is_relevant": true,
+        "relevance_explanation": "MVA manages vehicle registration and identification, which are essential for identifying vehicle owners for the purpose of issuing automated citations for noise violations.",
+        "relevance_rating": 3
+      },
+      {
+        "agency_name": "State Highway Administration",
+        "is_relevant": true,
+        "relevance_explanation": "SHA maintains the state-numbered highways in the participating counties where noise abatement monitoring systems are authorized for deployment.",
+        "relevance_rating": 4
       }
     ]
   },
@@ -3664,73 +3670,67 @@
     ],
     "YearAndSession": "2025 Regular Session",
     "StatusCurrentAsOf": "2025-12-01T10:45:07.463",
-    "bill_summary": "The Building Opportunities for Nurses Act of 2025 extends the termination date of the Maryland State Board of Nursing to July 1, 2030, and maintains the Secretary of Health's authority over the board's infrastructure operations while allowing board special funds to cover those costs. It expands the Maryland Loan Assistance Repayment Program (MLARP) for nurses to include for-profit employment in shortage areas and specific medical specialties. The bill also updates nursing education and licensure requirements, delays implementation dates for new nursing assistant certification tiers to April 1, 2026, and extends various income tax credits for preceptors who train nursing students through June 30, 2030.",
+    "bill_summary": "The Building Opportunities for Nurses Act of 2025 extends the State Board of Nursing's termination date to July 1, 2030, expands the Maryland Loan Assistance Repayment Program for Nurses to include for-profit employment in shortage areas, modifies education requirements for nurse licensure, and extends several income tax credits for nurse preceptors.",
     "start_year": 2025,
     "end_year": 2030,
     "funding": 1000000,
     "responsible_party": "Maryland Department of Health and the State Board of Nursing",
-    "stakeholders": "Registered nurses, licensed practical nurses, nursing assistants, nursing students, healthcare preceptors (including physicians and nurse practitioners), and healthcare facilities in medical shortage areas.",
-    "fiscal_impact_summary": "State special fund expenditures increase by approximately $440,000 in FY 2025 for infrastructure costs. General fund revenues decrease by up to $100,000 annually from FY 2027 through 2030 due to tax credit extensions, while general fund expenditures increase by up to $100,000 annually starting in FY 2026 to capitalize the LPN/RN preceptorship fund. Special fund revenues and expenditures increase by up to $300,000 annually through FY 2030 for tax credit programs. The FY 2026 budget includes $1,000,000 for the nurse loan assistance repayment fund.",
+    "stakeholders": "Registered nurses, licensed practical nurses, nursing assistants, nurse preceptors, nursing students, and healthcare employers.",
+    "fiscal_impact_summary": "State Board of Nursing special fund expenditures increase by approximately $440,000 in FY 2025. General fund revenues decrease by up to $100,000 annually from FY 2027 to FY 2030 due to tax credit extensions. Special fund revenues and expenditures for preceptorship tax credit programs increase by up to $300,000 annually through FY 2030. There is no local fiscal impact.",
     "agency_relevance": [
       {
-        "agency_name": "Governor's Office",
+        "agency_name": "Department of Health",
         "is_relevant": true,
-        "relevance_explanation": "As the chief executive agency, the Governor's Office is responsible for signing the legislation, overseen executive branch departments like the Maryland Department of Health, and coordinates the biennial state budget which includes appropriations for the Maryland Loan Assistance Repayment Program.",
-        "relevance_rating": 3
+        "relevance_explanation": "As the primary agency overseeing the State Board of Nursing and healthcare workforce initiatives, the Department of Health (MDH) is the lead for implementing the loan repayment program expansion, identifying shortage areas, and managing the Board's infrastructure during the extended sunset period.",
+        "relevance_rating": 5
       },
       {
         "agency_name": "Comptroller of Maryland",
         "is_relevant": true,
-        "relevance_explanation": "The Comptroller is responsible for accounting for the Maryland Loan Assistance Repayment Program Fund for Nurses and managing the issuance of the preceptorship income tax credits expanded and extended by the bill.",
+        "relevance_explanation": "The Comptroller is responsible for accounting for the Maryland Loan Assistance Repayment Program Fund for Nurses and administering the preceptorship income tax credits expanded and extended by this bill.",
         "relevance_rating": 4
-      },
-      {
-        "agency_name": "Maryland State Treasurer's Office",
-        "is_relevant": true,
-        "relevance_explanation": "The State Treasurer's Office is the principal custodian of state financial assets and is specifically required by the bill to hold the Maryland Loan Assistance Repayment Program Fund for Nurses separately.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Office of the Attorney General",
-        "is_relevant": true,
-        "relevance_explanation": "The OAG serves as the legal advisor to the Maryland Department of Health and the State Board of Nursing, providing counsel on the statutory changes to licensing requirements and the extension of regulatory authority.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Department of Budget and Management",
-        "is_relevant": true,
-        "relevance_explanation": "The Secretary of Budget and Management is required to consult with the Secretary of Health to determine the personnel positions and compensation for Board of Nursing staff under the Secretary's infrastructure authority.",
-        "relevance_rating": 4
-      },
-      {
-        "agency_name": "Department of Health",
-        "is_relevant": true,
-        "relevance_explanation": "MDH is the primary agency impacted as it oversees the Board of Nursing. The bill extends the Secretary's authority over Board infrastructure, expands the Loan Assistance Repayment Program administered by the Department, and requires the Department to identify healthcare workforce shortage areas.",
-        "relevance_rating": 5
       },
       {
         "agency_name": "Higher Education Commission",
         "is_relevant": true,
-        "relevance_explanation": "The Commission is explicitly required to work in conjunction with the Board of Nursing to approve nursing assistant training programs and set the curriculum standards.",
-        "relevance_rating": 4
-      },
-      {
-        "agency_name": "Maryland Higher Education Commission",
-        "is_relevant": true,
-        "relevance_explanation": "MHEC (listed twice in the agency directory) is relevant for its joint role with the Board of Nursing in approving and surveying nursing assistant training programs in the state.",
+        "relevance_explanation": "The Maryland Higher Education Commission (MHEC) works in conjunction with the Board of Nursing to approve nursing assistant training programs, a regulatory function directly modified by the bill's changes to training site approvals.",
         "relevance_rating": 4
       },
       {
         "agency_name": "Governor's Workforce Development Board",
         "is_relevant": true,
-        "relevance_explanation": "The GWDB is required to consult with the Department of Health to identify areas of the state with healthcare workforce shortages, which determines eligibility for the preceptorship income tax credits.",
-        "relevance_rating": 4
+        "relevance_explanation": "The bill requires the Department of Health to consult with the Governor's Workforce Development Board to identify geographic areas with health care workforce shortages for the purposes of awarding preceptorship tax credits.",
+        "relevance_rating": 3
       },
       {
-        "agency_name": "Office of Legislative Audits",
+        "agency_name": "Maryland State Treasurer's Office",
         "is_relevant": true,
-        "relevance_explanation": "The OLA is responsible for auditing executive agencies; the reauthorization of the Board of Nursing under the Sunset Law is directly informed by performance evaluations and audits conducted on the agency's operations.",
+        "relevance_explanation": "The State Treasurer is tasked with holding the Maryland Loan Assistance Repayment Program Fund for Nurses separately and overseeing its investment, as described in the Health - General Article sections referenced by the bill.",
         "relevance_rating": 2
+      },
+      {
+        "agency_name": "Department of Budget and Management",
+        "is_relevant": true,
+        "relevance_explanation": "The Secretary of Budget and Management is required to consult with the Secretary of Health to determine specific Board of Nursing positions for which compensation may be set independently, a provision extended by the bill.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Office of the Attorney General",
+        "is_relevant": true,
+        "relevance_explanation": "The OAG acts as the legal advisor for the Department of Health and the State Board of Nursing; it will provide guidance on the regulatory changes to licensure, training site approvals, and the extension of statutory authority.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Executive Commissions, Committees, Task Forces, and Advisory Boards",
+        "is_relevant": true,
+        "relevance_explanation": "The bill mandates that the Department of Health convene and seek advice from a stakeholder workgroup to establish priorities and regulations for the loan assistance repayment program.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Governor's Office",
+        "is_relevant": true,
+        "relevance_explanation": "The Governor's Office oversees the executive agencies involved and is responsible for signing the sunset extension and the program expansions into law as part of statewide healthcare workforce initiatives.",
+        "relevance_rating": 1
       }
     ]
   },
@@ -4089,48 +4089,42 @@
     ],
     "YearAndSession": "2025 Regular Session",
     "StatusCurrentAsOf": "2025-12-01T10:45:07.463",
-    "bill_summary": "This bill requires the Department of Public Safety and Correctional Services to conduct an annual study and report on the residential locations of individuals before and after their incarceration in State correctional facilities. The study will track data such as the county of residence at intake, the county of release, the county of conviction, and any facility transfers occurring shortly before release.",
+    "bill_summary": "This bill requires the Department of Public Safety and Correctional Services to conduct an annual study and report on the locations of individuals before and after their incarceration in State correctional facilities. The study must track data such as the county of residence reported at intake, the county of release, and comparisons between the county of residence, conviction, and incarceration.",
     "start_year": 2025,
     "end_year": null,
     "funding": null,
     "responsible_party": "Department of Public Safety and Correctional Services",
-    "stakeholders": "Individuals incarcerated in Maryland State correctional facilities and the Maryland General Assembly",
-    "fiscal_impact_summary": "The Department of Public Safety and Correctional Services can conduct the required annual study and report using existing budgeted resources. There is no impact on State or local revenues or local expenditures.",
+    "stakeholders": "Individuals incarcerated in State correctional facilities, the Department of Public Safety and Correctional Services, and members of the Maryland General Assembly.",
+    "fiscal_impact_summary": "The Department of Public Safety and Correctional Services can conduct the required annual study and report using existing budgeted resources. There is no impact on State revenues or local government finances.",
     "agency_relevance": [
       {
         "agency_name": "Department of Public Safety and Correctional Services",
         "is_relevant": true,
-        "relevance_explanation": "As the primary implementing agency, the department is specifically mandated by the bill to conduct the annual study, collect data on individual residences and transfers, and report findings to the General Assembly.",
+        "relevance_explanation": "As the primary agency managing Maryland\u2019s adult correctional system and State prisons, the bill directly tasks the department with conducting the annual study and reporting the results on inmate residence and release data.",
         "relevance_rating": 5
       },
       {
         "agency_name": "Governor's Office of Crime Prevention and Policy",
         "is_relevant": true,
-        "relevance_explanation": "The fiscal note identifies that this office manages the Performance Incentive Grant Fund, which supports reentry programs. The study's data on where individuals are released is critical for the office's policy development and grant allocation to reduce recidivism.",
+        "relevance_explanation": "This agency serves as the state\u2019s hub for public safety policy and manages grants aimed at reducing recidivism; the fiscal note specifically identifies the agency\u2019s Performance Incentive Grant Fund as relevant to the bill\u2019s focus on reentry and recidivism data.",
         "relevance_rating": 3
       },
       {
-        "agency_name": "Executive Commissions, Committees, Task Forces, and Advisory Boards",
+        "agency_name": "Department of Labor",
         "is_relevant": true,
-        "relevance_explanation": "The fiscal note mentions the Task Force on the Creation of a Division of Returning Citizens and Expanded Reentry Services, which is tasked with assessing reentry services. This study provides direct data necessary for that task force's findings.",
-        "relevance_rating": 3
-      },
-      {
-        "agency_name": "Administrative Office of the Courts",
-        "is_relevant": true,
-        "relevance_explanation": "The bill requires a comparison of release locations to the county where the original conviction occurred. The AOC manages the judicial data systems and public records that identify these jurisdictions of conviction.",
-        "relevance_rating": 2
-      },
-      {
-        "agency_name": "Governor's Office",
-        "is_relevant": true,
-        "relevance_explanation": "The Governor\u2019s Office oversees the operations of the Department of Public Safety and Correctional Services and spearheads statewide initiatives aimed at public safety and economic opportunity, which are influenced by prisoner reentry patterns.",
+        "relevance_explanation": "The agency is responsible for workforce development and apprenticeship programs for job seekers, including those reentering the workforce; it is specifically listed as an information source for the fiscal analysis of this bill.",
         "relevance_rating": 2
       },
       {
         "agency_name": "Department of Budget and Management",
         "is_relevant": true,
-        "relevance_explanation": "As the state's central fiscal authority, DBM oversees the budget for the Department of Public Safety and Correctional Services and manages the performance requirements associated with new legislative mandates.",
+        "relevance_explanation": "As the state's central fiscal authority, this agency oversees the budgets of public safety departments and is relevant to the reporting requirements involving the House Appropriations and Senate Budget and Taxation committees.",
+        "relevance_rating": 2
+      },
+      {
+        "agency_name": "Executive Commissions, Committees, Task Forces, and Advisory Boards",
+        "is_relevant": true,
+        "relevance_explanation": "The fiscal note identifies that the data from this study is relevant to the work of the Task Force on the Creation of a Division of Returning Citizens and Expanded Reentry Services, which is tasked with assessing markers of successful reentry.",
         "relevance_rating": 2
       }
     ]
