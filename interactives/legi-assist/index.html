@@ -895,6 +895,8 @@
                         
                         if (event.data.type === 'legiassist-set-params') {
                             const params = new URLSearchParams(event.data.params);
+                            
+                            // Update filters from params
                             if (params.get('year')) selectedYear.value = parseInt(params.get('year'));
                             if (params.get('agency')) {
                                 selectedAgency.value = params.get('agency');
@@ -903,23 +905,37 @@
                             if (params.get('q')) searchQuery.value = params.get('q');
                             
                             const broad = params.getAll('broad');
-                            if (broad.length > 0) filterBroad.value = broad;
+                            filterBroad.value = broad.length > 0 ? broad : [];
                             
                             const narrow = params.getAll('narrow');
-                            if (narrow.length > 0) filterNarrow.value = narrow;
+                            filterNarrow.value = narrow.length > 0 ? narrow : [];
                             
-                            // Fetch data then open bill modal if specified
-                            fetchData().then(() => {
-                                const billId = params.get('bill');
+                            // Handle bill modal - if data already loaded, just open/close modal
+                            const billId = params.get('bill');
+                            if (allBills.value.length > 0) {
+                                // Data already loaded, just update modal state
                                 if (billId) {
                                     const found = allBills.value.find(b => b.BillNumber === billId);
-                                    if (found) activeBill.value = found;
+                                    activeBill.value = found || null;
+                                } else {
+                                    activeBill.value = null;
                                 }
-                            });
+                            } else {
+                                // Need to fetch data first
+                                fetchData().then(() => {
+                                    if (billId) {
+                                        const found = allBills.value.find(b => b.BillNumber === billId);
+                                        if (found) activeBill.value = found;
+                                    }
+                                });
+                            }
                         }
                     });
 
                     window.addEventListener('popstate', (event) => {
+                        // Skip if embedded - let parent iframe wrapper handle via postMessage
+                        if (window.parent !== window) return;
+                        
                         const params = new URLSearchParams(window.location.search);
                         const billId = params.get('bill');
                         if (billId) {
