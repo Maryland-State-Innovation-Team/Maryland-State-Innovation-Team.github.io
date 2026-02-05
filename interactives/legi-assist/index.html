@@ -145,13 +145,12 @@
                 <div v-if="selectedAgency" class="p-3 bg-red-50 rounded-lg border border-red-100">
                     <label for="impact-rating-filter-desktop" class="block text-[10px] font-black text-red-800 uppercase mb-2 tracking-wider">Filter by Relevance</label>
                     <select id="impact-rating-filter-desktop" v-model="filterRating" class="w-full bg-white border border-gray-400 rounded px-2 py-1 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-red-800">
-                        <option value="all">All Relevance Levels</option>
-                        <option value="5">5 - Primary Relevance</option>
-                        <option value="4">4 - High Relevance</option>
-                        <option value="3">3 - Moderate Relevance</option>
-                        <option value="2">2 - Low Relevance</option>
-                        <option value="1">1 - Minimal Relevance</option>
-                    </select>
+                    <option value="all">All Relevance Levels</option>
+                    <option value="5">Primary - 5</option>
+                    <option value="4">High - 4 or greater</option>
+                    <option value="3">Moderate - 3 or greater</option>
+                    <option value="2">Low - 2 or greater</option>
+                </select>
                 </div>
                 
                 <fieldset>
@@ -223,13 +222,12 @@
                             <div v-if="selectedAgency" class="p-4 bg-red-50 rounded-lg border border-red-100">
                                 <label for="impact-rating-filter-mobile" class="block text-[10px] font-black text-red-800 uppercase mb-2 tracking-wider">Filter by Relevance</label>
                                 <select id="impact-rating-filter-mobile" v-model="filterRating" class="w-full bg-white border border-gray-400 rounded px-3 py-3 text-base text-slate-900 outline-none focus:ring-2 focus:ring-red-800">
-                                    <option value="all">All Relevance Levels</option>
-                                    <option value="5">5 - Primary Relevance</option>
-                                    <option value="4">4 - High Relevance</option>
-                                    <option value="3">3 - Moderate Relevance</option>
-                                    <option value="2">2 - Low Relevance</option>
-                                    <option value="1">1 - Minimal Relevance</option>
-                                </select>
+                                <option value="all">All Relevance Levels</option>
+                                <option value="5">Primary - 5</option>
+                                <option value="4">High - 4 or greater</option>
+                                <option value="3">Moderate - 3 or greater</option>
+                                <option value="2">Low - 2 or greater</option>
+                            </select>
                             </div>
                             
                             <fieldset>
@@ -639,7 +637,7 @@
                     updateUrl();
                 };
 
-                watch([searchQuery, filterBroad, filterNarrow, sortBy], () => { updateUrl(); });
+                watch([searchQuery, filterBroad, filterNarrow, sortBy, filterRating], () => { updateUrl(); });
 
                 // Enforce sort rules when year changes
                 watch(selectedYear, (newYear) => {
@@ -673,6 +671,10 @@
                     const narrow = params.getAll('narrow');
                     if (narrow.length > 0) filterNarrow.value = narrow;
 
+                    if (params.get('relevance')) {
+                        filterRating.value = params.get('relevance');
+                    }
+
                     // Apply sort parameter LAST
                     if (params.get('sort')) {
                         await nextTick();
@@ -696,6 +698,7 @@
                     if (searchQuery.value) params.set('q', searchQuery.value);
                     filterBroad.value.forEach(val => params.append('broad', val));
                     filterNarrow.value.forEach(val => params.append('narrow', val));
+                    if (filterRating.value !== 'all') params.set('relevance', filterRating.value);
                     const newUrl = `${window.location.pathname}?${params.toString()}`;
                     if (usePushState) {
                         window.history.pushState({ bill: activeBill.value?.BillNumber || null }, '', newUrl);
@@ -782,16 +785,18 @@
 
                 const filteredBills = computed(() => {
                     let results = allBills.value;
-                    
+
                     // 1. Filter by Agency (and Rating)
                     if (selectedAgency.value) {
                         results = results.filter(b => 
                             b.agency_relevance.some(a => a.agency_name === selectedAgency.value)
                         );
                         if (filterRating.value !== "all") {
+                            const minRating = parseInt(filterRating.value);
                             results = results.filter(b => {
                                 const rel = b.agency_relevance.find(ar => ar.agency_name === selectedAgency.value);
-                                return rel && rel.relevance_rating == filterRating.value;
+                                // Use >= to implement "or higher" logic
+                                return rel && rel.relevance_rating >= minRating;
                             });
                         }
                     }
@@ -828,7 +833,7 @@
                         }
 
                         // Option B: Sort by Relevance or Date
-                        
+
                         // Get relevance scores (0 if no agency selected)
                         const relA = selectedAgency.value 
                             ? (a.agency_relevance.find(ar => ar.agency_name === selectedAgency.value)?.relevance_rating || 0) 
@@ -836,7 +841,7 @@
                         const relB = selectedAgency.value 
                             ? (b.agency_relevance.find(ar => ar.agency_name === selectedAgency.value)?.relevance_rating || 0) 
                             : 0;
-                            
+
                         // Get timestamps (default to 0 if missing)
                         const dateA = a.first_seen ? new Date(a.first_seen).getTime() : 0;
                         const dateB = b.first_seen ? new Date(b.first_seen).getTime() : 0;
@@ -1038,6 +1043,7 @@
                                 agencySearch.value = params.get('agency');
                             }
                             if (params.get('q')) searchQuery.value = params.get('q');
+                            if (params.get('relevance')) filterRating.value = params.get('relevance');
                             if (params.get('sort')) sortBy.value = params.get('sort');
                             
                             const broad = params.getAll('broad');
