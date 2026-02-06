@@ -56,18 +56,32 @@
                                             <div class="maryland-hero__description">
                                                 <p>Discover the legislation that matters most to you</p>
                                                 
-                                                <div class="bg-white max-w-md text-left">
-                                                    <label class="usa-label text-xs font-bold uppercase tracking-wide text-gray-500" for="year-select">Select Legislative Session</label>
-                                                    <select class="usa-select mt-2" name="year-select" id="year-select" v-model="selectedYear" @change="fetchData">
+                                                <label class="usa-label text-xs font-bold uppercase tracking-wide text-gray-500" for="year-select">Select Legislative Session</label>
+
+                                                <div class="flex flex-col md:flex-row items-stretch gap-2 margin-top-2">
+                                                    <select 
+                                                        class="usa-select margin-0 w-full md:flex-1" 
+                                                        name="year-select" 
+                                                        id="year-select" 
+                                                        v-model="selectedYear" 
+                                                        @change="fetchData"
+                                                        style="height: auto;"
+                                                    >
                                                         <option v-for="year in [2026, 2025, 2024, 2023]" :value="year">{{ year }} Regular Session</option>
                                                     </select>
-                                                    <button @click="enterDashboard" class="usa-button usa-button--big width-full margin-top-2 bg-red-800 hover:bg-red-900">
+
+                                                    <button 
+                                                        @click="enterDashboard" 
+                                                        class="usa-button margin-0 bg-red-800 hover:bg-red-900 w-full md:w-1/4"
+                                                        style="white-space: nowrap;"
+                                                    >
                                                         Search
                                                     </button>
-                                                    <div class="margin-top-2 display-flex flex-align-center gap-1 opacity-90">
-                                                        <span class="font-sans-xs text-base-dark margin-right-1">Built by</span>
-                                                        <img src="assets/innovation-website-logo-dark.png" alt="Maryland State Innovation Team" style="height: 2.5rem; width: auto;">
-                                                    </div>
+                                                </div>
+
+                                                <div class="margin-top-2 display-flex flex-align-center gap-1 opacity-90">
+                                                    <span class="font-sans-xs text-base-dark margin-right-1">Built by</span>
+                                                    <img src="assets/innovation-website-logo-dark.png" alt="Maryland State Innovation Team" style="height: 2.5rem; width: auto;">
                                                 </div>
                                             </div>
                                         </div>
