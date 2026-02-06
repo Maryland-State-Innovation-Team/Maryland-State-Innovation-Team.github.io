@@ -172,8 +172,8 @@
                 <!-- Header -->
                 <div class="padding-3 border-bottom border-base-lighter bg-white" style="padding-bottom: 1.75rem;">
                      <a href="#" @click.prevent="returnToLanding" class="display-flex flex-align-center gap-1 margin-bottom-2 no-underline text-base-darker hover:text-primary" style="text-decoration: none;" aria-label="Return to Landing Page">
-                         <img src="assets/legislation.svg" alt="" aria-hidden="true" style="height: 1.5rem; width: auto;">
-                         <h1 class="font-serif-md text-bold margin-0">Maryland Legi-Assist</h1>
+                         <img src="assets/legislation.svg" alt="" aria-hidden="true" style="height: 2rem; width: auto;">
+                         <h1 class="font-serif-lg text-bold margin-0" style="font-size:1.15rem;">Maryland Legi-Assist</h1>
                      </a>
                      <button @click="showAboutModal = true" class="usa-button usa-button--outline width-full display-flex flex-justify-between flex-align-center">
                          About this Tool
@@ -383,8 +383,8 @@
                  <!-- Mobile Header -->
                  <div class="display-flex desktop:display-none bg-white border-bottom border-base-lighter padding-2 flex-align-center width-full z-10 sticky top-0">
                      <a href="#" @click.prevent="returnToLanding" class="display-flex flex-align-center gap-1 no-underline text-base-darker hover:text-primary" style="text-decoration: none;" aria-label="Return to Landing Page">
-                         <img src="assets/legislation.svg" alt="" aria-hidden="true" style="height: 1.5rem; width: auto;">
-                         <span class="font-sans-md text-bold">MD Legi-Assist</span>
+                         <img src="assets/legislation.svg" alt="" aria-hidden="true" style="height: 2rem; width: auto;">
+                         <span class="font-serif-md text-bold">MD Legi-Assist</span>
                      </a>
                      <div class="display-flex flex-align-center gap-1 margin-left-auto">
                         <button 
@@ -427,11 +427,11 @@
 
                      <div class="display-flex flex-align-center gap-2">
                          <div v-if="selectedYear === 2026 || selectedAgency" class="display-flex flex-align-center">
-                            <label for="sort-select" class="usa-label margin-0 margin-right-1 font-sans-xs text-base-dark text-bold text-no-wrap">Sort by</label>
+                            <label for="sort-select" class="usa-label margin-0 margin-right-1 font-sans-sm text-base-dark text-bold text-no-wrap">Sort by</label>
                             <select 
                                 id="sort-select" 
                                 v-model="sortBy" 
-                                class="usa-select margin-0 width-auto font-sans-xs bg-white border-base-light"
+                                class="usa-select margin-0 width-auto font-sans-sm bg-white"
                                 style="height: 2.5rem; padding-top: 0.5rem; padding-bottom: 0.5rem;"
                             >
                                 <option v-if="selectedYear === 2026" value="date">Newest First</option>
@@ -480,8 +480,8 @@
                                     <div class="display-flex flex-column flex-1 padding-3">
                                         <div class="maryland-card__header padding-0 margin-bottom-1">
 
-                                            <div class="margin-bottom-05">
-                                                <h2 class="font-serif-xl text-bold text-primary line-height-sans-2 margin-0">
+                                            <div class="margin-bottom-2">
+                                                <h2 class="font-sans-xl text-bold text-primary line-height-sans-2 margin-0">
                                                     {{ bill.BillNumber }}{{ bill.CrossfileBillNumber ? ' / ' + bill.CrossfileBillNumber : '' }}
                                                 </h2>
                                             </div>
@@ -490,7 +490,7 @@
                                                 {{ bill.Title }}
                                             </h3>
 
-                                            <div class="display-flex flex-wrap flex-align-center gap-1 margin-top-3">
+                                            <div class="display-flex flex-wrap flex-align-center gap-1 margin-top-2">
                                                 <span v-if="selectedYear === 2026 && getNextAction(bill)" class="inline-flex flex-align-center gap-1 bg-accent-warm-lighter text-base-darker padding-x-105 padding-y-05 radius-md font-sans-xs text-bold border border-accent-warm-light">
                                                     <i class="ph ph-calendar-blank text-md"></i>
                                                     {{ getNextAction(bill).label }}: {{ formatDate(getNextAction(bill).date) }} 
@@ -748,7 +748,7 @@
                                 <h2 id="modal-title" ref="modalTitle" tabindex="-1" class="font-serif-xl desktop:font-serif-2xl text-bold text-primary outline-none line-height-sans-2">
                                     {{ activeBill.BillNumber }}{{ activeBill.CrossfileBillNumber ? ' / ' + activeBill.CrossfileBillNumber : '' }}
                                 </h2>
-                                <span class="px-2 sm:px-3 py-05 bg-white border border-base-light font-sans-3xs text-bold text-base-dark uppercase tracking-wider">{{ activeBill.YearAndSession }}</span>
+                                <span class="usa-tag">{{ activeBill.YearAndSession }}</span>
                             </div>
                         </div>
                         <button @click="closeBill" aria-label="Close Modal" class="usa-button usa-button--unstyled p-2 hover:bg-base-lightest transition-colors shrink-0 text-base-darker">
@@ -766,7 +766,7 @@
                                 </section>
 
                                 <section aria-labelledby="summary-heading">
-                                    <h4 id="summary-heading" class="text-base-dark font-bold uppercase font-serif-3xs tracking-widest mb-3">Plain-English Summary</h4>
+                                    <h4 id="summary-heading" class="text-base-dark font-bold uppercase font-sans-3xs tracking-widest mb-3">Plain-English Summary</h4>
                                     <p class="text-base-darker leading-relaxed font-sans-md">{{ activeBill.bill_summary }}</p>
                                 </section>
 
@@ -785,11 +785,11 @@
 
                                 <div v-if="activeBill.responsible_party || activeBill.stakeholders" class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                                     <div v-if="activeBill.responsible_party" class="p-4 bg-base-lightest border border-base-lighter">
-                                        <h5 class="font-serif-3xs font-bold text-base-dark uppercase mb-2">Responsible Party</h5>
-                                        <p class="font-bold text-base-darker font-sans-sm">{{ activeBill.responsible_party }}</p>
+                                        <h5 class="font-sans-3xs font-bold text-base-dark uppercase mb-2">Responsible Party</h5>
+                                        <p class="font-sans-xs text-base-dark">{{ activeBill.responsible_party }}</p>
                                     </div>
                                     <div v-if="activeBill.stakeholders" class="p-4 bg-base-lightest border border-base-lighter">
-                                        <h5 class="font-serif-3xs font-bold text-base-dark uppercase mb-2">Stakeholders</h5>
+                                        <h5 class="font-sans-3xs font-bold text-base-dark uppercase mb-2">Stakeholders</h5>
                                         <p class="font-sans-xs text-base-dark">{{ activeBill.stakeholders }}</p>
                                     </div>
                                 </div>
@@ -821,21 +821,21 @@
                                     <div v-if="(activeBill.first_seen || activeBill.last_updated) && selectedYear >= 2026" class="pt-4 mt-4 border-t border-base-light grid grid-cols-2 gap-4">
                                         <div v-if="activeBill.first_seen">
                                             <dt class="font-sans-3xs font-bold text-base-dark uppercase tracking-wide">First Seen</dt>
-                                            <dd class="font-sans-sm font-medium text-base-darker mt-1">{{ formatTimestamp(activeBill.first_seen) }}</dd>
+                                            <dd class="font-sans-sm font-medium text-base-darker mt-1" v-html="formatTimestamp(activeBill.first_seen)"></dd>
                                         </div>
                                         <div v-if="activeBill.last_updated">
                                             <dt class="font-sans-3xs font-bold text-base-dark uppercase tracking-wide">Last Updated</dt>
-                                            <dd class="font-sans-sm font-medium text-base-darker mt-1">{{ formatTimestamp(activeBill.last_updated) }}</dd>
+                                            <dd class="font-sans-sm font-medium text-base-darker mt-1" v-html="formatTimestamp(activeBill.last_updated)"></dd>
                                         </div>
                                     </div>
                                 </dl>
 
                                 <div>
-                                    <h4 class="font-serif-3xs font-bold text-base-dark uppercase mb-2">Subjects</h4>
-                                    <ul class="flex flex-wrap gap-2" aria-label="Bill subjects">
-                                        <li v-for="s in activeBill.BroadSubjects" class="px-2 py-05 bg-base-lightest text-base-darker border border-base-lighter font-sans-3xs font-bold uppercase">{{ s.Name }}</li>
-                                        <li v-for="s in activeBill.NarrowSubjects" class="px-2 py-05 bg-accent-cool-lighter text-accent-cool-darker border border-accent-cool-light font-sans-3xs text-bold">{{ s.Name }}</li>
-                                    </ul>
+                                    <h4 class="font-sans-3xs font-bold text-base-dark uppercase mb-2">Subjects</h4>
+                                    <div class="flex flex-wrap gap-2" aria-label="Bill subjects">
+                                        <span v-for="s in activeBill.BroadSubjects" class="usa-tag">{{ s.Name }}</span>
+                                        <span v-for="s in activeBill.NarrowSubjects" class="usa-tag bg-accent-cool-lighter text-accent-cool-darker border border-accent-cool-light">{{ s.Name }}</span>
+                                    </div>
                                 </div>
 
                                 <a :href="'https://mgaleg.maryland.gov/mgawebsite/Legislation/Details/' + activeBill.BillNumber + '?ys=' + selectedYear + 'RS'" 
@@ -1582,7 +1582,13 @@
                 };
 
                 const formatDate = (ds) => ds ? new Date(ds).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
-                const formatTimestamp = (ds) => ds ? new Date(ds).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric' }) : '';
+                const formatTimestamp = (ds) => {
+                    if (!ds) return '';
+                    const d = new Date(ds);
+                    const datePart = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                    const timePart = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+                    return `${datePart}<br>@ ${timePart}`;
+                };
                 const formatTime = (ds) => ds ? new Date(ds).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) : '';
                 const isNew = (dateStr) => {
                     if (!dateStr) return false;
