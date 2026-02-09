@@ -158,6 +158,9 @@
                                         <p class="margin-top-0">
                                             Tools like Legi-Assist represent our commitment to improve government operations. By leveraging responsible AI and human-centered design, we empower state employees to work more efficiently, ensuring that policy decisions are data-informed and responsive to the needs of all Marylanders.
                                         </p>
+                                        <p class="margin-top-1">
+                                            Learn more about our work on our <a href="https://innovation.maryland.gov/" target="_blank" rel="noopener" class="usa-link">website<span class="sr-only"> (opens in new tab)</span></a>.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +175,7 @@
             <!-- Sidebar (Desktop) -->
             <aside class="display-none desktop:display-flex flex-column shrink-0 z-30 bg-white border-base-lighter border-right" style="width: 20rem;">
                 <!-- Header -->
-                <div class="padding-3 border-bottom border-base-lighter bg-white" style="padding-bottom: 1.75rem;">
+                <div class="padding-x-3 border-bottom border-base-lighter bg-white display-flex flex-column flex-justify-center" style="height: 160px;">
                      <a href="#" @click.prevent="returnToLanding" class="display-flex flex-align-center gap-1 margin-bottom-2 no-underline text-base-darker hover:text-primary" style="text-decoration: none;" aria-label="Return to Landing Page">
                          <img src="assets/legislation.svg" alt="" aria-hidden="true" style="height: 2rem; width: auto; margin-right: 10px;">
                          <h1 class="font-serif-lg text-bold margin-0" style="font-size:1.15rem;">Maryland Legi-Assist</h1>
@@ -191,7 +194,7 @@
 
                      <div class="usa-checkbox margin-bottom-3">
                          <input class="usa-checkbox__input" id="favorites-filter" type="checkbox" v-model="showFavoritesOnly">
-                         <label class="usa-checkbox__label" for="favorites-filter">Show Favorites Only</label>
+                         <label class="usa-checkbox__label" for="favorites-filter">Show Favorite Bills Only</label>
                      </div>
 
                      <div class="margin-bottom-3">
@@ -419,7 +422,7 @@
                  </div>
                  
                  <!-- Results Header (Desktop) -->
-                <div class="display-none desktop:display-flex flex-justify-between flex-align-center padding-x-3 padding-top-5 padding-bottom-6 bg-white border-bottom border-base-lighter shrink-0 width-full">
+                <div class="display-none desktop:display-flex flex-justify-between flex-align-center padding-x-3 bg-white border-bottom border-base-lighter shrink-0 width-full" style="height: 160px;">
                     <div
                         class="maryland-listing__list-summary flex-1"
                         role="status"
@@ -792,16 +795,14 @@
                                 </section>
 
                                 <section v-if="activeBill.fiscal_impact_summary" aria-labelledby="fiscal-heading">
-                                    <h4 id="fiscal-heading" class="text-base-dark font-bold uppercase font-serif-3xs tracking-widest mb-3">Fiscal Impact Analysis</h4>
-                                    <div class="bg-accent-cool-lighter text-base-darker p-4 sm:p-5 border border-accent-cool-light font-sans-md">
-                                        <div v-if="activeBill.has_fiscal_note === false" class="flex items-start gap-2 mb-3 pb-3 border-b border-accent-cool-light">
-                                            <i class="ph ph-warning text-lg text-accent-cool-dark mt-0.5 shrink-0"></i>
-                                            <p class="text-base-darker font-medium italic font-sans-xs">
-                                                Disclaimer: This fiscal analysis is preliminary and may change when the fiscal and policy note incorporating agency and DLS feedback is published.
-                                            </p>
-                                        </div>
-                                        {{ activeBill.fiscal_impact_summary }}
+                                    <h4 id="fiscal-heading" class="font-sans-3xs font-bold text-base-dark uppercase mb-2">Fiscal Impact Analysis</h4>
+                                    <div v-if="activeBill.has_fiscal_note === false" class="flex items-start gap-2 mb-3 text-base-dark">
+                                        <i class="ph ph-warning text-lg text-accent-cool-dark mt-0.5 shrink-0"></i>
+                                        <p class="font-medium italic font-sans-xs">
+                                            Disclaimer: This fiscal analysis is preliminary and may change when the fiscal and policy note incorporating agency and DLS feedback is published.
+                                        </p>
                                     </div>
+                                    <p class="text-base-darker leading-relaxed font-sans-md">{{ activeBill.fiscal_impact_summary }}</p>
                                 </section>
 
                                 <div v-if="activeBill.responsible_party || activeBill.stakeholders" class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -818,37 +819,37 @@
 
                             <div class="space-y-6">
                                 <div class="bg-base-lightest border border-base-lighter p-4 sm:p-5 space-y-4">
-                                    <dl class="space-y-4">
+                                    <dl class="space-y-5">
                                         <div>
                                             <dt class="font-sans-3xs font-bold text-base-dark uppercase tracking-wide">Primary Sponsor</dt>
-                                            <dd class="font-sans-sm font-bold text-base-darker mt-1" style="line-height: 1.15rem;">{{ activeBill.SponsorPrimary }}</dd>
+                                            <dd class="font-sans-sm font-bold text-base-darker mt-3" style="line-height: 1.15rem;">{{ activeBill.SponsorPrimary }}</dd>
                                         </div>
                                         <div>
                                             <dt class="font-sans-3xs font-bold text-base-dark uppercase tracking-wide">Current Status</dt>
-                                            <dd class="font-sans-sm font-bold text-primary mt-1" style="line-height: 1.15rem;">{{ activeBill.Status }}</dd>
+                                            <dd class="font-sans-sm font-bold text-primary mt-3" style="line-height: 1.15rem;">{{ activeBill.Status }}</dd>
                                         </div>
 
                                         <div v-if="getNextAction(activeBill)?.label === 'Hearing' && getTestimonyDeadline(getNextAction(activeBill).date)">
                                             <dt class="font-sans-3xs font-bold text-base-dark uppercase tracking-wide">Testimony Deadline</dt>
-                                            <dd class="font-sans-sm font-bold text-red-800 mt-1" style="line-height: 1.15rem;">
+                                            <dd class="font-sans-sm font-bold text-red-800 mt-3" style="line-height: 1.15rem;">
                                                 {{ formatDate(getTestimonyDeadline(getNextAction(activeBill).date)) }} @ 6:00 PM
                                             </dd>
                                         </div>
 
                                         <div v-if="activeBill.funding != null">
                                             <dt class="font-sans-3xs font-bold text-base-dark uppercase tracking-wide">Est. Funding Impact</dt>
-                                            <dd class="font-sans-sm font-bold text-accent-cool-darker mt-1" style="line-height: 1.15rem;">{{ formatCurrency(activeBill.funding) }}</dd>
+                                            <dd class="font-sans-sm font-bold text-accent-cool-darker mt-3" style="line-height: 1.15rem;">{{ formatCurrency(activeBill.funding) }}</dd>
                                         </div>
                                     </dl>
                                     
                                     <div v-if="(activeBill.first_seen || activeBill.last_updated) && selectedYear >= 2026" class="pt-4 mt-4 border-t border-base-light grid grid-cols-2 gap-4">
                                         <dl v-if="activeBill.first_seen">
                                             <dt class="font-sans-3xs font-bold text-base-dark uppercase tracking-wide">First Seen</dt>
-                                            <dd class="font-sans-sm font-medium text-base-darker mt-1" v-html="formatTimestamp(activeBill.first_seen)" style="line-height: 1.15rem;"></dd>
+                                            <dd class="font-sans-sm font-medium text-base-darker mt-3" v-html="formatTimestamp(activeBill.first_seen)" style="line-height: 1.15rem;"></dd>
                                         </dl>
                                         <dl v-if="activeBill.last_updated">
                                             <dt class="font-sans-3xs font-bold text-base-dark uppercase tracking-wide">Last Updated</dt>
-                                            <dd class="font-sans-sm font-medium text-base-darker mt-1" v-html="formatTimestamp(activeBill.last_updated)" style="line-height: 1.15rem;"></dd>
+                                            <dd class="font-sans-sm font-medium text-base-darker mt-3" v-html="formatTimestamp(activeBill.last_updated)" style="line-height: 1.15rem;"></dd>
                                         </dl>
                                     </div>
                                 </div>
