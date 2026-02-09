@@ -189,7 +189,9 @@
                 <div class="flex-1 overflow-y-auto padding-3">
                     <div class="display-flex flex-justify-between flex-align-center margin-bottom-2 width-full">
                         <h2 class="font-serif-lg text-bold margin-0" style="outline: none;" ref="filtersHeading" tabindex="-1">Filters</h2>
-                        <button @click="clearFilters" class="usa-button usa-button--unstyled font-sans-3xs text-uppercase text-primary hover:text-primary-dark margin-left-auto underline padding-right-0" v-if="activeFilterCount > 0">Clear All</button>
+                        <button @click="clearFilters" class="usa-button usa-button--unstyled font-sans-3xs text-uppercase text-primary hover:text-primary-dark margin-left-auto underline padding-right-0" v-if="activeFilterCount > 0">
+                            Clear All<span class="sr-only"> Filters</span>
+                        </button>
                     </div>
 
                      <div class="usa-checkbox margin-bottom-3">
@@ -213,7 +215,7 @@
                                 v-model="agencySearch" 
                                 @focus="showAgencyList = true"
                                 @input="showAgencyList = true"
-                                @keydown.down.prevent="focusFirstOption"
+                                @keydown.down.prevent="focusNextItem($event, 'down', 'li')"
                                 @keydown.escape="showAgencyList = false"
                                 type="text" 
                                 id="agency-filter-input"
@@ -225,13 +227,18 @@
                                 style="padding-right: 2.5rem;"
                                 placeholder="Search agencies..."
                             >
+                            <div class="sr-only" role="status" aria-live="polite">
+                                {{ showAgencyList ? filteredAgencies.length + ' agencies found.' : '' }}
+                            </div>
+
                             <button 
                                 v-if="selectedAgency" 
-                                @click="clearAgency" 
-                                aria-label="Clear selected agency"
+                                @click="clearAgency"
+                                aria-label="Clear selected agency" 
                                 class="usa-button usa-button--unstyled position-absolute text-base-light hover:text-primary display-flex flex-align-center flex-justify-center"
                                 style="top: 50%; right: 0.5rem; transform: translateY(-50%); width: 2rem; height: 2rem;"
                             >
+                                <span class="sr-only">Clear selected agency</span>
                                 <i class="ph-fill ph-x-circle text-xl" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -243,12 +250,14 @@
                             class="position-absolute left-0 right-0 margin-top-1 bg-white border-1px border-base-lighter shadow-2 z-50 maxh-card overflow-y-auto list-none padding-0 margin-0"
                         >
                             <li 
-                                v-for="option in filteredAgencies" 
+                                v-for="(option, index) in filteredAgencies" 
                                 :key="option.name"
-                                tabindex="0"
+                                tabindex="-1"
                                 @click="selectAgency(option)"
                                 @keydown.enter.prevent="selectAgency(option)"
                                 @keydown.space.prevent="selectAgency(option)"
+                                @keydown.down.prevent="focusNextItem($event, 'down', 'li')"
+                                @keydown.up.prevent="focusNextItem($event, 'up', 'li')"
                                 class="padding-105 hover:bg-base-lightest focus:bg-base-lightest cursor-pointer font-sans-2xs border-bottom border-base-lighter last:border-0 text-base-darker outline-none focus:outline-primary"
                             >
                                 {{ option.displayName }}
@@ -276,6 +285,7 @@
                                 v-model="sponsorSearch" 
                                 @focus="showSponsorList = true"
                                 @input="showSponsorList = true"
+                                @keydown.down.prevent="focusNextItem($event, 'down', 'li')"
                                 @keydown.escape="showSponsorList = false"
                                 type="text" 
                                 id="sponsor-filter-input"
@@ -287,6 +297,10 @@
                                 style="padding-right: 2.5rem;"
                                 placeholder="Search sponsors..."
                             >
+                            <div class="sr-only" role="status" aria-live="polite">
+                                {{ showSponsorList ? filteredSponsors.length + ' sponsors found.' : '' }}
+                            </div>
+
                             <button 
                                 v-if="selectedSponsor" 
                                 @click="clearSponsor" 
@@ -294,6 +308,7 @@
                                 class="usa-button usa-button--unstyled position-absolute text-base-light hover:text-primary display-flex flex-align-center flex-justify-center"
                                 style="top: 50%; right: 0.5rem; transform: translateY(-50%); width: 2rem; height: 2rem;"
                             >
+                                <span class="sr-only">Clear selected sponsor</span>
                                 <i class="ph-fill ph-x-circle text-xl" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -307,10 +322,12 @@
                             <li 
                                 v-for="option in filteredSponsors" 
                                 :key="option"
-                                tabindex="0"
+                                tabindex="-1"
                                 @click="selectSponsor(option)"
                                 @keydown.enter.prevent="selectSponsor(option)"
                                 @keydown.space.prevent="selectSponsor(option)"
+                                @keydown.down.prevent="focusNextItem($event, 'down', 'li')"
+                                @keydown.up.prevent="focusNextItem($event, 'up', 'li')"
                                 class="padding-105 hover:bg-base-lightest focus:bg-base-lightest cursor-pointer font-sans-2xs border-bottom border-base-lighter last:border-0 text-base-darker outline-none focus:outline-primary"
                             >
                                 {{ option }}
@@ -318,17 +335,18 @@
                         </ul>
                     </div>
 
-                     <hr class="border-base-light margin-y-3">
+                    <hr class="border-base-light margin-y-3">
 
-                     <div class="margin-bottom-3">
+                    <div class="margin-bottom-3">
                         <label class="usa-label margin-top-0 font-sans-sm" for="keyword-search">Keyword Search</label>
                         <input v-model="searchQuery" id="keyword-search" type="text" class="usa-input margin-top-1 width-full font-sans-sm" placeholder="Title, summary, ID...">
-                     </div>
+                    </div>
 
-                     <fieldset class="usa-fieldset margin-bottom-3">
+                    <fieldset class="usa-fieldset margin-bottom-3">
                         <legend class="usa-label margin-top-0 font-sans-sm">Broad Subjects</legend>
                         <input 
                             v-model="broadSubjectSearch" 
+                            @keydown.down.prevent="focusNextItem($event, 'down', 'search-to-checkbox')"
                             type="text" 
                             class="usa-input margin-bottom-1 height-4 font-sans-2xs" 
                             placeholder="Filter broad subjects..." 
@@ -336,7 +354,17 @@
                         >
                         <div class="border-1px border-base-lighter padding-1 overflow-y-auto bg-white" style="max-height: 10rem;">
                             <div class="usa-checkbox" v-for="sub in filteredBroadSubjects" :key="sub.Code">
-                                <input class="usa-checkbox__input" :id="'broad-'+sub.Code" type="checkbox" v-model="filterBroad" :value="sub.Name" @focus="scrollToFocusedItem">
+                                <input 
+                                    class="usa-checkbox__input" 
+                                    :id="'broad-'+sub.Code" 
+                                    type="checkbox" 
+                                    v-model="filterBroad" 
+                                    :value="sub.Name" 
+                                    tabindex="-1"
+                                    @focus="scrollToFocusedItem"
+                                    @keydown.down.prevent="focusNextItem($event, 'down', 'checkbox')"
+                                    @keydown.up.prevent="focusNextItem($event, 'up', 'checkbox')"
+                                >
                                 <label class="usa-checkbox__label" :for="'broad-'+sub.Code">{{ sub.Name }}</label>
                             </div>
                             <div v-if="filteredBroadSubjects.length === 0" class="font-sans-2xs text-base text-italic padding-1">
@@ -349,6 +377,7 @@
                         <legend class="usa-label margin-top-0">Narrow Subjects</legend>
                         <input 
                             v-model="narrowSubjectSearch" 
+                            @keydown.down.prevent="focusNextItem($event, 'down', 'search-to-checkbox')"
                             type="text" 
                             class="usa-input margin-bottom-1 height-4 font-sans-2xs" 
                             placeholder="Filter narrow subjects..." 
@@ -356,7 +385,17 @@
                         >
                         <div class="border-1px border-base-lighter padding-1 overflow-y-auto bg-white" style="max-height: 10rem;">
                             <div class="usa-checkbox" v-for="sub in filteredNarrowSubjects" :key="sub.Code">
-                                <input class="usa-checkbox__input" :id="'narrow-'+sub.Code" type="checkbox" v-model="filterNarrow" :value="sub.Name" @focus="scrollToFocusedItem">
+                                <input 
+                                    class="usa-checkbox__input" 
+                                    :id="'narrow-'+sub.Code" 
+                                    type="checkbox" 
+                                    v-model="filterNarrow" 
+                                    :value="sub.Name" 
+                                    tabindex="-1"
+                                    @focus="scrollToFocusedItem"
+                                    @keydown.down.prevent="focusNextItem($event, 'down', 'checkbox')"
+                                    @keydown.up.prevent="focusNextItem($event, 'up', 'checkbox')"
+                                >
                                 <label class="usa-checkbox__label" :for="'narrow-'+sub.Code">{{ sub.Name }}</label>
                             </div>
                             <div v-if="filteredNarrowSubjects.length === 0" class="font-sans-2xs text-base text-italic padding-1">
@@ -381,7 +420,7 @@
                             </h3>
                             <a href="https://innovation.maryland.gov" target="_blank" rel="noopener" class="usa-button usa-button--primary margin-0">
                                 Visit website
-                                <span class="sr-only">(opens in new tab)</span>
+                                <span class="sr-only">of the Maryland State Innovation Team (opens in new tab)</span>
                             </a>
                         </div>
                     </div>
@@ -541,8 +580,11 @@
                         <div class="padding-2 border-bottom border-base-lighter flex justify-between items-center bg-base-lightest w-full">
                             <h2 id="drawer-title" ref="mobileFiltersHeading" tabindex="-1" class="font-serif-lg font-bold text-base-dark margin-0" style="outline: none;">Filters</h2>
                             <div class="flex items-center gap-3">
-                                <button @click="clearFilters" class="usa-button usa-button--unstyled font-sans-3xs text-uppercase text-primary hover:text-primary-dark underline padding-right-0" v-if="activeFilterCount > 0">Clear All</button>
-                                <button @click="showFilterDrawer = false" aria-label="Close filters" class="usa-button usa-button--unstyled text-base-dark hover:text-primary margin-0"><i class="ph ph-x text-xl" aria-hidden="true"></i></button>
+                                <button @click="clearFilters" class="usa-button usa-button--unstyled font-sans-3xs text-uppercase text-primary hover:text-primary-dark underline padding-right-0" v-if="activeFilterCount > 0">Clear All<span class="sr-only"> Filters</span></button>
+                                <button @click="showFilterDrawer = false" aria-label="Close filters" class="usa-button usa-button--unstyled text-base-dark hover:text-primary margin-0">
+                                    <span class="sr-only">Close filters</span>
+                                    <i class="ph ph-x text-xl" aria-hidden="true"></i>
+                                </button>
                             </div>
                         </div>
                         <div class="padding-2 flex-1 overflow-y-auto">
@@ -571,25 +613,34 @@
                             
                             <div class="margin-bottom-3" @focusout="handleFocusOut('agency', $event)">
                                 <label class="usa-label margin-top-0 font-sans-sm" for="mobile-agency-input">Filter by Agency</label>
-                                <input 
-                                    v-model="agencySearch" 
-                                    @focus="showAgencyList = true"
-                                    @input="showAgencyList = true"
-                                    @keydown.escape="showAgencyList = false"
-                                    type="text"
-                                    id="mobile-agency-input"
-                                    role="combobox"
-                                    aria-autocomplete="list"
-                                    aria-controls="mobile-agency-results-list"
-                                    :aria-expanded="showAgencyList && filteredAgencies.length > 0" 
-                                    placeholder="Search agencies..." 
-                                    class="usa-input width-full margin-bottom-1 font-sans-sm"
-                                >
+                                <div class="position-relative">
+                                    <input 
+                                        v-model="agencySearch" 
+                                        @focus="showAgencyList = true"
+                                        @input="showAgencyList = true"
+                                        @keydown.down.prevent="focusNextItem($event, 'down', 'li')"
+                                        @keydown.escape="showAgencyList = false"
+                                        type="text"
+                                        id="mobile-agency-input"
+                                        role="combobox"
+                                        aria-autocomplete="list"
+                                        aria-controls="mobile-agency-results-list"
+                                        :aria-expanded="showAgencyList && filteredAgencies.length > 0" 
+                                        placeholder="Search agencies..." 
+                                        class="usa-input width-full margin-bottom-1 font-sans-sm"
+                                    >
+                                    <div class="sr-only" role="status" aria-live="polite">
+                                        {{ showAgencyList ? filteredAgencies.length + ' agencies found.' : '' }}
+                                    </div>
+                                </div>
 
                                 <div v-if="selectedAgency" class="padding-1 bg-primary-lighter text-primary-darker radius-md border-1px border-primary-light margin-bottom-1">
                                     <div class="display-flex flex-align-center flex-justify-between font-sans-2xs text-bold margin-bottom-1">
                                         {{ agencySearch }}
-                                        <button @click="clearAgency" aria-label="Clear selected agency" class="usa-button usa-button--unstyled text-primary"><i class="ph ph-x-circle text-lg" aria-hidden="true"></i></button>
+                                        <button @click="clearAgency" aria-label="Clear selected agency" class="usa-button usa-button--unstyled text-primary">
+                                            <span class="sr-only">Clear selected agency</span>
+                                            <i class="ph ph-x-circle text-lg" aria-hidden="true"></i>
+                                        </button>
                                     </div>
 
                                     <label class="usa-label margin-top-0 text-primary-darker font-sans-3xs uppercase" for="mobile-relevance-select">Relevance Threshold</label>
@@ -602,70 +653,83 @@
                                     </select>
                                 </div>
 
-                                <div 
+                                <ul 
                                     v-if="showAgencyList && filteredAgencies.length" 
                                     id="mobile-agency-results-list"
                                     role="listbox"
-                                    class="border-1px border-base-lighter radius-md overflow-y-auto" 
+                                    class="border-1px border-base-lighter radius-md overflow-y-auto list-none padding-0 margin-0" 
                                     style="max-height: 10rem;"
                                 >
-                                    <div 
+                                    <li 
                                         v-for="option in filteredAgencies" 
                                         :key="option.name"
-                                        tabindex="0"
+                                        tabindex="-1"
                                         @click="selectAgency(option)"
                                         @keydown.enter.prevent="selectAgency(option)"
                                         @keydown.space.prevent="selectAgency(option)"
+                                        @keydown.down.prevent="focusNextItem($event, 'down', 'li')"
+                                        @keydown.up.prevent="focusNextItem($event, 'up', 'li')"
                                         class="padding-1 border-bottom border-base-lighter hover:bg-base-lightest focus:bg-base-lightest font-sans-2xs text-base-dark last:border-0 outline-none focus:outline-primary cursor-pointer"
                                     >
                                         {{ option.displayName }}
-                                    </div>
-                                </div>
+                                    </li>
+                                </ul>
                             </div>
                             
                             <hr class="border-base-light margin-y-2">
                             
                             <div class="margin-bottom-3" @focusout="handleFocusOut('sponsor', $event)">
                                 <label class="usa-label margin-top-0 font-sans-sm" for="mobile-sponsor-input">Filter by Sponsor</label>
-                                <input 
-                                    v-model="sponsorSearch" 
-                                    @focus="showSponsorList = true"
-                                    @input="showSponsorList = true"
-                                    @keydown.escape="showSponsorList = false"
-                                    type="text" 
-                                    id="mobile-sponsor-input"
-                                    role="combobox"
-                                    aria-autocomplete="list"
-                                    aria-controls="mobile-sponsor-results-list"
-                                    :aria-expanded="showSponsorList && filteredSponsors.length > 0"
-                                    placeholder="Search sponsors..." 
-                                    class="usa-input width-full margin-bottom-1 font-sans-sm"
-                                >
+                                <div class="position-relative">
+                                    <input 
+                                        v-model="sponsorSearch" 
+                                        @focus="showSponsorList = true"
+                                        @input="showSponsorList = true"
+                                        @keydown.down.prevent="focusNextItem($event, 'down', 'li')"
+                                        @keydown.escape="showSponsorList = false"
+                                        type="text" 
+                                        id="mobile-sponsor-input"
+                                        role="combobox"
+                                        aria-autocomplete="list"
+                                        aria-controls="mobile-sponsor-results-list"
+                                        :aria-expanded="showSponsorList && filteredSponsors.length > 0"
+                                        placeholder="Search sponsors..." 
+                                        class="usa-input width-full margin-bottom-1 font-sans-sm"
+                                    >
+                                    <div class="sr-only" role="status" aria-live="polite">
+                                        {{ showSponsorList ? filteredSponsors.length + ' sponsors found.' : '' }}
+                                    </div>
+                                </div>
 
                                 <div v-if="selectedSponsor" class="display-flex flex-align-center flex-justify-between padding-1 bg-primary-lighter text-primary-darker radius-md font-sans-2xs text-bold border-1px border-primary-light margin-bottom-1">
                                     {{ sponsorSearch }}
-                                    <button @click="clearSponsor" aria-label="Clear selected sponsor" class="usa-button usa-button--unstyled text-primary"><i class="ph ph-x-circle text-lg" aria-hidden="true"></i></button>
+                                    <button @click="clearSponsor" aria-label="Clear selected sponsor" class="usa-button usa-button--unstyled text-primary">
+                                        <span class="sr-only">Clear selected sponsor</span>
+                                        <i class="ph ph-x-circle text-lg" aria-hidden="true"></i>
+                                    </button>
                                 </div>
 
-                                <div 
+                                <ul 
                                     v-if="showSponsorList && filteredSponsors.length" 
                                     id="mobile-sponsor-results-list"
                                     role="listbox"
-                                    class="border-1px border-base-lighter radius-md overflow-y-auto" 
+                                    class="border-1px border-base-lighter radius-md overflow-y-auto list-none padding-0 margin-0" 
                                     style="max-height: 10rem;"
                                 >
-                                    <div 
+                                    <li 
                                         v-for="option in filteredSponsors" 
                                         :key="option"
-                                        tabindex="0"
+                                        tabindex="-1"
                                         @click="selectSponsor(option)"
                                         @keydown.enter.prevent="selectSponsor(option)"
                                         @keydown.space.prevent="selectSponsor(option)"
+                                        @keydown.down.prevent="focusNextItem($event, 'down', 'li')"
+                                        @keydown.up.prevent="focusNextItem($event, 'up', 'li')"
                                         class="padding-1 border-bottom border-base-lighter hover:bg-base-lightest focus:bg-base-lightest font-sans-2xs text-base-dark last:border-0 outline-none focus:outline-primary cursor-pointer"
                                     >
                                         {{ option }}
-                                    </div>
-                                </div>
+                                    </li>
+                                </ul>
                             </div>
 
                             <hr class="border-base-light margin-y-2">
@@ -675,10 +739,11 @@
                                 <input v-model="searchQuery" id="mobile-keyword-input" type="text" class="usa-input width-full font-sans-sm" placeholder="Title, summary, ID...">
                             </div>
                             
-                             <fieldset class="usa-fieldset margin-bottom-3">
+                            <fieldset class="usa-fieldset margin-bottom-3">
                                 <legend class="usa-label margin-top-0 font-sans-sm">Broad Subjects</legend>
                                 <input 
                                     v-model="broadSubjectSearch" 
+                                    @keydown.down.prevent="focusNextItem($event, 'down', 'search-to-checkbox')"
                                     type="text" 
                                     class="usa-input margin-bottom-1 height-4 font-sans-2xs width-full" 
                                     placeholder="Filter broad subjects..." 
@@ -686,7 +751,17 @@
                                 >
                                 <div class="border-1px border-base-lighter padding-1 overflow-y-auto bg-white margin-top-1" style="max-height: 10rem;">
                                     <div class="usa-checkbox" v-for="sub in filteredBroadSubjects" :key="sub.Code">
-                                        <input class="usa-checkbox__input" :id="'mobile-broad-'+sub.Code" type="checkbox" v-model="filterBroad" :value="sub.Name" @focus="scrollToFocusedItem">
+                                        <input 
+                                            class="usa-checkbox__input" 
+                                            :id="'mobile-broad-'+sub.Code" 
+                                            type="checkbox" 
+                                            v-model="filterBroad" 
+                                            :value="sub.Name" 
+                                            tabindex="-1"
+                                            @focus="scrollToFocusedItem"
+                                            @keydown.down.prevent="focusNextItem($event, 'down', 'checkbox')"
+                                            @keydown.up.prevent="focusNextItem($event, 'up', 'checkbox')"
+                                        >
                                         <label class="usa-checkbox__label" :for="'mobile-broad-'+sub.Code">{{ sub.Name }}</label>
                                     </div>
                                     <div v-if="filteredBroadSubjects.length === 0" class="font-sans-2xs text-base text-italic padding-1">
@@ -699,6 +774,7 @@
                                 <legend class="usa-label margin-top-0 font-sans-sm">Narrow Subjects</legend>
                                 <input 
                                     v-model="narrowSubjectSearch" 
+                                    @keydown.down.prevent="focusNextItem($event, 'down', 'search-to-checkbox')"
                                     type="text" 
                                     class="usa-input margin-bottom-1 height-4 font-sans-2xs width-full" 
                                     placeholder="Filter narrow subjects..." 
@@ -706,7 +782,17 @@
                                 >
                                 <div class="border-1px border-base-lighter padding-1 overflow-y-auto bg-white margin-top-1" style="max-height: 10rem;">
                                     <div class="usa-checkbox" v-for="sub in filteredNarrowSubjects" :key="sub.Code">
-                                        <input class="usa-checkbox__input" :id="'mobile-narrow-'+sub.Code" type="checkbox" v-model="filterNarrow" :value="sub.Name" @focus="scrollToFocusedItem">
+                                        <input 
+                                            class="usa-checkbox__input" 
+                                            :id="'mobile-narrow-'+sub.Code" 
+                                            type="checkbox" 
+                                            v-model="filterNarrow" 
+                                            :value="sub.Name" 
+                                            tabindex="-1"
+                                            @focus="scrollToFocusedItem"
+                                            @keydown.down.prevent="focusNextItem($event, 'down', 'checkbox')"
+                                            @keydown.up.prevent="focusNextItem($event, 'up', 'checkbox')"
+                                        >
                                         <label class="usa-checkbox__label" :for="'mobile-narrow-'+sub.Code">{{ sub.Name }}</label>
                                     </div>
                                     <div v-if="filteredNarrowSubjects.length === 0" class="font-sans-2xs text-base text-italic padding-1">
@@ -731,7 +817,7 @@
                                     </h3>
                                     <a href="https://innovation.maryland.gov" target="_blank" rel="noopener" class="usa-button usa-button--primary margin-0">
                                         Visit website
-                                        <span class="sr-only">(opens in new tab)</span>
+                                        <span class="sr-only">of the Maryland State Innovation Team (opens in new tab)</span>
                                     </a>
                                 </div>
                             </div>
@@ -773,9 +859,13 @@
                             :title="isFavorite(activeBill.BillNumber) ? 'Remove from favorites' : 'Add to favorites'"
                             :aria-pressed="isFavorite(activeBill.BillNumber)"
                         >
+                            <span class="sr-only">
+                                {{ isFavorite(activeBill.BillNumber) ? 'Remove from favorites' : 'Add to favorites' }}
+                            </span>
                             <i :class="isFavorite(activeBill.BillNumber) ? 'ph-fill ph-star text-yellow-500' : 'ph ph-star text-base-light'" class="text-2xl"></i>
                         </button>
-                        <button @click="closeBill" aria-label="Close Modal" class="usa-button usa-button--unstyled p-2 hover:bg-base-lightest transition-colors shrink-0 text-base-darker">
+                        <button @click="closeBill" aria-label="Close bill modal" class="usa-button usa-button--unstyled p-2 hover:bg-base-lightest transition-colors shrink-0 text-base-darker">
+                            <span class="sr-only">Close bill modal</span>
                             <i class="ph ph-x text-2xl" aria-hidden="true"></i>
                         </button>
                     </header>
@@ -911,7 +1001,8 @@
                         <h2 id="about-modal-title" ref="modalTitle" tabindex="-1" class="font-serif-lg sm:font-serif-xl font-bold text-base-darker outline-none">
                             About Maryland Legi-Assist
                         </h2>
-                        <button @click="showAboutModal = false" aria-label="Close Modal" class="p-2 hover:bg-gray-100 transition-colors">
+                        <button @click="showAboutModal = false" aria-label="Close about modal" class="p-2 hover:bg-gray-100 transition-colors">
+                            <span class="sr-only">Close about modal</span>
                             <i class="ph ph-x text-2xl text-base-darker" aria-hidden="true"></i>
                         </button>
                     </header>
@@ -1039,10 +1130,9 @@
                     if (newBill || newAbout) {
                         lastActiveElement = document.activeElement;
                         await nextTick();
-                        const modal = document.querySelector('[role="dialog"]');
-                        if (modal) {
-                            const closeBtn = modal.querySelector('button[aria-label="Close Modal"]');
-                            if (closeBtn) closeBtn.focus();
+                        // Focus the modal title (ref="modalTitle") for best a11y context
+                        if (modalTitle.value) {
+                            modalTitle.value.focus();
                         }
                     } else {
                         await nextTick();
@@ -1537,6 +1627,13 @@
                 const openBill = (bill) => {
                     activeBill.value = bill;
                     updateUrl(true);
+
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'bill_open', {
+                            'bill_number': bill.BillNumber,
+                            'session_year': selectedYear.value
+                        });
+                    }
                 };
 
                 const closeBill = () => {
@@ -1545,8 +1642,10 @@
                 };
 
                 const trapFocus = (e) => {
-                    const modal = document.querySelector('[role="dialog"]');
+                    // Use e.currentTarget to target the specific active modal (the element handling the event)
+                    const modal = e.currentTarget;
                     if (!modal) return;
+                    
                     const focusableSelectors = [
                         'button:not([disabled]):not([aria-hidden="true"])',
                         'a[href]:not([aria-hidden="true"])',
@@ -1555,11 +1654,15 @@
                         'textarea:not([disabled])',
                         '[tabindex]:not([tabindex="-1"]):not([aria-hidden="true"])'
                     ].join(', ');
+                    
                     const focusableElements = Array.from(modal.querySelectorAll(focusableSelectors))
-                        .filter(el => el.offsetParent !== null);
+                        .filter(el => el.offsetParent !== null); // Ensure visible
+
                     if (focusableElements.length === 0) return;
+                    
                     const firstElement = focusableElements[0];
                     const lastElement = focusableElements[focusableElements.length - 1];
+                    
                     if (e.shiftKey) {
                         if (document.activeElement === firstElement) {
                             e.preventDefault();
@@ -1711,6 +1814,12 @@
                         newSet.delete(key);
                     } else {
                         newSet.add(key);
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'bill_favorite', {
+                                'bill_number': billNumber,
+                                'session_year': selectedYear.value
+                            });
+                        }
                     }
                     favorites.value = newSet;
                     
@@ -1791,6 +1900,50 @@
                             e.preventDefault();
                             firstElement.focus();
                         }
+                    }
+                };
+
+                // Generic handler for arrow key navigation in lists (Comboboxes and Checkboxes)
+                const focusNextItem = (e, direction, type) => {
+                    const current = e.target;
+                    let target = null;
+                    
+                    if (type === 'li') {
+                        // Combobox Logic (Agency/Sponsor)
+                        if (current.tagName === 'INPUT') {
+                            // Input -> First Item
+                            const listId = current.getAttribute('aria-controls');
+                            const list = document.getElementById(listId);
+                            if (list && list.firstElementChild) {
+                                target = list.firstElementChild;
+                            }
+                        } else {
+                            // Item -> Next/Prev Item
+                            target = direction === 'down' ? current.nextElementSibling : current.previousElementSibling;
+                        }
+                    } 
+                    else if (type === 'checkbox') {
+                        // Checkbox List Logic: Move between items
+                        const wrapper = current.closest('.usa-checkbox');
+                        if (wrapper) {
+                            const targetWrapper = direction === 'down' ? wrapper.nextElementSibling : wrapper.previousElementSibling;
+                            if (targetWrapper) {
+                                target = targetWrapper.querySelector('input');
+                            }
+                        }
+                    } 
+                    else if (type === 'search-to-checkbox') {
+                        // Search Input -> First Checkbox
+                        // Assumes the list container is the immediate next sibling of the input
+                        const container = current.nextElementSibling;
+                        if (container) {
+                             target = container.querySelector('input[type="checkbox"]');
+                        }
+                    }
+
+                    if (target) {
+                        target.focus();
+                        if(e) e.preventDefault();
                     }
                 };
 
@@ -1904,7 +2057,7 @@
                     formatDate, formatTime, formatTimestamp, isNew, exportToExcel, fetchData, getNextAction, getTestimonyDeadline,
                     modalTitle, trapFocus, trapFocusDrawer, clearAgency, clearSponsor, clearFilters, returnToLanding, agencyFilterContainer, sponsorFilterContainer,
                     filterDrawer, focusFirstOption, announceToScreenReader,
-                    filtersHeading, mobileFiltersHeading,
+                    filtersHeading, mobileFiltersHeading, focusNextItem,
                     favorites, showFavoritesOnly, toggleFavorite, isFavorite,
                     currentView, enterDashboard, handleFocusOut, scrollToFocusedItem
                 };
