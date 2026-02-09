@@ -407,6 +407,81 @@
                 padding-right: 3rem;
             }
         }
+
+        /* Styled cards inside the accordion */
+        .parent-resources-section .usa-accordion__content {
+            background-color: #fbfdff;
+            border: 1px solid #e6eef6;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .parent-resources-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        @media (min-width: 640px) {
+            .parent-resources-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .parent-resources-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .parent-resources-card {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            background: #ffffff;
+            border: 1px solid #e9f1f8;
+            border-left: 6px solid #07648D; /* accent */
+            padding: 1rem;
+            border-radius: 6px;
+            box-shadow: 0 1px 2px rgba(27,27,27,0.04);
+        }
+
+        .parent-resources-card__icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 50%;
+            background: #07648D;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .parent-resources-card__title {
+            margin: 0 0 0.25rem 0;
+            font-size: 1rem;
+        }
+
+        .parent-resources-card__title a {
+            color: #1b1b1b;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .parent-resources-card__title a:hover {
+            text-decoration: underline;
+            color: #054a69;
+        }
+
+        .parent-resources-card__meta {
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
     </style>
     <script>
         // 1. Initialize dataLayer and gtag immediately (Safe Shim)
@@ -606,24 +681,32 @@
                             </h2>
                             <div id="parent-resources" class="usa-accordion__content" hidden>
                                 <p>The Maryland Community Business Compass is designed to help entrepreneurs start and grow businesses. If you are a family member looking for child care services, verified safety records, or quality ratings, please use these resources:</p>
-                                
-                                <h3 class="font-serif-lg margin-top-2">1. Get Personal Assistance Finding Care</h3>
-                                <p>
-                                    <a href="https://locatesearch.marylandfamilynetwork.org/" target="_blank">LOCATE: Child Care<span class="usa-sr-only"> (opens in new tab)</span></a> (Maryland Family Network)<br>
-                                    A free, personalized service for parents. Use their searchable database or speak with a specialist to find child care that fits your specific needs, location, and schedule.
-                                </p>
 
-                                <h3 class="font-serif-lg margin-top-2">2. Check Safety & Compliance</h3>
-                                <p>
-                                    <a href="https://checkccmd.org/" target="_blank">Check Child Care Maryland<span class="usa-sr-only"> (opens in new tab)</span></a> (MSDE)<br>
-                                    Visit this site to review official licensing information. You can verify a provider’s license status, check for verified complaints, and view inspection results to ensure a program meets state safety standards.
-                                </p>
+                                <div class="parent-resources-grid margin-top-2">
+                                    <div class="parent-resources-card">
+                                        <div class="parent-resources-card__icon" aria-hidden="true">1</div>
+                                        <div>
+                                            <h4 class="parent-resources-card__title"><a href="https://locatesearch.marylandfamilynetwork.org/" target="_blank">LOCATE: Child Care<span class="usa-sr-only"> (opens in new tab)</span></a></h4>
+                                            <p class="parent-resources-card__meta">Maryland Family Network — A free, personalized service for parents. Use their searchable database or speak with a specialist to find child care that fits your specific needs, location, and schedule.</p>
+                                        </div>
+                                    </div>
 
-                                <h3 class="font-serif-lg margin-top-2">3. Find Quality Rated Programs</h3>
-                                <p>
-                                    <a href="https://marylandexcels.org/" target="_blank">Maryland EXCELS<span class="usa-sr-only"> (opens in new tab)</span></a> (MSDE)<br>
-                                    Find programs committed to higher standards of education and care. Use this tool to locate child care options that have achieved specific quality ratings that support stronger student outcomes.
-                                </p>
+                                    <div class="parent-resources-card">
+                                        <div class="parent-resources-card__icon" aria-hidden="true">2</div>
+                                        <div>
+                                            <h4 class="parent-resources-card__title"><a href="https://checkccmd.org/" target="_blank">Check Child Care Maryland<span class="usa-sr-only"> (opens in new tab)</span></a></h4>
+                                            <p class="parent-resources-card__meta">MSDE — Visit this site to review official licensing information. Verify a provider’s license status, check for verified complaints, and view inspection results to ensure a program meets state safety standards.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="parent-resources-card">
+                                        <div class="parent-resources-card__icon" aria-hidden="true">3</div>
+                                        <div>
+                                            <h4 class="parent-resources-card__title"><a href="https://marylandexcels.org/" target="_blank">Maryland EXCELS<span class="usa-sr-only"> (opens in new tab)</span></a></h4>
+                                            <p class="parent-resources-card__meta">MSDE — Find programs committed to higher standards of education and care. Locate child care options that have achieved quality ratings to support stronger student outcomes.</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
