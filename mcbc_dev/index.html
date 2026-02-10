@@ -408,11 +408,29 @@
             }
         }
 
+        /* Overrides to match Insight Mode (Square corners, Gray expanded background) */
+        .parent-resources-section .usa-accordion__button {
+            background-color: #ffffff;
+            color: #1b1b1b;
+            border: 1px solid #DFE1E2;
+            border-radius: 0;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .parent-resources-section .usa-accordion__button[aria-expanded="true"] {
+            background-color: #F0F0F0;
+        }
+
+        .parent-resources-section .usa-accordion__button:hover {
+            background-color: #F0F0F0;
+        }
+
         /* Styled cards inside the accordion */
         .parent-resources-section .usa-accordion__content {
-            background-color: #fbfdff;
-            border: 1px solid #e6eef6;
-            border-radius: 8px;
+            background-color: #F0F0F0; /* Insight Mode Gray */
+            border: 1px solid #DFE1E2;
+            border-top: none;
+            border-radius: 0;
             padding: 1.5rem;
         }
 
@@ -435,15 +453,27 @@
         }
 
         .parent-resources-card {
+            position: relative;
             display: flex;
             gap: 1rem;
             align-items: flex-start;
             background: #ffffff;
             border: 1px solid #e9f1f8;
-            border-left: 6px solid #07648D; /* accent */
+            border-left: none;
             padding: 1rem;
-            border-radius: 6px;
+            padding-left: 1.5rem;
+            border-radius: 0;
             box-shadow: 0 1px 2px rgba(27,27,27,0.04);
+        }
+
+        .parent-resources-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background-color: #07648D;
         }
 
         .parent-resources-card__icon {
@@ -467,7 +497,6 @@
 
         .parent-resources-card__title a {
             color: #1b1b1b;
-            text-decoration: none;
             font-weight: 700;
         }
 
