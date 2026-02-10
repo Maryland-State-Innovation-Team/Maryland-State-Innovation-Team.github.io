@@ -1,0 +1,60 @@
+name: Update Legi-Assist Content
+
+on:
+  schedule:
+    # 6 AM EST is 11 AM UTC
+    - cron: '0 11 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-legi-assist:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v4
+
+      - name: Clone Legi-Assist repository
+        run: git clone https://github.com/Maryland-State-Innovation-Team/Legi-Assist.git legi-assist-repo
+
+      - name: Copy index.html
+        run: cp legi-assist-repo/index.html interactives/legi-assist/index.html
+
+      - name: Copy assets folder
+        run: |
+          mkdir -p interactives/legi-assist/assets
+          cp -r legi-assist-repo/assets/. interactives/legi-assist/assets/
+
+      - name: Copy data files
+        run: |
+          # Copy maryland_agencies.json
+          cp legi-assist-repo/data/maryland_agencies.json interactives/legi-assist/data/maryland_agencies.json
+          
+          # Copy frontend_data.json for each year
+          for year in 2023rs 2024rs 2025rs 2026rs; do
+            if [ -f "legi-assist-repo/data/$year/frontend_data.json" ]; then
+              mkdir -p "interactives/legi-assist/data/$year"
+              cp "legi-assist-repo/data/$year/frontend_data.json" "interactives/legi-assist/data/$year/frontend_data.json"
+            else
+              echo "Warning: legi-assist-repo/data/$year/frontend_data.json not found"
+            fi
+          done
+
+      - name: Cleanup cloned repo
+        run: rm -rf legi-assist-repo
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Check for changes
+          if [[ -n $(git status -s) ]]; then
+            git add .
+            git commit -m "Update Legi-Assist content from https://github.com/Maryland-State-Innovation-Team/Legi-Assist"
+            git push
+          else
+            echo "No changes to commit"
+          fi
