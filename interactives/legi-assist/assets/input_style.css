@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* iOS safe area support */
+html {
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+html, body {
+    height: 100%;
+    height: -webkit-fill-available;
+    overflow: hidden;
+    width: 100%;
+}
+
+body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+
+/* Header safe area padding for iOS */
+header {
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+}
+
+/* Modal positioning fix for iOS */
+[role="dialog"] {
+    padding-top: env(safe-area-inset-top);
+}
+
+/* Ensure modal close button is always reachable */
+[role="dialog"] > div {
+    margin-top: env(safe-area-inset-top);
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+
+[v-cloak] { display: none; }
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+    outline: none;
+}
+
+@media (prefers-contrast: high) {
+    .border-gray-200 { border-color: #000; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    .animate-spin { animation: none; }
+}
+
+/* Ensure minimum touch target size for interactive elements on touch devices */
+@media (pointer: coarse) {
+    button, a, select {
+        min-height: 44px;
+    }
+}
+
+/* Filter Drawer Styles */
+.drawer-overlay {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+
+
+/* Fade transitions */
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.2s ease;
+}
+.fade-enter-from, .fade-leave-to {
+    opacity: 0;
+}
+
+/* iframe-specific fixes */
+@supports (-webkit-touch-callout: none) {
+    html, body {
+        height: 100%;
+        height: -webkit-fill-available;
+    }
+    
+    .fixed.inset-0 {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    #app {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        height: -webkit-fill-available;
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    
+    main {
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+
+/* Normalize input/select/button heights in flex containers */
+.flex.items-center select,
+.flex.items-center button,
+.flex.items-center input {
+    min-height: 44px;
+    box-sizing: border-box;
+}
+
+/* Override for flag card without media */
+@media (min-width: 40em) {
+    .maryland-card--flag .maryland-card__header,
+    .maryland-card--flag .maryland-card__body,
+    .maryland-card--flag .maryland-card__footer {
+        margin-left: 0 !important;
+    }
+}
+
+/* Fix for MDWDS applying underlines to all unstyled buttons */
+.usa-button--unstyled {
+    text-decoration: none;
+}
+.usa-button--unstyled:hover {
+    text-decoration: none;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+                        
+/* Inset focus rings for listbox items to prevent clipping */
+#agency-results-list li:focus,
+#sponsor-results-list li:focus,
+#mobile-agency-results-list li:focus,
+#mobile-sponsor-results-list li:focus {
+    outline: 0.25rem solid #2491ff !important;
+    outline-offset: -0.25rem !important;
+}
