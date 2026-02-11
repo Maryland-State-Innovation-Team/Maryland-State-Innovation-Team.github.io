@@ -1332,24 +1332,13 @@
             const filterConfig = {
                 industries: {
                     title: 'Business Category',
-                    key: 'list_of_relevant_industries',
+                    key: 'list_of_eligible_industries',
                     options: ["Child Care Services", "Grocery Stores and Fresh Food Retailers", "Agriculture, Forestry, Fishing and Hunting", "Mining, Quarrying, and Oil and Gas Extraction", "Utilities", "Construction", "Manufacturing", "Wholesale Trade", "Retail Trade", "Transportation and Warehousing", "Information", "Finance and Insurance", "Real Estate and Rental and Leasing", "Professional, Scientific, and Technical Services", "Management of Companies and Enterprises", "Administrative and Support and Waste Management and Remediation Services", "Educational Services", "Health Care and Social Assistance", "Arts, Entertainment, and Recreation", "Accommodation and Food Services", "Other Services (except Public Administration)", "Public Administration"]
                 },
                 assistanceTypes: {
                     title: 'Assistance Type',
                     key: 'assistance_type',
-                    options: [
-                        "grant",
-                        "loan",
-                        "tax-credit",
-                        "tax-exemption",
-                        "rebate",
-                        "subsidy",
-                        "training",
-                        "equity-investment",
-                        "other-financial-assistance",
-                        "other-technical-assistance"
-                    ]
+                    options: ["loan", "grant", "tax-credit"]
                 },
                 orgTypes: {
                     title: 'Grantee Organization Type',
@@ -1387,18 +1376,31 @@
                 applyFiltersFromUrl();
                 updateCheckboxesFromState();
                 try {
-                    // Single fetch for the unified data file
-                    const response = await fetch('incentives_structured.json');
-                    if (!response.ok) throw new Error("Network response was not ok.");
+                    const [localRes, stateRes] = await Promise.all([
+                        fetch('local_incentives_structured.json'),
+                        fetch('state_incentives_structured.json')
+                    ]);
+                    if (!localRes.ok || !stateRes.ok) throw new Error("Network response was not ok.");
 
-                    const data = await response.json();
-
-                    // Process single data source and apply 'is_out_of_date' filter
-                    allIncentives = data
+                    const localData = await localRes.json();
+                    const stateData = await stateRes.json();
+                    
+                    allIncentives = [...localData, ...stateData]
                         .filter(item => item.structured_extraction && item.structured_extraction.program_name)
-                        .filter(item => item.structured_extraction.is_out_of_date !== true) // Filter out outdated items
+                        .filter(item => {
+                            if (item.is_out_of_date === true) return false;
+                            
+                            const isTargetAgency = [
+                                "Maryland Department of Housing and Community Development",
+                                "State Department of Education"
+                            ].includes(item.agency);
+                            
+                            const isWashingtonCounty = item.locality_name === "Washington County";
+                            
+                            return isTargetAgency || isWashingtonCounty;
+                        })
                         .map(item => ({ ...item, slug: slugify(item.structured_extraction.program_name) }));
-
+                    
                     renderFeaturedIncentives(allIncentives);
 
                     handleRouting();

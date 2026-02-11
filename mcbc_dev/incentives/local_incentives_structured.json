@@ -1,0 +1,2882 @@
+[
+  {
+    "OBJECTID": "allegany",
+    "program_name": "Business Expansion Deferred Loan Program (BEDL)",
+    "locality_name": "Allegany County",
+    "agency": "",
+    "more_details_url": "https://www.alleganyworks.org/business-expansion-deferred-loan-program",
+    "structured_extraction": {
+      "program_name": "Business Expansion Deferred Loan Program (BEDL)",
+      "program_description": "This program provides forgivable loans to small businesses. It helps new companies establish themselves in Allegany County. It also helps existing companies grow to create more jobs, increase their ability to sell products outside the area, or improve their local community presence.",
+      "agency": "Allegany County Economic and Community Development",
+      "list_of_eligible_counties": [
+        "Allegany"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "loan",
+        "grant"
+      ],
+      "assistance_description": "The program offers low-interest loans from $10,000 to $50,000. Businesses can have up to 50% of the loan forgiven if they meet performance goals, such as job creation. Loans over $40,000 require a one-to-one match from the business. The county may also defer payments for up to six months after the business receives the loan.",
+      "URL": "https://www.alleganyworks.org/business-expansion-deferred-loan-program",
+      "application_deadline_string": "rolling basis",
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "alleganyworks@alleganygov.org",
+      "contact_phone": "(301) 777-5967",
+      "program_audience": "This program is for small, for-profit businesses in Allegany County with fewer than 15 full-time employees that are ready to expand.",
+      "use_of_funds": "You can use the loan to buy tangible assets that help your business grow, such as equipment and furniture. You cannot use the funds for staff salaries, buying or improving an existing building, or constructing a new building.",
+      "geographic_eligibility": "Your business must have a physical location in Allegany County. You must own the property or have a long-term commercial lease. A home-based business can apply if its expansion plan includes moving to a commercial location.",
+      "requirements_list": [
+        "Must be a for-profit entity in good standing with Allegany County and the State of Maryland.",
+        "Must have fewer than 15 full-time employees.",
+        "Must have a physical presence in Allegany County.",
+        "Must receive a formal invitation from Allegany County Economic and Community Development to apply.",
+        "A 1:1 funding match is required for loans over $40,000.",
+        "Must provide a business plan approved by the local Small Business Development Center.",
+        "Funds must be spent within 24 months of loan approval to qualify for forgiveness."
+      ],
+      "application_process_overview": "First, contact the Allegany County Economic and Community Development team to discuss your project. You must meet certain criteria and then receive a formal invitation to apply. After you apply, a review committee will assess your application. The committee then submits its recommendations to the County Commissioners for final approval.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "allegany",
+    "program_name": "CleanTech Research & Development Grant Program",
+    "locality_name": "Allegany County",
+    "agency": "",
+    "more_details_url": "https://www.alleganyworks.org/cleantech-research-development-grant",
+    "structured_extraction": {
+      "program_name": "CleanTech Research & Development Grant Program",
+      "program_description": "This program helps businesses in Allegany County develop new environmental technologies. It provides grants to help pay for research conducted at the University of Maryland's Appalachian Laboratory.",
+      "agency": "Allegany County Economic and Community Development",
+      "list_of_eligible_counties": [
+        "Allegany"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "The program offers a grant that matches a company's research costs up to $50,000. This grant pays for half of a project's total cost, with the maximum grant amount being $50,000.",
+      "URL": "https://www.alleganyworks.org/cleantech-research-development-grant",
+      "application_deadline_string": "rolling",
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "alleganyworks@alleganygov.org",
+      "contact_phone": "(301) 777-5967",
+      "program_audience": "This program is for for-profit businesses in Allegany County that develop new products or services in environmental science and technology.",
+      "use_of_funds": "You can use grant funds to pay for costs of research or lab use contracted through the Appalachian Laboratory. The purpose must be to develop a new product or service.",
+      "geographic_eligibility": "Your business must have a physical location in Allegany County through ownership or a long-term commercial lease. A home-based business can apply if it shows a clear plan to move into a commercial space.",
+      "requirements_list": [
+        "Applicants must be for-profit, tax-paying entities in good standing with Allegany County and Maryland.",
+        "Businesses must apply by formal invitation only.",
+        "The business must demonstrate the ability to offer a tangible product or service.",
+        "A 1:1 match for research costs is required.",
+        "All research must be contracted through the University of Maryland Center for Environmental Science (UMCES) Appalachian Laboratory.",
+        "A quote for services and a letter of approval from the Appalachian Lab is required for the application.",
+        "Grant recipients must keep a commercial presence in Allegany County for at least four years after receiving the award."
+      ],
+      "application_process_overview": "First, contact the Allegany County Economic and Community Development team to discuss your project. If eligible, they will give you a formal invitation to apply. You must get a project quote and a letter of approval from the Appalachian Lab. Then, you submit your application with these documents and a project narrative. County staff and the Lab review applications and send recommendations to the County Commissioners for final approval.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "allegany",
+    "program_name": "Western Maryland Economic Future Investment Board",
+    "locality_name": "Allegany County",
+    "agency": "",
+    "more_details_url": "https://senatoredwardsfund.org/",
+    "structured_extraction": {
+      "program_name": "Western Maryland Economic Future Investment Board",
+      "program_description": "This program provides funding to support economic development in Western Maryland. It helps projects that create significant job opportunities or increase the local tax base.",
+      "agency": "Tri-County Council of Western Maryland",
+      "list_of_eligible_counties": [
+        "Allegany",
+        "Garrett",
+        "Washington"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit",
+        "government"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "grant",
+        "loan"
+      ],
+      "assistance_description": "The program offers grants and loans for two types of projects: infrastructure and business development. The minimum award amount is typically $150,000, but the board may consider smaller projects on a case-by-case basis.",
+      "URL": "https://senatoredwardsfund.org/",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": "Jake Shade",
+      "contact_email": "jshade@lockhousegroup.com",
+      "contact_phone": null,
+      "program_audience": "Businesses or local governments with projects that will have a major economic impact in Western Maryland.",
+      "use_of_funds": "Funds support capital infrastructure and business development. Infrastructure uses can include broadband connectivity, road access improvements, utility connections, property purchases, and building construction.",
+      "geographic_eligibility": "Projects must be located in Allegany, Garrett, or Washington County.",
+      "requirements_list": [
+        "Projects must create new jobs that pay at least 120% of the State Minimum Wage.",
+        "Infrastructure projects require a minimum 20% match from the local government, the business, or another approved source.",
+        "Business development projects require a minimum 10% match from the local government, the business, or another approved source.",
+        "Projects must create significant jobs or provide a significant increase to the tax base."
+      ],
+      "application_process_overview": "To apply, first make an inquiry to the Executive Director, a Member of the Board, or the Economic Development Director in the county where the project is located.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "annearundel",
+    "program_name": "Arundel Community Reinvestment (ACR) Fund",
+    "locality_name": "Anne Arundel County",
+    "agency": "",
+    "more_details_url": "https://www.aaedc.org/business/financing-and-tax-credits/acr-fund/",
+    "structured_extraction": {
+      "program_name": "Arundel Community Reinvestment (ACR) Fund",
+      "program_description": "This fund helps drive economic activity and investment in specific areas of Anne Arundel County. It supports improvements in Commercial Revitalization Districts, parts of Annapolis, the county's Enterprise Zone, and certain commercial areas in South County.",
+      "agency": "Anne Arundel Economic Development Corporation",
+      "list_of_eligible_counties": [
+        "Anne Arundel"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [
+        "Enterprise Zones"
+      ],
+      "eligible_organization_types": [
+        "for-profit",
+        "individuals"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "loan"
+      ],
+      "assistance_description": "The program provides interest-free loans up to $100,000. Borrowers repay the loan over three to seven years. The loan can cover up to 90% of the total project costs. Loan recipients can also apply for a companion loan of up to $500,000 through the VOLT Fund for other business needs.",
+      "URL": "https://www.aaedc.org/business/financing-and-tax-credits/acr-fund/",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "info@aaedc.org",
+      "contact_phone": "410.222.7410",
+      "program_audience": "Property owners and business owners with a lease in eligible areas.",
+      "use_of_funds": "You can use funds to renovate and upgrade building exteriors. You can also use them for site improvements, like landscaping. A companion loan can fund tenant improvements, equipment purchases, and working capital.",
+      "geographic_eligibility": "Projects must be located in one of Anne Arundel County's eleven Commercial Revitalization Districts, parts of the City of Annapolis, the county's Enterprise zone in Brooklyn Park, or designated commercial corridors in South County.",
+      "requirements_list": [
+        "Applicant must be a property owner or a business owner with a lease.",
+        "The loan is limited to 90% of total project costs, requiring a 10% match from the applicant."
+      ],
+      "application_process_overview": "First, contact the Anne Arundel Economic Development Corporation (AAEDC) to discuss the process. You must also verify your property's eligibility. After that, you can submit the online application.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "annearundel",
+    "program_name": "Community Revitalization Tax Credit",
+    "locality_name": "Anne Arundel County",
+    "agency": "",
+    "more_details_url": "https://www.aaedc.org/business/financing-and-tax-credits/community-revitalization-tax-credit/",
+    "structured_extraction": {
+      "program_name": "Community Revitalization Tax Credit",
+      "program_description": "This program offers a property tax credit to property owners who improve their buildings. The credit helps offset the cost of renovations, new construction, or redevelopment projects in certain areas.",
+      "agency": "Anne Arundel Economic Development Corporation",
+      "list_of_eligible_counties": [
+        "Anne Arundel"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program provides a property tax credit for up to five years. The credit equals the amount of the property tax increase that results from improvements. The improvements must have an assessed value of at least $100,000.",
+      "URL": "https://www.aaedc.org/business/financing-and-tax-credits/community-revitalization-tax-credit/",
+      "application_deadline_string": "120 days following the issuance of the notice of assessment by the Maryland State Department of Assessments and Taxation",
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "info@aaedc.org",
+      "contact_phone": "410.222.7410",
+      "program_audience": "Owners of commercially or industrially zoned property in designated areas.",
+      "use_of_funds": "The tax credit supports projects that involve renovating or rehabilitating an existing building, constructing a new building, or demolishing a building for redevelopment.",
+      "geographic_eligibility": "The property must be located in one of Anne Arundel County’s 11 designated Commercial Revitalization districts.",
+      "requirements_list": [
+        "The property must be zoned for commercial or industrial use.",
+        "The improvements must increase the assessed value by at least $100,000."
+      ],
+      "application_process_overview": "Property owners must apply for the credit within 120 days after the Maryland State Department of Assessments and Taxation issues a notice of assessment for the improvements.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "baltimorecity",
+    "program_name": "Grocery Store Tax Credit",
+    "locality_name": "Baltimore City",
+    "agency": "",
+    "more_details_url": "https://www.baltimoredevelopment.com/doing-business/grocery-store-tax-credit",
+    "structured_extraction": {
+      "program_name": "Grocery Store Personal Property Tax Credit",
+      "program_description": "Baltimore City provides a personal property tax credit to grocery stores. The credit supports new stores or stores making significant renovations in targeted city areas. This program aims to increase resident access to healthy food and encourage local economic development.",
+      "agency": "Baltimore Development Corporation",
+      "list_of_eligible_counties": [
+        "Baltimore City"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Grocery Stores and Fresh Food Retailers"
+      ],
+      "list_of_prioritized_industries": [],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program offers an 80 percent credit against personal property tax for 10 years. The credit applies to business property like furniture, fixtures, and equipment.",
+      "URL": "https://www.baltimoredevelopment.com/doing-business/grocery-store-tax-credit",
+      "application_deadline_string": "October 1",
+      "application_deadline_date": "2026-10-01",
+      "contact_name": null,
+      "contact_email": "info@BaltimoreDevelopment.com",
+      "contact_phone": "(410) 837-9305",
+      "program_audience": "Owners of new or significantly renovated grocery stores.",
+      "use_of_funds": "The tax credit applies to personal property, which includes furniture, fixtures, and equipment.",
+      "geographic_eligibility": "The store must be in a designated grocery store incentive area within Baltimore City. Applicants should use the CityView website to confirm if a location qualifies.",
+      "requirements_list": [
+        "For newly constructed stores, you must spend $150,000 or more, or $25 per square foot, on new personal property.",
+        "For newly renovated stores, you must spend a certain amount on new personal property based on the store's size.",
+        "The store must have at least 500 square feet for selling fruits and vegetables.",
+        "The store must have at least 500 square feet for selling other perishable goods, like meat, seafood, and dairy products."
+      ],
+      "application_process_overview": "First, fill out and submit a pre-qualification form for your location. The agency takes about 30 days to process it. Second, once you receive pre-qualification, complete the construction or renovation. Then, submit the initial application form by October 1 to be considered for the tax year starting the next January. Third, after the credit is granted, you must submit a continuing eligibility form each year by November 30 to maintain the credit for the 10-year period.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "baltimorecity",
+    "program_name": "Foreign Trade Zone",
+    "locality_name": "Baltimore City",
+    "agency": "",
+    "more_details_url": "https://www.baltimoredevelopment.com/doing-business/foreign-trade-zone",
+    "structured_extraction": {
+      "program_name": "Foreign Trade Zone",
+      "program_description": "This program creates federally designated areas that are considered outside of U.S. Customs territory. This helps companies that import or export international goods save money. The program allows businesses to defer duties, reduce fees, and simplify their supply chain.",
+      "agency": "Baltimore Development Corporation",
+      "list_of_eligible_counties": [
+        "Baltimore City",
+        "Anne Arundel",
+        "Baltimore",
+        "Harford",
+        "Cecil",
+        "Howard",
+        "Queen Anne's"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [],
+      "assistance_description": "The program offers several cost-saving and operational benefits. Companies can delay paying import duties, pay lower processing fees, and simplify their logistics.",
+      "URL": "https://www.baltimoredevelopment.com/doing-business/foreign-trade-zone",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": "Will Cawthern",
+      "contact_email": "wcawthern@BaltimoreDevelopment.com",
+      "contact_phone": "(410) 837-9305",
+      "program_audience": "This program is for companies that import or export goods internationally.",
+      "use_of_funds": "The program supports activities in warehouse, distribution, and manufacturing facilities.",
+      "geographic_eligibility": "The program service area includes almost 1,000 acres of designated industrial and distribution space in the eligible counties. A company can be located at any property in this designated service area.",
+      "requirements_list": [
+        "The business must import or export international goods.",
+        "The company must be located at a property within the designated service area."
+      ],
+      "application_process_overview": "Contact the Foreign Trade Zone Director to learn about the program's benefits. A company can complete the activation process within a few weeks.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "baltimorecity",
+    "program_name": "Facade Improvement Grant (FIG)",
+    "locality_name": "Baltimore City",
+    "agency": "",
+    "more_details_url": "https://www.baltimoredevelopment.com/doing-business/facade-improvement-grant",
+    "structured_extraction": {
+      "program_name": "Facade Improvement Grant (FIG)",
+      "program_description": "The Baltimore Development Corporation gives matching grants to businesses and property owners in Baltimore City. The funds help pay for outside improvements to commercial and industrial buildings. These projects make the properties and the surrounding commercial areas look better.",
+      "agency": "Baltimore Development Corporation",
+      "list_of_eligible_counties": [
+        "Baltimore City"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit",
+        "individuals"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "The program offers matching grants for exterior improvements. Eligible properties include commercial buildings, vacant and corner commercial properties, industrial properties, and shopping centers.",
+      "URL": "https://www.baltimoredevelopment.com/doing-business/facade-improvement-grant",
+      "application_deadline_string": "See website",
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "info@BaltimoreDevelopment.com",
+      "contact_phone": "(410) 837-9305",
+      "program_audience": "Businesses and property owners of commercial and industrial properties.",
+      "use_of_funds": "Funds can be used for exterior improvements to commercial and industrial buildings. This includes work on facades, storefronts, signs, and awnings.",
+      "geographic_eligibility": "The program is available for properties located city-wide in Baltimore City.",
+      "requirements_list": [
+        "Applicant must provide matching funds.",
+        "Work cannot begin until the grant is awarded and an agreement letter is signed."
+      ],
+      "application_process_overview": "To apply, complete and submit the application form available on the program website. If you have questions, contact the agency by email.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "baltimorecity",
+    "program_name": "Neighbohood Impact Investment Fund (NIIF) Direct Loans",
+    "locality_name": "Baltimore City",
+    "agency": "",
+    "more_details_url": "https://www.baltimoreniif.org/financing/direct-loans/",
+    "structured_extraction": {
+      "program_name": "Neighborhood Impact Investment Fund (NIIF) Direct Loans",
+      "program_description": "This program provides direct loans for development projects in Baltimore City. It helps fund projects at any stage, including buying property, planning, construction, and long-term financing. The program supports housing, commercial development, community facilities, and mixed-use projects.",
+      "agency": "Neighborhood Impact Investment Fund",
+      "list_of_eligible_counties": [
+        "Baltimore City"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "non-profit",
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Construction",
+        "Real Estate and Rental and Leasing"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "loan"
+      ],
+      "assistance_description": "The program offers several types of loans up to $3 million, including acquisition, construction, bridge, and term loans. Predevelopment loans are available for up to $100,000. Interest rates begin at 5.0% and are subject to review. Loan terms vary by type, ranging from 18 months to 7 years. The program may provide subordinate debt to fill funding gaps.",
+      "URL": "https://www.baltimoreniif.org/financing/direct-loans/",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": "Mark Kaufman",
+      "contact_email": "Mark@baltimoreniif.org",
+      "contact_phone": null,
+      "program_audience": "This program is for developers, including small businesses and non-profits, working on real estate projects.",
+      "use_of_funds": "Funds can pay for various project costs. These include buying vacant land or buildings. You can also use funds for predevelopment costs like engineering and design. The loans also cover construction, adaptive reuse, and major renovations.",
+      "geographic_eligibility": "Projects must be located in specific, pre-defined Eligible Neighborhoods within Baltimore City. An interactive map on the program website shows these areas.",
+      "requirements_list": [
+        "Commitment fee of $5,000",
+        "Origination fee up to 1.50% of the loan amount",
+        "Loans generally require a first or second lien on the property as collateral",
+        "Loan-to-value (LTV) ratios apply and vary by loan type, typically up to 90-95%"
+      ],
+      "application_process_overview": "First, use the program's interactive map to confirm your project is in an eligible neighborhood. Next, decide which financing option fits your needs. Finally, complete and submit the online intake form.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "baltimorecity",
+    "program_name": "Outdoor Spaces Grant",
+    "locality_name": "Baltimore City",
+    "agency": "",
+    "more_details_url": "https://www.baltimoredevelopment.com/doing-business/facade-improvement-grant",
+    "structured_extraction": {
+      "program_name": "Outdoor Spaces Grant",
+      "program_description": "The Baltimore Development Corporation (BDC) provides grants to help business owners pay for outdoor improvements. These improvements include seating, parklets, and landscaping. The program aims to create more public space, encourage community interaction, and make Baltimore's neighborhood streets more lively.",
+      "agency": "Baltimore Development Corporation",
+      "list_of_eligible_counties": [
+        "Baltimore City"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit",
+        "non-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "The program offers a reimbursement grant of up to $5,000. Businesses must provide matching funds. You must pay for the entire project first, and the grant will reimburse you after you show proof of completion and payment.",
+      "URL": "https://www.baltimoredevelopment.com/doing-business/facade-improvement-grant",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "info@baltimoredevelopment.com",
+      "contact_phone": null,
+      "program_audience": "This program is for business owners and community groups in Baltimore City.",
+      "use_of_funds": "Funds can pay for cafe tables and chairs, benches, curbside facilities like parklets, shade structures, outdoor lighting, planters, plants, and landscaping. You can also use funds for mobile vending structures.",
+      "geographic_eligibility": "The project must be in Baltimore City. Eligible locations include sidewalk space, adjacent parking spaces, private outdoor seating areas, and community spaces open to the public.",
+      "requirements_list": [
+        "Applicant must provide matching funds.",
+        "Applicant must pay for all project costs before receiving reimbursement.",
+        "Work must not begin before receiving written grant approval.",
+        "Project construction must be completed within 120 days of the award letter.",
+        "Applicant must be in good legal standing with federal, state, and local authorities.",
+        "For projects in the public right-of-way, a Curbside Commercial Permit or Minor Privilege Permit is required.",
+        "For community-led projects, a Memorandum of Understanding (MOU) is required.",
+        "Applicants must obtain two quotes for work done by third-party contractors.",
+        "The cost of architectural or design services cannot exceed 25% of the total project cost.",
+        "The cost of plants and landscaping is limited to 25% of the total grant amount.",
+        "The grant recipient must maintain the improvements for three years."
+      ],
+      "application_process_overview": "First, complete the application form. Then, gather the required documents. This includes a W-9 form, a sketch of your project, cost estimates, and any necessary permits or agreements. Email the complete application package to info@baltimoredevelopment.com. You can also mail the application. A BDC staff member will assist you through the process.",
+      "is_out_of_date": true,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "baltimorecity",
+    "program_name": "Francis Scott Key Bridge Business Assistance",
+    "locality_name": "Baltimore City",
+    "agency": "",
+    "more_details_url": "https://response.maryland.gov/bridge/support-for-businesses",
+    "structured_extraction": {
+      "program_name": "Small Business Administration (SBA) Economic Injury Disaster Loans (EIDLs)",
+      "program_description": "This program gives loans up to $2 million to help small businesses and some non-profits. The loans help them handle temporary revenue loss from the bridge collapse.",
+      "agency": "Small Business Administration (SBA)",
+      "list_of_eligible_counties": [
+        "All"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "non-profit",
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "loan"
+      ],
+      "assistance_description": "The program provides low-interest loans up to $2 million. Businesses can use the funds to pay for normal operating expenses like fixed debts, payroll, and accounts payable.",
+      "URL": "https://www.sba.gov/funding-programs/disaster-assistance",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": null,
+      "program_audience": "Small businesses and some private non-profit organizations affected by the bridge collapse.",
+      "use_of_funds": "You can use funds to pay for normal operating expenses. This includes fixed debts, payroll, accounts payable, and other bills that you cannot currently meet.",
+      "geographic_eligibility": null,
+      "requirements_list": [
+        "Must have experienced a temporary loss of revenue due to the bridge collapse."
+      ],
+      "application_process_overview": "You can apply for a loan online.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "baltimorecity",
+    "program_name": "Buy Into Bmore Fixed Pricing Program",
+    "locality_name": "Baltimore City",
+    "agency": "",
+    "more_details_url": "https://dhcd.baltimorecity.gov/fixed-pricing-program",
+    "structured_extraction": {
+      "program_name": "Buy Into Bmore Fixed Pricing Program",
+      "program_description": "The City of Baltimore sells its vacant buildings and lots at set prices. The program helps future homeowners, community groups, and developers buy and restore these properties for residential use.",
+      "agency": "Baltimore City Department of Housing & Community Development",
+      "list_of_eligible_counties": [
+        "Baltimore City"
+      ],
+      "list_of_prioritized_counties": [
+        "Baltimore City"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit",
+        "non-profit",
+        "individuals"
+      ],
+      "list_of_eligible_industries": [
+        "Construction",
+        "Real Estate and Rental and Leasing"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [],
+      "assistance_description": "The program sells city-owned properties at fixed, below-market prices. Homeowners and Community Land Trusts can buy a vacant building or lot for $1. Non-profits pay between $500 and $1,000. For-profit developers pay between $1,000 and $3,000. The price depends on the buyer's organization type and whether the property is a building or a lot.",
+      "URL": "https://dhcd.baltimorecity.gov/fixed-pricing-program",
+      "application_deadline_string": "rolling basis",
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "developmentinfo@baltimorecity.gov",
+      "contact_phone": "410-396-4111",
+      "program_audience": "This program helps individuals who want to become homeowners, as well as community land trusts, non-profit organizations, and for-profit developers.",
+      "use_of_funds": "You can use this program to buy and fix up vacant city-owned properties. The properties must be used for housing or for a mix of housing and business use.",
+      "geographic_eligibility": "The program applies to properties located within the E-J Housing Market Typology areas of Baltimore City.",
+      "requirements_list": [
+        "Applicants must prove they have at least $90,000 available to rehabilitate each property.",
+        "Homeowners must live in the property as their primary residence for a minimum of five years after renovation is complete.",
+        "The property must be renovated and receive a use and occupancy permit within 12 months of purchase.",
+        "Applicants cannot have any open legal issues or federal or state liens that could prevent them from completing the project.",
+        "Applicants must pay a $100 application fee, which is credited at settlement if approved or refunded if rejected."
+      ],
+      "application_process_overview": "Applicants submit an application online. The agency reviews applications as they are received and makes a decision within two weeks. If multiple qualified applicants apply for the same property, the agency reviews them in the order they were submitted.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "baltimore",
+    "program_name": "Grant for Revitalizing Office Workspaces (GROW)",
+    "locality_name": "Baltimore County",
+    "agency": "",
+    "more_details_url": "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/business/financing-and-tax-credits",
+    "structured_extraction": {
+      "program_name": "Grant for Revitalizing Office Workspaces (GROW)",
+      "program_description": "This program offers grants to businesses signing their first commercial lease in Baltimore County. The grant helps pay for initial leasing costs. The county awards funds on a first-come, first-served basis until the money runs out.",
+      "agency": "Baltimore County Department of Economic and Workforce Development",
+      "list_of_eligible_counties": [
+        "Baltimore"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "The program provides a one-time grant of $8 per square foot. The maximum award is $80,000 per business.",
+      "URL": "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/business/financing-and-tax-credits",
+      "application_deadline_string": "Rolling, within 180 days of lease execution",
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "businesshelp@baltimorecountymd.gov",
+      "contact_phone": null,
+      "program_audience": "Businesses signing their first commercial lease in Baltimore County.",
+      "use_of_funds": "Businesses can use the grant to help pay for initial costs when leasing a new commercial space.",
+      "geographic_eligibility": "The program is for businesses leasing Class A or Class B office or flex space within Baltimore County.",
+      "requirements_list": [
+        "Must execute a direct lease with a landlord for a minimum 36-month term.",
+        "Leased property must be a minimum of 500 square feet.",
+        "Application must be received within 180 days of lease execution.",
+        "Lease must be signed after February 14, 2025.",
+        "Applicants must have a minimum personal credit score of 625.",
+        "Retail, restaurant, independent financial, or insurance agent or broker establishments are not eligible."
+      ],
+      "application_process_overview": "First, complete and submit the online Program and Tax Credit Interest form. After submission, the county's Business Services team will contact you if you are eligible.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "baltimore",
+    "program_name": "Advanced Technology Loan Fund",
+    "locality_name": "Baltimore County",
+    "agency": "",
+    "more_details_url": "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/business/financing-and-tax-credits",
+    "structured_extraction": {
+      "program_name": "Advanced Technology Loan Fund",
+      "program_description": "This fund provides loans to technology companies. It also helps businesses buy technology equipment.",
+      "agency": "Baltimore County Department of Economic and Workforce Development",
+      "list_of_eligible_counties": [
+        "Baltimore"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [],
+      "assistance_type": [
+        "loan"
+      ],
+      "assistance_description": "The program offers loans up to a maximum of $250,000.",
+      "URL": "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/business/financing-and-tax-credits",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": null,
+      "program_audience": "Technology companies and businesses that need to acquire technology equipment are eligible.",
+      "use_of_funds": "You can use loan funds to finance buying and improving land, buildings, and equipment. You can also use funds for new construction or facility expansion.",
+      "geographic_eligibility": null,
+      "requirements_list": [],
+      "application_process_overview": null,
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "baltimore",
+    "program_name": "Boost Loan Fund Program",
+    "locality_name": "Baltimore County",
+    "agency": "",
+    "more_details_url": "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/boost-fund",
+    "structured_extraction": {
+      "program_name": "Boost Loan Fund Program",
+      "program_description": "This program provides loans to small, minority, woman, and veteran-owned businesses. The Maryland Department of Commerce provides the funds, which come from state video lottery terminal revenue.",
+      "agency": "Baltimore County Department of Economic and Workforce Development",
+      "list_of_eligible_counties": [
+        "Baltimore"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "loan"
+      ],
+      "assistance_description": "Businesses can borrow between $50,000 and $250,000. The program offers a reduced down payment and interest rates at or below current market rates. Loans have a maximum term of 20 years. The program customizes payment plans to help businesses manage their cash flow.",
+      "URL": "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/boost-fund",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": null,
+      "program_audience": "The program serves small, minority-owned, woman-owned, and veteran-owned businesses.",
+      "use_of_funds": "Funds can pay for start-up costs, gap funding, building improvements, equipment, lease improvements, business acquisition, working capital, and commercial real estate.",
+      "geographic_eligibility": null,
+      "requirements_list": [
+        "Must be classified as a small business by Small Business Administration (SBA) standards.",
+        "Must have a personal credit score of 625 or higher.",
+        "Must provide collateral as security for the loan.",
+        "Must provide personal guarantees."
+      ],
+      "application_process_overview": "To apply, complete the online form on the Baltimore County financing and tax credits webpage. Select the Boost Loan Fund Program. A member of the Business Services team will contact you if you are eligible.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "baltimore",
+    "program_name": "Building Improvement Loan Program (BILP)",
+    "locality_name": "Baltimore County",
+    "agency": "",
+    "more_details_url": "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/business/financing-and-tax-credits",
+    "structured_extraction": {
+      "program_name": "Building Improvement Loan Program (BILP)",
+      "program_description": "This program gives businesses an interest-free loan for building improvements. Businesses must be in a Commercial Revitalization District. The loan can help pay for outside upgrades, like signs and landscaping. It may also cover some inside work and equipment.",
+      "agency": "Baltimore County Department of Economic and Workforce Development",
+      "list_of_eligible_counties": [
+        "Baltimore"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "loan"
+      ],
+      "assistance_description": "The program offers an interest-free loan of up to $60,000. Businesses can combine this loan with other incentives for larger projects.",
+      "URL": "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/business/financing-and-tax-credits",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "businesshelp@baltimorecountymd.gov",
+      "contact_phone": null,
+      "program_audience": "Businesses located in one of Baltimore County's 24 Commercial Revitalization Districts.",
+      "use_of_funds": "Funds can pay for exterior improvements like awnings, landscaping, and signs. Some minor interior and equipment improvements may also qualify.",
+      "geographic_eligibility": "To qualify, your business must be in one of the 24 Commercial Revitalization Districts in Baltimore County. You can check your address using the county's 'My Neighborhood' online tool.",
+      "requirements_list": [],
+      "application_process_overview": "First, use the county's 'My Neighborhood' tool to confirm your business is in a Commercial Revitalization District. Next, contact the Business Services team to get an application and more information, or complete the online interest form. The team will contact you if you are eligible.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "baltimore",
+    "program_name": "Business Growth Loans",
+    "locality_name": "Baltimore County",
+    "agency": "",
+    "more_details_url": "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/business/financing-and-tax-credits",
+    "structured_extraction": {
+      "program_name": "Business Growth Loans",
+      "program_description": "This program provides direct loans or loan guarantees to new or expanding industrial or commercial businesses.",
+      "agency": "Baltimore County Department of Economic and Workforce Development",
+      "list_of_eligible_counties": [
+        "Baltimore"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "loan"
+      ],
+      "assistance_description": "The program offers loans up to a maximum of $250,000.",
+      "URL": "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/business/financing-and-tax-credits",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": null,
+      "program_audience": "New or expanding industrial or commercial businesses.",
+      "use_of_funds": "You can use funds to buy and improve land, buildings, plants, and equipment. You can also use the money for new construction or facility expansion.",
+      "geographic_eligibility": "The program serves businesses located in Baltimore County.",
+      "requirements_list": [],
+      "application_process_overview": "To apply, complete the online form and select the finance program you are interested in. The Business Services team will contact you if you are eligible.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "baltimore",
+    "program_name": "Enterprise Zone (EZ) Tax Credit",
+    "locality_name": "Baltimore County",
+    "agency": "",
+    "more_details_url": "https://www.baltimorecountymd.gov/files/Documents/EconomicDevel/Enterprise/ezbrochure.pdf",
+    "structured_extraction": {
+      "program_name": "Enterprise Zone (EZ) Tax Credit",
+      "program_description": "This program helps businesses in designated Baltimore County areas. It encourages companies to stay and grow. The program also promotes the use of empty or underused properties and the creation of new, high-paying jobs. It supports the county's efforts to improve older office and industrial areas.",
+      "agency": "Baltimore County Department of Economic Development",
+      "list_of_eligible_counties": [
+        "Baltimore"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [
+        "Enterprise Zones"
+      ],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program offers two main tax credits. The Real Property Tax Credit applies to companies that improve their property. This credit lasts for 10 years. For the first five years, it covers 80% of the property tax increase from the new investment. The credit amount decreases by 10% each year for the next five years. The State Income Tax Credit is for hiring new, full-time employees. Companies can get a one-time credit of up to $1,000 for each new employee. The credit can increase to $3,000 for hiring a worker who meets certain 'disadvantaged' criteria, with more credits available if the employee stays for a second and third year.",
+      "URL": "https://www.baltimorecountymd.gov/files/Documents/EconomicDevel/Enterprise/ezbrochure.pdf",
+      "application_deadline_string": "December 31",
+      "application_deadline_date": "2025-12-31",
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": null,
+      "program_audience": "Businesses that invest in property or hire new employees within specific Enterprise Zones in Baltimore County.",
+      "use_of_funds": "This program provides tax credits, not direct funds. Businesses can earn credits for making improvements to their property or for creating new, full-time jobs.",
+      "geographic_eligibility": "The business must be in one of three designated Enterprise Zones in Baltimore County: the Chesapeake Zone, the Southwest Enterprise Zone, or the Federal Center at Woodlawn.",
+      "requirements_list": [
+        "Must be located within a designated Enterprise Zone in Baltimore County.",
+        "Must make a new investment in real property or hire new employees working in the zone.",
+        "Most businesses are eligible, but retail businesses are generally excluded."
+      ],
+      "application_process_overview": "1. Complete the application and send it to the Baltimore County Department of Economic Development by December 31 to receive a property tax credit on the next tax bill. 2. After the department reviews your application, you will get a letter confirming if you are eligible. 3. For the property tax credit, the county will automatically notify the Maryland Department of Assessments and Taxation. 4. To claim the income tax credit, you must submit Maryland Tax Form 500CR with your annual tax return. 5. If you hire a 'disadvantaged' employee to receive a higher credit, you must get that employee certified.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "baltimore",
+    "program_name": "Tax Exempt Bonds",
+    "locality_name": "Baltimore County",
+    "agency": "",
+    "more_details_url": "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/business/financing-and-tax-credits",
+    "structured_extraction": {
+      "program_name": "Tax Exempt Bonds",
+      "program_description": "This program provides tax-exempt bond financing to help manufacturers and non-profit organizations. Businesses can use the funds to buy and improve land, buildings, and equipment. They can also use the money for new construction or to expand their facilities.",
+      "agency": "Baltimore County Department of Economic and Workforce Development",
+      "list_of_eligible_counties": [
+        "Baltimore"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "non-profit",
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Manufacturing"
+      ],
+      "list_of_prioritized_industries": [],
+      "assistance_type": [
+        "loan"
+      ],
+      "assistance_description": "The program offers bond financing ranging from $2.5 million to $10 million.",
+      "URL": "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/business/financing-and-tax-credits",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": null,
+      "program_audience": "Manufacturers and 501(c)(3) non-profit organizations",
+      "use_of_funds": "Funds can be used to buy and improve land, buildings, and equipment. You can also use the financing for new construction or to expand a facility.",
+      "geographic_eligibility": null,
+      "requirements_list": [
+        "Financing amount must be between $2.5 million and $10 million."
+      ],
+      "application_process_overview": "To apply, complete the online form and select this program. The Business Services team will contact you if you are eligible.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "baltimore",
+    "program_name": "Waterfront Business Improvement Loan Program",
+    "locality_name": "Baltimore County",
+    "agency": "",
+    "more_details_url": "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/business/financing-and-tax-credits",
+    "structured_extraction": {
+      "program_name": "Waterfront Business Improvement Loan Program",
+      "program_description": "This program provides loans to waterfront businesses in Baltimore County. The loans help pay for improvements to the exterior of the property.",
+      "agency": "Baltimore County Department of Economic and Workforce Development",
+      "list_of_eligible_counties": [
+        "Baltimore"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "loan"
+      ],
+      "assistance_description": "Businesses can borrow up to $75,000 or 90% of the project cost, whichever is less. The loan has a seven-year term with zero percent interest.",
+      "URL": "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/business/financing-and-tax-credits",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": null,
+      "program_audience": "Waterfront businesses in Baltimore County.",
+      "use_of_funds": "You can use funds for exterior improvements. This includes bulkhead repair, slip renovations, signage, landscaping, and facade improvements.",
+      "geographic_eligibility": "The business must be a waterfront business located in Baltimore County.",
+      "requirements_list": [],
+      "application_process_overview": "To apply, complete the online form on the program website. Select the finance program you want to apply for. The Business Services team will contact you if you are eligible.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "caroline",
+    "program_name": "Caroline Manufacturing Tax Credit",
+    "locality_name": "Caroline County",
+    "agency": "",
+    "more_details_url": "https://www.carolinebusiness.com/incentives-tax-credits/#cmtc",
+    "structured_extraction": {
+      "program_name": "Caroline Manufacturing Tax Credit",
+      "program_description": "This program provides a tax credit to manufacturers. It encourages business expansion and development to improve the local economy.",
+      "agency": "Caroline County Commissioners",
+      "list_of_eligible_counties": [
+        "Caroline"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Manufacturing"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program offers a 100% tax credit on the increased property value from new construction or facility expansions. The credit lasts for five consecutive years. The business must recertify its eligibility each year.",
+      "URL": "https://www.carolinebusiness.com/incentives-tax-credits/#cmtc",
+      "application_deadline_string": "Rolling, must be filed within one year of the expanded or newly constructed facility's placement on the tax roll.",
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": null,
+      "program_audience": "Manufacturers, fabricators, and assemblers in Caroline County.",
+      "use_of_funds": "The tax credit applies to the increased property value resulting from new construction or facility expansion.",
+      "geographic_eligibility": "The tax credit applies only to Caroline County real property taxes, not municipal taxes.",
+      "requirements_list": [
+        "The expansion or new construction must increase the property's assessed value by more than $50,000.",
+        "The business must create at least 15 new full-time jobs.",
+        "New employees must receive at least the federal minimum wage.",
+        "The employer must provide a basic employee benefit plan that includes medical insurance, leave, and a pension.",
+        "The business must annually certify that it continues to meet the program requirements.",
+        "Applicants must not be in default on any Caroline County or Maryland state taxes."
+      ],
+      "application_process_overview": "An owner or their representative must file an application with the County Commissioners. The application must be filed within one year of the new or expanded facility being added to the county tax roll. Applicants use a form provided by the County Commissioners. The Commissioners then approve or deny the application.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "carroll",
+    "program_name": "Local Job Creation Tax Credit",
+    "locality_name": "Carroll County",
+    "agency": "",
+    "more_details_url": "https://carrollbiz.org/financing-incentives/",
+    "structured_extraction": {
+      "program_name": "Local Job Creation Tax Credit",
+      "program_description": "Carroll County offers a tax credit to businesses that create new jobs. This credit applies to the county property tax on the business's real estate and personal property.",
+      "agency": "Carroll County Department of Economic Development",
+      "list_of_eligible_counties": [
+        "Carroll"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [
+        "Priority Funding Areas"
+      ],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "A business can claim a tax credit against county property taxes on its new or expanded property and its personal property. The credit amount decreases over six years. For years one and two, the credit is 52% of the increased property tax. For years three and four, it is 39%. For years five and six, it is 26%.",
+      "URL": "https://carrollbiz.org/financing-incentives/",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": "Paige Sunderland",
+      "contact_email": "psunderland@carrollbiz.org",
+      "contact_phone": null,
+      "program_audience": "Businesses",
+      "use_of_funds": null,
+      "geographic_eligibility": "The business must be located in a designated Priority Funding Area within Carroll County.",
+      "requirements_list": [
+        "Construct or expand business premises by at least 5,000 square feet.",
+        "Employ at least 25 people in new, permanent full-time positions within 24 months.",
+        "The new positions must be new to the state of Maryland.",
+        "At least 50% of the new positions must pay 125% or more of the county's average weekly wage.",
+        "The business must not have moved its operations from another Maryland county or Baltimore City.",
+        "The business must not owe any delinquent taxes to Carroll County."
+      ],
+      "application_process_overview": "A business must declare its intent to apply for the tax credit on a form provided by the County Comptroller. Once the business meets all eligibility requirements, it can apply for certification. An online application form is available.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "carroll",
+    "program_name": "Gateway Renovation Tax Credit Program",
+    "locality_name": "Carroll County",
+    "agency": "",
+    "more_details_url": "https://carrollbiz.org/financing-incentives/",
+    "structured_extraction": {
+      "program_name": "Gateway Renovation Tax Credit Program",
+      "program_description": "This program helps businesses redevelop and improve properties along the Finksburg MD 140 commercial corridor. The county offers this tax credit to encourage property owners to make their properties look better.",
+      "agency": "Carroll County Department of Economic Development, Department of Management and Budget, and Department of the Comptroller",
+      "list_of_eligible_counties": [
+        "Carroll"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program offers a property tax credit for up to five years. For existing buildings, the credit is 75% if improvement costs are more than 25% of the assessed property value. The credit is 50% if costs are 25% or less. For new construction, the credit is 50% if improvement costs for the building's exterior exceed 50% of the property's assessed value. The total credit cannot exceed the total cost of improvements.",
+      "URL": "https://carrollbiz.org/financing-incentives/",
+      "application_deadline_string": "on or before May 1 immediately before the first taxable year for which the tax credit is sought",
+      "application_deadline_date": null,
+      "contact_name": "Paige Sunderland",
+      "contact_email": "psunderland@carrollbiz.org",
+      "contact_phone": null,
+      "program_audience": "Owners of commercial or industrial properties",
+      "use_of_funds": "Funds can pay for improvements to a building's exterior, such as new windows, paint, or a new roof. You can also use funds for site improvements like landscaping, signs, lighting, sidewalks, and pedestrian areas.",
+      "geographic_eligibility": "The property must be located in the Finksburg area along the Maryland Route 140 corridor. This includes properties from the Baltimore County line to Sandymount Road that front MD 140 or are directly next to a property that does.",
+      "requirements_list": [
+        "Property must be used for business, commercial, or industrial purposes.",
+        "Property must be located within a C-1, C-2, C-3, I-1, or I-2 commercial or industrial zone.",
+        "Improvements must significantly enhance the property's visual appearance.",
+        "You must apply before starting the improvement project."
+      ],
+      "application_process_overview": "First, get the application form from the Department of the Comptroller. Then, complete and sign the application. You must include a tax map, property photos, a detailed description of the planned improvements with drawings, and a summary of costs. Finally, submit the complete application before you begin any work and by the May 1 deadline.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "cecil",
+    "program_name": "Cecil Catalyst",
+    "locality_name": "Cecil County",
+    "agency": "",
+    "more_details_url": "https://www.ccgov.org/government/economic-development/doing-business-in-cecil-county/resources/cecil-catalyst",
+    "structured_extraction": {
+      "program_name": "Cecil Catalyst",
+      "program_description": "This program provides low-interest loans to businesses and people who have trouble getting money from traditional banks. It helps small businesses, including new ones, grow and create jobs.",
+      "agency": "Cecil County Office of Economic Development",
+      "list_of_eligible_counties": [
+        "Cecil"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit",
+        "individuals"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "loan"
+      ],
+      "assistance_description": "The program offers loans from $5,000 to $75,000. The Loan Review Committee may approve larger amounts for well-funded projects. The interest rate is the Prime Rate plus 2%, fixed for up to five years. For longer loans, the rate adjusts after the first five years.",
+      "URL": "https://www.ccgov.org/government/economic-development/doing-business-in-cecil-county/resources/cecil-catalyst",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "sedwards@ccgov.org",
+      "contact_phone": "410-996-6292",
+      "program_audience": "The program serves small businesses, including start-ups, and individuals.",
+      "use_of_funds": "You can use loan funds for many business purposes. These include improving leased property, buying or building property, renovations, machinery, equipment, and working capital.",
+      "geographic_eligibility": null,
+      "requirements_list": [
+        "Applicants must be credit-worthy and show they can repay the loan.",
+        "The business owners must provide a personal guarantee for the loan.",
+        "A non-refundable application fee of $100 is required.",
+        "The borrower pays for all closing costs.",
+        "If buying real estate, the business must occupy at least 51% of the property."
+      ],
+      "application_process_overview": "Step 1: Contact the Office of Economic Development to discuss your project. Step 2: Complete and submit the application form with required documents. Step 3: The Loan Review Committee reviews your application and makes a decision.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 403,
+      "url_is_reachable": false,
+      "url_error_message": "Client Error: Forbidden"
+    }
+  },
+  {
+    "OBJECTID": "frederick",
+    "program_name": "Frederick County Small Business Tax Credit",
+    "locality_name": "Frederick County",
+    "agency": "",
+    "more_details_url": "https://www.discoverfrederickmd.com/DocumentCenter/View/98/Small-Business-Tax-Credit-PDF",
+    "structured_extraction": {
+      "program_name": "Frederick County Small Business Tax Credit",
+      "program_description": "This program gives a six-year tax credit on real property. The credit helps businesses that expand their location and hire more staff in Frederick County.",
+      "agency": "Frederick County Office of Economic Development",
+      "list_of_eligible_counties": [
+        "Frederick"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [
+        "Priority Funding Areas"
+      ],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program provides a tax credit based on the higher property tax value from a business expansion. The credit amount decreases over six years. For years one and two, the credit is 40%. For years three and four, it is 30%. For years five and six, it is 20%.",
+      "URL": "https://www.discoverfrederickmd.com/DocumentCenter/View/98/Small-Business-Tax-Credit-PDF",
+      "application_deadline_string": "on or before October 1 of the tax year for which the real property is first eligible and must reapply annually",
+      "application_deadline_date": "2026-10-01",
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": "301-600-1058",
+      "program_audience": "Businesses expanding in or relocating to Frederick County from outside of Maryland.",
+      "use_of_funds": null,
+      "geographic_eligibility": "The business must be in a Frederick County priority funding area. Businesses can be existing county businesses or those relocating from outside Maryland.",
+      "requirements_list": [
+        "Obtain at least 2,500 square feet of new or expanded space.",
+        "Employ at least 5 people in full-time jobs within the first 24 months of occupying the new or expanded space."
+      ],
+      "application_process_overview": "First, contact the Frederick County Office of Economic Development. Next, notify the County's Director of Finance of your intent to claim the credit on or before October 1 of the first eligible tax year. You must reapply for the credit annually.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "frederick",
+    "program_name": "Frederick County New Jobs Tax Credit",
+    "locality_name": "Frederick County",
+    "agency": "",
+    "more_details_url": "https://www.discoverfrederickmd.com/DocumentCenter/View/97/New-Jobs-Tax-Credit-PD",
+    "structured_extraction": {
+      "program_name": "Frederick County New Jobs Tax Credit",
+      "program_description": "This program provides a six-year tax credit on real property to businesses. The credit helps businesses that expand their buildings and create new jobs in Frederick County.",
+      "agency": "Frederick County Office of Economic Development",
+      "list_of_eligible_counties": [
+        "Frederick"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [
+        "Priority Funding Areas"
+      ],
+      "eligible_organization_types": [],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program provides a tax credit on the increased value of a business's real property after an expansion. The credit amount decreases over six years. For years one and two, the credit is 52%. For years three and four, it is 39%. For years five and six, it is 26%.",
+      "URL": "https://www.discoverfrederickmd.com/DocumentCenter/View/97/New-Jobs-Tax-Credit-PD",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": "301-600-1058",
+      "program_audience": "This program is for businesses that are new to Frederick County, are already located there, or are moving to the county from outside of Maryland.",
+      "use_of_funds": "The benefit is a reduction in real property taxes for businesses that expand their facilities.",
+      "geographic_eligibility": "The business must be located within a Frederick County priority funding area.",
+      "requirements_list": [
+        "Must be established in Frederick County or relocate to the county from outside Maryland.",
+        "Must construct or expand premises by at least 5,000 square feet.",
+        "Must create at least 25 full-time jobs within the first 24 months after occupying the new or expanded premises.",
+        "Must maintain the 25 full-time permanent positions for three years after each year a tax credit is allowed."
+      ],
+      "application_process_overview": "First, contact the Frederick County Office of Economic Development. Before you expand, you must also notify the County's Director of Finance of your intent to claim the credit.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "frederick",
+    "program_name": "Frederick County Enhanced New Jobs Tax Credit",
+    "locality_name": "Frederick County",
+    "agency": "",
+    "more_details_url": "https://www.discoverfrederickmd.com/DocumentCenter/View/100/Enhanced-New-Jobs-Tax-Credit-PDF",
+    "structured_extraction": {
+      "program_name": "Frederick County Enhanced New Jobs Tax Credit",
+      "program_description": "This program offers a real property tax credit to businesses that expand their facilities and create a large number of new jobs within Frederick County.",
+      "agency": "Frederick County Office of Economic Development",
+      "list_of_eligible_counties": [
+        "Frederick"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [
+        "Priority Funding Areas"
+      ],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program provides a 58% tax credit for 12 years. The credit applies to the increased real property tax amount that results from a business expansion.",
+      "URL": "https://www.discoverfrederickmd.com/DocumentCenter/View/100/Enhanced-New-Jobs-Tax-Credit-PDF",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": "301-600-1058",
+      "program_audience": "This program is for businesses that are already in Frederick County or are moving to the county from outside of Maryland.",
+      "use_of_funds": null,
+      "geographic_eligibility": "Your business must be located in a Priority Funding Area within Frederick County.",
+      "requirements_list": [
+        "Must be established in Frederick County or relocate to the county from outside Maryland.",
+        "Must construct or expand premises by at least 250,000 square feet.",
+        "Must create at least 1,250 full-time permanent jobs paying at least 150% of the federal minimum wage.",
+        "Alternatively, create at least 2,500 full-time jobs and add 500 more positions, all paying at least 150% of the federal minimum wage.",
+        "You must inform the County's Director of Finance about your plan to claim the credit before you begin the expansion."
+      ],
+      "application_process_overview": "First, contact the Frederick County Office of Economic Development. Then, you must notify the County's Director of Finance that you intend to claim the credit before your expansion begins.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "frederick",
+    "program_name": "Frederick County Commercial & Industrial Business Tax Credit",
+    "locality_name": "Frederick County",
+    "agency": "",
+    "more_details_url": "https://www.discoverfrederickmd.com/DocumentCenter/View/106/Commercial-and-Industrial-Business-Tax-Credit-PDF",
+    "structured_extraction": {
+      "program_name": "Frederick County Commercial & Industrial Business Tax Credit",
+      "program_description": "This program offers a 10-year tax credit on real property taxes. It supports businesses that build new facilities or expand existing ones in Frederick County. The credit reduces the amount of property tax owed on the value of the new improvements.",
+      "agency": "Frederick County Office of Economic Development",
+      "list_of_eligible_counties": [
+        "Frederick"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Manufacturing"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The county provides a 10-year tax credit for real property. The credit is a percentage of the new property tax that results from building or expanding a facility. If the average credit over the 10 years is more than 60% of the new tax amount, the County Council must approve it.",
+      "URL": "https://www.discoverfrederickmd.com/DocumentCenter/View/106/Commercial-and-Industrial-Business-Tax-Credit-PDF",
+      "application_deadline_string": "October 1 of the tax year which the facility is first eligible",
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": "301-600-1058",
+      "program_audience": "This program helps businesses that manufacture, fabricate, or assemble products in Frederick County.",
+      "use_of_funds": null,
+      "geographic_eligibility": null,
+      "requirements_list": [
+        "Must conduct manufacturing, fabricating or assembling operations within Frederick County.",
+        "Must have a total new investment of at least $5 million.",
+        "Must create at least 25 new permanent jobs.",
+        "New jobs must pay at least 150% of the federal minimum wage.",
+        "New positions may not be transferred from another location in Frederick County."
+      ],
+      "application_process_overview": "First, contact the Frederick County Office of Economic Development. Next, you must apply with the County Treasurer by October 1 of the first tax year your facility is eligible. After that, you must file a form every year by April 30 to show you still qualify for the credit.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "garrett",
+    "program_name": "County Business Property Tax Incentive Program",
+    "locality_name": "Garrett County",
+    "agency": "",
+    "more_details_url": "https://business.garrettcountymd.gov/sites/business.garrettcountymd.gov/files/2023-11/Garrett-County-Business-Property-Tax-Credit-%28Rev.05.22.2008%29.pdf",
+    "structured_extraction": {
+      "program_name": "Garrett County Property Tax Credit for New or Expanding Businesses",
+      "program_description": "This program gives a property tax credit to businesses that start or grow in Garrett County. The credit lowers county real estate taxes on new buildings or property improvements for five years.",
+      "agency": "Garrett County Department of Economic Development",
+      "list_of_eligible_counties": [
+        "Garrett"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program provides a five-year tax credit on the increased value of a property after improvements. In the first year, the credit is 50% of the increased county real estate tax. The credit then reduces by 10% each following year, to 40%, 30%, 20%, and finally 10%.",
+      "URL": "https://business.garrettcountymd.gov/sites/business.garrettcountymd.gov/files/2023-11/Garrett-County-Business-Property-Tax-Credit-%28Rev.05.22.2008%29.pdf",
+      "application_deadline_string": "rolling",
+      "application_deadline_date": null,
+      "contact_name": "Kim E. Durst",
+      "contact_email": "kdurst@garrettcounty.org",
+      "contact_phone": "(301) 334-1921",
+      "program_audience": "The program is for any new or expanding commercial or industrial business in Garrett County.",
+      "use_of_funds": "This tax credit helps offset the cost of property improvements. Eligible projects include expanding, renovating, or making capital improvements to a business property.",
+      "geographic_eligibility": "The program is available for properties located anywhere in Garrett County.",
+      "requirements_list": [
+        "Must make a minimum of $100,000 in real property capital improvements."
+      ],
+      "application_process_overview": "First, a business must tell the Garrett County Department of Economic Development that it wants to apply. The business should do this right after it finishes any property expansion, renovation, or improvement. Second, the business fills out and submits an application form from the department. If the business qualifies, the department sends a certificate of eligibility.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "harford",
+    "program_name": "Workforce Technical Training Grant",
+    "locality_name": "Harford County",
+    "agency": "",
+    "more_details_url": "https://www.harfordcountymd.gov/1285/Workforce-Technical-Training-Grant",
+    "structured_extraction": {
+      "program_name": "Workforce Technical Training Grant",
+      "program_description": "This program provides matching grants to businesses in Harford County. The funds help pay for technical training for full-time employees. The training should help the business improve its production capabilities.",
+      "agency": "Harford County Department of Economic Development",
+      "list_of_eligible_counties": [
+        "Harford"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "The county offers competitive matching grants. These grants help businesses provide technical training to their employees to improve productivity and competitiveness.",
+      "URL": "https://www.harfordcountymd.gov/1285/Workforce-Technical-Training-Grant",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "ded@harfordcountymd.gov",
+      "contact_phone": "410-638-3059",
+      "program_audience": "Employers in Harford County",
+      "use_of_funds": "Funds support technical training for existing full-time permanent employees. The training must help expand or improve the company's production capabilities.",
+      "geographic_eligibility": null,
+      "requirements_list": [
+        "Provide matching funds",
+        "Training must be for existing, full-time, permanent employees"
+      ],
+      "application_process_overview": "First, download, save, and complete all required forms from the 'Files' tab on the program website. Then, submit these files as part of the application package. A webinar is available to explain the eligibility and application process.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "harford",
+    "program_name": "Economic Development Opportunity Fund",
+    "locality_name": "Harford County",
+    "agency": "",
+    "more_details_url": "https://www.harfordcountymd.gov/2465/Loan-Programs",
+    "structured_extraction": {
+      "program_name": "Economic Development Opportunity Fund",
+      "program_description": "This program provides loans to small businesses in Harford County. The loans help businesses grow by funding new investments, creating jobs, and keeping existing jobs.",
+      "agency": "Harford County Office of Economic Development",
+      "list_of_eligible_counties": [
+        "Harford"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "loan"
+      ],
+      "assistance_description": "The program offers loans up to $200,000 with flexible terms. Businesses must provide collateral, but the county may make exceptions for loans under $10,000. Loans over $50,000 need approval from the Harford County Council.",
+      "URL": "https://www.harfordcountymd.gov/2465/Loan-Programs",
+      "application_deadline_string": "rolling",
+      "application_deadline_date": null,
+      "contact_name": "Bonnie Barresi",
+      "contact_email": "bebarresi@harfordcountymd.gov",
+      "contact_phone": "410-638-3338",
+      "program_audience": "Small businesses",
+      "use_of_funds": "You can use funds for projects in Harford County. This includes buying land or buildings, expanding facilities, upgrading technology, or purchasing equipment.",
+      "geographic_eligibility": null,
+      "requirements_list": [
+        "Must be a small business as defined by the U.S. Small Business Administration.",
+        "Must be located in Harford County.",
+        "Must have been operating for at least one year.",
+        "Must be in good standing with Harford County and the State of Maryland.",
+        "Must provide collateral, though exceptions may be made for loans less than $10,000.",
+        "Must submit a business plan, two years of cash flow projections, two years of business and personal tax returns, two years of financial statements, a schedule of business debts, a personal financial statement, and a description of available collateral."
+      ],
+      "application_process_overview": "First, go to the program website and click the application button to reach the information page. After reviewing the information, click apply to access the eCivis portal. Then, create a profile and log in to start the application. The Loan Committee reviews completed applications monthly. If a loan is over $50,000, it also needs approval from the Harford County Council. Settlement happens within 90 days of approval.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "harford",
+    "program_name": "Harford County Tourism Funding Program",
+    "locality_name": "Harford County",
+    "agency": "",
+    "more_details_url": "https://www.harfordcountymd.gov/2678/Tourism",
+    "structured_extraction": {
+      "program_name": "Harford County Tourism Funding Program",
+      "program_description": "The Harford County Department of Economic Development offers grants to non-profit groups and towns. The grants help fund events and activities that attract visitors to the county, especially for overnight stays. The program receives its funding from the county's hotel tax.",
+      "agency": "Harford County Department of Economic Development",
+      "list_of_eligible_counties": [
+        "Harford"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "non-profit",
+        "government"
+      ],
+      "list_of_eligible_industries": [
+        "Arts, Entertainment, and Recreation",
+        "Agriculture, Forestry, Fishing and Hunting"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "The program provides grants through two funds: the Partnership Fund and the Community Impact Fund. For the 2026 fiscal year, a total of $770,000 is available for all awards. Harford County's 6% hotel tax funds this program.",
+      "URL": "https://www.harfordcountymd.gov/2678/Tourism",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "ded@harfordcountymd.gov",
+      "contact_phone": "410-638-3059",
+      "program_audience": "This program helps non-profit organizations and municipal governments in Harford County. Eligible non-profits must have a 501(c)3 or 501(c)6 status and a primary focus on tourism.",
+      "use_of_funds": "You can use grant money for activities that promote tourism. This includes marketing for festivals, events, and exhibits. Funds may also cover some non-marketing and operational costs, like salaries, but with certain limits. You cannot use funds to buy property, for building projects, to pay off debt, or for general office equipment.",
+      "geographic_eligibility": "Only organizations registered with the State of Maryland at an address in Harford County are eligible to apply.",
+      "requirements_list": [
+        "Must be a 501(c)(3) or 501(c)(6) non-profit organization or a Harford County municipality.",
+        "The organization's mission must be tourism-related, meaning its activities primarily attract visitors from outside Harford County for overnight stays.",
+        "Must be in good standing with the Maryland State Department of Assessment and Taxation and the Maryland Office of the Secretary of State's Charitable Organization Division.",
+        "Applicants to the Partnership Fund must collaborate with at least one other organization.",
+        "Applicants must submit all required documentation, which includes financial statements, proof of non-profit status, and letters of support from partners."
+      ],
+      "application_process_overview": "Applications for the 2026 funding cycle open on March 7, 2025. Applicants must submit a complete application with all required documents. A review committee evaluates the applications and makes funding recommendations.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "howard",
+    "program_name": "Route 1 Tax Credit Program",
+    "locality_name": "Howard County",
+    "agency": "",
+    "more_details_url": "https://www.howardcountymd.gov/planning-zoning/route-1-tax-credit-program",
+    "structured_extraction": {
+      "program_name": "Route 1 Tax Credit Program",
+      "program_description": "This program offers tax credits to owners of commercial and industrial properties. The credits support visible improvements to properties located along the Route 1 corridor.",
+      "agency": "Howard County Department of Planning & Zoning",
+      "list_of_eligible_counties": [
+        "Howard"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program provides a tax credit up to a maximum of $100,000 per property. You may be eligible for up to 125% of approved expenses if costs exceed the initial estimate, not to exceed the $100,000 cap. The full credit is available over five years if the property's taxes are high enough. The credit stays with the property, not the owner, if it is sold.",
+      "URL": "https://www.howardcountymd.gov/planning-zoning/route-1-tax-credit-program",
+      "application_deadline_string": "Applications open each July and are reviewed on a rolling basis until the annual allocation is used.",
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": "410-313-2350",
+      "program_audience": "Owners of commercial and industrial properties along the Route 1 corridor.",
+      "use_of_funds": "Eligible uses include: exterior renovations or cleaning; structural improvements to the facade; replacing false facades; restoring architectural features; adding streetscape items like landscaping, walkways, or lighting; repairing doors and windows; new signs, canopies, or awnings; visible roof repairs; screening for utility or trash areas; enhanced exterior lighting; fencing that does not hide the building; sidewalks; new construction that improves the property's appearance; and necessary interior structural work.",
+      "geographic_eligibility": "Properties must be located along the Route 1 corridor in Howard County.",
+      "requirements_list": [
+        "You must be current on property taxes.",
+        "The property must have no outstanding violations for zoning, licensing, permits, or fire codes.",
+        "Proposed improvements must comply with the Route 1 Manual and county development standards.",
+        "Approval for the tax credit does not replace the need for any required building or sign permits.",
+        "The program has a total annual allocation of $250,000."
+      ],
+      "application_process_overview": "First, contact the agency to discuss your proposed project. If you decide to apply, submit an application with contractor cost estimates and photos of the property's current condition. County staff review the application to ensure you meet all requirements. An inter-departmental committee then votes to approve or deny the project. You must not begin any work until you receive a Certificate of Eligibility. After completing the work, submit a final application with a maintenance agreement and invoices by April 1st. A county representative will inspect the site to verify the work was completed as approved.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "kent",
+    "program_name": "Commerce Zone Tax Credit (County)",
+    "locality_name": "Kent County",
+    "agency": "",
+    "more_details_url": "https://www.kentcounty.com/business/business_support/incentives/tax_credits#CommerceZone",
+    "structured_extraction": {
+      "program_name": "Commerce Zone Tax Credit (County)",
+      "program_description": "This program gives a tax credit to commercial or industrial property owners who make a capital investment in their property. The credit applies against the increased property value for ten years when a business moves in to operate.",
+      "agency": "Kent County Commissioners",
+      "list_of_eligible_counties": [
+        "Kent"
+      ],
+      "list_of_prioritized_counties": [
+        "Kent"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program provides a ten-year tax credit on the increased property value from a capital investment. The credit is 50% for the first five years. It is 25% for years six and seven. For years eight through ten, the credit is 15%.",
+      "URL": "https://www.kentcounty.com/business/business_support/incentives/tax_credits#CommerceZone",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "kentcounty@kentgov.org",
+      "contact_phone": "410-778-4600",
+      "program_audience": "Commercial or industrial real property owners.",
+      "use_of_funds": "The tax credit applies to capital investments made on commercial or industrial real property where a business locates to operate.",
+      "geographic_eligibility": null,
+      "requirements_list": [
+        "Must be a commercial or industrial real property owner.",
+        "Must make a capital investment on the property.",
+        "A business entity must locate on the property to conduct business."
+      ],
+      "application_process_overview": "Download and complete the Application for Commerce Zone Tax Credit from the program website. Submit the application to the county.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "kent",
+    "program_name": "Job Creation Tax Credit (County)",
+    "locality_name": "Kent County",
+    "agency": "",
+    "more_details_url": "https://www.kentcounty.com/business/business_support/incentives/tax_credits#NewJobCreation",
+    "structured_extraction": {
+      "program_name": "Tax Credits for Businesses That Create New Jobs (County)",
+      "program_description": "This program provides a tax credit to businesses in Kent County. To qualify, a business must build a new facility or expand an existing one and hire at least 10 new full-time employees.",
+      "agency": "Kent County Commissioners",
+      "list_of_eligible_counties": [
+        "Kent"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program offers a six-year tax credit on the increased assessed value of the property. The credit is 52% for the first two years, 39% for the third and fourth years, and 26% for the fifth and sixth years.",
+      "URL": "https://www.kentcounty.com/business/business_support/incentives/tax_credits#NewJobCreation",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "kentcounty@kentgov.org",
+      "contact_phone": "410-778-4600",
+      "program_audience": "Businesses in Kent County that are expanding their physical location and creating new full-time jobs.",
+      "use_of_funds": null,
+      "geographic_eligibility": null,
+      "requirements_list": [
+        "Must construct or expand business premises by at least 5,000 square feet.",
+        "Must employ at least 10 individuals in new, full-time positions."
+      ],
+      "application_process_overview": "Businesses must complete and submit the Application for the Job Creation Tax Credit.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "kent",
+    "program_name": "Upper Shore Workforce Investment Board Incumbent Worker Training Fund (IWT)",
+    "locality_name": "Kent County",
+    "agency": "",
+    "more_details_url": "https://www.uswib.org/general-5",
+    "structured_extraction": {
+      "program_name": "Upper Shore Workforce Investment Board Incumbent Worker Training Fund (IWT)",
+      "program_description": "This program helps businesses in Kent and Queen Anne's counties pay for training for their current employees. The training should help workers improve their skills, get new career opportunities, or earn higher wages. All training must result in a credential.",
+      "agency": "Upper Shore Workforce Investment Board",
+      "list_of_eligible_counties": [
+        "Kent",
+        "Queen Anne's"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "The program reimburses businesses for training costs. A company can receive a maximum of $5,000. The program targets a training cost of $1,500 per person, but this amount is negotiable.",
+      "URL": "https://www.uswib.org/general-5",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": "Debbie Bowden",
+      "contact_email": "envistrallc@gmail.com",
+      "contact_phone": null,
+      "program_audience": "Businesses in Kent and Queen Anne's counties that want to train their employees.",
+      "use_of_funds": "You can use funds to pay for different types of training. This includes classroom training for new skills and certifications. It also covers on-the-job training, in-house training programs, and training from outside providers.",
+      "geographic_eligibility": "The program is available to businesses located in Kent and Queen Anne's counties.",
+      "requirements_list": [
+        "Applicants must have a plan to train current, non-contractual employees.",
+        "All trainings must result in a credential that confirms completion."
+      ],
+      "application_process_overview": "To apply or learn more about the fund, contact Debbie Bowden at envistrallc@gmail.com.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "montgomery",
+    "program_name": "Biotechnology Investor Incentive Program",
+    "locality_name": "Montgomery County",
+    "agency": "",
+    "more_details_url": "https://www.montgomerycountymd.gov/business/doing-business-in-mc/funding-incentives-details.html#biip",
+    "structured_extraction": {
+      "program_name": "Biotechnology Investor Incentive Program",
+      "program_description": "This program gives a supplemental grant to people or companies that invest in biotechnology businesses in Montgomery County. If an investor qualifies for and receives the Maryland Biotechnology Investment Incentive Tax Credit, they automatically get this extra grant from the county.",
+      "agency": "Montgomery County Department of Finance",
+      "list_of_eligible_counties": [
+        "Montgomery"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit",
+        "individuals"
+      ],
+      "list_of_eligible_industries": [
+        "Professional, Scientific, and Technical Services"
+      ],
+      "list_of_prioritized_industries": [],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "The county provides a supplemental grant. The county automatically gives this grant to investors who receive the state's Biotechnology Investment Incentive Tax Credit. The county typically pays out the grants between March and May for investments made in the previous calendar year.",
+      "URL": "https://www.montgomerycountymd.gov/business/doing-business-in-mc/funding-incentives-details.html#biip",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": "240-777-8860",
+      "program_audience": "Investors in biotechnology companies located in Montgomery County.",
+      "use_of_funds": null,
+      "geographic_eligibility": "The program supports investments in biotechnology companies located within Montgomery County.",
+      "requirements_list": [
+        "Investors must be approved for and receive tax credits from the Maryland Biotechnology Investment Incentive Tax Credit Program."
+      ],
+      "application_process_overview": "There is no separate application for this county grant. Investors automatically receive the grant if they are approved for the Maryland Biotechnology Investment Incentive Tax Credit.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "montgomery",
+    "program_name": "Economic Development Grant and Loan Program",
+    "locality_name": "Montgomery County",
+    "agency": "",
+    "more_details_url": "https://www.montgomerycountymd.gov/business/doing-business-in-mc/funding-incentives-details.html#edglp",
+    "structured_extraction": {
+      "program_name": "Economic Development Grant and Loan Program",
+      "program_description": "This program provides money to private employers. The employers must keep or create new jobs in Montgomery County.",
+      "agency": "Montgomery County Business Center",
+      "list_of_eligible_counties": [
+        "Montgomery"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Manufacturing",
+        "Professional, Scientific, and Technical Services"
+      ],
+      "assistance_type": [
+        "grant",
+        "loan"
+      ],
+      "assistance_description": "The program typically provides assistance from $5,000 to $100,000. Larger projects may receive more money.",
+      "URL": "https://www.montgomerycountymd.gov/business/doing-business-in-mc/funding-incentives-details.html#edglp",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "BusinessCenter@MontgomeryCountyMD.gov",
+      "contact_phone": "240-777-0311",
+      "program_audience": "Private businesses",
+      "use_of_funds": null,
+      "geographic_eligibility": "The program gives priority to businesses located in urban revitalization areas.",
+      "requirements_list": [
+        "Must show projected job growth or capital investment.",
+        "Must provide financial history and projections, including balance sheets, income statements, and cash flow statements.",
+        "Must provide company and management background.",
+        "Must provide a present and future market outlook.",
+        "Priority is given to projects that create significant new jobs within 1 to 3 years.",
+        "Priority is given to projects that result in significant capital investment.",
+        "Priority is given to projects that leverage existing state and private funding."
+      ],
+      "application_process_overview": null,
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "montgomery",
+    "program_name": "Montgomery County Job Creation Fund",
+    "locality_name": "Montgomery County",
+    "agency": "",
+    "more_details_url": "https://thinkmoco.com/site-selection/job-creation-fund/",
+    "structured_extraction": {
+      "program_name": "Montgomery County Job Creation Fund",
+      "program_description": "This program offers grants to employers in Montgomery County. The funds help companies grow and expand by hiring new workers.",
+      "agency": "Montgomery County Department of Finance",
+      "list_of_eligible_counties": [
+        "Montgomery"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "non-profit",
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Health Care and Social Assistance",
+        "Professional, Scientific, and Technical Services",
+        "Information",
+        "Accommodation and Food Services",
+        "Management of Companies and Enterprises"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "Eligible companies can receive a grant for each new job they create. The grant is $10,000 per job, or $12,000 per job if the business is in a designated Community Equity Index disadvantaged area. The total award cannot exceed $500,000 for one company.",
+      "URL": "https://thinkmoco.com/site-selection/job-creation-fund/",
+      "application_deadline_string": "Rolling",
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "FIN.EconomicDevelopmentFund@montgomerycountymd.gov",
+      "contact_phone": null,
+      "program_audience": "This program is for employers located in Montgomery County. It is open to company headquarters, national nonprofit organizations, or businesses in target industries.",
+      "use_of_funds": "The grant supports business growth and expansion connected to hiring new employees.",
+      "geographic_eligibility": "The business must be located in Montgomery County. Companies in Community Equity Index disadvantaged areas receive a higher award amount per job.",
+      "requirements_list": [
+        "Must be a company headquarters, a national nonprofit organization, or operate in a target industry (Life Sciences, Advanced Technology, Cybersecurity, Quantum Computing, Hospitality).",
+        "Must create at least five new full-time, permanent jobs within twelve months of applying.",
+        "Each new job must have a base annual salary of $100,000, not including benefits."
+      ],
+      "application_process_overview": "First, submit an application to the Montgomery County Department of Finance. In the application, state the number of qualifying jobs you plan to create and the hiring schedule. Second, the submission date starts a 12-month period where you must hire at least 5 qualifying employees. You have an additional 6 months to hire more positions beyond the initial five.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "montgomery",
+    "program_name": "MOVE Grant Program",
+    "locality_name": "Montgomery County",
+    "agency": "",
+    "more_details_url": "https://www.montgomerycountymd.gov/business/programs/move-grant.html",
+    "structured_extraction": {
+      "program_name": "MOVE Grant Program",
+      "program_description": "This program provides grants to help businesses that sign their first commercial office lease in Montgomery County. It also helps businesses that expand their existing office lease by at least 500 square feet.",
+      "agency": "Montgomery County Business Center",
+      "list_of_eligible_counties": [
+        "Montgomery"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "The program offers grants based on the size of the leased office space. Businesses leasing less than 7,500 square feet can get $8 per square foot, up to $60,000. For leases between 7,501 and 10,000 square feet, the grant is $10 per square foot, up to $100,000. For leases over 10,000 square feet, the grant is $12.50 per square foot, up to $150,000. Certain strategic industries may receive $15 per square foot, up to $150,000.",
+      "URL": "https://www.montgomerycountymd.gov/business/programs/move-grant.html",
+      "application_deadline_string": "first-come, first-served; must apply within 180 days of lease execution",
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "BusinessCenter@Montgomerycountymd.gov",
+      "contact_phone": "240-777-0311",
+      "program_audience": "Businesses leasing commercial office space for the first time or expanding their current office space in Montgomery County.",
+      "use_of_funds": "The grant supports costs associated with a business leasing its first commercial office space or expanding its existing office space.",
+      "geographic_eligibility": "The business must lease commercial office space located in Montgomery County.",
+      "requirements_list": [
+        "Must sign a new commercial office lease or expand an existing lease by at least 500 square feet.",
+        "The lease term must be 36 months or longer.",
+        "The business must be in good standing with the Maryland State Department of Assessments and Taxation.",
+        "Submit a complete application within 180 days of the lease execution date.",
+        "Retail, restaurant, and independent financial or insurance agent/broker businesses are not eligible."
+      ],
+      "application_process_overview": "First, review the program criteria to ensure eligibility. Next, gather required documents, including the signed lease, articles of incorporation, proof of occupancy, and a business plan. Then, submit the complete application online. A program manager will conduct a site visit to verify occupancy before the county disburses the grant funds.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "montgomery",
+    "program_name": "SBIR/STTR Matching Grant Program",
+    "locality_name": "Montgomery County",
+    "agency": "",
+    "more_details_url": "https://montgomerycountymd.gov/business/SBIR-STTR/",
+    "structured_extraction": {
+      "program_name": "Montgomery County, Maryland SBIR/STTR Matching Grant Program",
+      "program_description": "This program gives grants to small businesses in Montgomery County. It helps companies in the biotechnology, medicine, and life sciences fields. The funds support companies that apply for or receive federal Small Business Innovation Research (SBIR) or Small Business Technology Transfer (STTR) awards. The goal is to help these companies bring their new technologies to the market faster.",
+      "agency": "Montgomery County Business Center",
+      "list_of_eligible_counties": [
+        "Montgomery"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Health Care and Social Assistance",
+        "Professional, Scientific, and Technical Services"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "The program offers grants in three phases. Phase 0 provides up to $5,000 to repay costs for expert help with a first-time federal SBIR/STTR application. Phase 1 provides a grant of up to $25,000 for companies that win a federal Phase 1 award. Phase 2 provides a grant of up to $50,000 for companies that win a federal Phase 2 award.",
+      "URL": "https://montgomerycountymd.gov/business/SBIR-STTR/",
+      "application_deadline_string": "first-come-first-served",
+      "application_deadline_date": null,
+      "contact_name": "Derese Bikila",
+      "contact_email": "Derese.Bikila@montgomerycountymd.gov",
+      "contact_phone": "240-777-0311",
+      "program_audience": "The program is for small biotechnology, medical, and life science companies in Montgomery County. It is for companies that have applied for or recently won a federal SBIR or STTR award.",
+      "use_of_funds": "Phase 0 funds repay costs for technical help with writing a federal grant application. Phase 1 and 2 funds help companies move their technology to the market. Up to 50% of these grants can repay costs for technical, investment, or commercialization help.",
+      "geographic_eligibility": "A company must conduct at least 51% of its research and development in Montgomery County.",
+      "requirements_list": [
+        "Must be in Good Standing with the Maryland Department of Assessments and Taxation (SDAT).",
+        "Must have a maximum of 20 employees at the time of application.",
+        "Phase 0 applicants must have been in operation for five years or less and have received no prior SBIR/STTR awards.",
+        "Phase 1 applicants must have been in operation for five years or less and received a maximum of two prior Phase 1 and zero Phase 2 awards.",
+        "Phase 2 applicants must have been in operation for seven years or less and received a maximum of four prior Phase 1 and one prior Phase 2 awards."
+      ],
+      "application_process_overview": "Businesses apply through the portal on the Montgomery County Business Center website. The county accepts applications on a first-come, first-served basis. Phase 0 applicants must show proof they hired technical help and submitted a federal application. Phase 1 and 2 applicants must show proof they received a federal award.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "montgomery",
+    "program_name": "New Jobs Tax Credits",
+    "locality_name": "Montgomery County",
+    "agency": "",
+    "more_details_url": "https://www.montgomerycountymd.gov/finance/taxes/business.html",
+    "structured_extraction": {
+      "program_name": "New Jobs Tax Credits",
+      "program_description": "This program gives tax credits to businesses that grow their physical space and hire more employees in Montgomery County. The program includes the New Jobs Credit for general business growth and the Enhanced New Jobs Credit for very large expansion projects.",
+      "agency": null,
+      "list_of_eligible_counties": [
+        "Montgomery"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "This program offers two property tax credits. The New Jobs Tax Credit lasts for six years. In the first two years, the credit is 52% of the new tax from the expansion. In years three and four, the credit is 39%. In years five and six, the credit is 26%. The Enhanced New Jobs Tax Credit is for very large projects and lasts 24 years. This credit equals 58.5% of the new local tax from the expansion for the entire 24 years. Businesses may also qualify for an additional State tax credit.",
+      "URL": "https://www.montgomerycountymd.gov/finance/taxes/business.html",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": null,
+      "program_audience": "Businesses planning to expand their physical location and hire new staff.",
+      "use_of_funds": null,
+      "geographic_eligibility": "Businesses already in Montgomery County or moving from outside Maryland can apply. Businesses moving from another Maryland county or Baltimore City are not eligible.",
+      "requirements_list": [
+        "Applicant must notify the County of intent to apply before expanding its space and staff.",
+        "Retail businesses are not eligible for the New Jobs Tax Credit.",
+        "New Jobs Tax Credit: Increase space by at least 5,000 square feet and hire at least 25 new permanent, full-time employees within a 24-month period.",
+        "Enhanced New Jobs Tax Credit: Must be in a qualified industry and meet one of three large-scale expansion and job creation requirements."
+      ],
+      "application_process_overview": "A business must notify the County that it plans to seek the credit before it expands its space and staff. For complete details, the business should contact the County.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "princegeorges",
+    "program_name": "Revitalization Tax Credit",
+    "locality_name": "Prince George's County",
+    "agency": "",
+    "more_details_url": "https://www.princegeorgescountymd.gov/departments-offices/county-executive/economy/geographic-development-incentives/county-incentives/revitalization-tax-credit",
+    "structured_extraction": {
+      "program_name": "Revitalization Tax Credit",
+      "program_description": "This program helps property owners in existing communities. It offers tax relief for making certain improvements to real property. The tax credit reduces the property tax increase that results from the higher property value after improvements.",
+      "agency": "Economic Development Corporation",
+      "list_of_eligible_counties": [
+        "Prince George's"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program provides a tax credit on the increased property value from improvements. For non-residential properties, the credit is 100% in the first year and decreases by 20% each year for five years. For residential properties, the credit is 100% in the first year, 66% in the second year, and 33% in the third year.",
+      "URL": "https://www.princegeorgescountymd.gov/departments-offices/county-executive/economy/geographic-development-incentives/county-incentives/revitalization-tax-credit",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": "Business Development Specialist",
+      "contact_email": null,
+      "contact_phone": "301-583-4650",
+      "program_audience": "Property owners who make improvements to residential or non-residential buildings.",
+      "use_of_funds": "The benefit is a tax credit for qualified real property improvements.",
+      "geographic_eligibility": "Projects must be located in existing communities within Prince George's County.",
+      "requirements_list": [
+        "Developments of ten or more single-family homes and multifamily units require County Council approval.",
+        "Eligible residential improvements are capped at $200,000 per dwelling unit."
+      ],
+      "application_process_overview": "To learn more or apply, contact the Economic Development Corporation. Ask to speak with a Business Development Specialist.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 403,
+      "url_is_reachable": false,
+      "url_error_message": "Client Error: Forbidden"
+    }
+  },
+  {
+    "OBJECTID": "princegeorges",
+    "program_name": "Economic Development Incentive (EDI) Fund",
+    "locality_name": "Prince George's County",
+    "agency": "",
+    "more_details_url": "https://www.pgcedc.com/edi-fund",
+    "structured_extraction": {
+      "program_name": "Economic Development Incentive (EDI) Fund",
+      "program_description": "This fund helps businesses in Prince George's County start, grow, and stay in the area. It aims to create and keep jobs and attract new companies to the county.",
+      "agency": null,
+      "list_of_eligible_counties": [
+        "Prince George's"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Public Administration",
+        "Health Care and Social Assistance",
+        "Information",
+        "Professional, Scientific, and Technical Services"
+      ],
+      "list_of_prioritized_industries": [
+        "Public Administration",
+        "Health Care and Social Assistance",
+        "Information",
+        "Professional, Scientific, and Technical Services"
+      ],
+      "assistance_type": [
+        "loan",
+        "grant"
+      ],
+      "assistance_description": "The program has a total of $50 million for funding. It provides conditional and conventional loans. The fund also sets aside $1 million to help small businesses get lines of credit from traditional banks.",
+      "URL": "https://www.pgcedc.com/edi-fund",
+      "application_deadline_string": "rolling",
+      "application_deadline_date": null,
+      "contact_name": "Andre Plummer",
+      "contact_email": "Applummer@co.pg.md.us",
+      "contact_phone": "301-583-5067",
+      "program_audience": "Businesses that want to start a new project, expand, move, or buy equipment.",
+      "use_of_funds": "You can use funds for a new project, expansion, relocation, or to buy equipment.",
+      "geographic_eligibility": "Projects must be located in or near areas the county prioritizes for revitalization.",
+      "requirements_list": [
+        "The project must demonstrate measurable economic benefits, such as creating jobs, increasing commerce, or expanding the tax base.",
+        "The project must align with the county's development and revitalization goals.",
+        "The applicant must show that public funding is necessary for the project to proceed."
+      ],
+      "application_process_overview": "Complete your application online at https://edif.princegeorgescountymd.gov/.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "princegeorges",
+    "program_name": "High Technology Facilities Tax Credit",
+    "locality_name": "Prince George's County",
+    "agency": "",
+    "more_details_url": "https://www.pgcedc.com/high-tech-real-property",
+    "structured_extraction": {
+      "program_name": "High Technology Facilities Tax Credit",
+      "program_description": "This program offers a property tax credit to support new and existing high-technology facilities. It helps businesses that focus on manufacturing, fabrication, assembly, and research and development.",
+      "agency": "Prince George's County Economic Development Corporation",
+      "list_of_eligible_counties": [
+        "Prince George's"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Manufacturing",
+        "Professional, Scientific, and Technical Services"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program provides a real property tax credit for five years on the increased value of the property. In year one, the credit is 100%. It decreases to 80% in year two, 60% in year three, 40% in year four, and 20% in year five.",
+      "URL": "https://www.pgcedc.com/high-tech-real-property",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": "Andre Plummer",
+      "contact_email": "Applummer@co.pg.md.us",
+      "contact_phone": "301-583-5067",
+      "program_audience": "High-technology businesses.",
+      "use_of_funds": "The tax credit applies to investments in real property. This includes new construction or significant improvements to a facility.",
+      "geographic_eligibility": "The program is available for facilities located in Prince George's County.",
+      "requirements_list": [
+        "Must be a high-technology business involved in engineering, life sciences, computer sciences, research and development, or related manufacturing.",
+        "Invest at least $500,000 in 5,000 square feet or more of real property.",
+        "The property must be newly constructed or substantially improved.",
+        "Create at least 10 new full-time jobs within three years."
+      ],
+      "application_process_overview": "First, an eligible business applies for the tax credit through the Economic Development Corporation (EDC). Then, the EDC reviews the application. Finally, the County's Finance Department must approve the project.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "queenannes",
+    "program_name": "Economic Development Incentive Fund (EDIF)",
+    "locality_name": "Queen Anne's County",
+    "agency": "",
+    "more_details_url": "https://choosequeenannes.com/meet-us/economic-development-incentive-fund-commission/",
+    "structured_extraction": {
+      "program_name": "Economic Development Incentive Fund (EDIF)",
+      "program_description": "This program provides financial help to businesses. It offers loans or conditional loans that can turn into grants. The fund supports new businesses starting in Queen Anne's County. It also helps existing businesses grow or move to the county.",
+      "agency": "Queen Anne’s County Economic Development Incentive Fund Commission",
+      "list_of_eligible_counties": [
+        "Queen Anne's"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [
+        "Enterprise Zones",
+        "Main Street Areas",
+        "Opportunity Zones",
+        "Priority Funding Areas",
+        "Sustainable Communities"
+      ],
+      "eligible_organization_types": [
+        "for-profit",
+        "individuals"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Agriculture, Forestry, Fishing and Hunting",
+        "Manufacturing",
+        "Information",
+        "Professional, Scientific, and Technical Services",
+        "Arts, Entertainment, and Recreation",
+        "Accommodation and Food Services"
+      ],
+      "assistance_type": [
+        "loan",
+        "grant"
+      ],
+      "assistance_description": "The program offers loans and conditional loans. A conditional loan may become a grant if the business meets certain goals. This funding helps new and existing businesses with their projects.",
+      "URL": "https://choosequeenannes.com/meet-us/economic-development-incentive-fund-commission/",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": null,
+      "program_audience": "The program is for individuals and businesses. This includes those starting a new business, expanding a current one, or moving a business to Queen Anne's County.",
+      "use_of_funds": "Funds can support project costs for starting, expanding, or relocating a business.",
+      "geographic_eligibility": "Businesses must be physically located in Queen Anne's County. Business owners do not need to live in the county.",
+      "requirements_list": [
+        "The project must have a significant economic impact, such as creating or retaining jobs.",
+        "The applicant must show a need for the funding.",
+        "The project should leverage other public or private investment.",
+        "Businesses must create full-time jobs within a specific time.",
+        "The business must operate in Queen Anne's County for the entire term of the agreement.",
+        "The project must align with the county's land use and economic development goals."
+      ],
+      "application_process_overview": "First, prepare an application package. The package must include a project description, the completed application form, financial projections, and other supporting documents. County staff review the package. Then, they submit it to the EDIF Commission for consideration.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "queenannes",
+    "program_name": "Revolving Loan Fund (RLF)",
+    "locality_name": "Queen Anne's County",
+    "agency": "",
+    "more_details_url": "https://choosequeenannes.com/doing-business/business-incentives/",
+    "structured_extraction": {
+      "program_name": "Revolving Loan Fund (RLF)",
+      "program_description": "This program offers low-interest loans to new and growing businesses in Queen Anne's County. The loans help with business development, starting a new business, expanding operations, and establishing a vineyard.",
+      "agency": "Queen Anne's County Department of Economic & Tourism Development",
+      "list_of_eligible_counties": [
+        "Queen Anne's"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "loan"
+      ],
+      "assistance_description": "Businesses can borrow between $50,000 and $100,000. The fund also helps leverage other conventional loans.",
+      "URL": "https://choosequeenannes.com/doing-business/business-incentives/",
+      "application_deadline_string": "rolling",
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": null,
+      "program_audience": "New and expanding businesses.",
+      "use_of_funds": "You can use funds to buy or improve real estate, purchase equipment, or for working capital related to the project.",
+      "geographic_eligibility": "Applicants must be a new or expanding business located in Queen Anne's County.",
+      "requirements_list": [],
+      "application_process_overview": "The Economic Development Commission reviews funding requests. The County Commissioners authorize the disbursement of funds. Contact the agency to check for funding availability.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "queenannes",
+    "program_name": "Commercial Property Tax Credit",
+    "locality_name": "Queen Anne's County",
+    "agency": "",
+    "more_details_url": "https://choosequeenannes.com/doing-business/business-incentives/",
+    "structured_extraction": {
+      "program_name": "Commercial Property Tax Credit",
+      "program_description": "Queen Anne's County offers a property tax credit to businesses that improve their property and create new jobs. The business must operate outside the county's Enterprise Zone.",
+      "agency": "Queen Anne's County",
+      "list_of_eligible_counties": [
+        "Queen Anne's"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The county provides a four-year tax credit on the increased value of the improved property. The credit is 80% in the first year, 60% in the second year, 40% in the third year, and 20% in the fourth year. The County Commissioners award the tax credit at their discretion.",
+      "URL": "https://choosequeenannes.com/doing-business/business-incentives/",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": null,
+      "program_audience": "Businesses in Queen Anne's County.",
+      "use_of_funds": "Funds must support real property improvements.",
+      "geographic_eligibility": "The business must be located in Queen Anne's County but outside of the Enterprise Zone.",
+      "requirements_list": [
+        "Invest $25,000 or more in real property improvements.",
+        "Create at least 12 new full-time jobs within two years."
+      ],
+      "application_process_overview": "To apply, download and complete the application form.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "queenannes",
+    "program_name": "Upper Shore Micro Ag Grant",
+    "locality_name": "Queen Anne's County",
+    "agency": "",
+    "more_details_url": "https://choosequeenannes.com/micro-ag-grant/",
+    "structured_extraction": {
+      "program_name": "Upper Shore Micro Ag Grant",
+      "program_description": "Queen Anne’s County Economic & Tourism Development and the Upper Shore Regional Council offer grants to local agricultural businesses. The funds help businesses expand, diversify, improve marketing, complete capital projects, or conduct research.",
+      "agency": "Queen Anne’s County Economic & Tourism Development",
+      "list_of_eligible_counties": [
+        "Queen Anne's"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Agriculture, Forestry, Fishing and Hunting",
+        "Arts, Entertainment, and Recreation"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "The program offers competitive, cost-reimbursable grants from $2,500 to $10,000. A total of about $64,000 is available for fiscal year 2025.",
+      "URL": "https://choosequeenannes.com/micro-ag-grant/",
+      "application_deadline_string": "February 10, 2025 by 12:00 p.m. noon",
+      "application_deadline_date": "2025-02-10",
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": "410-604-2100",
+      "program_audience": "Agricultural businesses",
+      "use_of_funds": "You can use grant funds for strategic marketing, technology innovation, climate resiliency projects, capital improvements, research projects, animal welfare improvements, and agritourism projects.",
+      "geographic_eligibility": "Applicants must operate an agricultural business in Queen Anne’s County, MD.",
+      "requirements_list": [
+        "Must be actively engaged in the farming community.",
+        "Submit a project budget.",
+        "Provide documentation to support the financial request (e.g., quotes, receipts, invoices).",
+        "Submit Articles of Incorporation/Organization/Formation, Bylaws, and/or Operating Agreement, as applicable.",
+        "Grantees must complete a final grant report by June 15, 2025."
+      ],
+      "application_process_overview": "First, submit a complete online application with all required documents by the deadline. A committee then reviews the applications in February 2025. The agency notifies applicants about funding decisions by email.",
+      "is_out_of_date": true,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "stmarys",
+    "program_name": "New and Expanding Business Tax Credit",
+    "locality_name": "St. Mary's County",
+    "agency": "",
+    "more_details_url": "https://www.yesstmarysmd.com/doing-business-here/tax-incentives-financing/",
+    "structured_extraction": {
+      "program_name": "New and Expanding Business Tax Credit",
+      "program_description": "St. Mary's County offers tax credits to support private businesses. The program helps companies that create jobs in targeted industries, locations, or underserved areas within the county.",
+      "agency": "Commissioners of St. Mary's County",
+      "list_of_eligible_counties": [
+        "St. Mary's"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The county provides property tax credits based on job creation. Creating 10 to 15 jobs earns a $5,000 credit each year for five years. Creating 16 to 25 jobs provides an $8,000 credit each year for eight years. Creating 26 or more jobs offers a $10,000 credit each year for ten years. If a project includes new capital investment, the business also gets a 50% reduction on county property taxes for the new investment. The length of this extra credit depends on the number of jobs created.",
+      "URL": "https://www.yesstmarysmd.com/doing-business-here/tax-incentives-financing/",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": null,
+      "program_audience": "This program is for private businesses starting or growing in St. Mary's County.",
+      "use_of_funds": null,
+      "geographic_eligibility": "The program is available across St. Mary's County. It may focus on specific locations or markets that need more business activity.",
+      "requirements_list": [
+        "Must be a private venture",
+        "Must result in job growth in St. Mary's County",
+        "Businesses creating 10 or more jobs are eligible for tiered credit amounts",
+        "Projects with new capital investment receive an additional property tax credit"
+      ],
+      "application_process_overview": "To apply, a business must first submit the New and Expanding Business (NEXB) application. The Commissioners of St. Mary's County review the application and decide whether to approve the incentive. Submitting an application does not guarantee an award.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "stmarys",
+    "program_name": "St. Mary’s County Facade and Streetscape Improvement Program",
+    "locality_name": "St. Mary's County",
+    "agency": "",
+    "more_details_url": "https://www.yesstmarysmd.com/doing-business-here/tax-incentives-financing/facade-grant/",
+    "structured_extraction": {
+      "program_name": "St. Mary’s County Façade and Streetscape Improvement Program",
+      "program_description": "This program helps business and property owners improve their buildings in certain areas. The program provides money back for projects that fix up building fronts and nearby sidewalks. The goal is to make these areas look better, encourage more investment, and improve safety.",
+      "agency": null,
+      "list_of_eligible_counties": [
+        "St. Mary's"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [
+        "Sustainable Communities"
+      ],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "The program pays back 50% of a project's cost. The maximum amount you can receive is $6,000.",
+      "URL": "https://www.yesstmarysmd.com/doing-business-here/tax-incentives-financing/facade-grant/",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": "lee.greely",
+      "contact_email": "lee.greely@stmaryscountymd.gov",
+      "contact_phone": "240-538-2744",
+      "program_audience": "Commercial property owners and business owners in specific parts of Lexington Park and Charlotte Hall.",
+      "use_of_funds": "You can use funds to improve the outside of buildings. This includes storefronts and sidewalks next to the property.",
+      "geographic_eligibility": "Projects must be in the 'Downtown' and 'Great Mills Corridor' areas of Lexington Park, as defined by the Lexington Park Master Plan. Projects can also be in the designated Sustainable Communities area of Charlotte Hall.",
+      "requirements_list": [
+        "Property must be located within the designated grant area.",
+        "Proposed work must be an eligible project.",
+        "Cost estimates must come from licensed and insured contractors.",
+        "Limited to one application per address per calendar year."
+      ],
+      "application_process_overview": "First, confirm your property is in an eligible location and your project qualifies. Next, get cost estimates from licensed contractors. Then, gather all required documents. Finally, submit the complete application online in a single session, as you cannot save it and return later.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "washington",
+    "program_name": "Job Creation and Capital Investment Real Property Tax Credit",
+    "locality_name": "Washington County",
+    "agency": "",
+    "more_details_url": "https://www.washco-md.net/wp-content/uploads/Job-Creations-and-Capital-Investment-Packet.pdf",
+    "structured_extraction": {
+      "program_name": "Job Creation and Capital Investment Real Property Tax Credit",
+      "program_description": "This program provides a real property tax credit to businesses. It helps attract new companies and supports existing companies that expand in Washington County.",
+      "agency": "Washington County Department of Business Development",
+      "list_of_eligible_counties": [
+        "Washington"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [
+        "Priority Funding Areas"
+      ],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program offers a tax credit on the increased value of a business's real property after it expands or builds a new facility. The credit amount and duration depend on the project tier. Tier 1 provides credits up to 52% for six years. Tier 2 provides credits up to 30% for six years. Tier 3 provides credits up to 100% for fifteen years for major investments.",
+      "URL": "https://www.washco-md.net/wp-content/uploads/Job-Creations-and-Capital-Investment-Packet.pdf",
+      "application_deadline_string": "Rolling, before project construction is complete",
+      "application_deadline_date": null,
+      "contact_name": "Tax Credit Programs Administrator",
+      "contact_email": "edcinfo@hagerstownedc.org",
+      "contact_phone": "240-313-2280",
+      "program_audience": "This program helps new and existing businesses that locate or expand in Washington County.",
+      "use_of_funds": null,
+      "geographic_eligibility": "The business property must be located in a Priority Funding Area in Washington County. Businesses located in an Enterprise Zone are not eligible for this program.",
+      "requirements_list": [
+        "Must be located in a Priority Funding Area.",
+        "Cannot be located in an Enterprise Zone.",
+        "Submit an application before construction is complete.",
+        "Tier 1 (Existing Business): Expand by at least 1,500 sq. ft. and create at least 1 new full-time job paying at least 150% of the federal minimum wage.",
+        "Tier 2 (New Business): Obtain at least 2,500 sq. ft. of space and create at least 5 new full-time jobs paying at least 150% of the federal minimum wage.",
+        "Tier 3 (New or Existing Business): Invest at least $10,000,000 in capital improvements and create at least 100 new full-time jobs.",
+        "Must provide annual employment reports to maintain the credit."
+      ],
+      "application_process_overview": "First, a business must notify the county of its intent to apply for the credit. Then, it submits an application to the Department of Business Development before finishing construction. The department will certify the business if it is eligible. After certification and project completion, the business must create the required number of new jobs. The business must submit yearly reports on employment to maintain the credit.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "washington",
+    "program_name": "High Performance Commercial Building Tax Incentive Program",
+    "locality_name": "Washington County",
+    "agency": "",
+    "more_details_url": "https://www.washco-md.net/wp-content/uploads/High-Performance-2016.pdf",
+    "structured_extraction": {
+      "program_name": "High Performance Commercial Building Tax Incentive Program",
+      "program_description": "This program gives property tax credits to owners of commercial buildings in Washington County. Owners receive the credit for constructing or renovating buildings to meet high energy and environmental standards. To qualify, buildings must earn a Silver, Gold, or Platinum rating from the Leadership in Energy and Environmental Design (LEED) system.",
+      "agency": "Washington County Department of Business Development",
+      "list_of_eligible_counties": [
+        "Washington"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "non-profit",
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit"
+      ],
+      "assistance_description": "The program provides a tax credit for three years. The credit applies to the increased property value after new construction or renovation. The amount is 20% of the increase for a LEED Silver rating, 25% for Gold, and 30% for Platinum.",
+      "URL": "https://www.washco-md.net/wp-content/uploads/High-Performance-2016.pdf",
+      "application_deadline_string": "Apply within 1 year after the building is certified as a “high performance building”.",
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": "edcinfo@hagerstownedc.org",
+      "contact_phone": "240-313-2280",
+      "program_audience": "Owners of commercial buildings in Washington County.",
+      "use_of_funds": null,
+      "geographic_eligibility": "The program is for commercial properties located in Washington County.",
+      "requirements_list": [
+        "The property must be a commercial building.",
+        "The building must achieve a LEED Silver, Gold, or Platinum rating.",
+        "The application must be submitted within one year of the building receiving its LEED certification.",
+        "The building must maintain its certification level for the three-year credit period.",
+        "Applicants must submit an annual letter of compliance."
+      ],
+      "application_process_overview": "First, the building owner submits a complete application form. They must include a copy of their LEED certification request. After the project is finished, the owner must provide a use and occupancy certificate and proof of the final LEED certification. The Department of Business Development then reviews the materials to approve the tax credit.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "washington",
+    "program_name": "Western Maryland Revolving Loan Fund",
+    "locality_name": "Washington County",
+    "agency": "",
+    "more_details_url": "https://www.tccwmd.org/programs/summit-financing-solutions/",
+    "structured_extraction": {
+      "program_name": "Western Maryland Revolving Loan Fund",
+      "program_description": "The Tri-County Council for Western Maryland offers this loan program to help businesses in Allegany, Garrett, and Washington counties. The program provides gap financing, which means it partners with banks to fund the part of a project that a primary lender cannot cover. The main goal is to create or keep jobs in the region.",
+      "agency": "Tri-County Council for Western Maryland",
+      "list_of_eligible_counties": [
+        "Allegany",
+        "Garrett",
+        "Washington"
+      ],
+      "list_of_prioritized_counties": [
+        "All"
+      ],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit",
+        "individuals"
+      ],
+      "list_of_eligible_industries": [
+        "Any"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "loan"
+      ],
+      "assistance_description": "The program provides loans from $10,000 to $400,000. It offers this financing as gap funding, meaning a bank or other private lender must fund at least 50% of the project. The interest rates connect to the prime interest rate. Loan terms are up to 5 years for working capital and up to 15 years for fixed assets like real estate.",
+      "URL": "https://www.tccwmd.org/programs/summit-financing-solutions/",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": null,
+      "contact_email": null,
+      "contact_phone": "301-689-1300",
+      "program_audience": "This program is for businesses, including corporations, partnerships, and sole proprietorships. The business must be in Allegany, Garrett, or Washington County. It is for businesses that cannot get all their needed funding from traditional lenders.",
+      "use_of_funds": "You can use funds for business acquisition and expansion. You can also use them for land and building costs, buying machinery and equipment, start-up costs, and working capital.",
+      "geographic_eligibility": "Businesses must be located in Allegany, Garrett, or Washington County to be eligible.",
+      "requirements_list": [
+        "A business plan is required.",
+        "A private lender must fund at least 50% of the total project cost.",
+        "Applicant must provide a denial letter from the primary lender for 100% of the project, along with their approval to finance a majority of the project.",
+        "One job must be created or retained for every $30,000 borrowed within the first 36 months of the loan.",
+        "A minimum equity injection of 10% is generally required for start-up businesses.",
+        "Personal guaranties of the debt are required from all owners with 20% or greater interest.",
+        "Applicants must provide a completed personal financial statement and 3 years of both business and personal tax returns.",
+        "A $250 non-refundable application fee is required.",
+        "Approved borrowers are assessed a 1.5% loan origination fee at closing."
+      ],
+      "application_process_overview": "First, create a business plan and determine your funding needs. Second, apply for a loan from a private bank to determine how much they will finance. Third, complete the program's application form and submit it with the required documents and application fee.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  },
+  {
+    "OBJECTID": "wicomico",
+    "program_name": "SWED Ag Grant Fund",
+    "locality_name": "Wicomico County",
+    "agency": "",
+    "more_details_url": "https://www.swed.org/ag-grant-fund",
+    "structured_extraction": {
+      "program_name": "SWED Ag Grant Fund",
+      "program_description": "This program helps new and existing agriculture and resource-based businesses grow in Wicomico County. It is a partnership between Wicomico County, PNC Bank, and the Maryland Agricultural & Resource Based Industry Development Corporation (MARBIDCO).",
+      "agency": "Salisbury-Wicomico Economic Development (SWED)",
+      "list_of_eligible_counties": [
+        "Wicomico"
+      ],
+      "list_of_prioritized_counties": [],
+      "list_of_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit"
+      ],
+      "list_of_eligible_industries": [
+        "Agriculture, Forestry, Fishing and Hunting",
+        "Manufacturing",
+        "Arts, Entertainment, and Recreation"
+      ],
+      "list_of_prioritized_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "grant"
+      ],
+      "assistance_description": "The program provides grant funds to support projects. It operates as a cost-share program.",
+      "URL": "https://www.swed.org/ag-grant-fund",
+      "application_deadline_string": null,
+      "application_deadline_date": null,
+      "contact_name": "David Ryan",
+      "contact_email": "info@swed.org",
+      "contact_phone": "410-749-1251",
+      "program_audience": "The program supports new and existing for-profit businesses in agriculture and resource-based industries.",
+      "use_of_funds": "Funds can be used for projects that support Wicomico County’s farming, forestry, or seafood industries. This includes businesses involved in agritourism or the production, packaging, processing, or marketing of agricultural products.",
+      "geographic_eligibility": "Businesses must have their headquarters and main operations in Wicomico County.",
+      "requirements_list": [
+        "The applicant must contribute at least 50% of the total project cost.",
+        "The business must be registered and in good standing with the State of Maryland and Wicomico County.",
+        "The project must help Wicomico County's farming, forestry, or seafood industries.",
+        "Businesses that package, process, or market agricultural products are also eligible."
+      ],
+      "application_process_overview": "Applicants submit an application to Salisbury-Wicomico Economic Development (SWED). SWED then submits the application to the Maryland Agricultural & Resource Based Industry Development Corporation (MARBIDCO). Both SWED and MARBIDCO must approve the application.",
+      "is_out_of_date": false,
+      "is_full_text_irrelevant": false,
+      "url_status_code": 200,
+      "url_is_reachable": true,
+      "url_error_message": null
+    }
+  }
+]
