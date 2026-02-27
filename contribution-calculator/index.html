@@ -122,7 +122,10 @@
                 <div>
                     <div class="flex justify-between items-end mb-2">
                         <label class="block text-sm font-bold text-gray-700" for="income">Annual Household Income</label>
-                        <span id="max-income-label" class="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded-md">Max (85% SMI): $...</span>
+                        <div class="flex gap-2">
+                            <span id="current-smi-label" class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md"></span>
+                            <span id="max-income-label" class="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded-md">Max (85% SMI): $...</span>
+                        </div>
                     </div>
                     <div class="relative mb-5 shadow-sm rounded-xl">
                         <span class="absolute left-4 top-3.5 text-gray-500 font-bold">$</span>
@@ -225,6 +228,7 @@
     const incomeInput = document.getElementById('income');
     const incomeSlider = document.getElementById('income-slider');
     const maxIncomeLabel = document.getElementById('max-income-label');
+    const currentSmiLabel = document.getElementById('current-smi-label');
 
     const outMonthly = document.getElementById('out-monthly');
     const outAnnual = document.getElementById('out-annual');
@@ -292,9 +296,14 @@
             incomeInput.value = income;
             incomeSlider.value = income;
         }
+
+        // Calculate and update SMI % label
+        const smi100 = SMI_100_MD[size];
+        const smiPercent = (income / smi100) * 100;
+        currentSmiLabel.innerText = `${smiPercent.toFixed(1)}% SMI`;
         
         const fpgMonthly = Math.round((15650 + (size - 1) * 5500) / 12);
-        const grossMonthly = income / 12;
+        const grossMonthly = Math.round(income / 12);
         
         const tableData = generateTable(size);
         let activeLevelIndex = 0;
