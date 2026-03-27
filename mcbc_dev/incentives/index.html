@@ -1388,7 +1388,7 @@
                 updateCheckboxesFromState();
                 try {
                     // Single fetch for the unified data file
-                    const response = await fetch('incentives_structured.json');
+                    const response = await fetch('export.json');
                     if (!response.ok) throw new Error("Network response was not ok.");
 
                     const data = await response.json();
@@ -1397,7 +1397,7 @@
                     allIncentives = data
                         .filter(item => item.structured_extraction && item.structured_extraction.program_name)
                         .filter(item => item.structured_extraction.is_out_of_date !== true) // Filter out outdated items
-                        .map(item => ({ ...item, slug: slugify(item.structured_extraction.program_name) }));
+                        .map(item => ({ ...item, slug: item.slug || slugify(item.structured_extraction.program_name) }));
 
                     renderFeaturedIncentives(allIncentives);
 
