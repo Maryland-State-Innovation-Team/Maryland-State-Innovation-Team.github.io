@@ -1873,7 +1873,16 @@
                     for (const [key, config] of Object.entries(filterConfig)) {
                          const filterSet = activeFilters[key];
                          if (filterSet.size > 0) {
-                             const itemValues = data[config.key] || [];
+                             // Industry filter checks all three industry fields so a program
+                             // eligible for an industry (list_of_eligible_industries) shows up
+                             // even if list_of_relevant_industries is empty.
+                             const itemValues = key === 'industries'
+                                 ? [...new Set([
+                                     ...(data.list_of_eligible_industries || []),
+                                     ...(data.list_of_prioritized_industries || []),
+                                     ...(data.list_of_relevant_industries || []),
+                                   ])]
+                                 : data[config.key] || [];
                              const hasMatch = itemValues.some(val => filterSet.has(val) || (key === 'counties' && (val === 'All' || filterSet.has('All'))));
                              if (!hasMatch) return false;
                          }
