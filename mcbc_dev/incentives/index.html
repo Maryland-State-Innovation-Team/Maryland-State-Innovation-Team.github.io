@@ -1744,7 +1744,7 @@
 
                     let statusLabel, statusClass, statusSort;
                     if (isAccepting) {
-                        statusLabel = 'Accepting Applications';
+                        statusLabel = 'Open';
                         statusClass = 'bg-green-cool-5 text-green-cool-70';
                         statusSort = '0';
                     } else if (isRecurring) {
@@ -1773,7 +1773,7 @@
                             <td data-label="Status" data-sort-value="${statusSort}" style="white-space: nowrap;">
                                 <span class="usa-tag radius-pill padding-x-1 padding-y-05 font-sans-3xs ${statusClass}"
                                       role="status"
-                                      aria-label="Application status: ${statusLabel}">
+                                      aria-label="Status: ${statusLabel}">
                                     ${statusLabel}
                                 </span>
                             </td>
