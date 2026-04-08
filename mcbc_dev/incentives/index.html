@@ -1048,7 +1048,7 @@
                                             <th scope="col" data-sortable>Program&nbsp;Name</th>
                                             <th scope="col">Description</th>
                                             <th scope="col" data-sortable>Assistance&nbsp;Type</th>
-                                            <th scope="col" data-sortable>Deadline</th>
+                                            <th scope="col" data-sortable>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody id="results-table-body">
@@ -1393,10 +1393,16 @@
 
                     const data = await response.json();
 
-                    // Process single data source and apply 'is_out_of_date' filter
+                    // Process single data source.
+                    // is_accepting_applications / is_recurring replace the old is_out_of_date field.
+                    // Old records (is_out_of_date) are handled by the migration helper below.
+                    const isDiscontinued = se => {
+                        if ('is_out_of_date' in se) return se.is_out_of_date === true; // legacy
+                        return se.is_accepting_applications === false && se.is_recurring === false;
+                    };
                     allIncentives = data
                         .filter(item => item.structured_extraction && item.structured_extraction.program_name)
-                        .filter(item => item.structured_extraction.is_out_of_date !== true) // Filter out outdated items
+                        .filter(item => !isDiscontinued(item.structured_extraction))
                         .map(item => ({ ...item, slug: item.slug || slugify(item.structured_extraction.program_name) }));
 
                     renderFeaturedIncentives(allIncentives);
@@ -1410,7 +1416,13 @@
             }
 
             function updateUrlWithFilters() {
-                const params = new URLSearchParams();
+                // Start from existing params so non-filter keys (sort, sortDir) are preserved.
+                const params = new URLSearchParams(window.location.search);
+
+                // Clear only the keys this function owns, then re-set from current state.
+                params.delete('searchTerm');
+                for (const key in filterConfig) params.delete(key);
+
                 if (activeFilters.searchTerm) params.set('searchTerm', activeFilters.searchTerm);
                 for (const key in filterConfig) {
                     if (activeFilters[key] && activeFilters[key].size > 0) {
@@ -1422,6 +1434,85 @@
                     history.replaceState(null, '', `${newPath}${window.location.hash}`);
                 }
             }
+
+            // ── Sort persistence ───────────────────────────────────────────────────
+            // MDWDS/USWDS manages sort state internally via aria-sort attributes.
+            // We mirror that state into URL search params so it survives detail/list
+            // navigation and bookmarking.
+
+            let _restoringSort = false; // guard to prevent observer loop during restore
+
+            function saveSortToUrl() {
+                if (_restoringSort) return;
+                const sortedTh = document.querySelector('table thead th[aria-sort="ascending"], table thead th[aria-sort="descending"]');
+                const params = new URLSearchParams(window.location.search);
+                if (sortedTh) {
+                    const allSortableThs = [...document.querySelectorAll('table thead th[data-sortable]')];
+                    const colIdx = allSortableThs.indexOf(sortedTh);
+                    params.set('sort', colIdx);
+                    params.set('sortDir', sortedTh.getAttribute('aria-sort'));
+                } else {
+                    params.delete('sort');
+                    params.delete('sortDir');
+                }
+                const newPath = params.toString()
+                    ? `${window.location.pathname}?${params.toString()}`
+                    : window.location.pathname;
+                history.replaceState(null, '', `${newPath}${window.location.hash}`);
+            }
+
+            function restoreSortFromUrl() {
+                const params = new URLSearchParams(window.location.search);
+                const colStr = params.get('sort');
+                const dir    = params.get('sortDir');
+                if (colStr === null || !dir) return;
+
+                // Defer until after renderTable() has populated the tbody.
+                setTimeout(() => {
+                    const allSortableThs = [...document.querySelectorAll('table thead th[data-sortable]')];
+                    const th = allSortableThs[parseInt(colStr)];
+                    if (!th) return;
+
+                    // Find the column's position among ALL ths (sortable + non-sortable)
+                    // so we can index into the matching td in each row.
+                    const allThs   = [...document.querySelectorAll('table thead th')];
+                    const colIndex = allThs.indexOf(th);
+                    if (colIndex < 0) return;
+
+                    const tbody = document.querySelector('table tbody');
+                    if (!tbody) return;
+                    const rows = [...tbody.querySelectorAll('tr')];
+
+                    // Sort rows directly by data-sort-value — avoids USWDS click-cycle ambiguity.
+                    rows.sort((a, b) => {
+                        const aTds = [...a.querySelectorAll('td')];
+                        const bTds = [...b.querySelectorAll('td')];
+                        const aVal = (aTds[colIndex]?.dataset.sortValue ?? aTds[colIndex]?.textContent ?? '').trim().toLowerCase();
+                        const bVal = (bTds[colIndex]?.dataset.sortValue ?? bTds[colIndex]?.textContent ?? '').trim().toLowerCase();
+                        const cmp  = aVal.localeCompare(bVal, undefined, { numeric: true });
+                        return dir === 'ascending' ? cmp : -cmp;
+                    });
+                    rows.forEach(row => tbody.appendChild(row));
+
+                    // Sync aria-sort so USWDS visuals (header icon, screen readers) stay correct.
+                    _restoringSort = true;
+                    allSortableThs.forEach(t => t.setAttribute('aria-sort', t === th ? dir : 'none'));
+                    setTimeout(() => { _restoringSort = false; }, 50);
+                }, 50);
+            }
+
+            // Watch for aria-sort attribute changes on any th and persist to URL.
+            const _sortObserver = new MutationObserver(saveSortToUrl);
+
+            function attachSortObserver() {
+                const thead = document.querySelector('table thead');
+                if (thead) {
+                    _sortObserver.observe(thead, {
+                        attributes: true, subtree: true, attributeFilter: ['aria-sort']
+                    });
+                }
+            }
+            attachSortObserver();
 
             function applyFiltersFromUrl() {
                 const params = new URLSearchParams(window.location.search);
@@ -1468,6 +1559,7 @@
                     history.pushState("", document.title, window.location.pathname + window.location.search);
                 }
                 applyFilters();
+                restoreSortFromUrl();
 
                 // Add focus management
                 // We only move focus if this is NOT the initial load. 
@@ -1640,12 +1732,30 @@
                     
                     const typeSortValue = types.join(' ');
 
-                    const rawDeadline = data.application_deadline_date || '';
-                    const displayDeadline = formatDate(rawDeadline);
-                    
-                    // If deadline is missing, treat it as the year 9999.
-                    // This ensures it stays at the bottom when sorting Ascending (Upcoming deadlines).
-                    const deadlineSortValue = rawDeadline || '9999-12-31'; 
+                    // Application status badge.
+                    // Supports both new fields (is_accepting_applications / is_recurring)
+                    // and legacy field (is_out_of_date) for records not yet re-extracted.
+                    const isAccepting = 'is_accepting_applications' in data
+                        ? data.is_accepting_applications === true
+                        : data.is_out_of_date !== true; // legacy fallback
+                    const isRecurring = 'is_recurring' in data
+                        ? data.is_recurring !== false
+                        : data.is_out_of_date !== true; // legacy fallback
+
+                    let statusLabel, statusClass, statusSort;
+                    if (isAccepting) {
+                        statusLabel = 'Accepting Applications';
+                        statusClass = 'bg-green-cool-5 text-green-cool-70';
+                        statusSort = '0';
+                    } else if (isRecurring) {
+                        statusLabel = 'Closed — Recurring';
+                        statusClass = 'bg-gold-5 text-gold-60v';
+                        statusSort = '1';
+                    } else {
+                        statusLabel = 'Closed';
+                        statusClass = 'bg-base-lighter text-base-dark';
+                        statusSort = '2';
+                    }
 
                     return `
                         <tr class="clickable-row" data-href="#/incentive/${item.slug}">
@@ -1660,8 +1770,12 @@
                             <td data-label="Assistance Type" class="assistance-type" data-sort-value="${typeSortValue}">
                                 ${tagsHtml}
                             </td>
-                            <td data-label="Deadline" data-sort-value="${deadlineSortValue}" style="white-space: nowrap;">
-                                ${displayDeadline}
+                            <td data-label="Status" data-sort-value="${statusSort}" style="white-space: nowrap;">
+                                <span class="usa-tag radius-pill padding-x-1 padding-y-05 font-sans-3xs ${statusClass}"
+                                      role="status"
+                                      aria-label="Application status: ${statusLabel}">
+                                    ${statusLabel}
+                                </span>
                             </td>
                         </tr>
                     `;
