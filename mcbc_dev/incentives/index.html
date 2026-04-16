@@ -545,9 +545,12 @@
         }
         .agency-name {
             max-width: 180px;
+            display: -webkit-box;
+            line-clamp: 3;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
         }
         /* CSS Truncation: Line Clamp */
         .description-truncate {
