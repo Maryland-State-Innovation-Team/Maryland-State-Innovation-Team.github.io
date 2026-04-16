@@ -1046,13 +1046,14 @@
                                     <thead>
                                         <tr>
                                             <th scope="col" data-sortable>Program&nbsp;Name</th>
+                                            <th scope="col" data-sortable>Agency</th>
                                             <th scope="col">Description</th>
                                             <th scope="col" data-sortable>Assistance&nbsp;Type</th>
                                             <th scope="col" data-sortable>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody id="results-table-body">
-                                        <tr><td colspan="4" class="text-center padding-4">Loading incentives...</td></tr>
+                                        <tr><td colspan="5" class="text-center padding-4">Loading incentives...</td></tr>
                                     </tbody>
                                 </table>
                                 <div class="usa-table__announcement-region usa-sr-only" role="status" aria-live="polite"></div>
@@ -1410,7 +1411,7 @@
                     handleRouting();
                 } catch (error) {
                     console.error("Failed to load incentive data:", error);
-                    tableBody.innerHTML = `<tr><td colspan="4" class="text-center padding-4 text-error">Error loading data. Please try again later.</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="5" class="text-center padding-4 text-error">Error loading data. Please try again later.</td></tr>`;
                     resultsCount.textContent = '0 results';
                 }
             }
@@ -1706,7 +1707,7 @@
 
             function renderTable(incentives) {
                 if (incentives.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="4" class="text-center padding-4">No incentives match your criteria.</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="5" class="text-center padding-4">No incentives match your criteria.</td></tr>`;
                     return;
                 }
 
@@ -1761,6 +1762,9 @@
                         <tr class="clickable-row" data-href="#/incentive/${item.slug}">
                             <td data-label="Program Name" class="program-name font-sans-md text-bold">
                                 <a href="#/incentive/${item.slug}" class="usa-link row-link">${data.program_name}</a>
+                            </td>
+                            <td data-label="Agency" class="font-sans-xs text-base-dark" style="white-space: nowrap;">
+                                ${item.agency || data.agency || ''}
                             </td>
                             <td data-label="Description" style="min-width: 200px;">
                                 <div class="description-truncate text-base-dark" title="${rawDesc.replace(/"/g, '&quot;')}">
