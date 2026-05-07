@@ -6144,8 +6144,6 @@
       "program_description": "A grant program established in 2021 and expanded by the Maryland General Assembly in 2022 that provides emergency financial assistance to small businesses, minority-owned businesses, women-owned businesses, veteran-owned businesses, and non-profits to recover from disaster damage and loss of operations. The program is funded by the Maryland Department of Commerce through the Video Lottery Terminal (VOLT) fund, which is replenished by slot machine tax revenue from Maryland casinos. Grants of up to $50,000 can be used to cover physical damages to buildings and equipment, offset lost revenue during business closure, inventory losses, cleanup labor, equipment replacement, working capital needed to resume operations, and other legitimate business expenses related to disaster recovery. The program has been activated for multiple disaster events including the January 9-10, 2024 flooding in Annapolis and the October 29-30, 2021 flooding in Anne Arundel County, with $1,000,000 allocated for recovery assistance per activation. The program distributed $647,095 to 21 small businesses following the 2021 flooding event.",
       "agency": "Anne Arundel County",
       "list_of_eligible_counties": [
-        "Anne Arundel",
-        "Baltimore City",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -15785,9 +15783,6 @@
       "program_description": "An annual city program that defers unpaid property tax liens, city fines, or citations to prevent homes from being sold at the annual Tax Sale auction in May. The program removes eligible homeowners' properties from tax sale for one year by allocating $2 million in funding. The program does not forgive unpaid bills; deferred balances remain due and may place the property at risk in future years. Each applicant's property tax lien amount is deducted from the $2 million balance. Once the funding is exhausted, the program closes for that year. Applicants must reapply each year.",
       "agency": "Baltimore City",
       "list_of_eligible_counties": [
-        "Baltimore City",
-        "Somerset",
-        "Allegany",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -19139,7 +19134,6 @@
       "program_description": "Provides transportation services for Medical Assistance (Medicaid) recipients in Baltimore County and statewide who need to access medically necessary medical services. Offers multiple transportation modes based on clinical necessity including ambulatory/paratransit, wheelchair van, sedan/cab, or ambulance (BLS, ALS, or specialized care levels). Services include transportation to medical appointments, treatments, and facility transfers/discharges for eligible recipients with no other means of transportation available. Transportation is provided using the least expensive method suitable to the recipient's needs. Regular service operates Monday through Saturday from 5 a.m. to 8 p.m., with emergency medical facility discharges and transfers available 24/7.",
       "agency": "Baltimore County",
       "list_of_eligible_counties": [
-        "Baltimore City",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -21459,8 +21453,7 @@
       "program_description": "Maryland's House Keys for Employees program provides an employer partnership opportunity that matches funds for closing costs and down payments to help eligible first-time homebuyers purchase homes in Maryland. Through participating employers, the program delivers down payment and closing cost assistance to employees statewide. Local match for private-sector and public-sector employees could total up to $5,000, equivalent to the state benefit and contribution. Calvert County government is a participating employer and provides matching funds for eligible county government and public school system employees.",
       "agency": "Calvert County",
       "list_of_eligible_counties": [
-        "All",
-        "Calvert"
+        "All"
       ],
       "list_of_prioritized_counties": [
         "Calvert"
@@ -29780,7 +29773,6 @@
       "program_description": "A financial assistance program that helps building owners, property owners, and businesses cover costs related to installing sprinkler and electrical systems in Annapolis.",
       "agency": "City of Annapolis",
       "list_of_eligible_counties": [
-        "Baltimore City",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -34861,7 +34853,6 @@
       "program_description": "A program that helps homeowners ages 55 and older make accessibility improvements to their homes to support aging in place. Improvements include widening doorways for wheelchairs, adding grab bars in bathrooms, installing first-floor bathrooms and showers, adding ramps, changing door and sink hardware to lever-style handles, and adding bedrooms and bathrooms on the main level to allow seniors to remain safely in their own homes. The program also supports low and moderate-income families with home rehabilitation, energy conservation, and lead hazard reduction. Essential home repairs may also be funded if the homeowner does not qualify for the accessibility-focused program. The program provides zero percent interest deferred loans with no payments for 30 years for eligible seniors, and loans with interest rates based on household income for low and moderate-income families. Average loans are anticipated to be around $10,000 to $15,000 with no set loan limit. Upon the end of the 30-year term, if the homeowner is unable to repay, the State can extend the deferral period. The loan becomes payable only when the house is sold or transferred. If transferred to a family member and the original owner still resides there as their primary residence, repayment is not triggered. If the spouse continues to live there after the original borrower's death, deferral continues. If a child occupies the home as their principal residence after the original borrower's death, the loan does not become due at that time, though the interest rate may increase if the child's income exceeds certain limits. If the property is refinanced with cash out, the loan must be repaid in full. If refinancing with no cash out, immediate repayment is not required. It is available through all 19 local Area Offices on Aging statewide in Maryland and the Frederick County Division of Housing.",
       "agency": "Frederick County",
       "list_of_eligible_counties": [
-        "Frederick",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -37604,8 +37595,6 @@
       "program_description": "A cooperative group buying program that leverages collective purchasing power to reduce costs for residents and small business owners installing solar panels, battery storage, electric vehicle chargers, or heat pumps. The program is available in multiple Maryland jurisdictions including Frederick County, Rockville, Montgomery County, and the City of Annapolis, and is part of the broader MD-VA-DC regional cooperative purchasing network. Participants can purchase or lease rooftop solar systems and renewable energy components at discounted cooperative pricing approximately 20% lower than typical market rates. A typical solar project is expected to save at least $6,500 on purchase and installation. The program conducts reverse auctions with pre-vetted contractors to secure group discounts. Participants register for free without obligation and can place a 100% refundable deposit to lock in contracts. Leasing and financing options are available for all income levels. Low- to moderate-income households may qualify for the Maryland Solar Access Grant Program offering up to $7,500 per system.",
       "agency": "Frederick County, City of Rockville, Montgomery County, and City of Annapolis",
       "list_of_eligible_counties": [
-        "Frederick",
-        "Montgomery",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -38237,7 +38226,6 @@
       "program_description": "Provides grants to help businesses retain workers following the Key Bridge collapse.",
       "agency": "Garrett County",
       "list_of_eligible_counties": [
-        "Baltimore City",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -41531,11 +41519,9 @@
       "program_description": "This grant program provides funding to schools and community-based organizations to establish student peer mediation programs designed to reduce juvenile violence and support student peer mediation initiatives. Programs utilize best practices and recommended standards for conflict resolution, providing opportunities for students to use communication, human relations, and problem-solving skills in real-life settings. The program offers grant assistance with up to $50,000 available, anticipated to result in one award for SFY 2027. Contingent upon good standing and positive outcomes, funding is anticipated to continue at the same level for SFY 2028 and SFY 2029. Funds are reimbursed quarterly based on actual expenditures.",
       "agency": "Governor's Office of Crime Prevention and Policy",
       "list_of_eligible_counties": [
-        "Baltimore City",
         "All"
       ],
       "list_of_prioritized_counties": [
-        "Baltimore City",
         "All"
       ],
       "list_of_incentive_areas": [],
@@ -47204,9 +47190,6 @@
       "program_description": "A loan program established by MARBIDCO through 2022 legislation (Senate Bill 830) to help finance the cost of eligible seafood processing projects, including historic oyster shucking facilities, and to increase the amount of oyster shells retained in the state and returned to the Chesapeake Bay. Low-cost financing is provided specifically for oyster shucking house operations and related seafood processing infrastructure through cooperative arrangements with commercial banks, Farm Credit Associations, and USDA Farm Service Agency. Loans up to $250,000 are available for qualifying oyster processing business projects. The program is funded with $1 million.",
       "agency": "Maryland Agricultural and Resource-Based Industry Development Corporation",
       "list_of_eligible_counties": [
-        "Cecil",
-        "Kent",
-        "Queen Anne's",
         "All"
       ],
       "list_of_prioritized_counties": [
@@ -47807,8 +47790,7 @@
       "program_description": "A statewide program administered by the Maryland Agricultural Resource-Based Development Corporation (MARBIDCO) that provides down payment assistance and financing to young, beginning, or first-time farmers purchasing agricultural properties. The program includes both a general Next Gen track for farmland typically over 50 acres and a Small Acreage Next Generation Program (SANG) track for properties between 10 and 49 acres. Next Gen provides assistance representing up to 51% of fair market value (capped at $500,000), while SANG provides down payment assistance representing 30% to 60% of fair market value (capped at $500,000 or $6,000 per acre). Assistance covers the land-only fair market value in exchange for a permanent agricultural conservation easement. The program helps overcome high farmland costs and limited access to capital by collaborating with commercial or farm credit lenders. After settlement, landowners must enroll in an Agricultural District program and maintain a permanent easement through an approved program. If no permanent easement is procured within the specified timeframe (4 years if county is default easement holder, 7 years if MARBIDCO designates easement holder), MARBIDCO ensures permanent preservation through an easement. The SANG track in Washington County provides automatic permanent preservation at the time of settlement without requiring pursuit of a permanent easement after settlement. The program preserves agricultural land from future development by temporarily relinquishing development rights to support eventual permanent preservation. SANG operates in partnership with the Southern Maryland Agricultural Development Commission (SMADC) for five Southern Maryland counties (Anne Arundel, Calvert, Charles, Prince George's, and St. Mary's).",
       "agency": "Maryland Agricultural and Resource-Based Industry Development Corporation",
       "list_of_eligible_counties": [
-        "All",
-        "Washington"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [
@@ -54098,8 +54080,7 @@
       "program_description": "Federal and state program that provides low-income consumers and individuals receiving government benefits such as Medical Assistance, food stamps, SSI, or energy assistance a discount on monthly telephone service, broadband Internet service, or bundled voice-broadband packages purchased from participating wireline or wireless providers. Eligible individuals can receive reduced cost landline phone service or a free cell phone.",
       "agency": "Maryland Department of Assessments and Taxation",
       "list_of_eligible_counties": [
-        "All",
-        "St. Mary's"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -56978,23 +56959,9 @@
       "program_description": "A comprehensive program that promotes economic development and environmental improvement by encouraging the cleanup and reuse of contaminated or potentially contaminated properties (brownfields), especially in distressed urban areas and densely populated urban centers. The program identifies and redeploys underutilized properties by providing financial incentives to help organize and assess brownfield properties, perform environmental evaluations, and conduct cleanup work. Property owners and operators who clean up qualified brownfield sites can receive low-interest loans or grants for Phase I and Phase II environmental assessments, site remediation activities, and property tax credits. Property owners who successfully remediate qualified brownfield sites can receive real property tax credits of 50% to 70% of the property tax attributable to the increase in assessed value of the site for a 5-year period, with potential extension to 10 years in designated enterprise zones. Additional credits of up to 20% may be available for properties in enterprise zones, designated commercial revitalization areas, or when cleanup costs exceed $1,000,000.",
       "agency": "Maryland Department of Commerce",
       "list_of_eligible_counties": [
-        "Allegany",
-        "Anne Arundel",
-        "Baltimore City",
-        "Baltimore County",
-        "Cecil",
-        "Dorchester",
-        "Frederick",
-        "Howard",
-        "Montgomery",
-        "Prince George's",
-        "Queen Anne's",
-        "Somerset",
-        "Worcester",
         "All"
       ],
       "list_of_prioritized_counties": [
-        "Baltimore County",
         "All"
       ],
       "list_of_incentive_areas": [
@@ -57138,8 +57105,7 @@
       "program_description": "A state program that provides tax incentives to new and existing manufacturers and non-manufacturers locating or expanding in Opportunity Zones that create new full-time jobs and employ apprentices in Maryland. The program offers a refundable income tax credit equal to 5.75% of wages per eligible new position for manufacturers creating at least 5 new full-time jobs (or at least 10 jobs in Tier 1 areas, 20 in Tier 2 areas), a $1,000 tax credit for businesses employing eligible apprentices, and encourages additional investment in new equipment through accelerated and bonus depreciation. Tax credits are available for a 10-year period in Tier 1 areas and 5 years in Tier 2 areas. The program was expanded in 2019 to include non-manufacturers locating or expanding in Opportunity Zones, particularly in Tier 1 counties like Garrett County, which may be eligible for additional incentives including real property tax credits, sales and use tax refunds, and fee waivers. The program stopped accepting new applicants on June 1, 2024; only companies that enrolled before that date can participate. State sets application period after July 1 each year for returning participants.",
       "agency": "Maryland Department of Commerce",
       "list_of_eligible_counties": [
-        "All",
-        "Garrett"
+        "All"
       ],
       "list_of_prioritized_counties": [
         "Baltimore City",
@@ -57370,7 +57336,6 @@
       "program_description": "Provides financial assistance through grants and loans to businesses impacted by the Key Bridge collapse to support recovery and continued operations in the Port of Baltimore area and surrounding regions.",
       "agency": "Maryland Department of Commerce",
       "list_of_eligible_counties": [
-        "Baltimore City",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -57517,17 +57482,6 @@
       "program_description": "A state fund that uses proceeds from video lottery terminals to provide below-market-rate loans to small, minority, women, and veteran-owned businesses for business expansion, real estate acquisition, equipment purchase, and working capital. At least 50 percent of allocations go to targeted businesses within 10 miles of Maryland's six casinos (Maryland Live! in Anne Arundel County, Hollywood Casino Perryville in Cecil County, Rocky Gap Casino in Allegany County, Ocean Downs in Worcester County, Horseshoe Casino in Baltimore City, and National Harbor in Prince George's County), with the remaining 50 percent available statewide to eligible businesses throughout Maryland. Loans range from $10,000 to $500,000 and are priced at or below current market interest rates. A specialized FLEX Fund component offers $2 million in flexible financing with expedited approval (two-week turnaround) and reduced underwriting requirements, specifically designed for small, minority, and veteran-owned businesses in Prince George's County. Additional loan products administered through regional partners such as Tri-County Council for Western Maryland provide financing up to $1,000,000 with interest rates tied to Prime Rate plus 1 percent, terms up to 5 years for working capital and 15 years for fixed assets, and targeted support for Garrett, Allegany, and Washington counties. The program supports hiring and business expansion objectives.",
       "agency": "Maryland Department of Commerce",
       "list_of_eligible_counties": [
-        "Anne Arundel",
-        "Allegany",
-        "Baltimore City",
-        "Baltimore County",
-        "Cecil",
-        "Garrett",
-        "Howard",
-        "Montgomery",
-        "Prince George's",
-        "Washington",
-        "Worcester",
         "All"
       ],
       "list_of_prioritized_counties": [
@@ -58252,7 +58206,6 @@
       "program_description": "A Medicaid-funded program providing essential community-based services and supports to enable older adults and individuals with disabilities to live independently in their own homes and communities. Services include personal assistance with activities of daily living, supports planning (case management), nurse monitoring, personal emergency response systems, assistive technology, environmental assessments, accessibility adaptations, consumer training, transition services, medical day care, and home delivered meals.",
       "agency": "Maryland Department of Disabilities",
       "list_of_eligible_counties": [
-        "Montgomery",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -61258,8 +61211,7 @@
       "program_description": "A statewide program funded by the 1998 Master Tobacco Settlement Agreement that implements strategies to reduce the burden of tobacco-related disease in Maryland. The program supports tobacco use prevention and cessation efforts, cancer prevention, education, screening, and treatment services through a network of local community health coalitions. Services include free smoking cessation counseling, nicotine replacement therapy (patches), and tobacco use prevention education for individuals, community groups, school groups, and businesses. The program also funds cancer research and the establishment of local community health coalitions.",
       "agency": "Maryland Department of Health",
       "list_of_eligible_counties": [
-        "All",
-        "Queen Anne's"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -62163,15 +62115,7 @@
       "program_description": "A comprehensive accredited Community Health Worker training and certification program offered by the Maryland Department of Health through partnerships with local community colleges and organizations. The program trains individuals to provide health education and support services in their communities through accredited training available in English and Spanish at multiple statewide locations including Salisbury, Brentwood, CCBC Essex campus, Columbia (Howard County), Largo (Prince George's County), Frederick, La Plata, Arbutus, Silver Spring, and through partner organizations like The Healthy Church in Columbia, the Asian American Center of Frederick, College of Southern Maryland Foundation, The E-See Seeds LLC, Prince George's Community College, and Fenote Training Academy. Training opportunities with scholarship and stipend support are available throughout the state, with specific scholarship and stipend programs through the College of Southern Maryland Foundation in the Southern Maryland region (Calvert, Charles, and St. Mary's counties). Upon completion of an accredited CHW training program, individuals can obtain state certification valid for two years at no cost. Certification requires applicants to be at least 18 years old, hold a high school diploma or GED equivalent, and provide documentation of successful completion from an accredited training program.",
       "agency": "Maryland Department of Health",
       "list_of_eligible_counties": [
-        "All",
-        "Calvert",
-        "Charles",
-        "St. Mary's",
-        "Howard",
-        "Baltimore City",
-        "Baltimore County",
-        "Montgomery",
-        "Prince George's"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -62861,11 +62805,9 @@
       "program_description": "This grant supports the development of a financial sustainability plan for an integrated behavioral health and community health worker program through expert consultation on Medicaid reimbursement.",
       "agency": "Maryland Department of Health",
       "list_of_eligible_counties": [
-        "Baltimore City",
         "All"
       ],
       "list_of_prioritized_counties": [
-        "Baltimore City",
         "All"
       ],
       "list_of_incentive_areas": [],
@@ -62914,11 +62856,6 @@
       "program_description": "This grant funds the expansion of 24-hour behavioral health urgent care services combined with substance use disorder crisis stabilization services in Central Maryland, targeting low-income individuals, African American residents, and women.",
       "agency": "Maryland Department of Health",
       "list_of_eligible_counties": [
-        "Anne Arundel",
-        "Carroll",
-        "Frederick",
-        "Howard",
-        "Montgomery",
         "All"
       ],
       "list_of_prioritized_counties": [
@@ -68608,8 +68545,7 @@
       "program_description": "This is an umbrella program category that funds multiple community health initiatives across Maryland designed to reduce preventable emergency department visits and promote access to care in community settings. Specific grantees implement projects addressing chronic disease management, behavioral health, cultural and linguistic barriers, and mobile health services. One funded project targets individuals with chronic disease conditions who frequently utilize emergency departments in Baltimore City and promotes access to primary and preventative care services in the community. Grant funds support emergency department diversion teams, help residents enroll in public health care coverage, and provide health care system navigation support. Funded projects have included the Better Access to Care Program at the University of Maryland Department of Family Medicine, which reduced hospital emergency department visits using the Chronic Care Model for patients with diabetes, depression, and asthma. Grant funds are also used to support emergency department diversion teams deployed in hospitals in Baltimore City such as Sinai and Northwest Hospitals.",
       "agency": "Maryland Department of Health",
       "list_of_eligible_counties": [
-        "All",
-        "Baltimore City"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -70384,24 +70320,6 @@
       "program_description": "A federally-funded initiative offering comprehensive technical assistance to rural hospitals to address financial and operational challenges and maintain essential health services for their communities. Administered by the National Rural Health Association in partnership with contractors and partners, participating hospitals receive technical assistance at no cost, including access to webinars and training events focused on best practices for financial and operational improvement, efficiency, and quality of care enhancement. The program helps rural hospitals identify and address healthcare needs, strengthen local healthcare systems, enhance efficiency and financial performance, and bolster quality of care.",
       "agency": "Maryland Department of Health",
       "list_of_eligible_counties": [
-        "Allegany",
-        "Calvert",
-        "Caroline",
-        "Carroll",
-        "Cecil",
-        "Charles",
-        "Dorchester",
-        "Frederick",
-        "Garrett",
-        "Harford",
-        "Kent",
-        "Queen Anne's",
-        "Somerset",
-        "St. Mary's",
-        "Talbot",
-        "Washington",
-        "Wicomico",
-        "Worcester",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -71712,11 +71630,7 @@
       "program_description": "A Medicaid waiver program providing services to older adults and individuals with physical disabilities who require nursing home level of care, enabling them to live at home instead of in a nursing facility. Services include assisted living, behavior consultation, case management, dietitian and nutritionist services, medical day care, Senior Center Plus, personal assistance, supports planning, nurse monitoring, personal emergency response systems, environmental assessments, accessibility adaptations, assistive devices, home delivered meals, family and consumer training, transitional cost assistance, and all other standard Medicaid services including Community First Choice. For applicants receiving Long Term Care Medicaid in a nursing home, the program provides assistance to develop a plan to safely transition to the community. The program allows Medicaid to cover services typically only available in nursing homes when provided in participants' own homes or assisted living facilities.",
       "agency": "Maryland Department of Health, Montgomery County, and St. Mary's County",
       "list_of_eligible_counties": [
-        "All",
-        "Anne Arundel",
-        "Charles",
-        "Montgomery",
-        "St. Mary's"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -71903,12 +71817,7 @@
       "program_description": "A program undertaken by the Maryland Department of Housing and Community Development in partnership with the Maryland Department of Aging that provides zero percent interest loans and grants to help seniors and low and moderate-income homeowners make accessibility improvements and essential home repairs to their homes. Improvements may include installation of grab bars and railings, widening of doorways, installation of ramps, wheelchair ramps, accessible showers, lever handles, first floor bathrooms, laundry rooms, energy conservation, plumbing, wells, sewer, and lead hazard reduction to enable seniors to remain independent in their homes and age in place. Senior homeowners age 55 and older receive zero percent interest loans with payments deferred for 30 years. Loans can be extended beyond the 30-year term if the homeowner is unable to repay and still occupies the home. The loan becomes payable when the house is sold or transferred, unless transferred to a family member who continues to occupy it as their primary residence, or if a spouse continues to reside there after the original borrower's death. Refinancing with cash-out triggers full repayment, but rate adjustments without cash-out do not. Payments may be structured as a lump sum at the end of the deferral period or as monthly payments at the homeowner's request. Grants up to $25,000 are available for applicants who do not qualify for loan funding.",
       "agency": "Maryland Department of Housing and Community Development",
       "list_of_eligible_counties": [
-        "All",
-        "Calvert",
-        "Charles",
-        "Frederick",
-        "Montgomery",
-        "Prince George's"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -72647,8 +72556,7 @@
       "program_description": "A program that supports 501(c)(3) nonprofit organizations by awarding allocations of state tax credits to benefit local projects and services in Priority Funding Areas and throughout Maryland. These tax credits serve as incentives to attract contributions from individuals and businesses for community revitalization, economic development, and local initiatives. Donors making contributions of $500 or more receive tax credits equal to 50% of the value of the money, goods, or real property contribution, which are in addition to federal and state tax deductions for charitable contributions. Tax credits can be used against taxes owed for the year in which the contribution was made and cannot be used retroactively for prior tax years.",
       "agency": "Maryland Department of Housing and Community Development",
       "list_of_eligible_counties": [
-        "All",
-        "Kent"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [
@@ -72706,24 +72614,6 @@
       "program_description": "A state revitalization program that provides local governments, community development organizations, county councils, community development corporations, main street organizations, downtown partnerships, and groups of local governments with grants for capital projects with at least a 15-year shelf life aimed at strengthening communities through revitalization activities. The program supports neighborhood revitalization, housing, workforce development, and community development projects with a focus on vacant property reduction, homeownership, legacy resident investment, commercial and arts investment, and vibrant civic spaces. Approximately $8 million in capital funding is available annually for community improvement projects. Eligible project types include mixed-use development, business retention and attraction initiatives, streetscape improvements, homeownership increases, facade improvements, upper story redevelopment, adaptive reuse of vacant buildings, neighborhood parks, arts and cultural amenities, small business incubators, real estate acquisition, rehabilitation, or demolition, site development, construction of community facilities, building renovations and improvements, and community stabilization projects. Projects are most competitive when they explicitly connect to revitalization strategies and goals from a community's Sustainable Community Action Plan.",
       "agency": "Maryland Department of Housing and Community Development",
       "list_of_eligible_counties": [
-        "Allegany",
-        "Anne Arundel",
-        "Baltimore City",
-        "Baltimore County",
-        "Carroll",
-        "Cecil",
-        "Frederick",
-        "Garrett",
-        "Harford",
-        "Howard",
-        "Kent",
-        "Prince George's",
-        "Somerset",
-        "St. Mary's",
-        "Talbot",
-        "Washington",
-        "Wicomico",
-        "Worcester",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -72903,29 +72793,6 @@
       "program_description": "A grant program offering funding to local jurisdictions, their ISP partners, cooperatives, and other eligible organizations to construct new broadband networks serving unserved households and businesses. The program provides capital construction grants to build broadband infrastructure in areas where service is not currently available at specified speeds, with flexible matching requirements based on service area density. Up to $95 million is available for infrastructure projects deploying fiber optics, fixed wireless, or other technologies. Funds support equipment purchase and installation, construction of outside plant facilities, professional engineering services, fiber optic cable installation and testing, and related broadband service delivery infrastructure. Funded through the American Rescue Plan Act of 2021, Capital Projects Fund. The grant covers the majority of capital construction costs associated with providing service to unserved homes and businesses.",
       "agency": "Maryland Department of Housing and Community Development",
       "list_of_eligible_counties": [
-        "Allegany",
-        "Anne Arundel",
-        "Baltimore City",
-        "Calvert",
-        "Caroline",
-        "Carroll",
-        "Cecil",
-        "Charles",
-        "Dorchester",
-        "Frederick",
-        "Garrett",
-        "Harford",
-        "Howard",
-        "Kent",
-        "Montgomery",
-        "Prince George's",
-        "Queen Anne's",
-        "Somerset",
-        "St. Mary's",
-        "Talbot",
-        "Washington",
-        "Wicomico",
-        "Worcester",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -73753,9 +73620,7 @@
       "program_description": "A voluntary program designed to help Housing Choice Voucher Program and Public Housing participants achieve higher education, improve their employment status, and work toward economic self-sufficiency and reduced dependence on temporary cash assistance. The program evaluates skills and determines needs of families and individuals, providing guidance in financial literacy, job training, childcare, and other workforce success instruments. Participants work with FSS coordinators to develop individual family plans with short and long-term goals. Participants enter a contract (typically 5 years, extendable 2 years with good cause) and receive supportive services. When a family's income increases and they pay higher rent, the difference is credited to an interest-bearing escrow account.",
       "agency": "Maryland Department of Housing and Community Development",
       "list_of_eligible_counties": [
-        "All",
-        "Prince George's",
-        "Dorchester"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -73822,7 +73687,6 @@
       "program_description": "A loan program created by the Maryland General Assembly in 2007 to help homeowners buy out (redeem) ground leases. Ground leases are long-term leases (usually 99 years) that are renewable forever and require periodic ground rent payments from the tenant to the lease holder. The program provides low-interest loans to homeowners to purchase ground lease redemptions and cover title search and loan closing costs. 0% interest, 30-year loans up to $3,500 including transactional costs up to $1,000 for lower income borrowers (60% AMI and below). Higher income borrowers (60-80% AMI) may receive loans at 4.5%-6.0% interest rates.",
       "agency": "Maryland Department of Housing and Community Development",
       "list_of_eligible_counties": [
-        "Baltimore City",
         "All"
       ],
       "list_of_prioritized_counties": [
@@ -78124,8 +77988,7 @@
       "program_description": "Provides low-interest or deferred loans to owner-occupants and rental property owners to install, repair, or replace indoor plumbing systems in residential properties. Assistance covers wells, septic systems, piping, connections to public water or sewer systems, plumbing fixtures, bathrooms and toilets, water purification systems, sand mound systems, and replacement of lead pipes inside homes after service line replacement. The program serves individuals and non-profits with limited income to finance additions or repairs to water or sewer systems in structurally sound properties. Interest rates range from 0% to 6% based on the applicant's ability to pay. Maximum loan term is 30 years. Deferred loans are available to borrowers requiring health, safety or accessibility improvements, with potential annual forgiveness for families with incomes below 30 percent of statewide or Washington, D.C. Metropolitan Statistical Area median income. Also provides financial assistance to homeowners who need to replace lead pipes inside their homes after the city replaces the lead service line up to the home's entrance.",
       "agency": "Maryland Department of Housing and Community Development",
       "list_of_eligible_counties": [
-        "All",
-        "Wicomico"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -78326,24 +78189,6 @@
       "program_description": "The Strategic Demolition Fund seeks to accelerate economic development and job creation in Maryland communities by improving the economic viability of greyfield development (the redevelopment of previously developed but underutilized sites). The program funds demolition of derelict structures, site acquisition and assembly to create redevelopment-sized parcels, site development, construction-level architectural and engineering designs, infrastructure improvements, historic building rehabilitation and adaptive reuse, residential and commercial property renovations, and community space development. Grants and loans support the demolition of vacant, blighted, and derelict structures as part of statewide revitalization efforts. Funds are limited and awards focus on projects with high economic and revitalization impact in their communities. Approximately $10 million in capital funding is available in Fiscal Year 2025 for strategic demolition projects in Sustainable Communities or Opportunity Zones.",
       "agency": "Maryland Department of Housing and Community Development",
       "list_of_eligible_counties": [
-        "Allegany",
-        "Anne Arundel",
-        "Baltimore City",
-        "Baltimore County",
-        "Carroll",
-        "Cecil",
-        "Charles",
-        "Frederick",
-        "Garrett",
-        "Harford",
-        "Howard",
-        "Kent",
-        "Prince George's",
-        "Somerset",
-        "Talbot",
-        "Washington",
-        "Wicomico",
-        "Worcester",
         "All"
       ],
       "list_of_prioritized_counties": [
@@ -80141,12 +79986,7 @@
       "program_description": "A statewide financial assistance program administered by the Maryland Department of Human Services Office of Home Energy Programs that provides emergency grants and subsidies to help income-eligible households in Maryland pay their electricity, gas, and other utility bills. The program assists households facing utility termination or experiencing emergency situations. Grant amounts are determined based on household income, household size following current fiscal year income guidelines, and electric use over the past 12 months. Assistance is available once per program year (July through June). Grants are sent directly to the utility company to help pay past due or ongoing bills, and customers are placed on budget billing plans to spread their annual costs into equal monthly payments. In Montgomery County, grants of up to $2,000 are available toward past due electric utility bills, applied as either a one-time credit or divided into 12 monthly credits. A 55-day hold on electric utility accounts is available if applicants apply within 14 days of termination notice issuance (one hold per program year). Local access points are available statewide, including in Montgomery County through Housing Stabilization Services, in Frederick through the City of Frederick, in Washington County through the Washington County Community Action Council, in St. Mary's County through the Tri-County Community Action Committee at senior activity centers, and in Prince George's County through the Department of Social Services. Application status can be checked online at myohepstatus.maryland.gov. Eligibility is determined by income limits based on household size and gross monthly income.",
       "agency": "Maryland Department of Human Services",
       "list_of_eligible_counties": [
-        "All",
-        "Montgomery",
-        "Frederick",
-        "Washington",
-        "St. Mary's",
-        "Prince George's"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -83388,8 +83228,7 @@
       "program_description": "A program that gives foster youth the opportunity to practice living independently while being supervised by local departments of social services. Youth in SILA live in a variety of settings including renting a room, living in their own apartments, or staying on campus in a dorm. Each month, SILA youth receive a check from the department to help cover living expenses. Youth receive financial assistance to cover living costs while developing independent living skills in housing, health care, education, employment, financial literacy, and social and emotional well-being through support from the local department and provider agency.",
       "agency": "Maryland Department of Human Services",
       "list_of_eligible_counties": [
-        "All",
-        "Baltimore City"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -83598,8 +83437,7 @@
       "program_description": "SNAP is the largest federal nutrition assistance program in the nation. It helps low-income households and individuals, including kinship caregivers and children in their care, purchase nutritious and essential food items by providing monthly benefits that increase their buying power based on the U.S. Department of Agriculture's Thrifty Food Plan. Eligible applicants receive benefits on an EBT card (Independence Card) that works like a bank ATM card and can be used to purchase eligible food items at authorized retailers. The program includes a Restaurant Meals Program for eligible elderly, disabled, and homeless individuals to purchase meals from participating restaurants. Some applicants with little or no money may qualify for Expedited SNAP benefits issued within 7 days after identity verification. Benefit amounts depend on household size, gross income, and allowable expenses, and benefits must be accessed no later than 30 days from when the office receives the application. Eligible foods include fruits, vegetables, meat, poultry, fish, dairy products, breads, and cereals. SNAP benefits cannot be used for hot or prepared foods, alcohol, tobacco, or non-food items. SNAP participants can also purchase fresh produce and groceries online from participating retailers including Amazon, Walmart, ShopRite, Food Lion, Giant of Maryland, Martin's, Aldi, Weis, and Safeway, with delivery to their homes or store pickup. Formerly known as Food Stamps.",
       "agency": "Maryland Department of Human Services",
       "list_of_eligible_counties": [
-        "All",
-        "Baltimore City"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -83750,26 +83588,6 @@
       "program_description": "A voluntary employment and training program that connects SNAP recipients to free job-driven training programs lasting 12 to 16 weeks in industries including welding, construction, machine operation, manufacturing, healthcare, hospitality, and computer technology/IT. Participants receive job placement, retention, and support services including hard skills and soft skills training, job readiness, industry-recognized certifications and credentials, work experience, transportation assistance, referrals to community services, help resolving employment barriers, access to work-related supplies, and support from a personal career navigator and success coach to help them find and keep employment. The program is delivered through multiple third-party partner organizations including community colleges, workforce development organizations, non-profit organizations, and private training providers.",
       "agency": "Maryland Department of Human Services",
       "list_of_eligible_counties": [
-        "Allegany",
-        "Anne Arundel",
-        "Baltimore City",
-        "Baltimore County",
-        "Calvert",
-        "Caroline",
-        "Carroll",
-        "Charles",
-        "Dorchester",
-        "Frederick",
-        "Harford",
-        "Howard",
-        "Kent",
-        "Montgomery",
-        "Prince George's",
-        "Queen Anne's",
-        "St. Mary's",
-        "Talbot",
-        "Washington",
-        "Wicomico",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -85080,8 +84898,7 @@
       "program_description": "A workforce training program that helps employers offset training costs for workers in Maryland. The program partners with local businesses to support employer strategies for retention, growth, expansion, and layoff aversion through skills training in in-demand occupations. Training funds are provided to businesses serious about increasing employee productivity and upgrading skills of current employees. Funds support classroom-based training, in-house staff training, apprenticeships, and other opportunities.",
       "agency": "Maryland Department of Labor, Licensing and Regulation",
       "list_of_eligible_counties": [
-        "All",
-        "Baltimore City"
+        "All"
       ],
       "list_of_prioritized_counties": [
         "Baltimore City"
@@ -86151,24 +85968,7 @@
       "program_description": "A program dedicated to assisting Maryland's coastal communities in addressing short- and long-term coastal hazards such as high tide flooding, storm surge, and sea level rise. The program connects local government staff and partners to essential information, tools, training, and financial assistance to build resilience in coastal communities. It provides financial assistance through Outcome 2 of the Chesapeake and Coastal Grants Gateway, technical assistance to local communities, training opportunities for local practitioners, and access to resources and supportive networks to help communities become more resilient to coastal threats. The program includes guidance for developing Nuisance Flood Plans and selecting Relative Sea Level Rise estimates for coastal projects, with step-by-step frameworks for assessing coastal flood risk and incorporating probabilistic sea level rise projections into planning and site-specific projects.",
       "agency": "Maryland Department of Natural Resources",
       "list_of_eligible_counties": [
-        "All",
-        "Anne Arundel",
-        "Baltimore City",
-        "Baltimore County",
-        "Calvert",
-        "Caroline",
-        "Cecil",
-        "Charles",
-        "Dorchester",
-        "Harford",
-        "Kent",
-        "Prince George's",
-        "Queen Anne's",
-        "St. Mary's",
-        "Somerset",
-        "Talbot",
-        "Wicomico",
-        "Worcester"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -87202,7 +87002,6 @@
       "program_description": "A week-long canoeing expedition for high school students that combines outdoor adventure with environmental education. Participants practice leadership and teamwork skills while navigating the Patuxent River, conducting water quality tests, studying plant communities, completing stewardship projects, and camping riverside. The program includes instruction in paddle safety, leadership skills, environmental science, and outdoor stewardship. The program culminates in a presentation to community leaders, families, and friends.",
       "agency": "Maryland Department of Natural Resources",
       "list_of_eligible_counties": [
-        "Prince George's",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -89399,12 +89198,6 @@
       "program_description": "A summer employment and skills training program for youth ages 14-17 and veterans that combines hands-on outdoor conservation projects in Maryland State Parks with job and life skills training. Participants engage in habitat and facility restoration, environmental enrichment activities including fishing, archery, kayaking, and stream surveys, plus a camping experience. The program culminates in a graduation ceremony with certificates of achievement. Participants work Monday-Thursday on trail repair, tree planting, invasive species removal, and structure construction while receiving wages and career exploration opportunities. Fridays feature enrichment days with environmental education and recreational activities. The program emphasizes SPIRIT Principles: Stewardship, Professionalism, Initiative, Respect, Integrity, and Teamwork.",
       "agency": "Maryland Department of Natural Resources",
       "list_of_eligible_counties": [
-        "Baltimore City",
-        "Harford",
-        "Montgomery",
-        "Prince George's",
-        "Worcester",
-        "Anne Arundel",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -90035,8 +89828,7 @@
       "program_description": "A comprehensive mentorship program that pairs skilled veteran hunters with first-time or lapsed hunters to teach hunting skills, techniques, firearm safety, and hunting strategies. The program includes technical lectures covering firearm safety, hunting tips, techniques and strategies, plus range time to prepare mentees for hunting. Participants receive ongoing support through in-person meetings, text, calls, or email. The program offers general mentorship through the learnhunting.org platform and specialized 2.5-day mentored hunting events such as the National Deer Association Mentored Deer Hunt, an intensive muzzleloader hunting experience held in Accident, Maryland (Garrett County) that includes orientation, facility tours (including processing facilities), range time, meals, and most equipment provided at no cost. All participants receive support and training at no cost.",
       "agency": "Maryland Department of Natural Resources",
       "list_of_eligible_counties": [
-        "All",
-        "Garrett"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -91146,8 +90938,7 @@
       "program_description": "A voucher-based program providing financial assistance to Maryland and Delaware commercial and charter vessels directly or reasonably expected to be impacted by wind turbines in Lease Area OCS-A 0490. The program facilitates safe navigation through equipment installation/upgrades and training for safe navigation and fishing activities around wind turbines. Eligible ocean-going commercial fishing vessels and operators receive equipment upgrades and training such as radar training and vessel navigation equipment upgrades, with up to $10,000 for equipment upgrades on commercial/for-hire fishing vessels, up to $5,000 for charter vessels, and training support up to $1,000 per vessel for multiple participants including radar training and professional mariner certification. An additional $35,000 is available toward experiential training at Maryland Maritime Institute of Technology and Graduate Studies (MITAGS) with fishing vessel-specific wind facility simulation. Participants choose from preferred equipment vendors and training options. The eligible number of vessels and individuals was determined based on coastal fishing industry input.",
       "agency": "Maryland Department of Natural Resources",
       "list_of_eligible_counties": [
-        "All",
-        "Worcester"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -98092,16 +97883,10 @@
       "program_description": "A statewide program funded by fees collected from users of onsite sewage disposal systems that provides grants and subsidies for upgrading septic systems to best available technology for nitrogen removal and for implementing cover crops to reduce nitrogen loading to the Chesapeake Bay. The program funds the replacement of conventional septic tanks with nitrogen-reducing units or connections to public sewer where available. Effective July 1, 2012, a $60 annual fee is collected from each user served by an onsite system, generating approximately $27 million per year, with 60% used for septic system upgrades and 40% for cover crops. Upgraded systems reduce nitrogen loads by approximately 50% compared to conventional systems and lower coliform and enterococci counts. The program has already upgraded over 12,000 septic systems across Maryland. For low-income households, funding can be used to replace failing septic systems. Regional implementations available in multiple counties including Worcester, Talbot, Charles, and Prince George's counties, with grants covering the cost and installation of BAT units plus maintenance. The program aims to reduce harmful nutrients like nitrogen discharged into the Chesapeake Bay and its tributaries. Program also supports community wastewater treatment systems and sewer connections to municipal treatment plants with enhanced nutrient removal standards.",
       "agency": "Maryland Department of the Environment",
       "list_of_eligible_counties": [
-        "All",
-        "Charles",
-        "Prince George's",
-        "Worcester",
-        "Talbot",
-        "Anne Arundel"
+        "All"
       ],
       "list_of_prioritized_counties": [
-        "All",
-        "Worcester"
+        "All"
       ],
       "list_of_incentive_areas": [
         "Priority Funding Areas"
@@ -98180,34 +97965,10 @@
       "program_description": "A comprehensive, statewide grant and subsidy program that provides funds for upgrading septic systems to best available technology (BAT) for nitrogen removal, connecting properties to public sewer systems, installing holding tanks, and implementing cover crops. The program is funded by fees collected from users of onsite sewage disposal systems to reduce nitrogen loading to the Chesapeake Bay and its tributaries. Upgraded systems reduce nitrogen loads by approximately 50% compared to conventional systems and lower coliform and enterococci counts. The program has already upgraded over 12,000 septic systems across Maryland. Effective July 1, 2012, a $60 annual fee is collected from each user served by an onsite system, with an estimated program income of $27 million per year. Sixty percent of funds support septic system upgrades and 40 percent support cover crops. Implementation occurs at the county level, with local County Health Departments administering applications. Funding varies by property type: residential properties with household incomes under $300,000 per year receive 100 percent funding, all nonprofit entities receive 100 percent funding, and non-residential properties receive 50 percent funding. Low-income households may receive additional support for failing system replacement. The program aims to improve water quality and restore the health of the Chesapeake Bay ecosystem. Between 2007 and 2011, the program funded nitrogen removal unit installations on 95 septic systems in Charles County. There are 420,000 onsite systems in Maryland eligible for the program. The program also provides funding for new construction cost differential between conventional and BAT systems, community system replacement costs, and includes two years of operations and maintenance by certified service providers.",
       "agency": "Maryland Department of the Environment",
       "list_of_eligible_counties": [
-        "All",
-        "Charles",
-        "Prince George's",
-        "Worcester",
-        "Talbot",
-        "Anne Arundel",
-        "Baltimore County",
-        "Baltimore City",
-        "Calvert",
-        "Caroline",
-        "Carroll",
-        "Cecil",
-        "Dorchester",
-        "Frederick",
-        "Garrett",
-        "Harford",
-        "Howard",
-        "Kent",
-        "Montgomery",
-        "Queen Anne's",
-        "St. Mary's",
-        "Somerset",
-        "Washington",
-        "Wicomico"
+        "All"
       ],
       "list_of_prioritized_counties": [
-        "All",
-        "Worcester"
+        "All"
       ],
       "list_of_incentive_areas": [
         "Priority Funding Areas"
@@ -98374,12 +98135,7 @@
       "program_description": "A statewide program administered by the Maryland Department of the Environment that allows billing authorities and individual jurisdictions to grant waivers or exemptions from paying the Bay Restoration Fee (flush tax) to residential dwellings and properties that demonstrate substantial financial hardship. The exemption removes the Bay Restoration Fee from water bills or real property tax accounts for specified time periods (typically one year). Exemptions must be reapplied for annually. Applicants must meet eligibility criteria established by their local billing authority, which may include receiving energy assistance subsidies, public assistance (supplemental security income or food stamps), veterans or social security disability benefits, or meeting income criteria established by the Maryland Department of Human Services Office of Home Energy Programs. Some jurisdictions, such as Baltimore County and Allegany County, restrict eligibility to property owners whose primary residence is in the county and who currently receive specific tax credits or meet hardship criteria. Individual billing authorities establish their own financial hardship exemption programs and submit proposed plans to the Maryland Department of the Environment for approval. The State of Maryland requires all participating counties to collect mandated fees to support Chesapeake Bay restoration efforts.",
       "agency": "Maryland Department of the Environment",
       "list_of_eligible_counties": [
-        "All",
-        "Allegany",
-        "Baltimore City",
-        "Baltimore County",
-        "Calvert",
-        "Talbot"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -100302,8 +100058,7 @@
       "program_description": "Provides financial assistance for replacement of older diesel vehicles with newer EPA-compliant models. The program includes two main components: (1) replacement of older diesel school buses with electric school buses and associated charging infrastructure for school districts and county governments, providing up to 45 percent of the purchase price; and (2) replacement of older drayage trucks operating at the Port of Baltimore with MY2017 or newer EPA-compliant trucks (or MY2012 or newer with EPA 2010-compliant engine), paying up to half the purchase price to a maximum of $30,000-$35,000 per truck depending on program year. In all cases, the recipient provides the remainder of the purchase price. For drayage trucks, scrappage income from replaced trucks may be used toward the owner's share of the purchase price.",
       "agency": "Maryland Department of the Environment",
       "list_of_eligible_counties": [
-        "All",
-        "Baltimore City"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -100508,18 +100263,6 @@
       "program_description": "A state-administered program that provides technical assistance, project facilitation, education, training, and financing support to local governments in Maryland. The program helps counties and municipalities identify and plan high-priority greenhouse gas emissions reduction projects with co-benefits to health, ecology, and the economy. Services include county-specific outreach, consultation, facilitation services, grant writing assistance, and direct support to navigate resources and financing mechanisms. The University of Maryland's Environmental Finance Center and state staff provide hands-on support to help communities plan, design, finance, implement, and track greenhouse gas reduction projects.",
       "agency": "Maryland Department of the Environment",
       "list_of_eligible_counties": [
-        "Garrett",
-        "Allegany",
-        "Washington",
-        "Calvert",
-        "St. Mary's",
-        "Kent",
-        "Talbot",
-        "Caroline",
-        "Dorchester",
-        "Wicomico",
-        "Somerset",
-        "Worcester",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -113795,9 +113538,7 @@
       "program_description": "An exemption from the state Admission and Amusement Tax on gross receipts from admissions or amusement charges levied by arts and entertainment enterprises or qualifying resident artists located in designated Arts and Entertainment Districts. Local governments may grant this exemption to eligible entities operating in designated A&E Districts statewide, with implementation and eligibility determination handled on a case-by-case basis by local authorities and the Maryland State Department of Assessments and Taxation.",
       "agency": "Maryland State Arts Council",
       "list_of_eligible_counties": [
-        "All",
-        "Washington",
-        "Wicomico"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -116150,7 +115891,6 @@
       "program_description": "A partnership with CVS Health and the Community College of Baltimore County that prepares job seekers with disabilities to become Certified Pharmacy Technicians by passing the national Pharmacy Technician Certifying Board (PTCB) test. Pharmacy Technicians assist pharmacists in hospitals or retail pharmacies, serving customers, processing insurance claims, maintaining inventory, and filling prescriptions. The program includes 14 weeks of classroom instruction covering CVS programs and procedures, inventory management, and prescription medication measurements, along with 6 weeks of clinical on-the-job training, hands-on experience in a mock pharmacy, and externships in actual CVS locations throughout Maryland.",
       "agency": "Maryland State Department of Education",
       "list_of_eligible_counties": [
-        "Baltimore City",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -117336,9 +117076,6 @@
       "program_description": "Grant programs that help registered family child care providers offset costs of opening their child care programs. Includes one-time direct grants of $1,000 for new providers and ongoing grants for registered providers in eligible counties. Eligibility is based on income levels and family size.",
       "agency": "Maryland State Department of Education",
       "list_of_eligible_counties": [
-        "Somerset",
-        "Wicomico",
-        "Worcester",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -117773,8 +117510,7 @@
       "program_description": "This program provides mental health consultation and support services to promote positive mental and behavioral health practices for infants and young children with developmental, social, emotional or behavioral issues. Mental health professionals connect with licensed early care and education providers and families to help educators understand how relationships affect young children's social and emotional growth. Services include referrals, direct services, and individualized strategies for children, families, teachers, and caregivers. Mental health consultants work with families and child care staff to create supportive environments, reduce challenging behaviors, and prepare children for school success while reducing expulsions. The program builds the capacity of early care and education providers and family members to promote healthy social-emotional development.",
       "agency": "Maryland State Department of Education",
       "list_of_eligible_counties": [
-        "All",
-        "Montgomery"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -119963,8 +119699,7 @@
       "program_description": "A 10-week retail training program for people with disabilities designed to prepare participants for competitive integrated employment in retail settings, particularly at CVS stores. The program combines classroom instruction in a mock CVS store setting, hands-on learning activities at actual CVS locations, and paid work experience. The program consists of four weeks of classroom instruction and mock store training delivered by Community College of Baltimore County instructors and DORS staff, followed by six weeks of paid in-store work experience at CVS Pharmacy stores throughout Maryland. The program is offered three times per calendar year through DORS Workforce & Technology Center locations, providing opportunities for approximately 24 participants annually. Participants develop retail skills including inventory management, customer service, cash register operation, phone and intercom etiquette, and non-verbal communication.",
       "agency": "Maryland State Department of Education",
       "list_of_eligible_counties": [
-        "All",
-        "Baltimore City"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -122482,8 +122217,6 @@
       "program_description": "A program designed to enhance technology commercialization and provide technical and business assistance to small and early-stage companies in urban Maryland. The program offers mentoring, connections to support programs, and grant funding through dedicated Venture Growth Advisors in key urban regions.",
       "agency": "Maryland Technology Development Corporation (TEDCO)",
       "list_of_eligible_counties": [
-        "Baltimore City",
-        "Prince George's",
         "All"
       ],
       "list_of_prioritized_counties": [
@@ -122538,8 +122271,7 @@
       "program_description": "A competitive matching funds program that provides non-dilutive funding to small businesses that have received or are seeking federal Small Business Innovation Research (SBIR) or Small Business Technology Transfer (STTR) awards. The program aims to strengthen SBIR/STTR awards, promote job creation and economic development in Maryland, encourage commercialization of research by small businesses, facilitate technology transfer from universities and federal labs, and support economically disadvantaged small businesses in accessing federal funding. The program is administered at both the state level through TEDCO and locally through Montgomery County. For Phase I SBIR/STTR awards, companies receive a grant equal to the lesser of 25% of the Phase I award or $25,000. For Phase II SBIR/STTR awards, companies receive a grant equal to the lesser of 25% of the Phase II award or $75,000 (state level) or up to $50,000 (Montgomery County level). Montgomery County also provides Phase 0 grants that reimburse up to $5,000 of technical assistance expenditures associated with pursuing a first Phase I grant. Awards are issued on a quarterly basis or first-come-first-served basis, subject to fund availability. Up to 50% of matching grants may be used for reimbursement of technical assistance, investment assistance, or commercialization assistance expenses. The program supports small businesses engaged in SBIR and STTR activities, with policies and procedures established at both state and local levels. Applicants must maintain at least 51% of R&D operations within Montgomery County for a minimum of 2 years from grant disbursement (county component).",
       "agency": "Maryland Technology Development Corporation (TEDCO) and Montgomery County",
       "list_of_eligible_counties": [
-        "All",
-        "Montgomery"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -122766,7 +122498,6 @@
       "program_description": "A loan program administered by Montgomery County that provides financial assistance to minority- and women-owned small businesses in Montgomery County and across Maryland for business operations and expansion.",
       "agency": "Montgomery County",
       "list_of_eligible_counties": [
-        "Montgomery",
         "All"
       ],
       "list_of_prioritized_counties": [],
@@ -135557,8 +135288,7 @@
       "program_description": "A highly competitive federal grant program that encourages domestic small businesses to engage in federal research and development across technology areas and markets to stimulate technological innovation, meet federal research and development needs, and increase commercialization. The program supports small businesses in commercializing innovative technologies by facilitating collaboration between small businesses and research institutions. It provides federal funding for early-stage U.S.-based small businesses creating innovative technologies, including those that improve health, and helps move ideas from concept to market by supporting research, development, and commercialization of new technologies in high-impact sectors including biotechnology, energy, defense, and advanced technology.",
       "agency": "Montgomery County, Prince George's County, St. Mary's County, and City of Annapolis",
       "list_of_eligible_counties": [
-        "All",
-        "Prince George's"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -139315,8 +139045,7 @@
       "program_description": "A state program that provides medical assistance and health coverage to eligible disabled and low-income individuals and families in Maryland. The program helps cover medical expenses including doctor's visits, exams, prescriptions, hospital bills, and Medicare premiums.",
       "agency": "Prince George's County",
       "list_of_eligible_counties": [
-        "All",
-        "Prince George's"
+        "All"
       ],
       "list_of_prioritized_counties": [],
       "list_of_incentive_areas": [],
@@ -144471,7 +144200,6 @@
       "program_description": "A federal program that provides subsidies to help eligible low-income households afford broadband and Internet service. Qualified households receive monthly service credits of up to $30 toward Internet and mobile services, or up to $75 per month if located on Tribal lands. The program is offered through a partnership with Comcast as Internet Essentials and Internet Essentials Plus, with two service speed tiers available: Internet Essentials (up to 50 Mbps, 4 devices) and Internet Essentials Plus (up to 100 Mbps, 5 devices). No activation fees and free equipment included. Eligible households must receive benefits from the National School Lunch Program, SNAP, Medicaid, Federal Public Housing Assistance, Lifeline, Federal Pell Grants, WIC, or other qualifying federal benefit programs.",
       "agency": "Somerset County",
       "list_of_eligible_counties": [
-        "Somerset",
         "All"
       ],
       "list_of_prioritized_counties": [],
