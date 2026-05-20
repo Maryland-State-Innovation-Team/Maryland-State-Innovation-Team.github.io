@@ -983,7 +983,7 @@
                             <div class="usa-form-group">
                                 <label class="usa-label usa-sr-only" for="search-input">Search by keyword</label>
                                 <div class="usa-search usa-search--big" role="search">
-                                    <input class="usa-input" id="search-input" type="search" name="search" placeholder="Search by keyword, program name, or agency">
+                                    <input class="usa-input" id="search-input" type="search" name="search" placeholder="Search by keyword, program name, or source">
                                 </div>
                             </div>
                         </div>
@@ -1040,7 +1040,13 @@
 
                         <div class="desktop:grid-col-9">
                             <div id="results-container" class="display-flex flex-justify-between flex-align-center margin-bottom-1">
-                                <p id="results-count" class="font-sans-sm text-base" role="status" aria-live="polite">Loading results...</p>
+                                <div class="display-flex flex-align-center gap-2">
+                                    <p id="results-count" class="font-sans-sm text-base margin-right-2" role="status" aria-live="polite">Loading results...</p>
+                                    <div class="usa-checkbox" style="margin: 0;">
+                                        <input class="usa-checkbox__input" id="show-low-confidence" type="checkbox">
+                                        <label class="usa-checkbox__label font-sans-3xs" for="show-low-confidence" style="margin-top: 0;">Show low-confidence results</label>
+                                    </div>
+                                </div>
                                 <button id="download-csv-btn" class="usa-button usa-button--outline" aria-label="Download List">
                                     <span class="download-text">Download</span>
                                     <svg class="usa-icon margin-left-05" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">
@@ -1055,14 +1061,18 @@
                                     <thead>
                                         <tr>
                                             <th scope="col" data-sortable>Program&nbsp;Name</th>
-                                            <th scope="col" data-sortable>Agency</th>
+                                            <th scope="col" data-sortable>Source</th>
                                             <th scope="col">Description</th>
                                             <th scope="col" data-sortable>Assistance&nbsp;Type</th>
+                                            <th scope="col" data-sortable>Funding</th>
+                                            <th scope="col" data-sortable>Stage</th>
+                                            <th scope="col" data-sortable>Quality</th>
+                                            <th scope="col" data-sortable>Sources</th>
                                             <th scope="col" data-sortable>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody id="results-table-body">
-                                        <tr><td colspan="5" class="text-center padding-4">Loading incentives...</td></tr>
+                                        <tr><td colspan="9" class="text-center padding-4">Loading incentives...</td></tr>
                                     </tbody>
                                 </table>
                                 <div class="usa-table__announcement-region usa-sr-only" role="status" aria-live="polite"></div>
@@ -1115,7 +1125,7 @@
                                     </div>
                                     <hr class="info-box-divider">
                                     <div id="detail-agency-box">
-                                        <h2 class="font-sans-md text-base">Agency</h2>
+                                        <h2 class="font-sans-md text-base">Source</h2>
                                         <p id="detail-agency" class="font-sans-md text-bold"></p>
                                     </div>
                                 </div>
@@ -1338,11 +1348,12 @@
                 orgTypes: new Set(),
                 assistanceTypes: new Set(),
                 industries: new Set(),
+                fundingSource: new Set(),
             };
             const filterConfig = {
                 industries: {
                     title: 'Business Category',
-                    key: 'list_of_relevant_industries',
+                    key: 'eligible_industries',
                     options: ["Child Care Services", "Grocery Stores and Fresh Food Retailers", "Agriculture, Forestry, Fishing and Hunting", "Mining, Quarrying, and Oil and Gas Extraction", "Utilities", "Construction", "Manufacturing", "Wholesale Trade", "Retail Trade", "Transportation and Warehousing", "Information", "Finance and Insurance", "Real Estate and Rental and Leasing", "Professional, Scientific, and Technical Services", "Management of Companies and Enterprises", "Administrative and Support and Waste Management and Remediation Services", "Educational Services", "Health Care and Social Assistance", "Arts, Entertainment, and Recreation", "Accommodation and Food Services", "Other Services (except Public Administration)", "Public Administration"]
                 },
                 assistanceTypes: {
@@ -1368,13 +1379,18 @@
                 },
                 counties: {
                     title: 'County',
-                    key: 'list_of_eligible_counties',
-                    options: ["Allegany", "Anne Arundel", "Baltimore", "Baltimore City", "Calvert", "Caroline", "Carroll", "Cecil", "Charles", "Dorchester", "Frederick", "Garrett", "Harford", "Howard", "Kent", "Montgomery", "Prince George's", "Queen Anne's", "St. Mary's", "Somerset", "Talbot", "Washington", "Wicomico", "Worcester"]
+                    key: 'eligible_counties',
+                    options: ["Allegany", "Anne Arundel", "Baltimore County", "Baltimore City", "Calvert", "Caroline", "Carroll", "Cecil", "Charles", "Dorchester", "Frederick", "Garrett", "Harford", "Howard", "Kent", "Montgomery", "Prince George's", "Queen Anne's", "St. Mary's", "Somerset", "Talbot", "Washington", "Wicomico", "Worcester"]
+                },
+                fundingSource: {
+                    title: 'Funding Source',
+                    key: 'funding_source',
+                    options: ["public", "private"]
                 },
                 incentiveAreas: {
                     title: 'Incentive Area',
                     description_html: '<div class="padding-bottom-1"><a href="../methodology/#incentive-areas" target="_blank" rel="noopener noreferrer">What are incentive areas?</a></div>',
-                    key: 'list_of_incentive_areas',
+                    key: 'eligible_incentive_areas',
                     options: ["NourishMD Eligibility Zone", "Just Communities", "ENOUGH Act Grantees", "BRNI Areas", "Enterprise Zone Focus Areas", "Enterprise Zones", "Main Street Areas", "Opportunity Zones", "Priority Funding Areas", "RISE Zones", "Sustainable Communities", "Transit Oriented Development"]
                 }
             };
@@ -1420,7 +1436,7 @@
                     handleRouting();
                 } catch (error) {
                     console.error("Failed to load incentive data:", error);
-                    tableBody.innerHTML = `<tr><td colspan="5" class="text-center padding-4 text-error">Error loading data. Please try again later.</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="9" class="text-center padding-4 text-error">Error loading data. Please try again later.</td></tr>`;
                     resultsCount.textContent = '0 results';
                 }
             }
@@ -1716,7 +1732,7 @@
 
             function renderTable(incentives) {
                 if (incentives.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="5" class="text-center padding-4">No incentives match your criteria.</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="9" class="text-center padding-4">No incentives match your criteria.</td></tr>`;
                     return;
                 }
 
@@ -1772,7 +1788,7 @@
                             <td data-label="Program Name" class="program-name font-sans-md text-bold">
                                 <a href="#/incentive/${item.slug}" class="usa-link row-link">${data.program_name}</a>
                             </td>
-                            <td data-label="Agency">
+                            <td data-label="Source">
                                 <div class="agency-name font-sans-xs text-base-dark" title="${item.agency || data.agency || ''}">
                                     ${item.agency || data.agency || ''}
                                 </div>
@@ -1784,6 +1800,18 @@
                             </td>
                             <td data-label="Assistance Type" class="assistance-type" data-sort-value="${typeSortValue}">
                                 ${tagsHtml}
+                            </td>
+                            <td data-label="Funding" class="font-sans-xs text-capitalize" style="white-space: nowrap;">
+                                ${data.funding_source || 'public'}
+                            </td>
+                            <td data-label="Stage" class="font-sans-xs text-capitalize" style="white-space: nowrap;">
+                                ${data.business_stage || '—'}
+                            </td>
+                            <td data-label="Quality" class="font-sans-xs text-capitalize">
+                                ${data.data_quality || '—'}
+                            </td>
+                            <td data-label="Sources" class="font-sans-xs">
+                                ${data.source_count || '—'}
                             </td>
                             <td data-label="Status" data-sort-value="${statusSort}" style="white-space: nowrap;">
                                 <span class="usa-tag radius-pill padding-x-1 padding-y-05 font-sans-3xs ${statusClass}"
@@ -1858,7 +1886,7 @@
 
                 // If a contact method exists, create the button
                 if (contactHref) {
-                    buttonContainer.innerHTML += `<a href="${contactHref}" class="usa-button usa-button--outline usa-button--outline--inverse">Contact Agency</a>`;
+                    buttonContainer.innerHTML += `<a href="${contactHref}" class="usa-button usa-button--outline usa-button--outline--inverse">Contact</a>`;
                 }
 
                 // Agency (still bold text)
@@ -1866,7 +1894,7 @@
 
                 // Geographic Area (as pills)
                 const geoEl = document.getElementById('detail-geo');
-                const geoData = data.list_of_eligible_counties || [];
+                const geoData = data.eligible_counties || [];
                 if (geoData.length > 0) {
                     // Use 'All' if it's the only item, otherwise filter it out if mixed
                     const filteredGeo = geoData.length > 1 ? geoData.filter(g => g !== 'All') : geoData;
@@ -1994,24 +2022,20 @@
 
             function applyFilters() {
                 const term = activeFilters.searchTerm.toLowerCase();
+                const showLowConfidence = document.getElementById('show-low-confidence')?.checked;
                 displayedIncentives = allIncentives.filter(item => {
                     const data = item.structured_extraction;
+                    if (!showLowConfidence && data.data_quality === 'low') {
+                        return false;
+                    }
                     if (term && !(data.program_name?.toLowerCase().includes(term) || data.program_description?.toLowerCase().includes(term) || data.agency?.toLowerCase().includes(term))) {
                         return false;
                     }
                     for (const [key, config] of Object.entries(filterConfig)) {
                          const filterSet = activeFilters[key];
                          if (filterSet.size > 0) {
-                             // Industry filter checks all three industry fields so a program
-                             // eligible for an industry (list_of_eligible_industries) shows up
-                             // even if list_of_relevant_industries is empty.
-                             const itemValues = key === 'industries'
-                                 ? [...new Set([
-                                     ...(data.list_of_eligible_industries || []),
-                                     ...(data.list_of_prioritized_industries || []),
-                                     ...(data.list_of_relevant_industries || []),
-                                   ])]
-                                 : data[config.key] || [];
+                             const raw = data[config.key];
+                             const itemValues = Array.isArray(raw) ? raw : (raw ? [raw] : []);
                              const hasMatch = itemValues.some(val => filterSet.has(val) || (key === 'counties' && (val === 'All' || filterSet.has('All'))));
                              if (!hasMatch) return false;
                          }
@@ -2086,23 +2110,24 @@
                     active_filters: Object.keys(activeFilters).filter(k => activeFilters[k].size > 0).join(',')
                 });
 
-                const headers = ["Program Name", "Agency", "URL", "Eligible Counties", "Assistance Type", "Eligible Organization Types", "Eligible Industries", "Application Deadline", "Summary"];
-                
+                const headers = ["Program Name", "Source", "URL", "Eligible Counties", "Assistance Type", "Eligible Organization Types", "Eligible Industries", "Funding Source", "Application Deadline", "Summary"];
+
                 const escapeCSV = (s) => (s === null || s === undefined) ? '' : `"${String(s).replace(/"/g, '""')}"`;
 
-                const rows = displayedIncentives.map(item => { 
-                    const d = item.structured_extraction; 
+                const rows = displayedIncentives.map(item => {
+                    const d = item.structured_extraction;
                     return [
-                        d.program_name, 
-                        d.agency, 
-                        d.URL, 
-                        d.list_of_eligible_counties?.join('; '), 
-                        d.assistance_type?.join('; '), 
-                        d.eligible_organization_types?.join('; '), 
-                        d.list_of_eligible_industries?.join('; '), 
-                        d.application_deadline_string, 
+                        d.program_name,
+                        d.agency,
+                        d.URL,
+                        d.eligible_counties?.join('; '),
+                        d.assistance_type?.join('; '),
+                        d.eligible_organization_types?.join('; '),
+                        d.eligible_industries?.join('; '),
+                        d.funding_source || 'public',
+                        d.application_deadline_string,
                         item.summary || d.program_description
-                    ]; 
+                    ];
                 });
 
                 // Construct the CSV string
@@ -2191,7 +2216,8 @@
                 });
             }
             downloadBtn.addEventListener('click', downloadCSV);
-            
+            document.getElementById('show-low-confidence').addEventListener('change', applyFilters);
+
             // GA4: Event Delegation for Dynamic Detail Buttons
             const detailBtnContainer = document.getElementById('detail-button-container');
             detailBtnContainer.addEventListener('click', (e) => {
