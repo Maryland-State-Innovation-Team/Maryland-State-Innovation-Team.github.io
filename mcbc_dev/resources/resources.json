@@ -5995,7 +5995,7 @@
     {
         "id": 290,
         "organization": "Maryland State Family Child Care Association",
-        "description": "The Maryland State Child Care Association's mission statement is to promote the growth and development of professional licensed child care and learning centers in Maryland.\n",
+        "description": "The Maryland State Family Child Care Association (MSFCCA) is a non-profit professional organization dedicated to advocating for, educating, and supporting registered family child care providers across the state. Through legislative advocacy and professional development initiatives, the MSFCCA works to elevate the quality of early childhood care and strengthen the family child care profession in Maryland.",
         "type": "State",
         "area": [
             "Maryland"
@@ -6004,8 +6004,8 @@
         "address_city": null,
         "address_state": null,
         "address_zip": null,
-        "url": "https://mscca.org",
-        "logo_link": "https://drive.google.com/file/d/19vI6BRo0r2Asu8UqoRmyEPvxUHAegpWB/view",
+        "url": "https://www.msfcca.org/",
+        "logo_link": "https://static.wixstatic.com/media/ae94a9_645cac5a541340abb9868f112fc71750~mv2.png/v1/crop/x_70,y_146,w_1870,h_441/fill/w_684,h_172,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ae94a9_645cac5a541340abb9868f112fc71750~mv2.png",
         "logo_file": "logos/290.jpg",
         "question_tags": [
             "Networking",
@@ -6013,12 +6013,9 @@
             "Getting Started"
         ],
         "business_category": "Child Care",
-        "phone": {
-            "display": "410-820-9196",
-            "link": "tel:+14108209196"
-        },
+        "phone": null,
         "fax": null,
-        "email": "info@mscca.org",
+        "email": "admin@msfcca.org",
         "contacts": [
             {
                 "name": "Ruby Daniels",
@@ -6028,7 +6025,7 @@
                     "link": "tel:+14105315159"
                 },
                 "fax": null,
-                "email": "marylandstatefamilychildcare@gmail.com"
+                "email": null
             },
             {
                 "name": "Wendy Dingus",
@@ -6038,7 +6035,7 @@
                     "link": "tel:+13013923481"
                 },
                 "fax": null,
-                "email": "marylandstatefamilychildcare@gmail.com"
+                "email": null
             }
         ]
     },
@@ -6074,6 +6071,146 @@
                 },
                 "fax": null,
                 "email": "chcooper@co.pg.md.us"
+            }
+        ]
+    },
+    {
+        "id": 294,
+        "organization": "Rockville Economic Development, Inc.",
+        "description": "Rockville Economic Development, Inc. (REDI) is a nonprofit, public-private partnership established in 1997 by the City of Rockville to serve as its primary economic development agency. REDI helps businesses launch, locate, and expand by offering site selection assistance, access to funding and incentives, networking resources, and customized demographic research.",
+        "type": "City",
+        "area": [
+            "Montgomery County"
+        ],
+        "address": "51 Monroe St",
+        "address_city": "Rockville",
+        "address_state": "Maryland",
+        "address_zip": "20850",
+        "url": "https://rockvilleredi.org/",
+        "logo_link": "https://rockvilleredi.org/wp-content/uploads/2024/03/REDI-Logo-Tag-RGB-1024x582.jpg",
+        "logo_file": "logos/294.jpg",
+        "question_tags": [
+            "Permits and Licensing",
+            "Find Funding",
+            "Networking",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
+        ],
+        "business_category": "All",
+        "phone": {
+            "display": "301-315-8096",
+            "link": "tel:+13013158096"
+        },
+        "fax": null,
+        "email": "admin@RockvilleREDI.org",
+        "contacts": []
+    },
+    {
+        "id": 295,
+        "organization": "Governor's Office of Business Advancement (GOBA)",
+        "description": "The Governor's Office of Business Advancement (GOBA) is the state's top troubleshooting office for businesses facing regulatory challenges. Embedded at the Maryland Department of Commerce, GOBA partners with state and local government agencies to resolve disputes, remove obstacles, and provide myriad customized solutions for businesses of all sizes, sectors, and stages.",
+        "type": "State",
+        "area": [
+            "Maryland"
+        ],
+        "address": "401 E. Pratt St",
+        "address_city": "Baltimore",
+        "address_state": "Maryland",
+        "address_zip": "21202",
+        "url": "https://business.maryland.gov/",
+        "logo_link": "https://medco-corp.com/wp-content/uploads/2024/02/Untitled-design-5-e1707232914750-aspect-ratio-137-137.png",
+        "logo_file": "logos/27.jpg",
+        "question_tags": [
+            "Permits and Licensing",
+            "Find Funding",
+            "Business Operations and Planning",
+            "Find a Site/Location",
+            "Getting Started"
+        ],
+        "business_category": "All",
+        "phone": null,
+        "fax": null,
+        "email": null,
+        "contacts": [
+            {
+                "name": "Luis O. Cardona",
+                "title": "Director",
+                "phone": {
+                    "display": "443-806-4950",
+                    "link": "tel:+14438064950"
+                },
+                "fax": null,
+                "email": "luis.cardona@maryland.gov"
+            }
+        ]
+    },
+    {
+        "id": 296,
+        "organization": "Maryland Health Benefit Exchange (MHBE)",
+        "description": "Maryland Health Benefit Exchange (MHBE) is responsible for the administration of Maryland Health Connection, the state\u2019s health insurance marketplace, under the Patient Protection and Affordable Care Act of 2010 (ACA). MHBE works with Maryland Department of Health, Maryland Insurance Administration, Department of Human Services and stakeholders statewide.",
+        "type": "State",
+        "area": [
+            "Maryland"
+        ],
+        "address": "750 East Pratt St",
+        "address_city": "Baltimore",
+        "address_state": "Maryland",
+        "address_zip": "21202",
+        "url": "https://www.marylandhbe.com/",
+        "logo_link": "https://www.marylandhbe.com/wp-content/uploads/2021/02/Group-963.png",
+        "logo_file": "logos/296.jpg",
+        "question_tags": [
+            "Employee Benefits"
+        ],
+        "business_category": "All",
+        "phone": {
+            "display": "855-642-8572",
+            "link": "tel:+18556428572"
+        },
+        "fax": null,
+        "email": "mhbe.constituentservices@maryland.gov",
+        "contacts": [
+            {
+                "name": "Wonda Oliver",
+                "title": "Deputy Director of Consumer Assistance",
+                "phone": null,
+                "fax": null,
+                "email": "wonda.oliver@maryland.gov"
+            }
+        ]
+    },
+    {
+        "id": 297,
+        "organization": "Maryland State Child Care Association",
+        "description": "The Maryland State Child Care Association's mission statement is to promote the growth and development of professional licensed child care and learning centers in Maryland.\n",
+        "type": "State",
+        "area": [
+            "Maryland"
+        ],
+        "address": null,
+        "address_city": null,
+        "address_state": null,
+        "address_zip": null,
+        "url": "https://mscca.org/",
+        "logo_link": "https://mscca.org/wp-content/uploads/2022/02/mscca-New-greenlogo-notext-sml.jpg",
+        "logo_file": "logos/297.jpg",
+        "question_tags": [
+            "Networking",
+            "Business Operations and Planning",
+            "Getting Started"
+        ],
+        "business_category": "Child Care",
+        "phone": null,
+        "fax": null,
+        "email": "info@mscca.org",
+        "contacts": [
+            {
+                "name": "Christina Peusch",
+                "title": "Executive Director",
+                "phone": null,
+                "fax": null,
+                "email": "info@mscca.org"
             }
         ]
     }
