@@ -6201,7 +6201,10 @@
             "Getting Started"
         ],
         "business_category": "Child Care",
-        "phone": null,
+        "phone": {
+            "display": "410-820-9196",
+            "link": "tel:+14108209196"
+        },
         "fax": null,
         "email": "info@mscca.org",
         "contacts": [
