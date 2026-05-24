@@ -1759,28 +1759,46 @@
                     const typeSortValue = types.join(' ');
 
                     // Application status badge.
-                    // Supports both new fields (is_accepting_applications / is_recurring)
-                    // and legacy field (is_out_of_date) for records not yet re-extracted.
-                    const isAccepting = 'is_accepting_applications' in data
-                        ? data.is_accepting_applications === true
-                        : data.is_out_of_date !== true; // legacy fallback
-                    const isRecurring = 'is_recurring' in data
-                        ? data.is_recurring !== false
-                        : data.is_out_of_date !== true; // legacy fallback
+                    // Tri-state: true / false / null (null = source page didn't state).
+                    // Legacy is_out_of_date is mapped onto the new fields for old records.
+                    let accepting, recurring;
+                    if ('is_accepting_applications' in data || 'is_recurring' in data) {
+                        accepting = data.is_accepting_applications ?? null;
+                        recurring = data.is_recurring ?? null;
+                    } else if ('is_out_of_date' in data) {
+                        // Legacy: is_out_of_date=true → both false; else both true.
+                        accepting = data.is_out_of_date === true ? false : true;
+                        recurring = data.is_out_of_date === true ? false : true;
+                    } else {
+                        accepting = null;
+                        recurring = null;
+                    }
 
                     let statusLabel, statusClass, statusSort;
-                    if (isAccepting) {
+                    if (accepting === true) {
                         statusLabel = 'Open';
                         statusClass = 'bg-green-cool-5 text-green-cool-70';
                         statusSort = '0';
-                    } else if (isRecurring) {
-                        statusLabel = 'Closed — Recurring';
+                    } else if (accepting === null && recurring === true) {
+                        statusLabel = 'Recurring';
                         statusClass = 'bg-gold-5 text-gold-60v';
                         statusSort = '1';
+                    } else if (accepting === null) {
+                        statusLabel = 'Confirm with agency';
+                        statusClass = 'bg-base-lighter text-base-dark';
+                        statusSort = '2';
+                    } else if (recurring === true) {
+                        statusLabel = 'Closed — Recurring';
+                        statusClass = 'bg-gold-5 text-gold-60v';
+                        statusSort = '3';
+                    } else if (recurring === null) {
+                        statusLabel = 'Closed — Confirm future rounds';
+                        statusClass = 'bg-base-lighter text-base-dark';
+                        statusSort = '4';
                     } else {
                         statusLabel = 'Closed';
                         statusClass = 'bg-base-lighter text-base-dark';
-                        statusSort = '2';
+                        statusSort = '5';
                     }
 
                     return `
