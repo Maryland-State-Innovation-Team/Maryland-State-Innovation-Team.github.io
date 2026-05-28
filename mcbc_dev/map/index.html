@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WCLWWJCG');</script>
+<!-- End Google Tag Manager -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
+
     <title>Locate the Opportunity - Maryland Community Business Compass</title>
-    <link rel="icon" type="image/x-icon" href="./assets/favicon-CxEqIT3B.ico">
-    <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
     <script>
         // 1. Initialize dataLayer and gtag immediately (Safe Shim)
         // This ensures window.gtag exists for other scripts, preventing ReferenceErrors
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-
         // 2. Fetch environment config
         fetch('../env.json')
             .then(function(response) {
@@ -20,13 +27,11 @@
             .then(function(config) {
                 if (config.environment === 'production') {
                     var gaId = 'G-W4R4JXSE3R';
-                    
                     // 3. Load the Google Tag Manager script asynchronously
                     var script = document.createElement('script');
                     script.async = true;
                     script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
                     document.head.appendChild(script);
-
                     // 4. Configure GA (Processing the queue)
                     gtag('js', new Date());
                     gtag('config', gaId);                    
@@ -38,11 +43,15 @@
                 console.warn('Could not load env.json, GA suppressed.', error);
             });
     </script>
-  <script type="module" crossorigin src="./assets/index-B7UlnzEP.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-Cy0oi8b6.css">
+  <script type="module" crossorigin src="../assets/map-BLp1qm04.js"></script>
+  <link rel="stylesheet" crossorigin href="../assets/map-Cy0oi8b6.css">
 </head>
 <body class="bg-slate-100 text-slate-800">
     <a href="#main-content" class="visually-hidden focusable">Skip to main content</a>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCLWWJCG"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <select id="choropleth-select" class="hidden w-full p-2 rounded-md border-2 border-slate-300 focus:ring-slate-500 focus:border-slate-500">
     </select>
 
@@ -131,85 +140,118 @@
             </div>
 
             <button data-sector="other" class="sector-choice-btn group mt-4 w-full border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-slate-400 rounded-lg p-4 text-center transition flex justify-center items-center">
-                <span class="font-semibold text-slate-700">Other / Not Sure</span>
+                <span class="font-semibold text-slate-700">General Business</span>
             </button>
         </div>
     </div>
     
 
     <div id="app-container" class="relative w-screen flex flex-col">
-        <div class="usa-banner-container">
-            <section class="usa-banner" aria-label="Official website of the State of Maryland">
-                <div class="usa-accordion">
-                    <header class="usa-banner__header padding-x-2">
-                        <div class="usa-banner__inner padding-0 display-flex flex-align-center">
-                            <div class="grid-col-auto display-flex flex-align-center">
-                                <img class="usa-banner__header-flag" aria-hidden="true" src="data:image/svg+xml,%3csvg%20width='18'%20height='13'%20viewBox='0%200%2018%2013'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20x='7'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='5'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='1'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='7'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='3'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='3'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='5'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='11'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2011%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='13'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2013%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='17'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2017%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='11'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2011%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='15'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2015%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='15'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2015%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='13'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2013%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='17'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2017%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='6.5'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='9.25'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='6.5'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='1'%20y='9.25'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2017%206.5)'%20fill='white'/%3e%3crect%20x='13'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2013%203.75)'%20fill='white'/%3e%3crect%20x='13'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2013%206.5)'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2017%203.75)'%20fill='%23B50909'/%3e%3crect%20x='0.75'%20y='0.75'%20width='16.5'%20height='11.5'%20stroke='black'%20stroke-width='0.5'/%3e%3c/svg%3e">
-                            </div>
-                            <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
-                                <p class="usa-banner__header-text">An official website of the State of Maryland</p>
-                            </div>
-                            <button type="button" class="usa-banner__button" aria-expanded="false" aria-controls="gov-banner-default">
-                                Here’s how you know
-                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor" aria-hidden="true" focusable="false">
-                                    <path d="M576-253.85 349.85-480 576-706.15 613.15-669l-189 189 189 189L576-253.85Z"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </header>
+        <a href="#main-content" class="visually-hidden focusable">
+    Skip to main content
+</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCLWWJCG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div class="usa-banner-container">
+    <section class="usa-banner" aria-label="Official website of the State of Maryland">
+        <div class="usa-accordion">
+            <div class="usa-banner__header">
+            <div class="usa-banner__inner">
 
-                    <div class="usa-banner__content usa-accordion__content" id="gov-banner-default" hidden="true">
-                        <div class="grid-row grid-gap-lg">
-                            <div class="usa-banner__guidance tablet:grid-col-6">
-                                <img class="usa-banner__icon usa-media-block__img" role="img" alt="" aria-hidden="true" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3e%3ctitle%3eicon-dot-gov%3c/title%3e%3cpath%20fill='%232378C3'%20fill-rule='evenodd'%20d='m32%200c17.7%200%2032%2014.3%2032%2032s-14.3%2032-32%2032-32-14.3-32-32%2014.3-32%2032-32zm0%201.2c-17%200-30.8%2013.8-30.8%2030.8s13.8%2030.8%2030.8%2030.8%2030.8-13.8%2030.8-30.8-13.8-30.8-30.8-30.8zm11.4%2038.9c.5%200%20.9.4.9.8v1.6h-24.6v-1.6c0-.5.4-.8.9-.8zm-17.1-12.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h.8c.5%200%20.9.4.9.8v.8h-21.4v-.8c0-.5.4-.8.9-.8h.8v-9.8zm5.7-8.2%2012.3%204.9v1.6h-1.6c0%20.5-.4.8-.9.8h-19.6c-.5%200-.9-.4-.9-.8h-1.6v-1.6s12.3-4.9%2012.3-4.9z'/%3e%3c/svg%3e">
-                                <div class="usa-media-block__body">
-                                    <p><strong>Official websites use .gov</strong><br>A <strong>.gov</strong> website belongs to an official government organization in the United States.</p>
-                                </div>
-                            </div>
-                            <div class="usa-banner__guidance tablet:grid-col-6">
-                                <img class="usa-banner__icon usa-media-block__img" role="img" alt="" aria-hidden="true" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3e%3ctitle%3eicon-https%3c/title%3e%3cpath%20fill='%23719F2A'%20fill-rule='evenodd'%20d='M32%200c17.673%200%2032%2014.327%2032%2032%200%2017.673-14.327%2032-32%2032C14.327%2064%200%2049.673%200%2032%200%2014.327%2014.327%200%2032%200zm0%201.208C14.994%201.208%201.208%2014.994%201.208%2032S14.994%2062.792%2032%2062.792%2062.792%2049.006%2062.792%2032%2049.006%201.208%2032%201.208zm0%2018.886a7.245%207.245%200%200%201%207.245%207.245v3.103h.52c.86%200%201.557.698%201.557%201.558v9.322c0%20.86-.697%201.558-1.557%201.558h-15.53c-.86%200-1.557-.697-1.557-1.558V32c0-.86.697-1.558%201.557-1.558h.52V27.34A7.245%207.245%200%200%201%2032%2020.094zm0%203.103a4.142%204.142%200%200%200-4.142%204.142v3.103h8.284V27.34A4.142%204.142%200%200%200%2032%2023.197z'/%3e%3c/svg%3e">
-                                <div class="usa-media-block__body">
-                                    <p><strong>Secure .gov websites use HTTPS</strong><br>A <strong>lock</strong> (<span class="icon-lock"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="64" viewBox="0 0 52 64" class="usa-banner__lock-image" role="img" aria-labelledby="banner-lock-description-default" focusable="false"><title id="banner-lock-title-default">Lock</title><desc id="banner-lock-description-default">Locked padlock icon</desc><path fill="#000000" fill-rule="evenodd" d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"></path></svg></span>) or <strong>https://</strong> means you’ve safely connected to the .gov website. Share sensitive information only on official, secure websites.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <p class="usa-banner__header-text">
+                An official website of the State of Maryland.
+                </p>
+                <button type="button" class="usa-banner__button" aria-expanded="false" aria-controls="gov-banner-default">
+                Here’s how you know
+                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
+                    <path d="M576-253.85 349.85-480 576-706.15 613.15-669l-189 189 189 189L576-253.85Z"></path>
+                </svg>
+                </button>
+                <div class="usa-banner__additional-links">
+                    <a href="https://translate.google.com/translate?u=https://dev.compass.mgo.benefits.maryland.gov/map/" class="usa-banner__additional-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="20px" viewBox="0 -960 960 960" width="20px">
+                            <path d="M480-116q-75.15 0-141.5-28.46t-115.96-78.08q-49.62-49.61-78.08-115.96T116-480q0-75.77 28.46-141.81t78.08-115.65q49.61-49.62 115.96-78.08T480-844q75.77 0 141.81 28.46t115.65 78.08q49.62 49.61 78.08 115.65T844-480q0 75.15-28.46 141.5t-78.08 115.96q-49.61 49.62-115.65 78.08T480-116Zm0-53.85q21.62-21.61 40.54-70.42 18.92-48.81 29.08-108.81H410.38q10.93 61.54 29.47 110.35 18.53 48.81 40.15 68.88Zm-64.46-5q-19-30-34.31-75.53-15.31-45.54-23.46-98.7H197.08q31.69 69.31 89.5 115.2 57.81 45.88 128.96 59.03Zm128.92 0q71.15-13.15 128.96-59.03 57.81-45.89 89.5-115.2H602.23q-10.08 53.54-25.39 99.08-15.3 45.54-32.38 75.15ZM178.92-401.08h173.7q-2.77-21.3-3.47-41.73-.69-20.42-.69-39.19 0-18.77.69-38.19.7-19.43 3.47-38.73h-173.7q-5.77 19.38-8.34 39.38-2.58 20-2.58 39.54t2.58 39.54q2.57 20 8.34 39.38Zm226.69 0h148.78q2.76-22.3 3.46-41.34.69-19.04.69-37.58t-.69-38.08q-.7-19.54-3.46-40.84H405.61q-2.76 21.3-3.46 40.84-.69 19.54-.69 38.08t.69 38.08q.7 19.54 3.46 40.84Zm201.77 0h173.7q5.77-19.38 8.34-39.38 2.58-20 2.58-39.54t-2.58-40.04q-2.57-20.5-8.34-38.88h-173.7q2.77 21.3 3.47 41.73.69 20.42.69 39.19 0 18.77-.69 38.19-.7 19.43-3.47 38.73Zm-5.15-209.84h160.69Q730.85-681 674-726.12q-56.85-45.11-129.54-59.42 19 31.92 33.92 76.89 14.93 44.96 23.85 97.73Zm-191.85 0h139.24q-10.93-61.16-30.04-110.93-19.12-49.77-39.58-68.3-20.46 18.53-39.58 68.3-19.11 49.77-30.04 110.93Zm-213.3 0h160.69q8.92-52.77 23.85-97.73 14.92-44.97 33.92-76.89-73.08 14.31-129.73 59.62-56.66 45.3-88.73 115Z"></path>
+                        </svg>
+                        Translate
+                    </a>
                 </div>
-            </section>
-        </div>
-
-        <header class="usa-header usa-header--basic">
-            <div class="usa-nav-container">
-                <div class="usa-navbar">
-                    <div class="usa-logo custom-logo" id="basic-logo">
-                        <div class="usa-logo__text">
-                            <a href="../" title="Home">
-                                <img src="data:image/svg+xml,%3csvg%20width='141'%20height='76'%20viewBox='0%200%20141%2076'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cmask%20id='mask0_5104_5562'%20style='mask-type:luminance'%20maskUnits='userSpaceOnUse'%20x='16'%20y='0'%20width='109'%20height='76'%3e%3cpath%20d='M70.4927%200.600006C27.5434%201.1804%2016%2027.4917%2016%2027.4917V75.6H87.0662H101.77H115.893H124.018V57.4143V27.2337C124.018%2027.2337%20111.959%201.43836%2070.6862%200.600006C70.6862%200.600006%2065.6561%200.600006%2065.5916%200.600006'%20fill='white'/%3e%3c/mask%3e%3cg%20mask='url(%23mask0_5104_5562)'%3e%3cpath%20d='M102.672%20-9.9116H13.1625V97.913H102.672V-9.9116Z'%20fill='%23FFC233'/%3e%3cpath%20d='M99.319%2053.8029L70.1702%2036.3266L70.1057%20-9.84711H99.319V53.8029Z'%20fill='%23231F20'/%3e%3cpath%20d='M70.2348%20101.782L41.4084%2084.1125V18.9792L70.2348%2036.3266V101.782Z'%20fill='%23231F20'/%3e%3cpath%20d='M41.344%2018.9792V1.1804H12.2597L41.344%2018.9792Z'%20fill='%23231F20'/%3e%3cpath%20d='M144.783%2052.7711H5.35944V76.8898H144.783V52.7711Z'%20fill='%23C40E3E'/%3e%3cpath%20d='M140.721%20-0.109366H99.1255V49.5467H140.721V-0.109366Z'%20fill='%23C40E3E'/%3e%3cpath%20d='M67.0748%2062.5089C67.0748%2065.4108%2064.6887%2067.7969%2061.7868%2067.7969C58.8848%2067.7969%2056.4987%2065.4108%2056.4987%2062.5089V43.0334C56.4987%2040.1314%2058.8848%2037.7453%2061.7868%2037.7453C64.6887%2037.7453%2067.0748%2040.1314%2067.0748%2043.0334V62.5089Z'%20fill='white'/%3e%3cpath%20d='M145.622%2047.5476C148.524%2047.5476%20150.91%2049.9336%20150.91%2052.8356C150.91%2055.7376%20148.524%2058.1237%20145.622%2058.1237H52.6939C49.7919%2058.1237%2047.4058%2055.7376%2047.4058%2052.8356C47.4058%2049.9336%2049.7919%2047.5476%2052.6939%2047.5476H145.622Z'%20fill='white'/%3e%3cpath%20d='M104.607%2082.1778C104.607%2085.0798%20102.221%2087.4659%2099.319%2087.4659C96.417%2087.4659%2094.031%2085.0798%2094.031%2082.1778V23.5579C94.031%2020.6559%2096.417%2018.2698%2099.319%2018.2698C102.221%2018.2698%20104.607%2020.6559%20104.607%2023.5579V82.1778Z'%20fill='white'/%3e%3cpath%20d='M109.057%2027.2337C111.959%2027.2337%20114.345%2029.6198%20114.345%2032.5218C114.345%2035.4237%20111.959%2037.8098%20109.057%2037.8098H89.5813C86.6793%2037.8098%2084.2932%2035.4237%2084.2932%2032.5218C84.2932%2029.6198%2086.6793%2027.2337%2089.5813%2027.2337H109.057Z'%20fill='white'/%3e%3cpath%20d='M109.057%2067.7969C111.959%2067.7969%20114.345%2070.183%20114.345%2073.085C114.345%2075.9869%20111.959%2078.373%20109.057%2078.373H89.5813C86.6793%2078.373%2084.2932%2075.9869%2084.2932%2073.085C84.2932%2070.183%2086.6793%2067.7969%2089.5813%2067.7969H109.057Z'%20fill='white'/%3e%3c/g%3e%3c/svg%3e" alt="">
-                                <span>Maryland Community<br>Business Compass<span class="visually-hidden"> Home</span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <button type="button" class="usa-menu-btn">Menu</button>
-                </div>
-                <nav aria-label="Primary navigation" class="usa-nav">
-                    <button type="button" class="usa-nav__close" aria-label="Close Menu"></button>
-                    <ul class="usa-nav__primary usa-accordion">
-                        <li class="usa-nav__primary-item">
-                            <a href="../" class="usa-nav__link"><span>Home</span></a>
-                        </li>
-                        <li class="usa-nav__primary-item">
-                            <a href="./" class="usa-nav__link usa-current" aria-current="page"><span>Locate the Opportunity</span></a>
-                        </li>
-                        <li class="usa-nav__primary-item">
-                            <a href="../incentives/" class="usa-nav__link"><span>Find Government Funding</span></a>
-                        </li>
-                        <li class="usa-nav__primary-item">
-                            <a href="../resources/" class="usa-nav__link"><span>Connect with Experts</span></a>
-                        </li>
-                    </ul>
-                </nav>
+                
             </div>
-        </header>
+            </div>
+
+            <div class="usa-banner__content" id="gov-banner-default" hidden="">
+            <div class="grid-row grid-gap-lg">
+                <div class="usa-banner__guidance tablet:grid-col-6">
+                <img class="usa-banner__icon usa-media-block__img" role="img" alt="" aria-hidden="true" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3e%3ctitle%3eicon-dot-gov%3c/title%3e%3cpath%20fill='%232378C3'%20fill-rule='evenodd'%20d='m32%200c17.7%200%2032%2014.3%2032%2032s-14.3%2032-32%2032-32-14.3-32-32%2014.3-32%2032-32zm0%201.2c-17%200-30.8%2013.8-30.8%2030.8s13.8%2030.8%2030.8%2030.8%2030.8-13.8%2030.8-30.8-13.8-30.8-30.8-30.8zm11.4%2038.9c.5%200%20.9.4.9.8v1.6h-24.6v-1.6c0-.5.4-.8.9-.8zm-17.1-12.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h.8c.5%200%20.9.4.9.8v.8h-21.4v-.8c0-.5.4-.8.9-.8h.8v-9.8zm5.7-8.2%2012.3%204.9v1.6h-1.6c0%20.5-.4.8-.9.8h-19.6c-.5%200-.9-.4-.9-.8h-1.6v-1.6s12.3-4.9%2012.3-4.9z'/%3e%3c/svg%3e">
+                <div class="usa-media-block__body">
+                    <p>
+                    <strong>Official websites use .gov</strong><br>A
+                    <strong>.gov</strong> website belongs to an official government
+                    organization in the United States.
+                    </p>
+                </div>
+                </div>
+                <div class="usa-banner__guidance tablet:grid-col-6">
+                <img class="usa-banner__icon usa-media-block__img" role="img" alt="" aria-hidden="true" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3e%3ctitle%3eicon-https%3c/title%3e%3cpath%20fill='%23719F2A'%20fill-rule='evenodd'%20d='M32%200c17.673%200%2032%2014.327%2032%2032%200%2017.673-14.327%2032-32%2032C14.327%2064%200%2049.673%200%2032%200%2014.327%2014.327%200%2032%200zm0%201.208C14.994%201.208%201.208%2014.994%201.208%2032S14.994%2062.792%2032%2062.792%2062.792%2049.006%2062.792%2032%2049.006%201.208%2032%201.208zm0%2018.886a7.245%207.245%200%200%201%207.245%207.245v3.103h.52c.86%200%201.557.698%201.557%201.558v9.322c0%20.86-.697%201.558-1.557%201.558h-15.53c-.86%200-1.557-.697-1.557-1.558V32c0-.86.697-1.558%201.557-1.558h.52V27.34A7.245%207.245%200%200%201%2032%2020.094zm0%203.103a4.142%204.142%200%200%200-4.142%204.142v3.103h8.284V27.34A4.142%204.142%200%200%200%2032%2023.197z'/%3e%3c/svg%3e">
+                <div class="usa-media-block__body">
+                    <p>
+                    <strong>Secure .gov websites use HTTPS</strong><br>A
+                    <strong>lock</strong> (
+                    <span class="icon-lock"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="64" viewBox="0 0 52 64" class="usa-banner__lock-image" role="img" aria-labelledby="banner-lock-description-default" focusable="false">
+                        <title id="banner-lock-title-default">Lock</title>
+                        <desc id="banner-lock-description-default">
+                            Locked padlock icon
+                        </desc>
+                        <path fill="#000000" fill-rule="evenodd" d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"></path>
+                        </svg> </span>) or <strong>https://</strong> means you’ve safely connected to
+                    the .gov website. Share sensitive information only on official,
+                    secure websites.
+                    </p>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<header class="usa-header usa-header--basic">
+    <div class="usa-nav-container">
+        <div class="usa-navbar">
+            <div class="usa-logo custom-logo" id="basic-logo">
+                <div class="usa-logo__text">
+                    <a href="../" title="Home">
+                        <img src="../assets/mdwds_logo_notext.svg" alt="">
+                        <span>Maryland Community<br>Business Compass<span class="visually-hidden"> Home</span></span>
+                    </a>
+                </div>
+            </div>
+            <button type="button" class="usa-menu-btn">Menu</button>
+        </div>
+        <nav aria-label="Primary navigation" class="usa-nav">
+            <button type="button" class="usa-nav__close" aria-label="Close Menu"></button>
+            <ul class="usa-nav__primary usa-accordion">
+                <li class="usa-nav__primary-item">
+                    <a href="../" class="usa-nav__link "><span>Home</span></a>
+                </li>
+                <li class="usa-nav__primary-item">
+                    <a href="../map/" class="usa-nav__link usa-current" aria-current="page"><span>Locate the Opportunity</span></a>
+                </li>
+                <li class="usa-nav__primary-item">
+                    <a href="../incentives/" class="usa-nav__link "><span>Find Government Funding</span></a>
+                </li>
+                <li class="usa-nav__primary-item">
+                    <a href="../resources/" class="usa-nav__link "><span>Connect with Experts</span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+
 
         <noscript>
             <style>
@@ -268,7 +310,7 @@
                             <select id="sector-select" class="w-full h-full appearance-none bg-base-darkest text-white font-semibold text-sm shadow-lg py-2 pl-3 pr-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-base-darkest focus:ring-white border border-gray-600 transition-colors">
                                 <option value="childcare">Child Care</option>
                                 <option value="fresh-food">Fresh Food</option>
-                                <option value="other">Other</option>
+                                <option value="other">General Business</option>
                             </select>
                             <div id="sector-select-chevron" class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white transition-colors">
                                 <svg aria-hidden="true" focusable="false" class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>

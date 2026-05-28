@@ -1,15 +1,15 @@
 [
   {
     "indicator": "Average Child Care Spending (per child)",
-    "source": "Census Business Builder"
+    "source": "BLS Consumer Expenditure Survey (CE) PUMS and Census ACS (5-Year Estimates)"
   },
   {
     "indicator": "Average Household Income",
     "source": "Census ACS (5-Year Estimates)"
   },
   {
-    "indicator": "Average Yearly Grocery Spending",
-    "source": "Census Business Builder"
+    "indicator": "Annual Household Grocery Spending Estimation",
+    "source": "BLS Consumer Expenditure Survey (CE) PUMS and Census ACS (5-Year Estimates)"
   },
   {
     "indicator": "BRNI Areas",
@@ -73,7 +73,7 @@
   },
   {
     "indicator": "Fresh Food Spending Capacity Score",
-    "source": "Innovation Team Calculation Based on Census ACS (5-Year Estimates) and Census Business Builder"
+    "source": "Innovation Team Calculation Based on Census ACS (5-Year Estimates) and BLS Consumer Expenditure Survey (CE) PUMS"
   },
   {
     "indicator": "Incentive Programs (Grants/Loans)",
@@ -121,7 +121,7 @@
   },
   {
     "indicator": "Social Investment Need Score",
-    "source": "Innovation Team Calculation Based on OpenStreetMap, CDC PLACES (Model-based Estimates), Census ACS (5-Year Estimates), and Census Business Builder"
+    "source": "Innovation Team Calculation Based on OpenStreetMap, CDC PLACES (Model-based Estimates), Census ACS (5-Year Estimates), and BLS Consumer Expenditure Survey (CE) PUMS"
   },
   {
     "indicator": "Sustainable Communities",

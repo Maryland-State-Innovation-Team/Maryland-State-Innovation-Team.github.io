@@ -29,6 +29,16 @@
     "techContent": "<p>We utilize specific Census tables (B23008) to aggregate children under 6 living in families where all parents are in the labor force. This includes single-parent households where the parent works, and two-parent households where both work. This effectively proxies the \"need for care\" rather than just counting the total population of children.</p>"
   },
   {
+    "id": "childcare-spending-estimation",
+    "title": "Estimated Annual Child Care Spending (per child under 5)",
+    "description": "An estimate of annual child care spending per child under 5 for each census tract, derived from a regression model trained on the BLS Consumer Expenditure Survey and applied to ACS tract-level demographics.",
+    "unit": "Dollars per child under 5 per year",
+    "dataSource": "BLS Consumer Expenditure Survey (CE) PUMS and Census ACS (5-Year Estimates)",
+    "whatItMeans": "This estimate captures how much households in a neighborhood spend on babysitting and day care annually per young child — accounting for differences in income, household size, and the prevalence of households with young children.",
+    "techTitle": "Technical Deep Dive: CE PUMS Regression Model",
+    "techContent": "<p>We use the BLS Consumer Expenditure Survey (CE) Public Use Microdata Series (PUMS) interview files to build a regression model of household child care spending. The model is trained on households in Census Division 5 (South Atlantic), which includes Maryland, for regional representativeness. All households are included in the regression — not just those reporting non-zero child care spending — so the model captures the population-average spending rate.</p><p><strong>Model formula (WLS):</strong> <code>childcare_annual ~ income + household_size + has_young_child</code>, where <code>childcare_annual</code> is annualized quarterly babysitting and day care expenditure (CE variable <code>BBYDAYCQ × 4</code>), <code>has_young_child</code> is 1 if the household's youngest child is under 5 (<code>CHILDAGE</code> in 1–4), and observations are weighted by the CE final household weight (<code>FINLWT21</code>).</p><p>We apply this model to ACS 5-year tract-level predictors for every Maryland census tract, then convert per-household predictions to per-child-under-5 by multiplying by the tract household count and dividing by the tract under-5 population. CE self-reported expenditures systematically undercount comprehensive spending estimates; we apply a correction factor derived from validated tract-level benchmarks.</p>"
+  },
+  {
     "id": "child-care-supply",
     "title": "Estimated Child Care Supply",
     "description": "An estimate of licensed child care seats with a dynamic search radius adjusted for local vehicle ownership rates.",
@@ -39,14 +49,24 @@
     "techContent": "<p><b>Excludable vs. Non-Excludable Services:</b> Unlike a grocery store where anyone can enter (non-excludable), child care is \"excludable\"—access is strictly limited by the number of licensed seats. We therefore model supply as a finite inventory problem.</p><p>We calculate the total licensed capacity for children under 6 within a dynamic buffer. The radius of this buffer is determined by local Vehicle Ownership rates—ranging from 1 mile in high-ownership areas to ~10 miles in low-ownership areas—to simulate the \"catchment area\" a parent can realistically traverse to secure a limited slot.</p>"
   },
   {
+    "id": "grocery-spending-estimation",
+    "title": "Estimated Annual Household Grocery Spending",
+    "description": "An estimate of annual food-at-home spending per household for each census tract, derived from a regression model trained on the BLS Consumer Expenditure Survey and applied to ACS tract-level demographics.",
+    "unit": "Dollars per household per year",
+    "dataSource": "BLS Consumer Expenditure Survey (CE) PUMS and Census ACS (5-Year Estimates)",
+    "whatItMeans": "This estimate captures how much households in a neighborhood actually spend on groceries each year — not just their income. It accounts for differences in household size, education, and spending patterns observed nationally, adjusted for the South Atlantic region that includes Maryland.",
+    "techTitle": "Technical Deep Dive: CE PUMS Regression Model",
+    "techContent": "<p>We use the BLS Consumer Expenditure Survey (CE) Public Use Microdata Series (PUMS) interview files to build a regression model of household food-at-home spending. The model is trained on households in Census Division 5 (South Atlantic), which includes Maryland, for regional representativeness.</p><p><strong>Model formula (WLS):</strong> <code>food_annual ~ income + household_size + pct_bachelors</code>, where <code>food_annual</code> is annualized quarterly food-at-home expenditure (CE variable <code>FDHOMECQ × 4</code>), income is total pre-tax household income (<code>FINCBTXM</code>), and observations are weighted by the CE final household weight (<code>FINLWT21</code>).</p><p>We then apply this model to ACS 5-year tract-level predictors for every Maryland census tract (average household income, average household size, and share of adults with a bachelor's degree or higher). CE self-reported spending systematically undercounts comprehensive household expenditure; we apply a correction factor derived from validated tract-level benchmarks.</p>"
+  },
+  {
     "id": "fresh-food-demand",
     "title": "Estimated Fresh Food Spending Capacity Score",
     "description": "An estimate of how much a neighborhood could spend on groceries if high quality options were available, measuring economic capacity independent of current access.",
     "unit": "Percentile from 0-100",
-    "dataSource": "Innovation Team Calculation Based on Census ACS (5-Year Estimates) and Census Business Builder",
+    "dataSource": "Innovation Team Calculation Based on Census ACS (5-Year Estimates) and BLS Consumer Expenditure Survey (CE) PUMS",
     "whatItMeans": "This score separates economic viability from physical presence and measures whether a neighborhood has the spending power to financially support fresh food providers in their community.",
-    "techTitle": "Technical Deep Dive: OLS Regression Modeling",
-    "techContent": "<p>We train an Ordinary Least Squares (OLS) regression model to predict the \"Spend-per-Income\" ratio based on household demographics such as size, education, and presence of children. This model is applied to tract-level income data to estimate total theoretical market demand in dollars, independent of current supply.</p>"
+    "techTitle": "Technical Deep Dive: Access-Adjusted Food Spending Model",
+    "techContent": "<p>We train an Ordinary Least Squares (OLS) regression model to predict per-household food-at-home spending as a function of grocery access and household demographics: <code>food_at_home ~ grocery_supply_score + income + pct_under5 + pct_children_5_17 + pct_65_and_over + pct_snap + pct_renter</code>.</p><p>The <code>grocery_supply_score</code> coefficient captures the empirical lift in food-at-home spending from better grocery access, after controlling for income and demographics (R² = 0.897; supply coefficient = +$1.94 per percentile point). We then project every tract to the 95th-percentile access level to produce a counterfactual estimate of what food spending would be if the neighborhood had ideal grocery access — removing the \"access tax\" on currently underserved areas.</p><p>The demand score is ranked on a per-household basis (0–100 percentile). Ranking on per-household ideal spending — rather than total tract market size — ensures the score reflects the economic potential of a typical household in the neighborhood, producing a geographically smooth gradient that is comparable across tracts of different population densities.</p>"
   },
   {
     "id": "fresh-food-supply",
@@ -130,7 +150,7 @@
     "title": "Social Investment Need Score",
     "description": "This score identifies the areas where social intervention can have the greatest impact. It shows the neighborhoods where there is a critical gap in fresh food access but where local spending power is unlikely to attract or sustain private-sector fresh food providers.",
     "unit": "Percentile from 0-100",
-    "dataSource": "Innovation Team Calculation Based on OpenStreetMap, CDC PLACES (Model-based Estimates), Census ACS (5-Year Estimates), and Census Business Builder",
+    "dataSource": "Innovation Team Calculation Based on OpenStreetMap, CDC PLACES (Model-based Estimates), Census ACS (5-Year Estimates), and BLS Consumer Expenditure Survey (CE) PUMS",
     "whatItMeans": "Neighborhoods with high scores have significant food access needs but limited spending power meaning that market-based solutions are unlikely to fill the gap. For funders, policymakers, and non-profits, these are the highest-opportunity areas for grants, subsidies, or alternative grocery models.",
     "techTitle": "Technical Deep Dive: Modeling Market Failure",
     "techContent": "<p>We calculate a \"Market Strength Index\" by normalizing the total estimated grocery spending potential of every neighborhood on a 0–1 scale. We then invert this to derive a \"Market Multiplier\" (where 1.0 represents the lowest purchasing power).</p><p>The final score is the product of the <b>Fresh Food Gap Score</b> and the <b>Market Multiplier</b>. This multiplicative approach isolates the intersection of high physiological need and low economic viability, filtering out wealthy areas that lack stores simply by choice while highlighting areas dependent on social investment.</p>"

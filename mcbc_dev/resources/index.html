@@ -1273,6 +1273,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 // Populate both views
                 ['initial', 'results'].forEach(view => {
                     fillSelect(inputs[view].industry, industries);
+                    // Append "General Business" option — selects resources tagged for any business (business_category === "All")
+                    const generalOpt = document.createElement('option');
+                    generalOpt.value = 'general';
+                    generalOpt.textContent = 'General Business';
+                    inputs[view].industry.appendChild(generalOpt);
                     fillSelect(inputs[view].location, locations);
                     
                     // Custom Multiselect
@@ -1491,7 +1496,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                 // Filter Logic
                 const filtered = allResources.filter(item => {
-                    if (state.industry && item.business_category !== 'All' && item.business_category !== state.industry) return false;
+                    if (state.industry === 'general') {
+                        // General Business = only resources tagged for all industries
+                        if (item.business_category !== 'All') return false;
+                    } else if (state.industry && item.business_category !== 'All' && item.business_category !== state.industry) {
+                        return false;
+                    }
 
                     if (state.location) {
                         const itemLocs = Array.isArray(item.area) ? item.area : [item.address_city];
