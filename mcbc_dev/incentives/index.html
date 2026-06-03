@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Government Funding - Maryland Community Business Compass</title>
-    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
-    <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WCLWWJCG');</script>
+<!-- End Google Tag Manager -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
 
+    <title>Find Government Funding - Maryland Community Business Compass</title>
     <style>
         body {
             font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
@@ -42,12 +49,10 @@
         .custom-logo .usa-logo__text a:visited {
              color: #1b1b1b;
         }
-
         .scrollable-filters {
             max-height: calc(100vh - 12rem);
             overflow-y: auto;
         }
-
         .md-tag {
             display: inline-flex;
             align-items: center;
@@ -73,24 +78,19 @@
             cursor: pointer;
         }
         .md-tag button:hover { color: white; }
-
-
         /* Add responsive padding to the header/nav for breathing room */
         .usa-header {
             padding-top: 0.5rem;
             padding-left: 1rem;
             padding-right: 1rem;
         }
-
         .usa-nav-container {
             padding: 0 0.5rem; /* small horizontal padding by default */
         }
-
         @media (min-width: 1024px) {
             .usa-menu-btn {
                 display: none;
             }
-
             /* Make the header layout a horizontal flex container so logo and nav sit inline */
             .usa-nav-container {
                 display: flex;
@@ -99,12 +99,10 @@
                 justify-content: space-between; /* keep logo left and nav to the right */
                 padding: 0 1.5rem; /* larger horizontal padding on desktop */
             }
-
             /* Slightly larger header padding on desktop */
             .usa-header {
                 padding-top: 0.75rem; padding-left: 1.5rem; padding-right: 1.5rem;
             }
-
             /* Keep the existing navbar (logo area) sized naturally */
             .usa-nav-container .usa-navbar {
                 display: flex;
@@ -113,7 +111,6 @@
                 flex: 0 0 auto;
                 width: auto;
             }
-
             /* Place the primary nav to the right of the logo but don't let it stretch full width */
             .usa-nav {
                 order: 2;
@@ -123,19 +120,16 @@
                 background: transparent; /* remove mobile drawer background on desktop */
                 box-shadow: none;
             }
-
             /* Make the primary list horizontal and shrink to its content */
             .usa-nav__primary {
                 display: inline-flex;
                 gap: 1.25rem;
                 align-items: flex-end;
             }
-
             .usa-nav__primary-item {
                 display: inline-flex;
                 align-items: center;
             }
-
             /* High-specificity overrides to prevent upstream MDWDS from forcing full-width nav */
             /* Make the nav shrink to its content and ensure primary items sit on the right */
             header .usa-nav-container .usa-nav {
@@ -143,14 +137,12 @@
                 width: auto !important;
                 max-width: none !important;
             }
-
             header .usa-nav-container .usa-nav__primary {
                 display: inline-flex !important;
                 width: auto !important;
                 justify-content: flex-end !important;
                 margin-left: 0 !important;
             }
-
             /* Extra force: ensure the nav itself doesn't expand and is pushed to the right */
             header .usa-nav-container > .usa-nav {
                 margin-left: auto !important;
@@ -158,18 +150,15 @@
                 max-width: fit-content !important;
                 min-width: 0 !important;
             }
-
             /* Hide the mobile close button icon on desktop */
             .usa-nav__close {
                 display: none;
             }
-
             /* Remove any top margin that pushes the nav below the logo on desktop */
             .usa-nav-container > .usa-nav {
                 margin-top: 0;
             }
         }
-
         /* Mobile: keep logo and menu button inline and right-align the menu button */
         @media (max-width: 1023.98px) {
             /* Ensure the navbar uses flex so logo and menu button are inline */
@@ -180,13 +169,11 @@
                 width: 100%;
                 gap: 1rem;
             }
-
             /* Make logo stay left */
             .usa-logo.custom-logo {
                 order: 1;
                 flex: 0 1 auto;
             }
-
             /* Menu button on the right, inline with logo */
             .usa-menu-btn {
                 order: 2;
@@ -194,26 +181,22 @@
                 display: inline-flex;
                 align-items: center;
             }
-
             /* Nav remains hidden/drawer controlled by MDWDS on mobile, so keep default styles */
             .usa-nav {
                 order: 3;
             }
         }
-        
         .usa-nav__close {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath fill='%231b1b1b' d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: center;
             background-size: 1.5rem;
         }
-
         /* 1. Float the Download CSV button to the right in its container */
         #results-container #download-csv-btn {
             margin-left: auto;
             order: 2; /* keep it after the results count in flex order */
         }
-
         /* 2. Prevent the main table from increasing the app width — allow horizontal scroll on small screens */
         .table-scroll-container {
             overflow-x: auto;
@@ -225,21 +208,18 @@
             min-width: 0; /* allow table cells to shrink / wrap where appropriate */
             box-sizing: border-box;
         }
-
         /* 3. Add bottom padding to the 'On this page' section in the detail view on mobile so content doesn't butt up against the following section */
         @media (max-width: 1023.98px) {
             #detail-contents-nav-container {
                 padding-bottom: 1.25rem;
             }
         }
-
         /* 4. Breadcrumb separator color override when breadcrumb sits on blue background */
         .incentive-detail-header .usa-breadcrumb__list-item:not(:last-child)::after,
         .incentive-detail-header .usa-breadcrumb__list-item:nth-last-child(2) .usa-breadcrumb__link::before {
             background-color: #ffffff !important; /* make separators visible against the blue */
             opacity: 0.95 !important;
         }
-
         .usa-header--basic {
             border-bottom: 1px solid #dfe1e2; /* base-lighter */
         }
@@ -249,7 +229,6 @@
         .usa-nav__primary > .usa-nav__primary-item > .usa-nav__link.usa-current {
             border-bottom: 0.25rem solid #005ea2; /* primary-default */
         }
-        
         input[type="search"]::-webkit-search-cancel-button {
             -webkit-appearance: none;
             appearance: none;
@@ -267,16 +246,13 @@
         input[type="search"]:placeholder-shown::-webkit-search-cancel-button {
             display: none;
         }
-
         #detail-org {
             text-transform: capitalize;
         }
-
         /* Only capitalize filters where source data is lowercase (Assistance Types) */
         label[for^="assistanceTypes-"] {
             text-transform: capitalize;
         }
-
         .incentive-detail-header h1 {
             color: white;
             margin-top: 1rem;
@@ -291,8 +267,7 @@
          #detail-contents-nav .usa-sidenav__item a:hover {
             text-decoration: underline;
         }
-        /* Add these new styles inside the <style> tag */
-
+        /* Add these new styles inside the \3c style> tag */
         /* Style search input with a magnifying glass icon */
         #search-input {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23565c65'%3E%3Cpath d='M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
@@ -301,7 +276,6 @@
             background-size: 1.25rem;
             padding-left: 2.5rem;
         }
-
         /* Make search control wider and responsive */
         .usa-search {
             width: 100%;
@@ -311,13 +285,11 @@
             width: 100%;
             max-width: 100%;
         }
-
         /* When the search lives in the top search-row, allow it to span the full container width */
         .search-row .usa-search {
             max-width: none !important;
             width: 100% !important;
         }
-
         /* Badge that shows number of active filters in a category */
         .filter-count {
             display: inline-flex;
@@ -334,9 +306,6 @@
             font-size: 0.875rem;
         }
         .filter-count.hidden { display: none; }
-
-
-
         /* Style the mobile menu button like the example image */
         .usa-menu-btn {
             background-color: #005ea2; /* primary-default */
@@ -347,19 +316,16 @@
             border: none;
             margin: 0;
         }
-
         /* Ensure the results count/CSV button container is full width */
         #results-container {
             width: 100%;
         }
-
         .incentive-detail-header .usa-breadcrumb {
             background-color: transparent;
         }
         .incentive-detail-header .usa-breadcrumb__list::before {
             background-color: transparent;
         }
-
         .incentive-detail-header {
             background-image: url('../assets/bg.svg');
             background-color: #19355d; /* Lighter fallback color */
@@ -368,7 +334,6 @@
             background-position: center center;
             padding: 2rem 0;
         }
-
         /* Style the tag moved into the hero */
         .incentive-detail-header .usa-tag {
             background-color: #E1F3F8; /* New background */
@@ -381,7 +346,6 @@
             display: inline-block;
             margin-top: 1rem;
         }
-
         /* Style the deadline text moved into the hero */
         .incentive-detail-header #detail-deadline {
             color: white;
@@ -389,18 +353,15 @@
             margin-top: 1rem;
             margin-bottom: 0;
         }
-
         /* Style the new 'Contact' button */
         #detail-contact-link {
             text-align: center;
             margin-bottom: 1rem;
         }
-
         .sticky-sidebar {
             position: sticky;
             top: 1.5rem;
         }
-
         /* Grey pill tag for the info box */
         .info-box-tag {
             display: inline-block;
@@ -417,7 +378,6 @@
             margin: 0.125rem;
             text-transform: capitalize;
         }
-
         /* White <hr> for the hero */
         .incentive-detail-header .white-divider {
             border: 0;
@@ -427,7 +387,6 @@
             margin-top: 1.5rem;
             margin-bottom: 1rem;
         }
-
         /* Grey <hr> for the info box */
         .info-box .info-box-divider {
             margin: 1rem 0;
@@ -435,7 +394,6 @@
             height: 1px;
             background-color: #DFE1E2;
         }
-
         .usa-button--outline--inverse{
             color: white;
             box-shadow: inset 0 0 0 2px white;
@@ -451,7 +409,6 @@
             outline: none !important;
             box-shadow: none !important; 
         }
-
         .list-pill-tag {
             display: inline-block;
             background-color: #E1F3F8; /* accent-cool-lighter */
@@ -466,7 +423,6 @@
             white-space: nowrap;
             text-decoration: none;
         }
-
         /* Scrollable Table Container */
         .table-scroll-container {
             max-height: 85vh; 
@@ -474,7 +430,6 @@
             border: 1px solid #dfe1e2; 
             position: relative;
         }
-
         /* Sticky Header Logic */
         .table-scroll-container thead th,
         .table-scroll-container thead th[data-sortable] {
@@ -488,7 +443,6 @@
             border-bottom-width: 1px;
             border-right-width: 1px;
         }
-
         /* Remove default top margin from table so it sits flush against the sticky header */
         .table-scroll-container .usa-table {
             margin-top: 0;
@@ -502,7 +456,6 @@
         .usa-checkbox {
             position: relative; 
         }
-
         /* The Input: Locked to top-left, but clipped so it takes up effectively 0 space */
         .usa-checkbox__input {
             position: absolute !important;
@@ -512,7 +465,6 @@
             height: 1px !important;
             z-index: -1;
             opacity: 0 !important;
-            
             /* Accessibility Safeguards: Ensures no visual leakage */
             overflow: hidden;
             clip: rect(1px, 1px, 1px, 1px); /* Standard "sr-only" clip pattern */
@@ -526,7 +478,6 @@
         .clickable-row {
             cursor: pointer;
         }
-
         /* High-Specificity Hover State 
         We target the 'td' inside the hovered row to override the 
         striped background color. */
@@ -534,23 +485,12 @@
             background-color: #dfe1e2 !important; /* 'base-lighter' token from USWDS */
             color: #1b1b1b; /* Ensure text stays legible */
         }
-
         /* Active state (when clicking down) */
         table.usa-table tr.clickable-row:active td {
             background-color: #cfd2d4 !important; /* Slightly darker */
         }
-
         .program-name {
             max-width: 300px;
-        }
-        .agency-name {
-            max-width: 180px;
-            display: -webkit-box;
-            line-clamp: 3;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
         /* CSS Truncation: Line Clamp */
         .description-truncate {
@@ -568,38 +508,32 @@
         .usa-prose>ul li, .usa-prose>ol li {
             padding-left: 0px;
         }
-
         .usa-table th, .usa-table td {
             /* Apply borders only to the Bottom and Right to prevent double-thickness */
             border: 0 solid #1b1b1b;
             border-bottom-width: 1px;
             border-right-width: 1px;
         }
-
         /* Mobile Filter Toggle Styles */
         .mobile-filter-toggle {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
         /* Default Mobile State: Filters are hidden unless the wrapper has the 'active' class (handled by JS) or we use the [hidden] attribute */
         #filters-wrapper[hidden] {
             display: none;
         }
-
         /* Desktop Overrides (min-width: 1024px to match 'tablet-lg' breakpoint) */
         @media (min-width: 1024px) {
             /* Hide the toggle button on large screens */
             .mobile-filter-toggle {
                 display: none;
             }
-
             /* Force the wrapper to always be visible on large screens, overriding the [hidden] attribute */
             #filters-wrapper[hidden] {
                 display: block !important;
             }
-            
             /* Ensure the sticky sidebar behavior works */
             #filters-wrapper {
                 display: block;
@@ -607,15 +541,12 @@
                 top: 1.5rem;
             }
         }
-
         /* --- Mobile Filter Drawer Styles --- */
-
         /* Styles for the drawer elements (Hidden by default on Desktop) */
         .mobile-filter-header,
         .mobile-filter-footer {
             display: none;
         }
-
         /* Mobile/Tablet Drawer Logic (Max-width 1023.98px matches your existing breakpoint) */
         @media (max-width: 1023.98px) {
             /* The Wrapper becomes a fixed modal/drawer */
@@ -630,12 +561,10 @@
                 display: flex;
                 flex-direction: column;
             }
-
             /* When hidden, actually hide it (The [hidden] attribute does this, but we ensure display behavior matches) */
             #filters-wrapper[hidden] {
                 display: none;
             }
-
             /* Show Header and Footer on Mobile */
             .mobile-filter-header {
                 display: flex;
@@ -646,7 +575,6 @@
                 background: #f0f0f0;
                 flex: 0 0 auto; /* Don't shrink */
             }
-
             .mobile-filter-footer {
                 display: block;
                 padding: 1rem;
@@ -654,7 +582,6 @@
                 background: #ffffff;
                 flex: 0 0 auto; /* Don't shrink */
             }
-
             /* Ensure the inner content wrapper grows to fill the space between header and footer.
             We set min-height: 0 and overflow: hidden to prevent it from breaking out of the flex container,
             allowing the child .scrollable-filters to handle the actual scrolling.
@@ -666,7 +593,6 @@
                 overflow: hidden;
                 min-height: 0;
             }
-
             /* The accordion container needs to grow to fill the middle space and scroll independently */
             .scrollable-filters {
                 flex: 1 1 auto;
@@ -675,7 +601,6 @@
                 padding: 1rem;
             }
         }
-        
         /* --- Shared Hero Styling --- */
         .hero-header-bg {
             background-image: url('../assets/bg.svg');
@@ -686,8 +611,6 @@
             padding: 3rem 0 4rem 0; /* More padding at bottom for breathing room */
             color: white;
         }
-
-
         /* --- Featured Incentive Cards --- */
         .featured-card {
             background-color: white;
@@ -703,13 +626,11 @@
             text-decoration: none;
             border-left: 0.5rem solid #00bde3; 
         }
-
         .featured-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             text-decoration: none;
         }
-
         .featured-card-image {
             width: 30%; /* Fixed width on all screens */
             min-width: 120px; /* Ensure image doesn't get too small on mobile */
@@ -721,7 +642,6 @@
             background-color: #f0f0f0;
             flex-shrink: 0; /* Prevent image from shrinking */
         }
-
         .featured-card-content {
             padding: 1rem;
             display: flex;
@@ -730,7 +650,6 @@
             width: 70%; /* Occupy remaining space */
             justify-content: center;
         }
-
         .featured-eyebrow {
             color: #07648d;
             font-size: 0.75rem;
@@ -740,7 +659,6 @@
             margin-bottom: 0.25rem; /* Tighter spacing */
             display: block;
         }
-
         .featured-title {
             font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
             font-size: 1.15rem; /* Slightly smaller for compactness */
@@ -752,11 +670,9 @@
             text-decoration-color: transparent;
             transition: text-decoration-color 0.2s;
         }
-
         .featured-card:hover .featured-title {
             text-decoration-color: #005ea2;
         }
-
         .featured-description {
             font-size: 0.95rem; /* Slightly smaller text */
             line-height: 1.4;
@@ -767,7 +683,6 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-
         /* Float the Download CSV button to the right in its container */
         #results-container #download-csv-btn {
             margin-left: auto;
@@ -778,18 +693,15 @@
             display: flex;       /* Enables flexbox for icon alignment */
             align-items: center; /* Vertically centers the text and icon */
         }
-
         /* Hide the text "Download" on screens smaller than 640px (mobile) */
         @media (max-width: 639.98px) {
             #results-container #download-csv-btn .download-text {
                 display: none;
             }
-            
             /* Remove the margin from the icon since it's now alone */
             #results-container #download-csv-btn .usa-icon {
                 margin-left: 0;
             }
-
             /* Optional: Adjust padding to make the square button look better */
             #results-container #download-csv-btn {
                 padding-left: 0.75rem;
@@ -801,7 +713,6 @@
             padding-top: 0.25rem;
             padding-bottom: 0.25rem;
         }
-
         .usa-banner__button {
             cursor: pointer;
         }
@@ -814,16 +725,15 @@
             height: 1px;
             white-space: nowrap; /* Prevent line breaks */
         }
-        
         /* When focused, return to the document flow to push content down */
         .focusable:focus {
             position: relative !important;
+            width: -moz-fit-content !important;
             width: fit-content !important; 
             height: auto;
             clip: auto;
             overflow: visible;
             white-space: normal;
-            
             /* Visual Styling */
             display: block;
             background-color: #ffffff;
@@ -833,13 +743,73 @@
             font-weight: 700;
             z-index: auto;
         }
+        /* Status pills — WCAG 2.2 AA contrast (each pair ≥ 4.5:1) */
+        .status-pill {
+            display: inline-block;
+            padding: 0.125rem 0.625rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 1.4;
+            white-space: nowrap;
+        }
+        .status-open      { background: #ecf3ec; color: #154c21; }
+        .status-recurring { background: #fff5c2; color: #5c3d00; }
+        .status-unknown   { background: #f0f0f0; color: #1b1b1b; }
+        .status-closed    { background: #f8dfe2; color: #761c2c; }
+        /* When applied to a USWDS .usa-tag (used on the detail page), suppress uppercase
+           so multi-word status labels stay readable. */
+        .usa-tag.status-open,
+        .usa-tag.status-recurring,
+        .usa-tag.status-unknown,
+        .usa-tag.status-closed {
+            text-transform: none;
+            letter-spacing: 0;
+        }
+        /* Loading overlay — mirrors map page (frontend/src/map/style.css) */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            transition: opacity 0.3s ease-in-out;
+        }
+        #loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #fff;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Hold layout while data is loading so footer doesn't slide up under spinner */
+        #incentive-list-view {
+            min-height: 600px;
+        }
     </style>
     <script>
         // 1. Initialize dataLayer and gtag immediately (Safe Shim)
         // This ensures window.gtag exists for other scripts, preventing ReferenceErrors
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-
         // 2. Fetch environment config
         fetch('../env.json')
             .then(function(response) {
@@ -848,13 +818,11 @@
             .then(function(config) {
                 if (config.environment === 'production') {
                     var gaId = 'G-W4R4JXSE3R';
-                    
                     // 3. Load the Google Tag Manager script asynchronously
                     var script = document.createElement('script');
                     script.async = true;
                     script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
                     document.head.appendChild(script);
-
                     // 4. Configure GA (Processing the queue)
                     gtag('js', new Date());
                     gtag('config', gaId);                    
@@ -866,83 +834,118 @@
                 console.warn('Could not load env.json, GA suppressed.', error);
             });
     </script>
+  <script type="module" crossorigin src="../assets/incentives-Bdw-F_6F.js"></script>
+  <link rel="modulepreload" crossorigin href="../assets/modulepreload-polyfill-B5Qt9EMX.js">
 </head>
 <body>
-    <a href="#main-content" class="visually-hidden focusable">
-       Skip to main content
-    </a>
-    <div class="usa-banner-container">
-        <section class="usa-banner" aria-label="Official website of the State of Maryland">
-            <div class="usa-accordion">
-                <header class="usa-banner__header padding-x-2">
-                    <div class="usa-banner__inner padding-0 display-flex flex-align-center">
-                        <div class="grid-col-auto display-flex flex-align-center">
-                            <img class="usa-banner__header-flag" aria-hidden="true" src="data:image/svg+xml,%3csvg%20width='18'%20height='13'%20viewBox='0%200%2018%2013'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20x='7'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='5'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='1'%20y='1'%20width='2'%20height='3.4375'%20fill='%23FFBE2E'/%3e%3crect%20x='7'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='3'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%23FFBE2E'/%3e%3crect%20x='3'%20y='1'%20width='2'%20height='3.4375'%20fill='%231B1B1B'/%3e%3crect%20x='5'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='4.4375'%20width='2'%20height='2.0625'%20fill='%231B1B1B'/%3e%3crect%20x='11'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2011%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='13'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2013%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='17'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2017%2012)'%20fill='%23FFBE2E'/%3e%3crect%20x='11'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2011%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='15'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2015%208.5625)'%20fill='%23FFBE2E'/%3e%3crect%20x='15'%20y='12'%20width='2'%20height='3.4375'%20transform='rotate(180%2015%2012)'%20fill='%231B1B1B'/%3e%3crect%20x='13'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2013%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='17'%20y='8.5625'%20width='2'%20height='2.0625'%20transform='rotate(180%2017%208.5625)'%20fill='%231B1B1B'/%3e%3crect%20x='1'%20y='6.5'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='9.25'%20width='4'%20height='2.75'%20fill='white'/%3e%3crect%20x='5'%20y='6.5'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='1'%20y='9.25'%20width='4'%20height='2.75'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2017%206.5)'%20fill='white'/%3e%3crect%20x='13'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2013%203.75)'%20fill='white'/%3e%3crect%20x='13'%20y='6.5'%20width='4'%20height='2.75'%20transform='rotate(180%2013%206.5)'%20fill='%23B50909'/%3e%3crect%20x='17'%20y='3.75'%20width='4'%20height='2.75'%20transform='rotate(180%2017%203.75)'%20fill='%23B50909'/%3e%3crect%20x='0.75'%20y='0.75'%20width='16.5'%20height='11.5'%20stroke='black'%20stroke-width='0.5'/%3e%3c/svg%3e">
-                        </div>
-                        <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
-                            <p class="usa-banner__header-text">An official website of the State of Maryland</p>
-                        </div>
-                        <button type="button" class="usa-banner__button" aria-expanded="false" aria-controls="gov-banner-default">
-                            Here’s how you know
-                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor" aria-hidden="true" focusable="false">
-                                <path d="M576-253.85 349.85-480 576-706.15 613.15-669l-189 189 189 189L576-253.85Z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </header>
-                <div class="usa-banner__content usa-accordion__content" id="gov-banner-default" hidden="true">
-                    <div class="grid-row grid-gap-lg">
-                        <div class="usa-banner__guidance tablet:grid-col-6">
-                            <img class="usa-banner__icon usa-media-block__img" role="img" alt="" aria-hidden="true" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3e%3ctitle%3eicon-dot-gov%3c/title%3e%3cpath%20fill='%232378C3'%20fill-rule='evenodd'%20d='m32%200c17.7%200%2032%2014.3%2032%2032s-14.3%2032-32%2032-32-14.3-32-32%2014.3-32%2032-32zm0%201.2c-17%200-30.8%2013.8-30.8%2030.8s13.8%2030.8%2030.8%2030.8%2030.8-13.8%2030.8-30.8-13.8-30.8-30.8-30.8zm11.4%2038.9c.5%200%20.9.4.9.8v1.6h-24.6v-1.6c0-.5.4-.8.9-.8zm-17.1-12.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h.8c.5%200%20.9.4.9.8v.8h-21.4v-.8c0-.5.4-.8.9-.8h.8v-9.8zm5.7-8.2%2012.3%204.9v1.6h-1.6c0%20.5-.4.8-.9.8h-19.6c-.5%200-.9-.4-.9-.8h-1.6v-1.6s12.3-4.9%2012.3-4.9z'/%3e%3c/svg%3e">
-                            <div class="usa-media-block__body">
-                                <p><strong>Official websites use .gov</strong><br>A <strong>.gov</strong> website belongs to an official government organization in the United States.</p>
-                            </div>
-                        </div>
-                        <div class="usa-banner__guidance tablet:grid-col-6">
-                            <img class="usa-banner__icon usa-media-block__img" role="img" alt="" aria-hidden="true" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3e%3ctitle%3eicon-https%3c/title%3e%3cpath%20fill='%23719F2A'%20fill-rule='evenodd'%20d='M32%200c17.673%200%2032%2014.327%2032%2032%200%2017.673-14.327%2032-32%2032C14.327%2064%200%2049.673%200%2032%200%2014.327%2014.327%200%2032%200zm0%201.208C14.994%201.208%201.208%2014.994%201.208%2032S14.994%2062.792%2032%2062.792%2062.792%2049.006%2062.792%2032%2049.006%201.208%2032%201.208zm0%2018.886a7.245%207.245%200%200%201%207.245%207.245v3.103h.52c.86%200%201.557.698%201.557%201.558v9.322c0%20.86-.697%201.558-1.557%201.558h-15.53c-.86%200-1.557-.697-1.557-1.558V32c0-.86.697-1.558%201.557-1.558h.52V27.34A7.245%207.245%200%200%201%2032%2020.094zm0%203.103a4.142%204.142%200%200%200-4.142%204.142v3.103h8.284V27.34A4.142%204.142%200%200%200%2032%2023.197z'/%3e%3c/svg%3e">
-                            <div class="usa-media-block__body">
-                                <p><strong>Secure .gov websites use HTTPS</strong><br>A <strong>lock</strong> (<span class="icon-lock"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="64" viewBox="0 0 52 64" class="usa-banner__lock-image" role="img" aria-labelledby="banner-lock-description-default" focusable="false"><title id="banner-lock-title-default">Lock</title><desc id="banner-lock-description-default">Locked padlock icon</desc><path fill="#000000" fill-rule="evenodd" d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"></path></svg></span>) or <strong>https://</strong> means you’ve safely connected to the .gov website. Share sensitive information only on official, secure websites.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div id="loading-overlay" role="status" aria-live="polite">
+        <div class="spinner"></div>
+        <p class="text-lg">Loading incentives…</p>
     </div>
+    <a href="#main-content" class="visually-hidden focusable">
+    Skip to main content
+</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCLWWJCG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div class="usa-banner-container">
+    <section class="usa-banner" aria-label="Official website of the State of Maryland">
+        <div class="usa-accordion">
+            <div class="usa-banner__header">
+            <div class="usa-banner__inner">
 
-    <div id="app">
-        <header class="usa-header usa-header--basic">
-            <div class="usa-nav-container">
-                <div class="usa-navbar">
-                    <div class="usa-logo custom-logo" id="basic-logo">
-                        <div class="usa-logo__text">
-                            <a href="../" title="Home">
-                                <img src="../assets/mdwds_logo_notext.svg" alt="">
-                                <span>Maryland Community<br>Business Compass<span class="visually-hidden"> Home</span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <button type="button" class="usa-menu-btn">Menu</button>
+                <p class="usa-banner__header-text">
+                An official website of the State of Maryland.
+                </p>
+                <button type="button" class="usa-banner__button" aria-expanded="false" aria-controls="gov-banner-default">
+                Here’s how you know
+                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
+                    <path d="M576-253.85 349.85-480 576-706.15 613.15-669l-189 189 189 189L576-253.85Z"></path>
+                </svg>
+                </button>
+                <div class="usa-banner__additional-links">
+                    <a href="https://translate.google.com/translate?u=https://dev.compass.mgo.benefits.maryland.gov/incentives/" class="usa-banner__additional-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="20px" viewBox="0 -960 960 960" width="20px">
+                            <path d="M480-116q-75.15 0-141.5-28.46t-115.96-78.08q-49.62-49.61-78.08-115.96T116-480q0-75.77 28.46-141.81t78.08-115.65q49.61-49.62 115.96-78.08T480-844q75.77 0 141.81 28.46t115.65 78.08q49.62 49.61 78.08 115.65T844-480q0 75.15-28.46 141.5t-78.08 115.96q-49.61 49.62-115.65 78.08T480-116Zm0-53.85q21.62-21.61 40.54-70.42 18.92-48.81 29.08-108.81H410.38q10.93 61.54 29.47 110.35 18.53 48.81 40.15 68.88Zm-64.46-5q-19-30-34.31-75.53-15.31-45.54-23.46-98.7H197.08q31.69 69.31 89.5 115.2 57.81 45.88 128.96 59.03Zm128.92 0q71.15-13.15 128.96-59.03 57.81-45.89 89.5-115.2H602.23q-10.08 53.54-25.39 99.08-15.3 45.54-32.38 75.15ZM178.92-401.08h173.7q-2.77-21.3-3.47-41.73-.69-20.42-.69-39.19 0-18.77.69-38.19.7-19.43 3.47-38.73h-173.7q-5.77 19.38-8.34 39.38-2.58 20-2.58 39.54t2.58 39.54q2.57 20 8.34 39.38Zm226.69 0h148.78q2.76-22.3 3.46-41.34.69-19.04.69-37.58t-.69-38.08q-.7-19.54-3.46-40.84H405.61q-2.76 21.3-3.46 40.84-.69 19.54-.69 38.08t.69 38.08q.7 19.54 3.46 40.84Zm201.77 0h173.7q5.77-19.38 8.34-39.38 2.58-20 2.58-39.54t-2.58-40.04q-2.57-20.5-8.34-38.88h-173.7q2.77 21.3 3.47 41.73.69 20.42.69 39.19 0 18.77-.69 38.19-.7 19.43-3.47 38.73Zm-5.15-209.84h160.69Q730.85-681 674-726.12q-56.85-45.11-129.54-59.42 19 31.92 33.92 76.89 14.93 44.96 23.85 97.73Zm-191.85 0h139.24q-10.93-61.16-30.04-110.93-19.12-49.77-39.58-68.3-20.46 18.53-39.58 68.3-19.11 49.77-30.04 110.93Zm-213.3 0h160.69q8.92-52.77 23.85-97.73 14.92-44.97 33.92-76.89-73.08 14.31-129.73 59.62-56.66 45.3-88.73 115Z"></path>
+                        </svg>
+                        Translate
+                    </a>
                 </div>
-                <nav aria-label="Primary navigation" class="usa-nav">
-                    <button type="button" class="usa-nav__close" aria-label="Close Menu"></button>
-                    <ul class="usa-nav__primary usa-accordion">
-                        <li class="usa-nav__primary-item">
-                            <a href="../" class="usa-nav__link"><span>Home</span></a>
-                        </li>
-                        <li class="usa-nav__primary-item">
-                            <a href="../map/" class="usa-nav__link"><span>Locate the Opportunity</span></a>
-                        </li>
-                        <li class="usa-nav__primary-item">
-                            <a href="../incentives/" class="usa-nav__link usa-current" aria-current="page"><span>Find Government Funding</span></a>
-                        </li>
-                        <li class="usa-nav__primary-item">
-                            <a href="../resources/" class="usa-nav__link"><span>Connect with Experts</span></a>
-                        </li>
-                    </ul>
-                </nav>
+                
             </div>
-        </header>
+            </div>
+
+            <div class="usa-banner__content" id="gov-banner-default" hidden="">
+            <div class="grid-row grid-gap-lg">
+                <div class="usa-banner__guidance tablet:grid-col-6">
+                <img class="usa-banner__icon usa-media-block__img" role="img" alt="" aria-hidden="true" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3e%3ctitle%3eicon-dot-gov%3c/title%3e%3cpath%20fill='%232378C3'%20fill-rule='evenodd'%20d='m32%200c17.7%200%2032%2014.3%2032%2032s-14.3%2032-32%2032-32-14.3-32-32%2014.3-32%2032-32zm0%201.2c-17%200-30.8%2013.8-30.8%2030.8s13.8%2030.8%2030.8%2030.8%2030.8-13.8%2030.8-30.8-13.8-30.8-30.8-30.8zm11.4%2038.9c.5%200%20.9.4.9.8v1.6h-24.6v-1.6c0-.5.4-.8.9-.8zm-17.1-12.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h1.6v-9.8h3.3v9.8h.8c.5%200%20.9.4.9.8v.8h-21.4v-.8c0-.5.4-.8.9-.8h.8v-9.8zm5.7-8.2%2012.3%204.9v1.6h-1.6c0%20.5-.4.8-.9.8h-19.6c-.5%200-.9-.4-.9-.8h-1.6v-1.6s12.3-4.9%2012.3-4.9z'/%3e%3c/svg%3e">
+                <div class="usa-media-block__body">
+                    <p>
+                    <strong>Official websites use .gov</strong><br>A
+                    <strong>.gov</strong> website belongs to an official government
+                    organization in the United States.
+                    </p>
+                </div>
+                </div>
+                <div class="usa-banner__guidance tablet:grid-col-6">
+                <img class="usa-banner__icon usa-media-block__img" role="img" alt="" aria-hidden="true" src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%20viewBox='0%200%2064%2064'%3e%3ctitle%3eicon-https%3c/title%3e%3cpath%20fill='%23719F2A'%20fill-rule='evenodd'%20d='M32%200c17.673%200%2032%2014.327%2032%2032%200%2017.673-14.327%2032-32%2032C14.327%2064%200%2049.673%200%2032%200%2014.327%2014.327%200%2032%200zm0%201.208C14.994%201.208%201.208%2014.994%201.208%2032S14.994%2062.792%2032%2062.792%2062.792%2049.006%2062.792%2032%2049.006%201.208%2032%201.208zm0%2018.886a7.245%207.245%200%200%201%207.245%207.245v3.103h.52c.86%200%201.557.698%201.557%201.558v9.322c0%20.86-.697%201.558-1.557%201.558h-15.53c-.86%200-1.557-.697-1.557-1.558V32c0-.86.697-1.558%201.557-1.558h.52V27.34A7.245%207.245%200%200%201%2032%2020.094zm0%203.103a4.142%204.142%200%200%200-4.142%204.142v3.103h8.284V27.34A4.142%204.142%200%200%200%2032%2023.197z'/%3e%3c/svg%3e">
+                <div class="usa-media-block__body">
+                    <p>
+                    <strong>Secure .gov websites use HTTPS</strong><br>A
+                    <strong>lock</strong> (
+                    <span class="icon-lock"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="64" viewBox="0 0 52 64" class="usa-banner__lock-image" role="img" aria-labelledby="banner-lock-description-default" focusable="false">
+                        <title id="banner-lock-title-default">Lock</title>
+                        <desc id="banner-lock-description-default">
+                            Locked padlock icon
+                        </desc>
+                        <path fill="#000000" fill-rule="evenodd" d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"></path>
+                        </svg> </span>) or <strong>https://</strong> means you’ve safely connected to
+                    the .gov website. Share sensitive information only on official,
+                    secure websites.
+                    </p>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<header class="usa-header usa-header--basic">
+    <div class="usa-nav-container">
+        <div class="usa-navbar">
+            <div class="usa-logo custom-logo" id="basic-logo">
+                <div class="usa-logo__text">
+                    <a href="../" title="Home">
+                        <img src="../assets/mdwds_logo_notext.svg" alt="">
+                        <span>Maryland Community<br>Business Compass<span class="visually-hidden"> Home</span></span>
+                    </a>
+                </div>
+            </div>
+            <button type="button" class="usa-menu-btn">Menu</button>
+        </div>
+        <nav aria-label="Primary navigation" class="usa-nav">
+            <button type="button" class="usa-nav__close" aria-label="Close Menu"></button>
+            <ul class="usa-nav__primary usa-accordion">
+                <li class="usa-nav__primary-item">
+                    <a href="../" class="usa-nav__link "><span>Home</span></a>
+                </li>
+                <li class="usa-nav__primary-item">
+                    <a href="../map/" class="usa-nav__link "><span>Locate the Opportunity</span></a>
+                </li>
+                <li class="usa-nav__primary-item">
+                    <a href="../incentives/" class="usa-nav__link usa-current" aria-current="page"><span>Find Government Funding</span></a>
+                </li>
+                <li class="usa-nav__primary-item">
+                    <a href="../resources/" class="usa-nav__link "><span>Connect with Experts</span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+                
 
         <div id="md-tos-banner-container" aria-live="polite"></div>
 
@@ -983,7 +986,7 @@
                             <div class="usa-form-group">
                                 <label class="usa-label usa-sr-only" for="search-input">Search by keyword</label>
                                 <div class="usa-search usa-search--big" role="search">
-                                    <input class="usa-input" id="search-input" type="search" name="search" placeholder="Search by keyword, program name, or source">
+                                    <input class="usa-input" id="search-input" type="search" name="search" placeholder="Search by keyword, program name, or agency">
                                 </div>
                             </div>
                         </div>
@@ -1040,13 +1043,7 @@
 
                         <div class="desktop:grid-col-9">
                             <div id="results-container" class="display-flex flex-justify-between flex-align-center margin-bottom-1">
-                                <div class="display-flex flex-align-center gap-2">
-                                    <p id="results-count" class="font-sans-sm text-base margin-right-2" role="status" aria-live="polite">Loading results...</p>
-                                    <div class="usa-checkbox" style="margin: 0;">
-                                        <input class="usa-checkbox__input" id="show-low-confidence" type="checkbox">
-                                        <label class="usa-checkbox__label font-sans-3xs" for="show-low-confidence" style="margin-top: 0;">Show low-confidence results</label>
-                                    </div>
-                                </div>
+                                <p id="results-count" class="font-sans-sm text-base" role="status" aria-live="polite">Loading results...</p>
                                 <button id="download-csv-btn" class="usa-button usa-button--outline" aria-label="Download List">
                                     <span class="download-text">Download</span>
                                     <svg class="usa-icon margin-left-05" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">
@@ -1061,18 +1058,13 @@
                                     <thead>
                                         <tr>
                                             <th scope="col" data-sortable>Program&nbsp;Name</th>
-                                            <th scope="col" data-sortable>Source</th>
                                             <th scope="col">Description</th>
-                                            <th scope="col" data-sortable>Assistance&nbsp;Type</th>
-                                            <th scope="col" data-sortable>Funding</th>
-                                            <th scope="col" data-sortable>Stage</th>
-                                            <th scope="col" data-sortable>Quality</th>
-                                            <th scope="col" data-sortable>Sources</th>
                                             <th scope="col" data-sortable>Status</th>
+                                            <th scope="col" data-sortable>Assistance&nbsp;Type</th>
                                         </tr>
                                     </thead>
                                     <tbody id="results-table-body">
-                                        <tr><td colspan="9" class="text-center padding-4">Loading incentives...</td></tr>
+                                        <tr><td colspan="4" class="text-center padding-4">Loading incentives...</td></tr>
                                     </tbody>
                                 </table>
                                 <div class="usa-table__announcement-region usa-sr-only" role="status" aria-live="polite"></div>
@@ -1125,7 +1117,7 @@
                                     </div>
                                     <hr class="info-box-divider">
                                     <div id="detail-agency-box">
-                                        <h2 class="font-sans-md text-base">Source</h2>
+                                        <h2 class="font-sans-md text-base">Agency</h2>
                                         <p id="detail-agency" class="font-sans-md text-bold"></p>
                                     </div>
                                 </div>
@@ -1156,49 +1148,51 @@
             </div>
         </main>
 
-        <footer class="maryland-footer" aria-labelledby="footer">
-            <h2 id="footer" class="usa-sr-only">Footer</h2>
-            <div class="maryland-footer__container">
-                
-                <section aria-labelledby="agency-footer" class="maryland-footer__section">
-                    <div class="maryland-footer__agency">
-                        <img class="maryland-footer__agency-logo" src="../assets/innovation-website-logo-light.png" alt="The office of Governor Wes Moore Innovation Team logo" style="height: 50px; width: auto;">
-                        <h3 class="maryland-footer__agency-name" id="agency-footer">
-                            Maryland State Innovation Team
-                        </h3>
-                        <ul class="maryland-footer__agency-social">
-                            <li>
-                                <a href="https://www.instagram.com/marylandinnovation/" target="_blank" class="maryland-footer__agency-social-link maryland-footer__agency-social-link--instagram">
-                                    <span class="usa-sr-only">Connect with Maryland State Innovation Team on instagram.com</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/@MarylandStateInnovationTeam" target="_blank" class="maryland-footer__agency-social-link maryland-footer__agency-social-link--youtube">
-                                    <span class="usa-sr-only">Connect with Maryland State Innovation Team on youtube.com</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/company/marylanditeam" target="_blank" class="maryland-footer__agency-social-link maryland-footer__agency-social-link--linkedin">
-                                    <span class="usa-sr-only">Connect with Maryland State Innovation Team on linkedin.com</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+        <div id="md-tos-banner-container" aria-live="polite"></div>
 
-                    <hr class="maryland-footer__divider">
+    <footer class="maryland-footer" aria-labelledby="footer">
+        <h2 id="footer" class="usa-sr-only">Footer</h2>
+        <div class="maryland-footer__container">
+            
+            <section aria-labelledby="agency-footer" class="maryland-footer__section">
+                <div class="maryland-footer__agency">
+                    <img class="maryland-footer__agency-logo" src="../assets/innovation-website-logo-light.png" alt="The office of Governor Wes Moore Innovation Team logo" style="height: 50px; width: auto;">
+                    <h3 class="maryland-footer__agency-name" id="agency-footer">
+                        Maryland State Innovation Team
+                    </h3>
+                    <ul class="maryland-footer__agency-social">
+                        <li>
+                            <a href="https://www.instagram.com/marylandinnovation/" target="_blank" class="maryland-footer__agency-social-link maryland-footer__agency-social-link--instagram">
+                                <span class="usa-sr-only">Connect with Maryland State Innovation Team on instagram.com</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/@MarylandStateInnovationTeam" target="_blank" class="maryland-footer__agency-social-link maryland-footer__agency-social-link--youtube">
+                                <span class="usa-sr-only">Connect with Maryland State Innovation Team on youtube.com</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/company/marylanditeam" target="_blank" class="maryland-footer__agency-social-link maryland-footer__agency-social-link--linkedin">
+                                <span class="usa-sr-only">Connect with Maryland State Innovation Team on linkedin.com</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-                    <div class="maryland-footer__agency-menu">
-                        <div class="maryland-footer__agency-contact">
-                            <div class="maryland-footer__link-group">
-                                <h3 class="maryland-footer__link-group-heading">Contact us</h3>
-                                <ul class="maryland-footer__link-group-list">
-                                    <li>6 Saint Paul Street, Baltimore, MD 21202</li>
-                                    <li><a href="mailto:compass@maryland.gov">compass@maryland.gov</a></li>
-                                    <li><a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank">Visit the Innovation Team Website</a></li>
-                                </ul>
-                            </div>
+                <hr class="maryland-footer__divider">
+
+                <div class="maryland-footer__agency-menu">
+                    <div class="maryland-footer__agency-contact">
+                        <div class="maryland-footer__link-group">
+                            <h3 class="maryland-footer__link-group-heading">Contact us</h3>
+                            <ul class="maryland-footer__link-group-list">
+                                <li>6 Saint Paul Street, Baltimore, MD 21202</li>
+                                <li><a href="mailto:compass@maryland.gov">compass@maryland.gov</a></li>
+                                <li><a href="https://innovation.maryland.gov/Pages/default.aspx" target="_blank">Visit the Innovation Team Website</a></li>
+                            </ul>
                         </div>
-                        <div class="maryland-footer__agency-links">
+                    </div>
+                    <div class="maryland-footer__agency-links">
                         <nav class="maryland-footer__link-group">
                             <h3 class="maryland-footer__link-group-heading">
                             Learn more
@@ -1219,89 +1213,112 @@
                             </ul>
                         </nav>
                     </div>
-                    </div>
-                </section>
+                </div>
+            </section>
 
-                <hr class="maryland-footer__divider">
+            <hr class="maryland-footer__divider">
 
-                <section aria-labelledby="global-footer" class="maryland-footer__section">
-                    <h3 class="maryland-footer__title" id="global-footer">
-                        Explore Maryland.gov
-                    </h3>
-                    <div class="maryland-footer__content">
-                        <nav class="maryland-footer__link-group" aria-labelledby="top-services">
-                            <h3 class="maryland-footer__link-group-heading" id="top-services">Top services</h3>
-                            <ul class="maryland-footer__link-group-list">
-                                <li><a href="https://mva.maryland.gov/vehicles">Vehicle services</a></li>
-                                <li><a href="https://dhs.maryland.gov/supplemental-nutrition-assistance-program/">Food assistance / SNAP</a></li>
-                                <li><a href="https://www.labor.maryland.gov/employment/unemployment.shtml">Unemployment services</a></li>
-                                <li><a href="https://www.marylandtaxes.gov/individual/index.php">Taxes</a></li>
-                                <li><a href="https://elections.maryland.gov/voter_registration/index.html">Register to vote</a></li>
-                                <li><a href="https://www.maryland.gov/pages/residents.aspx">Resident resources</a></li>
-                                <li><a href="https://www.visitmaryland.org/">Visit Maryland</a></li>
-                                <li><a href="https://www.maryland.gov/pages/online_services.aspx">More online services</a></li>
-                            </ul>
-                        </nav>
-                        <nav class="maryland-footer__link-group" aria-labelledby="government">
-                            <h3 class="maryland-footer__link-group-heading" id="government">Government</h3>
-                            <ul class="maryland-footer__link-group-list">
-                                <li><a href="https://governor.maryland.gov/">Governor Wes Moore</a></li>
-                                <li><a href="https://governor.maryland.gov/leadership/cabinet/">Maryland cabinet agencies</a></li>
-                                <li><a href="http://www.maryland.gov/pages/agency_directory.aspx">All state agencies</a></li>
-                                <li><a href="https://www.maryland.gov/pages/state_employees.aspx">For state employees</a></li>
-                                <li><a href="https://www.maryland.gov/pages/jobs.aspx">Maryland state jobs</a></li>
-                                <li><a href="https://www.ola.state.md.us/fraud/ola-fraud-hotline/">Report state government fraud</a></li>
-                            </ul>
-                        </nav>
-                        <nav class="maryland-footer__link-group" aria-labelledby="policies">
-                            <h3 class="maryland-footer__link-group-heading" id="policies">Policies</h3>
-                            <ul class="maryland-footer__link-group-list">
-                                <li><a href="https://www.maryland.gov/pages/accessibility.aspx">Accessibility</a></li>
-                                <li><a href="https://www.maryland.gov/pages/privacy_security.aspx">Privacy &amp; security</a></li>
-                            </ul>
-                        </nav>
-                        <nav class="maryland-footer__link-group" aria-labelledby="connect">
-                            <h3 class="maryland-footer__link-group-heading" id="connect">Connect</h3>
-                            <ul class="maryland-footer__link-group-list">
-                                <li><a href="https://mdrelay.maryland.gov/Pages/default.aspx">Maryland Relay: 7-1-1</a></li>
-                                <li><a href="http://www.doit.state.md.us/phonebook/">State employee directory</a></li>
-                                <li><a href="https://news.maryland.gov/">Maryland news</a></li>
-                                <li><a href="https://www.doit.state.md.us/selectsurvey/TakeSurvey.aspx?SurveyID=86M2956">Customer service survey</a></li>
-                            </ul>
-                        </nav>
-                        <nav class="maryland-footer__link-group" aria-labelledby="alerts">
-                            <h3 class="maryland-footer__link-group-heading" id="alerts">Alerts</h3>
-                            <ul class="maryland-footer__link-group-list">
-                                <li><a href="https://mdready.maryland.gov/be-informed/Pages/sign-up-for-alerts.aspx">Emergency alerts</a></li>
-                                <li><a href="https://chart.maryland.gov/Incidents/GetIncidents">Travel alerts</a></li>
-                                <li><a href="https://doit.maryland.gov/cybersecurity/">Cybersecurity</a></li>
-                                <li><a href="https://goccp.maryland.gov/victim-services/human-trafficking/">Report human trafficking</a></li>
-                                <li><a href="https://response.maryland.gov/bridge">Key bridge</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    
-                    <hr class="maryland-footer__divider">
-                    
-                    <div class="maryland-footer__branding">
-                        <img class="maryland-footer__logo" alt="Maryland full logo" src="../assets/mdwds_logo_horizontal_inverted.svg" style="height: 40px;">
-                        <div class="maryland-footer__copyright">
-                            © 2025 State of Maryland. All rights reserved.
-                        </div>
-                    </div>
-                </section>
+            <section aria-labelledby="global-footer" class="maryland-footer__section">
+                <h3 class="maryland-footer__title" id="global-footer">
+                    Explore Maryland.gov
+                </h3>
+                <div class="maryland-footer__content">
+                    <nav class="maryland-footer__link-group" aria-labelledby="top-services">
+                        <h3 class="maryland-footer__link-group-heading" id="top-services">Top services</h3>
+                        <ul class="maryland-footer__link-group-list">
+                            <li><a href="https://mva.maryland.gov/vehicles">Vehicle services</a></li>
+                            <li><a href="https://dhs.maryland.gov/supplemental-nutrition-assistance-program/">Food assistance / SNAP</a></li>
+                            <li><a href="https://www.labor.maryland.gov/employment/unemployment.shtml">Unemployment services</a></li>
+                            <li><a href="https://www.marylandtaxes.gov/individual/index.php">Taxes</a></li>
+                            <li><a href="https://elections.maryland.gov/voter_registration/index.html">Register to vote</a></li>
+                            <li><a href="https://www.maryland.gov/pages/residents.aspx">Resident resources</a></li>
+                            <li><a href="https://www.visitmaryland.org/">Visit Maryland</a></li>
+                            <li><a href="https://www.maryland.gov/pages/online_services.aspx">More online services</a></li>
+                        </ul>
+                    </nav>
+                    <nav class="maryland-footer__link-group" aria-labelledby="government">
+                        <h3 class="maryland-footer__link-group-heading" id="government">Government</h3>
+                        <ul class="maryland-footer__link-group-list">
+                            <li><a href="https://governor.maryland.gov/">Governor Wes Moore</a></li>
+                            <li><a href="https://governor.maryland.gov/leadership/cabinet/">Maryland cabinet agencies</a></li>
+                            <li><a href="http://www.maryland.gov/pages/agency_directory.aspx">All state agencies</a></li>
+                            <li><a href="https://www.maryland.gov/pages/state_employees.aspx">For state employees</a></li>
+                            <li><a href="https://www.maryland.gov/pages/jobs.aspx">Maryland state jobs</a></li>
+                            <li><a href="https://www.ola.state.md.us/fraud/ola-fraud-hotline/">Report state government fraud</a></li>
+                        </ul>
+                    </nav>
+                    <nav class="maryland-footer__link-group" aria-labelledby="policies">
+                        <h3 class="maryland-footer__link-group-heading" id="policies">Policies</h3>
+                        <ul class="maryland-footer__link-group-list">
+                            <li><a href="https://www.maryland.gov/pages/accessibility.aspx">Accessibility</a></li>
+                            <li><a href="https://www.maryland.gov/pages/privacy_security.aspx">Privacy &amp; security</a></li>
+                        </ul>
+                    </nav>
+                    <nav class="maryland-footer__link-group" aria-labelledby="connect">
+                        <h3 class="maryland-footer__link-group-heading" id="connect">Connect</h3>
+                        <ul class="maryland-footer__link-group-list">
+                            <li><a href="https://mdrelay.maryland.gov/Pages/default.aspx">Maryland Relay: 7-1-1</a></li>
+                            <li><a href="http://www.doit.state.md.us/phonebook/">State employee directory</a></li>
+                            <li><a href="https://news.maryland.gov/">Maryland news</a></li>
+                            <li><a href="https://www.doit.state.md.us/selectsurvey/TakeSurvey.aspx?SurveyID=86M2956">Customer service survey</a></li>
+                        </ul>
+                    </nav>
+                    <nav class="maryland-footer__link-group" aria-labelledby="alerts">
+                        <h3 class="maryland-footer__link-group-heading" id="alerts">Alerts</h3>
+                        <ul class="maryland-footer__link-group-list">
+                            <li><a href="https://mdready.maryland.gov/be-informed/Pages/sign-up-for-alerts.aspx">Emergency alerts</a></li>
+                            <li><a href="https://chart.maryland.gov/Incidents/GetIncidents">Travel alerts</a></li>
+                            <li><a href="https://doit.maryland.gov/cybersecurity/">Cybersecurity</a></li>
+                            <li><a href="https://goccp.maryland.gov/victim-services/human-trafficking/">Report human trafficking</a></li>
+                            <li><a href="https://response.maryland.gov/bridge">Key bridge</a></li>
+                        </ul>
+                    </nav>
+                </div>
                 
-            </div>
-        </footer>
-    </div>
-
+                <hr class="maryland-footer__divider">
+                
+                <div class="maryland-footer__branding">
+                    <img class="maryland-footer__logo" alt="Maryland full logo" src="../assets/mdwds_logo_horizontal_inverted.svg" style="height: 40px;">
+                    <div class="maryland-footer__copyright">
+                        © 2026 State of Maryland. All rights reserved.
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+    </footer>
     <script>
         var mdwds = { image_path: "https://cdn.maryland.gov/mdwds/0.12.0/img" };
     </script>
     <script src="https://cdn.maryland.gov/mdwds/0.12.0/js/mdwds-core.js"></script>
-
+    <script src="../assets/tos_notification.js"></script>
+    <script>
+        window.initTermsBanner({ rootPath: '..' });
+    </script>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Translate Link Update ---
+            const translateLink = document.querySelector('.usa-banner__additional-link');
+            const updateTranslateLink = () => {
+                if (translateLink) {
+                    const currentHash = window.location.hash;
+                    // The base URL for the incentives page is injected via Vite templating
+                    const baseUrl = 'https://dev.compass.mgo.benefits.maryland.gov/incentives/';
+                    // Ensure the full URL including hash is encoded properly for the 'u' parameter
+                    const fullUrl = baseUrl + (currentHash || '');
+                    translateLink.href = 'https://translate.google.com/translate?u=' + encodeURIComponent(fullUrl);
+                }
+            };
+            
+            // Initial update
+            updateTranslateLink();
+            
+            // Update on hash change and history navigation
+            window.addEventListener('hashchange', updateTranslateLink);
+            window.addEventListener('popstate', updateTranslateLink);
+
             // --- ANALYTICS SETUP ---
             let mapContext = {};
             try {
@@ -1348,26 +1365,50 @@
                 orgTypes: new Set(),
                 assistanceTypes: new Set(),
                 industries: new Set(),
-                fundingSource: new Set(),
             };
+            // Industry list: Child Care + Fresh Food pinned to the top, rest alphabetized.
+            const PINNED_INDUSTRIES = ["Child Care Services", "Grocery Stores and Fresh Food Retailers"];
+            const OTHER_INDUSTRIES = [
+                "Accommodation and Food Services",
+                "Administrative and Support and Waste Management and Remediation Services",
+                "Agriculture, Forestry, Fishing and Hunting",
+                "Arts, Entertainment, and Recreation",
+                "Construction",
+                "Educational Services",
+                "Finance and Insurance",
+                "Health Care and Social Assistance",
+                "Information",
+                "Management of Companies and Enterprises",
+                "Manufacturing",
+                "Mining, Quarrying, and Oil and Gas Extraction",
+                "Other Services (except Public Administration)",
+                "Professional, Scientific, and Technical Services",
+                "Public Administration",
+                "Real Estate and Rental and Leasing",
+                "Retail Trade",
+                "Transportation and Warehousing",
+                "Utilities",
+                "Wholesale Trade"
+            ];
             const filterConfig = {
                 industries: {
                     title: 'Business Category',
                     key: 'eligible_industries',
-                    options: ["Child Care Services", "Grocery Stores and Fresh Food Retailers", "Agriculture, Forestry, Fishing and Hunting", "Mining, Quarrying, and Oil and Gas Extraction", "Utilities", "Construction", "Manufacturing", "Wholesale Trade", "Retail Trade", "Transportation and Warehousing", "Information", "Finance and Insurance", "Real Estate and Rental and Leasing", "Professional, Scientific, and Technical Services", "Management of Companies and Enterprises", "Administrative and Support and Waste Management and Remediation Services", "Educational Services", "Health Care and Social Assistance", "Arts, Entertainment, and Recreation", "Accommodation and Food Services", "Other Services (except Public Administration)", "Public Administration"]
+                    options: [...PINNED_INDUSTRIES, ...OTHER_INDUSTRIES]
                 },
                 assistanceTypes: {
                     title: 'Assistance Type',
                     key: 'assistance_type',
+                    // Alphabetized; the two "other-*" catch-all buckets pinned to the bottom.
                     options: [
+                        "equity-investment",
                         "grant",
                         "loan",
-                        "tax-credit",
-                        "tax-exemption",
                         "rebate",
                         "subsidy",
+                        "tax-credit",
+                        "tax-exemption",
                         "training",
-                        "equity-investment",
                         "other-financial-assistance",
                         "other-technical-assistance"
                     ]
@@ -1375,23 +1416,18 @@
                 orgTypes: {
                     title: 'Grantee Organization Type',
                     key: 'eligible_organization_types',
-                    options: ["non-profit", "for-profit", "individuals", "higher education institution", "government"]
+                    options: ["for-profit", "government", "higher education institution", "individuals", "non-profit"]
                 },
                 counties: {
                     title: 'County',
                     key: 'eligible_counties',
-                    options: ["Allegany", "Anne Arundel", "Baltimore County", "Baltimore City", "Calvert", "Caroline", "Carroll", "Cecil", "Charles", "Dorchester", "Frederick", "Garrett", "Harford", "Howard", "Kent", "Montgomery", "Prince George's", "Queen Anne's", "St. Mary's", "Somerset", "Talbot", "Washington", "Wicomico", "Worcester"]
-                },
-                fundingSource: {
-                    title: 'Funding Source',
-                    key: 'funding_source',
-                    options: ["public", "private"]
+                    options: ["Allegany", "Anne Arundel", "Baltimore", "Baltimore City", "Calvert", "Caroline", "Carroll", "Cecil", "Charles", "Dorchester", "Frederick", "Garrett", "Harford", "Howard", "Kent", "Montgomery", "Prince George's", "Queen Anne's", "Somerset", "St. Mary's", "Talbot", "Washington", "Wicomico", "Worcester"]
                 },
                 incentiveAreas: {
                     title: 'Incentive Area',
                     description_html: '<div class="padding-bottom-1"><a href="../methodology/#incentive-areas" target="_blank" rel="noopener noreferrer">What are incentive areas?</a></div>',
                     key: 'eligible_incentive_areas',
-                    options: ["NourishMD Eligibility Zone", "Just Communities", "ENOUGH Act Grantees", "BRNI Areas", "Enterprise Zone Focus Areas", "Enterprise Zones", "Main Street Areas", "Opportunity Zones", "Priority Funding Areas", "RISE Zones", "Sustainable Communities", "Transit Oriented Development"]
+                    options: ["BRNI Areas", "ENOUGH Act Grantees", "Enterprise Zone Focus Areas", "Enterprise Zones", "Just Communities", "Main Street Areas", "NourishMD Eligibility Zone", "Opportunity Zones", "Priority Funding Areas", "RISE Zones", "Sustainable Communities", "Transit Oriented Development"]
                 }
             };
 
@@ -1408,137 +1444,151 @@
             const slugify = (text) => text.toString().toLowerCase()
                 .replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
 
+            const loadingOverlay = document.getElementById('loading-overlay');
+            let searchIndex = null;
+
             async function initializeApp() {
                 renderFilterUI();
                 applyFiltersFromUrl();
                 updateCheckboxesFromState();
                 try {
-                    // Single fetch for the unified data file
-                    const response = await fetch('export.json');
-                    if (!response.ok) throw new Error("Network response was not ok.");
+                    const res = await fetch('export.json');
+                    if (!res.ok) throw new Error("Network response was not ok.");
+                    const raw = await res.json();
 
-                    const data = await response.json();
+                    // Force is_accepting_applications=false when the ISO deadline is past today.
+                    // Protects against stale feeds where the agency hasn't flipped the flag yet.
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    const isoRe = /^\d{4}-\d{2}-\d{2}$/;
+                    for (const item of raw) {
+                        const se = item.structured_extraction;
+                        if (!se || se.is_accepting_applications === false) continue;
+                        const iso = se.application_deadline_date;
+                        if (!iso || !isoRe.test(iso)) continue;
+                        const [y, m, d] = iso.split('-').map(Number);
+                        if (new Date(y, m - 1, d) < today) {
+                            se.is_accepting_applications = false;
+                        }
+                    }
 
-                    // Process single data source.
-                    // is_accepting_applications / is_recurring replace the old is_out_of_date field.
-                    // Old records (is_out_of_date) are handled by the migration helper below.
-                    const isDiscontinued = se => {
-                        if ('is_out_of_date' in se) return se.is_out_of_date === true; // legacy
-                        return se.is_accepting_applications === false && se.is_recurring === false;
-                    };
-                    allIncentives = data
+                    allIncentives = raw
                         .filter(item => item.structured_extraction && item.structured_extraction.program_name)
-                        .filter(item => !isDiscontinued(item.structured_extraction))
-                        .map(item => ({ ...item, slug: item.slug || slugify(item.structured_extraction.program_name) }));
+                        .filter(item => {
+                            const se = item.structured_extraction;
+                            // Drop discontinued (not accepting AND not recurring).
+                            // Past-deadline non-recurring programs get caught here too.
+                            if (se.is_accepting_applications === false && se.is_recurring === false) return false;
+                            // Drop low-quality records
+                            if (se.data_quality === 'low') return false;
+                            return true;
+                        });
+                    // Slug already comes from export.json on each item; no need to recompute.
+
+                    if (window.IncentivesSearch) {
+                        searchIndex = window.IncentivesSearch.createSearchIndex(allIncentives);
+                    }
 
                     renderFeaturedIncentives(allIncentives);
 
                     handleRouting();
+                    attachSortObserver();
                 } catch (error) {
                     console.error("Failed to load incentive data:", error);
-                    tableBody.innerHTML = `<tr><td colspan="9" class="text-center padding-4 text-error">Error loading data. Please try again later.</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="4" class="text-center padding-4 text-error">Error loading data. Please try again later.</td></tr>`;
                     resultsCount.textContent = '0 results';
+                } finally {
+                    if (loadingOverlay) {
+                        loadingOverlay.classList.add('hidden');
+                        loadingOverlay.inert = true;
+                    }
                 }
             }
 
             function updateUrlWithFilters() {
-                // Start from existing params so non-filter keys (sort, sortDir) are preserved.
-                const params = new URLSearchParams(window.location.search);
-
-                // Clear only the keys this function owns, then re-set from current state.
-                params.delete('searchTerm');
-                for (const key in filterConfig) params.delete(key);
-
+                const params = new URLSearchParams();
                 if (activeFilters.searchTerm) params.set('searchTerm', activeFilters.searchTerm);
                 for (const key in filterConfig) {
                     if (activeFilters[key] && activeFilters[key].size > 0) {
                         params.set(key, Array.from(activeFilters[key]).join(','));
                     }
                 }
+                // Preserve sort params (managed separately by saveSortToUrl).
+                const existing = new URLSearchParams(window.location.search);
+                if (existing.has('sort')) params.set('sort', existing.get('sort'));
+                if (existing.has('sortDir')) params.set('sortDir', existing.get('sortDir'));
+
                 const newPath = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname;
                 if (newPath !== `${window.location.pathname}${window.location.search}`) {
                     history.replaceState(null, '', `${newPath}${window.location.hash}`);
+                    updateTranslateLink();
                 }
             }
 
-            // ── Sort persistence ───────────────────────────────────────────────────
-            // MDWDS/USWDS manages sort state internally via aria-sort attributes.
-            // We mirror that state into URL search params so it survives detail/list
-            // navigation and bookmarking.
-
-            let _restoringSort = false; // guard to prevent observer loop during restore
+            // --- SORT ORDER URL PERSISTENCE ---
+            let _restoringSort = false;
+            let _sortObserverAttached = false;
 
             function saveSortToUrl() {
                 if (_restoringSort) return;
-                const sortedTh = document.querySelector('table thead th[aria-sort="ascending"], table thead th[aria-sort="descending"]');
+                const sortedTh = document.querySelector('.table-scroll-container thead th[aria-sort="ascending"], .table-scroll-container thead th[aria-sort="descending"]');
                 const params = new URLSearchParams(window.location.search);
                 if (sortedTh) {
-                    const allSortableThs = [...document.querySelectorAll('table thead th[data-sortable]')];
+                    const allSortableThs = [...document.querySelectorAll('.table-scroll-container thead th[data-sortable]')];
                     const colIdx = allSortableThs.indexOf(sortedTh);
-                    params.set('sort', colIdx);
-                    params.set('sortDir', sortedTh.getAttribute('aria-sort'));
+                    if (colIdx >= 0) {
+                        params.set('sort', String(colIdx));
+                        params.set('sortDir', sortedTh.getAttribute('aria-sort'));
+                    }
                 } else {
                     params.delete('sort');
                     params.delete('sortDir');
                 }
-                const newPath = params.toString()
-                    ? `${window.location.pathname}?${params.toString()}`
-                    : window.location.pathname;
+                const qs = params.toString();
+                const newPath = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
                 history.replaceState(null, '', `${newPath}${window.location.hash}`);
             }
 
             function restoreSortFromUrl() {
                 const params = new URLSearchParams(window.location.search);
                 const colStr = params.get('sort');
-                const dir    = params.get('sortDir');
+                const dir = params.get('sortDir');
                 if (colStr === null || !dir) return;
-
-                // Defer until after renderTable() has populated the tbody.
+                // Defer slightly so the table body has rendered.
                 setTimeout(() => {
-                    const allSortableThs = [...document.querySelectorAll('table thead th[data-sortable]')];
-                    const th = allSortableThs[parseInt(colStr)];
+                    const allSortableThs = [...document.querySelectorAll('.table-scroll-container thead th[data-sortable]')];
+                    const th = allSortableThs[parseInt(colStr, 10)];
                     if (!th) return;
-
-                    // Find the column's position among ALL ths (sortable + non-sortable)
-                    // so we can index into the matching td in each row.
-                    const allThs   = [...document.querySelectorAll('table thead th')];
+                    const allThs = [...document.querySelectorAll('.table-scroll-container thead th')];
                     const colIndex = allThs.indexOf(th);
                     if (colIndex < 0) return;
-
-                    const tbody = document.querySelector('table tbody');
+                    const tbody = document.querySelector('.table-scroll-container tbody');
                     if (!tbody) return;
                     const rows = [...tbody.querySelectorAll('tr')];
-
-                    // Sort rows directly by data-sort-value — avoids USWDS click-cycle ambiguity.
+                    if (rows.length === 0) return;
                     rows.sort((a, b) => {
                         const aTds = [...a.querySelectorAll('td')];
                         const bTds = [...b.querySelectorAll('td')];
                         const aVal = (aTds[colIndex]?.dataset.sortValue ?? aTds[colIndex]?.textContent ?? '').trim().toLowerCase();
                         const bVal = (bTds[colIndex]?.dataset.sortValue ?? bTds[colIndex]?.textContent ?? '').trim().toLowerCase();
-                        const cmp  = aVal.localeCompare(bVal, undefined, { numeric: true });
+                        const cmp = aVal.localeCompare(bVal, undefined, { numeric: true });
                         return dir === 'ascending' ? cmp : -cmp;
                     });
-                    rows.forEach(row => tbody.appendChild(row));
-
-                    // Sync aria-sort so USWDS visuals (header icon, screen readers) stay correct.
                     _restoringSort = true;
+                    rows.forEach(row => tbody.appendChild(row));
                     allSortableThs.forEach(t => t.setAttribute('aria-sort', t === th ? dir : 'none'));
                     setTimeout(() => { _restoringSort = false; }, 50);
                 }, 50);
             }
 
-            // Watch for aria-sort attribute changes on any th and persist to URL.
-            const _sortObserver = new MutationObserver(saveSortToUrl);
-
             function attachSortObserver() {
-                const thead = document.querySelector('table thead');
-                if (thead) {
-                    _sortObserver.observe(thead, {
-                        attributes: true, subtree: true, attributeFilter: ['aria-sort']
-                    });
-                }
+                if (_sortObserverAttached) return;
+                const thead = document.querySelector('.table-scroll-container thead');
+                if (!thead) return;
+                const observer = new MutationObserver(saveSortToUrl);
+                observer.observe(thead, { attributes: true, subtree: true, attributeFilter: ['aria-sort'] });
+                _sortObserverAttached = true;
             }
-            attachSortObserver();
 
             function applyFiltersFromUrl() {
                 const params = new URLSearchParams(window.location.search);
@@ -1583,9 +1633,9 @@
 
                 if (window.location.hash.startsWith('#/incentive/')) {
                     history.pushState("", document.title, window.location.pathname + window.location.search);
+                    updateTranslateLink();
                 }
                 applyFilters();
-                restoreSortFromUrl();
 
                 // Add focus management
                 // We only move focus if this is NOT the initial load. 
@@ -1633,7 +1683,7 @@
                     const checkboxes = config.options.map(option => `
                         <li class="usa-checkbox">
                              <input class="usa-checkbox__input" id="${filterKey}-${slugify(option)}" type="checkbox" data-filter-key="${filterKey}" value="${option}">
-                             <label class="usa-checkbox__label" for="${filterKey}-${slugify(option)}">${option}</label>
+                             <label class="usa-checkbox__label" for="${filterKey}-${slugify(option)}" data-testid="label-${filterKey}-${slugify(option)}">${option}</label>
                         </li>
                     `).join('');
                     
@@ -1730,113 +1780,53 @@
                 }
             }
 
+            function statusFor(se) {
+                const accepting = se.is_accepting_applications ?? null;
+                const recurring = se.is_recurring ?? null;
+                // `label` is the short pill text used in the results table.
+                // `detailLabel` is the longer, more actionable phrasing used on the detail page.
+                if (accepting === true)                       return { label: 'Open',                  detailLabel: 'Open',                                       cls: 'status-open',      sort: '0' };
+                if (accepting === null && recurring === true) return { label: 'Recurring',             detailLabel: 'Recurring',                                  cls: 'status-recurring', sort: '1' };
+                if (accepting === null)                       return { label: 'Confirm with agency',   detailLabel: 'Confirm deadline with agency',               cls: 'status-unknown',   sort: '2' };
+                if (recurring === true)                       return { label: 'Closed — Recurring',    detailLabel: 'Closed — Recurring',                         cls: 'status-recurring', sort: '3' };
+                if (recurring === null)                       return { label: 'Closed — Confirm',      detailLabel: 'Closed — Confirm if recurring with agency',  cls: 'status-unknown',   sort: '4' };
+                return                                              { label: 'Closed',                  detailLabel: 'Closed',                                     cls: 'status-closed',    sort: '5' };
+            }
+
             function renderTable(incentives) {
                 if (incentives.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="9" class="text-center padding-4">No incentives match your criteria.</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="4" class="text-center padding-4">No incentives match your criteria.</td></tr>`;
                     return;
                 }
 
-                const formatDate = (dateStr) => {
-                    if (!dateStr) return 'N/A';
-                    if (dateStr.match(/^\d{4}-\d{2}-\d{2}$/)) {
-                        const [year, month, day] = dateStr.split('-').map(Number);
-                        const date = new Date(year, month - 1, day);
-                        return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-                    }
-                    return dateStr;
-                };
-
                 tableBody.innerHTML = incentives.map(item => {
                     const data = item.structured_extraction;
-                    
+
                     const rawDesc = item.summary || data.program_description || '';
 
                     const types = data.assistance_type || [];
-                    const tagsHtml = types.length > 0 
-                        ? types.map(t => `<span class="list-pill-tag">${t}</span>`).join(' ') 
+                    const tagsHtml = types.length > 0
+                        ? types.map(t => `<span class="list-pill-tag">${t}</span>`).join(' ')
                         : 'N/A';
-                    
+
                     const typeSortValue = types.join(' ');
-
-                    // Application status badge.
-                    // Tri-state: true / false / null (null = source page didn't state).
-                    // Legacy is_out_of_date is mapped onto the new fields for old records.
-                    let accepting, recurring;
-                    if ('is_accepting_applications' in data || 'is_recurring' in data) {
-                        accepting = data.is_accepting_applications ?? null;
-                        recurring = data.is_recurring ?? null;
-                    } else if ('is_out_of_date' in data) {
-                        // Legacy: is_out_of_date=true → both false; else both true.
-                        accepting = data.is_out_of_date === true ? false : true;
-                        recurring = data.is_out_of_date === true ? false : true;
-                    } else {
-                        accepting = null;
-                        recurring = null;
-                    }
-
-                    let statusLabel, statusClass, statusSort;
-                    if (accepting === true) {
-                        statusLabel = 'Open';
-                        statusClass = 'bg-green-cool-5 text-green-cool-70';
-                        statusSort = '0';
-                    } else if (accepting === null && recurring === true) {
-                        statusLabel = 'Recurring';
-                        statusClass = 'bg-gold-5 text-gold-60v';
-                        statusSort = '1';
-                    } else if (accepting === null) {
-                        statusLabel = 'Confirm with agency';
-                        statusClass = 'bg-base-lighter text-base-dark';
-                        statusSort = '2';
-                    } else if (recurring === true) {
-                        statusLabel = 'Closed — Recurring';
-                        statusClass = 'bg-gold-5 text-gold-60v';
-                        statusSort = '3';
-                    } else if (recurring === null) {
-                        statusLabel = 'Closed — Confirm future rounds';
-                        statusClass = 'bg-base-lighter text-base-dark';
-                        statusSort = '4';
-                    } else {
-                        statusLabel = 'Closed';
-                        statusClass = 'bg-base-lighter text-base-dark';
-                        statusSort = '5';
-                    }
+                    const status = statusFor(data);
 
                     return `
                         <tr class="clickable-row" data-href="#/incentive/${item.slug}">
                             <td data-label="Program Name" class="program-name font-sans-md text-bold">
                                 <a href="#/incentive/${item.slug}" class="usa-link row-link">${data.program_name}</a>
                             </td>
-                            <td data-label="Source">
-                                <div class="agency-name font-sans-xs text-base-dark" title="${item.agency || data.agency || ''}">
-                                    ${item.agency || data.agency || ''}
-                                </div>
-                            </td>
                             <td data-label="Description" style="min-width: 200px;">
                                 <div class="description-truncate text-base-dark" title="${rawDesc.replace(/"/g, '&quot;')}">
                                     ${rawDesc}
                                 </div>
                             </td>
+                            <td data-label="Status" data-sort-value="${status.sort}" style="white-space: nowrap;">
+                                <span class="status-pill ${status.cls}" role="status" aria-label="Status: ${status.label}">${status.label}</span>
+                            </td>
                             <td data-label="Assistance Type" class="assistance-type" data-sort-value="${typeSortValue}">
                                 ${tagsHtml}
-                            </td>
-                            <td data-label="Funding" class="font-sans-xs text-capitalize" style="white-space: nowrap;">
-                                ${data.funding_source || 'public'}
-                            </td>
-                            <td data-label="Stage" class="font-sans-xs text-capitalize" style="white-space: nowrap;">
-                                ${data.business_stage || '—'}
-                            </td>
-                            <td data-label="Quality" class="font-sans-xs text-capitalize">
-                                ${data.data_quality || '—'}
-                            </td>
-                            <td data-label="Sources" class="font-sans-xs">
-                                ${data.source_count || '—'}
-                            </td>
-                            <td data-label="Status" data-sort-value="${statusSort}" style="white-space: nowrap;">
-                                <span class="usa-tag radius-pill padding-x-1 padding-y-05 font-sans-3xs ${statusClass}"
-                                      role="status"
-                                      aria-label="Status: ${statusLabel}">
-                                    ${statusLabel}
-                                </span>
                             </td>
                         </tr>
                     `;
@@ -1879,10 +1869,13 @@
                 document.getElementById('breadcrumb-current-page').textContent = data.program_name;
 
                 document.getElementById('detail-deadline').textContent = data.application_deadline_string ? `Deadline: ${data.application_deadline_string}` : '';
-                
-                document.getElementById('detail-tags').innerHTML = data.assistance_type?.map(type => 
-                    `<span class="usa-tag bg-accent-cool-lighter text-accent-cool-darker text-capitalize">${type}</span>`
-                ).join('') || '';
+
+                const status = statusFor(data);
+                const tagsHtml = (data.assistance_type || [])
+                    .map(type => `<span class="usa-tag bg-accent-cool-lighter text-accent-cool-darker text-capitalize">${type}</span>`)
+                    .join('');
+                document.getElementById('detail-tags').innerHTML =
+                    `<span class="usa-tag radius-pill ${status.cls}" role="status" aria-label="Status: ${status.detailLabel}">${status.detailLabel}</span>` + tagsHtml;
 
                 const buttonContainer = document.getElementById('detail-button-container');
                 buttonContainer.innerHTML = ''; // Clear it out first
@@ -1904,7 +1897,7 @@
 
                 // If a contact method exists, create the button
                 if (contactHref) {
-                    buttonContainer.innerHTML += `<a href="${contactHref}" class="usa-button usa-button--outline usa-button--outline--inverse">Contact</a>`;
+                    buttonContainer.innerHTML += `<a href="${contactHref}" class="usa-button usa-button--outline usa-button--outline--inverse">Contact Agency</a>`;
                 }
 
                 // Agency (still bold text)
@@ -2039,21 +2032,19 @@
             }
 
             function applyFilters() {
-                const term = activeFilters.searchTerm.toLowerCase();
-                const showLowConfidence = document.getElementById('show-low-confidence')?.checked;
+                const term = activeFilters.searchTerm.trim();
+                let matchSlugSet = null;
+                if (term && searchIndex && window.IncentivesSearch) {
+                    matchSlugSet = window.IncentivesSearch.searchIncentives(searchIndex, term);
+                }
+
                 displayedIncentives = allIncentives.filter(item => {
+                    if (matchSlugSet && !matchSlugSet.has(item.slug)) return false;
                     const data = item.structured_extraction;
-                    if (!showLowConfidence && data.data_quality === 'low') {
-                        return false;
-                    }
-                    if (term && !(data.program_name?.toLowerCase().includes(term) || data.program_description?.toLowerCase().includes(term) || data.agency?.toLowerCase().includes(term))) {
-                        return false;
-                    }
                     for (const [key, config] of Object.entries(filterConfig)) {
                          const filterSet = activeFilters[key];
                          if (filterSet.size > 0) {
-                             const raw = data[config.key];
-                             const itemValues = Array.isArray(raw) ? raw : (raw ? [raw] : []);
+                             const itemValues = data[config.key] || [];
                              const hasMatch = itemValues.some(val => filterSet.has(val) || (key === 'counties' && (val === 'All' || filterSet.has('All'))));
                              if (!hasMatch) return false;
                          }
@@ -2064,6 +2055,7 @@
                 renderTable(displayedIncentives);
                 renderActiveFilterTags();
                 updateUrlWithFilters();
+                restoreSortFromUrl();
             }
 
             function handleFilterChange(e) {
@@ -2128,7 +2120,7 @@
                     active_filters: Object.keys(activeFilters).filter(k => activeFilters[k].size > 0).join(',')
                 });
 
-                const headers = ["Program Name", "Source", "URL", "Eligible Counties", "Assistance Type", "Eligible Organization Types", "Eligible Industries", "Funding Source", "Application Deadline", "Summary"];
+                const headers = ["Program Name", "Agency", "URL", "Status", "Eligible Counties", "Assistance Type", "Eligible Organization Types", "Eligible Industries", "Application Deadline", "Summary"];
 
                 const escapeCSV = (s) => (s === null || s === undefined) ? '' : `"${String(s).replace(/"/g, '""')}"`;
 
@@ -2138,11 +2130,11 @@
                         d.program_name,
                         d.agency,
                         d.URL,
+                        statusFor(d).label,
                         d.eligible_counties?.join('; '),
                         d.assistance_type?.join('; '),
                         d.eligible_organization_types?.join('; '),
                         d.eligible_industries?.join('; '),
-                        d.funding_source || 'public',
                         d.application_deadline_string,
                         item.summary || d.program_description
                     ];
@@ -2234,8 +2226,7 @@
                 });
             }
             downloadBtn.addEventListener('click', downloadCSV);
-            document.getElementById('show-low-confidence').addEventListener('change', applyFilters);
-
+            
             // GA4: Event Delegation for Dynamic Detail Buttons
             const detailBtnContainer = document.getElementById('detail-button-container');
             detailBtnContainer.addEventListener('click', (e) => {
@@ -2336,10 +2327,6 @@
                 }
             });
         });
-    </script>
-    <script src="../assets/tos_notification.js"></script>
-    <script>
-        window.initTermsBanner({ rootPath: '..' });
     </script>
 </body>
 </html>
