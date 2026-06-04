@@ -13,7 +13,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
 <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
 
-    <title>Find Government Funding - Maryland Community Business Compass</title>
+    <title>Find Funding & Support - Maryland Community Business Compass</title>
     <style>
         body {
             font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
@@ -804,6 +804,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         #incentive-list-view {
             min-height: 600px;
         }
+        /* Override mdwds.min.css `* + .usa-alert { margin-top: 1rem }` for our info banner */
+        #incentives-info-banner {
+            margin-top: 0;
+        }
     </style>
     <script>
         // 1. Initialize dataLayer and gtag immediately (Safe Shim)
@@ -935,7 +939,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <a href="../map/" class="usa-nav__link "><span>Locate the Opportunity</span></a>
                 </li>
                 <li class="usa-nav__primary-item">
-                    <a href="../incentives/" class="usa-nav__link usa-current" aria-current="page"><span>Find Government Funding</span></a>
+                    <a href="../incentives/" class="usa-nav__link usa-current" aria-current="page"><span>Find Funding & Support</span></a>
                 </li>
                 <li class="usa-nav__primary-item">
                     <a href="../resources/" class="usa-nav__link "><span>Connect with Experts</span></a>
@@ -945,7 +949,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 </header>
 
-                
+
+        <div id="incentives-info-banner" class="usa-alert usa-alert--info" role="status" aria-labelledby="incentives-banner-heading">
+            <div class="usa-alert__body">
+                <h4 class="usa-alert__heading" id="incentives-banner-heading">New</h4>
+                <p class="usa-alert__text">Our database of funding and support programs now incorporates almost 110 data sources spanning state, local, and a select number of private sources.</p>
+            </div>
+        </div>
 
         <div id="md-tos-banner-container" aria-live="polite"></div>
 
@@ -965,12 +975,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </section>
             </noscript>
             <div id="incentive-list-view" style="display: none;" role="region" aria-label="Incentive Search View" aria-hidden="true">
-                
+
                 <div class="hero-header-bg">
                     <div class="grid-container">
                         <div class="grid-row grid-gap">
                             <div class="tablet:grid-col-12">
-                                <h1 id="list-view-title" class="font-serif-xl tablet:font-serif-2xl desktop:font-serif-3xl margin-top-0 tablet:margin-bottom-0 focus-outline-none text-white" tabindex="-1">Find Government Funding For Your Business</h1>
+                                <h1 id="list-view-title" class="font-serif-xl tablet:font-serif-2xl desktop:font-serif-3xl margin-top-0 tablet:margin-bottom-0 focus-outline-none text-white" tabindex="-1">Find Funding & Support in Maryland</h1>
                             </div>
                         </div>
 
@@ -1058,13 +1068,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                     <thead>
                                         <tr>
                                             <th scope="col" data-sortable>Program&nbsp;Name</th>
+                                            <th scope="col" data-sortable>Source</th>
+                                            <th scope="col" data-sortable>Scope</th>
                                             <th scope="col">Description</th>
                                             <th scope="col" data-sortable>Status</th>
                                             <th scope="col" data-sortable>Assistance&nbsp;Type</th>
                                         </tr>
                                     </thead>
                                     <tbody id="results-table-body">
-                                        <tr><td colspan="4" class="text-center padding-4">Loading incentives...</td></tr>
+                                        <tr><td colspan="6" class="text-center padding-4">Loading incentives...</td></tr>
                                     </tbody>
                                 </table>
                                 <div class="usa-table__announcement-region usa-sr-only" role="status" aria-live="polite"></div>
@@ -1365,6 +1377,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 orgTypes: new Set(),
                 assistanceTypes: new Set(),
                 industries: new Set(),
+                scope: new Set(),
             };
             // Industry list: Child Care + Fresh Food pinned to the top, rest alphabetized.
             const PINNED_INDUSTRIES = ["Child Care Services", "Grocery Stores and Fresh Food Retailers"];
@@ -1428,6 +1441,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     description_html: '<div class="padding-bottom-1"><a href="../methodology/#incentive-areas" target="_blank" rel="noopener noreferrer">What are incentive areas?</a></div>',
                     key: 'eligible_incentive_areas',
                     options: ["BRNI Areas", "ENOUGH Act Grantees", "Enterprise Zone Focus Areas", "Enterprise Zones", "Just Communities", "Main Street Areas", "NourishMD Eligibility Zone", "Opportunity Zones", "Priority Funding Areas", "RISE Zones", "Sustainable Communities", "Transit Oriented Development"]
+                },
+                scope: {
+                    title: 'Scope',
+                    // No `key`; matched against the derived scopeFor(data) value below.
+                    valuesFor: (data) => [scopeFor(data)],
+                    options: ["State", "County", "Local", "Regional", "Private"]
                 }
             };
 
@@ -1495,7 +1514,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     attachSortObserver();
                 } catch (error) {
                     console.error("Failed to load incentive data:", error);
-                    tableBody.innerHTML = `<tr><td colspan="4" class="text-center padding-4 text-error">Error loading data. Please try again later.</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="6" class="text-center padding-4 text-error">Error loading data. Please try again later.</td></tr>`;
                     resultsCount.textContent = '0 results';
                 } finally {
                     if (loadingOverlay) {
@@ -1780,6 +1799,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 }
             }
 
+            function scopeFor(se) {
+                // Private collapses to a single label. Public splits by geographic scope.
+                if (se.funding_source === 'private') return 'Private';
+                switch (se.geographic_scope) {
+                    case 'statewide': return 'State';
+                    case 'county':    return 'County';
+                    case 'municipal': return 'Local';
+                    case 'regional':  return 'Regional';
+                    default:          return '';
+                }
+            }
+
             function statusFor(se) {
                 const accepting = se.is_accepting_applications ?? null;
                 const recurring = se.is_recurring ?? null;
@@ -1795,7 +1826,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             function renderTable(incentives) {
                 if (incentives.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="4" class="text-center padding-4">No incentives match your criteria.</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="6" class="text-center padding-4">No incentives match your criteria.</td></tr>`;
                     return;
                 }
 
@@ -1811,12 +1842,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                     const typeSortValue = types.join(' ');
                     const status = statusFor(data);
+                    const agency = data.agency || '';
+                    const scope = scopeFor(data);
 
                     return `
                         <tr class="clickable-row" data-href="#/incentive/${item.slug}">
                             <td data-label="Program Name" class="program-name font-sans-md text-bold">
                                 <a href="#/incentive/${item.slug}" class="usa-link row-link">${data.program_name}</a>
                             </td>
+                            <td data-label="Source">${agency}</td>
+                            <td data-label="Scope" style="white-space: nowrap;">${scope}</td>
                             <td data-label="Description" style="min-width: 200px;">
                                 <div class="description-truncate text-base-dark" title="${rawDesc.replace(/"/g, '&quot;')}">
                                     ${rawDesc}
@@ -2044,7 +2079,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     for (const [key, config] of Object.entries(filterConfig)) {
                          const filterSet = activeFilters[key];
                          if (filterSet.size > 0) {
-                             const itemValues = data[config.key] || [];
+                             const itemValues = config.valuesFor ? config.valuesFor(data) : (data[config.key] || []);
                              const hasMatch = itemValues.some(val => filterSet.has(val) || (key === 'counties' && (val === 'All' || filterSet.has('All'))));
                              if (!hasMatch) return false;
                          }
@@ -2120,7 +2155,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     active_filters: Object.keys(activeFilters).filter(k => activeFilters[k].size > 0).join(',')
                 });
 
-                const headers = ["Program Name", "Agency", "URL", "Status", "Eligible Counties", "Assistance Type", "Eligible Organization Types", "Eligible Industries", "Application Deadline", "Summary"];
+                const headers = ["Program Name", "Source", "Scope", "URL", "Status", "Eligible Counties", "Assistance Type", "Eligible Organization Types", "Eligible Industries", "Application Deadline", "Summary"];
 
                 const escapeCSV = (s) => (s === null || s === undefined) ? '' : `"${String(s).replace(/"/g, '""')}"`;
 
@@ -2129,6 +2164,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     return [
                         d.program_name,
                         d.agency,
+                        scopeFor(d),
                         d.URL,
                         statusFor(d).label,
                         d.eligible_counties?.join('; '),
