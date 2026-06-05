@@ -1833,15 +1833,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const recurring = se.is_recurring ?? null;
                 // `label` is the short pill text used in the results table.
                 // `detailLabel` is the longer, more actionable phrasing used on the detail page.
-                // Past-deadline records have accepting=false applied at load time, but if they're
-                // recurring or unknown-recurring, we collapse them into the same label as the
-                // null-accepting case — the user's next step is the same: check back / call.
-                if (accepting === true) return { label: 'Open',                detailLabel: 'Open',                          cls: 'status-open',      sort: '0' };
-                if (recurring === true) return { label: 'Recurring',           detailLabel: 'Recurring',                     cls: 'status-recurring', sort: '1' };
-                if (recurring === null) return { label: 'Confirm with agency', detailLabel: 'Confirm deadline with agency',  cls: 'status-unknown',   sort: '2' };
-                // Plain "Closed" — accepting=false AND recurring=false. Pre-filter drops these,
-                // so this is unreachable in practice but kept as a defensive fallback.
-                return                         { label: 'Closed',              detailLabel: 'Closed',                        cls: 'status-closed',    sort: '3' };
+                if (accepting === true) return { label: 'Open',                detailLabel: 'Open',                                       cls: 'status-open',      sort: '0' };
+                // Either the agency confirms it's recurring, or applications are closed for now
+                // but a future round will run — both render the same way.
+                if (recurring === true) return { label: 'Recurring',           detailLabel: 'Recurring',                                  cls: 'status-recurring', sort: '1' };
+                // accepting=null + recurring=null. We don't know if applications are open
+                // OR if it's recurring. Action: ask.
+                if (accepting === null) return { label: 'Confirm with agency', detailLabel: 'Confirm deadline with agency',               cls: 'status-unknown',   sort: '2' };
+                // accepting=false + recurring=null. We know the window is closed; we don't know
+                // if it'll run again. Pill keeps "Confirm with agency" to invite click-through;
+                // detail page explains the actual ask.
+                if (recurring === null) return { label: 'Confirm with agency', detailLabel: 'Closed — confirm if recurring with agency',  cls: 'status-unknown',   sort: '2' };
+                // accepting=false AND recurring=false. Pre-filter drops these; defensive fallback.
+                return                         { label: 'Closed',              detailLabel: 'Closed',                                     cls: 'status-closed',    sort: '3' };
             }
 
             function renderTable(incentives) {
