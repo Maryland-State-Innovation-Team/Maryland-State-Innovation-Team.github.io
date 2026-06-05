@@ -13,7 +13,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
 <link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
 
-    <title>Find Funding & Support - Maryland Community Business Compass</title>
+    <title>Find Funding - Maryland Community Business Compass</title>
     <style>
         body {
             font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
@@ -804,9 +804,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         #incentive-list-view {
             min-height: 600px;
         }
-        /* Override mdwds.min.css `* + .usa-alert { margin-top: 1rem }` for our info banner */
-        #incentives-info-banner {
+        /* Override mdwds.min.css `* + .usa-alert { margin-top: 1rem }` for our top-of-page disclaimer */
+        #incentives-disclaimer-banner {
             margin-top: 0;
+        }
+        /* Lede subheader under the H1 — visually a paragraph, semantically an h2 for outline */
+        #list-view-subhead {
+            margin-top: 0.5rem;
+            margin-bottom: 0;
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 1.5;
         }
     </style>
     <script>
@@ -939,7 +947,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <a href="../map/" class="usa-nav__link "><span>Locate the Opportunity</span></a>
                 </li>
                 <li class="usa-nav__primary-item">
-                    <a href="../incentives/" class="usa-nav__link usa-current" aria-current="page"><span>Find Funding & Support</span></a>
+                    <a href="../incentives/" class="usa-nav__link usa-current" aria-current="page"><span>Find Funding</span></a>
                 </li>
                 <li class="usa-nav__primary-item">
                     <a href="../resources/" class="usa-nav__link "><span>Connect with Experts</span></a>
@@ -950,10 +958,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 
 
-        <div id="incentives-info-banner" class="usa-alert usa-alert--info" role="status" aria-labelledby="incentives-banner-heading">
+        <div id="incentives-disclaimer-banner" class="usa-alert usa-alert--info" role="note" aria-labelledby="incentives-disclaimer-label">
             <div class="usa-alert__body">
-                <h4 class="usa-alert__heading" id="incentives-banner-heading">New</h4>
-                <p class="usa-alert__text">Our database of funding and support programs now incorporates almost 110 data sources spanning state, local, and a select number of private sources.</p>
+                <p id="incentives-disclaimer-label" class="usa-alert__heading">Verify program details before applying</p>
+                <p class="usa-alert__text">This database is built from publicly available information. Always confirm program details, eligibility, and deadlines with the source agency or organization before applying.</p>
             </div>
         </div>
 
@@ -980,7 +988,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="grid-container">
                         <div class="grid-row grid-gap">
                             <div class="tablet:grid-col-12">
-                                <h1 id="list-view-title" class="font-serif-xl tablet:font-serif-2xl desktop:font-serif-3xl margin-top-0 tablet:margin-bottom-0 focus-outline-none text-white" tabindex="-1">Find Funding & Support in Maryland</h1>
+                                <h1 id="list-view-title" class="font-serif-xl tablet:font-serif-2xl desktop:font-serif-3xl margin-top-0 tablet:margin-bottom-0 focus-outline-none text-white" tabindex="-1">Find Funding in Maryland</h1>
+                                <h2 id="list-view-subhead" class="text-white">Our database of funding and support programs now incorporates 100+ data sources spanning state, local, and a select number of private sources.</h2>
                             </div>
                         </div>
 
@@ -1068,10 +1077,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                     <thead>
                                         <tr>
                                             <th scope="col" data-sortable>Program&nbsp;Name</th>
+                                            <th scope="col" data-sortable>Status</th>
+                                            <th scope="col">Description</th>
                                             <th scope="col" data-sortable>Source</th>
                                             <th scope="col" data-sortable>Scope</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col" data-sortable>Status</th>
                                             <th scope="col" data-sortable>Assistance&nbsp;Type</th>
                                         </tr>
                                     </thead>
@@ -1378,6 +1387,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 assistanceTypes: new Set(),
                 industries: new Set(),
                 scope: new Set(),
+                status: new Set(),
             };
             // Industry list: Child Care + Fresh Food pinned to the top, rest alphabetized.
             const PINNED_INDUSTRIES = ["Child Care Services", "Grocery Stores and Fresh Food Retailers"];
@@ -1447,6 +1457,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     // No `key`; matched against the derived scopeFor(data) value below.
                     valuesFor: (data) => [scopeFor(data)],
                     options: ["State", "County", "Local", "Regional", "Private"]
+                },
+                status: {
+                    title: 'Status',
+                    valuesFor: (data) => [statusFor(data).label],
+                    // Order mirrors statusFor's sort order: most actionable first.
+                    // Plain "Closed" (accepting=false AND recurring=false) is dropped at load time, so it's not a filter option.
+                    options: ["Open", "Recurring", "Confirm with agency"]
                 }
             };
 
@@ -1816,12 +1833,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 const recurring = se.is_recurring ?? null;
                 // `label` is the short pill text used in the results table.
                 // `detailLabel` is the longer, more actionable phrasing used on the detail page.
-                if (accepting === true)                       return { label: 'Open',                  detailLabel: 'Open',                                       cls: 'status-open',      sort: '0' };
-                if (accepting === null && recurring === true) return { label: 'Recurring',             detailLabel: 'Recurring',                                  cls: 'status-recurring', sort: '1' };
-                if (accepting === null)                       return { label: 'Confirm with agency',   detailLabel: 'Confirm deadline with agency',               cls: 'status-unknown',   sort: '2' };
-                if (recurring === true)                       return { label: 'Closed — Recurring',    detailLabel: 'Closed — Recurring',                         cls: 'status-recurring', sort: '3' };
-                if (recurring === null)                       return { label: 'Closed — Confirm',      detailLabel: 'Closed — Confirm if recurring with agency',  cls: 'status-unknown',   sort: '4' };
-                return                                              { label: 'Closed',                  detailLabel: 'Closed',                                     cls: 'status-closed',    sort: '5' };
+                // Past-deadline records have accepting=false applied at load time, but if they're
+                // recurring or unknown-recurring, we collapse them into the same label as the
+                // null-accepting case — the user's next step is the same: check back / call.
+                if (accepting === true) return { label: 'Open',                detailLabel: 'Open',                          cls: 'status-open',      sort: '0' };
+                if (recurring === true) return { label: 'Recurring',           detailLabel: 'Recurring',                     cls: 'status-recurring', sort: '1' };
+                if (recurring === null) return { label: 'Confirm with agency', detailLabel: 'Confirm deadline with agency',  cls: 'status-unknown',   sort: '2' };
+                // Plain "Closed" — accepting=false AND recurring=false. Pre-filter drops these,
+                // so this is unreachable in practice but kept as a defensive fallback.
+                return                         { label: 'Closed',              detailLabel: 'Closed',                        cls: 'status-closed',    sort: '3' };
             }
 
             function renderTable(incentives) {
@@ -1850,16 +1870,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <td data-label="Program Name" class="program-name font-sans-md text-bold">
                                 <a href="#/incentive/${item.slug}" class="usa-link row-link">${data.program_name}</a>
                             </td>
-                            <td data-label="Source">${agency}</td>
-                            <td data-label="Scope" style="white-space: nowrap;">${scope}</td>
+                            <td data-label="Status" data-sort-value="${status.sort}" style="white-space: nowrap;">
+                                <span class="status-pill ${status.cls}" role="status" aria-label="Status: ${status.label}">${status.label}</span>
+                            </td>
                             <td data-label="Description" style="min-width: 200px;">
                                 <div class="description-truncate text-base-dark" title="${rawDesc.replace(/"/g, '&quot;')}">
                                     ${rawDesc}
                                 </div>
                             </td>
-                            <td data-label="Status" data-sort-value="${status.sort}" style="white-space: nowrap;">
-                                <span class="status-pill ${status.cls}" role="status" aria-label="Status: ${status.label}">${status.label}</span>
-                            </td>
+                            <td data-label="Source">${agency}</td>
+                            <td data-label="Scope" style="white-space: nowrap;">${scope}</td>
                             <td data-label="Assistance Type" class="assistance-type" data-sort-value="${typeSortValue}">
                                 ${tagsHtml}
                             </td>
@@ -2086,6 +2106,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     }
                     return true;
                 });
+                // Default sort: status priority (Open → Recurring → Confirm → Closed),
+                // then program name A-Z within each status group. restoreSortFromUrl
+                // (called below) overrides this when the URL specifies a sort.
+                displayedIncentives.sort((a, b) => {
+                    const sa = statusFor(a.structured_extraction).sort;
+                    const sb = statusFor(b.structured_extraction).sort;
+                    if (sa !== sb) return sa < sb ? -1 : 1;
+                    const na = a.structured_extraction.program_name || '';
+                    const nb = b.structured_extraction.program_name || '';
+                    return na.localeCompare(nb);
+                });
                 resultsCount.textContent = `Showing ${displayedIncentives.length} results`;
                 renderTable(displayedIncentives);
                 renderActiveFilterTags();
@@ -2155,7 +2186,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     active_filters: Object.keys(activeFilters).filter(k => activeFilters[k].size > 0).join(',')
                 });
 
-                const headers = ["Program Name", "Source", "Scope", "URL", "Status", "Eligible Counties", "Assistance Type", "Eligible Organization Types", "Eligible Industries", "Application Deadline", "Summary"];
+                const headers = ["Program Name", "Status", "Source", "Scope", "URL", "Eligible Counties", "Assistance Type", "Eligible Organization Types", "Eligible Industries", "Application Deadline", "Summary"];
 
                 const escapeCSV = (s) => (s === null || s === undefined) ? '' : `"${String(s).replace(/"/g, '""')}"`;
 
@@ -2163,10 +2194,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     const d = item.structured_extraction;
                     return [
                         d.program_name,
+                        statusFor(d).label,
                         d.agency,
                         scopeFor(d),
                         d.URL,
-                        statusFor(d).label,
                         d.eligible_counties?.join('; '),
                         d.assistance_type?.join('; '),
                         d.eligible_organization_types?.join('; '),
