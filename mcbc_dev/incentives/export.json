@@ -3754,7 +3754,7 @@
         "Medical conditions, disabilities, or special needs must be noted on the registration form"
       ],
       "application_process_overview": "Create an account at the Child Care Registration Portal, add child(ren) to the account, and register for available spaces or the wait list by selecting location and session (AM/PM). Wait list registration for the general public opens online by region from April 7–14, 2026. Once offered a space, families must submit required admission forms (available at http://www.aacounty.org/departments/recreation-parks/child-care/forms-and-publications/) and make payment by August 10, 2026.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
@@ -6226,7 +6226,7 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit"
@@ -6379,7 +6379,7 @@
         "Deferred gain must be recognized by December 31, 2026 or upon earlier disposal of the investment"
       ],
       "application_process_overview": "Investors reinvest capital gains into a qualified Opportunity Fund that invests in designated Opportunity Zone tracts. Contact the Anne Arundel Economic Development Corporation (AAEDC) for information about commercial revitalization and reinvestment opportunities in Anne Arundel County.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": true,
       "is_recurring": false,
       "source_count": 2,
       "data_quality": "medium",
@@ -6835,7 +6835,7 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -8133,9 +8133,7 @@
         "Baltimore"
       ],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "NourishMD Eligibility Zone"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "non-profit"
       ],
@@ -8585,9 +8583,7 @@
         "Baltimore"
       ],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "for-profit",
         "non-profit"
@@ -8760,9 +8756,7 @@
         "Baltimore City"
       ],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "non-profit",
         "for-profit",
@@ -10805,10 +10799,7 @@
         "Baltimore City"
       ],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Opportunity Zones",
-        "Sustainable Communities"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "non-profit",
         "for-profit"
@@ -11699,9 +11690,7 @@
         "Baltimore"
       ],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "NourishMD Eligibility Zone"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "individuals"
       ],
@@ -18418,7 +18407,7 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -19508,7 +19497,8 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone - Focus Area",
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit"
@@ -19637,9 +19627,7 @@
         "Baltimore"
       ],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "NourishMD Eligibility Zone"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "for-profit"
       ],
@@ -20136,6 +20124,62 @@
       "data_quality": "low",
       "source_urls": [
         "https://www.calvertcountymd.gov/3535/Business-Grant-Opportunities"
+      ]
+    }
+  },
+  {
+    "slug": "new-markets-tax-credit-program",
+    "structured_extraction": {
+      "program_name": "New Markets Tax Credit Program",
+      "program_description": "The New Markets Tax Credit (NMTC) Program attracts private investment into low-income communities by allowing individual and corporate investors to receive a federal income tax credit equal to 39% of their equity investment in certified Community Development Entities (CDEs). CDEs then deploy that capital into businesses and projects in distressed, low-income census tracts. The program aims to break cycles of disinvestment by funding commercial real estate, manufacturing facilities, and access to education and healthcare in underserved areas.",
+      "agency": "CDFI Fund (Community Development Financial Institutions Fund)",
+      "funding_source": "public",
+      "geographic_scope": "statewide",
+      "eligible_counties": [
+        "All"
+      ],
+      "eligible_municipalities": [],
+      "eligible_regions": [],
+      "eligible_incentive_areas": [
+        "NMTC Eligible Census Tracts"
+      ],
+      "eligible_organization_types": [
+        "for-profit",
+        "non-profit"
+      ],
+      "business_stage": "any",
+      "eligible_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "tax-credit",
+        "equity-investment"
+      ],
+      "assistance_description": "Investors receive a federal income tax credit totaling 39% of their original equity investment in a certified Community Development Entity (CDE), claimed over a seven-year period. CDEs must apply to the CDFI Fund for allocation authority through an annual competition. Businesses and projects in low-income communities access capital by contacting CDEs directly — they do not apply to the CDFI Fund. As of FY 2023, the program has generated $8 in private investment for every $1 of federal funding.",
+      "URL": "https://www.cdfifund.gov/programs-training/programs/new-markets-tax-credit",
+      "application_deadline_string": "Annual CDE allocation competition; investors can claim credit anytime through allocated CDEs",
+      "application_deadline_date": "",
+      "contact_name": "",
+      "contact_email": "",
+      "contact_phone": "",
+      "program_audience": "Individual and corporate investors seeking a federal tax credit, and certified Community Development Entities (CDEs) applying for tax credit allocation authority to channel capital into low-income communities.",
+      "use_of_funds": "Equity investments in Community Development Entities, which then deploy capital into businesses and real estate projects in low-income census tracts — including commercial real estate, manufacturing facilities, education, and healthcare.",
+      "geographic_eligibility": "Investments must be made in NMTC-eligible low-income census tracts. CDEs may serve communities nationwide, including Maryland.",
+      "requirements_list": [
+        "Applicants for allocation authority must be certified as Community Development Entities (CDEs) by the CDFI Fund",
+        "Investments must be directed to low-income community census tracts as defined by the IRS",
+        "Businesses seeking NMTC-enhanced financing should contact CDEs directly rather than applying to the CDFI Fund",
+        "Investors must make qualified equity investments (QEIs) in certified CDEs"
+      ],
+      "application_process_overview": "Step 1: Obtain CDE Certification from the CDFI Fund. Step 2: Submit an application during the annual allocation competition (opening date, deadline, and announcement date published each cycle). Step 3: Await award announcement. Step 4: Execute allocation agreement. Step 5: Comply with ongoing reporting requirements. Businesses seeking financing should locate a CDE serving their area using the NMTC Awardee States Served map.",
+      "is_accepting_applications": true,
+      "is_recurring": true,
+      "serves_maryland": true,
+      "extraction_confidence": "high",
+      "attachment_urls": [
+        "https://www.cdfifund.gov/system/files/2022-11/New_Markets_Tax_Credit_Program_FactSheet.pdf",
+        "https://www.cdfifund.gov/system/files/2022-11/New_Markets_Tax_Credit_Program_FactSheet_Spanish.pdf",
+        "https://www.cdfifund.gov/system/files/documents/2020-introduction-to-the-nmtc-program_-final.pdf"
       ]
     }
   },
@@ -21566,8 +21610,8 @@
         "Must be pursuing an undergraduate degree in an eligible discipline such as Parks and Recreation, Natural Resources, Outdoor Recreation Management, Therapeutic Recreation, Sports Administration, Turf Grass Management, Golf Course Operations, Grounds Management, Park and Resource Management, Community Sports Management, Sports and Tourism, Sports Communication, or other related disciplines"
       ],
       "application_process_overview": "Download the application PDF from the Calvert County website and submit between April 1 and June 30.",
-      "is_accepting_applications": null,
-      "is_recurring": null,
+      "is_accepting_applications": true,
+      "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
       "attachment_urls": [
@@ -21671,7 +21715,7 @@
         "Cannot be used for forest conservation mitigation or development requirements under Calvert County Zoning Ordinance"
       ],
       "application_process_overview": "Bring the coupon (downloadable from the county website) to a participating nursery, present it at checkout for up to $50 off each native tree (up to six trees), register your information at the nursery, and plant your trees. Optionally submit photos by tagging #CalvertSpreadYourLeaves on social media or emailing NativeTree@calvertcountymd.gov.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": true,
       "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
@@ -22524,7 +22568,7 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit"
@@ -23110,9 +23154,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Priority Funding Areas"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "for-profit"
       ],
@@ -23301,9 +23343,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Priority Funding Areas"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "government"
       ],
@@ -24913,7 +24953,7 @@
         "Must complete and submit application form and budget template"
       ],
       "application_process_overview": "Review the FY27 ORF Notice of Funding Availability (NOFA) for full process details, then download and complete the FY27 ORF Application and Budget Template. Application materials are available at https://www.cecilcountymd.gov/846/Local-Community-Grants. Submit by May 1, 2026.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 3,
       "data_quality": "high",
@@ -25217,8 +25257,8 @@
         "Credit applies for up to five years or until property is transferred"
       ],
       "application_process_overview": "Complete and submit the Cecil County Real Property Tax Credit Application for Habitat for Humanity (PDF available on the program page).",
-      "is_accepting_applications": null,
-      "is_recurring": null,
+      "is_accepting_applications": true,
+      "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
       "attachment_urls": [
@@ -25803,7 +25843,7 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit"
@@ -30853,7 +30893,8 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Main Street Areas"
+        "Main Street Areas",
+        "Arts and Entertainment Districts"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -31402,7 +31443,7 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit"
@@ -32396,7 +32437,7 @@
         "Application must be submitted to the Planning Department by April 1st following the calendar year in which the expenditures were incurred"
       ],
       "application_process_overview": "Submit a Historic Preservation Tax Credit Application online via the 'Apply Online' tab on the City of Frederick website, or submit the application with copies of receipts for eligible work, by April 1st following the calendar year in which the expenditures were incurred. Contact Christina Martinkosky, Division Manager of Historic Preservation, at CMartinkosky@CityofFrederickMD.gov or 301-600-1831 with questions.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 4,
       "data_quality": "high",
@@ -32667,7 +32708,7 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Arts and Entertainment Districts"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -32849,7 +32890,7 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -34469,7 +34510,7 @@
         "Public services are not eligible for FY 2027 funding — only capital and physical improvements are eligible"
       ],
       "application_process_overview": "1. Download and review the FY 2027 guidelines. 2. Attend one of two virtual technical sessions (Aug. 21 or Sept. 16, 2025). 3. Create an account on the online grant portal at grantinterface.com, complete the Eligibility Form, and submit the application by October 17, 2025 at 5:00 P.M. 4. Optionally attend the public hearing at Rockville City Hall on Sept. 8, 2025. 5. Mayor & Council approvals expected by December 31, 2025; County review January/February 2026; funds available after October 1, 2026.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
@@ -35838,7 +35879,7 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -40335,7 +40376,7 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit"
@@ -43483,7 +43524,7 @@
         "Business must be located in a Frederick County Priority Funding Area"
       ],
       "application_process_overview": "First, contact the Frederick County Office of Economic Development. Next, notify the County's Director of Finance of your intent to claim the credit on or before October 1 of the first eligible tax year. You must reapply for the credit annually. An application form is also available at https://www.frederickcountymd.gov/DocumentCenter/View/346696.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": true,
       "is_recurring": true,
       "source_count": 2,
       "data_quality": "medium",
@@ -44724,7 +44765,7 @@
         "Completing the registration form does not guarantee a spot"
       ],
       "application_process_overview": "Sign up online via the application form (available in English, Spanish, and French). Complete the online placement test as part of the application. Test results determine class level placement. If no space is available, the program will help connect applicants to alternative providers.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
@@ -46274,7 +46315,7 @@
         "Must meet output, outcome, and impact measurement requirements"
       ],
       "application_process_overview": "NOFA is projected for release in February each year; applications are projected to be due in April. Apply through the Grant Management System (GMS) at https://grants.goccp.maryland.gov. Applicants must obtain a User ID and password prior to the application deadline. Application requires completion of narrative sections (Goals/Objectives, Project Measurement, Timeline, Spending Plan, Management Capabilities, Sustainability, Disclosure of Pending Applications), a Budget Tab (Personnel, Operating Expenses, Travel, Contractual Services, Equipment, Other), a Budget Prioritization Tab, and a Documents Tab for supporting materials. Post-award, subrecipients must complete the Subrecipient Organizational Capacity Questionnaire and are encouraged to use Electronic Funds Transfer (EFT). For support, contact support@goccp.freshdesk.com.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 2,
       "data_quality": "medium",
@@ -46611,9 +46652,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "ENOUGH Act Grantees"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "non-profit",
         "government"
@@ -47230,9 +47269,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "ENOUGH Act Grantees"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "government",
         "non-profit"
@@ -47786,9 +47823,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "ENOUGH Act Grantees"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "non-profit",
         "government",
@@ -47855,9 +47890,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "ENOUGH Act Grantees"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "non-profit",
         "government"
@@ -50180,7 +50213,7 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit"
@@ -52343,9 +52376,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Opportunity Zones"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "non-profit",
         "for-profit",
@@ -54444,7 +54475,7 @@
         "Credit does not automatically renew and must be reapplied for each cycle"
       ],
       "application_process_overview": "Submit the Commercial Based Tax Credit Application to the Howard County Department of Finance by April 1, 2026. The application form is available at https://www.howardcountymd.gov/finance/resource/commercial-tax-credit-application. The credit does not automatically renew and must be reapplied for each cycle.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 3,
       "data_quality": "medium",
@@ -54530,7 +54561,7 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -54618,7 +54649,7 @@
         "Credit does not automatically renew; must reapply each year"
       ],
       "application_process_overview": "Submit the Commercial Based Tax Credit Application to the Howard County Department of Finance by April 1, 2026. The credit does not automatically renew and must be reapplied for each year. Application form available at https://www.howardcountymd.gov/finance/resource/commercial-tax-credit-application.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 3,
       "data_quality": "medium",
@@ -54734,7 +54765,7 @@
         "Credit does not automatically renew; a new application must be submitted each cycle"
       ],
       "application_process_overview": "Submit the Commercial Based Tax Credit Application to the Howard County Department of Finance by April 1, 2026. The credit does not automatically renew, so a new application is required each year. Application form available at https://www.howardcountymd.gov/finance/resource/commercial-tax-credit-application.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 3,
       "data_quality": "medium",
@@ -54894,7 +54925,7 @@
         "Property may not receive a Green Building tax credit in the same tax year"
       ],
       "application_process_overview": "Submit the Commercial Based Tax Credit Application to the Howard County Department of Finance by April 1, 2026, including a copy of the qualifying LEED or equivalent certification. Application form available at https://www.howardcountymd.gov/finance/resource/commercial-tax-credit-application.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 3,
       "data_quality": "medium",
@@ -55278,7 +55309,7 @@
         "Property must be the applicant's principal residence"
       ],
       "application_process_overview": "Submit a Residential Construction/Equity Based Tax Credit Application to the Howard County Department of Finance by April 1, 2026, with proof of joint ownership and the percentage of the property held by the Housing Commission. The application form is available at https://www.howardcountymd.gov/finance/resource/residential-construction-equity-based-tax-credit-application.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 3,
       "data_quality": "medium",
@@ -57496,7 +57527,7 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit"
@@ -59227,7 +59258,7 @@
         "Not in default on any student loan"
       ],
       "application_process_overview": "The County Executive and HCPSS will enter a Memorandum of Understanding (MOU) to govern the program, which will define the specific eligibility parameters, application period, award period, methods of distribution, review processes, and required documentation. The application period opens after the MOU is signed.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": null,
       "source_count": 1,
       "data_quality": "medium",
@@ -59585,7 +59616,7 @@
         "Must be a farm located in Howard County"
       ],
       "application_process_overview": "Contact the Howard Soil Conservation District for application details. Revolving loan program details to be announced.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 3,
       "data_quality": "high",
@@ -61543,7 +61574,7 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit"
@@ -71916,7 +71947,7 @@
         "Eligible operations include agricultural, horticultural, vegetable, or fruit products; livestock, meats, marine food products, poultry, eggs, or dairy products; equine operations; wool, hides, feathers, or honey; or any product of farm, forest, orchard, garden, or water"
       ],
       "application_process_overview": "Download and complete the 2026 Small Acreage Cover Crop Program Application form (PDF) and the Requirements and Agreement form. Submit by postal mail or email during the enrollment period (March 16 – April 24, 2026). Growers are reimbursed based on paid receipts after planting. All documentation must be submitted to the Department by December 31, 2027. Contact Bill Tharpe at bill.tharpe@maryland.gov or 410-841-5869 for questions.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
@@ -72742,7 +72773,7 @@
         "Original documents should not be sent"
       ],
       "application_process_overview": "Apply online through the Maryland OneStop portal (www.taxcredits.sdat.maryland.gov) or download and mail the paper application (Form RTC-1) to the Renters' Tax Credit Program, P.O. Box 49006, Baltimore, MD 21297. Online applications are processed faster. In-person appointments can be scheduled at 123 Market Place, Baltimore, MD 21202. Applications must be submitted by October 1 of the applicable year. Do not email applications containing personal information such as Social Security numbers or tax returns. Required documents include copies of all 1099 forms, rent receipts from January through December, a copy of the lease or rental agreement, and a copy of the federal income tax return if one was filed. Application assistance is also available at all senior activity centers in St. Mary's County and through the Carroll County Division of Aging & Disabilities at 410-386-3800.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": true,
       "is_recurring": true,
       "source_count": 6,
       "data_quality": "high",
@@ -73130,7 +73161,8 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Opportunity Zones"
+        "Opportunity Zones",
+        "RISE Zones"
       ],
       "eligible_organization_types": [
         "individuals",
@@ -73184,7 +73216,7 @@
         "QMBC must be in good standing with Maryland"
       ],
       "application_process_overview": "Step 1: QMBC submits Form B application through Commerce's online system (accepted beginning August 19, 2025; deadline March 31, 2026). Step 2: Investors submit Form A application through Commerce's online system (accepted beginning September 2, 2025; applications submitted by September 15, 2025 at 11:59 p.m. are eligible for the Online Electronic Queue on September 16, 2025; final deadline April 30, 2026). Step 3: Investors register in the Online Electronic Queue Investor Registration system (opens September 16, 2025 at 9:00 a.m. EST) using their username and reference number received after submitting Form A. Queue position determines first-come, first-served allocation. Step 4: If approved, Commerce issues an Initial Certificate of Approval; investor has 30 days to make the investment. Step 5: Investor provides proof of investment within 10 days of making the investment; Commerce issues Final Certificate of Approval. Step 6: Investor claims the tax credit on a Maryland Tax Return and attaches the Final Certificate of Approval.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
@@ -73215,8 +73247,7 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "BRNI Areas",
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -73287,7 +73318,7 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "BRNI Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -73717,8 +73748,8 @@
         "Priority given to providers serving children ages 2 and younger"
       ],
       "application_process_overview": "Applicants must apply through the online portal by January 30, 2026. The application requires details on ownership, a valid license, and proof of scholarship participation. Applicants must also submit financial projections, tax returns, and collateral details.",
-      "is_accepting_applications": null,
-      "is_recurring": null,
+      "is_accepting_applications": false,
+      "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
       "source_urls": [
@@ -74013,7 +74044,8 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone - Focus Area",
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -74103,7 +74135,7 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit"
@@ -74217,7 +74249,7 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit"
@@ -74338,9 +74370,9 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas",
         "Priority Funding Areas",
-        "Sustainable Communities"
+        "Sustainable Communities",
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -75154,9 +75186,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "ENOUGH Act Grantees"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "for-profit"
       ],
@@ -75693,7 +75723,8 @@
       "eligible_regions": [],
       "eligible_incentive_areas": [
         "Priority Funding Areas",
-        "Opportunity Zones"
+        "Opportunity Zones",
+        "One Maryland Jurisdictions"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -76556,8 +76587,9 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
+        "Enterprise Zone",
         "Opportunity Zones",
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone - Focus Area"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -81731,7 +81763,7 @@
         "Local entities (LBHAs, CSAs, LAAs) serve as implementing partners across all 24 Maryland jurisdictions"
       ],
       "application_process_overview": "Maryland submits a state application to SAMHSA. The FY26-27 SUPTRS Block Grant Application was submitted on 10/1/2025. Public comments on the application can be submitted by email. Services are administered locally through LBHAs, CSAs, LAAs, and the Administrative Services Organization (ASO). The OMB-approved form (No. 0930-0168) is valid through 01/31/2028.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
@@ -83936,9 +83968,7 @@
         "Baltimore City"
       ],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Sustainable Communities"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "non-profit",
         "for-profit",
@@ -85845,7 +85875,7 @@
         "Eligibility requirements detailed on the Independent Living Tax Credit main page"
       ],
       "application_process_overview": "1. Complete the accessibility renovations and file your Maryland taxes for that tax year. 2. Submit the completed application and supporting documentation (receipts, invoices, before-and-after photos, permits) to DHCD by June 1st of the current calendar year — either online via dhcd.wufoo.com or by downloading the paper application and submitting by email or mail. 3. DHCD reviews applications and notifies approved applicants by August 31st. 4. If approved, file an amended Maryland tax return (Form 502X) with the DHCD tax credit certification attached.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 2,
       "data_quality": "medium",
@@ -86317,7 +86347,9 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Main Street Areas"
+        "Main Street Areas",
+        "Priority Funding Areas",
+        "Sustainable Communities"
       ],
       "eligible_organization_types": [
         "government",
@@ -86357,7 +86389,7 @@
         "Must organize and maintain volunteer committees (public and private sector)"
       ],
       "application_process_overview": "Check community readiness, learn about the Main Street Approach, build support from local leaders and community members, visit existing Main Street communities, set goals for the program, then contact Main Street Maryland staff. The application process to MD DHCD can take 6 months to a year, after which newly designated communities pursue 1–2 years toward National Main Street Center accreditation standards. The application process is scheduled to reopen in May 2026.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
@@ -87429,9 +87461,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Priority Funding Areas"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "non-profit",
         "for-profit"
@@ -87693,7 +87723,7 @@
       ],
       "eligible_incentive_areas": [
         "Sustainable Communities",
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "government",
@@ -87751,7 +87781,7 @@
       "eligible_incentive_areas": [
         "Priority Funding Areas",
         "Sustainable Communities",
-        "Enterprise Zones"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "non-profit",
@@ -87887,8 +87917,7 @@
         "Sustainable Communities",
         "Priority Funding Areas",
         "Opportunity Zones",
-        "Transit Oriented Development",
-        "BRNI Areas"
+        "Transit Oriented Development"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -88301,9 +88330,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Priority Funding Areas"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "government",
         "non-profit",
@@ -88360,8 +88387,7 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Opportunity Zones",
-        "Main Street Areas"
+        "Opportunity Zones"
       ],
       "eligible_organization_types": [
         "for-profit"
@@ -88472,9 +88498,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Priority Funding Areas"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "for-profit",
         "non-profit",
@@ -88659,9 +88683,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Priority Funding Areas"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "for-profit",
         "non-profit",
@@ -88803,8 +88825,7 @@
       "eligible_regions": [],
       "eligible_incentive_areas": [
         "Priority Funding Areas",
-        "Sustainable Communities",
-        "Enterprise Zone Focus Areas"
+        "Sustainable Communities"
       ],
       "eligible_organization_types": [
         "non-profit",
@@ -89532,7 +89553,8 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Priority Funding Areas"
+        "Priority Funding Areas",
+        "Sustainable Communities"
       ],
       "eligible_organization_types": [
         "non-profit",
@@ -92966,6 +92988,61 @@
     }
   },
   {
+    "slug": "maryland-business-works-incumbent-worker-training",
+    "structured_extraction": {
+      "program_name": "Maryland Business Works (Incumbent Worker Training)",
+      "program_description": "Maryland Business Works is a workforce training program operated by the Maryland Department of Labor that provides funds to help Maryland businesses train their employees. MOED partners with the Maryland Department of Labor to provide training funds to businesses focused on employee retention, growth, and layoff prevention. The program targets small businesses with in-demand occupations. It offers a dollar-for-dollar match requirement with a maximum of $4,500 per trainee per project and up to $40,000 annually per business. Note: the program may not be accepting new applications when all budgeted funding for a fiscal year has been obligated.",
+      "agency": "Maryland Department of Labor, Division of Workforce Development and Adult Learning",
+      "funding_source": "public",
+      "geographic_scope": "statewide",
+      "eligible_counties": [
+        "All"
+      ],
+      "eligible_municipalities": [],
+      "eligible_regions": [],
+      "eligible_incentive_areas": [],
+      "eligible_organization_types": [
+        "for-profit",
+        "non-profit"
+      ],
+      "business_stage": "any",
+      "eligible_industries": [
+        "Any"
+      ],
+      "assistance_type": [
+        "subsidy",
+        "training"
+      ],
+      "assistance_description": "Training funds provided to eligible Maryland businesses to train current employees. A dollar-for-dollar match is required. Maximum funding per trainee is $4,500 per project or series of projects. Maximum annual request per business cannot exceed $40,000. Funds cover classroom-based training, in-house staff training, apprenticeships, and other skill-upgrade opportunities.",
+      "URL": "https://labor.maryland.gov/employment/mbw.shtml",
+      "application_deadline_string": "Not currently accepting applications for this fiscal year",
+      "application_deadline_date": "",
+      "contact_name": "",
+      "contact_email": "dlwdalbusinessservices-labor@maryland.gov",
+      "contact_phone": "410-767-2173",
+      "program_audience": "Maryland businesses seeking to train their current employees, particularly small businesses with 250 or fewer employees focused on employee retention, skills upgrades, and layoff prevention.",
+      "use_of_funds": "Classroom-based training, in-house staff training, apprenticeships, and other skill-upgrade opportunities for current employees.",
+      "geographic_eligibility": "Statewide Maryland; Baltimore City businesses may also access the program through MOED.",
+      "requirements_list": [
+        "Primarily targets small businesses with 250 employees or fewer.",
+        "Businesses must provide a dollar-for-dollar match on training funds.",
+        "Training cap of $4,500 per trainee per project or series of projects.",
+        "Maximum annual request per business is $40,000.",
+        "Focus on in-demand occupations and businesses facing potential layoffs or seeking growth."
+      ],
+      "application_process_overview": "Submit requests, documentation, and communication by e-mail, phone, or mail to the Division of Workforce Development & Adult Learning, Maryland Department of Labor, 100 S. Charles Street, Suite 2000, Tower 1, Baltimore, MD 21201. Baltimore City businesses may also contact MOED Employer Services at 443-984-3014.",
+      "is_accepting_applications": false,
+      "is_recurring": true,
+      "source_urls": [
+        "https://www.baltimorecity.gov/moed/our-work/employer-services/training",
+        "https://labor.maryland.gov/employment/mbw.shtml"
+      ],
+      "attachment_urls": [
+        "https://www.baltimorecity.gov/media/document/mdbizworkspdf"
+      ]
+    }
+  },
+  {
     "slug": "professional-outplacement-assistance-center-poac",
     "structured_extraction": {
       "program_name": "Professional Outplacement Assistance Center (POAC)",
@@ -96008,7 +96085,7 @@
         "Clean and store equipment after fish release"
       ],
       "application_process_overview": "1. Register using the online registration form starting January 1st (deadline March 15th). 2. Submit a signed Memorandum of Intent (MOI) with the registration. 3. Attend teacher training workshop in the fall hosted by Trout Unlimited (first-year teachers must attend the October 24, 2026 session). 4. Pre-cycle tank by November 12, 2026 or risk being dropped from the program. 5. Receive fish eggs in early December from the Albert Powell Fish Hatchery. 6. Raise fish and conduct lessons October–May. 7. Release fish at an approved DNR site in April/May. 8. Submit reimbursement package (invoice, proof of purchase, and W-9) by June 30th. 9. Complete the online reporting form by July 31st.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 2,
       "data_quality": "high",
@@ -106184,8 +106261,7 @@
       "eligible_incentive_areas": [
         "Sustainable Communities",
         "Priority Funding Areas",
-        "Transit Oriented Development",
-        "Opportunity Zones"
+        "Transit Oriented Development"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -107483,9 +107559,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "RISE Zones"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "non-profit",
         "for-profit",
@@ -111836,9 +111910,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "ENOUGH Act Grantees"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "non-profit"
       ],
@@ -114837,9 +114909,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Opportunity Zones"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "for-profit",
         "non-profit",
@@ -115357,7 +115427,7 @@
         "Grant is 100% reimbursable — applicants must spend funds before reimbursement is issued"
       ],
       "application_process_overview": "Applicants should first plan their project by considering the safety problem, target population, proposed solution, and evaluation methods. Contact a technical advisor at the Maryland Highway Safety Office for assistance. Apply through the online 'Grant & Projects for Safety' portal. For more information, visit zerodeathsmd.gov/grants/safety-grants/.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 2,
       "data_quality": "medium",
@@ -117421,7 +117491,8 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Priority Funding Areas"
+        "Priority Funding Areas",
+        "Arts and Entertainment Districts"
       ],
       "eligible_organization_types": [
         "government"
@@ -117691,7 +117762,7 @@
         "Capital improvements to properties owned by schools, school systems, colleges, universities, the Maryland Department of General Services, or the Maryland Stadium Authority are ineligible projects"
       ],
       "application_process_overview": "Applications are submitted electronically through MSAC's online grants management system, SmartSimple. Applicants must create a free account or log in at marylandarts.smartsimple.com. Electronic signatures are required. Technical support for SmartSimple is available during regular office hours. A multi-disciplinary statewide grant panel reviews applications and applicants receive electronic notification of award or denial. Grantees must submit a final report upon project completion. First-time applicants are strongly encouraged to contact program staff before applying.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 2,
       "data_quality": "medium",
@@ -117937,7 +118008,7 @@
         "Grantees must submit a final report at completion of the funded project."
       ],
       "application_process_overview": "Designated county arts agencies submit one of two types of applications annually to MSAC. On-Year: Submit a draft three-year plan for review by MSAC staff and a panel; revise based on feedback; submit revised plan for Council approval. Off-Year: Submit an off-year application with changes to the plan, financial reporting, and professional development requests for MSAC staff review. See the Grant Guidelines for detailed information.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
@@ -118417,7 +118488,7 @@
         "Folklife Apprenticeship project expenses must total at least $5,000"
       ],
       "application_process_overview": "Submit a nomination via MSAC's online grants management system SmartSimple. New users must create a profile. A completed nomination includes answers to prompts describing the nominee's long-term achievement in the traditional arts and optional supplemental materials. Contact State Folklorist Ryan Koons to have a draft nomination reviewed before submission. See sub-program pages for Folklife Apprenticeships and Folklife Network for specific application details.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 2,
       "data_quality": "medium",
@@ -118664,7 +118735,7 @@
         "Nonprofits must meet certain grant income requirements."
       ],
       "application_process_overview": "Applications are accepted through the Smart Simple online portal on a rolling basis from September 2, 2025, through March 31, 2026. A panel reviews applications submitted by the last day of each month during the following month. The agency then sends notifications. If approved, applicants receive a grant agreement to process the payment.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 1,
       "data_quality": "low",
@@ -118722,7 +118793,7 @@
         "Multi-phased artworks that received prior PAAM grant funding are ineligible"
       ],
       "application_process_overview": "Apply through the SmartSimple online grants platform at marylandarts.smartsimple.com. Create a free account or log in, complete the application electronically including an electronic signature, and submit by the published deadline. A multi-disciplinary statewide panel electronically reviews and scores applications using published rubrics. All grantees must file a final report in SmartSimple after the grant agreement is executed.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
@@ -118800,7 +118871,7 @@
         "Organizations must be a Maryland-based 501(c)3, a government entity, a school, or a college/university"
       ],
       "application_process_overview": "Apply through the SmartSimple online grants platform at marylandarts.smartsimple.com. Create a free account or log in, complete the application electronically including an electronic signature, and submit by the published deadline. Review the applicable grant rubric before submitting. A multi-disciplinary statewide panel electronically reviews and scores applications using published rubrics. All grantees must file a final report in SmartSimple after the grant agreement is executed. Artists interested in commissions can also apply to the Maryland Public Artist Roster through the broader PAAM program.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
@@ -118890,7 +118961,8 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Priority Funding Areas"
+        "Priority Funding Areas",
+        "Arts and Entertainment Districts"
       ],
       "eligible_organization_types": [
         "individuals",
@@ -127015,64 +127087,6 @@
     }
   },
   {
-    "slug": "maryland-business-works-incumbent-worker-training",
-    "structured_extraction": {
-      "program_name": "Maryland Business Works (Incumbent Worker Training)",
-      "program_description": "A training program for current employees seeking to upgrade their skills. MOED partners with the Maryland Department of Labor, Licensing and Regulation (DLLR) to provide training funds to businesses focused on employee retention, growth, and layoff prevention. The program targets small businesses with in-demand occupations.",
-      "agency": "Mayor's Office of Employment Development (MOED)",
-      "funding_source": "public",
-      "geographic_scope": "municipal",
-      "eligible_counties": [
-        "Baltimore City"
-      ],
-      "eligible_municipalities": [
-        "Baltimore City"
-      ],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "for-profit",
-        "non-profit"
-      ],
-      "business_stage": "any",
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "subsidy",
-        "training"
-      ],
-      "assistance_description": "Training funds provided with a dollar-for-dollar match requirement. Maximum funding per trainee is $4,500 per project or series of projects. Maximum annual request per business cannot exceed $40,000. Funds cover classroom-based training, in-house staff training, apprenticeships, and other opportunities.",
-      "URL": "https://www.baltimorecity.gov/moed/our-work/employer-services/training",
-      "application_deadline_string": "",
-      "application_deadline_date": "",
-      "contact_name": "MOED Employer Services",
-      "contact_email": "",
-      "contact_phone": "443-984-3014",
-      "program_audience": "Baltimore City businesses with current employees seeking skills upgrades, particularly small businesses with 250 or fewer employees facing potential layoffs or seeking to expand.",
-      "use_of_funds": "Classroom-based training, in-house staff training, apprenticeships, and other skill-upgrade opportunities for current employees.",
-      "geographic_eligibility": "Available to businesses in Baltimore City.",
-      "requirements_list": [
-        "Primarily targets small businesses with 250 employees or fewer.",
-        "Businesses must provide a dollar-for-dollar match on training funds.",
-        "Training cap of $4,500 per trainee per project or series of projects.",
-        "Maximum annual request per business is $40,000.",
-        "Focus on in-demand occupations and businesses facing potential layoffs or seeking growth."
-      ],
-      "application_process_overview": "Contact MOED Employer Services at 443-984-3014 for more information, or review program details via the linked document.",
-      "is_accepting_applications": null,
-      "is_recurring": true,
-      "source_count": 1,
-      "data_quality": "medium",
-      "attachment_urls": [
-        "https://www.baltimorecity.gov/media/document/mdbizworkspdf"
-      ],
-      "source_urls": [
-        "https://www.baltimorecity.gov/moed/our-work/employer-services/training"
-      ]
-    }
-  },
-  {
     "slug": "outplacement-services",
     "structured_extraction": {
       "program_name": "Outplacement Services",
@@ -129012,9 +129026,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Transit Oriented Development"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "for-profit",
         "non-profit"
@@ -136103,7 +136115,7 @@
         "Families must reside in Montgomery County, Maryland"
       ],
       "application_process_overview": "Eligible child care programs can contact Charlene Muhammad by phone (240-777-1769 English, 240-777-1426 Spanish) or email to learn more and apply. Families apply directly with Montgomery County and receive a list of participating childcare programs to select from; the application link is posted on Montgomery County Community resources. Application opens November 1st; program begins in Winter (January).",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
@@ -137285,7 +137297,7 @@
         "Approved applicants may only apply for a Refresh Grant once within a five-year period from project completion for the same property and/or business address"
       ],
       "application_process_overview": "Submit a Program Interest Form via SurveyMonkey for the Countywide Façade Improvement Program, or an application at montgomerycountymd.gov/DHCA/community/neighborhood/facade.html. Full project submissions are not being reviewed until at least July 1, 2025 due to funding limitations. Applications are accepted on an ongoing basis and reviewed on a first-come, first-served basis. DHCA staff will request additional information if needed and relay next steps. Contact Kristina Ellis at Kristina.Ellis@montgomerycountymd.gov for more information.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": true,
       "is_recurring": true,
       "source_count": 2,
       "data_quality": "medium",
@@ -139406,7 +139418,7 @@
         "Priority given to first-time applicants"
       ],
       "application_process_overview": "1. Submit the online application (or request a PDF or translated version from your Regional Service Office). 2. Your local Regional Service Office reviews the application to determine if the event qualifies. 3. If approved, you receive a notice stating the grant amount (up to $1,000). 4. Agree to the program rules, provide receipts for spending, and submit a final report. 5. Register your group in the County Central Vendor System to receive payment. Processing takes 1–2 weeks. Additional details are available in the Neighborhood Events Matching Fund fact sheet.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": true,
       "is_recurring": true,
       "source_count": 6,
       "data_quality": "high",
@@ -140390,9 +140402,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "NourishMD Eligibility Zone"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "non-profit",
         "for-profit",
@@ -141392,7 +141402,7 @@
         "Collaborative applications are allowed"
       ],
       "application_process_overview": "Apply through the eCivis/Euna grants portal. Review the NOFO and information session slide deck. Applications submitted after the priority deadline will be accepted on a rolling basis until available funds are fully committed, with proposals reviewed in bi-weekly clusters. The Euna application page will be updated once all funds have been committed. If additional funding becomes available, OGM will update the application page and send a notice through the Montgomery County Grant Opportunities Newsletter. OGM plans to open a separate NOFO in late Winter 2026 for finalized strategic plans seeking additional implementation funding.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 1,
       "data_quality": "low",
@@ -144513,7 +144523,7 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas",
+        "NMTC Eligible Census Tracts",
         "Main Street Areas"
       ],
       "eligible_organization_types": [
@@ -144661,8 +144671,8 @@
         "Matching investment opportunity available through June 30, 2028"
       ],
       "application_process_overview": "Subscribe to OFR emails for updates on next steps, eligibility criteria, and the application process. Applications and inquiries can be directed to ofr.venturefund@maryland.gov. Contact Stephen Clampett, Assistant Commissioner, at 410-230-6104 with questions.",
-      "is_accepting_applications": null,
-      "is_recurring": true,
+      "is_accepting_applications": true,
+      "is_recurring": false,
       "source_count": 1,
       "data_quality": "medium",
       "source_urls": [
@@ -145497,7 +145507,9 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [],
+      "eligible_incentive_areas": [
+        "NMTC Eligible Census Tracts"
+      ],
       "eligible_organization_types": [
         "for-profit",
         "non-profit"
@@ -146951,9 +146963,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Transit Oriented Development"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "for-profit",
         "non-profit"
@@ -149811,9 +149821,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Transit Oriented Development"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "for-profit",
         "non-profit"
@@ -150182,7 +150190,7 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit",
@@ -151332,7 +151340,7 @@
         "Budget variances greater than 10% must be explained in reporting"
       ],
       "application_process_overview": "Attend the grant application workshop (held in February). Submit the completed application with all required documents by the deadline (March 22 for FY2024). Incomplete applications are disqualified. Applications are reviewed April through June by the Grant Review Committee, which recommends awardees for a vote. Applicants are notified of results by June 30. After receiving an award, recipients must submit a mid-year report by January 31 and a final report by July 31 documenting fund expenditure, financial detail, and narrative outcomes.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": false,
       "is_recurring": true,
       "source_count": 1,
       "data_quality": "medium",
@@ -153109,7 +153117,7 @@
         "(Wicomico) Full eligibility requirements found in Legislative Bill 2022-07"
       ],
       "application_process_overview": "Queen Anne's County — For disabled emergency workers: submit the Application for Disabled Emergency Worker, Annual Eligibility Certification, Certificate of Service (completed by the agency chief or HR representative), and retirement/disability statement by June 15. For surviving spouses of fallen emergency workers: submit the Application for Surviving Spouse, Annual Eligibility Certification, Certificate of Service, and death certificate by June 15. Wicomico County — Complete the Heroes Act Application available on the Wicomico County website.",
-      "is_accepting_applications": null,
+      "is_accepting_applications": true,
       "is_recurring": true,
       "source_count": 2,
       "data_quality": "medium",
@@ -153142,7 +153150,7 @@
       "eligible_municipalities": [],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit"
@@ -153197,9 +153205,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "for-profit",
         "individuals"
@@ -154766,9 +154772,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Sustainable Communities"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "non-profit"
       ],
@@ -158800,7 +158804,8 @@
         "Any"
       ],
       "eligible_incentive_areas": [
-        "Enterprise Zones"
+        "Enterprise Zone",
+        "Enterprise Zone - Focus Area"
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
@@ -158809,8 +158814,8 @@
       "source_count": 1,
       "source_urls": [],
       "attachment_urls": [],
-      "is_accepting_applications": null,
-      "is_recurring": null,
+      "is_accepting_applications": true,
+      "is_recurring": true,
       "business_stage": "any",
       "geographic_scope": "statewide"
     }
@@ -162725,7 +162730,6 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas",
         "Priority Funding Areas"
       ],
       "eligible_organization_types": [
@@ -162860,7 +162864,7 @@
       ],
       "eligible_regions": [],
       "eligible_incentive_areas": [
-        "Enterprise Zone Focus Areas"
+        "Enterprise Zone"
       ],
       "eligible_organization_types": [
         "for-profit"
@@ -163082,9 +163086,7 @@
       ],
       "eligible_municipalities": [],
       "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Priority Funding Areas"
-      ],
+      "eligible_incentive_areas": [],
       "eligible_organization_types": [
         "for-profit"
       ],
