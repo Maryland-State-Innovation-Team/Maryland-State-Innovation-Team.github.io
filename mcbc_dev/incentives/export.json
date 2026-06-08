@@ -2684,68 +2684,6 @@
     }
   },
   {
-    "slug": "wprf-appeal-program",
-    "structured_extraction": {
-      "program_name": "WPRF Appeal Program",
-      "program_description": "The Watershed Protection and Restoration Fee (WPRF) Appeal Program allows Anne Arundel County property owners to challenge a WPRF bill they believe contains an error. Grounds for appeal include incorrect zoning classification, errors in impervious area calculation, mathematical errors, properties not subject to the charge, exempt property owners, incorrect identification of the property owner, or residential property in a non-residential zone.",
-      "agency": "Anne Arundel County Bureau of Watershed Protection and Restoration",
-      "funding_source": "public",
-      "geographic_scope": "county",
-      "eligible_counties": [
-        "Anne Arundel"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals",
-        "for-profit",
-        "non-profit"
-      ],
-      "business_stage": "any",
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "rebate"
-      ],
-      "assistance_description": "If the appeal is upheld, the county adjusts the billed fee and may issue a refund check. Refunds can only go back up to three years per Maryland State Code. The county issues a written decision within 45 days of receiving a completed appeal application. For HOAs, the total WPRF across all HOA-owned tax accounts is capped at the number of property tax accounts for homes/unimproved lots within HOA boundaries multiplied by 40% of the base rate. Denial of an appeal may be further appealed to the Maryland Tax Court under Article 24, § 9-710.",
-      "URL": "https://www.aacounty.org/public-works/bwpr/watershed-protection-restoration-fee/wprf-appeal-program",
-      "application_deadline_string": "Appeals are accepted on an ongoing basis.",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "bwprcustomercare@aacounty.org",
-      "contact_phone": "(410) 222-4240",
-      "program_audience": "Anne Arundel County property owners (residential, nonresidential, HOAs, farms, marinas, religious institutions, schools, multifamily, condos, NPDES permit holders, charitable nonprofits) who believe they have been incorrectly billed for the Watershed Protection and Restoration Fee.",
-      "use_of_funds": "Correction of erroneous WPRF charges and issuance of applicable refunds. Appeals may address tier reclassification, incorrect property classification, HOA fee cap application, mathematical errors, incorrect impervious surface calculations, or exemption status. This is an administrative review pathway, not a discretionary grant program.",
-      "geographic_eligibility": "Anne Arundel County, Maryland. Applies to all properties in the county subject to WPRF charges, including residential properties in RA, RLD, R1, R2, R5, R10, and R15 zoning classifications. Properties in the city of Annapolis are also covered under the county program.",
-      "requirements_list": [
-        "Property owner must believe they have been billed in error",
-        "Grounds for appeal include: incorrect zoning classification, errors in impervious area calculation for non-residential property, mathematical errors, property not subject to the charge, property owner exempt from the charge, errors in identification of property owner, or residential property in a non-residential zone",
-        "Applicant must declare information accuracy under penalty of perjury",
-        "DPW is authorized to inspect property and verify impervious surface area upon submission of appeal",
-        "Supporting documentation must be attached (plans, reports, photos, proof of ownership, proof of location, or proof of approved financial hardship exemption as applicable)",
-        "Tax account number and property address must be provided",
-        "Submit the appropriate form: Form 13-1 (residential tier), Form 13-2 (incorrect classification), Form 13-3 (HOA cap), Form 13-4 (math/impervious surface error), or Form 13-5 (exempt status)"
-      ],
-      "application_process_overview": "Submit an online appeal through the county website (www.aacounty.org/myannearundel or www.aarivers.org) or complete the appropriate paper form (Form 13-1 through 13-5 depending on the type of error) and mail to: Attn: WPRF Appeals, Anne Arundel County DPW, 2662 Riva Road, MS 7409, Annapolis, MD 21401. The county will review the application and issue a written decision within 45 days. If denied, the appeal may be further pursued at the Maryland Tax Court.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 1,
-      "data_quality": "medium",
-      "attachment_urls": [
-        "https://www.aacounty.org/sites/default/files/2026-02/wprf_form_13_1_residential_tier_v2.1.pdf",
-        "https://www.aacounty.org/sites/default/files/2026-02/wprf_form_13_2_incorrect_classification_v2.1.pdf",
-        "https://www.aacounty.org/sites/default/files/2026-02/wprf_form_13_3_hoa_cap_v2.1.pdf",
-        "https://www.aacounty.org/sites/default/files/2026-02/wprf_form_13_4_math_error_v2.1.pdf",
-        "https://www.aacounty.org/sites/default/files/2026-02/wprf_form_13_5_exempt_v2.1.pdf"
-      ],
-      "source_urls": [
-        "https://www.aacounty.org/public-works/bwpr/watershed-protection-restoration-fee/wprf-appeal-program"
-      ]
-    }
-  },
-  {
     "slug": "watershed-protection-and-restoration-fee-wprf-credit-program",
     "structured_extraction": {
       "program_name": "WPRF Credit Program, Appeal, and Stormwater Remediation Fee Financial Hardship Exemption",
@@ -6211,66 +6149,6 @@
     }
   },
   {
-    "slug": "enterprise-zone-tax-credit-program",
-    "structured_extraction": {
-      "program_name": "Enterprise Zone Tax Credit Program",
-      "program_description": "Maryland's Enterprise Zone program designates more than 1,500 acres in Brooklyn Park as Anne Arundel County's sole Enterprise Zone. Businesses located within this zone may qualify for real property tax credits and state income tax credits in exchange for job creation and capital investments. The program aims to incentivize commercial redevelopment, address vacant properties, and encourage business retention, expansion, and job creation in the Brooklyn Park area.",
-      "agency": "Anne Arundel Economic Development Corporation",
-      "funding_source": "public",
-      "geographic_scope": "municipal",
-      "eligible_counties": [
-        "Anne Arundel"
-      ],
-      "eligible_municipalities": [
-        "Brooklyn Park"
-      ],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [
-        "Enterprise Zone"
-      ],
-      "eligible_organization_types": [
-        "for-profit"
-      ],
-      "business_stage": "any",
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "tax-credit"
-      ],
-      "assistance_description": "Three types of tax credits are available: (1) A 10-year real property tax credit (county and city) based on the increase in assessed value from commercial capital investment — the credit decreases over 10 years. (2) A one-time $1,000 state income tax credit for each qualified employee filling a newly created full-time position. (3) A three-year state income tax credit for each newly hired economically disadvantaged employee, earned at $3,000, $2,000, and $1,000 over the three years respectively.",
-      "URL": "https://www.aaedc.org/business/overview/commercial-revitalization/enterprise-zone",
-      "application_deadline_string": "",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "",
-      "contact_phone": "410-222-7410",
-      "program_audience": "Businesses located within the Anne Arundel County Enterprise Zone in the Brooklyn Park area that make capital investments and create jobs.",
-      "use_of_funds": "Tax credits offset property taxes and state income taxes for businesses that invest capital and hire qualified employees within the enterprise zone.",
-      "geographic_eligibility": "Must be located within the Anne Arundel County designated 1,572-acre Enterprise Zone in the Brooklyn Park area.",
-      "requirements_list": [
-        "Must be established within the Anne Arundel County designated 1,572-acre Enterprise Zone in Brooklyn Park",
-        "To claim the property tax credit, at least $25,000 in capital investment in the enterprise zone must occur",
-        "Must create jobs and/or make capital investments",
-        "For the general income tax credit, business must create at least one full-time position (35+ hours per week) where the employee is paid at least 150% of the federal minimum wage and remains in the position for at least 6 months doing at least 50% of work time in the enterprise zone",
-        "To claim the income tax credit for hiring economically disadvantaged employees, the business must have certification from the Maryland Department of Labor, Licensing and Regulation, and the employee must remain in the position for three years",
-        "Must be certified as eligible by the Anne Arundel Economic Development Enterprise Zone Administrator"
-      ],
-      "application_process_overview": "Contact the Anne Arundel Economic Development Corporation (AAEDC) at 410-222-7410 for assistance with locating your business in the Enterprise Zone, obtaining certification of eligibility from the Enterprise Zone Administrator, and claiming applicable tax credits.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 2,
-      "data_quality": "medium",
-      "attachment_urls": [
-        "https://www.aaedc.org/wp-content/uploads/2017/12/Business-Toolbox-Enterprise-Zone.pdf"
-      ],
-      "source_urls": [
-        "https://www.aaedc.org/business/overview/commercial-revitalization/enterprise-zone",
-        "https://www.aaedc.org/business/overview/commercial-revitalization"
-      ]
-    }
-  },
-  {
     "slug": "mobile-poultry-processing-unit-mpu-rental-program",
     "structured_extraction": {
       "program_name": "Mobile Poultry Processing Unit (MPU) Rental Program",
@@ -9418,65 +9296,6 @@
         "https://www.baltimorecity.gov/health/our-work/aging-services/caregiver-support",
         "https://www.baltimorecity.gov/health/our-work/aging-services/caregiver-support/family-caregiver-application",
         "https://www.baltimorecity.gov/civil-rights/inform-women-transform-lives-baltimore/inform-women-transform-lives-campaign"
-      ]
-    }
-  },
-  {
-    "slug": "affordable-housing-trust-fund-community-land-trust-homeownership-nofa-2024",
-    "structured_extraction": {
-      "program_name": "Affordable Housing Trust Fund – Community Land Trust Homeownership NOFA (2024)",
-      "program_description": "The Baltimore City Department of Housing & Community Development (DHCD) offers up to $8.1 million from the Affordable Housing Trust Fund to support homeownership projects sponsored by Community Land Trusts (CLTs). Qualified applicants can request up to $1,000,000 per project. Applications are accepted on a rolling basis, with award notifications within 90 days of submission.",
-      "agency": "Baltimore City Department of Housing & Community Development",
-      "funding_source": "public",
-      "geographic_scope": "municipal",
-      "eligible_counties": [
-        "Baltimore City"
-      ],
-      "eligible_municipalities": [
-        "Baltimore"
-      ],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "non-profit"
-      ],
-      "business_stage": null,
-      "eligible_industries": [
-        "Real Estate and Rental and Leasing"
-      ],
-      "assistance_type": [
-        "grant"
-      ],
-      "assistance_description": "Up to $8.1 million is available in total from the Affordable Housing Trust Fund, with individual projects eligible to request up to $1,000,000. Funding caps include up to $75,000 per unit (50% AMI restriction). Applications are accepted on a rolling basis via the Neighborly Portal. Award notifications are issued within 90 days of submission.",
-      "URL": "https://www.baltimorecity.gov/dhcd/our-work/neighborhood-development/notices-funding-availability-and-request-professional-services",
-      "application_deadline_string": "Rolling basis (no fixed cutoff stated)",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "DHCD.AHTFNOFA@baltimorecity.gov",
-      "contact_phone": "",
-      "program_audience": "Community Land Trust (CLT) organizations — organized/managed by nonprofits (501(c)(2), (3), or (4)) — sponsoring affordable homeownership projects in Baltimore City. Secondary beneficiaries include low-income and very-low-income households (50% AMI and below 30% AMI), current and returning residents, and historically underserved communities.",
-      "use_of_funds": "Eligible uses include: acquisition and stabilization of non-City-owned properties; architectural and engineering; environmental assessment and testing; market and financial feasibility analysis; construction; carrying costs; financing and lender fees; legal fees (closing, financing, CLT-required documents); consultant fees (implementation); customary landscaping; project management staff; infrastructure and utilities; single-family, condo, and co-op projects; and direct subsidy to lower first mortgage amounts (Buyers Choice/Buyer-Initiated strategy). Ineligible uses include: acquisition of City-owned properties; rental or temporary/shelter housing projects; general organizational operating costs; relocation; loan repayment or lien payoff; community gardens or urban agriculture; projects supporting specific religious affiliations; commercial or economic development; and NOFA submission preparation costs.",
-      "geographic_eligibility": "Baltimore City only",
-      "requirements_list": [
-        "Applicant must be a qualified Community Land Trust (CLT) organized/managed by a nonprofit (501(c)(2), (3), or (4))",
-        "Projects must support affordable homeownership (not rental)",
-        "Projects must be located within Baltimore City",
-        "Applicants with 3 or more active existing AHTF construction/subsidy awards are ineligible until reduced to 2 active awards",
-        "City-owned property acquisition is not an eligible use",
-        "Construction costs and general organizational operating costs are ineligible under certain strategies"
-      ],
-      "application_process_overview": "Review the NOFA Program Overview document (available as of August 23, 2024) and submit an application through the Neighborly Portal at portal.neighborlysoftware.com/BALTIMOREMD. Written questions may be submitted to DHCD.AHTFNOFA@baltimorecity.gov (responses by email only). Award notifications are issued within 90 days of submission.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 2,
-      "data_quality": "medium",
-      "attachment_urls": [
-        "https://s3.amazonaws.com/baltimorecity.gov.if-us-east-1/s3fs-public/2024-01/ahtf_clt_operating_nofa_program_overview_2023.pdf",
-        "https://s3.amazonaws.com/baltimorecity.gov.if-us-east-1/s3fs-public/2024-09/clt_rolling_nofa-august_2024_final.pdf"
-      ],
-      "source_urls": [
-        "https://www.baltimorecity.gov/dhcd/our-work/neighborhood-development/notices-funding-availability-and-request-professional-services",
-        "https://www.baltimorecity.gov/recent-notices"
       ]
     }
   },
@@ -13458,60 +13277,6 @@
     }
   },
   {
-    "slug": "women-infants-children-wic-program",
-    "structured_extraction": {
-      "program_name": "Women, Infants & Children (WIC) Program",
-      "program_description": "The WIC program provides free food benefits, nutrition education, health screenings, breastfeeding support, and referrals to health and social services for eligible low-income pregnant women, new mothers, infants, and children under 5 years old in Baltimore City.",
-      "agency": "Baltimore City Health Department",
-      "funding_source": "public",
-      "geographic_scope": "municipal",
-      "eligible_counties": [
-        "Baltimore City"
-      ],
-      "eligible_municipalities": [
-        "Baltimore"
-      ],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "business_stage": null,
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "subsidy",
-        "other-technical-assistance"
-      ],
-      "assistance_description": "Eligible participants receive healthy foods at no cost loaded onto an eWIC card, nutrition education and counseling, growth and weight assessments, breastfeeding assistance from lactation specialists, and referrals to other health and social agencies. Participants may also join the annual WIC Farmers' Market Program.",
-      "URL": "https://www.baltimorecity.gov/health/our-work/maternal-and-child-health/wic-program",
-      "application_deadline_string": "",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "",
-      "contact_phone": "(410) 396-9427",
-      "program_audience": "Pregnant women, new mothers, infants, and children under 5 years of age who live in Maryland and have a nutritional need",
-      "use_of_funds": "Healthy foods, nutrition education, health screenings, breastfeeding support, and referrals to health and social services",
-      "geographic_eligibility": "Must live in Maryland; clinic locations are in Baltimore City",
-      "requirements_list": [
-        "Must live in Maryland",
-        "Must be pregnant, a new mother, or have an infant or child under 5 years of age",
-        "Must have a nutritional need",
-        "Must meet income eligibility guidelines (see Maryland WIC Homepage for current limits)"
-      ],
-      "application_process_overview": "Call the WIC appointment line at (410) 396-9427 to schedule an appointment. Visit the Maryland WIC Homepage for more information on how to prepare for your appointment. An online pre-screening tool is available to check eligibility before applying.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "attachment_urls": [],
-      "source_urls": [
-        "https://www.baltimorecity.gov/health/our-work/maternal-and-child-health/wic-program"
-      ],
-      "source_count": 1,
-      "data_quality": "medium"
-    }
-  },
-  {
     "slug": "office-of-youth-and-trauma-services-training-and-technical-assistance-center-oytsttac",
     "structured_extraction": {
       "program_name": "Office of Youth and Trauma Services Training and Technical Assistance Center (OYTSTTAC)",
@@ -14496,60 +14261,6 @@
       "data_quality": "medium",
       "source_urls": [
         "https://www.baltimorecity.gov/smbad/m/wbe-certification-process"
-      ]
-    }
-  },
-  {
-    "slug": "community-emergency-response-team-cert-baltimore-city",
-    "structured_extraction": {
-      "program_name": "Baltimore City Community Emergency Response Team (CERT)",
-      "program_description": "Baltimore City CERT is a free training program that teaches volunteers how to prepare for and respond to disasters and emergencies. The program covers fire safety, light search and rescue, team organization, communications, and basic emergency medical procedures. Graduates can volunteer with the Baltimore City Office of Emergency Management to support outreach, emergency response, and recovery operations.",
-      "agency": "Baltimore City Office of Emergency Management",
-      "funding_source": "public",
-      "geographic_scope": "municipal",
-      "eligible_counties": [
-        "Baltimore City"
-      ],
-      "eligible_municipalities": [
-        "Baltimore City"
-      ],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "business_stage": null,
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "training"
-      ],
-      "assistance_description": "Free two-day (8 hours per day) in-person CERT training course covering disaster prevention, preparation, and response skills. Members meet quarterly for ongoing trainings and informational sessions (in-person and hybrid options). Training sessions are scheduled throughout the year at various Baltimore City locations.",
-      "URL": "https://www.baltimorecity.gov/emergency/community-emergency-response-team-cert",
-      "application_deadline_string": "Rolling — scheduled course dates throughout the year",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "",
-      "contact_phone": "",
-      "program_audience": "Baltimore City residents or workers aged 18 and older who want to learn emergency preparedness and response skills and volunteer with the community.",
-      "use_of_funds": "Free training in disaster preparedness and emergency response skills including fire safety, search and rescue, team organization, communications, and emergency medical procedures.",
-      "geographic_eligibility": "Must live or work in Baltimore City.",
-      "requirements_list": [
-        "Must live or work in Baltimore City",
-        "Must be at least 18 years of age",
-        "Register for a FEMA Student ID (SID)",
-        "Complete an in-person CERT Training Course",
-        "Complete FEMA online courses: IS-315.a (CERT and ICS) and IS-317.a (Introduction to CERT)",
-        "Support at least one OEM-sponsored preparedness and outreach event per year"
-      ],
-      "application_process_overview": "Register for a FEMA SID at the DHS website, then enroll in a scheduled in-person CERT training course (registration links available via the Baltimore City OEM Linktree or Eventbrite for specific sessions).",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 1,
-      "data_quality": "medium",
-      "source_urls": [
-        "https://www.baltimorecity.gov/emergency/community-emergency-response-team-cert"
       ]
     }
   },
@@ -16254,60 +15965,6 @@
     }
   },
   {
-    "slug": "maryland-works-for-wind",
-    "structured_extraction": {
-      "program_name": "Maryland Works for Wind",
-      "program_description": "Maryland Works for Wind (MWW) is a workforce development program run by Baltimore County that connects county residents with job training and apprenticeship opportunities in three key industries linked to the wind energy sector: construction, manufacturing, and transportation/logistics. Career Navigators help match participants with partner organizations based on career interests.",
-      "agency": "Baltimore County Department of Economic and Workforce Development",
-      "funding_source": "public",
-      "geographic_scope": "county",
-      "eligible_counties": [
-        "Baltimore County"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "business_stage": null,
-      "eligible_industries": [
-        "Construction",
-        "Manufacturing",
-        "Transportation and Warehousing",
-        "Utilities"
-      ],
-      "assistance_type": [
-        "training"
-      ],
-      "assistance_description": "Free or subsidized job training and apprenticeship programs across construction, manufacturing, and transportation/logistics career paths. Support services may include child-care aid, criminal record expungement, financial aid, tools and work attire, and transportation aid. Partner organizations include community colleges, trade unions, and nonprofits offering programs in carpentry, CDL, CNC, electrical, welding, heavy equipment operation, and more.",
-      "URL": "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/industries/maryland-works-for-wind",
-      "application_deadline_string": "",
-      "application_deadline_date": "",
-      "contact_name": "Career Navigators",
-      "contact_email": "careernavigator@baltimorecountymd.gov",
-      "contact_phone": "410-887-6472",
-      "program_audience": "Baltimore County residents who are 18 or older, have a high school diploma or GED, can pass a drug test, and are authorized to work in the United States.",
-      "use_of_funds": "Job training and apprenticeship programs in construction, manufacturing, and transportation/logistics industries; support services such as child care, transportation, tools, financial aid, and criminal record expungement assistance.",
-      "geographic_eligibility": "Available to Baltimore County residents.",
-      "requirements_list": [
-        "Must be 18 years of age or older",
-        "Must have a high school diploma or GED",
-        "Must be able to pass a drug test",
-        "Must be authorized to work in the United States"
-      ],
-      "application_process_overview": "Complete the online inquiry form on the program page or contact Career Navigators by email or phone. Navigators will help match you with a partner organization based on your career interests.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "attachment_urls": [],
-      "source_urls": [
-        "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/industries/maryland-works-for-wind"
-      ],
-      "source_count": 1,
-      "data_quality": "medium"
-    }
-  },
-  {
     "slug": "strategic-workforce-initiatives-swi",
     "structured_extraction": {
       "program_name": "Strategic Workforce Initiatives (SWI)",
@@ -17129,55 +16786,6 @@
       ],
       "source_count": 1,
       "data_quality": "medium"
-    }
-  },
-  {
-    "slug": "women-infants-and-children-wic-program-baltimore-county",
-    "structured_extraction": {
-      "program_name": "Women, Infants and Children (WIC) Program (Baltimore County)",
-      "program_description": "The Special Supplemental Nutrition Program for Women, Infants and Children (WIC) provides healthy supplemental foods and nutrition counseling for income-eligible pregnant, postpartum, and breastfeeding women, as well as children under age five who have medical or nutritional risk factors.",
-      "agency": "Baltimore County Department of Health",
-      "funding_source": "public",
-      "geographic_scope": "county",
-      "eligible_counties": [
-        "Baltimore County"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "business_stage": null,
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "subsidy"
-      ],
-      "assistance_description": "Provides healthy supplemental foods and nutrition counseling at no cost to eligible participants. Baltimore County residents can access WIC services at seven locations: Dundalk, Essex, Lansdowne, Reisterstown, Rosedale/White Marsh, Towson, and Woodlawn.",
-      "URL": "https://www.baltimorecountymd.gov/departments/health/health-services/children",
-      "application_deadline_string": "",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "wicprogram@baltimorecountymd.gov",
-      "contact_phone": "410-887-6000",
-      "program_audience": "Income-eligible pregnant, postpartum, and breastfeeding women, and children under age five with medical or nutritional risk factors who are Maryland residents.",
-      "use_of_funds": "Supplemental healthy foods and nutrition counseling.",
-      "geographic_eligibility": "Must be a resident of the State of Maryland.",
-      "requirements_list": [
-        "Must be pregnant, breastfeeding, a new mother, or have an infant or child up to age five",
-        "Must have a health or nutrition need",
-        "Must meet income eligibility guidelines"
-      ],
-      "application_process_overview": "Contact the WIC program by phone at 410-887-6000 or email wicprogram@baltimorecountymd.gov, or visit one of the seven Baltimore County WIC locations.",
-      "is_accepting_applications": null,
-      "is_recurring": true,
-      "source_count": 1,
-      "data_quality": "medium",
-      "source_urls": [
-        "https://www.baltimorecountymd.gov/departments/health/health-services/children"
-      ]
     }
   },
   {
@@ -43135,57 +42743,6 @@
     }
   },
   {
-    "slug": "empower-initiative",
-    "structured_extraction": {
-      "program_name": "EmPOWER Initiative",
-      "program_description": "The EmPOWER Initiative creates an environment of economic inclusion in Frederick County by providing resources, educational opportunities, and networking events that support diverse local business owners regardless of race, ethnicity, gender, sexual orientation, ability, or religion. Eligible participants include people of color, people with disabilities, LGBTQ individuals, veterans, women, and allies.",
-      "agency": "Frederick County Office of Economic Development",
-      "funding_source": "public",
-      "geographic_scope": "county",
-      "eligible_counties": [
-        "Frederick"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "for-profit",
-        "non-profit"
-      ],
-      "business_stage": "any",
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "training",
-        "other-technical-assistance"
-      ],
-      "assistance_description": "Provides resources, educational opportunities, and networking events designed to support and connect diverse local business owners in Frederick County. No specific financial assistance amounts or terms are associated with this program.",
-      "URL": "https://www.discoverfrederickmd.com/184/DEIB",
-      "application_deadline_string": "",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "",
-      "contact_phone": "",
-      "program_audience": "Diverse business owners in Frederick County, including people of color, people with disabilities, LGBTQ individuals, veterans, women, and allies.",
-      "use_of_funds": "Support for diverse business owners through networking, education, and resources.",
-      "geographic_eligibility": "Frederick County, Maryland",
-      "requirements_list": [
-        "Business owner or business community member who identifies as or supports diverse individuals (race, ethnicity, gender, sexual orientation, ability, religion, veteran status, etc.)",
-        "Must be or support diverse individuals including people of color, people with disabilities, LGBTQ individuals, veterans, or women"
-      ],
-      "application_process_overview": "Sign up for the EmPOWER email list and RSVP to networking events via the links provided on the program page.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 2,
-      "data_quality": "medium",
-      "source_urls": [
-        "https://www.discoverfrederickmd.com/184/DEIB",
-        "https://www.discoverfrederickmd.com/184"
-      ]
-    }
-  },
-  {
     "slug": "empower-mentorship-program",
     "structured_extraction": {
       "program_name": "EmPOWER Mentorship Program",
@@ -48252,15 +47809,26 @@
       "application_process_overview": "Businesses must first obtain MBE certification through the Office of Minority Business Enterprise (housed within the Maryland Department of Transportation). The Office hosts a monthly application assistance workshop for businesses beginning the certification process. Once certified, firms can participate in state contracting opportunities and connect with MBE Liaisons at each participating agency. For specific procurements, certified MBEs submit an MBE Participation Schedule (Part 3 forms) confirming MDOT certification, classification, work description, and percentage allocation. Post-award forms (including MBE Utilization & Fair Solicitation Affidavit and Certified MBE Subcontractor Participation Certification) must be submitted within 10 business days of notification of apparent award.",
       "is_accepting_applications": true,
       "is_recurring": true,
-      "source_count": 2,
+      "source_count": 6,
       "data_quality": "medium",
       "attachment_urls": [
         "https://www.gomdsmallbiz.maryland.gov/Documents/MBE_Toolkit/SAMPLE%20FORMS_AttachmentDMBE-Forms-1%20as%20of%202.2021%20AS%20OF%209.15.2021.pdf",
-        "http://gomdsmallbiz.maryland.gov/Documents/MBE_Toolkit/SAMPLE%20FORMS_AttachmentDMBE-Forms-1%20as%20of%202.2021%20AS%20OF%209.15.2021.pdf"
+        "http://gomdsmallbiz.maryland.gov/Documents/MBE_Toolkit/SAMPLE%20FORMS_AttachmentDMBE-Forms-1%20as%20of%202.2021%20AS%20OF%209.15.2021.pdf",
+        "http://www.mdot.maryland.gov/MBE_DOCS/MBE-Only-Application.pdf",
+        "http://www.mdot.maryland.gov/MBE_DOCS/NEW_YEAR_2026_PNW.pdf",
+        "http://www.mdot.maryland.gov/MBE_DOCS/Personal_Net_Worth_Statement_4_9_2024.pdf",
+        "http://www.mdot.maryland.gov/MBE_DOCS/PNW_Statement_Guidelines_2024.pdf",
+        "http://www.mdot.maryland.gov/MBE_DOCS/2026_MBE_PNW_Overview.pdf",
+        "http://www.mdot.maryland.gov/MBE_DOCS/MBE-Only-Checklist-6-3-25.pdf",
+        "https://gomdsmallbiz.maryland.gov/Documents/MBE_Toolkit/SAMPLE%20FORMS_AttachmentDMBE-Forms-1%20as%20of%202.2021%20AS%20OF%209.15.2021.pdf"
       ],
       "source_urls": [
         "https://www.gomdsmallbiz.maryland.gov/Pages/mbe-Program.aspx",
-        "http://gomdsmallbiz.maryland.gov/Pages/mbe-Program.aspx"
+        "http://gomdsmallbiz.maryland.gov/Pages/mbe-Program.aspx",
+        "http://www.mdot.maryland.gov/tso/pages/Index.aspx?PageId=105",
+        "https://gomdsmallbiz.maryland.gov/Pages/mbe-certification.aspx",
+        "http://gomdsmallbiz.maryland.gov/Pages/mbe-certification.aspx",
+        "https://www.gomdsmallbiz.maryland.gov/Pages/mbe-certification.aspx"
       ]
     }
   },
@@ -67178,56 +66746,6 @@
     }
   },
   {
-    "slug": "mdpace-maryland-property-assessed-clean-energy-municipalities-overview",
-    "structured_extraction": {
-      "program_name": "MDPACE (Maryland Property Assessed Clean Energy) — Municipalities Overview",
-      "program_description": "MDPACE is a C-PACE (Commercial Property Assessed Clean Energy) financing program administered by the Maryland Clean Energy Center (MCEC) that allows counties to offer property-assessed clean energy financing to property owners. Once a county passes the required local ordinance and enters into an agreement with MCEC, MCEC administers the program at no cost to the county. Administration includes reviewing and approving C-PACE projects, training local contractors, registering capital providers, providing annual reports, and overseeing surcharge collection and remittance.",
-      "agency": "Maryland Clean Energy Center",
-      "funding_source": "public",
-      "geographic_scope": "statewide",
-      "eligible_counties": [
-        "All"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "government"
-      ],
-      "business_stage": null,
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "other-technical-assistance"
-      ],
-      "assistance_description": "MCEC administers the MDPACE program for participating counties at no cost to the county government. Services include intake, review, and approval of C-PACE projects; training local contractors and registering private capital providers; providing annual program reports; establishing procedures to place C-PACE surcharges; and overseeing remittance of surcharge payments to capital providers.",
-      "URL": "https://www.mdcleanenergy.org/programs/municipalities-overview/",
-      "application_deadline_string": "",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "",
-      "contact_phone": "",
-      "program_audience": "Maryland county governments that want to offer C-PACE financing to property owners in their jurisdiction.",
-      "use_of_funds": "Administrative support for counties to operate a C-PACE financing program, including contractor training, project review, and surcharge collection oversight.",
-      "geographic_eligibility": "Available to Maryland counties that pass a local ordinance establishing a C-PACE program and enter into an agreement with MCEC.",
-      "requirements_list": [
-        "County's legislative body must pass an ordinance establishing a C-PACE program",
-        "County must enter into an agreement with MCEC to administer the program",
-        "Maryland law (passed 2014) enables C-PACE financing at the state level; local ordinances are required before counties can participate"
-      ],
-      "application_process_overview": "County passes the required local ordinance (a draft ordinance is available for download on the MCEC website), then contacts MCEC to enter into an agreement. MCEC will then administer the MDPACE program within the county.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "attachment_urls": [],
-      "source_urls": [
-        "https://www.mdcleanenergy.org/programs/municipalities-overview/"
-      ],
-      "source_count": 1,
-      "data_quality": "medium"
-    }
-  },
-  {
     "slug": "mdpace-capital-provider-program",
     "structured_extraction": {
       "program_name": "MDPACE Capital Provider Program",
@@ -70312,7 +69830,7 @@
       "application_process_overview": "Contact the program manager or your local Soil Conservation District (or the USDA Service Center located in each county) for free technical assistance to identify suitable practices. Complete the Water Quality Project Application Form (Excel) and required attachments as specified in the MACS Manual. District staff will help you plan conservation practices and submit the cost-share application. Within 30 days of receipt of a complete application, MACS will notify the SCD of preliminary eligibility. Upon determination of preliminary eligibility, the SCD, applicant, and all landowners sign the MACS Agreement and return it within 30 days. Submit forms and supporting documentation per practice-specific guidelines, including deed documentation, Operation and Maintenance Plan, and NRCS technician sign-off. You may also contact the Maryland Department of Agriculture Office of Resource Conservation directly at (410) 841-5864 or visit mda.maryland.gov/conservation.",
       "is_accepting_applications": true,
       "is_recurring": true,
-      "source_count": 4,
+      "source_count": 5,
       "data_quality": "high",
       "attachment_urls": [
         "https://mda.maryland.gov/resource_conservation/Documents/macs_manual/MACS_Manual_Introduction.pdf",
@@ -70332,150 +69850,9 @@
         "https://mda.maryland.gov/resource_conservation/Pages/macs.aspx",
         "https://www.mde.maryland.gov/programs/water/WetlandsandWaterways/Regulations/Pages/lawsandprograms3.aspx",
         "http://mda.maryland.gov/resource_conservation/Pages/plant-trees.aspx",
-        "https://mda.maryland.gov/resource_conservation/pages/horse_pasture_manure_info.aspx"
-      ]
-    }
-  },
-  {
-    "slug": "resource-conservation",
-    "structured_extraction": {
-      "program_name": "Maryland Agricultural Water Quality Cost-Share (MACS) Program",
-      "program_description": "The MACS Program provides farmers, agricultural landowners, and small-scale equine and livestock operations with cost-share grants to cover up to 100 percent of the cost to install conservation measures known as best management practices (BMPs) on their farms. These practices prevent soil erosion, manage nutrients, and safeguard water quality in streams, rivers, and the Chesapeake Bay. More than 40 eligible BMPs include grassed waterways, streamside buffers of grasses and trees, animal manure management systems, animal waste storage facilities, spring developments, cover crops, stream protection practices, conservation cover, nutrient management services, and many other practices. Farmers can also receive cost-share assistance to transport excess poultry litter off the farm. The program supports tree-planting conservation practices including riparian forest buffers, hedgerow plantings, silvopasture, tree and shrub establishment, and windbreak establishment, with up to 100% cost-share (87.5% for silvopasture) plus $2 per tree planted. The program also supports livestock farmers through stream protection practices, including livestock watering facilities (frost-free waterers, spring developments), livestock exclusion fencing, stream crossings, and riparian forest buffers, helping farmers comply with Nutrient Management Program livestock setback requirements. A 2024 expansion made farms with at least 1,000 pounds of live animal weight eligible, covering small-scale equine and livestock operations and qualifying practices such as watering facilities, pasture management, animal waste storage structures, heavy use area protection, roof runoff structures, stream exclusion fencing, and interior pasture fencing. Cost-share rates range from 50% to 100% depending on the practice. The Maryland Department of Agriculture's Office of Resource Conservation works closely with Maryland farmers and soil conservation districts to plan and implement these conservation practices and programs that balance crop and livestock production with environmental protection.",
-      "agency": "Maryland Department of Agriculture",
-      "funding_source": "public",
-      "geographic_scope": "statewide",
-      "eligible_counties": [
-        "All"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals",
-        "for-profit",
-        "non-profit",
-        "government"
-      ],
-      "business_stage": "any",
-      "eligible_industries": [
-        "Agriculture, Forestry, Fishing and Hunting"
-      ],
-      "assistance_type": [
-        "grant"
-      ],
-      "assistance_description": "Cost-share grants covering up to 100% of the cost to install eligible best management practices (BMPs) on farms; rates vary by practice (50%–100%) as detailed in the MACS Manual. For tree-planting practices: riparian forest buffers (up to 100% + $2/tree), hedgerow planting (up to 100% + $2/tree), silvopasture (up to 87.5% + $2/tree), tree and shrub establishment (up to 100% + $2/tree), and windbreak establishment (up to 100% + $2/tree). For stream protection practices: livestock watering facilities, livestock exclusion fencing, and stream crossings (up to 87.5%); riparian forest buffers (up to 100% + $2/tree). For small equine and livestock operations: watering facilities, pasture management, animal waste storage structures, heavy use area protection, and roof runoff structures (up to 87.5%); stream exclusion fencing (up to 100%); interior pasture fencing (up to 50%). Single non-waste project maximum: $150,000 (no pooling) or $200,000 (with pooling). Animal waste storage/treatment maximum: $200,000 per project; $450,000 per person across all such projects. Nutrient management plans: up to 87.5% of eligible costs. Farms must have at least 1,000 pounds of live animal weight to qualify under the 2024 expansion for equine and livestock operations. Also provides cost-share assistance to transport excess poultry litter off the farm. Additional technical assistance is available to help farmers plan and implement conservation practices.",
-      "URL": "https://mda.maryland.gov/resource_conservation/Pages/macs.aspx",
-      "application_deadline_string": "",
-      "application_deadline_date": "",
-      "contact_name": "Jason D. Keppler",
-      "contact_email": "jason.keppler@maryland.gov",
-      "contact_phone": "410-841-5864",
-      "program_audience": "Farmers, agricultural landowners, livestock farmers, horse owners, small-scale equine and livestock operations, and other individuals, partnerships, corporations, trusts, or businesses operating a Maryland farm with existing or potentially critical conditions causing soil, nutrients, or pollutants to enter state waters, seeking to install conservation practices that protect water quality, manage nutrients, plant trees and shrubs for conservation purposes, and improve soil health and wildlife habitat.",
-      "use_of_funds": "Installation of conservation best management practices (BMPs) such as grassed waterways, streamside buffers, animal manure management systems, animal waste storage facilities, livestock watering facilities (frost-free waterers, spring developments), livestock exclusion fencing, stream crossings, riparian forest buffers, hedgerow planting, silvopasture, tree and shrub establishment, windbreak establishment, pasture management measures, animal waste storage structures, heavy use area protection, roof runoff structures, interior pasture fencing, cover crops, conservation cover, nutrient management services, rainwater harvesting systems, well protection, windbreaks for poultry houses, and more than 40 other eligible practices to prevent soil erosion, manage nutrients, protect water quality, and improve herd health. Also covers transport of excess poultry litter off the farm.",
-      "geographic_eligibility": "Statewide in Maryland through local soil conservation districts; priority watersheds are identified for targeting funds, including Lower Susquehanna (Baltimore, Harford), Pocomoke (Somerset, Worcester, Wicomico), Nanticoke/Wicomico (Somerset, Wicomico, Caroline, Dorchester), Choptank (Caroline, Dorchester, Talbot, Queen Anne's), Chester River (Talbot, Queen Anne's, Kent), Sassafras River (Kent), Reservoirs (Baltimore, Carroll, Howard, Montgomery), Patapsco River (Carroll, Howard), Patuxent (Anne Arundel, Calvert, Charles, Prince George's, St. Mary's, Howard), Washington Metro (Montgomery), Middle Potomac (Frederick, Washington, Carroll, Montgomery), and Upper Potomac (Washington). Available to all farms located in Maryland.",
-      "requirements_list": [
-        "Applicant must be a farmer or agricultural landowner",
-        "Applicant must be an individual, partnership, corporation, trust, or other business operating a Maryland farm",
-        "Must have an existing or potentially critical condition on agricultural land causing soil, nutrients, or other pollutants to enter state waters",
-        "Project must involve installation of an eligible best management practice (BMP)",
-        "Proposed project must improve water quality",
-        "Proposed project must meet MACS eligibility criteria and cost-effectiveness requirements",
-        "Nutrient Management Plan may be required for certain practices; nutrient management compliance required as condition of eligibility (MD Agric. Code Ann. §§8-801–8-806, COMAR 15.20.06-08)",
-        "Various practice-specific eligibility criteria and provisions apply as detailed in the MACS Manual",
-        "Applicants seeking stream protection practices must have livestock and pastureland bordering a stream",
-        "Must work with a local soil conservation district to identify suitable practices and apply for grants",
-        "For small equine and livestock operations: must have at least 1,000 pounds of live animal weight",
-        "For animal waste facility projects: minimum 15 animal units qualify for full flat rates; 1–14 animal units subject to reduced cost-share",
-        "Project must benefit land devoted to agricultural activity and reduce pollutants to waters of the State (surface or groundwater)",
-        "For sediment control: maximum cost-effectiveness threshold of $40/ton of soil saved",
-        "Project must be completed within one year of Agreement execution; one 6-month extension allowed",
-        "Soil Conservation and Water Quality Plan required for Sediment Control Ponds",
-        "Entire project must be maintained for the longest maintenance life of all BMPs (typically 5–15 years)",
-        "Signed NRCS designated technician and SCD Chairman/Designee authorization required; Operation and Maintenance Plan mandatory",
-        "Property deed documentation required; corporations, trusts, and partnerships must provide Certificate of Resolution",
-        "USDA NRCS standards and local soil conservation district approval required",
-        "Annual compliance monitoring: SCDs inspect up to 10% of BMPs randomly selected"
-      ],
-      "application_process_overview": "Contact the program manager or your local Soil Conservation District (or the USDA Service Center located in each county) for free technical assistance to identify suitable practices. Complete the Water Quality Project Application Form (Excel) and required attachments as specified in the MACS Manual. District staff will help you plan conservation practices and submit the cost-share application. Within 30 days of receipt of a complete application, MACS will notify the SCD of preliminary eligibility. Upon determination of preliminary eligibility, the SCD, applicant, and all landowners sign the MACS Agreement and return it within 30 days. Submit forms and supporting documentation per practice-specific guidelines. You may also contact the Maryland Department of Agriculture Office of Resource Conservation directly at (410) 841-5864.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 5,
-      "data_quality": "high",
-      "attachment_urls": [
-        "https://mda.maryland.gov/resource_conservation/Documents/macs_manual/MACS_Manual_Introduction.pdf",
-        "https://mda.maryland.gov/resource_conservation/Documents/macs_manual/2/1_Eligible_Practices_and_Cost-Share_Rates_NRCS_Numerical_Order.pdf",
-        "https://mda.maryland.gov/resource_conservation/Documents/macs_manual/2/2_eligible_practices_cost_share_rates_alphabetical.pdf",
-        "https://mda.maryland.gov/resource_conservation/Documents/macs_manual/3/3_Water_Quality_Project_Application_Form.xlsx",
-        "https://mda.maryland.gov/resource_conservation/Documents/macs_manual/3/5_MACS_Application_Instructions.pdf",
-        "https://mda.maryland.gov/resource_conservation/Documents/macs_manual/3/MACS%20Agreement.pdf",
-        "https://mda.maryland.gov/resource_conservation/Documents/macs_manual/3/22_claim_for_payment_instructions.pdf",
-        "https://mda.maryland.gov/resource_conservation/Documents/macs_manual/4/3_Priority_Watersheds_Target.pdf",
-        "https://mda.maryland.gov/resource_conservation/Documents/MDA_MACS_Grants_Fact%20Sheet_v8_LORES.pdf",
-        "https://mda.maryland.gov/resource_conservation/counties/mda%20stream%20booklet_final.pdf",
-        "https://mda.maryland.gov/resource_conservation/counties/ConservationGrants2021.pdf",
-        "https://mda.maryland.gov/resource_conservation/Documents/MDA_ConsChoices_2025_web.pdf"
-      ],
-      "source_urls": [
-        "https://mda.maryland.gov/resource_conservation/Pages/macs.aspx",
-        "https://mda.maryland.gov/resource_conservation/Pages/stream-protection.aspx",
-        "http://mda.maryland.gov/resource_conservation/Pages/plant-trees.aspx",
         "https://mda.maryland.gov/resource_conservation/pages/horse_pasture_manure_info.aspx",
-        "https://www.mde.maryland.gov/programs/water/WetlandsandWaterways/Regulations/Pages/lawsandprograms3.aspx"
-      ]
-    }
-  },
-  {
-    "slug": "maryland-agricultural-water-quality-cost-share-macs-program-stream-protection-practices",
-    "structured_extraction": {
-      "program_name": "Maryland Agricultural Water Quality Cost-Share (MACS) Program — Stream Protection Practices",
-      "program_description": "The MACS Program provides cost-share grants to livestock farmers to install stream protection practices, including livestock watering facilities, livestock exclusion fencing, stream crossings, and riparian forest buffers. These practices protect waterways, reduce erosion and pollution, and help farmers comply with Nutrient Management Program livestock setback requirements.",
-      "agency": "Maryland Department of Agriculture",
-      "funding_source": "public",
-      "geographic_scope": "statewide",
-      "eligible_counties": [
-        "All"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals",
-        "for-profit"
-      ],
-      "business_stage": "any",
-      "eligible_industries": [
-        "Agriculture, Forestry, Fishing and Hunting"
-      ],
-      "assistance_type": [
-        "grant"
-      ],
-      "assistance_description": "Cost-share grants covering up to 87.5% of costs for livestock watering facilities (frost-free waterers, spring developments), livestock exclusion fencing, and stream crossings. For riparian forest buffers, up to 100% cost-share is available plus $2 per tree planted. Farmers apply through their local soil conservation district.",
-      "URL": "https://mda.maryland.gov/resource_conservation/Pages/stream-protection.aspx",
-      "application_deadline_string": "",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "",
-      "contact_phone": "410.841.5865",
-      "program_audience": "Livestock farmers and horse owners with pastures bordering streams in Maryland.",
-      "use_of_funds": "Installing livestock watering facilities (frost-free waterers, spring developments), livestock exclusion fencing, stream crossings, and riparian forest buffers to protect streams and improve herd health.",
-      "geographic_eligibility": "Available statewide in Maryland through local soil conservation districts.",
-      "requirements_list": [
-        "Applicant must be a farmer or rural landowner with livestock and pastureland bordering a stream.",
-        "Must work with a local soil conservation district to identify suitable practices and apply for grants."
-      ],
-      "application_process_overview": "Contact your local soil conservation district for free technical assistance to identify suitable practices and submit a grant application.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "attachment_urls": [
-        "https://mda.maryland.gov/resource_conservation/counties/mda%20stream%20booklet_final.pdf",
-        "https://mda.maryland.gov/resource_conservation/counties/ConservationGrants2021.pdf",
-        "https://mda.maryland.gov/resource_conservation/Documents/MDA_ConsChoices_2025_web.pdf"
-      ],
-      "source_urls": [
         "https://mda.maryland.gov/resource_conservation/Pages/stream-protection.aspx"
-      ],
-      "source_count": 1,
-      "data_quality": "medium"
+      ]
     }
   },
   {
@@ -72539,58 +71916,6 @@
     }
   },
   {
-    "slug": "homeowners-tax-credit-htc-program-carroll-county",
-    "structured_extraction": {
-      "program_name": "Homeowners' Tax Credit (HTC) Program (Carroll County)",
-      "program_description": "The Homeowners' Tax Credit program limits the amount of property taxes a homeowner must pay based on their gross income. If your property taxes exceed a fixed percentage of your gross income, you receive a credit against your property tax bill. The program is open to all homeowners regardless of age.",
-      "agency": "Maryland Department of Assessments and Taxation",
-      "funding_source": "public",
-      "geographic_scope": "statewide",
-      "eligible_counties": [
-        "All"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "business_stage": null,
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "tax-credit"
-      ],
-      "assistance_description": "A credit applied against the homeowner's property tax bill. If the application is received and processed by May 1st, the credit appears on the July tax bill. If received after May 1st, the credit is issued as a voucher or check reimbursement.",
-      "URL": "https://www.carrollcountymd.gov/government/directory/citizen-services/division-of-aging-disabilities/services-and-programs/information-and-assistance/homeowners-tax-credit/",
-      "application_deadline_string": "September 1st",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "",
-      "contact_phone": "410-386-3800",
-      "program_audience": "Homeowners of any age whose property taxes exceed a fixed percentage of their gross income. Originally designed for older adults but now open to all homeowners.",
-      "use_of_funds": "Reduces the homeowner's property tax bill based on income.",
-      "geographic_eligibility": "Available statewide in Maryland. Carroll County residents can contact the Carroll County Division of Aging & Disabilities for assistance.",
-      "requirements_list": [
-        "Must own or have a legal interest in the property.",
-        "The dwelling must be your principal residence where you live at least six months of the year, including July 1st (exceptions for recent home purchasers or health/care needs).",
-        "Net worth, excluding the value of the property seeking the credit, must be less than $200,000.",
-        "Income for all household occupants must be reported (excluding dependents or those paying rent or room and board).",
-        "Must provide copies of all 1099 forms for the previous tax year and, if applicable, a copy of the Federal Income Tax Return."
-      ],
-      "application_process_overview": "Submit an application by September 1st. Contact the Maryland Department of Assessments and Taxation or the Carroll County Division of Aging & Disabilities at 410-386-3800 for assistance. Applications received by May 1st result in a credit on the July tax bill; applications received after May 1st result in a voucher or check reimbursement.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "attachment_urls": [],
-      "source_urls": [
-        "https://www.carrollcountymd.gov/government/directory/citizen-services/division-of-aging-disabilities/services-and-programs/information-and-assistance/homeowners-tax-credit/"
-      ],
-      "source_count": 1,
-      "data_quality": "medium"
-    }
-  },
-  {
     "slug": "improvement-required-for-health-or-medical-condition-real-property-tax-exemption",
     "structured_extraction": {
       "program_name": "Improvement Required for Health or Medical Condition Real Property Tax Exemption",
@@ -74098,7 +73423,7 @@
       "application_process_overview": "Business must apply to the local enterprise zone administrator for certification. In Baltimore County, download the eligibility application for County and Maryland Tax Credits (available at https://resources.baltimorecountymd.gov/Documents/EconomicDevel/Enterprise/ezqualificationapp.pdf) and send the completed application to the Enterprise Zone Coordinator, Baltimore County Department of Economic Development, Historic Courthouse, Suite 100, 400 Washington Avenue, Towson, Maryland 21204 by December 31. After review, you will receive a letter confirming eligibility. For the property tax credit, the county will automatically notify the Maryland Department of Assessments and Taxation. For BGE Rider 7 electricity rate reduction, contact BGE directly. In Cecil County, email EconomicDevelopment@cecilcountymd.gov before completing any construction or expansion project; also complete the Enterprise Zone Certification Application (PDF available at https://www.cecilcountymd.gov/DocumentCenter/View/334/Enterprise-Zone-Certification-Application-PDF). In Garrett County, visit the Maryland Department of Commerce Enterprise Zone Program page at commerce.maryland.gov for application details. Verify address eligibility using the interactive map. To claim the income tax credit, complete Maryland Tax Form 500CR and include it in the state tax return. If hiring a disadvantaged employee for a higher credit, obtain certification for that employee from the Maryland Department of Labor. For zone designation applications (submitted by political subdivisions), applications must be received on April 15 or October 15 each year; late applications cannot be accepted. The Secretary may designate zones within 60 days of each submission date.",
       "is_accepting_applications": true,
       "is_recurring": true,
-      "source_count": 4,
+      "source_count": 6,
       "data_quality": "high",
       "attachment_urls": [
         "https://commerce.maryland.gov/Documents/FinanceDocument/maryland-enterprise-zones-regulations.pdf",
@@ -74111,13 +73436,16 @@
         "https://resources.baltimorecountymd.gov/Documents/EconomicDevel/Enterprise/ezbrochure.pdf",
         "https://resources.baltimorecountymd.gov/Documents/EconomicDevel/Enterprise/ezqualificationapp.pdf",
         "https://www.cecilcountymd.gov/DocumentCenter/View/334/Enterprise-Zone-Certification-Application-PDF",
-        "https://www.cecilcountymd.gov/DocumentCenter/View/329/Cecil-County-Enterprise-Zones-PDF"
+        "https://www.cecilcountymd.gov/DocumentCenter/View/329/Cecil-County-Enterprise-Zones-PDF",
+        "https://www.aaedc.org/wp-content/uploads/2017/12/Business-Toolbox-Enterprise-Zone.pdf"
       ],
       "source_urls": [
         "https://commerce.maryland.gov/fund/programs-for-businesses/enterprise-zone-tax-credit",
         "https://www.baltimorecountymd.gov/departments/economic-and-workforce-development/business/financing-and-tax-credits",
         "https://www.baltimorecountymd.gov/departments/budfin/taxpayer-services/tax-credits/enterprise",
-        "https://www.baltimorecountymd.gov/departments/budfin/taxpayer-services/tax-credits"
+        "https://www.baltimorecountymd.gov/departments/budfin/taxpayer-services/tax-credits",
+        "https://www.aaedc.org/business/overview/commercial-revitalization/enterprise-zone",
+        "https://www.aaedc.org/business/overview/commercial-revitalization"
       ]
     }
   },
@@ -75306,73 +74634,6 @@
     }
   },
   {
-    "slug": "maryland-small-business-development-financing-authority-msbdfa",
-    "structured_extraction": {
-      "program_name": "Maryland Small Business Development Financing Authority (MSBDFA)",
-      "program_description": "MSBDFA promotes the viability and expansion of small businesses in Maryland, with a focus on businesses owned by economically and socially disadvantaged entrepreneurs, including minority-owned enterprises. It provides affordable financing through several program components: Contract Financing Program, Equity Participation Program, Long Term Guaranty Program (Guaranty Fund Program), State Small Business Credit Initiative (SSBCI), and Surety Bonding Program. The program offers loans, equity investments, loan guarantees, surety bonds, interest rate subsidies, and professional/technical assistance to businesses that cannot obtain financing through conventional channels. The Maryland Department of Commerce provides financing for approved small businesses, while a private contractor (MMG Capital Group / Meridian Management Group) manages the program components. Maryland received $45 million in SSBCI federal funds distributed through MSBDFA. The Guaranty Fund Program (GFP) specifically provides loan guaranties up to the lesser of 80% of the loan or $2,000,000 and can subsidize up to 4 percentage points of the interest rate charged by the lending institution, subject to annual review.",
-      "agency": "Maryland Department of Commerce",
-      "funding_source": "public",
-      "geographic_scope": "statewide",
-      "eligible_counties": [
-        "All"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "for-profit"
-      ],
-      "business_stage": "any",
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "loan",
-        "grant",
-        "subsidy",
-        "equity-investment",
-        "other-financial-assistance",
-        "other-technical-assistance"
-      ],
-      "assistance_description": "MSBDFA provides financing for working capital, supplies and materials, machinery and equipment acquisition, real estate acquisition, leasehold improvements, purchase of an existing business, contract financing, and refinancing of existing debt. Loans range from $25,000 to $2,000,000; equity financing from $25,000 to $1,000,000; professional/technical assistance loans up to $25,000 at 2% interest. Term loan rates are fixed at 5%–8% (as low as 2% for SSBCI-eligible loans); lines of credit 4%–8%. Loan terms up to 7 years (amortization up to 20 years). The Guaranty Fund Program (GFP) provides loan guaranties up to the lesser of 80% of the loan or $2,000,000, with guaranties not exceeding 10 years and interest rates generally ranging from prime to prime plus 2%. GFP can also subsidize up to 4 percentage points of the interest rate charged by the lending institution, subject to annual review. Loan guaranty annual fees range from 0.75% to 1.5%. Surety bonding up to $2,500,000 with premiums of 2%–3%. Non-refundable application fee of $250 (not required for loan guaranty or surety bond requests); $500 commitment fee at acceptance.",
-      "URL": "https://commerce.maryland.gov/fund/programs-for-businesses/msbdfa",
-      "application_deadline_string": "rolling",
-      "application_deadline_date": "",
-      "contact_name": "Robin Harris (application assistance); Randy Croxton, Chief Investment Officer (general information)",
-      "contact_email": "robin.harris@mmgcapitalgroup.com",
-      "contact_phone": "410-333-4270",
-      "program_audience": "Small businesses in Maryland, especially minority-owned and economically and socially disadvantaged businesses, that cannot obtain adequate business financing on reasonable terms through conventional channels. Particularly focused on businesses owned by individuals from historically underserved groups.",
-      "use_of_funds": "Working capital, supplies and materials, machinery and equipment acquisition, real estate acquisition, leasehold improvements, purchase of an existing business, contract financing (for contracts receiving majority funding from federal, state, or local government or regulated utilities), refinancing of existing debt under qualifying circumstances, professional/technical assistance, and surety bonds.",
-      "geographic_eligibility": "Company's principal place of business must be in the State of Maryland. Available statewide.",
-      "requirements_list": [
-        "Principal place of business must be in Maryland",
-        "Must qualify as a small business under SBA size standards",
-        "Must be unable to obtain adequate business financing on reasonable terms through normal financing channels",
-        "Principals must be of good moral character with a reputation for financial responsibility",
-        "Generally must have been operating at least 2 years; startups (0–2 years) considered if principals have significant industry experience",
-        "Minimum personal credit score of 550 (for at least 50% of ownership) for loans/surety bonding; 600 (for at least 51% of ownership) for equity",
-        "Business plan required",
-        "Personal guarantees required",
-        "$250 non-refundable application fee required at submission (for debt/equity applications; not required for loan guaranty or surety bond requests)",
-        "Create an account on the Maryland Commerce Financial Incentive Program Application Portal before applying",
-        "For GFP: Company must have applied for and been denied a loan by a financial institution or received a commitment letter subject to an MSBDFA guaranty, evidenced in writing",
-        "For GFP: If not a sole proprietorship, at least 70% of the business must be owned by individuals who meet the qualifications for applicants",
-        "For GFP: Issuance of a guarantee must generate substantial economic impact (job creation or retention, and tax revenue for the state)"
-      ],
-      "application_process_overview": "Visit the MMG Capital Group (Meridian Management Group) website at mmgcapitalgroup.com/msbdfa to review full MSBDFA guidelines, qualifications, and FAQs. Use the Application Questionnaire/Tool on the MMG website to assess qualification. Create an account on the online application portal at programs.commerce.maryland.gov/m, then complete the online application and pay the $250 application fee (application not processed until fee is confirmed by Maryland Department of Commerce). An assigned Loan Officer will advise on SSBCI eligibility. The approving body typically meets on the 2nd and 4th Thursday of each month. Financing decisions are voted on and approved by members of the MSBDFA Authority. If approved, closing generally occurs 3–6 weeks after acceptance of the Commitment Letter. Contact Robin Harris at Meridian Management Group for application assistance.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 4,
-      "data_quality": "high",
-      "source_urls": [
-        "https://commerce.maryland.gov/fund/programs-for-businesses/msbdfa",
-        "https://www.mmgcapitalgroup.com/msbdfa",
-        "https://www.mmgcapitalgroup.com/apply",
-        "https://www.mmgcapitalgroup.com/about-mmg"
-      ]
-    }
-  },
-  {
     "slug": "maryland-startup-funding-programs",
     "structured_extraction": {
       "program_name": "Maryland Startup Funding Programs",
@@ -76212,20 +75473,26 @@
       "application_process_overview": "Contact the fund manager in your region to apply. Regional fund managers include FSC First, Anne Arundel Economic Development Corporation, Meridian Management Group, Maryland Capital Enterprises, Baltimore County Economic Development, City of Baltimore Development Corp., Howard County Economic Development Authority, Tri-County Council for Western Maryland (Summit Financing Solutions), and Montgomery County Economic Development Corporation. Western Maryland businesses (Allegany, Garrett, Washington counties) may submit an inquiry form through Summit Financing Solutions at tccwmd.org; a business plan is required and standard underwriting practices apply. Cecil County businesses near Hollywood Casino in Perryville may contact the Cecil County Office of Economic Development at 410-996-8465. For program overview, visit the Maryland Department of Commerce VLT page.",
       "is_accepting_applications": true,
       "is_recurring": true,
-      "source_count": 5,
+      "source_count": 9,
       "data_quality": "high",
       "attachment_urls": [
         "https://commerce.maryland.gov/Documents/SMWOBA.Report.FY24.pdf",
         "https://commerce.maryland.gov/Documents/Small.Minority.and.Women.Owned.Business.Investment.Account.Video.Lottery.Terminal.%28VLT%29.Report.2023.pdf",
         "https://commerce.maryland.gov/Documents/ProgramReport/VLT_FinancialReport_FY22.pdf",
-        "https://commerce.maryland.gov/Documents/ProgramReport/vlt-annual-report-2021.pdf"
+        "https://commerce.maryland.gov/Documents/ProgramReport/vlt-annual-report-2021.pdf",
+        "https://www.aaedc.org/wp-content/uploads/2026/04/VOLT-Loan-2025.pdf.pdf",
+        "https://www.aaedc.org/wp-content/uploads/2025/09/2025-VOLT-FAQ-Final.pdf"
       ],
       "source_urls": [
         "https://www.washco-md.net/business-development/taxes-incentives/taxes-incentives-supporting-programs",
         "https://www.cecilcountymd.gov/342/Resources",
         "https://commerce.maryland.gov/fund/programs-for-businesses/vlt",
         "https://business.garrettcountymd.gov/business-development/small-minority-and-women-owned-businesses",
-        "https://www.tccwmd.org/programs/summit-financing-solutions"
+        "https://www.tccwmd.org/programs/summit-financing-solutions",
+        "https://fscfirst.com/learn/programs",
+        "https://fscfirst.com/learn/programs/small-business-flex-fund",
+        "https://www.pgcedc.com/additional-tax-incentives",
+        "https://www.aaedc.org/business/financing-and-tax-credits/volt-fund"
       ]
     }
   },
@@ -76405,92 +75672,6 @@
       ],
       "source_urls": [
         "https://commerce.maryland.gov/fund/Pages/Businesses/Tax_Credits/Winery-and-Vineyard-Grant-Program-%28WVEDG%29.aspx"
-      ]
-    }
-  },
-  {
-    "slug": "state-lottery-terminal-slot-fund",
-    "structured_extraction": {
-      "program_name": "Small, Minority and Women-Owned Business Account – Video Lottery Terminal (VLT) Fund / State Lottery Terminal (SLoT) Fund",
-      "program_description": "Maryland's Video Lottery Terminal (VLT) Fund (also known as the State Lottery Terminal / SLoT Fund or VOLT Fund) uses 1.5% of video lottery terminal proceeds from the state's six casinos to provide below-market-rate loans to small, minority, women, and veteran-owned businesses. The program is administered by the Maryland Department of Commerce through regional Fund Managers, including the Anne Arundel Economic Development Corporation (AAEDC, which manages the VOLT Fund), FSC First (through its Small Business Flex Fund), Meridian Management Group, Maryland Capital Enterprises, Baltimore County Economic Development, City of Baltimore Development Corp., Howard County Economic Development Authority, the Tri-County Council for Western Maryland (through its Summit Financing Solutions lending program), Montgomery County Economic Development Corporation, and the Prince George's County Economic Development Corporation. At least 50% of funds are directed to businesses within targeted areas near Maryland's six casinos (Hollywood Casino Perryville in Cecil County, Ocean Downs in Worcester County, Maryland Live! in Anne Arundel County, Rocky Gap Casino in Allegany County, Horseshoe Casino in Baltimore City, and National Harbor in Prince George's County), with the remaining 50% available to qualifying small businesses statewide. All of Garrett, Allegany, and Washington counties are recognized as a targeted area for TCCWMD's use of SLoT funds. Loan amounts range from $10,000 to $1,000,000 depending on the fund manager (AAEDC's VOLT Fund offers $25,000–$500,000 at 4%–7% interest; FSC First offers $25,000–$250,000; the Tri-County Council / Summit Financing Solutions offers $10,000–$1,000,000 at prime plus 1%; and Prince George's County EDC offers up to $250,000). Eligible uses include working capital, business acquisition and expansion, owner-occupied commercial real estate, leasehold improvements, equipment purchase, start-up costs, professional services, and refinancing of existing debt under certain circumstances. Applications are accepted on a rolling basis if funding is available. No government guarantee is required.",
-      "agency": "Maryland Department of Commerce (administered by regional fund managers including Anne Arundel Economic Development Corporation, FSC First, Meridian Management Group, Maryland Capital Enterprises, Baltimore County Economic Development, City of Baltimore Development Corp., Howard County Economic Development Authority, Tri-County Council for Western Maryland / Summit Financing Solutions, Montgomery County Economic Development Corporation, and Prince George's County Economic Development Corporation)",
-      "funding_source": "public",
-      "geographic_scope": "statewide",
-      "eligible_counties": [
-        "All"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [
-        "Western Maryland",
-        "Eastern Shore",
-        "Central Maryland",
-        "Southern Maryland",
-        "National Capital"
-      ],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "for-profit",
-        "individuals"
-      ],
-      "business_stage": "any",
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "loan",
-        "other-financial-assistance",
-        "other-technical-assistance"
-      ],
-      "assistance_description": "Below-market-rate loans ranging from $10,000 to $1,000,000, distributed through local fund managers. AAEDC's VOLT Fund offers $25,000–$500,000 at 4%–7% interest. FSC First offers $25,000–$250,000 with terms up to 10 years; interest rate is determined at underwriting. The Prince George's County EDC offers flexible loans up to $250,000. The Tri-County Council for Western Maryland / Summit Financing Solutions offers $10,000–$1,000,000 at prime plus 1%, with terms up to 5 years for working capital and up to 15 years for fixed assets. Application fee is $250 (non-refundable); $25 for loans between $10,000–$25,000. A 1% loan origination fee is due at closing. Collateral (business and personal assets) and personal guaranties are required from all owners with 20% or greater ownership interest. Life insurance on owner/guarantor required where no valid succession plan exists. Minimum 10% equity injection required for startup businesses. A Debt Service Coverage Ratio (DSCR) of at least 1.00x (historical or projected) is required. No government guarantee required. At least 50% of VLT allocations are targeted to small, minority, and women-owned businesses in areas near the six Maryland casinos; the remaining 50% is available to eligible businesses throughout Maryland. Processing time is approximately 30–120 days from complete application to closing.",
-      "URL": "https://commerce.maryland.gov/fund/programs-for-businesses/vlt",
-      "application_deadline_string": "Applications accepted on a rolling basis if funding is available.",
-      "application_deadline_date": "",
-      "contact_name": "Kisha Wiggins",
-      "contact_email": "kisha.wiggins@maryland.gov",
-      "contact_phone": "410-767-1627",
-      "program_audience": "Small, minority, women, and veteran-owned businesses (including startups and existing businesses) located in Maryland, with priority given to those in targeted areas near one of the state's six casinos (Maryland Live! in Anne Arundel County, Hollywood Casino Perryville in Cecil County, Rocky Gap in Allegany County, Ocean Downs in Worcester County, Horseshoe Casino in Baltimore City, and National Harbor in Prince George's County). Garrett, Allegany, and Washington counties are recognized as a targeted area for TCCWMD's Summit Financing Solutions program. Cecil County businesses near Hollywood Casino may also contact the Cecil County Office of Economic Development for local assistance.",
-      "use_of_funds": "Working capital, business acquisition and expansion, commercial real estate acquisition and expansion, owner-occupied commercial real estate, leasehold improvements, equipment purchase, vehicles, furniture/fixtures, start-up costs, inventory, franchise fees, professional services, professional/technical assistance, marketing, personnel costs, and refinancing of existing debt under certain circumstances.",
-      "geographic_eligibility": "At least 50% of funds are directed to businesses in targeted areas near one of Maryland's six casinos (Cecil, Worcester, Anne Arundel, Allegany, Prince George's Counties, and Baltimore City); the remaining 50% is available to eligible small businesses throughout Maryland. All of Garrett, Allegany, and Washington counties are recognized as a targeted area for TCCWMD's use of SLoT funds. Prince George's County businesses must be within targeted geographic proximity to National Harbor casino. AAEDC manages the VOLT Fund on behalf of the Maryland Department of Commerce for eligible businesses statewide.",
-      "requirements_list": [
-        "Must be a small, minority, women, or veteran-owned business (or otherwise qualify as a small business under SBA standards)",
-        "Must be located in Maryland",
-        "Priority given to businesses in targeted areas near the six Maryland casinos (at least 50% of fund allocations)",
-        "Must be located within a targeted geographic proximity to a Maryland casino (for casino-area targeted funds)",
-        "Personal credit score of 640 or above generally required (lower scores may be considered)",
-        "Historical Debt Service Coverage Ratio (DSCR) of 1.00x or projections with assumptions showing 1.00x DSCR",
-        "Collateral (business and personal assets) required when available, including deeds of trust, machinery and equipment liens",
-        "Personal guaranty required from all owners with 20% or greater ownership interest",
-        "Life insurance on owner/guarantor where no valid succession plan exists",
-        "Minimum 10% equity injection required for start-up businesses",
-        "A business plan is required for startup businesses",
-        "Must meet standard underwriting criteria including repayment capacity, debt service coverage, financial strength of company and guarantors, industry and management experience, and collateral protection",
-        "Application fee of $250 (non-refundable); $25 for loans between $10,000–$25,000",
-        "1% loan origination fee due at closing",
-        "No government guarantee required"
-      ],
-      "application_process_overview": "Contact the fund manager in your region to apply. AAEDC's VOLT Fund accepts online applications through AAEDC's online application portal (https://www.aaedc.org/business/financing-and-tax-credits/volt-fund); initial review within 7 days of complete application; term sheet issuance followed by underwriting; total approval timeline 30–120 days; closing 15–30 days post-approval. Settlement is facilitated with outside attorneys and servicing is administered by AAEDC financial services staff. FSC First applications are available online at https://fscfirst.com/learn/programs/small-business-flex-fund. For the Summit Financing Solutions program, submit an inquiry form through the TCCWMD website (https://www.tccwmd.org/programs/summit-financing-solutions/slot-fund.html). Prince George's County businesses should contact Financial Services Manager Andre Plummer at applummer@co.pg.md.us or 301-583-4635. For local assistance in Cecil County, contact the Cecil County Office of Economic Development at 410-996-8465. A business plan is required for startups and standard underwriting practices apply. Applications are reviewed considering repayment capacity, financial strength, industry experience, and collateral. More information is available at https://commerce.maryland.gov/fund/programs-for-businesses/vlt.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 9,
-      "data_quality": "high",
-      "attachment_urls": [
-        "https://commerce.maryland.gov/Documents/SMWOBA.Report.FY24.pdf",
-        "https://commerce.maryland.gov/Documents/Small.Minority.and.Women.Owned.Business.Investment.Account.Video.Lottery.Terminal.%28VLT%29.Report.2023.pdf",
-        "https://commerce.maryland.gov/Documents/ProgramReport/VLT_FinancialReport_FY22.pdf",
-        "https://commerce.maryland.gov/Documents/ProgramReport/vlt-annual-report-2021.pdf",
-        "https://www.aaedc.org/wp-content/uploads/2026/04/VOLT-Loan-2025.pdf.pdf",
-        "https://www.aaedc.org/wp-content/uploads/2025/09/2025-VOLT-FAQ-Final.pdf"
-      ],
-      "source_urls": [
-        "https://www.washco-md.net/business-development/taxes-incentives/taxes-incentives-supporting-programs",
-        "https://www.cecilcountymd.gov/342/Resources",
-        "https://fscfirst.com/learn/programs",
-        "https://fscfirst.com/learn/programs/small-business-flex-fund",
-        "https://commerce.maryland.gov/fund/programs-for-businesses/vlt",
-        "https://www.tccwmd.org/programs/summit-financing-solutions",
-        "https://www.pgcedc.com/additional-tax-incentives",
-        "https://business.garrettcountymd.gov/business-development/small-minority-and-women-owned-businesses",
-        "https://www.aaedc.org/business/financing-and-tax-credits/volt-fund"
       ]
     }
   },
@@ -80179,69 +79360,6 @@
     }
   },
   {
-    "slug": "medicaid-healthysteps-enhanced-payment",
-    "structured_extraction": {
-      "program_name": "Medicaid HealthySteps Enhanced Payment",
-      "program_description": "Maryland Medicaid's HealthySteps program provides qualified pediatric practices with an enhanced payment for delivering HealthySteps services — a pediatric primary care model that integrates child development specialists into well-child visits. Enhanced payments became effective January 1, 2023. Practices must complete enrollment steps, including submission of a supplemental application through the ePREP portal, before billing for the enhanced payment. FQHCs (Federally Qualified Health Centers) have additional guidance published November 2023, with specific payment amounts detailed in the Professional Services Provider Manual. Note: FQHCs are not eligible to bill for the enhanced payment component due to the Prospective Payment System.",
-      "agency": "Maryland Department of Health",
-      "funding_source": "public",
-      "geographic_scope": "statewide",
-      "eligible_counties": [
-        "All"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "for-profit",
-        "non-profit",
-        "government"
-      ],
-      "business_stage": "any",
-      "eligible_industries": [
-        "Health Care and Social Assistance"
-      ],
-      "assistance_type": [
-        "subsidy"
-      ],
-      "assistance_description": "Qualified HealthySteps practices may bill Maryland Medicaid for an enhanced (higher) payment rate using billing code H0025 for HealthySteps services in pediatric E&M and well-child visits, effective January 1, 2023. Eligible provider types include PT 20 (Physicians), PT 23 (Nurse Practitioners), and PT 80 (Physician Assistants). Practices must complete the required enrollment steps, including submission of a supplemental application through the ePREP portal, and must have completed HealthySteps Addenda (Group and Individual) plus an active site confirmation letter. FQHCs have additional guidance published November 2023 but are not eligible to bill for the enhanced payment component. Specific payment amounts are detailed in the Professional Services Provider Manual.",
-      "URL": "https://health.maryland.gov/mmcp/medicaid-mch-initiatives/Pages/HealthySteps-Providers.aspx",
-      "application_deadline_string": "",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "mdh.medicaidmch@maryland.gov",
-      "contact_phone": "1-844-463-7768",
-      "program_audience": "Maryland Medicaid-enrolled pediatric primary care practices (including physicians, nurse practitioners, and physician assistants; and FQHCs for implementation purposes) participating in the HealthySteps model and delivering HealthySteps services to pediatric patients",
-      "use_of_funds": "Enhanced Medicaid reimbursement for delivering HealthySteps integrated child development services within primary care settings",
-      "geographic_eligibility": "Statewide — available to Maryland Medicaid providers",
-      "requirements_list": [
-        "Practice must be a qualified HealthySteps practice",
-        "Must complete provider enrollment steps via ePREP supplemental application before billing for the enhanced payment",
-        "Eligible provider types: PT 20 (Physicians), PT 23 (Nurse Practitioners), PT 80 (Physician Assistants)",
-        "Must have completed HealthySteps Addenda (Group and Individual) and have an active site confirmation letter for all new and existing provider enrollments",
-        "Must follow guidance in the Professional Services Provider Manual",
-        "FQHCs may implement HealthySteps but are not eligible to bill for the enhanced payment component due to the Prospective Payment System"
-      ],
-      "application_process_overview": "Eligible practices must submit a supplemental application through the ePREP portal. For post-enrollment account updates, providers use the ePREP Portal Accounts tab → Supplemental Application → select update type → Start updates → generate application → Sign and Submit with last four SSN. Resources including a step-by-step guide, recorded webinar (5/14/25), and the Professional Services Provider Manual are available on the program page. Contact the ePREP Call Center at 1-844-463-7768 (M–F, 9am–5pm EST) for enrollment questions, or mdh.healthchoiceprovider@maryland.gov for claims/billing questions.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 2,
-      "data_quality": "medium",
-      "attachment_urls": [
-        "https://health.maryland.gov/mmcp/medicaid-mch-initiatives/Documents/HealthySteps/How%20to%20Update%20Account%20Information%20using%20the%20ePREP%20Portal.pdf",
-        "https://health.maryland.gov/mmcp/medicaid-mch-initiatives/Documents/HealthySteps/Healthy%20Steps%205.14.25%20Slides.pdf",
-        "https://health.maryland.gov/mmcp/provider/Documents/Transmittals_FY2024/PT%2033-24%20Coverage%20of%20CenteringPregnancy%20and%20HealthySteps%20Enhanced%20Payments%20for%20FQHCs%20FINAL.pdf",
-        "http://www.health.maryland.gov/mmcp/provider/Documents/Transmittals_FY2024/PT%2033-24%20Coverage%20of%20CenteringPregnancy%20and%20HealthySteps%20Enhanced%20Payments%20for%20FQHCs%20FINAL.pdf",
-        "http://www.health.maryland.gov/mmcp/medicaid-mch-initiatives/Documents/HealthySteps/How%20to%20Update%20Account%20Information%20using%20the%20ePREP%20Portal.pdf",
-        "http://www.health.maryland.gov/mmcp/medicaid-mch-initiatives/Documents/HealthySteps/Healthy%20Steps%205.14.25%20Slides.pdf"
-      ],
-      "source_urls": [
-        "https://health.maryland.gov/mmcp/medicaid-mch-initiatives/Pages/HealthySteps-Providers.aspx",
-        "http://www.health.maryland.gov/mmcp/medicaid-mch-initiatives/Pages/HealthySteps-Providers.aspx"
-      ]
-    }
-  },
-  {
     "slug": "medicaid-home-visiting-services",
     "structured_extraction": {
       "program_name": "Medicaid Home Visiting Services",
@@ -80934,8 +80052,12 @@
       "eligible_regions": [],
       "funding_source": "public",
       "data_quality": "medium",
-      "source_count": 1,
-      "source_urls": [],
+      "source_count": 3,
+      "source_urls": [
+        "https://www.princegeorgescountymd.gov/departments-offices/health/family-health-services/women-infants-children-wic",
+        "https://www.baltimorecity.gov/health/our-work/maternal-and-child-health/wic-program",
+        "https://www.baltimorecountymd.gov/departments/health/health-services/children"
+      ],
       "attachment_urls": [],
       "is_accepting_applications": null,
       "is_recurring": null,
@@ -82759,71 +81881,15 @@
       "application_process_overview": "Contact KISS via the helpline at 800-370-SEAT or by email to ask questions, find local assistance, schedule a checkup or presentation, or obtain educational materials. Monthly live webinars are available via registration links on the website.",
       "is_accepting_applications": true,
       "is_recurring": true,
-      "source_count": 2,
-      "data_quality": "medium",
-      "source_urls": [
-        "http://www.health.maryland.gov/phpa/OEHFP/KISS/Pages/about_kiss.aspx",
-        "http://health.maryland.gov/phpa/OEHFP/KISS/Pages/about_kiss.aspx"
-      ]
-    }
-  },
-  {
-    "slug": "kids-in-safety-seats-kiss-program",
-    "structured_extraction": {
-      "program_name": "Kids in Safety Seats (KISS) Program",
-      "program_description": "The Kids in Safety Seats (KISS) program is a statewide initiative operated by the Maryland Department of Health that helps reduce injuries and death among Maryland children by helping families obtain and correctly use car seats and booster seats. The statewide program offers a reduced-cost car seat purchase program for financially eligible families, in-person and virtual child passenger safety education, car seat checkup events, monthly live webinars, and a helpline and email clearinghouse to answer questions and refer families to local assistance programs. At the county level, the Howard County Health Department partners with the KISS program to provide car seat safety education and a new car seat (discounted at $40 per seat) to eligible Howard County families in need. Children must be ages birth to 8 years and the family must meet at least one income/benefit eligibility criterion (Medicaid, WIC, SSI/SSDI, TANF, SNAP, unemployment, or other). Cribs, bassinets, and pack-n-plays may also be available. Supplies are limited, a referral is required, and donations are accepted to support the Howard County program.",
-      "agency": "Maryland Department of Health, Office of Environmental Health and Food Protection",
-      "funding_source": "public",
-      "geographic_scope": "statewide",
-      "eligible_counties": [
-        "All"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "business_stage": null,
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "subsidy",
-        "training",
-        "other-technical-assistance",
-        "other-financial-assistance"
-      ],
-      "assistance_description": "Statewide: Reduced-cost car seat purchase program for financially eligible families, plus free in-person and virtual education, car seat checkup events, monthly live webinars, and a helpline (800-370-SEAT) and email service to answer questions and refer families to local assistance programs. Howard County: Provides a new car seat (discounted at $40 per seat) and car seat safety education to eligible Howard County families. Children must be ages birth to 8 years; family must meet at least one income/benefit criterion (Medicaid, WIC, SSI/SSDI, TANF, SNAP, unemployment, or other). Cribs, bassinets, and pack-n-plays may also be available. Supplies are limited and a referral is required. Donations (cash, checks, or money orders made out to Howard County Finance) are accepted.",
-      "URL": "http://www.health.maryland.gov/phpa/OEHFP/KISS/Pages/about_kiss.aspx",
-      "application_deadline_string": "",
-      "application_deadline_date": "",
-      "contact_name": "Tricia Mangold",
-      "contact_email": "mdh.kiss@maryland.gov",
-      "contact_phone": "410-313-6109",
-      "program_audience": "Caregivers, child providers, and child transporters in Maryland who need assistance selecting, obtaining, or correctly using car seats and booster seats for children. Howard County residents with children ages birth to 8 years who meet at least one income/benefit eligibility criterion (Medicaid, WIC, SSI/SSDI, TANF, SNAP, unemployment, or other) may also access the county-level program through the Howard County Health Department.",
-      "use_of_funds": "Purchase of reduced-cost or free car seats and booster seats; access to child passenger safety education, checkup events, webinars, and referrals to local assistance programs. Howard County program funds new car seats (discounted at $40 per seat) and car seat safety education; cribs, bassinets, and pack-n-plays may also be available.",
-      "geographic_eligibility": "Statewide — available to all Maryland residents. Howard County residents may also access a county-level program through the Howard County Health Department (Howard County residents only).",
-      "requirements_list": [
-        "Financial eligibility required for reduced-cost car seat purchase program",
-        "Must be a Howard County resident (for Howard County program)",
-        "Referral is required (for Howard County program)",
-        "Supplies are limited due to limited funding (for Howard County program)",
-        "Must meet at least one income/benefit eligibility criterion: Medicaid, WIC, SSI/SSDI, TANF, SNAP, unemployment, or other (for Howard County program)",
-        "Children must be ages birth to 8 years (for Howard County program)"
-      ],
-      "application_process_overview": "Statewide: Contact KISS via the helpline at 800-370-SEAT or by email to ask questions, find local assistance, schedule a checkup or presentation, or obtain educational materials. Monthly live webinars are available via registration links on the website. Howard County: A referral is required to receive a car seat and safety education. A referring staff member completes the Universal Referral Form (FY26 fillable form available on the Howard County Health Department website) with the client. The completed form is submitted via email to [email protected] or uploaded to the CAREAPP system. Client consent for contact (including text) is required. Car seat inspections can be scheduled by emailing [email protected].",
-      "is_accepting_applications": true,
-      "is_recurring": true,
       "source_count": 3,
-      "data_quality": "high",
-      "attachment_urls": [
-        "https://www.howardcountymd.gov/sites/default/files/2025-06/FY26 NEW Universal Referral Form - FILLABLE.pdf"
-      ],
+      "data_quality": "medium",
       "source_urls": [
         "http://www.health.maryland.gov/phpa/OEHFP/KISS/Pages/about_kiss.aspx",
         "http://health.maryland.gov/phpa/OEHFP/KISS/Pages/about_kiss.aspx",
         "https://www.howardcountymd.gov/health/injury-prevention"
+      ],
+      "attachment_urls": [
+        "https://www.howardcountymd.gov/sites/default/files/2025-06/FY26 NEW Universal Referral Form - FILLABLE.pdf"
       ]
     }
   },
@@ -86642,65 +85708,6 @@
       ],
       "source_count": 1,
       "data_quality": "medium"
-    }
-  },
-  {
-    "slug": "maryland-energy-assistance-program-meap-dhcd-home-repair",
-    "structured_extraction": {
-      "program_name": "Maryland Energy Assistance Program (MEAP) — DHCD Home Repair",
-      "program_description": "MEAP helps eligible Maryland households repair or replace heating, cooling, and water heating systems at no cost. The program also covers critical home repairs including structural, electrical, water leaks, lead, and asbestos remediation. The program operates year-round and is federally funded to make homes more comfortable. Applicants must meet income qualifications based on household size (up to 200% of the Federal Poverty Level) and have a non-functioning heating, cooling, or water heating system. Once eligibility is confirmed, a local agency schedules a home assessment and arranges a contractor to complete recommended work.",
-      "agency": "Maryland Department of Housing and Community Development",
-      "funding_source": "public",
-      "geographic_scope": "statewide",
-      "eligible_counties": [
-        "All"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "business_stage": null,
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "grant"
-      ],
-      "assistance_description": "Eligible households receive repair or replacement of heating, cooling, and/or water heating systems at no cost, as well as critical home repairs (structural, electrical, water leaks, lead, asbestos remediation). Maximum funding is $50,000 per project, with a maximum initial deposit of 33% of total project cost. The specific work is determined through a home assessment and depends on funding availability. Currently, due to limited funding and high demand, applicants are placed on a waitlist. Repair funding is restricted to homeowners; renters and mobile home owners (without proof of ownership) are limited to energy programs only.",
-      "URL": "http://dhcd.maryland.gov/Energy-Home-Repair/Pages/Homeowner-Grants/MEAP.aspx",
-      "application_deadline_string": "Year-round / rolling basis (waitlist in effect due to limited funding)",
-      "application_deadline_date": "",
-      "contact_name": "Housing and Building Energy Programs",
-      "contact_email": "",
-      "contact_phone": "1-855-583-8976",
-      "program_audience": "Low-income Maryland homeowners with non-functioning heating, cooling, or water heating systems whose household income is at or below 200% of the Federal Poverty Level. Renters are eligible for energy programs only (not repair programs). Mobile home owners may be eligible for energy programs; repair funding requires proof of ownership.",
-      "use_of_funds": "Repair or replacement of heating, cooling, and/or water heating systems; critical home repairs including structural, electrical, water leaks, lead, and asbestos remediation on the applicant's primary residence. Maximum funding of $50,000 per project.",
-      "geographic_eligibility": "Available statewide in Maryland. Special flood assistance is also available for households in Allegany or Garrett County affected by flooding.",
-      "requirements_list": [
-        "Household income must be at or below 200% of the Federal Poverty Level (income limits vary by household size)",
-        "Must have a non-functioning heating, cooling, and/or water heating system",
-        "Must be a Maryland resident",
-        "Proof of last 30 days gross household income",
-        "Most recent utility bill (all pages)",
-        "Social Security card copies for all household members",
-        "Photo ID for applicant",
-        "Proof of home ownership (required for repair funding)",
-        "Participants in OHEP utility bill pay assistance, SNAP, TANF, SSI, or HUD housing assistance programs are automatically considered income-eligible",
-        "Fuel Fund Assistance, DHCD Rehab Programs, Baltimore Lead Hazard Control Program, Medicaid, MEA Energy Equity Grant, MEEHA, and geographic eligibility for certain areas are NOT accepted as proof of income eligibility"
-      ],
-      "application_process_overview": "Complete the program application and submit all required documents to the DHCD office (Maryland Department of Housing and Community Development, Attn: Weatherization, 7800 Harkins Road, Lanham, MD 20706). Instructions for completing and returning the application are on the first page of the application form. If you are currently approved to receive Energy Assistance payments from the Maryland Department of Human Services, you may call the intake line at 1-855-583-8976. Once eligibility is confirmed, a local agency will contact you to schedule a home assessment, after which a contractor will complete the recommended work.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 1,
-      "data_quality": "medium",
-      "attachment_urls": [
-        "http://dhcd.maryland.gov/Energy-Home-Repair/Documents/EnergyProgramsApplication.pdf"
-      ],
-      "source_urls": [
-        "http://dhcd.maryland.gov/Energy-Home-Repair/Pages/Homeowner-Grants/MEAP.aspx"
-      ]
     }
   },
   {
@@ -91281,14 +90288,15 @@
       "application_process_overview": "Apply online at MarylandBenefits.gov, or apply in person at a Local Department of Social Services office. Applications can also be submitted by mail, fax, or other electronic means, or dropped off by another person on your behalf.",
       "is_accepting_applications": true,
       "is_recurring": true,
-      "source_count": 1,
+      "source_count": 2,
       "data_quality": "medium",
       "attachment_urls": [
         "https://dhs.maryland.gov/documents/Brochures/FIA/Bank On with DHS logo.pdf",
         "https://dhs.maryland.gov/documents/Brochures/FIA/Bank On with DHS logo - Spanish.pdf"
       ],
       "source_urls": [
-        "https://dhs.maryland.gov/weathering-tough-times/temporary-cash-assistance"
+        "https://dhs.maryland.gov/weathering-tough-times/temporary-cash-assistance",
+        "https://www.princegeorgescountymd.gov/departments-offices/social-services/services/family-investment/temporary-cash-assistance-program"
       ]
     }
   },
@@ -93557,7 +92565,7 @@
   {
     "slug": "conservation-reserve-enhancement-permanent-easement-program-crep",
     "structured_extraction": {
-      "program_name": "Conservation Reserve Enhancement Permanent Easement Program (CREP)",
+      "program_name": "Conservation Reserve Enhancement Program — Permanent Easement (CREP-PE)",
       "program_description": "The Conservation Reserve Enhancement Permanent Easement Program (CREP) allows agricultural landowners in Maryland with an existing federal CREP or Conservation Reserve Program (CRP) contract to place a permanent conservation easement on their land. The State of Maryland acquires a permanent interest in the land to ensure conservation practices that protect water quality and natural resources are maintained in perpetuity. Landowners must have already installed the required conservation practices under their federal contract. After the federal contract expires, the landowner agrees to keep the land in an approved conservation practice — such as a riparian buffer or other prescribed vegetation — forever, as defined in a conservation management plan or forest stewardship plan. Landowners may also add up to ten times their CREP Contract acreage to the easement to maximize land preservation and easement value. The easement is a legal agreement filed with county land records and held by a government agency or qualified nonprofit conservation organization, binding on current and all future landowners permanently. No structures may be built on enrolled lands. The program is administered by the Maryland Department of Natural Resources, with Washington County participation through the Washington County Department of Planning & Zoning.",
       "agency": "Maryland Department of Natural Resources",
       "funding_source": "public",
@@ -101838,89 +100846,6 @@
       "is_recurring": false,
       "business_stage": null,
       "geographic_scope": "statewide"
-    }
-  },
-  {
-    "slug": "minority-business-enterprise-mbe-certification-program",
-    "structured_extraction": {
-      "program_name": "Maryland Minority Business Enterprise (MBE) Certification Program",
-      "program_description": "Maryland's MBE Certification Program, administered by the Maryland Department of Transportation's Office of Minority Business Enterprise (OMBE), certifies small, minority- and women-owned businesses that meet eligibility standards, allowing them to participate in Maryland State procurement and contracting opportunities and to fulfill minority business participation goals on State-funded contracts and contracts funded by counties and cities within Maryland. Established in 1978, the program sets a statewide aspirational goal of 29% MBE participation across 70 participating state agencies and departments. Only certified MBE firms can count toward agencies' minority participation goals. Certified firms are listed in an online directory used by state, county, and local government buyers as well as private sector companies seeking diverse suppliers. Eligibility is based on minority status, ownership, control, business size, and the personal net worth of the minority owner(s). Firms may also hold DBE (Disadvantaged Business Enterprise) certification simultaneously, and applicants are evaluated for both MBE and DBE eligibility through a single Uniform Certification Application. OMBE reassesses certified firms annually, and firms may remain in the program as long as they continue to meet eligibility standards. Certification is administered by OMBE, while the Governor's Office of Small, Minority and Women Business Affairs oversees the broader program framework and statewide participation goals. Upon certification, MBEs can connect with MBE Liaisons at each participating agency and seek an Expansion of Services when they add new products or services. OMBE also offers a free Application Assistance Workshop on the first Tuesday of every month and a T.I.P.S. Small Business Webinar Series with free monthly training to help small, minority, women, and veteran-owned firms compete in state contracting.",
-      "agency": "Maryland Department of Transportation Office of Minority Business Enterprise (OMBE)",
-      "funding_source": "public",
-      "geographic_scope": "statewide",
-      "eligible_counties": [
-        "All"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "for-profit"
-      ],
-      "business_stage": "any",
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "other-technical-assistance"
-      ],
-      "assistance_description": "Free certification as a Minority Business Enterprise (MBE), which makes a firm eligible to fulfill minority business participation goals on State-funded contracts and contracts funded by counties and cities in Maryland. The program sets a 29% aspirational MBE participation goal across 70 participating state agencies. Certified firms are listed in an online directory accessible to government agencies and private companies seeking diverse suppliers. There is no cost to apply. The process takes several months once a complete application is received. OMBE offers a free Application Assistance Workshop on the first Tuesday of every month to help applicants prepare their application. The T.I.P.S. Small Business Webinar Series also offers free monthly training to help small, minority, women, and veteran-owned firms compete in state contracting. After initial certification, MBEs can connect with MBE Liaisons at each participating agency and seek an Expansion of Services when they add new products or services. Annual reassessment maintains certification status. The MBE Directory is available at https://mbe.mdot.maryland.gov/directory/.",
-      "URL": "http://www.mdot.maryland.gov/tso/pages/Index.aspx?PageId=105",
-      "application_deadline_string": "",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "mbe.dosem@maryland.gov",
-      "contact_phone": "410-865-1269",
-      "program_audience": "Small, minority- and women-owned, and socially and economically disadvantaged small business owners seeking certification to participate in State-funded, locally-funded, and state procurement contracts in Maryland.",
-      "use_of_funds": "Certification enables firms to count toward and fulfill minority business participation goals on eligible state-funded and locally-funded contracts, gain visibility in the State's online vendor directory used by government and private-sector buyers, and access state procurement and contracting opportunities. It is not a direct financial award.",
-      "geographic_eligibility": "Available statewide across Maryland through 70 participating agencies and departments. All Maryland firms and out-of-state firms applying for MBE certification must be registered and in good standing with the Maryland Department of Assessments and Taxation (SDAT). The online directory is used by counties, cities, municipalities, and State agencies.",
-      "requirements_list": [
-        "Firm must be minority-owned and socially and economically disadvantaged",
-        "Must meet minority status requirements (eligible groups include African American, Alaskan Native, Hispanic, Asian American, Native American, Female, and Disabled owners)",
-        "Must demonstrate minority ownership and control of the business",
-        "Must meet ownership requirements",
-        "Must meet control requirements",
-        "Must meet size requirements",
-        "Owner(s) must meet personal net worth standards — for 2026, the MBE PNW cap is $2,192,035 (adjusted annually based on the Consumer Price Index; effective January 1, 2026 through December 31, 2026)",
-        "Must complete a Personal Net Worth (PNW) Form and PNW Worksheet",
-        "Primary residence and associated mortgages are excluded from the PNW calculation; first $500,000 of qualified retirement savings excluded for State MBE applicants (not federal DBE)",
-        "Firm must be registered and in good standing with the Maryland Department of Assessments and Taxation (SDAT)",
-        "Must obtain MBE certification through the Office of Minority Business Enterprise (OMBE) within the Maryland Department of Transportation",
-        "Submit a completed Uniform Certification Application with all sections filled out",
-        "All documents must be in PDF format",
-        "Follow the MBE Only Document Checklist appropriate to your business structure",
-        "Submit application through the online portal at marylandmdbe.mdbecert.com",
-        "Only work performed by certified MBEs counts toward established contract goals",
-        "Must continue to meet eligibility standards for annual reassessment",
-        "Owner(s) must be U.S. citizens or resident aliens",
-        "Out-of-state firms must obtain home-state certification before seeking MDOT MBE certification",
-        "Certified MBE must be certified in the appropriate NAICS code matching work performed",
-        "MBE must perform a commercially useful function on the contract",
-        "Suppliers/wholesalers/regular dealers count at 60% of contract value toward participation goals; manufacturers and furnish-and-install/services count at 100%; brokers count at reasonable fee/commission only",
-        "MBE subcontractors must return participation certification within 10 days after notice from the Prime Contractor of the State's intent to award the contract"
-      ],
-      "application_process_overview": "Download the MBE Only Application, complete all sections, fill out the Personal Net Worth (PNW) Form using the provided guidelines, gather required documents per the MBE Only Document Checklist (Rev. 6/25), and submit through the online portal at marylandmdbe.mdbecert.com. Retain a copy of the entire application package. OMBE hosts a free Application Assistance Workshop on the first Tuesday of every month to assist applicants. Once certified, firms are automatically listed in the online directory at https://mbe.mdot.maryland.gov/directory/, can participate in state contracting opportunities, connect with MBE Liaisons at each participating agency, and may seek an Expansion of Services when they add new products or services. Complete details about eligibility standards and the certification process are also available at www.mdot.maryland.gov (MBE tab).",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 4,
-      "data_quality": "high",
-      "attachment_urls": [
-        "http://www.mdot.maryland.gov/MBE_DOCS/MBE-Only-Application.pdf",
-        "http://www.mdot.maryland.gov/MBE_DOCS/NEW_YEAR_2026_PNW.pdf",
-        "http://www.mdot.maryland.gov/MBE_DOCS/Personal_Net_Worth_Statement_4_9_2024.pdf",
-        "http://www.mdot.maryland.gov/MBE_DOCS/PNW_Statement_Guidelines_2024.pdf",
-        "http://www.mdot.maryland.gov/MBE_DOCS/2026_MBE_PNW_Overview.pdf",
-        "http://www.mdot.maryland.gov/MBE_DOCS/MBE-Only-Checklist-6-3-25.pdf",
-        "https://gomdsmallbiz.maryland.gov/Documents/MBE_Toolkit/SAMPLE%20FORMS_AttachmentDMBE-Forms-1%20as%20of%202.2021%20AS%20OF%209.15.2021.pdf",
-        "http://gomdsmallbiz.maryland.gov/Documents/MBE_Toolkit/SAMPLE%20FORMS_AttachmentDMBE-Forms-1%20as%20of%202.2021%20AS%20OF%209.15.2021.pdf",
-        "https://www.gomdsmallbiz.maryland.gov/Documents/MBE_Toolkit/SAMPLE%20FORMS_AttachmentDMBE-Forms-1%20as%20of%202.2021%20AS%20OF%209.15.2021.pdf"
-      ],
-      "source_urls": [
-        "http://www.mdot.maryland.gov/tso/pages/Index.aspx?PageId=105",
-        "https://gomdsmallbiz.maryland.gov/Pages/mbe-certification.aspx",
-        "http://gomdsmallbiz.maryland.gov/Pages/mbe-certification.aspx",
-        "https://www.gomdsmallbiz.maryland.gov/Pages/mbe-certification.aspx"
-      ]
     }
   },
   {
@@ -119165,13 +118090,14 @@
       "application_process_overview": "Apply online through the Maryland OneStop portal or the SDAT online tax credit application system at http://www.taxcredits.sdat.maryland.gov/ (online applications are processed faster than paper ones), or complete the paper application (Form HTC-1 Long Form) and mail it to: State Department of Assessments & Taxation, Homeowners' Tax Credit Program, P.O. Box 49005, Baltimore, MD 21297 (or 700 East Pratt Street, Suite 2700, Baltimore, MD 21202-6377). Do not email applications or supporting documents. First-time applicants may also obtain the form from the Assessment Office or local county Finance Office, or call (410) 767-4433 or 1 (800) 944-7403. Apply by April 15, 2026 to receive the credit on the initial July 1, 2026 tax bill, or by October 1, 2026 to receive a revised bill or refund. Credits for applications received after May 1 are refunded by the county finance office. Prospective home buyers should apply at least 30 days before their expected settlement date. Many counties also provide supplemental credits automatically to approved applicants. Contact SDAT at 410-767-4433 or sdat.homeowners@maryland.gov for assistance.",
       "is_accepting_applications": true,
       "is_recurring": true,
-      "source_count": 14,
+      "source_count": 21,
       "data_quality": "high",
       "attachment_urls": [
         "https://www.harfordcountymd.gov/DocumentCenter/View/28443/Homeowners-Tax-Credit-2025-PDF",
         "http://dat.maryland.gov/Documents/2026%20-%20HTC%201%20-%20LONG%20form.pdf",
         "https://dat.maryland.gov/Documents/2026%20-%20HTC%201%20-%20LONG%20form.pdf",
-        "https://onestop.md.gov/forms/homeowners-property-tax-credit-application-form-htc-2023-active-63dacc5b81fbf9019f6185b2"
+        "https://onestop.md.gov/forms/homeowners-property-tax-credit-application-form-htc-2023-active-63dacc5b81fbf9019f6185b2",
+        "https://dat.maryland.gov/realproperty/Documents/2023HTC_Application.pdf"
       ],
       "source_urls": [
         "https://www.washco-md.net/treasurers-office/tax-credit-information",
@@ -119187,7 +118113,14 @@
         "https://www.howardcountymd.gov/resource/all-tax-credits",
         "https://www.wicomicocounty.org/390/Information-for-County-Taxpayers",
         "https://www.howardcountymd.gov/finance/tax-credits",
-        "https://www.qac.org/627/Tax-Credits"
+        "https://www.qac.org/627/Tax-Credits",
+        "https://www.baltimorecountymd.gov/departments/budfin/taxpayer-services/tax-credits/homeowners",
+        "https://www.baltimorecountymd.gov/departments/budfin/taxpayer-services/tax-credits",
+        "http://dat.maryland.gov/Pages/tax-sale-resources.aspx",
+        "https://www.carolinemd.org/FAQ.aspx?QID=157",
+        "https://www.montgomerycountymd.gov/department-finance/taxes/tax-credits/state-homeowners-property-tax-credit-hotc",
+        "https://www.calvertcountymd.gov/638/Real-Estate-Taxes",
+        "https://www.carrollcountymd.gov/government/directory/citizen-services/division-of-aging-disabilities/services-and-programs/information-and-assistance/homeowners-tax-credit/"
       ]
     }
   },
@@ -119522,132 +118455,6 @@
       "source_urls": [
         "https://www.montgomerycountymd.gov/department-finance/taxes/county-taxes-tax-information/property-tax-credit-exemption-information/supplemental-homeowners-property-tax-credit",
         "https://www.montgomerycountymd.gov/department-finance/taxes/county-taxes-tax-information/property-tax-credit-exemption-information"
-      ]
-    }
-  },
-  {
-    "slug": "homeowners-tax-credit-program-state-program-with-baltimore-county-local-supplement",
-    "structured_extraction": {
-      "program_name": "Homeowners Tax Credit Program — State Program with Baltimore County Local Supplement",
-      "program_description": "A Maryland state program administered by the State Department of Assessments and Taxation (SDAT) that provides property tax credits to homeowners of all ages whose property tax bill is high relative to their household income. Baltimore County also offers a local supplemental credit on top of the state credit for qualifying homeowners in Baltimore County. The supplemental credit reduces the county property tax burden on the principal residence based on a comparison of the property tax bill to household income. For the Baltimore County supplement, household income must not exceed $60,000 and net worth (excluding the subject property and certain retirement accounts) must not exceed $200,000; the credit reduces taxes based on up to $300,000 of assessed value when taxes exceed the tax limit for the applicant's income level. An additional credit is available for homeowners age 70 or older. A new application must be filed each year by September 1; the same SDAT application is used for both the state credit and the Baltimore County supplement.",
-      "agency": "Maryland State Department of Assessments and Taxation (SDAT)",
-      "funding_source": "public",
-      "geographic_scope": "statewide",
-      "eligible_counties": [
-        "All"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "business_stage": null,
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "tax-credit"
-      ],
-      "assistance_description": "State property tax credit based on a comparison of household income to property tax bill. Baltimore County adds a supplemental credit applicable only to County property taxes for qualifying homeowners. For the Baltimore County supplement, household income must not exceed $60,000 and net worth (excluding the subject property and certain retirement accounts) must not exceed $200,000. Property taxes based on up to $300,000 of assessed value must exceed the tax limit for the applicant's income level. An additional credit is available for homeowners age 70 or older. The supplemental credit does not require a separate application — applicants for the state program are automatically considered for the Baltimore County supplement.",
-      "URL": "https://www.baltimorecountymd.gov/departments/budfin/taxpayer-services/tax-credits/homeowners",
-      "application_deadline_string": "September 1",
-      "application_deadline_date": "2026-09-01",
-      "contact_name": "",
-      "contact_email": "financeinfo@baltimorecountymd.gov",
-      "contact_phone": "410-767-4433",
-      "program_audience": "Maryland homeowners of all ages whose property tax bill is high relative to their household income; Baltimore County homeowners with combined household income up to $60,000 and net worth up to $200,000 (excluding the subject property and certain retirement accounts) are also eligible for the Baltimore County supplemental credit.",
-      "use_of_funds": "Reduction of property tax obligations at the state and/or county level based on a household income-to-property-tax-bill comparison; the Baltimore County supplement further reduces county property taxes owed on the homeowner's principal residence.",
-      "geographic_eligibility": "The state Homeowners Tax Credit is available statewide in Maryland. The Baltimore County supplemental credit applies only to Baltimore County property taxes for homeowners in Baltimore County.",
-      "requirements_list": [
-        "Must be a homeowner",
-        "Must own and occupy the property as principal residence",
-        "Must qualify based on household income compared to property tax bill",
-        "For Baltimore County supplemental credit: combined household income must not exceed $60,000",
-        "For Baltimore County supplemental credit: net worth must not exceed $200,000, excluding the value of the property being applied for and certain retirement accounts",
-        "For Baltimore County supplemental credit: property taxes (based on up to $300,000 of assessed value) must exceed the tax limit for the applicant's income level",
-        "Must apply for the Maryland State Homeowners' Tax Credit through SDAT to be considered for the Baltimore County supplemental credit",
-        "Baltimore County supplemental credit applies only to county property taxes",
-        "Must file a new application each year by September 1",
-        "Property taxes eligible for the Baltimore County credit exclude metropolitan charges, business-use portions of buildings, excess land acreage, and taxes on other buildings"
-      ],
-      "application_process_overview": "Apply for the Maryland State Homeowners' Tax Credit using the SDAT application, available from the State Department of Assessments and Taxation. The same application also serves as the Baltimore County supplemental credit application — no separate application is required for the County supplement. Applications must be submitted by September 1 each year. Call SDAT at 410-767-4433 or toll free 800-944-7403 for forms and information.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 2,
-      "data_quality": "medium",
-      "source_urls": [
-        "https://www.baltimorecountymd.gov/departments/budfin/taxpayer-services/tax-credits/homeowners",
-        "https://www.baltimorecountymd.gov/departments/budfin/taxpayer-services/tax-credits"
-      ]
-    }
-  },
-  {
-    "slug": "homeowners-property-tax-credit-program-hotc",
-    "structured_extraction": {
-      "program_name": "Homeowners' Property Tax Credit Program (HOTC)",
-      "program_description": "Maryland's Homeowners' Property Tax Credit Program (HOTC) limits the amount of property taxes a homeowner must pay based on their gross household income. If a homeowner's property tax bill exceeds a fixed percentage of their gross household income, the state issues a credit for the difference. The credit applies to taxes on the first $300,000 of assessed value. Originally created in 1975 for the elderly, the program is now available to homeowners of all ages who meet income and eligibility requirements, with combined gross household income of $60,000 or less and net worth under $200,000 (excluding the principal residence and qualified retirement savings or IRAs). The Maryland State Department of Assessments and Taxation (SDAT) reviews applications to determine eligibility. Credits are displayed on tax bills and reduce the amount due. If issued after payment, a refund is automatically made, administered locally through county finance offices. Homeowners must apply each year between February 1 and October 1 and disclose their income to receive the credit. A single online application can also be used to apply for the Montgomery County Supplemental Homeowners Property Tax Credit and the Montgomery County Senior Tax Credit. Anne Arundel County also provides a supplemental credit on top of the state credit. In Worcester County, applications can be processed through the County Treasurer's office or by calling 1-800-944-7403. Low-income homeowners can get help completing applications through the Maryland Benefits Center at (855) 444-4994.",
-      "agency": "Maryland State Department of Assessments and Taxation (SDAT)",
-      "funding_source": "public",
-      "geographic_scope": "statewide",
-      "eligible_counties": [
-        "All"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "business_stage": null,
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "tax-credit"
-      ],
-      "assistance_description": "A credit is applied against the homeowner's property tax bill for the amount by which property taxes exceed a percentage of gross household income, calculated as: 0% of the first $8,000 of income; 4% of the next $4,000; 6.5% of the next $4,000; and 9% of all income above $16,000. The credit applies only to taxes on the first $300,000 of assessed valuation. Homeowners who apply by April 15 receive the credit directly on their initial July tax bill; those who apply by October 1 receive a revised tax bill or refund check. Credits approved after payment are refunded by the local county Finance Office. Available to homeowners of all ages with combined gross household income of $60,000 or less and net worth under $200,000 (excluding the subject property and qualified retirement savings/IRAs). Applicants submit the HTC-1 (long form) with required documentation. Homeowners must re-apply each year between February 1 and October 1. Anne Arundel County also provides a supplemental credit on top of the state credit. Montgomery County residents using the online application can simultaneously apply for the Montgomery County Supplemental Homeowners Property Tax Credit and the Montgomery County Senior Tax Credit. Supplemental county credits are also available in other eligible counties.",
-      "URL": "https://dat.maryland.gov/realproperty/Pages/Homeowners%27-Property-Tax-Credit-Program.aspx",
-      "application_deadline_string": "October 1, 2026 (annual; apply by April 15, 2026 to receive credit on initial July 1, 2026 tax bill; applications accepted beginning February 1)",
-      "application_deadline_date": "2026-10-01",
-      "contact_name": "",
-      "contact_email": "sdat.homeowners@maryland.gov",
-      "contact_phone": "(410) 767-4433 or (800) 944-7403",
-      "program_audience": "Maryland residential homeowners of all ages whose property tax bill exceeds a fixed percentage of their gross household income, with combined gross household income of $60,000 or less and net worth under $200,000 (excluding the subject property and qualified retirement savings/IRAs). Available statewide, including Montgomery County, Anne Arundel County, Worcester County, Charles County, and other county residents who may also apply for county-specific supplemental credits.",
-      "use_of_funds": "Reduction of property tax liability for qualifying homeowners based on income relative to property tax obligation.",
-      "geographic_eligibility": "Available statewide in Maryland to owners of principal residences; administered locally through county finance offices and SDAT regional offices. Applications can be submitted online at taxcredits.sdat.maryland.gov (also accessible via onestop.md.gov) or by mail using the HTC-1 form to Maryland Department of Assessments and Taxation, 700 East Pratt Street, Suite 2700, Baltimore, MD 21202-6377. In-person assistance is available at local assessment offices. Anne Arundel County offers a supplemental credit in addition to the state credit. Worcester County residents may also apply through the County Treasurer's office or call 1-800-944-7403. Montgomery County residents can use a single online application to also apply for the Montgomery County Supplemental Homeowners Property Tax Credit and the Montgomery County Senior Tax Credit. Charles County residents may contact the Treasury/Taxes office at 301-645-0685.",
-      "requirements_list": [
-        "Must be a residential homeowner or have a legal interest in the property",
-        "Must be a primary residence homeowner",
-        "Property must be your principal residence where you live at least six months of the year, including July 1 (exceptions for recent home purchasers or those unable to do so due to health or special care needs)",
-        "Combined gross household income cannot exceed $60,000",
-        "Net worth must be less than $200,000, excluding the value of the subject property and any qualified retirement savings or Individual Retirement Accounts",
-        "Must report total income from all sources, including nontaxable retirement benefits such as Social Security and Railroad Retirement",
-        "Must re-apply each year between February 1 and October 1",
-        "Taxpayers under age 70 must apply by October 1",
-        "Application must be filed by October 1 of each tax year; applications accepted beginning February 1",
-        "First application must be obtained from the Assessment Office or local county Finance Office",
-        "Credit amount determined by household income and taxes levied",
-        "Must submit copies of prior year's federal income tax returns (Form 1040, 1040-SR, 1040-NR, or equivalent) and state tax returns",
-        "If income derived from partnership or corporation, must submit Form 1065 (with Schedule K-1) and/or Form 1120/1120S (with Schedule K-1)",
-        "Do not send original documents; submit copies only"
-      ],
-      "application_process_overview": "Apply online at taxcredits.sdat.maryland.gov (also accessible via onestop.md.gov) or download the 2026 HTC-1 (Long Form) from the SDAT website and submit by mail to Maryland Department of Assessments and Taxation, 700 East Pratt Street, Suite 2700, Baltimore, MD 21202-6377. A single online application covers the State HOTC, the Montgomery County Supplemental Homeowners Property Tax Credit, and the Montgomery County Senior Tax Credit (Senior Tax Credit available only to property owners age 65 and over, with other restrictions). Do not email applications or supporting documents; submit copies only as original documents cannot be returned. Applicants must submit copies of their prior year's (2025) federal income tax returns. Partnership/corporation income requires Form 1065 (with Schedule K-1) and/or Form 1120/1120S (with Schedule K-1). Applications are accepted between February 1 and October 1 each year. Apply by April 15, 2026 to receive the credit on the initial July 1, 2026 tax bill, or by October 1, 2026 to receive a revised bill or refund. First-time applicants may obtain the form from the Assessment Office or local county Finance Office. Worcester County residents may also apply through the County Treasurer's office or call 1-800-944-7403. Low-income homeowners can get help completing applications through the Maryland Benefits Center at (855) 444-4994. For assistance, contact SDAT at (410) 767-4433 or sdat.homeowners@maryland.gov. Charles County residents may also contact the Treasury/Taxes office at 301-645-0685.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 4,
-      "data_quality": "high",
-      "attachment_urls": [
-        "https://dat.maryland.gov/realproperty/Documents/2023HTC_Application.pdf",
-        "https://onestop.md.gov/forms/homeowners-property-tax-credit-application-form-htc-2023-active-63dacc5b81fbf9019f6185b2",
-        "http://dat.maryland.gov/Documents/2026%20-%20HTC%201%20-%20LONG%20form.pdf",
-        "https://www.harfordcountymd.gov/DocumentCenter/View/28443/Homeowners-Tax-Credit-2025-PDF"
-      ],
-      "source_urls": [
-        "http://dat.maryland.gov/Pages/tax-sale-resources.aspx",
-        "https://www.carolinemd.org/FAQ.aspx?QID=157",
-        "https://www.montgomerycountymd.gov/department-finance/taxes/tax-credits/state-homeowners-property-tax-credit-hotc",
-        "https://www.calvertcountymd.gov/638/Real-Estate-Taxes"
       ]
     }
   },
@@ -125831,75 +124638,6 @@
     }
   },
   {
-    "slug": "ride-together-rewards",
-    "structured_extraction": {
-      "program_name": "Ride Together Rewards: Baltimore Transit Incentive Program (CharmPass New Rider Incentive & FareShare Employer Incentive)",
-      "program_description": "Ride Together Rewards offers programs and subsidies for Baltimore-area commuters and employers who want to explore sustainable commuting options. The program includes two key incentive tracks: (1) CharmPass New Rider Incentive — during select promotional periods, first-time MTA transit riders in the Greater Baltimore area can download the CharmPass mobile app and receive free transit passes to try bus, metro, light rail, commuter bus, and MARC train services; (2) FareShare Employer Incentive — employers in the Greater Baltimore area can receive up to $3,000 (as $1,000 per month over three consecutive months) as a credit on their CharmPass account to offset the cost of purchasing transit passes for employees. Additionally, vanpoolers can save approximately $500 per month, and carpoolers earn a $5 daily incentive for up to 90 days. The program is administered by the Maryland Transit Administration (MTA).",
-      "agency": "Maryland Transit Administration (MTA)",
-      "funding_source": "public",
-      "geographic_scope": "regional",
-      "eligible_counties": [
-        "Baltimore City",
-        "Baltimore County",
-        "Anne Arundel",
-        "Howard",
-        "Harford",
-        "Carroll"
-      ],
-      "eligible_municipalities": [
-        "Baltimore"
-      ],
-      "eligible_regions": [
-        "Central Maryland"
-      ],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals",
-        "for-profit",
-        "non-profit",
-        "government"
-      ],
-      "business_stage": "any",
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "subsidy"
-      ],
-      "assistance_description": "Two tracks of assistance: (1) New Rider — Free transit passes loaded onto a new rider's CharmPass mobile app account during promotional periods (May 1–8, June 1–8, and July 1–8, 2026). Passes expire after 90 days and are non-transferable and non-redeemable for cash. Vanpoolers save approximately $500 per month; carpoolers earn a $5 daily incentive for up to 90 days. (2) FareShare Employer — Up to $3,000 per employer ($1,000 per month over three continuous months) delivered as a credit on the employer's CharmPass account to purchase transit fares for employees. Participating employers are also registered as MDOT Commuter Choice Maryland Employer Partners, gaining access to free commuter benefit resources.",
-      "URL": "https://www.mdot.maryland.gov/tso/pages/Index.aspx?PageId=231",
-      "application_deadline_string": "New Rider promotional periods: May 1-8, June 1-8, July 1-8, 2026. Employers must enroll by the 15th of the month prior to their starting month and submit their next month's purchase by the 25th of the month.",
-      "application_deadline_date": "2026-07-08",
-      "contact_name": "",
-      "contact_email": "mtacharmpass@mta.maryland.gov",
-      "contact_phone": "",
-      "program_audience": "First-time (new) users of the MTA transit system in the Greater Baltimore area; Baltimore-area commuters using carpool or vanpool; and employers with locations or employment centers in the Greater Baltimore area accessible to MTA transit stations.",
-      "use_of_funds": "Free transit passes for bus, metro, light rail, commuter bus, and MARC train services for new riders; subsidies and incentives for commuters who use carpool or vanpool; and employer credits for purchasing transit fares for employees via the CharmPass app.",
-      "geographic_eligibility": "Greater Baltimore region served by MTA transit services, including Baltimore City, Baltimore County, Anne Arundel, Howard, Harford, and Carroll counties. Employers must have locations or employment centers accessible to MTA stations through local transit, Commuter Bus, or MARC.",
-      "requirements_list": [
-        "Must be a first-time (new) user of the MTA transit system (for new rider incentive)",
-        "Must download the CharmPass mobile app and set up an account with email, name, and phone number (for new rider incentive)",
-        "Account must be verified within 48 hours (for new rider incentive)",
-        "Travel must be within the Greater Baltimore region using MTA transit services",
-        "Participants must share feedback via periodic surveys (for new rider incentive)",
-        "Employer must have locations or employment centers in the Greater Baltimore area accessible to MTA stations (for FareShare)",
-        "Employer must enroll by the 15th of the month prior to their starting month (for FareShare)",
-        "Employer must submit next month's purchase by the 25th of the month (for FareShare)",
-        "Employer must complete a questionnaire and set up an agreement with MTA (for FareShare)"
-      ],
-      "application_process_overview": "Sign up via the SurveyMonkey link on the program page. For new riders: during active promotional periods, download the CharmPass app, set up an account, and receive free passes once verified. During non-campaign periods, sign up to receive an alert for the next promotional period. Visit baltimorecommutes.org for details on carpool and vanpool programs. For employers (FareShare): email [email protected] to express interest. MTA will schedule a meeting to discuss options, after which the employer fills out a questionnaire to set up an agreement. MTA then verifies the account, applies the incentive credit, and loads fare products to the CharmPass account.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 3,
-      "data_quality": "high",
-      "source_urls": [
-        "http://www.mdot.maryland.gov/tso/pages/index.aspx?pageid=50",
-        "https://www.mdot.maryland.gov/tso/pages/index.aspx?pageid=50",
-        "https://www.mdot.maryland.gov/tso/pages/Index.aspx?PageId=231"
-      ]
-    }
-  },
-  {
     "slug": "ride-together-rewards-baltimore-transit-incentive-program-charmpass-new-rider-incentive",
     "structured_extraction": {
       "program_name": "Ride Together Rewards: Baltimore Transit Incentive Program – CharmPass (New Rider Incentive)",
@@ -130845,90 +129583,6 @@
     }
   },
   {
-    "slug": "rainscapes-stormwater-garden-rain-garden-rebate",
-    "structured_extraction": {
-      "program_name": "RainScapes Rewards Rain Garden Rebate",
-      "program_description": "Montgomery County's RainScapes Rewards program offers rebates to residential, commercial, and institutional property owners who install a rain garden that captures and filters stormwater runoff from impervious surfaces like roofs and driveways. Rain gardens are shallow, depressed landscape features (surface depressed 6 inches) filled with spongy soil and at least 75% native plants that absorb and clean runoff and support pollinators. The rebate is $10 per square foot of total rain garden area, with a minimum garden size of 75 square feet for residential and 100 square feet for commercial/institutional properties. Maximum rebate is $7,500 for residential and $20,000 for commercial or institutional properties. Projects must meet specific design, size, location, and planting standards and pass county inspections. Applications are accepted on a first-come, first-served basis.",
-      "agency": "Montgomery County Department of Environmental Protection",
-      "funding_source": "public",
-      "geographic_scope": "county",
-      "eligible_counties": [
-        "Montgomery"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals",
-        "non-profit",
-        "for-profit"
-      ],
-      "business_stage": "any",
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "rebate"
-      ],
-      "assistance_description": "$10 per square foot of total rain garden area installed. Maximum rebate is $7,500 for residential properties and $20,000 for commercial or institutional properties. Minimum garden size is 75 square feet for residential and 100 square feet for commercial/institutional. Rebate is issued after the project passes final inspection and the property owner submits itemized receipts or paid invoices and a signed Property Owner Agreement. Applications are accepted on a first-come, first-served basis. Typical installation costs range from $8–25 per square foot for rain gardens.",
-      "URL": "https://www.montgomerycountymd.gov/department-environmental-protection/property-care/rainscapes/rainscapes-stormwater-garden-rain-garden",
-      "application_deadline_string": "Rolling; accepted on a first come, first served basis",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "Rainscapes@montgomerycountymd.gov",
-      "contact_phone": "240-777-0311",
-      "program_audience": "Residential, commercial, and institutional property owners in Montgomery County (outside the municipalities of Rockville, Gaithersburg, and Takoma Park) who want to install a rain garden to manage stormwater runoff, including homeowners, businesses, congregations, and schools",
-      "use_of_funds": "Installation of a qualifying rain garden that captures and filters stormwater runoff from impervious surfaces. Eligible costs include plants, materials, and labor for a properly designed and installed rain garden meeting all RainScapes requirements, including site preparation (turf removal, soil amendment, edging, mulching) and planting plan development.",
-      "geographic_eligibility": "Properties must be located within Montgomery County, Maryland, but outside the municipalities of Rockville, Gaithersburg, and Takoma Park, which collect the Water Quality Protection Charge separately.",
-      "requirements_list": [
-        "Property must be in Montgomery County but outside Rockville, Gaithersburg, and Takoma Park",
-        "Residential minimum garden size: 75 square feet; Commercial/Institutional minimum: 100 square feet",
-        "Garden must be depressed 6 inches to store runoff",
-        "Garden must intercept stormwater runoff from an impervious surface (roof or driveway)",
-        "Must be on private property — not in the county right-of-way or an easement",
-        "Must be downhill from buildings and at least 10 feet from building foundations",
-        "Site slope must not exceed 12 percent",
-        "Garden must not be placed over utilities (minimum 36-inch offset for gas, 18-inch offset for all others)",
-        "Overflow must reach a pervious surface for at least 10 feet before reaching impervious surface",
-        "Soil must pass a percolation test",
-        "Garden must be sized to treat at least 1.2 inches of rain in a 24-hour storm event per drainage area (minimum rain capture goal: 1.0 inch)",
-        "Must use at least 75% native plants (cultivars accepted); up to 25% non-invasive non-native plants allowed",
-        "Plant containers must be quart-size or larger for non-groundcover plants",
-        "Apply 2–3 inches of natural, un-dyed shredded hardwood mulch (undyed double-shredded hardwood only)",
-        "Rain garden media must be existing soil mixed with 2 inches of compost incorporated to 12-inch depth; approved media composition is 50% sand, 25% compost, 25% topsoil",
-        "Submit a planting plan with graphic scale, north arrow, plant list, and inlet/overflow/berm locations",
-        "HOA approval letter required if applicable",
-        "Pass preliminary site suitability inspection after application submission",
-        "Pass final inspection after installation",
-        "Submit itemized receipts or paid invoice",
-        "Electronically sign and submit the Property Owner Agreement",
-        "Only new projects qualify — rebate cannot fulfill a county-required stormwater permit",
-        "Garden must meet requirements outlined in the RainScapes Rewards Rebate requirements document",
-        "Final sizing verified by a RainScapes planner after application",
-        "Deer-resistant plants required in areas with deer browse",
-        "Ponding gardens must drain within 24 hours",
-        "Percolation test required for ponding gardens (water must drain within 36 hours)",
-        "Garden must be placed at least 5 feet from built slabs (garages, patios, driveways, sidewalks)",
-        "Plant selection from Mid-Atlantic Piedmont natives recommended"
-      ],
-      "application_process_overview": "1. Review the RainScapes Rewards Rebate Application Guide and use the Rain Garden Sizing Estimator or sizing table to size your garden. 2. Submit a planting plan and plant list to a RainScapes planner for approval. 3. After plan approval, install the rain garden following the RainScapes Rain Garden Technical Manual. 4. Pass a preliminary site suitability inspection. 5. After installation, submit itemized receipts or paid invoice, sign the Property Owner Agreement, and schedule a final inspection to receive the rebate. Applications are accepted on a first-come, first-served basis. Applicants can also check the status of a current application online. Contact RainScapes staff for planting plan consultation. Contact: 311 or 240-777-0311 (outside county); 240-773-3556 TTY.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 2,
-      "data_quality": "high",
-      "attachment_urls": [
-        "https://assets.montgomerycountymd.gov/files/stormwater-gardens.pdf",
-        "https://www.montgomerycountymd.gov/DEP/Resources/Files/rainscapes/raingarden/RainGarden2018.pdf",
-        "https://assets.montgomerycountymd.gov/files/2026-04/blank-plant-list-accessible.xlsx",
-        "https://assets.montgomerycountymd.gov/files/rain-gardens-technical-design-manual.pdf"
-      ],
-      "source_urls": [
-        "https://www.montgomerycountymd.gov/department-environmental-protection/property-care/rainscapes/rainscapes-stormwater-garden-rain-garden",
-        "https://www.montgomerycountymd.gov/department-environmental-protection/property-care/rainscapes/rainscapes-stormwater-garden-rain-garden/requirements-qualify-rain-garden-rebate"
-      ]
-    }
-  },
-  {
     "slug": "rainscapes-rewards-rebate-program-stormwater-management-retrofits-conservation-landscapes-permeable-pavement-cisterns-more",
     "structured_extraction": {
       "program_name": "RainScapes Rewards Rebate Program – Stormwater Management Retrofits (Conservation Landscapes, Permeable Pavement, Cisterns & More)",
@@ -131045,7 +129699,7 @@
       "application_process_overview": "1. Review the Primer Guide, Water Harvesting Project Manual, and RainScapes Permeable Paver Manual on the RainScapes website (no paper application available; contact the program for help submitting electronically). 2. Submit an electronic application through the RainScapes Rewards online portal at https://www2.montgomerycountymd.gov/Rainscapes/. Applications are accepted on a first-come, first-served basis. Applicants can also check the status of a current application online. 3. For permeable pavement projects, submit contractor certification and perc test results with the application. For cistern projects, submit required supporting documents (location plan, HOA approval letter if applicable). 4. A RainScapes planner conducts a site assessment (in person or virtually) within approximately 2–12 weeks of application acceptance to confirm site suitability. 5. Submit a plan for approval within 3 months of the site assessment report. 6. Receive an official project approval email and electronically sign the Property Owner Agreement. 7. Install the project within 6 months of approval; for permeable pavement projects, submit construction photos to your planner during installation. 8. Contact your planner to schedule a final inspection and submit receipts and photos. 9. Receive rebate payment, typically within 8–12 weeks after final inspection. Call 311 (or 240-777-0311 outside the county; TTY 301-251-4850) or email RainScapes@MontgomeryCountyMd.gov with questions.",
       "is_accepting_applications": true,
       "is_recurring": true,
-      "source_count": 11,
+      "source_count": 13,
       "data_quality": "high",
       "attachment_urls": [
         "https://assets.montgomerycountymd.gov/files/First-steps.pdf",
@@ -131060,7 +129714,9 @@
         "https://assets.montgomerycountymd.gov/files/permeable-pavment-detail-drawings.pdf",
         "https://assets.montgomerycountymd.gov/files/cistern-project-requirements.pdf",
         "https://assets.montgomerycountymd.gov/files/rain-barrels-and-cisterns.pdf",
-        "https://assets.montgomerycountymd.gov/files/rain-barrel-project-requirements.pdf"
+        "https://assets.montgomerycountymd.gov/files/rain-barrel-project-requirements.pdf",
+        "https://www.montgomerycountymd.gov/DEP/Resources/Files/rainscapes/raingarden/RainGarden2018.pdf",
+        "https://assets.montgomerycountymd.gov/files/rain-gardens-technical-design-manual.pdf"
       ],
       "source_urls": [
         "https://www.montgomerycountymd.gov/department-environmental-protection/property-care/rainscapes/rainscapes-community",
@@ -131073,7 +129729,9 @@
         "https://www.montgomerycountymd.gov/department-environmental-protection/property-care/rainscapes",
         "https://www.montgomerycountymd.gov/department-environmental-protection/property-care/rainscapes/rainscapes-permeable-pavement-retrofit/requirements-eligible-permeable-pavement-retrofit-rebate",
         "https://www.montgomerycountymd.gov/department-environmental-protection/property-care/rainscapes/rainscapes-water-harvesting/rain-barrels-design-criteria-requirements-rainscapes-rewards-rebates",
-        "https://www.montgomerycountymd.gov/department-environmental-protection/property-care/rainscapes/rainscapes-permeable-pavement-retrofit"
+        "https://www.montgomerycountymd.gov/department-environmental-protection/property-care/rainscapes/rainscapes-permeable-pavement-retrofit",
+        "https://www.montgomerycountymd.gov/department-environmental-protection/property-care/rainscapes/rainscapes-stormwater-garden-rain-garden",
+        "https://www.montgomerycountymd.gov/department-environmental-protection/property-care/rainscapes/rainscapes-stormwater-garden-rain-garden/requirements-qualify-rain-garden-rebate"
       ]
     }
   },
@@ -131268,124 +129926,6 @@
       "data_quality": "medium",
       "source_urls": [
         "https://www.montgomerycountymd.gov/government/departments-agencies/department-environmental-protection/trash-recycling-yard-trim/waste-reduction-reuse-recycling-programs/recycle-multi-family-homes"
-      ]
-    }
-  },
-  {
-    "slug": "water-quality-protection-charge-wqpc-stormwater-management-credit-for-nonprofit-properties",
-    "structured_extraction": {
-      "program_name": "Water Quality Protection Charge (WQPC) Stormwater Management Credit for Nonprofit Properties",
-      "program_description": "Nonprofit 501(c)(3) property owners in Montgomery County can apply for a credit to reduce their annual Water Quality Protection Charge (WQPC) — a fee based on the amount of impervious surface (roofs, parking lots, etc.) on their property. Credits are awarded based on the volume of stormwater managed by on-site practices such as rain gardens, permeable pavement, or green roofs. Credits must be renewed every three years.",
-      "agency": "Montgomery County Department of Environmental Protection",
-      "funding_source": "public",
-      "geographic_scope": "county",
-      "eligible_counties": [
-        "Montgomery"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "non-profit"
-      ],
-      "business_stage": null,
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "tax-credit"
-      ],
-      "assistance_description": "Eligible nonprofit 501(c)(3) property owners can receive up to 60% reduction in their annual WQPC based on the volume of stormwater treated by a combination of environmental site design and stormwater management systems, or up to 80% if the property is completely treated by environmental site design (ESD) practices. For single-family residential (SFR) properties, credits can also reach up to 80%. Properties treating both onsite and offsite stormwater volumes may qualify for up to 100% credit. Credits are valid for three years and must be renewed. A separate hardship reduction (partial exemption) is also available for 501(c)(3) organizations exempt from property taxes whose WQPC exceeds 0.2% of total revenues from the property.",
-      "URL": "https://www.montgomerycountymd.gov/department-environmental-protection/water/clean-water-montgomery/water-quality-protection-charge/nonprofit-properties-water-quality-protection-charge",
-      "application_deadline_string": "September 30",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "",
-      "contact_phone": "311",
-      "program_audience": "IRS-designated 501(c)(3) nonprofit property owners in Montgomery County, Maryland. The program also covers single-family residential (SFR), non-residential (NR), and multi-family residential (MFR) property owners who maintain eligible on-site stormwater management practices.",
-      "use_of_funds": "Reduction of the annual Water Quality Protection Charge for properties with qualifying on-site stormwater management practices. Credits reduce the WQPC bill based on stormwater volume managed by eligible practices.",
-      "geographic_eligibility": "Available to nonprofit properties located in Montgomery County, Maryland. All Montgomery County property owners pay the WQPC, but only those maintaining eligible stormwater practices qualify for a credit.",
-      "requirements_list": [
-        "Must be an IRS-designated 501(c)(3) nonprofit organization",
-        "Property must have a stormwater management practice registered with Montgomery County, or be willing to install one",
-        "Must submit the WQPC credit application (renewal required every 3 years)",
-        "Must maintain stormwater management practices per Section 19-28 of Montgomery County Code",
-        "Design information required (may be waived if practice was permitted through Department of Permitting Services or RainScapes project)",
-        "Photographic proof of installation required; underground practices require above-ground verification",
-        "For hardship reduction: property must also be exempt from real property ad valorem taxation under State law and the WQPC must exceed 0.2% of total revenues from the property",
-        "Hardship reduction applicants must provide the most recent federal tax return or other revenue verification",
-        "Applications must be submitted by the property owner or the owner's authorized agent"
-      ],
-      "application_process_overview": "Submit an application using the online WQPC forms portal. Applications, submissions, and requests are due September 30. Include your 8-digit Account ID, owner name, property address, mailing address, telephone number, email, and stormwater system design information. A site visit may be coordinated by DEP. For questions, call 3-1-1 or submit a service request online.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 1,
-      "data_quality": "medium",
-      "attachment_urls": [
-        "https://assets.montgomerycountymd.gov/files/2026-04/wqpc-credit-manual-web.pdf"
-      ],
-      "source_urls": [
-        "https://www.montgomerycountymd.gov/department-environmental-protection/water/clean-water-montgomery/water-quality-protection-charge/nonprofit-properties-water-quality-protection-charge"
-      ]
-    }
-  },
-  {
-    "slug": "water-quality-protection-charge-wqpc-stormwater-management-credit-multi-family-and-non-residential-properties",
-    "structured_extraction": {
-      "program_name": "Water Quality Protection Charge (WQPC) Stormwater Management Credit — Multi-Family and Non-Residential Properties",
-      "program_description": "Multi-family and non-residential property owners in Montgomery County can apply for a credit to reduce their annual Water Quality Protection Charge (WQPC) — a fee based on impervious surface area on a property. Property owners who install and maintain qualifying stormwater management practices (such as rain gardens, permeable pavement, green roofs, or rain barrels) can receive a reduction of up to 60% of their charge for non-ESD practices, or up to 80% if the property is fully treated using environmental site design (ESD) practices. Additional credits of up to 100% total (capped at 40% of onsite credit) are available for off-site stormwater treatment. Credits must be renewed every three years.",
-      "agency": "Montgomery County Department of Environmental Protection",
-      "funding_source": "public",
-      "geographic_scope": "county",
-      "eligible_counties": [
-        "Montgomery"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals",
-        "non-profit",
-        "for-profit",
-        "government"
-      ],
-      "business_stage": "any",
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "tax-credit"
-      ],
-      "assistance_description": "Eligible property owners receive a credit reducing their annual Water Quality Protection Charge by up to 60% for non-ESD stormwater management practices, up to 80% if the entire property is treated by environmental site design (ESD) practices, or up to 100% total (capped at 40% of onsite credit) when off-site stormwater treatment is included. Credit is prorated based on treatment volume provided relative to the required Water Quality Volume (WQv) or Environmental Site Design Volume (ESDv). Credits must be renewed every three years.",
-      "URL": "https://www.montgomerycountymd.gov/department-environmental-protection/water/clean-water-montgomery/water-quality-protection-charge/multi-family-non-residential-properties-water-quality-protection-charge",
-      "application_deadline_string": "September 30",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "",
-      "contact_phone": "311",
-      "program_audience": "Multi-family residential and non-residential property owners in Montgomery County, including businesses, Home Owner Associations, non-profit organizations, and government-owned properties, who have installed qualifying stormwater management practices on their property.",
-      "use_of_funds": "Reduction of the annual Water Quality Protection Charge fee assessed on impervious surface area. Eligible stormwater management practices include green roofs, conservation landscaping, micro-bioretention, rain gardens, permeable pavements, rainwater harvesting (rain barrels/cisterns), sheet flow to conservation areas, wet ponds, bioretention, and submerged gravel wetlands, among others.",
-      "geographic_eligibility": "Available to multi-family and non-residential property owners in Montgomery County, Maryland. All property owners in Montgomery County are subject to the WQPC, including businesses, Home Owner Associations, and non-profit organizations.",
-      "requirements_list": [
-        "Property must be multi-family residential or non-residential",
-        "Stormwater management practice must be registered with the County",
-        "Property owner must own and maintain on-site stormwater management practices per Montgomery County Code Section 19-28",
-        "For new credit applications, engineer-certified plans must include total impervious area, year of installation, facility size and units, and impervious area treated by the stormwater management system",
-        "A photograph of the stormwater management system must be included",
-        "Specific design information may be required for privately installed practices not permitted through the Department of Permitting Services or built as a RainScapes project",
-        "Credits must be renewed every 3 years",
-        "Applications must be submitted by September 30"
-      ],
-      "application_process_overview": "Submit a WQPC credit application using the online WQPC form portal. The application requires the account ID from the property tax bill, owner name, property address, mailing address, telephone number, email, and information about the stormwater management system. A site visit may be coordinated by DEP. Applicants can use the NR/MFR Credit Calculator to determine the credit amount. Applications and renewals are due September 30.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 1,
-      "data_quality": "medium",
-      "attachment_urls": [
-        "https://assets.montgomerycountymd.gov/files/2026-04/wqpc-credit-manual-web.pdf"
-      ],
-      "source_urls": [
-        "https://www.montgomerycountymd.gov/department-environmental-protection/water/clean-water-montgomery/water-quality-protection-charge/multi-family-non-residential-properties-water-quality-protection-charge"
       ]
     }
   },
@@ -133906,59 +132446,6 @@
         "https://www.montgomerycountymd.gov/department-health-human-services/about-us/public-health-services-phs/medical-care-uninsured-children-care-kids",
         "https://www.montgomerycountymd.gov/department-health-human-services/about-us/public-health-services-phs/dental-health-services-home/dental-health-services-dental-services-children"
       ]
-    }
-  },
-  {
-    "slug": "care-for-kids-dental-benefits",
-    "structured_extraction": {
-      "program_name": "Care for Kids Dental Benefits",
-      "program_description": "Provides dental care to uninsured children who are Montgomery County residents and do not qualify for Maryland Children's Health Program (MCHP) or MCHP Premium. Children from birth through age 18 in families with income up to 250% of the Federal Poverty Level may qualify.",
-      "agency": "Montgomery County Department of Health and Human Services",
-      "funding_source": "public",
-      "geographic_scope": "county",
-      "eligible_counties": [
-        "Montgomery"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "business_stage": null,
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "subsidy"
-      ],
-      "assistance_description": "Dental care benefits for eligible uninsured children, including coverage for dental services provided through the county program.",
-      "URL": "https://www.montgomerycountymd.gov/department-health-human-services/about-us/public-health-services-phs/dental-health-services-home/dental-health-services-dental-services-children",
-      "application_deadline_string": "",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "hhsdentalkids@montgomerycountymd.gov",
-      "contact_phone": "240-777-4238",
-      "program_audience": "Uninsured children ages newborn through 18 who are Montgomery County residents and whose family income is at or below 250% of the Federal Poverty Level",
-      "use_of_funds": "Dental care for eligible children",
-      "geographic_eligibility": "Montgomery County residents only",
-      "requirements_list": [
-        "Must be a Montgomery County resident",
-        "Ages newborn through 18",
-        "Child must be uninsured and not eligible for MCHP or MCHP Premium",
-        "Family income no greater than 250% of the Federal Poverty Level",
-        "Must provide documentation verifying parentage or legal guardianship (driver's license, passport, or other legal picture ID)",
-        "Must provide documentation verifying identity of the minor (active Care for Kids card or letter of active eligibility, plus one of: MCPS ID, MCPS enrollment form, birth certificate, passport, physician's certificate, baptismal/church certification, hospital certificate, notarized parental affidavit, birth registration, or other legal/notarized ID)"
-      ],
-      "application_process_overview": "Apply online through the Community Connect Portal at communityconnect.montgomerycountymd.gov starting January 1, 2025. Bring required identity and income documents to your appointment.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "attachment_urls": [],
-      "source_urls": [
-        "https://www.montgomerycountymd.gov/department-health-human-services/about-us/public-health-services-phs/dental-health-services-home/dental-health-services-dental-services-children"
-      ],
-      "source_count": 1,
-      "data_quality": "medium"
     }
   },
   {
@@ -146674,57 +145161,6 @@
     }
   },
   {
-    "slug": "women-infants-children-wic",
-    "structured_extraction": {
-      "program_name": "Women, Infants & Children (WIC)",
-      "program_description": "WIC is a federally funded program that provides healthy supplemental foods, nutrition education and counseling, and breastfeeding promotion and support to pregnant women, postpartum women, breastfeeding women, infants, and children under age five who meet income and nutritional risk requirements.",
-      "agency": "Prince George's County Department of Health",
-      "funding_source": "public",
-      "geographic_scope": "county",
-      "eligible_counties": [
-        "Prince George's"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "business_stage": null,
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "subsidy",
-        "other-technical-assistance"
-      ],
-      "assistance_description": "Participants receive supplemental nutritious foods (milk, cheese, eggs, cereal, infant formula, fruits, and vegetables) delivered through an electronic benefit transfer (eWIC) card. The program also provides nutrition education and counseling, breastfeeding education and support, and referrals to healthcare providers and community organizations. There are no fees.",
-      "URL": "https://www.princegeorgescountymd.gov/departments-offices/health/family-health-services/women-infants-children-wic",
-      "application_deadline_string": "",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "",
-      "contact_phone": "",
-      "program_audience": "Pregnant, postpartum, and breastfeeding women, infants, and children up to age 5 residing in Prince George's County who meet income and nutritional risk eligibility requirements.",
-      "use_of_funds": "Supplemental nutritious foods, nutrition education and counseling, breastfeeding support, and referrals to health and community services.",
-      "geographic_eligibility": "Must reside in Prince George's County, Maryland.",
-      "requirements_list": [
-        "Must be pregnant, postpartum, breastfeeding, an infant, or a child under age 5",
-        "Must reside in Prince George's County",
-        "Must meet household income eligibility requirements",
-        "Must be determined to be at nutritional risk by a health professional or trained WIC staff"
-      ],
-      "application_process_overview": "Visit one of the six WIC program locations in Prince George's County (Andrews AFB, Cheverly, Central Ave/Landover, Clinton, Hyattsville, or Laurel) during business hours Monday through Friday, 8:00 a.m. to 4:30 p.m.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 1,
-      "data_quality": "medium",
-      "source_urls": [
-        "https://www.princegeorgescountymd.gov/departments-offices/health/family-health-services/women-infants-children-wic"
-      ]
-    }
-  },
-  {
     "slug": "bridges2success",
     "structured_extraction": {
       "program_name": "Bridges2Success",
@@ -147878,57 +146314,6 @@
       ],
       "source_urls": [
         "https://www.princegeorgescountymd.gov/departments-offices/social-services/services/family-investment/tax-preparation-services"
-      ]
-    }
-  },
-  {
-    "slug": "temporary-cash-assistance-program",
-    "structured_extraction": {
-      "program_name": "Temporary Cash Assistance Program",
-      "program_description": "Temporary Cash Assistance (TCA) provides cash assistance to low-income families with dependent children in Prince George's County when available resources do not fully meet the family's needs. The program aims to help participants move toward self-sufficiency through work. Benefits are limited to a total of 60 months (5 years) over a lifetime.",
-      "agency": "Prince George's County Department of Social Services",
-      "funding_source": "public",
-      "geographic_scope": "county",
-      "eligible_counties": [
-        "Prince George's"
-      ],
-      "eligible_municipalities": [],
-      "eligible_regions": [],
-      "eligible_incentive_areas": [],
-      "eligible_organization_types": [
-        "individuals"
-      ],
-      "business_stage": null,
-      "eligible_industries": [
-        "Any"
-      ],
-      "assistance_type": [
-        "other-financial-assistance"
-      ],
-      "assistance_description": "Cash assistance provided to eligible families. Benefits are limited to 60 months (5 years) over a lifetime. Applicants must meet all financial and technical eligibility requirements before benefits are issued.",
-      "URL": "https://www.princegeorgescountymd.gov/departments-offices/social-services/services/family-investment/temporary-cash-assistance-program",
-      "application_deadline_string": "",
-      "application_deadline_date": "",
-      "contact_name": "",
-      "contact_email": "",
-      "contact_phone": "",
-      "program_audience": "Low-income families with dependent children living in Prince George's County who lack sufficient resources to meet their needs.",
-      "use_of_funds": "Cash assistance to address family needs while participants prepare for employment and self-sufficiency.",
-      "geographic_eligibility": "Available to residents of Prince George's County, Maryland.",
-      "requirements_list": [
-        "Must meet financial and technical eligibility factors",
-        "Work-eligible applicants must seek employment and participate fully in work requirement activities from the day they apply",
-        "Must document cooperation with child support requirements",
-        "Must comply with substance abuse provisions",
-        "Benefits limited to 60 months (5 years) over a lifetime"
-      ],
-      "application_process_overview": "Apply online at My DHR (mydhrbenefits.dhr.state.md.us) or visit a local Prince George's County Department of Social Services office. Interpretation services are available free of charge for limited English proficiency customers.",
-      "is_accepting_applications": true,
-      "is_recurring": true,
-      "source_count": 1,
-      "data_quality": "medium",
-      "source_urls": [
-        "https://www.princegeorgescountymd.gov/departments-offices/social-services/services/family-investment/temporary-cash-assistance-program"
       ]
     }
   },
