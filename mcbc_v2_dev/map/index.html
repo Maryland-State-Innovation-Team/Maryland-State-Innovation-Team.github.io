@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WCLWWJCG');</script>
+<!-- End Google Tag Manager -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="stylesheet" href="https://cdn.maryland.gov/mdwds/0.12.0/css/mdwds.min.css"/>
+
+    <title>Neighborhood Intelligence — Maryland Community Business Compass V2</title>
+    <script>
+        // 1. Initialize dataLayer and gtag immediately (Safe Shim)
+        // This ensures window.gtag exists for other scripts, preventing ReferenceErrors
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        // 2. Fetch environment config
+        fetch('../env.json')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(config) {
+                if (config.environment === 'production') {
+                    var gaId = 'G-W4R4JXSE3R';
+                    // 3. Load the Google Tag Manager script asynchronously
+                    var script = document.createElement('script');
+                    script.async = true;
+                    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+                    document.head.appendChild(script);
+                    // 4. Configure GA (Processing the queue)
+                    gtag('js', new Date());
+                    gtag('config', gaId);                    
+                } else {
+                    console.log('Google Analytics suppressed (' + config.environment + ').');
+                }
+            })
+            .catch(function(error) {
+                console.warn('Could not load env.json, GA suppressed.', error);
+            });
+    </script>
+  <script type="module" crossorigin src="../assets/map-hntueq3D.js"></script>
+  <link rel="stylesheet" crossorigin href="../assets/map-U3NIWNvi.css">
+</head>
+<body class="bg-slate-100 text-slate-800">
+    <a href="#main-content" class="visually-hidden focusable">Skip to main content</a>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCLWWJCG"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <select id="choropleth-select" class="hidden w-full p-2 rounded-md border-2 border-slate-300 focus:ring-slate-500 focus:border-slate-500">
+    </select>
+
+    <div id="tour-overlay" class="hidden fixed left-0 w-full bg-black bg-opacity-70 z-[30000] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="tour-heading">
+        <div id="tour-overlay-content" class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-md relative">
+            <button id="tour-back-btn" class="absolute top-4 left-4 text-slate-400 hover:text-slate-600 focus:outline-none" aria-label="Go back">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            </button>
+            <h2 id="tour-heading" class="text-2xl font-bold text-slate-800 text-center mt-2">Choose Your View</h2>
+            <p class="mt-2 text-slate-600 text-center">How would you like to see the data?</p>
+
+            <div class="mt-6 grid grid-cols-1 gap-4">
+                <button data-mode="smartResearch" class="tour-choice-btn group border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-6 text-left transition flex items-center gap-4">
+                    <div class="flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="h-12 w-12 text-slate-500 group-hover:text-[#005ea2]" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m176-120-56-56 301-302-181-45 198-123-17-234 179 151 216-88-87 217 151 178-234-16-124 198-45-181-301 301Zm24-520-80-80 80-80 80 80-80 80Zm355 197 48-79 93 7-60-71 35-86-86 35-71-59 7 92-79 49 90 22 23 90Zm165 323-80-80 80-80 80 80-80 80ZM569-570Z"></path></svg>
+                    </div>
+                    <div>
+                        <span class="block font-semibold text-slate-700">Insights Mode</span>
+                        <span class="mt-1 block text-sm text-slate-600">Get guided answers to key questions.</span>
+                    </div>
+                </button>
+
+                <button data-mode="freeExplore" class="tour-choice-btn group border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-slate-400 rounded-lg p-6 text-left transition flex items-center gap-4">
+                    <div class="flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="h-12 w-12 text-slate-500 group-hover:text-[#005ea2]" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M120-120v-170h170v170H120Zm0-250v-170h170v170H120Zm0-250v-170h170v170H120Zm250 500v-170h170v170H370Zm0-250v-170h170v170H370Zm0-250v-170h170v170H370Zm250 500v-170h170v170H620Zm0-250v-170h170v170H620Zm0-250v-170h170v170H620Z"></path></svg>
+                    </div>
+                    <div>
+                        <span class="block font-semibold text-slate-700">Explore Mode</span>
+                        <span class="mt-1 block text-sm text-slate-600">See all data at once and perform your own analysis.</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="explore-modal-overlay" class="hidden fixed left-0 w-full bg-black bg-opacity-70 z-[30000] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="explore-heading">
+        <div id="explore-modal-content" class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-md relative">
+            <button id="explore-back-btn" class="absolute top-4 left-4 text-slate-400 hover:text-slate-600 focus:outline-none" aria-label="Go back">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            </button>
+            <h2 id="explore-heading" class="text-2xl font-bold text-slate-800 text-center mt-2">Select a Location to Get Started</h2>
+            <div class="mt-4 text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="h-16 w-16 primary-blue mx-auto mb-4" viewBox="0 -960 960 960" fill="currentColor"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
+                <p class="text-slate-600 leading-relaxed">
+                    Search for an address or click the map to view local insights and opportunities.
+                </p>
+            </div>
+            <div class="mt-8 flex items-center justify-between gap-4">
+                <label class="flex items-center gap-2 cursor-pointer p-1 -ml-1 rounded">
+                    <input type="checkbox" id="explore-dont-show-checkbox" class="h-5 w-5 text-blue-600 rounded border-gray-300">
+                    <span class="text-sm text-slate-600 select-none">Do not show this again</span>
+                </label>
+                <button id="explore-okay-btn" class="px-6 py-2 font-bold primary-blue-button rounded-lg shadow transition">
+                    Got it!
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="loading-overlay" role="status" aria-live="polite">
+        <div class="spinner"></div>
+        <p class="text-lg">Loading Community Data...</p>
+    </div>
+    
+
+    <div id="sector-modal-overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="modal-heading" aria-describedby="modal-description">
+        <div id="sector-modal-content" class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-lg text-center">
+            <h2 id="modal-heading" class="text-2xl font-bold text-slate-800">Choose your development type</h2>
+            <p id="modal-description" class="mt-2 text-slate-600">Select the kind of project you're scoping to focus the map on the most relevant indicators.</p>
+
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <button data-sector="hd-residential" class="sector-choice-btn group w-full border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-4 md:p-6 text-center transition flex flex-row md:flex-col items-center justify-center gap-4 md:gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="flex-shrink-0 h-10 w-10 md:h-12 md:w-12 text-slate-500 group-hover:text-[#005ea2] md:mx-auto" fill="currentColor" viewBox="0 -960 960 960">
+                        <path d="M120-120v-720h320v160h400v560H120Zm80-80h160v-80H200v80Zm0-160h160v-80H200v80Zm0-160h160v-80H200v80Zm0-160h160v-80H200v80Zm240 480h320v-400H440v400Zm160-240v-80h80v80h-80Zm0 160v-80h80v80h-80Z"/>
+                    </svg>
+                    <span class="block font-semibold text-slate-700">High-Density Residential</span>
+                </button>
+
+                <button data-sector="ld-residential" class="sector-choice-btn group w-full border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded-lg p-4 md:p-6 text-center transition flex flex-row md:flex-col items-center justify-center gap-4 md:gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="flex-shrink-0 h-10 w-10 md:h-12 md:w-12 text-slate-500 group-hover:text-[#005ea2] md:mx-auto" fill="currentColor" viewBox="0 -960 960 960">
+                        <path d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z"/>
+                    </svg>
+                    <span class="block font-semibold text-slate-700">Low-Density Residential</span>
+                </button>
+
+                <button data-sector="commercial" class="sector-choice-btn group w-full border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-lg p-4 md:p-6 text-center transition flex flex-row md:flex-col items-center justify-center gap-4 md:gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="flex-shrink-0 h-10 w-10 md:h-12 md:w-12 text-slate-500 group-hover:text-[#005ea2] md:mx-auto" fill="currentColor" viewBox="0 -960 960 960">
+                        <path d="M120-160v-440l80-200h560l80 200v440h-80v-240H520v240H120Zm80-480h560l-32-80H232l-32 80Zm0 400h240v-160H200v160Zm-40-400h640-640Zm40 320h240-240Z"/>
+                    </svg>
+                    <span class="block font-semibold text-slate-700">Commercial</span>
+                </button>
+
+                <button data-sector="mixed-use" class="sector-choice-btn group w-full border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-lg p-4 md:p-6 text-center transition flex flex-row md:flex-col items-center justify-center gap-4 md:gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="flex-shrink-0 h-10 w-10 md:h-12 md:w-12 text-slate-500 group-hover:text-[#005ea2] md:mx-auto" fill="currentColor" viewBox="0 0 24 24">
+                        <!-- Mixed-use: a mid-rise residential block atop a ground-floor storefront with awning -->
+                        <path d="M3 21V9l9-6 9 6v12h-6v-5h-6v5H3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                        <rect x="6" y="11" width="2.5" height="2.5" fill="currentColor"/>
+                        <rect x="10.75" y="11" width="2.5" height="2.5" fill="currentColor"/>
+                        <rect x="15.5" y="11" width="2.5" height="2.5" fill="currentColor"/>
+                        <path d="M3 17h18l-1.5-3H4.5L3 17z" fill="currentColor" opacity="0.9"/>
+                        <path d="M3 17h18" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <rect x="9" y="17.5" width="6" height="3.5" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                    </svg>
+                    <span class="block font-semibold text-slate-700">Mixed-Use</span>
+                </button>
+
+            </div>
+        </div>
+    </div>
+    
+
+    <div id="app-container" class="relative w-screen flex flex-col">
+        <a href="#main-content" class="visually-hidden focusable">
+    Skip to main content
+</a>
+<div class="usa-banner-container">
+    <section class="usa-banner" aria-label="Official website of the State of Maryland">
+        <div class="usa-accordion">
+            <div class="usa-banner__header">
+                <div class="usa-banner__inner">
+                    <p class="usa-banner__header-text">
+                        An official website of the State of Maryland.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<header class="usa-header usa-header--basic">
+    <div class="usa-nav-container">
+        <div class="usa-navbar">
+            <div class="usa-logo custom-logo" id="basic-logo">
+                <div class="usa-logo__text">
+                    <a href="../map/" title="Neighborhood Intelligence">
+                        <img src="../assets/mdwds_logo_notext.svg" alt="">
+                        <span>Neighborhood<br>Intelligence<span class="visually-hidden"> — Maryland Community Business Compass V2</span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <nav aria-label="Primary navigation" class="usa-nav">
+            <ul class="usa-nav__primary usa-accordion">
+                <li class="usa-nav__primary-item">
+                    <a href="../map/" class="usa-nav__link usa-current" aria-current="page"><span>Map</span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+
+
+        <noscript>
+            <style>
+                /* 1. Hide the overlays that block the screen */
+                #loading-overlay, 
+                #tour-overlay, 
+                #explore-modal-overlay, 
+                #sector-modal-overlay,
+                #mobile-layer-modal {
+                    display: none !important;
+                }
+
+                /* 2. Hide the interactive map area (Main Content) */
+                /* We leave #app-container visible so the Header/Banner still show */
+                #main-content {
+                    display: none !important;
+                }
+                
+                /* 3. Style the alert area */
+                .no-js-wrapper {
+                    flex-grow: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 4rem 1rem;
+                    background-color: #f1f5f9; /* Slate-100 to match bg */
+                }
+                
+                .usa-alert {
+                    max-width: 600px;
+                    width: 100%;
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                }
+            </style>
+            
+            <div class="no-js-wrapper">
+                <div class="usa-alert usa-alert--error" role="alert">
+                    <div class="usa-alert__body">
+                        <h3 class="usa-alert__heading text-bold">JavaScript is required</h3>
+                        <p class="usa-alert__text">
+                            We're sorry, but the Maryland Community Business Compass requires JavaScript to be enabled in your browser to use the interactive map. Please enable JavaScript in your browser settings to continue.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </noscript>
+        
+        <div id="main-content" class="relative flex-grow focus-outline-none" tabindex="-1" inert>
+            <div id="top-controls-wrapper" role="region" aria-label="Map Controls" class="absolute top-0 left-0 w-full p-2 md:p-4 z-[1005] flex flex-col md:flex-row md:justify-between md:items-start gap-3 pointer-events-none">
+                
+                <div id="geocoder-wrapper" class="relative pointer-events-auto flex flex-col">
+                    
+                    <div id="top-left-controls-row" class="w-full flex gap-2">
+                        <div id="sector-select-wrapper" class="relative flex-grow h-full flex-shrink-0 transition-all duration-300 w-[33%] md:flex-none md:w-[calc(33.333333%-0.25rem)]">
+                            <label for="sector-select" class="sr-only">My Sector</label>
+                            <select id="sector-select" class="w-full h-full appearance-none bg-base-darkest text-white font-semibold text-sm shadow-lg py-2 pl-3 pr-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-base-darkest focus:ring-white border border-gray-600 transition-colors">
+                                <option value="hd-residential">High-Density Residential</option>
+                                <option value="ld-residential">Low-Density Residential</option>
+                                <option value="commercial">Commercial</option>
+                                <option value="mixed-use">Mixed-Use</option>
+                            </select>
+                            <div id="sector-select-chevron" class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white transition-colors">
+                                <svg aria-hidden="true" focusable="false" class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                            </div>
+                        </div>
+
+                        <div id="map-mode-btn-group" class="flex-grow rounded-md shadow-lg border-2 border-primary-default bg-base-darkest flex-shrink-0 transition-colors flex transition-all duration-300 md:flex-none md:w-[calc(66.666667%-0.25rem)]">
+                            <button data-mode="smartResearch" aria-pressed="false" class="mode-btn font-semibold text-sm text-white gap-x-1.5 transition-colors flex-1 flex items-center justify-center">
+                                <span class="hidden xs:inline">Insights</span>
+                                <span class="xs:hidden">Insights</span>
+                                <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff" class="h-5 w-5 ml-1"><path d="m176-120-56-56 301-302-181-45 198-123-17-234 179 151 216-88-87 217 151 178-234-16-124 198-45-181-301 301Zm24-520-80-80 80-80 80 80-80 80Zm355 197 48-79 93 7-60-71 35-86-86 35-71-59 7 92-79 49 90 22 23 90Zm165 323-80-80 80-80 80 80-80 80ZM569-570Z"></path></svg>
+                            </button>
+                            <button data-mode="freeExplore" aria-pressed="false" class="mode-btn font-semibold text-sm text-white transition-colors flex-1">
+                                Explore
+                            </button>
+                        </div>
+
+                        <button id="mobile-edit-layers-btn" class="hidden h-[40px] w-[40px] bg-base-darkest border border-gray-600 rounded shadow-lg flex-shrink-0 items-center justify-center text-white focus:outline-none focus:ring-2 focus:ring-white" aria-label="Edit Map Layers">
+                             <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-118 120-398l66-50 294 228 294-228 66 50-360 280Zm0-202L120-600l360-280 360 280-360 280Zm0-280Zm0 178 230-178-230-178-230 178 230 178Z"/></svg>
+                        </button>
+                    </div>
+
+                    <div id="geocoder-container" role="search"></div>
+                    <button id="geocoder-clear-btn" class="hidden absolute top-[58px] right-3 h-5 w-5 rounded-full flex items-center justify-center bg-slate-400 hover:bg-slate-500 z-10 transition-colors">
+                        <span class="sr-only">Clear selection</span>
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="white">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div id="top-right-controls" class="pointer-events-auto self-end md:self-auto">
+                </div>
+            </div>
+            <div id="side-panel" class="absolute bottom-0 left-0 w-full h-0 bg-white shadow-2xl z-[1004] flex flex-col md:h-screen md:w-1/3 md:top-0 md:bottom-auto md:max-h-full transition-transform duration-300 ease-in-out md:-translate-x-full show:translate-x-0 transform">
+                <div id="side-panel-content" class="flex-grow overflow-y-auto"></div>
+                <button id="panel-handle" class="panel-handle" aria-expanded="false">
+                    <span class="sr-only">Toggle details panel</span>
+                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+            <button id="reset-onboarding-btn" class="absolute bottom-8 left-4 z-[900] bg-[#1b1b1b] text-white rounded-md p-1.5 shadow-md border-none hover:bg-[#4a4a4a] focus:outline-none focus:ring-2 focus:ring-white transition-colors">
+                <span class="sr-only">Reset and view onboarding tour</span>
+                <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-27 25-47.5t55-20.5q32 0 48.5 17.5t16.5 42.5q0 19-14 35.5T512-532q-29 26-38.5 49t-9.5 53Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+            </button>
+            <div id="map" class="h-full w-full z-0" tabindex="-1">
+            </div>
+    </div>
+    <div id="global-a11y-announcer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div id="toast-notification" role="alert" aria-live="polite">
+        <div id="toast-icon"></div>
+        <div id="toast-message"></div>
+        <button id="toast-close-btn" aria-label="Dismiss notification">
+            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+        </button>
+    </div>
+    <div id="mobile-layer-modal" class="hidden fixed inset-0 z-[40000] bg-white flex flex-col" role="dialog" aria-modal="true" aria-labelledby="mobile-layer-modal-title">
+        <div class="flex items-center justify-between p-4 border-b border-gray-200 bg-gray-50 flex-shrink-0">
+            <h2 id="mobile-layer-modal-title" class="text-xl font-bold text-slate-900">Map Layers</h2>
+            <button id="close-mobile-layer-modal" class="p-2 text-slate-600 hover:text-slate-900 focus:outline-none focus:bg-gray-200 rounded-full">
+                <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                <span class="sr-only">Close Layers</span>
+            </button>
+        </div>
+        <div id="mobile-layer-modal-content" class="flex-grow overflow-y-auto p-4">
+            </div>
+        <div class="p-4 border-t border-gray-200 bg-white flex-shrink-0">
+            <button id="mobile-layer-modal-done-btn" class="w-full py-3 bg-primary-default text-white font-bold rounded shadow hover:bg-primary-darker transition-colors">
+                View Map
+            </button>
+        </div>
+    </div>
+    <div id="md-tos-banner-container" aria-live="polite"></div>
+    <script src="../assets/tos_notification.js"></script>
+    <script>
+        window.initTermsBanner({ rootPath: '..' });
+    </script>
+</body>
+</html>
