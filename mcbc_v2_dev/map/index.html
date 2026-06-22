@@ -43,8 +43,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 console.warn('Could not load env.json, GA suppressed.', error);
             });
     </script>
-  <script type="module" crossorigin src="../assets/map-DvLGWJzJ.js"></script>
-  <link rel="stylesheet" crossorigin href="../assets/map-C8e22RjZ.css">
+  <script type="module" crossorigin src="../assets/map-BkR-bRB5.js"></script>
+  <link rel="stylesheet" crossorigin href="../assets/map-dEMu5Vb3.css">
 </head>
 <body class="bg-slate-100 text-slate-800">
     <a href="#main-content" class="visually-hidden focusable">Skip to main content</a>
@@ -118,47 +118,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
 
     <div id="sector-modal-overlay" class="hidden" role="dialog" aria-modal="true" aria-labelledby="modal-heading" aria-describedby="modal-description">
-        <div id="sector-modal-content" class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-lg text-center">
-            <h2 id="modal-heading" class="text-2xl font-bold text-slate-800">Choose your development type</h2>
-            <p id="modal-description" class="mt-2 text-slate-600">Select the kind of project you're scoping to focus the map on the most relevant indicators.</p>
-
-            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-
-                <button data-sector="hd-residential" class="sector-choice-btn group w-full border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-4 md:p-6 text-center transition flex flex-row md:flex-col items-center justify-center gap-4 md:gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="flex-shrink-0 h-10 w-10 md:h-12 md:w-12 text-slate-500 group-hover:text-[#005ea2] md:mx-auto" fill="currentColor" viewBox="0 -960 960 960">
-                        <path d="M120-120v-720h320v160h400v560H120Zm80-80h160v-80H200v80Zm0-160h160v-80H200v80Zm0-160h160v-80H200v80Zm0-160h160v-80H200v80Zm240 480h320v-400H440v400Zm160-240v-80h80v80h-80Zm0 160v-80h80v80h-80Z"/>
-                    </svg>
-                    <span class="block font-semibold text-slate-700">High-Density Residential</span>
+        <div id="sector-modal-content" class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-lg">
+            <h2 id="modal-heading" class="text-2xl font-bold text-slate-800 text-center">Welcome to Neighborhood Insights</h2>
+            <div id="modal-description" class="mt-4 space-y-3 text-sm text-slate-700 leading-relaxed">
+                <p>A census-tract map of Maryland for community developers, CDCs, and mission-aligned investors. Twenty-one development indicators — permits, DHCD/Commerce investment, vacancy, appraised-value change, real-estate velocity, zoning, demographics — plus 14 incentive overlays and parcel-level fit scoring for four project types are pre-joined to all 1,463 Maryland tracts.</p>
+                <p>Search an address or click any tract for a full breakdown, including community quotes and named organizations pulled from nearly 200 local plans. Switch the base layer or toggle overlays to compare across the state.</p>
+            </div>
+            <div class="mt-6 flex justify-center">
+                <button id="welcome-get-started-btn" class="px-8 py-3 font-bold primary-blue-button rounded-lg shadow transition">
+                    Get started
                 </button>
-
-                <button data-sector="ld-residential" class="sector-choice-btn group w-full border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded-lg p-4 md:p-6 text-center transition flex flex-row md:flex-col items-center justify-center gap-4 md:gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="flex-shrink-0 h-10 w-10 md:h-12 md:w-12 text-slate-500 group-hover:text-[#005ea2] md:mx-auto" fill="currentColor" viewBox="0 -960 960 960">
-                        <path d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z"/>
-                    </svg>
-                    <span class="block font-semibold text-slate-700">Low-Density Residential</span>
-                </button>
-
-                <button data-sector="commercial" class="sector-choice-btn group w-full border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-lg p-4 md:p-6 text-center transition flex flex-row md:flex-col items-center justify-center gap-4 md:gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="flex-shrink-0 h-10 w-10 md:h-12 md:w-12 text-slate-500 group-hover:text-[#005ea2] md:mx-auto" fill="currentColor" viewBox="0 -960 960 960">
-                        <path d="M120-160v-440l80-200h560l80 200v440h-80v-240H520v240H120Zm80-480h560l-32-80H232l-32 80Zm0 400h240v-160H200v160Zm-40-400h640-640Zm40 320h240-240Z"/>
-                    </svg>
-                    <span class="block font-semibold text-slate-700">Commercial</span>
-                </button>
-
-                <button data-sector="mixed-use" class="sector-choice-btn group w-full border-2 border-slate-200 hover:border-[#005ea2] hover:bg-[#d9e8f6] focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-lg p-4 md:p-6 text-center transition flex flex-row md:flex-col items-center justify-center gap-4 md:gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="flex-shrink-0 h-10 w-10 md:h-12 md:w-12 text-slate-500 group-hover:text-[#005ea2] md:mx-auto" fill="currentColor" viewBox="0 0 24 24">
-                        <!-- Mixed-use: a mid-rise residential block atop a ground-floor storefront with awning -->
-                        <path d="M3 21V9l9-6 9 6v12h-6v-5h-6v5H3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-                        <rect x="6" y="11" width="2.5" height="2.5" fill="currentColor"/>
-                        <rect x="10.75" y="11" width="2.5" height="2.5" fill="currentColor"/>
-                        <rect x="15.5" y="11" width="2.5" height="2.5" fill="currentColor"/>
-                        <path d="M3 17h18l-1.5-3H4.5L3 17z" fill="currentColor" opacity="0.9"/>
-                        <path d="M3 17h18" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                        <rect x="9" y="17.5" width="6" height="3.5" fill="none" stroke="currentColor" stroke-width="1.2"/>
-                    </svg>
-                    <span class="block font-semibold text-slate-700">Mixed-Use</span>
-                </button>
-
             </div>
         </div>
     </div>
@@ -189,7 +158,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <div class="usa-logo__text">
                     <a href="../map/" title="Neighborhood Insights">
                         <img src="../assets/mdwds_logo_notext.svg" alt="">
-                        <span>Neighborhood<br>Intelligence<span class="visually-hidden"> — Maryland Community Business Compass V2</span></span>
+                        <span>Neighborhood<br>Insights<span class="visually-hidden"> — Maryland Community Business Compass V2</span></span>
                     </a>
                 </div>
             </div>
@@ -259,17 +228,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <div id="geocoder-wrapper" class="relative pointer-events-auto flex flex-col">
                     
                     <div id="top-left-controls-row" class="w-full flex gap-2">
-                        <div id="sector-select-wrapper" class="relative flex-grow h-full flex-shrink-0 transition-all duration-300 w-[33%] md:flex-none md:w-[calc(33.333333%-0.25rem)]">
+                        <div id="sector-select-wrapper" class="hidden">
                             <label for="sector-select" class="sr-only">My Sector</label>
-                            <select id="sector-select" class="w-full h-full appearance-none bg-base-darkest text-white font-semibold text-sm shadow-lg py-2 pl-3 pr-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-base-darkest focus:ring-white border border-gray-600 transition-colors">
-                                <option value="hd-residential">High-Density Residential</option>
-                                <option value="ld-residential">Low-Density Residential</option>
+                            <select id="sector-select" class="hidden">
                                 <option value="commercial">Commercial</option>
-                                <option value="mixed-use">Mixed-Use</option>
                             </select>
-                            <div id="sector-select-chevron" class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white transition-colors">
-                                <svg aria-hidden="true" focusable="false" class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
-                            </div>
                         </div>
 
                         <div id="map-mode-btn-group" class="flex-grow rounded-md shadow-lg border-2 border-primary-default bg-base-darkest flex-shrink-0 transition-colors flex transition-all duration-300 md:flex-none md:w-[calc(66.666667%-0.25rem)]">
